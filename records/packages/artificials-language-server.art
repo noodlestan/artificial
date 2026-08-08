@@ -1,0 +1,32 @@
+# Module
+
+## Package: Artificials Language Server
+
+**Purpose:** Language server for Art modules.
+
+**Description:** Provides IDE support for Art module development.
+
+**Path:** `cli/language-server/`
+
+**Canonical Name:** `@art-js/artificials-language-server`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Dev:
+  - Package Dependency Set: Cli Development
+
+**Scripts:**
+
+- Package Script Set: Artificials Cli Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Lib Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json

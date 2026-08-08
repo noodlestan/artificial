@@ -1,0 +1,22 @@
+# Module
+
+## Routine: Validate Artefact References
+
+**Purpose:** Orchestrate the full reference validation pipeline under a path.
+
+**Inputs:**
+
+- `%project`: Structure: Project (optional — used for context, not consumed by sub-routines)
+- `%path`: string
+
+**Outputs:**
+
+- `%report`: Type: ValidationReport
+
+**Procedure:**
+
+1. With `%path` execute **Routine: Locate Artefact Files** to capture `%files`.
+2. With `%files` execute **Routine: Extract Artefact References** to capture `%references`.
+3. With `%references` execute **Routine: Check Reference Paths** to capture `%broken`.
+4. With `%files`, `%references`, and `%broken` execute **Routine: Report Validation Results** to capture `%report`.
+5. Return `%report`.

@@ -1,0 +1,22 @@
+# Module
+
+## Routine: Remove Resource From File
+
+**Purpose:** Remove a resource from a file and return it.
+
+**Inputs:**
+
+- `%contents` - string. The file contents.
+- `%resource-location` - Type: Resource Location.
+
+**Outputs:**
+
+- `%extracted-resource` - string. The extracted resource text.
+- `%updated-contents` - string. The file contents with resource removed.
+
+**Procedure:**
+
+1. Identify the block at `%resource-location.position` in `%contents`.
+2. Set `%extracted-resource` to the block contents.
+3. Set `%updated-contents` to `%contents` with block removed.
+4. Return `%extracted-resource` and `%updated-contents`.

@@ -1,0 +1,21 @@
+# Module
+
+## Routine: Apply Project Scaffolders
+
+**Purpose:** Resolve project-level scaffolders and apply them.
+
+**Inputs:**
+
+- `%project`: Structure: Project
+
+**Outputs:**
+
+- `%files-created`: List of generated file paths
+
+**Procedure:**
+
+1. Set `%context` to Type: Scaffolding Context with:
+   - `path` = `%project.path`
+   - `project` = `%project`
+2. With `%context`, `%project.scaffolders` execute **Routine: Apply Scaffolders** to capture `%files-created`.
+3. Return `%files-created`.

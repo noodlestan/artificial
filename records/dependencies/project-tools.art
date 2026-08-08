@@ -1,0 +1,33 @@
+# Module
+
+## Package Dependency: Lefthook
+
+**Canonical Name:** `lefthook`
+
+**Purpose:** Git hooks manager.
+
+**Version:** `2.1.9`
+
+## Package Dependency: Rollup
+
+**Canonical Name:** `rollup`
+
+**Purpose:** Module bundler.
+
+**Version:** `^4.61.1`
+
+## Package Dependency: Turbo
+
+**Canonical Name:** `turbo`
+
+**Purpose:** Monorepo build system.
+
+**Version:** `2.9.18`
+
+## Package Dependency Set: Root Tools
+
+**Dependencies:**
+
+- Package Dependency: Lefthook
+- Package Dependency: Rollup
+- Package Dependency: Turbo

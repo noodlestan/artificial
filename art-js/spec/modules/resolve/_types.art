@@ -1,0 +1,27 @@
+# Module
+
+## Uses
+
+::READ (Construct: Tag) FROM `../../grammar/index__generator.md`.
+
+## Declares
+
+### Type: Module Uses Table Entry
+
+**Purpose:** Defines a single entry in a module uses table.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `source` - NaturalName
+- `target-file` - NaturalName
+- `ref` - NaturalName
+
+### Type: Module Uses Table
+
+**Purpose:** Defines a table of all resources a module uses from external files.
+
+**Primitive:** List
+
+**Shape:** Module Uses Table Entry

@@ -1,0 +1,26 @@
+{
+  "name": "{{%project.name}}",
+  "version": "{{%project.version}}",
+  "description": "{{%project.description}}",
+  "author": "{{%project.author}}",
+  "license": "{{%project.license}}",
+  "private": true,
+  "packageManager": "{{%project.packageManager}}",
+  "workspaces": [
+::TEMPLATE for each `%namespace` in `%project.namespaces`
+::TEMPLATE for each `%package` in `%namespace.packages`
+    "{{%namespace.path}}{{%package.path}}",
+::END
+::END
+  ],
+  "engines": {
+    "node": "{{%project.nodeVersion}}"
+  },
+  "scripts": {
+::TEMPLATE for each `%script` in `%project.scripts`
+    "{{%script.name}}": "{{%script.command}}",
+::END
+  },
+  "devDependencies": {
+  }
+}

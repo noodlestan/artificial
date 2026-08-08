@@ -1,0 +1,75 @@
+# Module
+
+## Uses
+
+::READ (Construct: NaturalExpression) FROM `../expressions/natural-expression.art`.
+
+## Construct: ContextValue
+
+**Category:** Context
+
+**Purpose:** Provides a natural language construct for identifying, combining, and preparing context values for subsequent instructions.
+
+**Description:** A `<ContextValue>` is any natural language expression that identifies one or more context values. Context expressions may reference other values, combine multiple values, apply operations, and define new symbols.
+
+**Syntax:**
+
+A ContextValue is expressed as a natural language expression but may contain symbol constructs.
+
+```art
+<ContextValue> =
+    <NaturalExpression>
+```
+
+**Rules:**
+
+- A ContextValue SHOULD identify the target context values unambiguously.
+- A ContextValue MAY reference one or more context values by existing symbols or via a natural language expressions.
+- A ContextValue MAY classify or add specificity to values.
+- A ContextValue MAY combine multiple context values into a single expression.
+- A ContextValue MAY apply one or more operations to the identified context values.
+- A ContextValue MAY mix symbols, aliases, natural language, and operations within the same expression.
+
+**Examples:**
+
+ContextValue using a ContextSymbol to identify values:
+
+```md
+... the `%report.feedback.items`...
+```
+
+ContextValue using ContextAlias to identify values:
+
+```md
+... the matching feedback items as `%filtered-feedback`...
+```
+
+ContextValue using only natural language identifications.
+
+```md
+... the feedback items of the delegation report...
+```
+
+ContextValue classifying values:
+
+```md
+... the filtered `%report.feedback`...
+```
+
+ContextValue adding specifity:
+
+```md
+... the `%filtered-feedback` of the `%delegation-report`...
+```
+
+ContextValue combining context values:
+
+```md
+... the `%filtered-feedback` and the current `%target`...
+```
+
+ContextValue performing an operation:
+
+```md
+... the `%filtered-feedback` grouped by `%target`...
+```

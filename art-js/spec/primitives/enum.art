@@ -1,0 +1,119 @@
+# Module
+
+## Uses
+
+::READ (NaturalExpression, Identifier, NaturalName) FROM `language/grammar/index.art`.
+
+## Primitive: Enum
+
+**id**: `enum`
+
+**Name**: Enum
+
+**Kind**: Primitive
+
+**Purpose:** Defines values from a fixed set.
+
+**Description:** A primitive that holds a list of EnumValue.
+
+**ValueType:**
+
+```ts
+type PrimitiveEnumValue {
+  name: NaturalName.ValueType
+  description: NaturalExpression.ValueType
+};
+
+type PrimitiveEnum = {
+  values: PrimitiveEnumValue[];
+}
+```
+
+**Value:**
+
+```ts
+type PrimitiveEnumValue = {
+  value: string;
+};
+```
+
+### Art: Inline
+
+**Procedure**
+
+1. Return "Enum({each `%primitive.values` name})
+
+Example:
+
+```
+Enum (SPECULATIVE, WIP, UNSTABLE, STABLE, DEPRECATED)
+```
+
+### Art: Block
+
+**Procedure**
+
+1. With each `%primitive.values` name and description, generate a `%list`.
+2. Return """**Shape:** {`%list`}"""
+
+Example:
+
+```md
+**Shape:**
+
+- SPECULATIVE: This routine is a POC.
+- WIP: This routine ...
+- UNSTABLE: This routine...
+- STABLE: This routine ..
+- DEPRECATED: This routine ..
+```
+
+### Declaration: Inline
+
+**Procedure**
+
+1. Return "One of {each `%primitive.values` name}"
+
+Example:
+
+```
+One of SPECULATIVE, WIP, UNSTABLE, STABLE, DEPRECATED,
+```
+
+### Declaration: Block
+
+**Procedure**
+
+1. With each `%values` name and description, generate a `%list`.
+2. Return """
+   **Possible values and what they mean:**
+   {`%list`}
+   """
+
+Example:
+
+```md
+- SPECULATIVE: This routine is a POC.
+- WIP: This routine ...
+- UNSTABLE: This routine...
+- STABLE: This routine ..
+- DEPRECATED: This routine ..
+```
+
+### Generation
+
+**Procedure**
+
+1. Return "{`%value.value`}"
+
+Example:
+
+```md
+- SPECULATIVE: This routine is a POC.
+- WIP: This routine ...
+- UNSTABLE: This routine...
+- STABLE: This routine ..
+- DEPRECATED: This routine ..
+```
+
+### Interpretation

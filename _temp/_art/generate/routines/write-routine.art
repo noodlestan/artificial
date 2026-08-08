@@ -1,0 +1,60 @@
+# Module
+
+## Routine: Write Routine (#wip)
+
+**Purpose:** Define the standard format and conventions for writing routine `.art` files.
+
+**Inputs:**
+
+- `%name`: string — routine name in Title Case (e.g. `Check Package Path Exists`)
+- `%purpose`: string — single sentence describing what the routine does
+- `%inputs`: list — each with name, type, and whether optional
+- `%outputs`: list — each with name and type
+- `%procedure`: list — step-by-step instructions in pseudo-code
+
+**Outputs:**
+
+- `%file`: string — path to the generated routine `.art` file
+
+**Procedure:**
+
+1. Derive filename from `%name`: convert to kebab-case, append `.art`.
+2. Write file with this structure:
+
+```md
+# Module
+
+## Routine: {Name}
+
+**Purpose:** {single sentence}.
+
+**Inputs:**
+
+- `%{name}`: {Type} — {description}.
+- `%{name}`?: {Type} — {description} (if optional).
+
+**Outputs:**
+
+- `%{name}`: {Type}
+- `%{name}`: {Type}
+
+**Procedure:**
+
+1. {step}
+2. {step}
+   1. {sub-step}
+```
+
+3. Rules:
+   - Every routine file starts with `# Module`.
+   - `## Routine: {Name}` heading — Name in Title Case.
+   - Purpose is one sentence,.
+   - Optional inputs end with `?` after the name.
+   - Inputs, Outputs, and variables created inside use `%` prefix for variable names.
+   - Procedure steps are numbered. Sub-steps are indented.
+   - Reference other routines in bold: `**Routine: {Name}**`.
+   - Reference types in bold: `**Type: {Name}**`.
+   - Reference structures in bold: `**Structure: {Name}**`.
+   - Invoke other routines via "With `%input1` and `%input2` execute the **{{routine}}** to capture `{%output}`.
+   - Always "Return `%output`" if routine has output.
+4. Return `%file` path.

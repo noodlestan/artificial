@@ -1,0 +1,4 @@
+.coverage/
+env.d.ts
+dist/
+

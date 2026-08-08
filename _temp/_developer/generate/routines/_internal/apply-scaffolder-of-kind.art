@@ -1,0 +1,27 @@
+# Module
+
+## Routine: Apply Scaffolder Of Kind
+
+**Purpose:** Dispatch to kind-specific routine based on scaffolder kind.
+
+**Inputs:**
+
+- `%context`: Type: Scaffolding Context
+- `%scaffolder`: Structure: Scaffolder
+
+**Outputs:**
+
+- `%files-created`: List of generated file paths
+
+**Procedure:**
+
+1. Match %scaffolder.kind:
+   - Case "files":
+     - With `%context`, `%scaffolder` execute **Routine: Apply Scaffolder Kind Files** to capture `%files-created`.
+   - Case "skeleton":
+     - With `%context`, `%scaffolder` execute **Routine: Apply Scaffolder Kind Skeleton** to capture `%files-created`.
+   - Case "procedural":
+     - With `%context`, `%scaffolder` execute **Routine: Apply Scaffolder Kind Procedural** to capture `%files-created`.
+   - Case "set":
+     - With `%context`, `%scaffolder.scaffolders` execute **Routine: Apply Scaffolders** to capture `%files-created`.
+2. Return `%files-created`.

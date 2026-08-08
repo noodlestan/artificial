@@ -1,0 +1,11 @@
+# Module
+
+## Scaffolder Files: App Namespace Readme
+
+**Purpose:** Generates README.md for a micro apps namespace.
+
+**Files:**
+
+- `README.md`:
+  - template: `./README.md.tart`
+  - target: `{{%path}}README.md`

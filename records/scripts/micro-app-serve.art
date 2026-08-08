@@ -1,0 +1,9 @@
+# Module
+
+## Package Script Set: Micro App Serve
+
+**Scripts:**
+
+- Package Script: Serve
+  - Purpose: Basic http server for the micro app
+  - Command: `node src/serve.js`

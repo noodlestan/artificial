@@ -1,0 +1,25 @@
+# Module
+
+## Routine: Extract Artefact References
+
+**Purpose:** Read each file and extract all references to other files.
+
+**Inputs:**
+
+- `%files`: List (Type: FileLocation)
+
+**Outputs:**
+
+- `%references`: List (Type: ExtractedReference)
+
+**Procedure:**
+
+1. For each `%file` in `%files`:
+   1. Read `%file.path`.
+   2. For each line, match reference patterns:
+      - Markdown link: `\[([^\]]+)\]\(([^)]+)\)` — capture group 2 is `%targetPath`.
+      - Directive: `` ::READ `(\S+)` `` — backtick content is `%targetPath`.
+   3. Skip if `%targetPath` starts with `http` or contains `://` (URL, not file).
+   4. Resolve `%targetPath` relative to `%file.path` directory.
+   5. Emit `ExtractedReference { path, line, text, targetPath }`.
+2. Return `%references`.

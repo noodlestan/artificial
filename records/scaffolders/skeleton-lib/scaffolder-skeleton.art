@@ -1,0 +1,9 @@
+# Module
+
+## Scaffolder Skeleton: Lib Package
+
+**Purpose:** Scaffolds a library package: readme, package.json, tsconfig, vite.
+
+**Source:** `./skeleton`
+
+**Target:** `{{%path}}`

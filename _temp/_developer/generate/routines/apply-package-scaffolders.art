@@ -1,0 +1,25 @@
+# Module
+
+## Routine: Apply Package Scaffolders
+
+**Purpose:** Resolve package-level scaffolders and apply them.
+
+**Inputs:**
+
+- `%project`: Structure: Project
+- `%namespace`: Structure: Namespace
+- `%package`: Structure: Package
+
+**Outputs:**
+
+- `%files-created`: List of generated file paths
+
+**Procedure:**
+
+1. Set `%context` to Type: Scaffolding Context with:
+   - `path` = `%project.path` + `%namespace.path` + `%package.path`
+   - `project` = `%project`
+   - `namespace` = `%namespace`
+   - `package` = `%package`
+2. With `%context`, `%package.scaffolders` execute **Routine: Apply Scaffolders** to capture `%files-created`.
+3. Return `%files-created`.

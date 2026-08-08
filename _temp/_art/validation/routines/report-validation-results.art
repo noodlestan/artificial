@@ -1,0 +1,28 @@
+# Module
+
+## Routine: Report Validation Results
+
+**Purpose:** Aggregate results and format broken references into a report.
+
+**Inputs:**
+
+- `%files`: List (Type: FileLocation)
+- `%references`: List (Type: ExtractedReference)
+- `%broken`: List (Type: BrokenReference)
+
+**Outputs:**
+
+- `%report`: Type: ValidationReport
+
+**Procedure:**
+
+1. Build `%report`:
+   - `filesScanned` = length of `%files`.
+   - `referencesFound` = length of `%references`.
+   - `brokenReferences` = `%broken`.
+   - `status` = if `%broken` is empty → `"clean"` else `"broken"`.
+2. If `status` is `"broken"`:
+   1. Group `%broken` by `path`.
+   2. For each file: print path, then each broken ref with line, text, targetPath, reason.
+3. If `status` is `"clean"`: print summary only.
+4. Return `%report`.

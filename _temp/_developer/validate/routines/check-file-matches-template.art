@@ -1,0 +1,23 @@
+# Module
+
+## Routine: Check File Matches Template
+
+**Purpose:** Validate that a generated file matches its template output.
+
+**Inputs:**
+
+- `%file`: string (path to generated file)
+- `%template`: string (path to template file)
+- `%context`: object (record context used for rendering)
+
+**Outputs:**
+
+- `%matches`: boolean
+
+**Procedure:**
+
+1. Read `%file` content.
+2. Apply `%template` with `%context` to produce `%expected`.
+3. Compare `%file` content with `%expected`.
+4. If different, return `false` and log differences.
+5. Return `true`.

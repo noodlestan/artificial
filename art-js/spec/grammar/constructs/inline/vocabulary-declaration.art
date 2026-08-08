@@ -1,0 +1,51 @@
+# Module
+
+## Uses
+
+::READ (Construct: NaturalExpression) FROM `../expressions/natural-expression.art`.
+::READ (Construct: NaturalName) FROM `../expressions/natural-name.art`.
+::READ (ExampleInline) FROM `./example-inline.art`.
+
+## Construct: VocabularyDeclaration
+
+**Category:** Inline
+
+**Purpose:** Provide a controlled way to declare terms within a context, along with their definition, and optional examples.
+
+**Description:** Vocabulary entries are single-term declarations that define terminology relevant to their declaration scope. They are not advertised for discovery outside their scope.
+
+**Schema:**
+
+The declared term, definition, and optional example are identified as properties of the definition.
+
+```art
+VocabularyDeclaration {
+    term: <NaturalName>
+    definition: <NaturalExpression>
+    examples?: <ExampleInline:Suffix>
+}
+```
+
+**Syntax:**
+
+```art
+<VocabularyDeclaration> =
+    **<NaturalName (term)>** – <NaturalExpression (definition)>. <ExampleInline:Suffix>.
+```
+
+**Example:**
+
+Given the following VocabularyDeclaration:
+
+```md
+**Interaction Mode** – Provides reusable behavioural triggers and rules that influence how the agent performs operations. Example: "Interaction Mode: No Nonsense".
+```
+
+The identified vocabulary contains:
+
+```yaml
+term: Interaction Mode
+definition: Provides reusable behavioural triggers and rules that influence how the agent performs operations.
+examples:
+    - "Interaction Mode: No Nonsense".
+```

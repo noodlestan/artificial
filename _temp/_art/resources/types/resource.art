@@ -1,0 +1,24 @@
+# Module
+
+## Type: Resource (T is Structure)
+
+**Purpose:** A fully loaded resource record with all declaration fields.
+
+**Primitive:** Primitive: Record
+
+**Shape:**
+
+- `kind:` – The resource kind.
+- `name:` – The resource name.
+- `filename:` – The file where the resource is declared.
+- `...` – All declaration fields from the resource record.
+
+**Representation:**
+
+```ts
+type Resource<T extends Structure> = {
+  kind: string;
+  name: string;
+  filename: string;
+} & T;
+```

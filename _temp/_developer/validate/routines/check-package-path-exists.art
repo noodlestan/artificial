@@ -1,0 +1,21 @@
+# Module
+
+## Routine: Check Package Path Exists
+
+**Purpose:** Ensure a package directory exists, creating it if necessary.
+
+**Inputs:**
+
+- `%package`: Structure: Package | Structure: Project
+- `%namespace`: Structure: Namespace
+
+**Outputs:**
+
+- `%path`: string
+
+**Procedure:**
+
+1. Combine `%namespace.path` and `%package.path` into `%path`.
+2. Check directory exists at `%path`.
+3. Create dir if doesn't exist.
+4. Return `%path`.

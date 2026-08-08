@@ -1,0 +1,86 @@
+# Module: Compiler
+
+**Purpose:** Decisions about the pipeline that compiles art sources into projections — its model, implementation language, and guarantees.
+
+## Decision: Reactive Pull Pipeline
+
+**Status:** Adopted
+
+**Context:** Pushing compiled output to every target on every source change recomputes work no consumer asked for and makes output availability depend on build scheduling. Consumers should receive exactly what they need, when they request it.
+
+**Decision:** The pipeline is reactive and pull-based: output materialises when a consumer pulls a target through entry point → parse → extract → transform → render, and source changes propagate reactively to downstream consumers.
+
+**Consequences:** The watcher and dev-server must react to source-change events rather than recompute full outputs, constraining their design.
+
+## Decision: TypeScript Implementation
+
+**Status:** Adopted
+
+**Context:** The art-js toolchain needs an implementation language. "JS-first" was the working label, but the ecosystem constraint was never explicit, leaving package contracts underspecified.
+
+**Decision:** TypeScript is the implementation language for all art-js packages and tooling.
+
+## Decision: Entry Point Driven Compilation
+
+**Status:** Adopted
+
+**Context:** A compilation run needs a defined selection of what to compile; without one, output cannot be validated against expectations and builds are not reproducible from a single command.
+
+**Decision:** Each compilation run is anchored by an entry point — declared, selected, and resolved per the entry point spec. Output is validated against that spec, not against a stored reference output.
+
+**Consequences:** The entry point spec (PENDING in the WIP) is a prerequisite: the vertical slice cannot be validated until it is defined.
+
+## Decision: Deterministic Compilation
+
+**Status:** Adopted
+
+**Context:** Projections are committed to git; if a build produced different output for the same inputs, committed projections would drift from sources and reviews would be meaningless.
+
+**Decision:** Compilation is deterministic: identical source and config produce identical projections on every run.
+
+
+## Decision: Reactive Framework: SolidJS Signals
+
+**Status:** Proposal
+
+**Context:** The pipeline is reactive and pull-based; the implementation needs a reactive primitive to propagate source-change events to downstream consumers without recomputing work no one asked for.
+
+**Decision:** Use SolidJS signals as the reactive foundation for the art-js pipeline.
+
+## Decision: Compiler Based on Unified
+
+**Status:** Proposal
+
+**Context:** Parsing and transforming art sources needs a compiler substrate. Candidate compositions were: remark (unified + remark-* plugins), mdast with unist-util-* utilities, or a custom parser emitting unist-compatible nodes. Research into how GFM, MDX, and directives are built (micromark-extension-* + mdast-util-* + remark-* trios) showed the ecosystem's actual pattern: extensions build directly on micromark and grow the AST node set, rather than forking a dialect. micromark's own guidance is to use micromark with micromark-extension-* instead of remark when the goal is markdown → structured output with a few extensions. Surveyed projects and best-practices synthesis: see `_research.md`.
+
+**Decision:** Build the parser directly on micromark — the same extension base GFM, MDX, and directives use — with a thin custom extension (enter/exit hooks per token type) and an explicit construct stack. The parser emits art's own AST records (`SectionBlock`, `FieldBlock`, `NaturalBlock`, `ExampleBlock`, `Tag`), not mdast: no unist-util-visit, no remark/unified packages. Unified's extension-trio pattern (syntax extension, record types, renderer support) is mirrored when language plugins land.
+
+**Consequences:** Grammar constructs must be expressible as micromark token types with enter/exit hooks; the construct-stack builder is the core of the parser; the extensible record schema uses mdast-style declaration merging; later language plugins follow the ecosystem's four-part extension packaging (syntax, HTML/rendering, from, to).
+
+## Decision: Kind-Agnostic Parser
+
+**Status:** Proposal
+
+**Context:** Every SectionBlock arrives as `# Kind: Name`. If the parser enumerated known kinds it would have to grow with the language: every kind a domain introduces would be a core change, breaking Closed Syntax, Open Semantics, and creating two code paths (known kinds typed, unknown kinds generic). The alternative — the parser knowing nothing about kinds — needs to be stated explicitly, or extract/transform/validator packages will assume parse-time kind knowledge that is not there.
+
+**Decision:** The parser is kind-agnostic: `kind` is an open string, captured but never enumerated or interpreted at parse time. Any `# Kind: Name` heading becomes a generic SectionBlock record; kind semantics are resolved downstream (extract/transform/validator) via the structures that define each kind. This mirrors micromark, where token types are open strings that extensions add to without touching the core.
+
+**Consequences:** Parse never rejects and never special-cases; the core schema stays frozen (only construct forms are enumerated); per-kind typed records are an extract concern; the schema exposes kinds as an open registry for domain augmentations.
+
+## Decision: Open Schema Registry for Records
+
+**Status:** Proposal
+
+**Context:** Domain kinds need typed records without modifying the core schema. Two precedents exist. mdast defines per-position registry interfaces (`RootContentMap`, `BlockContentMap`, `PhrasingContentMap`) that extensions augment via declaration merging, with unions derived as `RootContentMap[keyof RootContentMap]` — the union grows by construction. `@types/estree` instead ships closed unions, which forced typescript-eslint to redefine every single node type to extend them (issue #413) — the cautionary tale: hand-written closed unions do not extend. (both precedents surveyed in `_research.md`)
+
+**Decision:** The core record schema follows the mdast registry pattern: per-position open registries (section content, field values, module content) with derived unions via `keyof`, augmented by domain kind-records through declaration merging. Records carry source position metadata; depth and parent are derived from the tree, not stored. A single schema definition is the source of truth, from which builders and validators can later be generated (the Babel `defineType` model), enabling the spec-to-TS bootstrap check.
+
+**Consequences:** Domain kinds get typed records without core changes; unions stay consistent by construction; schema generation (builders, validators) becomes possible once the parser spike proves the record shapes.
+
+## Decision: Watcher Based on Chokidar
+
+**Status:** Proposal
+
+**Context:** The watcher must react to source-change events rather than recompute full outputs; file watching needs a battle-tested, cross-platform library.
+
+**Decision:** Use chokidar for file watching in the watcher and dev-server packages.

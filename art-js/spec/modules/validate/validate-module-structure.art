@@ -1,0 +1,287 @@
+# Module
+
+## Uses
+
+::READ (Module Validation Rule Breach) FROM `./_types.art`.
+
+## Declares
+
+### Rule: Module Structure Root
+
+**id:** `module:structure:root`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. If `%contents` does not start with "# Module" or "# Module:":
+   1. Prepare a `%breach` record with:
+      - `filename` set to `%source`.
+      - `line` set to `1`.
+      - `rule-id` set to `module:structure:root`.
+      - `description` set to "Missing module heading".
+   2. Append `%breach` to `%breaches`.
+3. If `%breaches` is empty, return NOTHING.
+4. Otherwise, return `%breaches`.
+
+### Rule: Module Structure Single Uses
+
+**id:** `module:structure:single-uses`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Identify as `%uses-sections` all SectionBlocks named "Uses" in `%contents`.
+3. If length of `%uses-sections` greater than 1:
+   1. Prepare a `%breach` record with:
+      - `filename` set to `%source`.
+      - `line` set to the line number of the second `%uses-sections`.
+      - `rule-id` set to `module:structure:single-uses`.
+      - `description` set to "Multiple {length of `%uses-sections`} Uses sections".
+   2. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Rule: Module Structure Valid Uses
+
+**id:** `module:structure:valid-uses`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Identify as `%uses-section` the SectionBlock named "Uses" in `%contents`.
+3. If no `%uses-section` found, return NOTHING.
+4. With each line in the `%uses-section` that is not a `::READ` directive and not empty:
+   1. Prepare a `%breach` record with:
+      - `filename` set to `%source`.
+      - `line` set to `%line`.
+      - `rule-id` set to `module:structure:valid-uses`.
+      - `description` set to "Non-directive in Uses".
+   2. Append `%breach` to `%breaches`.
+5. If `%breaches` is empty, return NOTHING.
+6. Otherwise, return `%breaches`.
+
+### Rule: Module Structure Single Exposes
+
+**id:** `module:structure:single-exposes`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Identify as `%exposes-sections` all SectionBlocks named "Exposes" in `%contents`.
+3. If length of `%exposes-sections` greater than 1:
+   1. Prepare a `%breach` record with:
+      - `filename` set to `%source`.
+      - `line` set to the line number of the second `%exposes-sections`.
+      - `rule-id` set to `module:structure:single-exposes`.
+      - `description` set to "Multiple {length of `%exposes-sections`} Exposes sections".
+   2. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Rule: Module Structure Valid Exposes
+
+**id:** `module:structure:valid-exposes`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Identify as `%exposes-section` the SectionBlock named "Exposes" in `%contents`.
+3. If no `%exposes-section` found, return NOTHING.
+4. With each line in the `%exposes-section`,
+   1. If the line is not empty and not part of a `::READ` directive:
+      1. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to `%line`.
+         - `rule-id` set to `module:structure:valid-exposes`.
+         - `description` set to "Non-directive in Exposes".
+      2. Append `%breach` to `%breaches`.
+5. If `%breaches` is empty, return NOTHING.
+6. Otherwise, return `%breaches`.
+
+### Rule: Module Structure Mandatory Declares
+
+**id:** `module:structure:mandatory-declares`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Set `%has-exposes-section` to whether `%contents` has a SectionBlock named "Exposes".
+3. Set `%has-declares-section` to whether `%contents` has a SectionBlock named "Declares".
+4. If NOT `%has-exposes-section` AND NOT `%has-declares-section`:
+   1. Prepare a `%breach` record with:
+      - `filename` set to `%source`.
+      - `line` set to `1`.
+      - `rule-id` set to `module:structure:mandatory-declares`.
+      - `description` set to "Missing Declares section".
+   2. Append `%breach` to `%breaches`.
+5. If `%breaches` is empty, return NOTHING.
+6. Otherwise, return `%breaches`.
+
+### Rule: Module Structure Expose Overlap
+
+**id:** `module:structure:expose-overlap`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. If `%contents` has a SectionBlock named "Exposes" and a SectionBlock named "Declares":
+   1. Identify as `%declares-section` the SectionBlock named "Declares" in `%contents`.
+   2. Prepare a `%breach` record with:
+      - `filename` set to `%source`.
+      - `line` set to the line number of `%declares-section`.
+      - `rule-id` set to `module:structure:expose-overlap`.
+      - `description` set to "Both Exposes and Declares".
+   3. Append `%breach` to `%breaches`.
+3. If `%breaches` is empty, return NOTHING.
+4. Otherwise, return `%breaches`.
+
+### Rule: Module Structure Single Declare
+
+**id:** `module:structure:single-declare`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Identify as `%declares-sections` all SectionBlocks named "Declares" in `%contents`.
+3. If length of `%declares-sections` greater than 1:
+   1. Prepare a `%breach` record with:
+      - `filename` set to `%source`.
+      - `line` set to the line number of the second `%declares-sections`.
+      - `rule-id` set to `module:structure:single-declare`.
+      - `description` set to "Multiple {length of `%declares-sections`} Declares sections".
+   2. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Rule: Module Structure Invalid Declaration
+
+**id:** `module:structure:invalid-declaration`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Identify as `%declares-section` the SectionBlock named "Declares" in `%contents`.
+3. If no `%declares-section` found, return NOTHING.
+4. With each sub-SectionBlock in `%declares-section`:
+   1. If the heading does not match the pattern `### {type}: {name}`:
+      1. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to `%line`.
+         - `rule-id` set to `module:structure:invalid-declaration`.
+         - `description` set to "Invalid declaration name".
+      2. Append `%breach` to `%breaches`.
+5. If `%breaches` is empty, return NOTHING.
+6. Otherwise, return `%breaches`.
+
+## Declares
+
+### Routine: Validate Module Structure
+
+**Purpose:** Check if module file is valid.
+
+**Description:** Executes all rules in "## Rules" against the module contents and aggregates the results into a validation table.
+
+**Inputs:**
+
+- `%name` - The name of the module.
+- `%source` - A string identifying the source of the module (the filename or other).
+- `%contents` - The contents of the module file.
+
+**Outputs:**
+
+- `%module-structure-validation-table` - A table of validation results.
+
+**Before Executing:**
+
+1. If no `%name` provided,
+   1. THROW ERROR to user and STOP processing.
+
+**Procedure:**
+
+1. Prepare a `%report` table with columns `module`, `line`, `rule`, `description`, `snippet`.
+2. With each `%rule` in "## Rules":
+   1. Execute the `%rule` procedure with `%contents` and `%source` to capture eventual `%breaches`.
+   2. With each `%breach` in the captured `%breaches`:
+      1. Add row to `%report` with `%name`, `%breach.line`, `%breach.rule-id`, `%breach.description`, `-`.
+3. Return `%report` as `%module-structure-validation-table`.

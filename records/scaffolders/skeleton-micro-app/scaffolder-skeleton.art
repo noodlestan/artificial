@@ -1,0 +1,9 @@
+# Module
+
+## Scaffolder Skeleton: Micro App
+
+**Purpose:** Scaffolds a no-build vanilla micro app: readme, package.json (serve only), and zero-code src files.
+
+**Source:** `./skeleton`
+
+**Target:** `{{%path}}`

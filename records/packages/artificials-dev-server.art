@@ -1,0 +1,32 @@
+# Module
+
+## Package: Artificials Dev Server
+
+**Purpose:** Development server for Art modules.
+
+**Description:** Local development server for testing Art modules.
+
+**Path:** `cli/dev-server/`
+
+**Canonical Name:** `@art-js/artificials-dev-server`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Dev:
+  - Package Dependency Set: Cli Development
+
+**Scripts:**
+
+- Package Script Set: Artificials Cli Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: CLI Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json

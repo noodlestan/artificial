@@ -1,0 +1,15 @@
+# Module
+
+## Type: BrokenReference
+
+**Purpose:** A reference that failed validation, with explanation.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `path` - Path of the file containing the broken reference.
+- `line` - Line number where the reference was found.
+- `text` - Raw matched text of the reference.
+- `targetPath` - Resolved path the reference points to.
+- `reason` - Why the reference is broken (e.g. "File not found").

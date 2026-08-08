@@ -1,0 +1,30 @@
+# Module
+
+## Construct: NaturalExpression
+
+**Category:** Expressions
+
+**Purpose:** Provide a construct for expressing human-readable meaning and intent within constructs.
+
+**Description:** A NaturalExpression is a sequence of natural language elements used to identify, describe, combine, or qualify values and meaning. It provides the semantic text layer of the language and may contain embedded constructs such as ContextSymbol, NaturalName, and other expressions.
+
+**Rules:**
+
+- A NaturalExpression MUST communicate meaning using natural language.
+- A NaturalExpression MAY contain embedded constructs.
+- A NaturalExpression SHOULD express intent explicitly and unambiguously.
+- A NaturalExpression MAY identify, describe, combine, or qualify values and concepts.
+- A NaturalExpression MUST NOT be interpreted solely by its syntax; its meaning is determined by the semantics of the enclosing construct.
+
+**Syntax:**
+
+```art
+<NaturalExpression> =
+    <natural-language-text>
+```
+
+**Example:**
+
+```md
+Generate a summary of the API documentation including available endpoints, parameters, and examples.
+```

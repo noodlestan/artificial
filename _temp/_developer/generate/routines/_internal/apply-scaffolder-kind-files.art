@@ -1,0 +1,25 @@
+# Module
+
+## Routine: Apply Scaffolder Kind Files
+
+<!-- Renderer -->
+
+**Purpose:** Apply a files scaffolder to render templates to target files.
+
+**Inputs:**
+
+- `%context`: Type: Scaffolding Context
+- `%scaffolder`: Structure: Scaffolder Files
+
+**Outputs:**
+
+- `%files-created`: List of generated file paths
+
+**Procedure:**
+
+1. With each `%file` in `%scaffolder.files`:
+   1. Set `%filename` to `%context.path` + `%file.target`.
+   2. Render the `%file.template` template with `%context` to generate `%output`.
+   3. Write `%output` to `%filename`.
+   4. Append `%filename` to `%files-created`.
+2. Return `%files-created`.

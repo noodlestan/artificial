@@ -1,0 +1,53 @@
+# Module
+
+## Uses
+
+::READ (Construct: Tag) FROM `../expressions/tag.art`.
+::READ (Construct: NaturalName) FROM `../expressions/natural-name.art`.
+::READ (Construct: NaturalBlock) FROM `./natural-block.art`.
+
+## Construct: FieldBlock
+
+**Category:** Structural
+
+**Purpose:** Represent a named property within a SectionBlock.
+
+**Description:** A FieldBlock associates a name with a value within a SectionBlock. The value of the FieldBlock is the NaturalBlock that follows the field identifier, up to the next FieldBlock, FieldInline, InlineDeclaration, or SectionBlock, or the end of the enclosing SectionBlock.
+
+<!-- refine content rules -->
+
+**Schema:**
+
+```art
+FieldBlock {
+    name: <NaturalName>
+    value: <NaturalBlock>
+}
+```
+
+**Syntax:**
+
+```art
+<FieldBlock> =
+    **<NaturalName (field.name)>:** [<Tags>]
+        <NaturalBlock>
+```
+
+**Rules:**
+
+- A FieldBlock MUST define a name.
+- A FieldBlock MUST define a value.
+- A FieldBlock MAY be tagged with one or more Tag.
+- A FieldBlock value consists of all following content until the next FieldBlock, FieldInline, InlineDeclaration, SectionBlock, or the end of the enclosing SectionBlock.
+- A FieldBlock value MAY contain procedure blocks, example blocks, directives, and raw Markdown content.
+- A FieldBlock MUST NOT contain a SectionBlock.
+- A FieldBlock MUST NOT contain a nested FieldBlock.
+
+**Example:**
+
+```md
+**Inputs:**
+
+- `%task` – The task to modify.
+- `%specification` – The specification to integrate into the task.
+```

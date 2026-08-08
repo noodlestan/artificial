@@ -1,0 +1,20 @@
+# Module
+
+## Routine: Check Reference Paths
+
+**Purpose:** Verify each extracted reference resolves to an existing file.
+
+**Inputs:**
+
+- `%references`: List (Type: ExtractedReference)
+
+**Outputs:**
+
+- `%broken`: List (Type: BrokenReference)
+
+**Procedure:**
+
+1. For each `%ref` in `%references`:
+   1. Check `%ref.targetPath` exists on filesystem.
+   2. If not → emit `BrokenReference { path, line, text, targetPath, reason: "File not found" }`.
+2. Return `%broken` (empty list = all clean).

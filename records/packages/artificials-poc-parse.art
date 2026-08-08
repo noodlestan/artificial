@@ -1,0 +1,31 @@
+# Module
+
+## Package: Artificials Poc Parse
+
+**Purpose:** POC spike of the artificials parser: a self-contained, CLI-executable package at `cli/poc-parse/`.
+
+**Description:** Internally partitioned along the pipeline boundaries (parse/extract/transform/render) so it mirrors the future art-js modules. POC step 1 scaffolds the runnable CLI; parsing logic, schema types, and the micromark substrate are deliberately deferred.
+
+**Path:** `cli/poc-parse/`
+
+**Canonical Name:** `@art-js/poc-parse`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Dev:
+  - Package Dependency Set: Cli Development
+
+**Scripts:**
+
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: CLI Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json

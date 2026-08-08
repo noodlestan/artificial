@@ -1,0 +1,15 @@
+# {{%namespace.name}}
+
+> ((%namespace.purpose))
+
+{{%namespace.description}}
+
+## Packages
+
+::TEMPLATE for each `%package` in `%namespace.packages`
+
+- `{{%package.name}}` — {{%package.description}} (`{{%package.path}}`).
+
+::END
+
+## {{%project.license.short}}

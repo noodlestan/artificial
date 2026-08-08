@@ -1,0 +1,68 @@
+# Module
+
+## Uses
+
+::READ (Construct: Tag) FROM `../expressions/tag.art`.
+::READ (Construct: NaturalExpression) FROM `../expressions/natural-expression.art`.
+
+## Construct: ExampleBlock
+
+**Category:** Structural
+
+**Purpose:** Provide a standalone example of an input value being interpreted or of an output being generated to define expectations and verify generated outputs.
+
+**Description:** An ExampleBlock provides an example associated with a preceding construct or an explicitly identified context value. When no target is specified, the example applies to the immediately preceding eligible construct. When a target is specified using `of`, the example applies to value identified by the natural expression.
+
+**Syntax:**
+
+````art
+Example[ of <NaturalExpression>]: [<Tags>]
+
+```<example-block-language>
+<example-block-content>
+```
+````
+
+**Rules:**
+
+- An ExampleBlock with `of <NaturalExpression>` applies only to the value that should be interpreted from the specified expression.
+- An ExampleBlock without `of <NaturalExpression>` MAY ONLY follow a VocabularyDeclaration or a Directive.
+- An ExampleBlock without `of <NaturalExpression>` applies to the immediately preceding eligible construct.
+- An ExampleBlock MAY be tagged with one or more Tag.
+- An ExampleBlock MUST NOT appear between list items.
+- An ExampleBlock MUST NOT appear after lists without using `of <NaturalExpression>`.
+
+**Examples:**
+
+Example of illustrating the preceding VocabularyDeclaration without `of <NaturalExpression>`.
+
+````md
+**Formatter Function:** – A formatter is a function that serialises data for presentation.
+
+Example:
+
+```javascript
+function formatRow(row) {
+  return row.cells.join(', ');
+}
+```
+````
+
+Example of illustrating a ContextValue using `of <NaturalExpression>`.
+
+````md
+**Inputs:**
+
+- `%table-of-contents` – The table of contents extracted from the documentation source.
+- `%search-terms` – The terms used to filter relevant entries.
+
+Example of `%table-of-contents`:
+
+```md
+| Name           | Description               |
+| -------------- | ------------------------- |
+| Authentication | User authentication flows |
+| Permissions    | Access control rules      |
+| API Reference  | Available API endpoints   |
+```
+````

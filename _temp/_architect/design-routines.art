@@ -1,0 +1,47 @@
+# Module
+
+## Routine: Design Routines
+
+**Purpose:** Draft routine specifications from a process description.
+
+**Inputs:**
+
+- `%processDescription`: string — natural language description of a workflow to decompose
+- `%domain`: string — which domain this belongs to (e.g. `architect`, `art`, `developer`)
+
+**Outputs:**
+
+- `%routines`: list of routine specs (entry point + sub-routines)
+- `%types`: list of type specs (shared shapes detected across routines)
+
+**Procedure:**
+
+1. **Analyse the process description.**
+   1. Identify discrete steps — each step becomes a candidate sub-routine.
+   2. Identify the entry point — the step that orchestrates the others.
+   3. For each step, draft: purpose (single responsibility), inputs, outputs, procedure (pseudo-code calling other routines).
+
+2. **Detect shared shapes.**
+   1. Scan inputs and outputs across all routines.
+   2. If 2+ routines share the same shape (same fields, same semantics) → extract it as a type.
+   3. For each type, draft: purpose, primitive (Record), fields.
+
+3. **Analyse orchestration.**
+   1. Determine call order — which routines depend on which outputs.
+   2. Check if entry point can use early initialisation (pass context through without consuming it).
+   3. Draw call graph.
+
+4. **Analyse failure modes.**
+   1. For each routine: what happens if input is empty, path doesn't exist, file unreadable?
+   2. Define behaviour: return empty, skip, warn, or error.
+   3. Document in each routine's procedure.
+
+5. **Analyse complexity.**
+   1. For each routine: check for nested `if`, `with`, or `for` blocks.
+   2. If 2+ levels deep → candidate for extraction into a sub-routine.
+   3. Document in each routine's procedure.
+
+6. **Finalise.**
+   1. Verify single responsibility per routine — split if a routine does too much.
+   2. Verify types are minimal — don't create a type if only one routine uses it.
+   3. Return `%routines` and `%types`.

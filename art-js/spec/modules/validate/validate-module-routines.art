@@ -1,0 +1,261 @@
+# Module
+
+**Purpose:** Validate that all variables referenced within routines are properly declared.
+
+## Uses
+
+::READ (Module Validation Rule Breach) FROM `./_types.art`.
+
+## Declares
+
+### Rule: Routine Has Inputs
+
+**id:** `routine:has-inputs`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Find all SectionBlocks matching the pattern `### Routine: {name}` in `%contents`.
+3. With each `%routine` found:
+   1. If the routine has no Inputs section:
+      1. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to `%routine.line`.
+         - `rule-id` set to `routine:has-inputs`.
+         - `description` set to "Missing Inputs section".
+      2. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Rule: Routine Has Outputs
+
+**id:** `routine:has-outputs`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Find all SectionBlocks matching the pattern `### Routine: {name}` in `%contents`.
+3. With each `%routine` found:
+   1. If the routine has no Outputs section:
+      1. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to `%routine.line`.
+         - `rule-id` set to `routine:has-outputs`.
+         - `description` set to "Missing Outputs section".
+      2. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Rule: Routine Has Process
+
+**id:** `routine:has-process`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Find all SectionBlocks matching the pattern `### Routine: {name}` in `%contents`.
+3. With each `%routine` found:
+   1. If the routine has no Process or Procedure section:
+      1. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to `%routine.line`.
+         - `rule-id` set to `routine:has-process`.
+         - `description` set to "Missing Process section".
+      2. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Rule: Routine Input Known
+
+**id:** `routine:input-known`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Find all SectionBlocks matching the pattern `### Routine: {name}` in `%contents`.
+3. With each `%routine` found:
+   1. Extract the `%routine-inputs` from the Inputs section.
+   2. Extract the `%routine-outputs` from the Outputs section.
+   3. Extract the `%routine-process` from the Process or Procedure section.
+   4. Build the `%known-variables` list from `%routine-inputs` and `%routine-outputs`.
+   5. Find all ContextSymbol references (`%variable`) in `%routine-process`.
+   6. With each `%variable` found:
+      1. If `%variable` is NOT in `%known-variables` and not introduced by a local statement:
+         a. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to `%routine.line`.
+         - `rule-id` set to `routine:input-known`.
+         - `description` set to "Unknown variable".
+           b. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Rule: Routine Output Declared
+
+**id:** `routine:output-declared`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Find all SectionBlocks matching the pattern `### Routine: {name}` in `%contents`.
+3. With each `%routine` found:
+   1. Extract the `%routine-outputs` from the Outputs section.
+   2. Extract the `%routine-process` from the Process or Procedure section.
+   3. With each `%output` in `%routine-outputs`:
+      1. If `%output` is NOT referenced in `%routine-process`:
+         a. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to `%routine.line`.
+         - `rule-id` set to `routine:output-declared`.
+         - `description` set to "Output not assigned".
+           b. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Rule: Routine Input Used
+
+**id:** `routine:input-used`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Find all SectionBlocks matching the pattern `### Routine: {name}` in `%contents`.
+3. With each `%routine` found:
+   1. Extract the `%routine-inputs` from the Inputs section.
+   2. Extract the `%routine-process` from the Process or Procedure section.
+   3. With each `%input` in `%routine-inputs`:
+      1. If `%input` is NOT referenced in `%routine-process`:
+         a. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to `%routine.line`.
+         - `rule-id` set to `routine:input-used`.
+         - `description` set to "Input not referenced".
+           b. Append `%breach` to `%breaches`.
+4. If `%breaches` is empty, return NOTHING.
+5. Otherwise, return `%breaches`.
+
+### Routine: Validate Module Routines
+
+**Purpose:** Check that every `%variable` used inside a routine is known from its declared inputs, outputs, or local declarations.
+
+**Description:** Executes all rules in "## Rules" against the module contents and aggregates the results into a validation table.
+
+**Inputs:**
+
+- `%name` - The name of the module.
+- `%source` - A string identifying the source of the module (the filename or other).
+- `%contents` - The contents of the module file.
+
+**Outputs:**
+
+- `%module-routines-validation-table` - A table of validation results per routine.
+
+**Before Executing:**
+
+1. If no `%contents` provided,
+   1. THROW ERROR to user and STOP processing.
+
+**Procedure:**
+
+1. Prepare a `%report` table with columns `module`, `line`, `rule`, `description`, `snippet`.
+2. With each `%rule` in "## Rules":
+   1. Execute the `%rule` procedure with `%contents` and `%source` to capture eventual `%breaches`.
+   2. With each `%breach` in the captured `%breaches`:
+      1. Add row to `%report` with `%name`, `%breach.line`, `%breach.rule-id`, `%breach.description`, `-`.
+3. Return `%report` as `%module-routines-validation-table`.
+
+**Examples:**
+
+Example of a valid routine:
+
+```md
+### Routine: Generate Report
+
+**Inputs:**
+
+- `%data` - The data to report on.
+
+**Outputs:**
+
+- `%report` - The generated report.
+
+**Process:**
+
+1. With the `%data`, generate the `%report`.
+```
+
+Example of an invalid routine with an undeclared variable:
+
+```md
+### Routine: Generate Report
+
+**Inputs:**
+
+**Outputs:**
+
+- `%report` - The generated report.
+
+**Process:**
+
+1. With the `%data`, generate the `%report`.
+```
+
+Example of a generated report for the invalid routine:
+
+| module        | line | rule                | description              | snippet                        |
+| ------------- | ---- | ------------------- | ------------------------ | ------------------------------ |
+| Report Module | 3    | routine:input-known | Unknown variable `%data` | `With the \`%data\`, generate` |

@@ -1,0 +1,15 @@
+# Module
+
+## Declares
+
+### Structure: Grammar
+
+**Purpose:** Represents the meta-model used to describe interpreter-defined primitive value types.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `id` - kebab case identification of the grammar. Example: "artificial".
+- `name` - canonical name. Example: "artificial".
+- `constructs` - flat list of constructors classified with category

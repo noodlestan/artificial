@@ -1,0 +1,90 @@
+# Module
+
+## Uses
+
+::READ (Construct: NaturalExpression) FROM `../expressions/identifier.art`.
+
+## Construct: ExampleInline
+
+**Category:** Inline
+
+**Purpose:** Provide a way to illustrate concepts and instructions next to the source.
+
+**Description:** An ExampleInline can be _Suffix_ (at the end of an instruction) or _Nested_ (within the instruction text) and can be _Singular_ or _Plural_.
+
+**Schema:**
+
+```
+ExampleInline {
+    position: <suffix | nested>
+    examples: <NaturalExpression>[]
+}
+```
+
+**Syntax:**
+
+Syntax of _Suffix_, _Singular_:
+
+- Prefixed with ` Example:`.
+- Example text quoted with `"..."`.
+- Finished with a dot.
+
+```art
+<ExampleInline:Suffix:Singular> =
+    <NaturalExpression>. Example: "<NaturalExpression (example text)>"
+```
+
+Syntax of _Suffix_, _Plural_:
+
+- Prefixed with ` Examples:`.
+- Each example text quoted with `"..."`.
+- Examples separated by `, `.
+- Finished with a dot.
+
+```art
+<ExampleInline:Suffix:Plural> =
+    <NaturalExpression>. Examples: "<NaturalExpression (example text)>"[, "<NaturalExpression (example text)>" ...]
+```
+
+Syntax of _Nested_, _Singular_:
+
+- Prefixed by `Example:`.
+- Example text quoted with `"..."`.
+- Enclosed in brackets `(...)`.
+
+```art
+<ExampleInline:Nested:Singular> =
+    <NaturalExpression> (Example: "<NaturalExpression (example text)>") <NaturalExpression>
+```
+
+Syntax of _Nested_, _Plural_:
+
+- Prefixed by `Examples:`.
+- Examples text quoted with `"..."`.
+- Each example separated by `, `.
+- Enclosed in brackets `(...)`.
+
+```art
+<ExampleInline:Nested:Plural> =
+    <NaturalExpression> (Examples: "<NaturalExpression: Example>"[, "<NaturalExpression: Example 2>" ...]) <NaturalExpression>
+```
+
+**Examples:**
+
+Example of _Suffix_, _Singular_:
+
+```
+Current Status. Example: "READY".
+```
+
+Example of _Suffix_, _Plural_:
+
+```
+Resource Category. Examples: "Conventions", "Patterns", "References"
+```
+
+Example of _Nested_, _Plural_ and _Singular_:
+
+```md
+If the `%resource.type` is a record (Examples: "Task" and "Plan") or a knowledge resource (Example: "Patterns"), then...
+```

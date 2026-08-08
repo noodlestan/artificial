@@ -1,0 +1,36 @@
+# Artificial Structures
+
+<!-- WIP make sure these definitions are available in .agents/domains/_artificials/discovery/grammar.md : StructureField -->
+
+## Uses
+
+::READ (Primitive: Record) FROM `../primitives/record.art`
+::READ (Primitive: Record) FROM `../primitives/record.art`
+
+## Structure: Structure
+
+**id**: `structure`
+
+**Name**: Structure
+
+**Kind**: Structure
+
+**Description:** This structure defines the shape of a structure resource (like itself).
+
+**Status:** wip
+
+**Examples:**
+
+- This file (self-referential)
+- `.agents/domains/_artificials/structures/command__structure.md`
+- `.agents/domains/tasks/structures/task__structure.md`
+
+**Composes:** Structure: Base
+
+**Primitive**: Record
+
+**Shape:**
+
+- `composes?` - Another Structure
+- `primitive` – PrimitiveName
+- `shape` – One of WIP (primitive types)

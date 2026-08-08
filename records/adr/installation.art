@@ -1,0 +1,11 @@
+# Module: Installation
+
+**Purpose:** Decisions about how the system is adopted into a repository.
+
+## Decision: art init Bootstrap
+
+**Status:** Adopted
+
+**Context:** New projects must adopt the system without manual setup, and existing files must never be clobbered. Adoption has to be safe to run in any repository, more than once.
+
+**Decision:** `art init` / `npx art-init` inserts a marker-delimited bootstrap section into `AGENTS.md` (`<!-- ::ART-BOOTSTRAP:START/END -->`) and creates a `.agents/` skeleton — non-destructively and idempotently.

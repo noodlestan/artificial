@@ -1,0 +1,16 @@
+{
+  "name": "{{%package.name}}",
+  "version": "{{%package.version}}",
+  "description": "{{%package.description}}",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": true,
+  "bin": {
+    "artificials-build": "./bin/build.mjs",
+    "artificials-watch": "./bin/watch.mjs"
+  },
+  "scripts": {
+    "lint": "prettier . -c",
+    "lint:fix": "prettier . -c --write"
+  }
+}

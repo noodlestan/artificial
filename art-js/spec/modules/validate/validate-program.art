@@ -1,0 +1,32 @@
+# Module
+
+**Purpose:** Entry point routine to validate all modules in a program.
+
+## Uses
+
+::READ (Validate Module) `./validate-module.art`.
+
+## Exposes
+
+### Routine: Validate Program
+
+**Purpose:** Validate an entry point and all files it uses.
+
+**Description:** Reads an entry point.
+
+**Inputs:**
+
+- `%file` - The name of the entry point file.
+
+**Outputs:**
+
+- `%validation-report` - The aggregated validation report across all modules and rules.
+
+**Procedure:**
+
+1. Glob for all directories under `%path` that contain `.art` files.
+2. If no modules found, present "No modules found."
+3. Else, with each `%module-path` found:
+   1. Execute the **Routine: Validate Module** with `%module-path` to produce `%module-report`.
+   2. If `%module-report` has entries, append to `%validation-report`.
+4. Return the `%validation-report`.

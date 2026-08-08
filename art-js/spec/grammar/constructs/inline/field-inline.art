@@ -1,0 +1,42 @@
+# Module
+
+## Uses
+
+::READ (Construct: NaturalExpression) FROM `../expressions/natural-expression.art`.
+::READ (Construct: NaturalExpression) FROM `../expressions/natural-name.art`.
+
+## Construct: FieldInline
+
+**Category:** Inline
+
+**Purpose:** Represent a named property value expressed on a single line.
+
+**Description:** A FieldInline associates a name with an inline value within a SectionBlock. The value is a NaturalExpression defined on the same line as the field name.
+
+**Schema:**
+
+```art
+FieldInline {
+    name: <NaturalName>
+    value: <NaturalExpression>
+}
+```
+
+**Syntax:**
+
+```art
+<FieldInline> =
+	**<NaturalName (field.name)>:** <NaturalExpression>
+```
+
+**Rules:**
+
+- A FieldInline MUST define a name.
+- A FieldInline MUST define a value on the same line as the name.
+- A FieldInline value MUST be a NaturalExpression.
+
+**Example:**
+
+```md
+**Status:** IN-PROGRESS
+```

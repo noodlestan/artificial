@@ -1,0 +1,30 @@
+# Module
+
+## Package: Art Mantras
+
+**Purpose:** Interactive curator for the A.R.T.I.F.I.C.I.A.L.S acronym.
+
+**Description:** Generates mantra options for the ART acronym from per-letter word pools. Random mantra composition, strong promotion, banning, reordering, and saved mantras. Vanilla JS micro app, no build; state persisted in `src/data.json`.
+
+**Path:** `artisans/apps/art-mantras/`
+
+**Canonical Name:** `@artisans/art-mantras`
+
+**Version:** `0.0.1`
+
+**Language:** Vanilla JavaScript (HTML/CSS/JS, no build)
+
+**Dependencies:**
+
+- none
+
+**Scripts:**
+
+- Package Script Set: Micro App Serve
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Micro App
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json

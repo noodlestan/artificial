@@ -1,0 +1,28 @@
+# Module
+
+## Routine: Apply Scaffolder Kind Skeleton
+
+**Purpose:** Apply a skeleton scaffolder to copy a source directory to a target path.
+
+**Inputs:**
+
+- `%context`: Type: Scaffolding Context
+- `%scaffolder`: Structure: Scaffolder Skeleton
+
+**Outputs:**
+
+- `%files-created`: List of generated file paths
+
+**Procedure:**
+
+1. Set `%target-path` to `%context.path` + `%scaffolder.target`.
+2. In `%scaffolder.source` skeleton directory, find all `%files` (capture paths relative to skeleton directory).
+3. With each `%relative-filename` in `%files`:
+   1. If `%relative-filename` extension is `.tart`:
+      1. Read `%template` from `%relative-filename`.
+      2. Render the `%template` with `%context` and capture `%output`.
+      3. Set `%file-target` to `%target-path` + `%relative-filename` (stripping the `.tart` extension).
+      4. Save `%output` to `%file-target`.
+   2. Otherwise,
+      1. Copy `%relative-filename` to `%target-path` + `%relative-filename`.
+4. Return `%files-created`.

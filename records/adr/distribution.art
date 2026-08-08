@@ -1,0 +1,39 @@
+# Module: Distribution
+
+**Purpose:** Decisions about how domains are named, packaged, and exposed to consumers.
+
+## Decision: Projection Taxonomy
+
+**Status:** Adopted
+
+**Context:** The consumer-facing projections of a domain need stable names and tags. Without a fixed vocabulary, labels drift (facade, curator, hoist) and the drift propagates into types, tags, and docs, making the system unverifiable.
+
+**Decision:** The four projections are **Author**, **Generator**, **Operator**, and **Indexer**, with **Projection** as the container word. The names are the vocabulary — chosen as words, not by their deeper meaning. Tags are `#author`, `#generator`, `#operator`, `#indexer`.
+
+**Consequences:** The taxonomy constrains the naming of primitives and tags elsewhere in the system.
+
+## Decision: Projections Precompiled and Committed
+
+**Status:** Proposal
+
+**Context:** Projections could be generated at installation time or ahead of time. Generating at consumption time would make output dependent on runtime state and hide changes behind an opaque regeneration step.
+
+**Decision:** Projections are precompiled and committed to git, like generated content, rather than generated at consumption time.
+
+**Consequences:** A build step must run before any commit that changes sources or config.
+
+## Decision: Domains Package as Artifacts
+
+**Status:** Adopted
+
+**Context:** Domains are the unit of targeting and packaging. To be reusable across repositories, a domain must be distributable as a package rather than re-declared per repo.
+
+**Decision:** A domain compiles into one projection per use case and can be packaged as a reusable artifact (e.g. `@artificial/tasks`).
+
+## Decision: Naming Conventions
+
+**Status:** Adopted
+
+**Context:** The monorepo hosts both implementation packages and domain artifacts; without a convention, the two collide in scope and intent.
+
+**Decision:** `art-js` is reserved for JS implementation packages; `@artificial/{name}` is the scope for domain artifacts.

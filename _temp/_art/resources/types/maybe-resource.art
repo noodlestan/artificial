@@ -1,0 +1,26 @@
+# Module
+
+## Type: MaybeResource (T is Structure)
+
+**Purpose:** A resource in any state: reference, partially loaded, or fully loaded.
+
+**Primitive:** Primitive: Oneof
+
+**Shape:**
+
+- `alternatives:`
+  - Type: ResourceRef (T).
+  - Partial (Type: Resource (T)).
+  - Type: Resource (T).
+
+**Resolution:**
+
+- If `ResourceRef`: Find the file, then load the resource.
+- If `Partial`: Load the resource from the filename.
+- If `Resource`: Already loaded, return as-is.
+
+**Representation:**
+
+```ts
+type MaybeResource<T extends Structure> = ResourceRef<T> | Partial<T> | Resource<T>;
+```

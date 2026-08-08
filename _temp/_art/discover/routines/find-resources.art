@@ -1,0 +1,24 @@
+# Module
+
+## Routine: Find Resources
+
+**Purpose:** Scan filesystem for resources matching a kind pattern.
+
+**Inputs:**
+
+- `%kind`?: string (defaults to all kinds)
+- `%scope`?: string (defaults to `artificials/`)
+
+**Outputs:**
+
+- `%resources`: Table with columns: `file`, `kind`, `name`
+
+**Procedure:**
+
+1. If `%kind` provided, scan for `## {{%kind}}: ...` in `%scope`.
+2. If `%kind` not provided, scan for `## {any kind}: ...` in `%scope`.
+3. For each match:
+   1. Extract `kind` and `name` from heading.
+   2. Record source file path.
+4. Deduplicate by `kind:name`.
+5. Return `%resources`.

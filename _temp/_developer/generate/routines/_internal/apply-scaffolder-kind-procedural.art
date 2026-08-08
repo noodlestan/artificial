@@ -1,0 +1,19 @@
+# Module
+
+## Routine: Apply Scaffolder Kind Procedural
+
+**Purpose:** Apply a procedural scaffolder by invoking a named routine with inputs.
+
+**Inputs:**
+
+- `%context`: Type: Scaffolding Context
+- `%scaffolder`: Structure: Scaffolder Procedural
+
+**Outputs:**
+
+- `%files-created`: List of generated file paths
+
+**Procedure:**
+
+1. Invoke the `%scaffolder.procedure` with `%context` and `%scaffolder.input` to capture `%files-created`.
+2. Return `%files-created`.

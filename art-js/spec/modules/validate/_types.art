@@ -1,0 +1,18 @@
+# Module
+
+<!-- WIP: will import primitives when available -->
+
+## Declares
+
+### Type: Module Validation Rule Breach
+
+**Purpose:** Defines a single breach record from a validation rule.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `filename` - NaturalName
+- `line` - NaturalName
+- `rule-id` - NaturalName
+- `description` - NaturalExpression

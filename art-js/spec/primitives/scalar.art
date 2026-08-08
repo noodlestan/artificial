@@ -1,0 +1,108 @@
+# Module
+
+## Uses
+
+::READ (NaturalExpression, Identifier, NaturalName) `language/grammar/index.art`.
+
+## Declares
+
+### Type: ScalarValue
+
+**purpose:** Defines a single atomic value.
+
+**Schema:**
+
+```
+ScalarValue {
+  value: NaturalExpression
+  type: NaturalName
+}
+```
+
+### Primitive: Scalar
+
+**Id**: `scalar`
+
+**Name**: Scalar
+
+**Kind**: Primitive
+
+**Purpose:** Defines single atomic values.
+
+**Description:** A primitive that holds a single value of a specified type.
+
+**ValueType:**
+
+```ts
+type PrimitiveScalar = {
+  type: string;
+};
+```
+
+**Value:**
+
+```ts
+type PrmitiveScalarValue = {
+  value: T;
+};
+```
+
+#### Art: Inline
+
+**Procedure**
+
+1. Return "Scalar ({`%type`})"
+
+Example:
+
+```
+Text: "Hello World"
+```
+
+#### Art: Block
+
+**Procedure**
+
+1. Return """**ValueType:** {`%type`}
+   **Value:** {`%value`}"""
+
+Example:
+
+```md
+**ValueType:** Text
+**Value:** Hello World
+```
+
+#### Declaration: Inline
+
+**Procedure**
+
+1. Return "{`%type`}"
+
+Example:
+
+```
+A Text
+```
+
+#### Declaration: Block
+
+**Procedure**
+
+1. Return """
+   **ValueType:** {`%type`}
+   **Description:** A single {`%type`} value
+   """
+
+Example:
+
+```md
+**ValueType:** Text
+**Description:** A single Text value
+```
+
+#### Interpretation
+
+**Procedure**
+
+1. Interpret the `%value` as the type specified by `%type`.

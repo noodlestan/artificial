@@ -1,0 +1,27 @@
+# Module
+
+## Routine: Insert Resource Into File
+
+**Purpose:** Insert a resource at a specified location in a file.
+
+**Inputs:**
+
+- `%contents` - string. The file contents (or NOTHING for new file).
+- `%resource` - string. The resource to insert.
+- `%location` - Type: Resource Location.
+
+**Outputs:**
+
+- `%new-contents` - string. The updated file contents.
+- `%new-location` - Type: Resource Location. The actual insertion point.
+
+**Procedure:**
+
+1. If `%contents` is NOTHING:
+   1. Return `# Module\n\n{%resource}` and location at line 3.
+2. Parse `%location.position`:
+   1. If "before {target}": insert `%resource` before the target heading.
+   2. If "after {target}": insert `%resource` after the target heading.
+   3. If "at line {n}": insert `%resource` at line n.
+   4. Otherwise: append `%resource` to end of file.
+3. Return `%new-contents` and `%new-location` with actual insertion line.

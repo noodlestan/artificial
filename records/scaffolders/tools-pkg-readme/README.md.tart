@@ -1,0 +1,13 @@
+# {{%package.name}}
+
+> {{%package.description}}
+
+## Development
+
+Make sure you read the [namespace README](../README.md) first.
+
+### Build Targets
+
+This tool is NOT built.
+
+## {{%project.license.short}}

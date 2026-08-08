@@ -1,0 +1,22 @@
+# Module
+
+## Declares
+
+### Routine: List Art Files
+
+**Inputs:**
+
+- `%path` - The path to the module directory.
+
+**Outputs:**
+
+- `%files` - A list of file paths to all `.art` files found.
+
+**Procedure:**
+
+1. Use bash `ls **/*.art` to find all art files under `%path`.
+2. Return the matched files as `%files`.
+
+**Purpose:** Find all `.art` files under a module directory.
+
+**Description:** Takes a path to a module directory and returns a list of all `.art` source files found within it, including in subdirectories.

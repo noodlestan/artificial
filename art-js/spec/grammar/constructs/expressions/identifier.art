@@ -1,0 +1,36 @@
+# Module
+
+## Construct: Identifier
+
+**Category:** Expressions
+
+**Purpose:** Provide a canonical lexical representation for names used by artificial language constructs.
+
+**Description:** An Identifier is a structural element used to represent a stable and unambiguous name within the context. Identifiers are used by constructs that require explicit references, such as Tags and ContextSymbols.
+
+**Rules:**
+
+- An Identifier MUST use kebab-case notation.
+- An Identifier MUST contain only lowercase letters, numbers, and hyphens.
+- An Identifier MUST NOT contain whitespace or any other characters.
+
+**Syntax:**
+
+```art
+<Identifier> =
+    <kebab-case-name>
+```
+
+**Examples:**
+
+Examples of Valid identifiers:
+
+- `api-documentation`
+- `table-of-contents`
+- `maximum-results`
+- `search-terms`
+
+Invalid identifiers:
+
+- `API_Documentation`
+- `table Of Contents`

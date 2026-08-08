@@ -1,0 +1,9 @@
+# Module
+
+## Package Script Set: Root Extract
+
+**Scripts:**
+
+- Package Script: Extract
+  - Purpose: Extract resources
+  - Command: `turbo run extract`

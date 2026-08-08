@@ -1,0 +1,11 @@
+# Module
+
+## Scaffolder Files: Tools Namespace Readme
+
+**Purpose:** Generates README.md for the tools namespace.
+
+**Files:**
+
+- `README.md`:
+  - template: `./README.md.tart`
+  - target: `{{%path}}README.md`

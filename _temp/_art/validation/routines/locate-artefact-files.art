@@ -1,0 +1,19 @@
+# Module
+
+## Routine: Locate Artefact Files
+
+**Purpose:** Discover all .md and .art files under a given path.
+
+**Inputs:**
+
+- `%path`: string
+
+**Outputs:**
+
+- `%files`: List (Type: FileLocation)
+
+**Procedure:**
+
+1. Glob `{%path}/**/*.md` and `{%path}/**/*.art`.
+2. Merge results into `%files`.
+3. Return `%files` (may be empty — caller decides).

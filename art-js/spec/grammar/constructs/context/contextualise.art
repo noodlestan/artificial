@@ -1,0 +1,48 @@
+# Module
+
+## Uses
+
+::READ (Construct: ContextSymbol) FROM `./context-symbol.art`.
+::READ (Construct: ContextAlias) FROM `./context-alias.art`.
+::READ (Construct: ContextValue) FROM `./context-value.art`.
+
+## Construct: Contextualise
+
+**Category:** Context
+
+**Purpose:** Allow instructions to identify meaning from their surrounding context.
+
+**Description:** Defines context values for the following set of instructions
+
+**Syntax:**
+
+```art
+<Contextualise> =
+    With <ContextSymbol | ContextAlias | ContextValue>, ...
+```
+
+**Examples:**
+
+Example of contextualization with a ContextSymbol:
+
+```md
+With the `%filtered-list` items, execute...
+```
+
+Example of contextualization with a ContextAlias:
+
+```md
+With the matching feedback items as `%filtered-feedback`, execute...
+```
+
+Example of contextualization with an aggregation operation:
+
+```md
+With the `%filtered-feedback` and the current `%scope`, execute...
+```
+
+Example of contextualization with other operations:
+
+```md
+With the `%filtered-feedback` grouped by `%target`, execute...
+```

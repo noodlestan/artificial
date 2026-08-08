@@ -1,0 +1,330 @@
+{
+  "slots": [
+    {
+      "id": "A1",
+      "letter": "A",
+      "constant": true,
+      "strong": [
+        "Artificial"
+      ],
+      "pool": [],
+      "banned": []
+    },
+    {
+      "id": "R",
+      "letter": "R",
+      "constant": false,
+      "strong": [
+        "Resources",
+        "Regenerative"
+      ],
+      "pool": [
+        "Resource",
+        "Resources",
+        "Recursive",
+        "Rendered",
+        "Reusable",
+        "Reactive",
+        "Refined",
+        "Regenerative",
+        "Relational",
+        "Rooted",
+        "Reified",
+        "Records",
+        "Routines",
+        "Render",
+        "Reference",
+        "Reasoning",
+        "Results",
+        "Response"
+      ],
+      "banned": []
+    },
+    {
+      "id": "T",
+      "letter": "T",
+      "constant": false,
+      "strong": [
+        "Tree",
+        "Targeted"
+      ],
+      "pool": [
+        "Tree",
+        "Targeted",
+        "Transforms",
+        "Templates",
+        "Typed",
+        "Traceable",
+        "Truth",
+        "Terminal",
+        "Topological",
+        "Transparent",
+        "Types",
+        "Tasks",
+        "Tools",
+        "Transform"
+      ],
+      "banned": []
+    },
+    {
+      "id": "I1",
+      "letter": "I",
+      "constant": false,
+      "strong": [
+        "Instruction",
+        "Indexed",
+        "Imperative",
+        "Intent"
+      ],
+      "pool": [
+        "Instruction",
+        "Integrated",
+        "Instilled",
+        "Intrinsic",
+        "Into",
+        "Indexed",
+        "Interlinked",
+        "Interpreted",
+        "Imperative",
+        "Invertible",
+        "Interleaved",
+        "Intention",
+        "Intent",
+        "Iterative",
+        "Inferential",
+        "Instantiated",
+        "Irreducible",
+        "Inherent",
+        "Interoperable",
+        "Indexer",
+        "Input",
+        "Insights",
+        "Identify",
+        "Inquiry"
+      ],
+      "banned": []
+    },
+    {
+      "id": "F",
+      "letter": "F",
+      "constant": false,
+      "strong": [
+        "Facets",
+        "Formal",
+        "Foundational"
+      ],
+      "pool": [
+        "Facets",
+        "Faceted",
+        "Facetted",
+        "Formal",
+        "Foundational",
+        "Forged",
+        "Factored",
+        "Faithful",
+        "Framed",
+        "Findings",
+        "Format",
+        "Files",
+        "Feedback",
+        "Frameworks"
+      ],
+      "banned": []
+    },
+    {
+      "id": "I2",
+      "letter": "I",
+      "constant": false,
+      "strong": [
+        "Instruction",
+        "Indexed",
+        "Imperative",
+        "Intent"
+      ],
+      "pool": [
+        "Instruction",
+        "Integrated",
+        "Instilled",
+        "Intrinsic",
+        "Into",
+        "Indexed",
+        "Interlinked",
+        "Interpreted",
+        "Imperative",
+        "Invertible",
+        "Interleaved",
+        "Intention",
+        "Intent",
+        "Iterative",
+        "Inferential",
+        "Instantiated",
+        "Irreducible",
+        "Inherent",
+        "Interoperable",
+        "Indexer",
+        "Input",
+        "Insights",
+        "Identify",
+        "Inquiry"
+      ],
+      "banned": []
+    },
+    {
+      "id": "C",
+      "letter": "C",
+      "constant": false,
+      "strong": [
+        "Compiler",
+        "Composable"
+      ],
+      "pool": [
+        "Compiled",
+        "Canonical",
+        "Cascading",
+        "Compiler",
+        "Composable",
+        "Configurable",
+        "Coherent",
+        "Contractual",
+        "Contextual",
+        "Complete",
+        "Context",
+        "Commands",
+        "Constraints",
+        "Confidence",
+        "Clarity",
+        "Consumer",
+        "Curate",
+        "Capabilities",
+        "Compilation"
+      ],
+      "banned": []
+    },
+    {
+      "id": "I3",
+      "letter": "I",
+      "constant": false,
+      "strong": [
+        "Instruction",
+        "Indexed",
+        "Imperative",
+        "Intent"
+      ],
+      "pool": [
+        "Instruction",
+        "Integrated",
+        "Instilled",
+        "Intrinsic",
+        "Into",
+        "Indexed",
+        "Interlinked",
+        "Interpreted",
+        "Imperative",
+        "Invertible",
+        "Interleaved",
+        "Intention",
+        "Intent",
+        "Iterative",
+        "Inferential",
+        "Instantiated",
+        "Irreducible",
+        "Inherent",
+        "Interoperable",
+        "Indexer",
+        "Input",
+        "Insights",
+        "Identify",
+        "Inquiry"
+      ],
+      "banned": []
+    },
+    {
+      "id": "A2",
+      "letter": "A",
+      "constant": false,
+      "strong": [
+        "Art",
+        "Agents",
+        "Authorable"
+      ],
+      "pool": [
+        "Art",
+        "Agents",
+        "Authorable",
+        "Accessible",
+        "Aligned",
+        "Atomic",
+        "Actionable",
+        "Adaptive",
+        "Abstract",
+        "Assembled",
+        "Actions",
+        "API",
+        "Attachment",
+        "Assess",
+        "Ask",
+        "Apply",
+        "Achieve"
+      ],
+      "banned": []
+    },
+    {
+      "id": "L",
+      "letter": "L",
+      "constant": false,
+      "strong": [
+        "Language"
+      ],
+      "pool": [
+        "Language",
+        "Layers",
+        "Listings",
+        "Literal",
+        "Lexicon",
+        "Lenses",
+        "Logical",
+        "Latent",
+        "Layered",
+        "Loaded",
+        "Locate",
+        "Linear",
+        "Loop"
+      ],
+      "banned": []
+    },
+    {
+      "id": "S",
+      "letter": "S",
+      "constant": false,
+      "strong": [
+        "Services",
+        "System"
+      ],
+      "pool": [
+        "Services",
+        "System",
+        "Sources",
+        "Source",
+        "Source-tree",
+        "Sharing",
+        "Scaffolds",
+        "Schema",
+        "Streams",
+        "Semantic",
+        "Structure",
+        "Stable",
+        "Structures",
+        "Semantics",
+        "Select",
+        "Statement",
+        "Strategy",
+        "Synthesis",
+        "Scaffold",
+        "Specification",
+        "Section"
+      ],
+      "banned": []
+    }
+  ],
+  "mantras": []
+}

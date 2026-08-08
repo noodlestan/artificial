@@ -1,0 +1,45 @@
+# Module
+
+## Construct: NaturalBlock
+
+**Category:** Structural
+
+**Purpose:** Provide a construct for including additional material within other constructs.
+
+**Description:** NaturalBlock represents content associated with a construct through the construct's syntax rules. Example: The content of a SectionBlock, or of a FieldBlock.
+
+NaturalBlock is the catch-all classification: any content that does not match another construct is a NaturalBlock. Plain Markdown is never invalid — it classifies as NaturalBlock.
+
+**Rules:**
+
+- A NaturalBlock MAY contain one or more content elements.
+- A NaturalBlock is the default classification for content that does not match any other construct.
+- A NaturalBlock MUST NOT be interpreted as a named property unless defined by the enclosing construct.
+- The interpretation of a NaturalBlock is determined by the enclosing construct.
+<!-- refine content rules -->
+
+**Syntax:**
+
+```art
+<content-element> =
+    <paragraph>
+    | <bullet-list>
+    | <numbered-list>
+    | <table>
+    | <other-content-element>
+
+<NaturalBlock> =
+    <content-element> [<content-element> ...]
+```
+
+**Examples:**
+
+Example of NaturalBlock containing `<paragraph>` content, followed by `<bullet-list>` content:
+
+```md
+This section describes the available authentication methods.
+
+- Create resources.
+- Update resources.
+- Delete resources.
+```

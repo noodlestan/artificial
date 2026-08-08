@@ -1,0 +1,74 @@
+# Module
+
+## Uses
+
+::READ (Construct: Identifier) FROM `./identifier.art`.
+
+## Construct: Tag
+
+**Category:** Expressions
+
+**Purpose:** Attach metadata to resource declarations to enable identification, classification, filtering, grouping, and other operations.
+
+**Description:** Tags are the projection mechanism: they attach to resource declarations (SectionBlock headings) and definitions, and determine inclusion, exclusion, or transformation of content per projection. Tags are aligned to the four projections — `#author`, `#generator`, `#operator`, `#indexer` — so a tagged declaration knows which projections it belongs to. Multiple tags are space-separated. The values and meaning of tags are usually defined via VocabularyDeclaration.
+
+**Syntax:**
+
+Single tag:
+
+```art
+<Tag> =
+    (#<Identifier>)
+```
+
+Multiple tags:
+
+```art
+<Tags> =
+    <Tag> [<Tag> ...]
+```
+
+TaggedSectionBlock:
+
+```art
+### <section-block-header> <Tags>
+```
+
+Tagged definitions:
+
+```art
+### Process: Rendering Table of Contents
+
+<Vocabulary> <Tags>
+```
+
+**Rules:**
+
+- A Tag MUST appear only at the end of a construct's opening line — the SectionBlock heading, the FieldBlock identifier, or the ExampleBlock opening — or at the end of Vocabulary.
+- A Tag MUST NOT appear anywhere other than those opening lines or Vocabulary.
+- A Tag name MUST be kebab case.
+- A Tag MUST be prefixed with `#` and enclosed in parentheses.
+- A Tag determines the inclusion, exclusion, or transformation of the tagged declaration's content per projection.
+- Multiple tags MUST be space-separated.
+
+**Examples:**
+
+Example of a tagged SectionBlock:
+
+```md
+### Process: Writing Conventions (#generator) (#wip)
+```
+
+Example of tagged Vocabulary:
+
+```md
+**Convention Adoption** – An observation of the state of adoption of a convention. (#operator)
+```
+
+Example of Vocabulary defining tag values:
+
+```md
+**(#wip)** – Classifies items as work in progress.
+```
+
+<!-- WIP add TagReference , that enclosed in backticks and without the parenthesis. Syntax: art block: <TagReference> = `#<identifier>` Purpose: reference tags in instructions. Examples: example of referencing a tag in a filter operation md block:  "1. With each `%construct` tagged with `#generator`, ... -->

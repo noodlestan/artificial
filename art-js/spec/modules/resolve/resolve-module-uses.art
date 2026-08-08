@@ -1,0 +1,42 @@
+# Module
+
+## Uses
+
+::READ (Module Uses Table, Module Uses Table Entry) FROM `./_types.art`.
+
+## Expose
+
+### Routine: Resolve Module Uses
+
+**Purpose:** Extract a table of all resources a module uses from external files.
+
+**Description:** Parses the Uses section of a module, resolves each `::READ` directive to its target file, and returns a table listing each resource with its source and target file.
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%module-uses` - Type: Module Uses Table
+
+**Procedure:**
+
+1. Prepare an empty `%uses` list.
+2. Identify as `%uses-section` the SectionBlock named "Uses" in `%contents`.
+3. If no Uses section found,
+   1. Return the empty `%uses` as `%module-uses`.
+4. Else
+   1. Extract all `::READ` directives from the Uses section into `%from-directives`.
+   2. With each `%directive` in `%from-directives`:
+      1. Extract the `%target-file` path from the directive.
+      2. Resolve `%target-file` relative to the repository root.
+      3. Extract the list of `%resources` referenced in the directive.
+      4. With each `%resource` in `%resources`:
+         1. Prepare an `%entry` record with:
+            - `source` set to `%source`.
+            - `target-file` set to `%target-file`.
+            - `resource` set to `%resource`.
+         2. Append `%entry` to `%uses`.
+   3. Return `%uses` as `%module-uses`.

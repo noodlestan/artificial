@@ -1,0 +1,74 @@
+# Module
+
+**Purpose:** Validate that all routine references in a module are properly declared in its Uses section.
+
+## Uses
+
+::READ (Module Validation Rule Breach) FROM `./_types.art`.
+::READ (Resolve Module Uses) FROM `../resolve/resolve-module-uses.art`.
+
+## Rules
+
+### Rule: Module References Unknown Routine
+
+**id:** `module:references:unknown-routine`
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%breaches` - List (Type: Module Validation Rule Breach), or NOTHING.
+
+**Procedure:**
+
+1. Prepare an empty `%breaches` list.
+2. Execute the **Routine: Resolve Module Uses** with `%contents` and `%source` to produce `%module-uses`.
+3. Find all references matching the pattern `**Routine: {name}**` in `%contents`.
+4. With each `%reference` found:
+   1. Extract the `%routine-name` from the reference.
+   2. Check if `%routine-name` exists in `%module-uses` as a resource.
+   3. If not found:
+      1. Identify the `%line` number of the reference.
+      2. Prepare a `%breach` record with:
+         - `filename` set to `%source`.
+         - `line` set to the identified `%line`.
+         - `rule-id` set to `module:references:unknown-routine`.
+         - `description` set to "Unknown routine reference".
+      3. Append `%breach` to `%breaches`.
+5. If `%breaches` is empty, return NOTHING.
+6. Otherwise, return `%breaches`.
+
+## Declares
+
+### Routine: Validate Module References
+
+**Purpose:** Check that all routine references in a module are properly declared in its Uses section.
+
+**Description:** Executes all rules in "## Rules" against the module contents and aggregates the results into a validation table.
+
+**Inputs:**
+
+- `%name` - The name of the module.
+- `%source` - A string identifying the source of the module (the filename or other).
+- `%contents` - The contents of the module file.
+
+**Outputs:**
+
+- `%module-references-validation-table` - A table of validation results for each reference.
+
+**Before Executing:**
+
+1. If no `%contents` provided,
+   1. THROW ERROR to user and STOP processing.
+
+**Procedure:**
+
+1. Prepare a `%report` table with columns `module`, `line`, `rule`, `description`, `snippet`.
+2. With each `%rule` in "## Rules":
+   1. Execute the `%rule` procedure with `%contents` and `%source` to capture eventual `%breaches`.
+   2. With each `%breach` in the captured `%breaches`:
+      1. Add row to `%report` with `%name`, `%breach.line`, `%breach.rule-id`, `%breach.description`, `-`.
+3. Return `%report` as `%module-references-validation-table`.

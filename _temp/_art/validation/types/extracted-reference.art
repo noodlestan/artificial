@@ -1,0 +1,14 @@
+# Module
+
+## Type: ExtractedReference
+
+**Purpose:** A reference to another file found within a source file.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `path` - Path of the file containing the reference.
+- `line` - Line number where the reference was found.
+- `text` - Raw matched text of the reference.
+- `targetPath` - Resolved path the reference points to.

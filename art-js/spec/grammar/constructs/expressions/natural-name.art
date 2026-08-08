@@ -1,0 +1,30 @@
+# Module
+
+## Construct: NaturalName
+
+**Category:** Expressions
+
+**Purpose:** Provide a human-readable naming representation for artificial language constructs.
+
+**Description:** A NaturalName is a structural element used to represent a human-readable identifier within the context. NaturalNames are used by constructs that require natural language naming, such as a SectionBlock.
+
+**Rules:**
+
+- A NaturalName MUST start with a word.
+- A NaturalName MAY contain words, hyphens, and numbers.
+- A NaturalName MUST NOT contain only words, hyphens, and numbers.
+- A NaturalName MUST NOT contain verbs.
+- A NaturalName MUST NOT have more than 5 words.
+
+**Syntax:**
+
+```art
+<NaturalName> =
+    <natural-name>
+```
+
+**Example:**
+
+```md
+Artificial Language
+```

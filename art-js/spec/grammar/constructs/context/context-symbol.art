@@ -1,0 +1,57 @@
+# Module
+
+## Uses
+
+::READ (Construct: Identifier) FROM `../expressions/identifier.art`.
+
+## Construct: ContextSymbol
+
+**Category:** Context
+
+**Purpose:** Provides a notation to reference a ContextValues explicitly within instructions.
+
+**Description:** A ContextSymbol is a named reference that identifies a context value. It can refer to a declared inputs, a generated output, or any arbitrary data defined within the current context.
+
+**Important:** The interpretation rules for symbols are defined in the **Semantics** section.
+
+**Syntax:**
+
+Expressions enclosed in backticks and starting with a percentage sign.
+
+```art
+{BACKTICK} = `
+{PERCENT} = %
+{DOT} = .
+{SQUARE_OPEN} = [
+{SQUARE_CLOSE} = ]
+
+
+<symbol-reference> =
+    {PERCENT}<Identifier>
+
+<symbol-index-access> =
+    {SQUARE_OPEN}<symbol-reference>{SQUARE_CLOSE}
+
+<symbol-member-access> =
+    {DOT}<Identifier>
+
+<symbol-access> =
+    <symbol-member-access> | <symbol-index-access>
+
+<ContextSymbol> =
+    {BACKTICK}<symbol-reference>[<symbol-access> ...]{BACKTICK}
+```
+
+**Rules:**
+
+- A ContextSymbol MUST start with `%`.
+- A ContextSymbol MUST contain one or more kebab-case Identifiers separated by `.`.
+- A ContextSymbol MAY include index access after an Identifier.
+
+**Example:**
+
+```md
+Match the `%search-terms` against the `%well-known` list of resource types.
+With each `%spec` in `%task.specificions`.
+Identify the `%task.specificions.[%first].name` as `%name`.
+```

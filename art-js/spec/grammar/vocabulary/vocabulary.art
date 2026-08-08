@@ -1,0 +1,39 @@
+# Module
+
+<!-- WIP add Validate field to constructs (extra rules, oriented for validation) -->
+
+## Declares
+
+### Vocabulary
+
+**Artificial Grammar** – The combination of artificial vocabulary, syntax, and semantics that defines how artificial language should be written and interpreted.
+
+**Artificial Vocabulary** – The standardized set of terms used to describe artificial language constructs and their interpretation in a particular context.
+
+**Artificial Syntax** – The rules and notation for expressing artificial language elements and combining them into declarations, instructions, and other language constructs.
+
+**Artificial Semantics** – The meaning and interpretation rules of artificial instructions, enabling instructions to express intent clearly and be interpreted consistently with minimal ambiguity.
+
+**Artificial Schema** – The defined shape of an artificial structure, including its fields and the semantics associated with each field.
+
+**Artificial Construct** – WIP
+
+**Block Construct** – A language construct whose syntax spans multiple lines, including headings, content blocks, and nested structures.
+
+**Inline Construct** – A language construct expressed within a single line or as an embedded element within another construct.
+
+**Artificial Declaration** – A resource definition that introduces a name and its content, interpreted as WIP
+
+**Vocabulary Declaration** – A declaration of a term related to its declaration context, along with its definition and optional examples. Example: "**Artificial Operation** – A transformation applied to ..."
+
+**Natural Language** – Human-readable text used to express meaning and intent within artificial constructs or to articulate the role and relationship of other constructs such as Symbols, and operations.
+
+**NaturalName** – A human-readable identifier used to name constructs, declarations, and other language elements.
+
+**Artificial Operation** – A transformation construct applied to context values. Examples: "aggregate", "classify", "filter", "sort", "group", "validate", "summarise".
+
+**Artificial Instruction** – An imperative construct that describes context values and operations to be performed.
+
+**Artificial Source Code** – Executable instructions structured as reusable resources in `.art` files. Artificial source code follows the artificial grammar and semantics, enabling agents to interpret, validate, and execute routines, rules, and types defined within `.art` modules.
+
+**Meta-Syntax** – The notation used to describe artificial syntax, including placeholders, replaceable syntax elements, and combination rules. Used in this file within Syntax code blocks.

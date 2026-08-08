@@ -1,0 +1,24 @@
+# Module
+
+## Package Dependency: Artificials Build Tools
+
+**Canonical Name:** `@artificials/build`
+
+**Purpose:** Internal build tooling.
+
+**Version:** `0.0.11`
+
+## Package Dependency: Types Node
+
+**Canonical Name:** `@types/node`
+
+**Purpose:** Node.js type definitions.
+
+**Version:** `^25.9.3`
+
+## Package Dependency Set: Cli Development
+
+**Dependencies:**
+
+- Package Dependency: Artificials Build Tools
+- Package Dependency: Types Node

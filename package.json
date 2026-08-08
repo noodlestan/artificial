@@ -1,0 +1,49 @@
+{
+  "name": "artificial",
+  "version": "0.0.1",
+  "description": "A collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.",
+  "author": "Noodlestan",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "npm@10.2.3",
+  "workspaces": [
+    "art-js/cli/bin/",
+    "art-js/cli/dev-server/",
+    "art-js/cli/poc-parse/",
+    "art-js/cli/watcher/",
+    "art-js/libs/bundler/",
+    "art-js/libs/parser/",
+    "art-js/libs/primitives/",
+    "art-js/libs/program/",
+    "art-js/libs/validator/",
+    "art-js/spec/",
+    "artisans/apps/art-mantras/"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "clean": "turbo run build:clean",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "test": "turbo run test",
+    "ci": "turbo run ci"
+  },
+  "devDependencies": {
+    "@noodlestan/eslint-config": "git+ssh://git@github.com/noodlestan/eslint-config.git#main",
+    "@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main",
+    "eslint": "8.57.1",
+    "lefthook": "2.1.9",
+    "prettier": "3.8.4",
+    "turbo": "2.9.18",
+    "typescript": "5.9.3",
+    "vite": "8.0.16",
+    "vite-plugin-solid": "2.11.12",
+    "vite-plugin-solid-svg": "0.8.1",
+    "vite-plugin-top-level-await": "1.6.0",
+    "vitest": "4.1.8",
+    "solid-js": "1.9.13",
+    "rollup": "^4.61.1"
+  }
+}

@@ -1,0 +1,32 @@
+# Module
+
+## Package: Artificials Watcher
+
+**Purpose:** File watcher for Art modules.
+
+**Description:** Watches for changes in Art modules and triggers rebuilds.
+
+**Path:** `cli/watcher/`
+
+**Canonical Name:** `@art-js/artificials-watcher`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Dev:
+  - Package Dependency Set: Cli Development
+
+**Scripts:**
+
+- Package Script Set: Artificials Cli Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: CLI Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json

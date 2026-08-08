@@ -1,0 +1,24 @@
+# Module
+
+## Package Dependency: TSX
+
+**Canonical Name:** `tsx`
+
+**Purpose:** TypeScript execution.
+
+**Version:** `^4.22.4`
+
+## Package Dependency: No Comply Meta Extract
+
+**Canonical Name:** `@no-comply/meta-extract`
+
+**Purpose:** Meta extraction tools.
+
+**Version:** `0.0.11`
+
+## Package Dependency Set: Purrfect Extract
+
+**Dependencies:**
+
+- Package Dependency: TSX
+- Package Dependency: No Comply Meta Extract

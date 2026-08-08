@@ -1,0 +1,72 @@
+# Module
+
+::READ (Construct: Tag) FROM `../expressions/tag.art`.
+::READ (Construct: NaturalName) FROM `../expressions/natural-name.art`.
+::READ (Construct: NaturalBlock) FROM `./natural-block.art`.
+
+## Construct: SectionBlock
+
+**Category:** Structural
+
+**Purpose:** Capture resource declarations — the key construct that turns a markdown heading into a named, kinded resource that modules can reference, index, and project.
+
+**Description:** A SectionBlock is a structural construct consisting of a heading and its associated content. `# Kind: Name` declares a resource of that kind with that name, together with its tags and content. It is the bridge between the grammar and modules layers: the grammar fixes the form (optional kind, name, tags, content), while the meaning of each kind is provided by the structures — the domain declarations in `.art`. This is the same separation as a keyword in a programming language: `class` is fixed syntax, the meaning of `class Task` comes from the program. Closed syntax, open semantics.
+
+<!-- refine content rules -->
+
+**Schema:**
+
+```
+SectionBlock {
+    kind?: <NaturalName>
+    name: <NaturalName>
+    tags?: <Tag>[]
+    content: <NaturalBlock>
+}
+```
+
+**Syntax:**
+
+```art
+<syntax-block-header> =
+    ### [<NaturalName (section-block.kind)>: ]<NaturalName (section-block.name)>
+
+<SectionBlock> =
+    <syntax-block-header> [<Tags>]
+    <NaturalBlock>
+```
+
+**Rules:**
+
+- A SectionBlock MUST define a name.
+- A SectionBlock declares a resource identified by its kind and name.
+- A SectionBlock MAY define a kind.
+- A SectionBlock MAY be tagged with one or more Tag.
+- A SectionBlock MAY contain arbitrary content.
+- A SectionBlock MAY contain nested SectionBlocks.
+
+**Examples:**
+
+Example of Section Block without kind.
+
+```md
+## Rules
+
+Lorem ipsum
+```
+
+Example of Section Block with kind `rule`.
+
+```md
+### Rule: Maximum 4 items
+
+This is a rule.
+```
+
+Example of Section Block with tags.
+
+```md
+### Routine: List Tasks (#generator) (#wip)
+
+**Purpose:** List tasks according to criteria, ...
+```

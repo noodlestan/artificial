@@ -1,0 +1,21 @@
+# Module
+
+## Routine: Locate Resource In File
+
+**Purpose:** Find the line range of a named resource in a file.
+
+**Inputs:**
+
+- `%contents` - string. The file contents.
+- `%resource-name` - string. The name to locate.
+
+**Outputs:**
+
+- `%resource-location` - Type: Resource Location, or NOTHING.
+
+**Procedure:**
+
+1. For each heading in `%contents`:
+   1. If heading contains `%resource-name`:
+      1. Return `Resource Location { position: "at line {line}", target-resource: %resource-name }`.
+2. Return NOTHING.

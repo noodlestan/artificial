@@ -1,0 +1,26 @@
+# Module
+
+## Namespace: Art JS
+
+**Purpose:** Tools for working with Art files.
+
+**Description:** Art Language and modules implementation. The (reactive) pipeline flows from bundler to compiler to validator to parser to sources.
+
+**Path:** `art-js/`
+
+**Packages:**
+
+- Package: Artificials Bin
+- Package: Artificials Bundler
+- Package: Artificials Dev Server
+- Package: Artificials Language Server
+- Package: Artificials Parser
+- Package: Artificials Primitives
+- Package: Artificials Program
+- Package: Artificials Tools
+- Package: Artificials Validator
+- Package: Artificials Watcher
+
+**Scaffolders:**
+
+- Scaffolder Files: Namespace README

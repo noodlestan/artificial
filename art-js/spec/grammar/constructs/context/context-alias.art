@@ -1,0 +1,42 @@
+# Module
+
+## Uses
+
+::READ (Construct: ContextValue) FROM `./context-value.art`.
+::READ (Construct: ContextSymbol) FROM `./context-symbol.art`.
+
+## Construct: ContextAlias
+
+**Category:** Context
+
+**Purpose:** Provide an explicit notation for assigning alternative names to context values, allowing instructions to reference values using names that match the intent and scope of the current operation.
+
+**Description:** A ContextAlias is a contextualisation construct that associates an existing context value, identified by a ContextSymbol or natural language expression, with an alternative ContextSymbol name.
+
+**Syntax:**
+
+```art
+<ContextAlias> =
+    <ContextValue> as <ContextSymbol>
+```
+
+**Rules:**
+
+- A ContextAlias MUST define a target ContextSymbol.
+- A ContextAlias SHOULD be used when the context value does not have a suitable existing ContextSymbol name.
+- A ContextAlias MAY reference a context,
+- A ContextAlias MAY reference a natural language context expression.
+
+**Examples:**
+
+Defining an ContextAlias of an existing ContextSymbol:
+
+```md
+`%feedback-items` as `%filtered-feedback`
+```
+
+Defining an ContextAlias for a natural language expression:
+
+```md
+the matching feedback items as `%filtered-feedback`
+```

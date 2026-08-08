@@ -1,0 +1,38 @@
+{
+  "name": "@art-js/artificials-dev-server",
+  "version": "0.0.1",
+  "description": "Local development server for testing Art modules.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noodlestan/no-comply.git",
+    "directory": "cli/dev-server/"
+  },
+  "type": "module",
+  "module": "dist/esm/index.mjs",
+  "main": "dist/cjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "types": "./dist/esm/index.d.ts",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE-MIT"
+  ],
+  "scripts": {
+    "dev": "esbuild-cli-watch",
+    "build": "esbuild-cli",
+    "build:types:esm": "tsc --project tsconfig.esm.json",
+    "build:types:cjs": "tsc --project tsconfig.cjs.json",
+    "lint": "prettier . -c && eslint . && tsc --noEmit",
+    "lint:fix": "prettier . -c --write && eslint . --fix",
+    "build:clean": "rm -rf dist",
+    "ci": "npm run lint && npm run build && npm run test",
+    "test": "echo none yet"
+  }
+}

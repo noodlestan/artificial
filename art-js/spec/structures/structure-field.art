@@ -1,0 +1,33 @@
+# Module
+
+## Structure: StructureField
+
+**Id**: `structure-field`
+
+**Name**: StructureField
+
+**Kind**: Structure
+
+**Description:** A named element within a structure, with a description and optional group membership.
+
+**Status:** wip
+
+**Examples:**
+
+- This file (self-referential)
+- `.agents/domains/_artificials/structures/command__structure.md`
+- `.agents/domains/tasks/structures/task__structure.md`
+
+**Composes:** Structure: Resource
+
+**Primitive**: Record
+
+**Shape:**
+
+- `valueType` - Primitive or Structure
+
+**Examples:**
+
+- This file: `id` field in Structure: Structure
+- This file: `description` field in Structure: Structure
+- `.agents/domains/_artificials/structures/command__structure.md`: `triggers` field in Structure: Command

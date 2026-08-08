@@ -1,0 +1,39 @@
+# Module
+
+## Package: Artificials Build Tools
+
+**Purpose:** Internal tools used to build packages in this project.
+
+**Description:** Esbuild-based build system.
+
+**Path:** `build/`
+
+**Canonical Name:** `@artificials/build`
+
+**Version:** `0.0.1`
+
+**Language:** Javascript
+
+**Dependencies:**
+
+- Dev:
+  - Package Dependency Set: Build Tools Dev
+
+**Scripts:**
+
+- Lint
+  - Purpose: Check formatting, lint, and type check
+  - Command: `prettier . -c`
+
+- Lint Fix
+  - Purpose: Fix formatting and lint issues
+  - Command: `prettier . -c --write`
+
+**Scaffolders:**
+
+- Scaffolder Files: Tools Pkg Readme
+- Scaffolder Files: Tools Package Json
+- Scaffolder Files: License
+- Scaffolder Files: Dotfiles
+
+**PackageFile:** package.json

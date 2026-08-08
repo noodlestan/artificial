@@ -1,0 +1,11 @@
+# Module
+
+## Structure: Routine
+
+**Purpose:** Represents a reusable procedure that performs a specific task.
+
+**Shape**
+
+- `inputs` - List of input parameters with types.
+- `outputs` - List of output parameters with types.
+- `procedure` - Step-by-step instructions.

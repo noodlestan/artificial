@@ -1,0 +1,32 @@
+# Module
+
+## Routine: Extract Resource To Another File
+
+**Purpose:** Move a resource from one file to another and update references.
+
+**Inputs:**
+
+- `%source-file` - string. The file containing the resource to extract.
+- `%target-file` - string. The file to move the resource to.
+- `%resource-name` - string. The name of the resource to extract.
+- `%location` - string. Where to insert. Examples: "before Type: Foo", "after Routine: Bar".
+
+**Outputs:**
+
+- `%extraction-result` - Type: Resource Refactor Result.
+
+**Procedure:**
+
+1. If `%location` not provided, set to "at the end of file".
+2. Read `%source-file` into `%source-contents`.
+3. Read `%target-file` into `%target-contents` (or NOTHING if not exists).
+4. With `%source-contents` and `%resource-name` execute **Routine: Locate Resource In File** to capture `%resource-location`.
+5. If `%resource-location` is NOTHING:
+   1. Generate an ERROR message: "Resource `%resource-name` not found in `%source-file`".
+   2. THROW ERROR and STOP processing.
+6. With `%source-contents` and `%resource-location` execute **Routine: Remove Resource From File** to capture `%extracted-resource`, `%new-source-contents`.
+7. With `%target-contents`, `%extracted-resource`, and `%location` execute **Routine: Insert Resource Into File** to capture `%new-target-contents`.
+8. Write `%new-target-contents` to `%target-file`.
+9. With `%new-source-contents`, `%target-file`, and `%resource-name` execute **Routine: Update Module References** to capture `%final-source-contents`.
+10. Write `%final-source-contents` to `%source-file`.
+11. Return `Resource Refactor Result` with source-file, target-file, resource-name, resource-type, source-line, target-line, references-updated: true.

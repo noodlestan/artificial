@@ -1,0 +1,21 @@
+# Module
+
+## Routine: Apply Scaffolders
+
+**Purpose:** Apply a list of scaffolders to generate files.
+
+**Inputs:**
+
+- `%context`: Type: Scaffolding Context
+- `%scaffolders`: List (Structure: Scaffolder)
+
+**Outputs:**
+
+- `%files-created`: List of generated file paths
+
+**Procedure:**
+
+1. With each `%scaffolder` in `%scaffolders`:
+   1. With `%context`, `%scaffolder` execute **Routine: Apply Scaffolder Of Kind** to capture `%scaffolder-files`.
+   2. Append `%scaffolder-files` to `%files-created`.
+2. Return `%files-created`.

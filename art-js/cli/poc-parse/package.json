@@ -1,0 +1,34 @@
+{
+  "name": "@art-js/poc-parse",
+  "version": "0.0.1",
+  "description": "POC spike of the artificials parser: a self-contained, CLI-executable package.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noodlestan/no-comply.git",
+    "directory": "art-js/cli/poc-parse"
+  },
+  "type": "module",
+  "module": "dist/esm/index.mjs",
+  "main": "dist/cjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "types": "./dist/esm/index.d.ts",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE-MIT"
+  ],
+  "scripts": {
+    "dev": "node --experimental-strip-types src/index.ts",
+    "lint": "prettier . -c && eslint . && tsc --noEmit",
+    "lint:fix": "prettier . -c --write && eslint . --fix",
+    "build:clean": "rm -rf dist",
+    "test": "echo none yet"
+  }
+}

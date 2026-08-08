@@ -1,0 +1,30 @@
+# Module
+
+## Uses
+
+::READ (Resource Record) FROM `../resources/_types.art`.
+
+## Routine: Resolve Module Declares
+
+**Purpose:** Extract a table of all resources in a module file.
+
+**Description:** Returns a list of resource records, with Source, Kind and Name.
+
+**Inputs:**
+
+- `%contents` - The contents of the module file.
+- `%source` - The filename or path identifying the module.
+
+**Outputs:**
+
+- `%resources` - List (Type: Resource Record)
+
+**Procedure:**
+
+1. Prepare an empty `%resources` list.
+2. Identify all SectionBlocks matching the heading pattern `# {kind}: {name}` in `%contents`.
+3. With each identified SectionBlock:
+   1. Extract the `%kind` and `%name` from the heading.
+   2. Prepare an `%entry` record with [`%source`, `%kind`, `%name`].
+   3. Append `%entry` to `%resources`.
+4. Return `%resources`.

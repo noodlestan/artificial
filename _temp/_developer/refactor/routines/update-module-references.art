@@ -1,0 +1,26 @@
+# Module
+
+## Routine: Update Module References
+
+**Purpose:** Add a ::READ directive to a module after extracting a resource.
+
+**Inputs:**
+
+- `%contents` - string. The file contents.
+- `%target-file` - string. The file containing the extracted resource.
+- `%resource-name` - string. The name of the extracted resource.
+
+**Outputs:**
+
+- `%updated-contents` - string. The file contents with updated references.
+
+**Procedure:**
+
+1. Prepare `%new-directive` = `::READ ({%resource-name}) FROM \`{%target-file}\``.
+2. Find the first heading in `%contents`.
+3. If a ::READ for `%target-file` already exists:
+   1. Append `, {%resource-name}` to existing directive if not already listed.
+   2. Return `%contents` unchanged.
+4. Otherwise:
+   1. Insert `%new-directive` after the first heading.
+   2. Return `%updated-contents`.

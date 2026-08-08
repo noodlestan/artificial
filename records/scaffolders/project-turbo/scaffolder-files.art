@@ -1,0 +1,11 @@
+# Module
+
+## Scaffolder Files: Project Turbo
+
+**Purpose:** Generates the project root turbo.json from template.
+
+**Files:**
+
+- `turbo.json`:
+  - template: `./turbo.json.tart`
+  - target: `{{%path}}turbo.json`

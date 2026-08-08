@@ -1,0 +1,11 @@
+# Module
+
+## Scaffolder Files: Project Tsconfig
+
+**Purpose:** Generates the project root tsconfig.json from template.
+
+**Files:**
+
+- `tsconfig.json`:
+  - template: `./tsconfig.json.tart`
+  - target: `{{%path}}tsconfig.json`

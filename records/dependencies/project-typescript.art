@@ -1,0 +1,15 @@
+# Module
+
+## Package Dependency: TypeScript
+
+**Canonical Name:** `typescript`
+
+**Purpose:** TypeScript compiler.
+
+**Version:** `5.9.3`
+
+## Package Dependency Set: Root Typescript
+
+**Dependencies:**
+
+- Package Dependency: TypeScript

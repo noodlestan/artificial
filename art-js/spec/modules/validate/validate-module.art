@@ -1,0 +1,40 @@
+# Module
+
+**Purpose:** Validate a single module and all its source files.
+
+## Uses
+
+::READ (Validate Module Structure) FROM `./validate-module-structure.art`.
+::READ (Validate Module Uses) FROM `./validate-module-uses.art`.
+::READ (Validate Module Routines) FROM `./validate-module-routines.art`.
+::READ (Validate Module References) FROM `./validate-module-references.art`.
+
+## Exposes
+
+### Routine: Validate Module
+
+**Purpose:** Validate one `.art` source file (a module).
+
+**Description:** Reads the module file, executes all validation routines against it, and returns an aggregated report.
+
+**Inputs:**
+
+- `%file` - The name of the module file being validated.
+
+**Outputs:**
+
+- `%module-report` - The aggregated validation report across all rule sets.
+
+**Procedure:**
+
+1. Read the `%file` contents into `%contents`.
+2. Extract the `%name` from the file heading or filename.
+3. Prepare `%source` as the relative path of `%file` to `%path`.
+4. Execute the **Routine: Validate Module Rules** with `%name`, `%source`, `%contents` to produce `%rules-report`.
+5. Execute the **Routine: Validate Module Routines** with `%name`, `%source`, `%contents` to produce `%routines-report`.
+6. Execute the **Routine: Validate Module Uses** with `%name`, `%source`, `%contents` to produce `%uses-report`.
+7. Concatenate `%rules-report`, `%routines-report`, and `%uses-report` into `%module-report`.
+
+**Examples:**
+
+- Execute the **Routine: Validate Module** with the `%path` pointing to `artificials/art-js/spec/language/modules/validate` to validate all `.art` files in that module.

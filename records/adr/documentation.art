@@ -1,0 +1,19 @@
+# Module: Documentation
+
+**Purpose:** Decisions about how the system documents itself.
+
+## Decision: Guide Describes, ADRs Decide
+
+**Status:** Adopted
+
+**Context:** The guide previously carried design-decision content that duplicated or drifted from the ADRs. Rationale belonged in one authoritative place, and the guide had to stay safe to rewrite.
+
+**Decision:** The guide (`_guide.md`) describes the system — use cases, benefits, how it works. ADRs in `records/adr/` record decisions. The guide does not restate decisions.
+
+## Decision: `_temp/` is Pseudo-Code for art-js
+
+**Status:** Adopted
+
+**Context:** `_temp/` holds behavioural specifications for the future JS packages. These files risk being mistaken for shipped code or drifting into maintenance.
+
+**Decision:** Everything under `_temp/` is pseudo-code for art-js — behavioural specs written in the art language itself, consumed as spec by the JS implementation. Not shipped, not executed.

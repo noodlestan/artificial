@@ -1,0 +1,31 @@
+# Module
+
+## Structure: Base (Abstract)
+
+**Id**: `resource`
+
+**Name**: Resource
+
+**Kind**: Structure
+
+**Description:** Base structure for all resources.
+
+**Primitive**: Record
+
+**Shape:**
+
+- `id` – Identifier (resource name)
+- `name` – NaturalName (resource name)
+- `kind`: Natural Name (resource kind)
+- `purpose` – A short description of what the resource enables.
+- `description` – A short description of what the resource defines.
+- `status` – One of `active`, `wip`, `broken`, `deprecated`.
+- `examples` – A list of example values for the resource.
+
+**Status:** wip
+
+**Examples:**
+
+- This file (self-referential)
+- `.agents/domains/_artificials/structures/command__structure.md`
+- `.agents/domains/tasks/structures/task__structure.md`

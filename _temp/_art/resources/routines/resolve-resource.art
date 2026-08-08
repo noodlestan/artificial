@@ -1,0 +1,30 @@
+# Module
+
+## Routine: Resolve Resource
+
+**Purpose:** Resolve a MaybeResource to a fully loaded Resource, handling refs, partial records, and loaded records.
+
+**Inputs:**
+
+- `%resource` – Type: MaybeResource.
+
+**Outputs:**
+
+- `%resource` – Type: Resource.
+
+**Procedure:**
+
+1. If `%resource` is already a fully loaded Resource:
+   1. Return `%resource`.
+2. If `%resource` is a Record with a `%filename`:
+   1. With `%filename` and `%resource`, execute the **Routine: Read Resources from File** to load the `%resource`.
+   2. Return the loaded `%resource`.
+3. If `%resource` is a ResourceRef:
+   1. With `%resource`, execute the **Routine: Find Resource By Ref** to identify the `%filename`.
+   2. If `%filename` is NOTHING:
+      1. Generate an ERROR message "Resource not found: {%resource}.".
+      2. THROW ERROR to user and STOP processing instructions.
+   3. With `%filename` and `%resource`, execute the **Routine: Read Resources from File** to load the `%resource`.
+   4. Return the loaded `%resource`.
+4. Generate an ERROR message "Cannot resolve resource: {%resource}. Unknown type.".
+5. THROW ERROR to user and STOP processing instructions.

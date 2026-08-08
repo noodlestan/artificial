@@ -1,0 +1,32 @@
+# Module
+
+## Package: Artificials Bin
+
+**Purpose:** CLI for developing and building Art modules.
+
+**Description:** Provides an entry point to bundler, program, validator, parser, and watcher.
+
+**Path:** `cli/bin/`
+
+**Canonical Name:** `@art-js/artificials-bin`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Dev:
+  - Package Dependency Set: Cli Development
+
+**Scripts:**
+
+- Package Script Set: Artificials Cli Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: CLI Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json

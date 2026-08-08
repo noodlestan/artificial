@@ -1,0 +1,17 @@
+# Module
+
+## Namespace: Artificials Build Tools
+
+**Purpose:** Internal build and configuration tooling for the monorepo.
+
+**Description:** These packages are not published.
+
+**Path:** `tools/`
+
+**Packages:**
+
+- Package: Artificials Build Tools
+
+**Scaffolders:**
+
+- Scaffolder Files: Tools Namespace Readme

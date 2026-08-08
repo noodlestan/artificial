@@ -1,0 +1,14 @@
+# Module
+
+## Type: Scaffolding Context
+
+**Purpose:** Context passed through the scaffolding pipeline.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `path` - string. Resolved target path.
+- `project` - Structure: Project.
+- `namespace` - Structure: Namespace (optional).
+- `package` - Structure: Package (optional).

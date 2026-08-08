@@ -1,0 +1,14 @@
+# Module
+
+## Type: ValidationReport
+
+**Purpose:** Summary output of a reference validation run.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `filesScanned` - Number of files found and read.
+- `referencesFound` - Number of references extracted.
+- `brokenReferences` - List (Type: BrokenReference).
+- `status` - One of: `clean`, `broken`.

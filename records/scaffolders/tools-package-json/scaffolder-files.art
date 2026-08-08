@@ -1,0 +1,11 @@
+# Module
+
+## Scaffolder Files: Tools Package Json
+
+**Purpose:** Generates package.json for a tools package.
+
+**Files:**
+
+- `package.json`:
+  - template: `./package.json.tart`
+  - target: `{{%path}}package.json`

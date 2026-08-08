@@ -1,0 +1,11 @@
+# Module
+
+## Type: FileLocation
+
+**Purpose:** Identifies a file by its path.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `path` - Absolute or relative path to the file.

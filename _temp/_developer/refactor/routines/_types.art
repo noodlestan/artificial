@@ -1,0 +1,28 @@
+# Module
+
+## Type: Resource Location
+
+**Purpose:** Describes where to place a resource in a file.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `position` - string. Examples: "before Type: Foo", "after Routine: Bar", "at line 5".
+- `target-resource` - string. The resource to anchor to.
+
+## Type: Resource Refactor Result
+
+**Purpose:** Describes what happened during a resource extraction.
+
+**Primitive:** Record
+
+**Shape:**
+
+- `source-file` - string.
+- `target-file` - string.
+- `resource-name` - string.
+- `resource-type` - string.
+- `source-line` - number.
+- `target-line` - number.
+- `references-updated` - boolean.

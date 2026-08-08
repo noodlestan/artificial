@@ -1,0 +1,24 @@
+# Module
+
+## Package Dependency: Esbuild
+
+**Canonical Name:** `esbuild`
+
+**Purpose:** Internal build tooling.
+
+**Version:** `0.28.0`
+
+## Package Dependency: Esbuild Plugin Fle Path Extensions
+
+**Canonical Name:** `esbuild-plugin-file-path-extensions`
+
+**Purpose:** Node.js type definitions.
+
+**Version:** `2.1.4`
+
+## Package Dependency Set: Build Tools Dev
+
+**Dependencies:**
+
+- Package Dependency: Esbuild
+- Package Dependency: Esbuild Plugin Fle Path Extensions

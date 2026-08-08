@@ -1,0 +1,23 @@
+# Module
+
+## Routine: List Resources
+
+**Purpose:** Scan all `_guide.md` files and compile a table of resources from every domain.
+
+**Inputs:**
+
+- `%scope`?: string (defaults to `artificials/`)
+
+**Outputs:**
+
+- `%resources`: Table with columns: `domain`, `module`, `kind`, `name`, `purpose`
+
+**Procedure:**
+
+1. Locate all `_guide.md` files under `%scope`.
+2. For each `_guide.md`:
+   1. Extract `domain` from heading.
+   2. Scan for resource tables (rows with Kind, Name, Purpose columns).
+   3. Extract `module`, `kind`, `name`, `purpose` from each row.
+3. Compile all extracted rows into `%resources`.
+4. Return `%resources`.

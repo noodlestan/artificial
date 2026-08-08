@@ -1,0 +1,11 @@
+# Module
+
+## Scaffolder Files: Project Lefthook
+
+**Purpose:** Generates the project root lefthook.yml from template.
+
+**Files:**
+
+- `lefthook.yml`:
+  - template: `./lefthook.yml.tart`
+  - target: `{{%path}}lefthook.yml`

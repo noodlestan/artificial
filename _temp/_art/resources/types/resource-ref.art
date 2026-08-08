@@ -1,0 +1,23 @@
+# Module
+
+## Type: ResourceRef (T is Structure)
+
+**Purpose:** A reference to a resource by kind and name, before loading.
+
+**Primitive:** Primitive: Record
+
+**Shape:**
+
+- `kind:` – NaturalName - The resource kind.
+- `name:` – NaturalName - The resource name.
+
+**Example:** "Project: Artificials"
+
+**Representation:**
+
+```ts
+type ResourceRef<T extends Structure> = {
+  kind: T[kind];
+  name: string;
+};
+```

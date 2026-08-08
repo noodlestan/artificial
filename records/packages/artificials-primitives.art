@@ -1,0 +1,34 @@
+# Module
+
+## Package: Artificials Primitives
+
+**Purpose:** Core primitives for the Art language.
+
+**Description:** Foundational types and utilities for Art modules.
+
+**Path:** `libs/primitives/`
+
+**Canonical Name:** `@art-js/artificials-primitives`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Peer:
+
+- Dev:
+  - Package Dependency Set: Solid Lib Development
+
+**Scripts:**
+
+- Package Script Set: Artificials Lib Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Lib Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json

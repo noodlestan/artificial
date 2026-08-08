@@ -1,0 +1,25 @@
+{
+  "name": "@art-js/artificials-spec",
+  "version": "0.0.1",
+  "description": "The artificial language specification, written in art. Content package consumed by the parser, validator, and bundler packages.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noodlestan/no-comply.git",
+    "directory": "art-js/spec/"
+  },
+  "type": "module",
+  "files": [
+    "language",
+    "LICENSE-MIT"
+  ],
+  "scripts": {
+    "lint": "prettier . -c",
+    "lint:fix": "prettier . -c --write"
+  }
+}

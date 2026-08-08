@@ -1,0 +1,32 @@
+# Module
+
+## Package: Artificials Parser
+
+**Purpose:** Parses Art modules (.art) and markdown files (.md).
+
+**Description:** Parses context files and art modules into structured representations.
+
+**Path:** `libs/parser/`
+
+**Canonical Name:** `@art-js/artificials-parser`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Dev:
+  - Package Dependency Set: Solid Lib Development
+
+**Scripts:**
+
+- Package Script Set: Artificials Lib Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Lib Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json
