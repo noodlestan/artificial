@@ -29,7 +29,7 @@ Scaffold a runnable, self-contained CLI package named `@art-js/poc-parse` at `ar
 - `artificials/_guide.md` — the Artificials System overview: the compiler pipeline (Parse → Extract → Transform → Render) and the compilation model. Context only.
 - `artificials/_architect.md` — Approach + Step 1 (scaffold the poc-parse package).
 - `artificials/_wip.md` — only to identify the current step; NEVER modify it.
-- `artificials/records/adr/_research.md` — the substrate research behind the POC (context only; no substrate decisions in this step).
+- `artificials/architecture/records/adr/_research.md` — the substrate research behind the POC (context only; no substrate decisions in this step).
 - `artificials/records/packages/artificials-parser.art` — package record format example.
 - `artificials/records/scaffolders/skeleton-cli/scaffolder-skeleton.art` — the CLI package scaffold source.
 

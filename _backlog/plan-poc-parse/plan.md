@@ -18,7 +18,7 @@ No `task-{id}/task.md` files exist yet (backlogs domain WIP). Source of this pla
 
 - [Artificials Plan — Approach + Work ahead](artificials/_architect.md)
 - [Artificials WIP — ACTIONABLE](artificials/_wip.md)
-- [Substrate Research ADR](artificials/records/adr/_research.md)
+- [Substrate Research ADR](artificials/architecture/records/adr/_research.md)
 
 ## Mandatory Reading
 
@@ -34,7 +34,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 - `artificials/_guide.md` — artificials system overview: compiler pipeline and compilation model.
 - `artificials/_architect.md` — approach and the step being executed.
 - `artificials/_wip.md` — the ACTIONABLE list; identifies the current step.
-- `artificials/records/adr/_research.md` — substrate research behind the spike.
+- `artificials/architecture/records/adr/_research.md` — substrate research behind the spike.
 
 ## Commits
 
@@ -50,13 +50,17 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `artificials/_backlog/plan-poc-parse/instructions/scaffold-poc-parse__report.md`
 
-### `core-record-schema` - `PLANNED`
+### `core-record-schema` - `DONE`
 
 **Commit Message:** `poc-parse: add core record schema types`
 
 **Instructions File:** `artificials/_backlog/plan-poc-parse/instructions/core-record-schema.md`
 
 **Sub-Agent:** `core-record-schema`
+
+**Evidence:** commit `fd67848`; artefacts — `art-js/cli/poc-parse/src/parse/types.ts` (core record schema: `Point`, `Position`, `RecordBase`, `SectionBlock`, `FieldBlock`, `NaturalBlock`, `Tag`, `Document`, open registries, derived unions). Types only, `tsc --noEmit` clean.
+
+**Report:** `artificials/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`
 
 ### `smoke-parse-corpus` - `DRAFT`
 
@@ -104,7 +108,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 - Reactive core (chokidar → signals → memo recompute) — blocked on the POC (signals + directivity need exercised grammar).
 - Template engine research (Nunjucks/Handlebars/Liquid vs `.tart` requirements) — parallelizable.
 - Precompiled rewrite — install-time compilation + per-project overrides, using render-cost evidence from the POC.
-- Standalone build of the compile command — `artificials/bin/compile`, `artificials/records/adr/compile.art`-backed, aimed at POC step 8.
+- Standalone build of the compile command — `artificials/bin/compile`, `artificials/architecture/records/adr/compile.art`-backed, aimed at POC step 8.
 
 - Commit convention — all commits use `git commit --no-verify` to skip the pre-commit CI hooks (lefthook `clean` + `extract`); also documented in the module `_module.md` next-move routines.
 - Convention — delegation and report files are co-located in `plan-{id}/instructions/` (`{id}.md` + `{id}__report.md`). `files/index.md` naming patterns and `execute-plan/SKILL.md` delegation-file link rule reconciled to this on 2026-08-08; all subsequent instructions and reports render into `instructions/`.
@@ -112,3 +116,4 @@ For the delegatee (shared context; per-step context is in each instruction file)
 ## Feedback
 
 - `scaffold-poc-parse`: see `artificials/_backlog/plan-poc-parse/instructions/scaffold-poc-parse__report.md`. Key planner items F1–F3 (workspace entry in `artificials/package.json` not repo-root; scaffolder naming `Scaffolder Skeleton: CLI Package`; `ci` deferred, no build/deps yet) + technical-writer items F4–F5 (tsconfig extends path; README link targets).
+- `core-record-schema`: see `artificials/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`. Key planner item F1 (stale `_research.md` path: `artificials/architecture/records/adr/_research.md` → `artificials/ops/records/adr/_research.md`; affects plan.md lines 21, 37 and _architect.md line 11).

@@ -29,7 +29,7 @@ Author the core record schema for the artificials parser POC — the parser's ou
 - `artificials/_guide.md` — the Artificials System overview: the compiler pipeline, the declaration model (`# Kind: Name`), and the kind-agnostic parser. Context only.
 - `artificials/_architect.md` — Approach (schema-first in TS) + Step 2 (core record schema).
 - `artificials/_wip.md` — only to identify the current step; NEVER modify it.
-- `artificials/records/adr/_research.md` — best practices 1–6; esp. #4 (open registries + derived unions) and #5 (positions sacred, depth/parent derived).
+- `artificials/architecture/records/adr/_research.md` — best practices 1–6; esp. #4 (open registries + derived unions) and #5 (positions sacred, depth/parent derived).
 - `artificials/art-js/spec/grammar/structures/construct.art` — the grammar construct meta-model (context).
 - `artificials/art-js/spec/grammar/constructs/structural/section-block.art` — SectionBlock schema: `kind?`, `name`, `tags?`, `content`.
 - `artificials/art-js/spec/grammar/constructs/structural/field-block.art` — FieldBlock schema: `name`, `value`; and the value containment rules.

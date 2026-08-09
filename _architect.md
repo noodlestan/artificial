@@ -1,6 +1,6 @@
 # Artificials Plan
 
-Forward-looking work for the artificials toolchain. Decisions live in the ADRs (`records/adr/`); this file tracks the work ahead only. The current WIP tracker is `_wip.md`; the plan steps below map 1:1 to its ACTIONABLE items.
+Forward-looking work for the artificials toolchain. Decisions live in the ADRs (`architecture/records/adr/`); this file tracks the work ahead only. The current WIP tracker is `_wip.md`; the plan steps below map 1:1 to its ACTIONABLE items.
 
 ## Approach
 
@@ -8,13 +8,13 @@ Forward-looking work for the artificials toolchain. Decisions live in the ADRs (
 
 **Schema-first, in TS.** The core record schema (what a construct is: kind, name, fields, children) is defined as composable TS types — the parser's output contract. The ouroboros dissolves in JS land: TS types are the metalanguage (ground truth for the parser); the `.art` spec files are the object language (domain descriptions), caught up later and verified by the (unimplemented) bootstrap check. Core schema in TS now; domain schemas in `.art` later.
 
-**Micromark substrate.** Parsing builds directly on micromark — the same extension base GFM, MDX, and directives use — with our own thin extension (enter/exit hooks per token type) and an explicit construct stack. The parser emits art's own AST records (`SectionBlock`, `FieldBlock`, `NaturalBlock`, `ExampleBlock`, `Tag`), not mdast: no unist-util-visit, no remark/unified packages. Unified's extension-trio pattern (syntax extension, record types, renderer support) is mirrored when language plugins land. Whether the parse slice consumes micromark directly or declares indirections (e.g. `mdast-util-from-markdown`) is a spike decision; the research framing it is `records/adr/_research.md`.
+**Micromark substrate.** Parsing builds directly on micromark — the same extension base GFM, MDX, and directives use — with our own thin extension (enter/exit hooks per token type) and an explicit construct stack. The parser emits art's own AST records (`SectionBlock`, `FieldBlock`, `NaturalBlock`, `ExampleBlock`, `Tag`), not mdast: no unist-util-visit, no remark/unified packages. Unified's extension-trio pattern (syntax extension, record types, renderer support) is mirrored when language plugins land. Whether the parse slice consumes micromark directly or declares indirections (e.g. `mdast-util-from-markdown`) is a spike decision; the research framing it is `architecture/records/adr/_research.md`.
 
 ## Work ahead
 
 ### Step 0 — Best-practices research (done 2026-08-08)
 
-Surveyed projects doing "similar things" on top of micromark and extracted the best practices that shape the spike. Captured in `records/adr/_research.md`. Key takeaways:
+Surveyed projects doing "similar things" on top of micromark and extracted the best practices that shape the spike. Captured in `architecture/records/adr/_research.md`. Key takeaways:
 
 - Two-layer design: micromark owns syntax (tokens), a `from-markdown`-style stage owns semantics (records).
 - Construct-stack record builder (enter/exit hooks per token type + explicit stack) is the established pattern.

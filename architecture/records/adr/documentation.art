@@ -8,7 +8,7 @@
 
 **Context:** The guide previously carried design-decision content that duplicated or drifted from the ADRs. Rationale belonged in one authoritative place, and the guide had to stay safe to rewrite.
 
-**Decision:** The guide (`_guide.md`) describes the system — use cases, benefits, how it works. ADRs in `records/adr/` record decisions. The guide does not restate decisions.
+**Decision:** The guide (`_guide.md`) describes the system — use cases, benefits, how it works. ADRs in `architecture/records/adr/` record decisions. The guide does not restate decisions.
 
 ## Decision: `_temp/` is Pseudo-Code for art-js
 

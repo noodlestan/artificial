@@ -108,13 +108,13 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Sub-Agent:** `bind-shuffle`
 
-### `bind-promote` - `BLOCKED`
+### `bind-promote` - `PLANNED`
 
 **Commit Message:** `art-mantras: bind promote`
 
 **Instructions File:** `_backlog/plan-art-mantras/instructions/bind-promote.md`
 
-**Sub-Agent:** `Anscombe` (`019fe46c-0f13-7c41-b71a-f84a68caccba`) — delegated 2026-08-09
+**Sub-Agent:** `Faraday` (`019fe616-a8b7-7dd2-9dbc-86c4621497d5`) — delegated 2026-08-09
 
 ### `bind-reorder` - `DRAFT`
 
