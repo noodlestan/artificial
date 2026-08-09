@@ -2,12 +2,16 @@
 
 ## Namespace: Art Domains
 
-**Purpose:** ...
+**Purpose:** Domain packages for cross-repo tooling.
 
-**Description:** ...
+**Description:** Domain packages that provide cross-repo orchestration and workspace automation tools for the Noodlestan ecosystem.
 
 **Path:** `art-domains`
 
 **Packages:**
 
 - Package: Workspace CLI
+
+**Scaffolders:**
+
+- Scaffolder Files: Namespace README
