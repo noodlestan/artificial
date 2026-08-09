@@ -16,9 +16,9 @@ Race the art-mantras micro app to a committable, all-use-cases bootstrap — one
 
 No `task-{id}/task.md` files exist for this module — work is tracked in the module's `_wip.md` → Actions (repo-root-relative links):
 
-- [Art Mantras WIP — the 12-step race](artificials/artisans/apps/art-mantras/_wip.md)
-- [Art Mantras Plan — design contract](artificials/artisans/apps/art-mantras/_architect.md)
-- [Art Mantras Pseudo — function declarations](artificials/artisans/apps/art-mantras/_pseudo.md)
+- [Art Mantras WIP — the 12-step race](artisans/apps/art-mantras/_wip.md)
+- [Art Mantras Plan — design contract](artisans/apps/art-mantras/_architect.md)
+- [Art Mantras Pseudo — function declarations](artisans/apps/art-mantras/_pseudo.md)
 
 ## Mandatory Reading
 
@@ -31,10 +31,10 @@ For the delegator (execution mechanics):
 
 For the delegatee (shared context; per-step context is in each instruction file):
 
-- `artificials/artisans/apps/art-mantras/_guide.md` — module map: what each companion file contains and the reading order.
-- `artificials/artisans/apps/art-mantras/_architect.md` — the design: Why, What, How, Follow-ups (no code).
-- `artificials/artisans/apps/art-mantras/_pseudo.md` — function declarations, entry point first, grouped by layer; the contract.
-- `artificials/artisans/apps/art-mantras/_wip.md` — only to identify the current step; NEVER modify it.
+- `artisans/apps/art-mantras/_guide.md` — module map: what each companion file contains and the reading order.
+- `artisans/apps/art-mantras/_architect.md` — the design: Why, What, How, Follow-ups (no code).
+- `artisans/apps/art-mantras/_pseudo.md` — function declarations, entry point first, grouped by layer; the contract.
+- `artisans/apps/art-mantras/_wip.md` — only to identify the current step; NEVER modify it.
 
 ## Commits
 
@@ -44,9 +44,9 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit:** `cfd6311b`
 
-**Instructions File:** `artificials/_backlog/plan-art-mantras/instructions/serve-hello-world.md`
+**Instructions File:** `_backlog/plan-art-mantras/instructions/serve-hello-world.md`
 
-**Report:** `artificials/_backlog/plan-art-mantras/instructions/serve-hello-world__report.md`
+**Report:** `_backlog/plan-art-mantras/instructions/serve-hello-world__report.md`
 
 **Evidence:** `src/serve.js` (Serving-layer static server), `src/index.html` (hello-world page). Verified `node --check`, `npm run serve`, curl 200/404, clean console.
 
@@ -58,9 +58,9 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit:** `21a29a7b`
 
-**Instructions File:** `artificials/_backlog/plan-art-mantras/instructions/load-data.md`
+**Instructions File:** `_backlog/plan-art-mantras/instructions/load-data.md`
 
-**Report:** `artificials/_backlog/plan-art-mantras/instructions/load-data__report.md`
+**Report:** `_backlog/plan-art-mantras/instructions/load-data__report.md`
 
 **Evidence:** `src/app.js` (`const FILE`, `loadData()`, `main()` — fetch + hold on DOM ready, `run()` deferred), `src/index.html` (module script tag). Verified `node --check`, `npm run serve`, curl 200 (/, app.js, data.json) / 404, clean serve log + node fetch simulation.
 
@@ -72,9 +72,9 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit:** `10d29ce5`
 
-**Instructions File:** `artificials/_backlog/plan-art-mantras/instructions/mount-shell.md`
+**Instructions File:** `_backlog/plan-art-mantras/instructions/mount-shell.md`
 
-**Report:** `artificials/_backlog/plan-art-mantras/instructions/mount-shell__report.md`
+**Report:** `_backlog/plan-art-mantras/instructions/mount-shell__report.md`
 
 **Evidence:** `src/app.js` (Store staged `createStore`+`serialize`, Derivation complete `shuffle`+helpers, UI complete `mount`+factories+render api, Entry Point staged `run`), `src/index.html` (hello world heading removed). Verified `node --check`, `npm run serve` 200/404, headless run clicked all 94 buttons cleanly.
 
@@ -86,9 +86,9 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit:** `4eeab17b`
 
-**Instructions File:** `artificials/_backlog/plan-art-mantras/instructions/shell-tables.md`
+**Instructions File:** `_backlog/plan-art-mantras/instructions/shell-tables.md`
 
-**Report:** `artificials/_backlog/plan-art-mantras/instructions/shell-tables__report.md` (see note in Feedback)
+**Report:** `_backlog/plan-art-mantras/instructions/shell-tables__report.md` (see note in Feedback)
 
 **Evidence:** `src/app.js` — grid sections converted to semantic `<table>` markup: `createMantraRow()` single `<table>` with `<th scope="row">` letter / word `<td>` / control `<td>` (constant A1 → empty control cell, no button); `createStrongsSection()` per-letter `<table>`s (word `<td>` + ^/v/X controls); `createBannedSection()` per-letter `<table>`s inside native `<details>` (empty list → empty body, section present); toolbar unchanged. Zero behavior change. Verified `node --check`, `npm run serve` 200/404 clean, headless DOM sim — one mantra `<table>` with 11 `<tr>`, per-letter strongs tables, `<details>` banned section, all 94 buttons still inert.
 
@@ -100,19 +100,25 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit:** `a3261ea2`
 
-**Instructions File:** `artificials/_backlog/plan-art-mantras/instructions/bind-shuffle.md`
+**Instructions File:** `_backlog/plan-art-mantras/instructions/bind-shuffle.md`
 
-**Report:** `artificials/_backlog/plan-art-mantras/instructions/bind-shuffle__report.md`
+**Report:** `_backlog/plan-art-mantras/instructions/bind-shuffle__report.md`
 
 **Evidence:** `src/app.js` — Entry Point lands `apply()` with FIRST wired intent: `onNextShuffle` closure in `run()` (`out = shuffle(store.serialize())` → `ui.renderMantra(out)` → `return out`); `apply(ui, store, output, onNextShuffle)` staged (initial render + wire `ui.toolbar.shuffle -> onNextShuffle()` only); `run(data)` hands off to `apply()`; all other intent slots remain no-ops. Verified `node --check`, `npm run serve` 200, headless re-roll sim — 5 distinct mantra compositions across clicks, pick-up bindings reset, A1 constant, DOWNLOAD/+ mantra inert, no console errors.
 
 **Sub-Agent:** `bind-shuffle`
 
-### `bind-promote` - `PLANNED`
+### `bind-promote` - `COMMITTED`
 
 **Commit Message:** `art-mantras: bind promote`
 
 **Instructions File:** `_backlog/plan-art-mantras/instructions/bind-promote.md`
+
+**Commit:** `dcc28d0`
+
+**Report:** `_backlog/plan-art-mantras/instructions/bind-promote__report.md` (commit `7a2689b`)
+
+**Evidence:** `src/app.js` — added `createStore().promoteToStrong(slotId, word)` and wired `ui.mantraRow.promote` to preserve the current row entry, switch it to disabled `✓ strong`, and re-render the mantra and strongs sections. Verified with `node --check`, `npm run serve`, HTTP 200/404 checks, in-process DOM promotion verification, shuffle regression, constant A1, inert later controls, and no console errors.
 
 **Sub-Agent:** `Faraday` (`019fe616-a8b7-7dd2-9dbc-86c4621497d5`) — delegated 2026-08-09
 
@@ -186,6 +192,8 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 - (delegator, 2026-08-09) — delegated `bind-promote` verbatim to worker `Anscombe`; blocked during mandatory reading.
 - (delegator, 2026-08-09) — blocker: the instruction references a missing `artificials/.../_architect.md`; the checkout has the design contract as `_plan.md` under the requested `repos/artificial` root. Report: `instructions/bind-promote__report.md`.
+
+- (planner, 2026-08-09) — resolved: the `_plan.md` → `_architect.md` rename is committed in `3dd1b78`; the fresh delegation completed against the current checkout. Implementation is `dcc28d0`; report corrected and committed as `7a2689b`.
 
 - (planner, 2026-08-08) — delegation session: `shell-tables` + `bind-shuffle` both completed. `shell-tables` had no `DIRECTIVE FEEDBACK:` directive so no report file was rendered; the trail lives in this plan record and the commit `4eeab17b`. `bind-shuffle` rendered its report to `instructions/bind-shuffle__report.md` (commit `a3261ea2`).
 
