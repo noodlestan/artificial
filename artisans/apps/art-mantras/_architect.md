@@ -1,4 +1,4 @@
-# Plan: Art Mantras
+# Architect: Art Mantras
 
 ## Why
 
@@ -63,7 +63,7 @@ Every interaction mutates the store; the store is the single source of truth. Af
 - Vanilla JS only, no build step, no dependencies.
 - Clean code: descriptive functions.
 - Functions ordered from utils → … → `main()` entry point, which is last.
-- Zero code in this plan — function declarations (params, responsibilities, pseudo code only) live in `_pseudo.md`.
+- Zero code in this architecture document — function declarations (params, responsibilities, pseudo code only) live in `_pseudo.md`.
 - Semantic markup: grid sections render as `<table>` — the mantra row as one table (one `<tr>` per slot: letter `<th scope="row">`, word `<td>`, control `<td>`), strongs and banned as one `<table>` per letter. Structure follows this contract; the styling technique is the coder's choice.
 - Scaffold by cloning practices in neighbours: a package of **app** type has a very different `package.json` (no TS, no build, no deps) — it is scaffolded by `Scaffolder Skeleton: Micro App` (plus `Scaffolder Skeleton: Package Common` for LICENSE), and its scripts come from `Package Script Set: Micro App Serve`.
 
@@ -148,7 +148,7 @@ The app is organised in six layers, each mapping 1:1 to a `Layer:` section in `_
 - Literals always created through `verbThing()` factory functions (factories act as the source of docs for data, replacing TS).
 - No classes; no globals except `const FILE = "data.json"` (relative to the app's own location, `src/`) and the program's functions.
 - Component factories own their element, their data, and their events.
-- All function declarations live in `_pseudo.md`, entry point first, grouped by layer — this plan keeps the design, `_pseudo.md` keeps the functions.
+- All function declarations live in `_pseudo.md`, entry point first, grouped by layer — this architecture document keeps the design, `_pseudo.md` keeps the functions.
 
 ## Follow-ups (phase 2)
 

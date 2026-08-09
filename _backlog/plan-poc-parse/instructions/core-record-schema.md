@@ -27,7 +27,7 @@ Author the core record schema for the artificials parser POC — the parser's ou
 - `.agents/domains/plans/templates/report__template.md` — the report format you render at the end.
 - `artificials/_backlog/plan-poc-parse/plan.md` — the plan; this commit is `core-record-schema`.
 - `artificials/_guide.md` — the Artificials System overview: the compiler pipeline, the declaration model (`# Kind: Name`), and the kind-agnostic parser. Context only.
-- `artificials/_plan.md` — Approach (schema-first in TS) + Step 2 (core record schema).
+- `artificials/_architect.md` — Approach (schema-first in TS) + Step 2 (core record schema).
 - `artificials/_wip.md` — only to identify the current step; NEVER modify it.
 - `artificials/records/adr/_research.md` — best practices 1–6; esp. #4 (open registries + derived unions) and #5 (positions sacred, depth/parent derived).
 - `artificials/art-js/spec/grammar/structures/construct.art` — the grammar construct meta-model (context).
@@ -141,7 +141,7 @@ export type Construct = ConstructMap[keyof ConstructMap]
 
 ## Rules
 
-- NEVER modify `artificials/_guide.md`, `artificials/_plan.md`, `artificials/_wip.md`, `artificials/_backlog/plan-poc-parse/plan.md`, `.agents/domains/plans/**`, or any `artificials/records/**` file.
+- NEVER modify `artificials/_guide.md`, `artificials/_architect.md`, `artificials/_wip.md`, `artificials/_backlog/plan-poc-parse/plan.md`, `.agents/domains/plans/**`, or any `artificials/records/**` file.
 - Only create: `art-js/cli/poc-parse/src/parse/types.ts`. Do NOT touch `src/index.ts`, `package.json`, tsconfigs, or any other existing file.
 - Do NOT run `npm run lint` or `npm run lint:fix` — prettier/eslint are not installed (dev deps deliberately deferred; the deferral lifts when the package's lint/CI is first exercised, POC step 4+). Type-check with `tsc --noEmit` directly (see Final Verification).
 - If the plan or a reference is ambiguous or contradicts the repo conventions: resolve it with the simplest reading, and record the finding + a ready-to-apply change snippet in your report. Never code against a plan you silently changed in your head.
@@ -173,6 +173,6 @@ The artificials POC step 2 goal is met: the parser's output contract exists as c
 6. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `core-record-schema`, created `src/parse/types.ts`, thumbs up). The full trail lives in the report file; never repeat it in chat.
 5. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `core-record-schema`, created `src/parse/types.ts`, thumbs up). The full trail lives in the report file; never repeat it in chat.
 
-DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `artificials/_plan.md`, or `artificials/_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
+DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `artificials/_architect.md`, or `artificials/_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
 
 Thank you for your service.

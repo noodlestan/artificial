@@ -45,10 +45,10 @@ Ambiguities, omissions, and contradictions found while implementing, each with `
 
 **F1 — Workspace entry path and which "root package.json".**
 
-- where: Instruction "Changes → Add the workspace entry", Step 3, and Final Verification; mirrored in `artificials/_plan.md` Step 1 ("root `package.json`").
+- where: Instruction "Changes → Add the workspace entry", Step 3, and Final Verification; mirrored in `artificials/_architect.md` Step 1 ("root `package.json`").
 - problem: The art-js packages live in the `artificials/` module workspace (`artificials/package.json` is their npm workspace root; the repo-root `package.json` does not include art-js at all). A literal `cli/poc-parse/` entry matches nothing — module workspace entries are module-root-relative with the `art-js/cli/...` prefix (e.g. `art-js/cli/bin/`), and `npm install` must run in `artificials/` to register the workspace.
 - decision: Added `art-js/cli/poc-parse/` (not `cli/poc-parse/`) to `artificials/package.json`, inserted alphabetically; ran `npm install` in `artificials/`. Workspace registers (symlink present).
-- READY-TO-APPLY snippet for `artificials/_plan.md` Step 1:
+- READY-TO-APPLY snippet for `artificials/_architect.md` Step 1:
   ```md
   - Add the workspace entry `art-js/cli/poc-parse/` to the `workspaces` array in `artificials/package.json` (the module-root package.json that owns the art-js workspaces; the repo-root `package.json` does not include art-js). Only this entry; leave the rest untouched. Run `npm install` in `artificials/` to register it.
   ```
@@ -58,7 +58,7 @@ Ambiguities, omissions, and contradictions found while implementing, each with `
 - where: Instruction "Goals"/"Changes"/Step 1 — "scaffolders `Skeleton CLI` + `Package Common`".
 - problem: The recorded resource is named `Scaffolder Skeleton: CLI Package` (see `artificials-bin.art` and `scaffolders/skeleton-cli/scaffolder-skeleton.art`); "Skeleton CLI" is a shorthand that appears nowhere in the records.
 - decision: Registered the record with the conventional names `Scaffolder Skeleton: CLI Package` + `Scaffolder Skeleton: Package Common`.
-- READY-TO-APPLY snippet for `artificials/_plan.md` Step 1:
+- READY-TO-APPLY snippet for `artificials/_architect.md` Step 1:
   ```md
   - Register the package in `records/packages/artificials-poc-parse.art` (Path `cli/poc-parse/`, Canonical Name `@art-js/poc-parse`, Version `0.0.1`, scaffolders: Scaffolder Skeleton: CLI Package + Scaffolder Skeleton: Package Common).
   ```

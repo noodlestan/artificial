@@ -19,7 +19,7 @@ Implement the art-mantras race step 1 — **bootstrap: serve hello world**. The 
 - `.agents/domains/plans/templates/report__template.md` — the report format you render at the end.
 - `artificials/_backlog/plan-art-mantras/plan.md` — the plan; this commit is `serve-hello-world`.
 - `artificials/artisans/apps/art-mantras/_guide.md` — module map; read order is `_guide` → `_plan` → `_pseudo`.
-- `artificials/artisans/apps/art-mantras/_plan.md` — the design contract; read **Layer: Serving** (and Layers 1–5 for context only).
+- `artificials/artisans/apps/art-mantras/_architect.md` — the design contract; read **Layer: Serving** (and Layers 1–5 for context only).
 - `artificials/artisans/apps/art-mantras/_pseudo.md` — the function declarations; the contract. Step 1 concerns **Layer: Serving → `serve entry (serve.js)`**.
 - `artificials/artisans/apps/art-mantras/_wip.md` — only to identify the current step (step 1); NEVER modify it.
 
@@ -35,7 +35,7 @@ Implement the art-mantras race step 1 — **bootstrap: serve hello world**. The 
 
 ## Rules
 
-- NEVER modify `_plan.md`, `_pseudo.md`, `_wip.md`, `_guide.md`, `_module.md`, the plan file, or anything under `.agents/domains/plans/**` and `artificials/records/**`.
+- NEVER modify `_architect.md`, `_pseudo.md`, `_wip.md`, `_guide.md`, `_module.md`, the plan file, or anything under `.agents/domains/plans/**` and `artificials/records/**`.
 - Only modify application files: `src/serve.js` and `src/index.html` (nothing else).
 - Pseudo is the contract: `serve.js` implements exactly the Serving-layer responsibility — a basic static server, nothing more (no caching, no routing extras, no HTTPS).
 - If the plan or pseudo contradicts the step, or is ambiguous: resolve it in code with the simplest reading, and record the finding + a ready-to-apply change snippet in your report. Never code against a plan or pseudo you silently changed in your head.
@@ -110,6 +110,6 @@ The art-mantras race step 1 goal is met: `src/serve.js` serves the package over 
 4. Generate the response and send it back to the delegator.
 5. Keep the response terse — happy face + up to 3 bullet points (done `serve-hello-world`, created `src/serve.js` + `src/index.html`, thumbs up). The full trail lives in the report file; do not repeat it in chat.
 
-DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `_plan.md`, `_pseudo.md`, or `_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
+DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `_architect.md`, `_pseudo.md`, or `_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
 
 Thank you for your service.

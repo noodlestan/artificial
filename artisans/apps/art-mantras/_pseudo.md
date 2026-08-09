@@ -1,6 +1,6 @@
 # Pseudo: Art Mantras
 
-Function declarations for the art-mantras micro app: name, params, and **responsibility**, with pseudo code bodies. Presented entry point first (the locked anchor), then grouped by layer (each layer maps to a section of `_plan.md`). Zero real code. The runtime file orders functions from utils → `main()` last (see `_plan.md` NFRs). Component render bodies are implementation (the coder's domain) — the architect prescribes parts, ownership, events, responsibility, and the markup contract (grids render as `<table>` — see `_plan.md` NFRs); the styling technique is the coder's choice.
+Function declarations for the art-mantras micro app: name, params, and **responsibility**, with pseudo code bodies. Presented entry point first (the locked anchor), then grouped by layer (each layer maps to a section of `_architect.md`). Zero real code. The runtime file orders functions from utils → `main()` last (see `_architect.md` NFRs). Component render bodies are implementation (the coder's domain) — the architect prescribes parts, ownership, events, responsibility, and the markup contract (grids render as `<table>` — see `_architect.md` NFRs); the styling technique is the coder's choice.
 
 ## Layer: Entry Point
 

@@ -19,7 +19,7 @@ Implement the art-mantras race step 3 — **shell: mount static UI (no bindings 
 - `.agents/domains/plans/templates/report__template.md` — the report format you render at the end.
 - `artificials/_backlog/plan-art-mantras/plan.md` — the plan; this commit is `mount-shell`.
 - `artificials/artisans/apps/art-mantras/_guide.md` — module map; read order is `_guide` → `_plan` → `_pseudo`.
-- `artificials/artisans/apps/art-mantras/_plan.md` — the design contract; read **Layer: Entry Point** (`main`/`run`), **Layer: Store** (`createStore`/`serialize`), **Layer: Derivation** (`shuffle` + helpers), **Layer: UI** (`mount` + factories), plus Conventions (no classes, data-attributes, one listener per node).
+- `artificials/artisans/apps/art-mantras/_architect.md` — the design contract; read **Layer: Entry Point** (`main`/`run`), **Layer: Store** (`createStore`/`serialize`), **Layer: Derivation** (`shuffle` + helpers), **Layer: UI** (`mount` + factories), plus Conventions (no classes, data-attributes, one listener per node).
 - `artificials/artisans/apps/art-mantras/_pseudo.md` — the function declarations; the contract. Step 3 concerns: `createStore`/`serialize` (Store), `shuffle`/`createViewEntry`/`createFibWeights`/`pickFromStrong`/`pickFromPool`/`chooseMantraWord` (Derivation), `mount`/`createButton`/`createToolbar`/`createMantraRow`/`createStrongsSection`/`createBannedSection`/`renderMantra`/`renderStrongs`/`renderBanned` (UI), `run` (Entry Point).
 - `artificials/artisans/apps/art-mantras/_wip.md` — only to identify the current step (step 3); NEVER modify it.
 
@@ -39,7 +39,7 @@ Implement the art-mantras race step 3 — **shell: mount static UI (no bindings 
 
 ## Rules
 
-- NEVER modify `_plan.md`, `_pseudo.md`, `_wip.md`, `_guide.md`, `_module.md`, the plan file, or anything under `.agents/domains/plans/**` and `artificials/records/**`.
+- NEVER modify `_architect.md`, `_pseudo.md`, `_wip.md`, `_guide.md`, `_module.md`, the plan file, or anything under `.agents/domains/plans/**` and `artificials/records/**`.
 - Only modify application files: `src/app.js` and `src/index.html` (nothing else).
 - Pseudo is the contract: implement exactly the responsibilities declared. Where a function's full contract is staged across steps (createStore, run), implement only this step's slice and report the staged deferral.
 - If the plan or pseudo contradicts the step, or is ambiguous: resolve it in code with the simplest reading, and record the finding + a ready-to-apply change snippet in your report. Never code against a plan or pseudo you silently changed in your head.
@@ -130,6 +130,6 @@ The art-mantras race step 3 goal is met: the static shell mounts with toolbar, m
 4. Generate the response and send it back to the delegator.
 5. Keep the response terse — happy face + up to 3 bullet points (done `mount-shell`, created static shell + `ui` binding surface, thumbs up). The full trail lives in the report file; do not repeat it in chat.
 
-DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `_plan.md`, `_pseudo.md`, or `_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
+DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `_architect.md`, `_pseudo.md`, or `_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
 
 Thank you for your service.

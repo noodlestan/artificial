@@ -10,14 +10,14 @@
 
 ## Summary
 
-Race the art-mantras micro app to a committable, all-use-cases bootstrap — one thin committable increment per step, each verified with `npm run serve` + a clean browser console (no errors, no unexpected output). The scaffold (zero-code `src/` placeholders + `serve` script) and the design docs (`_plan.md`, `_pseudo.md`) are already committed; all 13 actions in `_wip.md` are open. The design contract is `_plan.md` + `_pseudo.md` — delegates never modify them; they report ready-to-apply snippets instead. Pseudo is the contract: function names, params, responsibilities, and call flow are fixed; DOM structure follows the markup contract (`<table>` grids — see `_plan.md` NFRs); the styling technique is the coder's choice.
+Race the art-mantras micro app to a committable, all-use-cases bootstrap — one thin committable increment per step, each verified with `npm run serve` + a clean browser console (no errors, no unexpected output). The scaffold (zero-code `src/` placeholders + `serve` script) and the design docs (`_architect.md`, `_pseudo.md`) are already committed; all 13 actions in `_wip.md` are open. The design contract is `_architect.md` + `_pseudo.md` — delegates never modify them; they report ready-to-apply snippets instead. Pseudo is the contract: function names, params, responsibilities, and call flow are fixed; DOM structure follows the markup contract (`<table>` grids — see `_architect.md` NFRs); the styling technique is the coder's choice.
 
 ## Source Tasks
 
 No `task-{id}/task.md` files exist for this module — work is tracked in the module's `_wip.md` → Actions (repo-root-relative links):
 
 - [Art Mantras WIP — the 12-step race](artificials/artisans/apps/art-mantras/_wip.md)
-- [Art Mantras Plan — design contract](artificials/artisans/apps/art-mantras/_plan.md)
+- [Art Mantras Plan — design contract](artificials/artisans/apps/art-mantras/_architect.md)
 - [Art Mantras Pseudo — function declarations](artificials/artisans/apps/art-mantras/_pseudo.md)
 
 ## Mandatory Reading
@@ -32,7 +32,7 @@ For the delegator (execution mechanics):
 For the delegatee (shared context; per-step context is in each instruction file):
 
 - `artificials/artisans/apps/art-mantras/_guide.md` — module map: what each companion file contains and the reading order.
-- `artificials/artisans/apps/art-mantras/_plan.md` — the design: Why, What, How, Follow-ups (no code).
+- `artificials/artisans/apps/art-mantras/_architect.md` — the design: Why, What, How, Follow-ups (no code).
 - `artificials/artisans/apps/art-mantras/_pseudo.md` — function declarations, entry point first, grouped by layer; the contract.
 - `artificials/artisans/apps/art-mantras/_wip.md` — only to identify the current step; NEVER modify it.
 
@@ -108,11 +108,11 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Sub-Agent:** `bind-shuffle`
 
-### `bind-promote` - `DRAFT`
+### `bind-promote` - `PLANNED`
 
 **Commit Message:** `art-mantras: bind promote`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `_backlog/plan-art-mantras/instructions/bind-promote.md`
 
 **Sub-Agent:** (pending)
 
@@ -175,7 +175,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 ## Follow ups
 
 - Race execution cycle — one commit per delegator session; after each delegation the planner session analyses the sub-agent report and feedback and authors the next instruction batch (increasing sizes, e.g. 2–3, then 4–5–6). Remaining commits move `DRAFT` → `PLANNED` as their instruction files are written.
-- Phase 2 — render the saved `mantras[]` list (a mantras component; possibly browsing/reloading a saved mantra). Out of scope for the race (only the one current random mantra exists in phase 1). From `_plan.md` → Follow-ups.
+- Phase 2 — render the saved `mantras[]` list (a mantras component; possibly browsing/reloading a saved mantra). Out of scope for the race (only the one current random mantra exists in phase 1). From `_architect.md` → Follow-ups.
 - `_module.md` next-move routines (break down responsibilities, tighten plan, abstract, commit) remain the planner's contract between race steps.
 
 - Commit convention — all commits use `git commit --no-verify` to skip the pre-commit CI hooks (lefthook `clean` + `extract`); also documented in the module `_module.md` next-move routines.
@@ -191,9 +191,9 @@ For the delegatee (shared context; per-step context is in each instruction file)
 - `bind-shuffle` (COMPLETED) — commit `a3261ea2`, exactly `src/app.js` (+18/-3). Re-roll verified headlessly (5 distinct mantra compositions across clicks, A1 constant, bindings reset, DOWNLOAD/+ mantra inert).
 
 
-- (planner, 2026-08-08) — applied: snippet 1 → `art-mantras/_plan.md` Layer: Serving ("package's `src/` directory"); snippet 2 → instruction verification wording ("modified by this delegation; pre-existing changes not counted"). Next instruction batch authored: `load-data`, `mount-shell`, `bind-shuffle` (commits → `PLANNED`).
+- (planner, 2026-08-08) — applied: snippet 1 → `art-mantras/_architect.md` Layer: Serving ("package's `src/` directory"); snippet 2 → instruction verification wording ("modified by this delegation; pre-existing changes not counted"). Next instruction batch authored: `load-data`, `mount-shell`, `bind-shuffle` (commits → `PLANNED`).
 
-- `serve-hello-world` (COMPLETED) — `_plan.md` Layer: Serving says "Serves from the package directory" while `_pseudo.md`/instruction say "over `src/`". Implemented the explicit reading (serves from `src/`). Ready-to-apply snippet suggested for `_plan.md` (see report).
+- `serve-hello-world` (COMPLETED) — `_architect.md` Layer: Serving says "Serves from the package directory" while `_pseudo.md`/instruction say "over `src/`". Implemented the explicit reading (serves from `src/`). Ready-to-apply snippet suggested for `_architect.md` (see report).
 - `serve-hello-world` (COMPLETED) — instruction Final-Verification criterion "git status shows ONLY the two files modified" cannot hold literally when the working tree carries pre-existing unrelated changes; verified only the intended two files were changed this session (see report).
 
 - (planner, 2026-08-08) — delegation prep for `load-data` choked (session resumed; no report/commit produced). Evaluated: nothing lost — `load-data` remains `PLANNED` with its instruction ready to relay. Delegatee feedback from `serve-hello-world` fully applied (snippets above).

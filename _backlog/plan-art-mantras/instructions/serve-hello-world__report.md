@@ -38,11 +38,11 @@ None.
 
 ### For the planner
 
-1. **Ambiguity — `_plan.md` → Layer: Serving.** `_plan.md` says "Serves from the package directory", while `_pseudo.md` → Layer: Serving and the instruction both say "over `src/`".
-   - `where`: `_plan.md` → Layer: Serving (line "Serves from the package directory").
+1. **Ambiguity — `_architect.md` → Layer: Serving.** `_architect.md` says "Serves from the package directory", while `_pseudo.md` → Layer: Serving and the instruction both say "over `src/`".
+   - `where`: `_architect.md` → Layer: Serving (line "Serves from the package directory").
    - `problem`: "package directory" could mean the package root (cwd) rather than the `src/` directory.
    - `decision`: implemented the explicit reading — server serves from `src/` (resolver prefixes `src/`; `/` defaults to `src/index.html`).
-   - Ready-to-apply snippet for `_plan.md`:
+   - Ready-to-apply snippet for `_architect.md`:
      ```md
      #### Layer: Serving
 

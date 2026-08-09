@@ -27,7 +27,7 @@ Scaffold a runnable, self-contained CLI package named `@art-js/poc-parse` at `ar
 - `.agents/domains/plans/templates/report__template.md` — the report format you render at the end.
 - `artificials/_backlog/plan-poc-parse/plan.md` — the plan; this commit is `scaffold-poc-parse`.
 - `artificials/_guide.md` — the Artificials System overview: the compiler pipeline (Parse → Extract → Transform → Render) and the compilation model. Context only.
-- `artificials/_plan.md` — Approach + Step 1 (scaffold the poc-parse package).
+- `artificials/_architect.md` — Approach + Step 1 (scaffold the poc-parse package).
 - `artificials/_wip.md` — only to identify the current step; NEVER modify it.
 - `artificials/records/adr/_research.md` — the substrate research behind the POC (context only; no substrate decisions in this step).
 - `artificials/records/packages/artificials-parser.art` — package record format example.
@@ -45,7 +45,7 @@ Scaffold a runnable, self-contained CLI package named `@art-js/poc-parse` at `ar
 
 ## Rules
 
-- NEVER modify `artificials/_guide.md`, `artificials/_plan.md`, `artificials/_wip.md`, `artificials/_backlog/plan-poc-parse/plan.md`, `.agents/domains/plans/**`, or any existing `artificials/records/packages/*` file.
+- NEVER modify `artificials/_guide.md`, `artificials/_architect.md`, `artificials/_wip.md`, `artificials/_backlog/plan-poc-parse/plan.md`, `.agents/domains/plans/**`, or any existing `artificials/records/packages/*` file.
 - Only create/modify: `art-js/cli/poc-parse/**` (new package), `artificials/records/packages/artificials-poc-parse.art` (new record), and the `workspaces` array in the root `package.json` (only the entry this step requires).
 - If the plan or a reference is ambiguous or contradicts the repo conventions: resolve it with the simplest reading, and record the finding + a ready-to-apply change snippet in your report. Never code against a plan you silently changed in your head.
 - RULE: If a command reports errors, attempt to fix them.
@@ -115,6 +115,6 @@ The artificials POC step 1 goal is met: `@art-js/poc-parse` exists at `art-js/cl
 4. Generate the response and send it back to the delegator.
 5. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `scaffold-poc-parse`, created `art-js/cli/poc-parse/**`, thumbs up). The full trail lives in the report file; never repeat it in chat.
 
-DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `artificials/_plan.md`, or `artificials/_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
+DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `artificials/_architect.md`, or `artificials/_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
 
 Thank you for your service.

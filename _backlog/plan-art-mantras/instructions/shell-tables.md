@@ -18,13 +18,13 @@ The plan workflow (see `artificials/_guide.md` → Planning Workflow → Working
 
 ## Goals
 
-Implement the art-mantras race step 4 — **markup: convert the static shell to semantic tables**. Step 3 (`mount-shell`, commit `10d29ce5`) rendered the grid sections as generic `<div>`s; the design contract (`_plan.md` NFRs → markup contract) requires semantic `<table>` markup. Convert the mantra row, strongs section, and banned section to `<table>` / `<th scope="row">` / `<tr>` / `<td>` structure.
+Implement the art-mantras race step 4 — **markup: convert the static shell to semantic tables**. Step 3 (`mount-shell`, commit `10d29ce5`) rendered the grid sections as generic `<div>`s; the design contract (`_architect.md` NFRs → markup contract) requires semantic `<table>` markup. Convert the mantra row, strongs section, and banned section to `<table>` / `<th scope="row">` / `<tr>` / `<td>` structure.
 
 **Behavior must be unchanged**: the same factories, the same render api, the same intent slots, the same button api (`setTitle`/`setEnabled`), and all buttons still inert. Zero intent wiring — `apply()` and its bindings land from step 5.
 
 ## Mandatory Reading
 
-- `artificials/artisans/apps/art-mantras/_plan.md` — NFRs → markup contract; What → UI (table structure per section).
+- `artificials/artisans/apps/art-mantras/_architect.md` — NFRs → markup contract; What → UI (table structure per section).
 - `artificials/artisans/apps/art-mantras/_pseudo.md` — Layer: UI (component factories, render api, intent slots; the markup contract now prescribes the grid structure).
 - `artificials/artisans/apps/art-mantras/src/app.js` — the current shell implementation to convert.
 
@@ -43,7 +43,7 @@ Implement the art-mantras race step 4 — **markup: convert the static shell to 
 
 ## Rules
 
-- NEVER modify `_plan.md`, `_pseudo.md`, `_wip.md`, `_guide.md`, `_module.md`, the plan file, or anything under `.agents/domains/plans/**` and `artificials/records/**`.
+- NEVER modify `_architect.md`, `_pseudo.md`, `_wip.md`, `_guide.md`, `_module.md`, the plan file, or anything under `.agents/domains/plans/**` and `artificials/records/**`.
 - Only modify application files: `src/app.js` (nothing else).
 - Follow the markup contract exactly: `<table>` for grids, `<th scope="row">` row headers, `<td>` cells. Do not introduce classes/ids/attributes that a future `styles.css` would need.
 - Markup is the ONLY change: no binding changes, no render-api changes, no new functions, no behavior differences, no new intent slots.

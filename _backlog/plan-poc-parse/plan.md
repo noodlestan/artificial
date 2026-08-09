@@ -16,7 +16,7 @@ POC-first spike of the artificials parser: a self-contained, CLI-executable pack
 
 No `task-{id}/task.md` files exist yet (backlogs domain WIP). Source of this plan is the artificials work tracker (repo-root-relative links):
 
-- [Artificials Plan — Approach + Work ahead](artificials/_plan.md)
+- [Artificials Plan — Approach + Work ahead](artificials/_architect.md)
 - [Artificials WIP — ACTIONABLE](artificials/_wip.md)
 - [Substrate Research ADR](artificials/records/adr/_research.md)
 
@@ -32,7 +32,7 @@ For the delegator (execution mechanics):
 For the delegatee (shared context; per-step context is in each instruction file):
 
 - `artificials/_guide.md` — artificials system overview: compiler pipeline and compilation model.
-- `artificials/_plan.md` — approach and the step being executed.
+- `artificials/_architect.md` — approach and the step being executed.
 - `artificials/_wip.md` — the ACTIONABLE list; identifies the current step.
 - `artificials/records/adr/_research.md` — substrate research behind the spike.
 
