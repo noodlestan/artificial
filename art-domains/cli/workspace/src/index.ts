@@ -1,47 +1,52 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander'
+import { Command } from 'commander';
 
-const program = new Command()
+export { defineConfig, locateCheckouts, loadWorkspaceConfig } from './config';
+export type {
+	RepositoryCheckout,
+	RepositoryRecord,
+	WorkspaceConfig,
+	WorkspaceRecord,
+} from './config';
 
-program
-  .name('art-workspace')
-  .description('Workspace orchestration CLI')
-  .version('0.0.1')
+const program = new Command();
 
-program
-  .command('clone')
-  .description('Clone repos from manifest')
-  .action(() => {
-    console.log('clone command - TODO')
-  })
+program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.1');
 
 program
-  .command('branch')
-  .description('Branch across repos')
-  .action(() => {
-    console.log('branch command - TODO')
-  })
+	.command('clone')
+	.description('Clone repos from manifest')
+	.action(() => {
+		console.info('clone command - TODO');
+	});
 
 program
-  .command('link')
-  .description('Link packages for local dev')
-  .action(() => {
-    console.log('link command - TODO')
-  })
+	.command('branch')
+	.description('Branch across repos')
+	.action(() => {
+		console.info('branch command - TODO');
+	});
 
 program
-  .command('sanity')
-  .description('Check repo status')
-  .action(() => {
-    console.log('sanity command - TODO')
-  })
+	.command('link')
+	.description('Link packages for local dev')
+	.action(() => {
+		console.info('link command - TODO');
+	});
 
 program
-  .command('publish')
-  .description('Publish packages')
-  .action(() => {
-    console.log('publish command - TODO')
-  })
+	.command('sanity')
+	.description('Check repo status')
+	.action(() => {
+		console.info('sanity command - TODO');
+	});
 
-program.parse()
+program
+	.command('publish')
+	.description('Publish packages')
+	.action(() => {
+		console.info('publish command - TODO');
+	});
+
+program.parse();
