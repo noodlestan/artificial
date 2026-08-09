@@ -36,7 +36,7 @@ Surveyed projects doing "similar things" on top of micromark and extracted the b
 
 **Goal:** the parser's output contract, before any parsing.
 
-- Recursive (`kind`, `name`, `fields` — values can be block-level, `children`); extensible via kind-union + declaration merging, mirroring mdast's `RootContentMap` pattern.
+- Recursive discriminated union on `construct` (e.g. `SectionBlock`, `FieldBlock`, `NaturalBlock`); extensible via open per-position registries (`BlockConstructMap`, `InlineConstructMap`) + declaration merging, mirroring mdast's `RootContentMap` pattern.
 - Records carry source position metadata; depth and parent are derived from the tree, not stored.
 - Schema-first: TS types are the metalanguage ground truth for the parser; the `.art` spec files are the object language, caught up later by the bootstrap check.
 
