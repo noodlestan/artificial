@@ -62,11 +62,11 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `artificials/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`
 
-### `smoke-parse-corpus` - `DRAFT`
+### `smoke-parse-corpus` - `PLANNED`
 
 **Commit Message:** `poc-parse: smoke-parse the corpus`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `artificials/_backlog/plan-poc-parse/instructions/smoke-parse-corpus.md`
 
 **Sub-Agent:** (pending)
 
@@ -74,7 +74,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `poc-parse: add construct-stack record builder`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `artificials/_backlog/plan-poc-parse/instructions/smoke-parse-corpus.md`
 
 **Sub-Agent:** (pending)
 
@@ -82,7 +82,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `poc-parse: cross-check grammar wip`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `artificials/_backlog/plan-poc-parse/instructions/smoke-parse-corpus.md`
 
 **Sub-Agent:** (pending)
 
@@ -90,7 +90,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `poc-parse: fix grammar spec gaps`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `artificials/_backlog/plan-poc-parse/instructions/smoke-parse-corpus.md`
 
 **Sub-Agent:** (pending)
 
@@ -98,7 +98,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `poc-parse: land first constructs and prep vertical slice`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `artificials/_backlog/plan-poc-parse/instructions/smoke-parse-corpus.md`
 
 **Sub-Agent:** (pending)
 
