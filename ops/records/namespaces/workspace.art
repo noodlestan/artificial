@@ -1,0 +1,13 @@
+# Module
+
+## Namespace: Workspace Tools
+
+**Purpose:** Cross-repo orchestration tooling for the Noodlestan workspace.
+
+**Description:** CLI tools for managing multiple repositories, cross-repo development workflows, and workspace automation.
+
+**Path:** `art-domains/cli/workspace/`
+
+**Packages:**
+
+- Package: Workspace CLI

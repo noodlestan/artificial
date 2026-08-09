@@ -1,0 +1,60 @@
+# Module
+
+## Package Dependency: Commander
+
+**Canonical Name:** `commander`
+
+**Purpose:** CLI framework for argument parsing and command routing.
+
+**Version:** `^12.0.0`
+
+## Package Dependency: Simple Git
+
+**Canonical Name:** `simple-git`
+
+**Purpose:** Git operations library for status, push, clone, branch commands.
+
+**Version:** `^3.24.0`
+
+## Package Dependency: Types Node
+
+**Canonical Name:** `@types/node`
+
+**Purpose:** Node.js type definitions.
+
+**Version:** `^25.9.3`
+
+## Package Dependency: TypeScript
+
+**Canonical Name:** `typescript`
+
+**Purpose:** TypeScript compiler.
+
+**Version:** `^5.4.0`
+
+## Package Dependency: Vitest
+
+**Canonical Name:** `vitest`
+
+**Purpose:** Testing framework.
+
+**Version:** `^1.4.0`
+
+## Package Dependency: Noodlestan Esbuild
+
+**Canonical Name:** `@noodlestan/esbuild`
+
+**Purpose:** Build tooling.
+
+**Version:** `^0.0.11`
+
+## Package Dependency Set: Workspace CLI Development
+
+**Dependencies:**
+
+- Package Dependency: Commander
+- Package Dependency: Simple Git
+- Package Dependency: Types Node
+- Package Dependency: TypeScript
+- Package Dependency: Vitest
+- Package Dependency: Noodlestan Esbuild
