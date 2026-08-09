@@ -4,28 +4,27 @@ Artificials unifies sources of truth for both data and knowledge within operatio
 
 The system comprises an artificial language for declaring domain resources, a compiler for extracting and transforming those declarations, and projection mechanisms for compiling sources into targeted representations for specific consumers. By tailoring each projection to its consumer, Artificials maximises the useful context available to an agent while minimising irrelevant context, duplication, and manually maintained derived instructions.
 
-## Which Guide for Which Session
+## Mandatory Reading
 
-- **Root `_guide.md` (this file)** — the artificials system, the plan workflow, and the pointer to the shared module workflow. Start here for system-level work and for any architect or delegator session.
-- **`_module.md`** — the shared module workflow: structure of a module's plan and pseudo documents, and the next-move commands (see `artificials/_module.md`). Consult it for module-scoped work; the guide references it under **Module Workflow**.
-- **Module `_guide.md`** — a module's companion-file map (e.g. `art-mantras/_guide.md`), linking back to `artificials/_guide.md` (plan workflow) and `artificials/_module.md` (module workflow). Start here for module-scoped work.
-- Both entry points converge on the same workflow and working agreements, so architect, delegator, and user sessions behave consistently across projects.
+::READ `repos/artificial/_guide.md` — the artificials system overview, plan workflow, and agent interactions.
 
-## Planning Workflow
+::READ `repos/artificial/_wip.md` — the current work-in-progress tracker with actionable items, pending work, blockers, and follow-ups.
 
-This project plans its work with the prototype plan workflow defined in `.agents/domains/plans/` — plan files, implementation instructions, delegation files, and reports (see `definitions/index.md`, `files/index.md`, `structures/plan__structure.md`, and `templates/`). The backlog lives at `artificials/_backlog/`. The working agents are [architect](.agents/skills/agent-architect/SKILL.md) (designs plans and writes instruction files) and [delegator](.agents/skills/agent-delegator/SKILL.md) (executes a plan by delegating each commit's instruction file to a sub-agent).
+::READ `repos/artificial/_architect.md` — the forward-looking architect plan with approach, work sequence, and milestone steps.
 
-### Working Together: Architect · Delegator · User
+::READ `.agents/domains/plans/definitions/index.md` — plan, implementation-instruction, delegation, and report definitions.
 
-The plan workflow runs on three working agreements. Any architect or delegator can pick it up cold — read the plan, read the instruction, execute, render the report, report terse:
+::READ `.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
 
-1. **The instruction is self-contained.** The architect authors the instruction file so it carries everything a sub-agent needs to execute the commit — goals, mandatory reading, changes, rules, workflow, validation, and report-back. It must never lean on session memory, chat context, or details relayed by the user.
-2. **The report is self-contained.** The delegator's sub-agent renders the report file from the report template; it carries the full trail — evidence, changes, verification results, blockers, and feedback. It must never lean on the chat response.
-3. **User interaction is minimal.** The user points to the next instruction and relays it to the delegator. Completion needs only a happy face and up to 3 bullet points — `done {commit}`, `created {artefacts}`, thumbs up — unless something goes horribly wrong, in which case report the blocker instead of a summary.
+::READ `.agents/domains/plans/structures/plan__structure.md` — plan record fields and statuses.
 
-## Module Workflow
+::READ `.agents/domains/plans/templates/` — plan, instruction, and report templates.
 
-The shared module workflow — the structure of a module's plan and pseudo documents, and the next-move commands — lives in `artificials/_module.md` (`# Module: Workflow`). Modules bind it through their own `_module.md` (e.g. `art-mantras/_module.md`).
+::READ `.agents/domains/engineering/_guide.md` — working agreements and agent modes.
+
+## Agents and User Interactions
+
+This project plans its work with the plan workflow defined in `.agents/domains/plans/`. The backlog lives at `artificials/_backlog/`. The workflow runs on the working agreements and agent modes defined in `.agents/domains/engineering/_guide.md`.
 
 ## Use Cases
 
@@ -46,7 +45,7 @@ A Planning Agent needs comprehensive knowledge of the planning domain: its struc
 
 #### Delegator Agent
 
-A Delegator Agent needs enough knowledge of planning to understand plans, commits, and implementation instructions, but does not need the full planning domain. The Builder agents it delegates to require a different projection: limited knowledge of planning, particularly how to interpret and follow plan instructions, combined with substantial knowledge resources for understanding and improving references such as architecture decisions, patterns, and conventions.
+A Delegator Agent needs enough knowledge of planning to understand plans, commits, and implementation instructions, but does not need the full planning domain. The Worker agents it delegates to require a different projection: limited knowledge of planning, particularly how to interpret and follow plan instructions, combined with substantial knowledge resources for understanding and improving references such as architecture decisions, patterns, and conventions.
 
 ### Single Source of Truth for Declarations
 
