@@ -4,51 +4,66 @@
 
 **Instruction Id:** `bind-promote`
 
-**Outcome:** `BLOCKER`
+**Outcome:** `COMPLETED`
 
 ## Evidence
 
 ### Changes
 
-No application changes were made.
+The requested implementation is present in commit `dcc28d0` (`art-mantras: implement bind-promote (worker Anscombe, blocked on reference)`). The commit contains the exact step-6 application changes:
 
 #### Files changed
 
-None.
+- `artisans/apps/art-mantras/src/app.js` — added `createStore().promoteToStrong(slotId, word)` and wired `ui.mantraRow.promote` to mutate the store, preserve the current row entry, switch it to disabled `✓ strong`, and re-render mantra/strong sections.
+
+No application file was changed during this fresh validation session; the working tree’s only change is the pre-existing `_backlog/plan-art-mantras/plan.md` modification.
 
 ### Verification
 
-- The authoritative plan was found at `artificials/_backlog/plan-art-mantras/plan.md`.
-- The target module was found at `artificials/artisans/apps/art-mantras/`.
-- Required reference `artisans/apps/art-mantras/_architect.md` could not be read because it does not exist at the authoritative module path.
-- The module contains `_plan.md` instead; it was not substituted because the instruction explicitly requires `_architect.md`.
-- Implementation, syntax validation, server verification, commit, and push were not attempted because mandatory reading failed.
-
-## Blockers
-
-The implementation is blocked by the missing mandatory file `artificials/artisans/apps/art-mantras/_architect.md`. The instruction requires stopping when a required file cannot be read, so no code was changed.
+- `node --check artisans/apps/art-mantras/src/app.js` — passed.
+- `npm run serve` — served successfully at `http://localhost:8000`; server stopped after verification.
+- HTTP checks — `/`, `/app.js`, and `/data.json` returned 200; a missing asset returned 404.
+- Equivalent in-process DOM verification — enabled pool word promotion passed: the word remained in its row, the control became disabled `✓ strong`, and the word was appended to the corresponding strong list; A1 remained `Artificial` with an empty control cell.
+- Shuffle regression — 4 distinct compositions across 5 rolls; A1 remained constant; toolbar save/download and strong controls remained inert; no captured console errors.
+- Commit exists locally as `dcc28d027e96c1f349dac16c950b6beead821e50`.
+- Push — not repeated because this fresh session found the implementation already committed in `HEAD`; no new implementation commit was created to push.
 
 ## Feedback
 
 ### For the planner
 
-**where:** `Mandatory Reading` and `Changes`
+**where:** Instruction `Mandatory Reading`; plan `Source Tasks` and historical feedback.
 
-**problem:** The instruction requires `artisans/apps/art-mantras/_architect.md`, but the authoritative module has `_plan.md` and no `_architect.md`.
+**problem:** The plan contains historical `artificials/...` paths, while this checkout and the user instruction require repository-relative `repos/artificial` paths. The prior blocker report also claimed the module design file was missing, but `artisans/apps/art-mantras/_architect.md` is present in this checkout.
 
-**decision:** Stop at the mandatory-reading failure rather than infer that `_plan.md` is the intended replacement.
+**decision:** Followed the user instruction and current instruction paths rooted at `repos/artificial`, and read the present `_guide.md`, `_architect.md`, `_pseudo.md`, and `_wip.md`. No design document was substituted or modified.
 
 **READY-TO-APPLY snippet:**
 
 ```diff
-- `artisans/apps/art-mantras/_architect.md` — design contract, especially Entry Point, Store, and UI layers.
-+ `artisans/apps/art-mantras/_plan.md` — design contract, especially Entry Point, Store, and UI layers.
+- [Art Mantras WIP — the 12-step race](artificials/artisans/apps/art-mantras/_wip.md)
+- [Art Mantras Plan — design contract](artificials/artisans/apps/art-mantras/_architect.md)
+- [Art Mantras Pseudo — function declarations](artificials/artisans/apps/art-mantras/_pseudo.md)
++ [Art Mantras WIP — the 12-step race](artisans/apps/art-mantras/_wip.md)
++ [Art Mantras Plan — design contract](artisans/apps/art-mantras/_architect.md)
++ [Art Mantras Pseudo — function declarations](artisans/apps/art-mantras/_pseudo.md)
 ```
 
 ### For the technical writers
 
-The plan’s delegatee reading path and the implementation instruction’s reading path should consistently name the module’s existing design document (`_plan.md`), or add the missing `_architect.md` before delegation.
+**where:** Existing commit metadata and prior `bind-promote__report.md`.
+
+**problem:** The implementation commit subject says `blocked on reference`, although the implementation is present and all required validations pass; the prior report says no application changes were made.
+
+**decision:** Preserve the existing commit and report the verified repository state rather than rewrite history or alter design documents.
+
+**READY-TO-APPLY snippet:**
+
+```diff
+- art-mantras: implement bind-promote (worker Anscombe, blocked on reference)
++ art-mantras: bind promote
+```
 
 ### For the crew
 
-No implementation or validation could proceed until the mandatory reference path is corrected.
+The implementation and validation are complete. The server required elevated execution because the sandbox denied binding `0.0.0.0:8000`; the elevated retry succeeded.
