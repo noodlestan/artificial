@@ -122,11 +122,11 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Sub-Agent:** `Faraday` (`019fe616-a8b7-7dd2-9dbc-86c4621497d5`) — delegated 2026-08-09
 
-### `bind-reorder` - `DRAFT`
+### `bind-reorder` - `PLANNED`
 
 **Commit Message:** `art-mantras: bind reorder`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `_backlog/plan-art-mantras/instructions/bind-reorder.md`
 
 **Sub-Agent:** (pending)
 
@@ -134,7 +134,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `art-mantras: bind ban`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `_backlog/plan-art-mantras/instructions/bind-ban.md` (draft)
 
 **Sub-Agent:** (pending)
 
@@ -142,7 +142,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `art-mantras: bind unban`
 
-**Instructions File:** (pending — written when this commit is delegated)
+**Instructions File:** `_backlog/plan-art-mantras/instructions/bind-unban.md` (draft)
 
 **Sub-Agent:** (pending)
 
