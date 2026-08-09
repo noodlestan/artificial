@@ -2,9 +2,9 @@
 
 ## Namespace: Art Domains
 
-**Purpose:** Domain packages for cross-repo tooling.
+**Purpose:** Curated domains for operational knowledge and workflows.
 
-**Description:** Domain packages that provide cross-repo orchestration and workspace automation tools for the Noodlestan ecosystem.
+**Description:** Domains are self-contained areas of knowledge and operations — structures, types, routines, commands, and vocabulary. This namespace hosts domain packages that can be distributed and reused across repositories. Examples: plans, tasks, references, workspaces, changelogs.
 
 **Path:** `art-domains`
 

@@ -1,8 +1,10 @@
 # Art Domains
 
-> Domain packages for cross-repo tooling.
+> Curated domains for operational knowledge and workflows.
 
-Domain packages that provide cross-repo orchestration and workspace automation tools for the Noodlestan ecosystem.
+Domains are self-contained areas of knowledge and operations — structures, types, routines, commands, and vocabulary. This namespace hosts domain packages that can be distributed and reused across repositories.
+
+Examples of domains: plans, tasks, references, workspaces, changelogs.
 
 ## Packages
 

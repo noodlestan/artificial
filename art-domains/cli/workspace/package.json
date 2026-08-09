@@ -7,7 +7,7 @@
     "art-workspace": "./dist/index.js"
   },
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --banner:js='#!/usr/bin/env node'",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --packages=external",
     "dev": "npm run build -- --watch",
     "test": "vitest",
     "lint": "eslint src/ && tsc --noEmit"
