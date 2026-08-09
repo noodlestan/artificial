@@ -1,5 +1,5 @@
 {
-  "extends": "../../../configs/tsconfig/cli/tsconfig.esm.json",
+  "extends": "@noodlestan/tsconfig/cli/tsconfig.esm.json",
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist/esm",

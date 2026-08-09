@@ -1,5 +1,5 @@
 {
-  "extends": "../../../configs/tsconfig/cli/tsconfig.cjs.json",
+  "extends": "@noodlestan/tsconfig/cli/tsconfig.cjs.json",
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist/cjs",

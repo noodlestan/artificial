@@ -31,19 +31,20 @@
     "ci": "turbo run ci"
   },
   "devDependencies": {
-    "@noodlestan/eslint-config": "git+ssh://git@github.com/noodlestan/eslint-config.git#main",
-    "@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main",
+    "@noodlestan/esbuild": "^0.0.11",
+    "@noodlestan/eslint-config": "^0.0.7",
+    "@noodlestan/tsconfig": "^0.0.11",
     "eslint": "8.57.1",
     "lefthook": "2.1.9",
     "prettier": "3.8.4",
+    "rollup": "^4.61.1",
+    "solid-js": "1.9.13",
     "turbo": "2.9.18",
     "typescript": "5.9.3",
     "vite": "8.0.16",
     "vite-plugin-solid": "2.11.12",
     "vite-plugin-solid-svg": "0.8.1",
     "vite-plugin-top-level-await": "1.6.0",
-    "vitest": "4.1.8",
-    "solid-js": "1.9.13",
-    "rollup": "^4.61.1"
+    "vitest": "4.1.8"
   }
 }
