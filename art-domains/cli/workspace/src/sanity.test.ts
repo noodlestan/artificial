@@ -38,7 +38,7 @@ async function commitFile(dir: string, filename: string, content = 'content') {
 }
 
 beforeEach(() => {
-	vi.spyOn(console, 'log').mockImplementation(() => {});
+	vi.spyOn(console, 'info').mockImplementation(() => {});
 	vi.spyOn(console, 'warn').mockImplementation(() => {});
 });
 
@@ -51,13 +51,17 @@ afterEach(() => {
 
 function writeManifest(
 	root: string,
-	repos: Array<{ name: string; checkout: string; remote?: string }>,
+	repos: Array<{ name: string; remote?: string }>,
+	checkouts: Array<{ repo: string; location: string; branch?: string }> = [],
 ) {
 	const reposStr = repos
 		.map(
 			r =>
-				`{ name: '${r.name}', remote: '${r.remote ?? `git@example.com:${r.name.toLowerCase()}.git`}', checkout: '${r.checkout}', branch: 'main', consumers: [] }`,
+				`{ name: '${r.name}', remote: '${r.remote ?? `git@example.com:${r.name.toLowerCase()}.git`}', consumers: [] }`,
 		)
+		.join(',\n      ');
+	const checkoutsStr = checkouts
+		.map(c => `{ repo: '${c.repo}', location: '${c.location}', branch: '${c.branch ?? 'main'}' }`)
 		.join(',\n      ');
 	writeFileSync(
 		join(root, '.art-workspace.mts'),
@@ -66,6 +70,7 @@ function writeManifest(
     workspace: { name: 'Test', purpose: 'test', remote: 'git@example.com:ws.git', branch: 'main' },
     repos: [${reposStr}],
   },
+  checkouts: [${checkoutsStr}],
 }
 `,
 	);
@@ -74,11 +79,11 @@ function writeManifest(
 describe('sanity command', () => {
 	it('reports "repo not cloned" for a missing checkout', async () => {
 		const root = makeTempDir();
-		writeManifest(root, [{ name: 'Missing', checkout: 'repos/missing' }]);
+		writeManifest(root, [{ name: 'Missing' }], [{ repo: 'Missing', location: 'repos/missing' }]);
 
 		await runSanity({ root, auto: false });
 
-		const output = (console.log as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/missing');
 		expect(output).toContain('repo not cloned');
 	});
@@ -91,11 +96,11 @@ describe('sanity command', () => {
 		const git = simpleGit(repoDir);
 		await git.push('origin', 'main', ['--set-upstream']);
 
-		writeManifest(root, [{ name: 'Green', checkout: 'repos/green' }]);
+		writeManifest(root, [{ name: 'Green' }], [{ repo: 'Green', location: 'repos/green' }]);
 
 		await runSanity({ root, auto: false });
 
-		const output = (console.log as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('All repos are green');
 	});
 
@@ -108,11 +113,11 @@ describe('sanity command', () => {
 		await git.push('origin', 'main', ['--set-upstream']);
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeManifest(root, [{ name: 'Dirty', checkout: 'repos/dirty' }]);
+		writeManifest(root, [{ name: 'Dirty' }], [{ repo: 'Dirty', location: 'repos/dirty' }]);
 
 		await runSanity({ root, auto: false });
 
-		const output = (console.log as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/dirty');
 		expect(output).toContain('no');
 	});
@@ -123,11 +128,11 @@ describe('sanity command', () => {
 		await initGitRepo(repoDir, { withRemote: true });
 		await commitFile(repoDir, 'file.txt');
 
-		writeManifest(root, [{ name: 'Unpushed', checkout: 'repos/unpushed' }]);
+		writeManifest(root, [{ name: 'Unpushed' }], [{ repo: 'Unpushed', location: 'repos/unpushed' }]);
 
 		await runSanity({ root, auto: false });
 
-		const output = (console.log as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/unpushed');
 		expect(output).toContain('no');
 	});
@@ -138,11 +143,11 @@ describe('sanity command', () => {
 		await initGitRepo(repoDir, { withRemote: true });
 		await commitFile(repoDir, 'file.txt');
 
-		writeManifest(root, [{ name: 'AutoPush', checkout: 'repos/autopush' }]);
+		writeManifest(root, [{ name: 'AutoPush' }], [{ repo: 'AutoPush', location: 'repos/autopush' }]);
 
 		await runSanity({ root, auto: true });
 
-		const logOutput = (console.log as ReturnType<typeof vi.fn>).mock.calls
+		const logOutput = (console.info as ReturnType<typeof vi.fn>).mock.calls
 			.map(c => c[0])
 			.join('\n');
 		expect(logOutput).toContain('All repos are green');
@@ -155,11 +160,15 @@ describe('sanity command', () => {
 		await commitFile(repoDir, 'file.txt');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeManifest(root, [{ name: 'DirtyNoAuto', checkout: 'repos/dirtynoauto' }]);
+		writeManifest(
+			root,
+			[{ name: 'DirtyNoAuto' }],
+			[{ repo: 'DirtyNoAuto', location: 'repos/dirtynoauto' }],
+		);
 
 		await runSanity({ root, auto: true });
 
-		const output = (console.log as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/dirtynoauto');
 		expect(output).toContain('no');
 	});
@@ -174,11 +183,11 @@ describe('sanity command', () => {
 		const headSha = await git.revparse(['HEAD']);
 		await git.checkout(headSha.trim());
 
-		writeManifest(root, [{ name: 'Detached', checkout: 'repos/detached' }]);
+		writeManifest(root, [{ name: 'Detached' }], [{ repo: 'Detached', location: 'repos/detached' }]);
 
 		await runSanity({ root, auto: false });
 
-		const output = (console.log as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('detached HEAD');
 	});
 
@@ -206,11 +215,11 @@ describe('sanity command', () => {
 			// expected conflict
 		}
 
-		writeManifest(root, [{ name: 'Conflict', checkout: 'repos/conflict' }]);
+		writeManifest(root, [{ name: 'Conflict' }], [{ repo: 'Conflict', location: 'repos/conflict' }]);
 
 		await runSanity({ root, auto: false });
 
-		const output = (console.log as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('merge conflicts');
 	});
 

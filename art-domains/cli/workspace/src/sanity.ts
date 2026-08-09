@@ -3,19 +3,13 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 
 import { loadWorkspaceConfig, locateCheckouts, verifyCheckouts } from './config';
+import { getCurrentBranch, isDetachedHead } from './private/branching';
+import { getUnpushedCount, hasMergeConflicts, hasRemote, isDirty } from './private/validate';
+import type { RepoStatus } from './types';
 
 interface SanityOptions {
 	root: string;
 	auto: boolean;
-}
-
-interface RepoStatus {
-	name: string;
-	location: string;
-	branch: string;
-	issues: string[];
-	pushed: 'no' | 'now' | 'yes';
-	exists: boolean;
 }
 
 async function getRepoStatus(
@@ -38,54 +32,23 @@ async function getRepoStatus(
 		};
 	}
 
-	const git = simpleGit(dir);
 	const issues: string[] = [];
 	let branch = '-';
 	let dirty = false;
 	let unpushedCount = 0;
-	let hasRemote = false;
+	let hasRemoteFlag = false;
 	let detachedHead = false;
 	let mergeConflicts = false;
 
 	try {
-		const status = await git.status();
+		branch = await getCurrentBranch(dir);
+		detachedHead = await isDetachedHead(dir);
+		mergeConflicts = await hasMergeConflicts(dir);
+		dirty = await isDirty(dir);
+		hasRemoteFlag = await hasRemote(dir);
 
-		branch = status.current ?? 'HEAD';
-		if (!status.current || status.current === 'HEAD') {
-			try {
-				const refOutput = await git.raw(['symbolic-ref', '-q', 'HEAD']);
-				if (!refOutput.trim()) {
-					detachedHead = true;
-				}
-			} catch {
-				detachedHead = true;
-			}
-		}
-
-		if (status.conflicted.length > 0) {
-			mergeConflicts = true;
-		}
-
-		if (status.files.length > 0) {
-			dirty = true;
-		}
-
-		const remotes = await git.getRemotes(false);
-		hasRemote = remotes.length > 0;
-
-		if (hasRemote && status.current && status.current !== 'HEAD') {
-			try {
-				const branches = await git.branch();
-				const tracking = branches.all.find(
-					b => b === `origin/${status.current}` || b === `remotes/origin/${status.current}`,
-				);
-				if (tracking) {
-					const ahead = await git.raw(['rev-list', '--count', `${tracking}..HEAD`]);
-					unpushedCount = Number.parseInt(ahead.trim(), 10);
-				}
-			} catch {
-				// no tracking branch
-			}
+		if (hasRemoteFlag && branch !== '-' && branch !== 'HEAD') {
+			unpushedCount = await getUnpushedCount(dir);
 		}
 	} catch {
 		issues.push('git error');
@@ -97,11 +60,12 @@ async function getRepoStatus(
 	if (mergeConflicts) {
 		issues.push('merge conflicts');
 	}
-	if (!hasRemote) {
+	if (!hasRemoteFlag) {
 		issues.push('no remote');
 	}
 	if (dirty) {
 		try {
+			const git = simpleGit(dir);
 			const status = await git.status();
 			const dirtyCount = status.files.length;
 			issues.push(`${dirtyCount} uncommitted file${dirtyCount !== 1 ? 's' : ''}`);
@@ -114,7 +78,7 @@ async function getRepoStatus(
 	}
 
 	let pushed: 'no' | 'now' | 'yes';
-	if (!hasRemote) {
+	if (!hasRemoteFlag) {
 		pushed = 'no';
 	} else if (initialPushed) {
 		pushed = 'yes';
@@ -199,10 +163,8 @@ export async function runSanity({ root, auto }: SanityOptions): Promise<void> {
 	});
 
 	if (nonGreen.length === 0) {
-		// eslint-disable-next-line no-console
-		console.log('All repos are green \u2713');
+		console.info('All repos are green \u2713');
 	} else {
-		// eslint-disable-next-line no-console
-		console.log(formatTable(nonGreen));
+		console.info(formatTable(nonGreen));
 	}
 }

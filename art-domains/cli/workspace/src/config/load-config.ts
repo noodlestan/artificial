@@ -20,6 +20,7 @@ const EMPTY_TEMPLATE = `export default {
 		},
 		repos: [],
 	},
+	checkouts: [],
 }
 `;
 

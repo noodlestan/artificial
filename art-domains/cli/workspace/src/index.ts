@@ -2,10 +2,12 @@
 
 import { Command } from 'commander';
 
+import { runClone } from './clone';
 import { runSanity } from './sanity';
 
 export { defineConfig, locateCheckouts, loadWorkspaceConfig, verifyCheckouts } from './config';
 export type {
+	CheckoutConfig,
 	RepositoryCheckout,
 	RepositoryRecord,
 	WorkspaceConfig,
@@ -14,13 +16,15 @@ export type {
 
 const program = new Command();
 
-program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.7');
+program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.8');
 
 program
 	.command('clone')
 	.description('Clone repos from manifest')
-	.action(() => {
-		console.info('clone command - TODO');
+	.argument('[names...]', 'repo names to clone (or "all")')
+	.action(async (names: string[]) => {
+		const root = process.cwd();
+		await runClone({ root, names });
 	});
 
 program

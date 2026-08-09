@@ -3,13 +3,9 @@ import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
 
-import type { RepositoryCheckout } from './types';
+import type { VerifyNeeds } from '../types';
 
-export interface VerifyNeeds {
-	exists?: boolean;
-	pushed?: boolean;
-	published?: boolean;
-}
+import type { RepositoryCheckout } from './types';
 
 async function gitIsUpToDate(dir: string): Promise<boolean> {
 	const git = simpleGit(dir);
