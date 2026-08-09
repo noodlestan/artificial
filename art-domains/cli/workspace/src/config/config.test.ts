@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import type { WorkspaceConfig } from './types';
 
-import { defineConfig, loadWorkspaceConfig, locateCheckouts } from './index';
+import { defineConfig, loadWorkspaceConfig, locateCheckouts, verifyCheckouts } from './index';
 
 function makeWorkspaceConfig(repos: WorkspaceConfig['records']['repos']): WorkspaceConfig {
 	return {
@@ -138,5 +138,103 @@ describe('loadWorkspaceConfig', () => {
 		writeFileSync(join(root, '.art-workspace.mts'), "throw new Error('boom');\n");
 
 		await expect(loadWorkspaceConfig(root)).rejects.toThrow(/\.art-workspace\.mts/);
+	});
+});
+
+describe('verifyCheckouts', () => {
+	it('fills only the requested fields', async () => {
+		const root = makeTempDir();
+		const checkouts = locateCheckouts(
+			makeWorkspaceConfig([{ name: 'A', remote: 'git@example.com:a.git', checkout: 'repos/a' }]),
+		);
+
+		await verifyCheckouts(checkouts, { exists: true }, root);
+
+		expect(checkouts[0].exists).toBeDefined();
+		expect(checkouts[0].pushed).toBeUndefined();
+		expect(checkouts[0].published).toBeUndefined();
+	});
+
+	it('sets exists: false for a missing directory', async () => {
+		const root = makeTempDir();
+		const checkouts = locateCheckouts(
+			makeWorkspaceConfig([{ name: 'A', remote: 'git@example.com:a.git', checkout: 'repos/a' }]),
+		);
+
+		await verifyCheckouts(checkouts, { exists: true }, root);
+
+		expect(checkouts[0].exists).toBe(false);
+	});
+
+	it('sets exists: true for an existing directory', async () => {
+		const root = makeTempDir();
+		const repoDir = join(root, 'repos/a');
+		const { mkdirSync } = await import('node:fs');
+		mkdirSync(repoDir, { recursive: true });
+
+		const checkouts = locateCheckouts(
+			makeWorkspaceConfig([{ name: 'A', remote: 'git@example.com:a.git', checkout: 'repos/a' }]),
+		);
+
+		await verifyCheckouts(checkouts, { exists: true }, root);
+
+		expect(checkouts[0].exists).toBe(true);
+	});
+
+	it('sets pushed: false for a missing directory', async () => {
+		const root = makeTempDir();
+		const checkouts = locateCheckouts(
+			makeWorkspaceConfig([{ name: 'A', remote: 'git@example.com:a.git', checkout: 'repos/a' }]),
+		);
+
+		await verifyCheckouts(checkouts, { pushed: true }, root);
+
+		expect(checkouts[0].pushed).toBe(false);
+	});
+
+	it('sets pushed: false for a repo with no remote', async () => {
+		const root = makeTempDir();
+		const repoDir = join(root, 'repos/a');
+		const { mkdirSync } = await import('node:fs');
+		const { execSync: exec } = await import('node:child_process');
+		mkdirSync(repoDir, { recursive: true });
+		exec('git init', { cwd: repoDir });
+		exec('git config user.email "test@example.com"', { cwd: repoDir });
+		exec('git config user.name "Test"', { cwd: repoDir });
+		writeFileSync(join(repoDir, 'file.txt'), 'content');
+		exec('git add .', { cwd: repoDir });
+		exec('git commit -m "initial"', { cwd: repoDir });
+
+		const checkouts = locateCheckouts(
+			makeWorkspaceConfig([{ name: 'A', remote: 'git@example.com:a.git', checkout: 'repos/a' }]),
+		);
+
+		await verifyCheckouts(checkouts, { pushed: true }, root);
+
+		expect(checkouts[0].pushed).toBe(false);
+	});
+
+	it('sets pushed: false for a dirty working tree', async () => {
+		const root = makeTempDir();
+		const repoDir = join(root, 'repos/a');
+		const { mkdirSync } = await import('node:fs');
+		const { execSync } = await import('node:child_process');
+		mkdirSync(repoDir, { recursive: true });
+		execSync('git init', { cwd: repoDir });
+		execSync('git config user.email "test@example.com"', { cwd: repoDir });
+		execSync('git config user.name "Test"', { cwd: repoDir });
+		execSync('git remote add origin git@example.com:a.git', { cwd: repoDir });
+		writeFileSync(join(repoDir, 'file.txt'), 'content');
+		execSync('git add .', { cwd: repoDir });
+		execSync('git commit -m "initial"', { cwd: repoDir });
+		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
+
+		const checkouts = locateCheckouts(
+			makeWorkspaceConfig([{ name: 'A', remote: 'git@example.com:a.git', checkout: 'repos/a' }]),
+		);
+
+		await verifyCheckouts(checkouts, { pushed: true }, root);
+
+		expect(checkouts[0].pushed).toBe(false);
 	});
 });

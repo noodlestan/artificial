@@ -2,7 +2,9 @@
 
 import { Command } from 'commander';
 
-export { defineConfig, locateCheckouts, loadWorkspaceConfig } from './config';
+import { runSanity } from './sanity';
+
+export { defineConfig, locateCheckouts, loadWorkspaceConfig, verifyCheckouts } from './config';
 export type {
 	RepositoryCheckout,
 	RepositoryRecord,
@@ -12,7 +14,7 @@ export type {
 
 const program = new Command();
 
-program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.3');
+program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.7');
 
 program
 	.command('clone')
@@ -37,9 +39,11 @@ program
 
 program
 	.command('sanity')
-	.description('Check repo status')
-	.action(() => {
-		console.info('sanity command - TODO');
+	.description('Check git status across all repos')
+	.option('--auto', 'push clean unpushed repos')
+	.action(async (options: { auto?: boolean }) => {
+		const root = process.cwd();
+		await runSanity({ root, auto: options.auto ?? false });
 	});
 
 program

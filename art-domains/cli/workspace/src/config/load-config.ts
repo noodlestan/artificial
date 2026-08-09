@@ -1,5 +1,4 @@
-import { existsSync, mkdtempSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -8,6 +7,7 @@ import { build } from 'esbuild';
 import type { WorkspaceConfig } from './types';
 
 const MANIFEST_FILE = '.art-workspace.mts';
+const TEMP_FILE = '.art-workspace-bundle.mjs';
 
 const EMPTY_TEMPLATE = `export default {
 	records: {
@@ -47,6 +47,18 @@ export async function loadWorkspaceConfig(root: string): Promise<WorkspaceConfig
 			write: false,
 			format: 'esm',
 			platform: 'node',
+			external: [
+				'node:fs',
+				'node:os',
+				'node:path',
+				'node:url',
+				'fs',
+				'os',
+				'path',
+				'url',
+				'esbuild',
+				'simple-git',
+			],
 		});
 	} catch (error) {
 		throw new Error(
@@ -54,8 +66,7 @@ export async function loadWorkspaceConfig(root: string): Promise<WorkspaceConfig
 		);
 	}
 
-	const dir = mkdtempSync(join(tmpdir(), 'art-workspace-'));
-	const tempFile = join(dir, 'config.mjs');
+	const tempFile = join(root, TEMP_FILE);
 	writeFileSync(tempFile, output.outputFiles[0].text);
 
 	try {
