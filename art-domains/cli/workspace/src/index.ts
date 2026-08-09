@@ -12,7 +12,7 @@ export type {
 
 const program = new Command();
 
-program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.1');
+program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.3');
 
 program
 	.command('clone')

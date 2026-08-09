@@ -1,6 +1,6 @@
 {
   "name": "@art-domains/workspace-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Workspace orchestration CLI",
   "type": "module",
   "bin": {
@@ -10,10 +10,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./config": {
+      "types": "./dist/config/index.d.ts",
+      "import": "./dist/config/index.js"
     }
   },
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --packages=external && tsc --emitDeclarationOnly",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --packages=external && esbuild src/config/index.ts --bundle --platform=node --outfile=dist/config/index.js --format=esm --packages=external && tsc --emitDeclarationOnly",
     "dev": "npm run build -- --watch",
     "test": "vitest run",
     "test:watch": "vitest",
