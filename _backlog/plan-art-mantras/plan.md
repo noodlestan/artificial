@@ -108,13 +108,13 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Sub-Agent:** `bind-shuffle`
 
-### `bind-promote` - `PLANNED`
+### `bind-promote` - `BLOCKED`
 
 **Commit Message:** `art-mantras: bind promote`
 
 **Instructions File:** `_backlog/plan-art-mantras/instructions/bind-promote.md`
 
-**Sub-Agent:** (pending)
+**Sub-Agent:** `Anscombe` (`019fe46c-0f13-7c41-b71a-f84a68caccba`) — delegated 2026-08-09
 
 ### `bind-reorder` - `DRAFT`
 
@@ -183,6 +183,9 @@ For the delegatee (shared context; per-step context is in each instruction file)
 - ~~Report/delegation file location drift — the delegator wrote the serve-hello-world report to `instructions/serve-hello-world__report.md` following `files/index.md`'s `Location:` line, while the naming pattern says `plan-{id}/delegations/`. Reconcile `files/index.md` before the delegation-file use case lands.~~ — RESOLVED 2026-08-08: `files/index.md` naming patterns reconciled to `plan-{id}/instructions/` (co-located, matching its `Location:` line); `execute-plan/SKILL.md` delegation-file link rule updated to match.
 
 ## Feedback
+
+- (delegator, 2026-08-09) — delegated `bind-promote` verbatim to worker `Anscombe`; blocked during mandatory reading.
+- (delegator, 2026-08-09) — blocker: the instruction references a missing `artificials/.../_architect.md`; the checkout has the design contract as `_plan.md` under the requested `repos/artificial` root. Report: `instructions/bind-promote__report.md`.
 
 - (planner, 2026-08-08) — delegation session: `shell-tables` + `bind-shuffle` both completed. `shell-tables` had no `DIRECTIVE FEEDBACK:` directive so no report file was rendered; the trail lives in this plan record and the commit `4eeab17b`. `bind-shuffle` rendered its report to `instructions/bind-shuffle__report.md` (commit `a3261ea2`).
 

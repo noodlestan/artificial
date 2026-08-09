@@ -73,7 +73,13 @@ function shuffle(data) {
 // --- Store ---
 
 function createStore(data) {
+  function promoteToStrong(slotId, word) {
+    const slot = data.slots.find((candidate) => candidate.id === slotId);
+    slot.strong.push(word);
+  }
+
   return {
+    promoteToStrong,
     serialize() {
       return { ...data, slots: [...data.slots] };
     },
@@ -251,6 +257,15 @@ function apply(ui, store, output, onNextShuffle) {
 
   ui.toolbar.shuffle = () => {
     currentOutput = onNextShuffle();
+  };
+
+  ui.mantraRow.promote = (slotId, word) => {
+    store.promoteToStrong(slotId, word);
+    const entry = currentOutput.find((candidate) => candidate.slotId === slotId);
+    entry.source = "strong";
+    entry.canPromote = false;
+    ui.renderMantra(currentOutput);
+    ui.renderStrongs(store.serialize().slots);
   };
 }
 
