@@ -6,7 +6,7 @@
 
 **Description:** Provides commands for managing multiple repositories: cloning repos, branching across repos, symlinking packages for local dev, checking repo status, and publishing packages.
 
-**Path:** `art-domains/cli/workspace/`
+**Path:** `cli/workspace/`
 
 **Canonical Name:** `@art-domains/workspace-cli`
 
