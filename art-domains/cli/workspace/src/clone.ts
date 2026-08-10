@@ -5,7 +5,12 @@ import simpleGit from 'simple-git';
 import { loadWorkspaceConfig } from './config';
 import type { RepositoryRecord, WorkspaceConfig } from './config/types';
 import { getCurrentBranch } from './private/branching';
-import { readCheckoutRecord, saveCheckoutRecord } from './private/records/checkout-record';
+import {
+	loadCheckouts,
+	readCheckoutRecord,
+	saveCheckoutRecord,
+} from './private/records/checkout-record';
+import { loadRepositories } from './private/records/repository-record';
 import { dirExists, isDirty } from './private/validate';
 
 interface CloneOptions {
@@ -28,24 +33,35 @@ interface ResolvedTarget {
 	branch: string;
 }
 
-function resolveTarget(config: WorkspaceConfig, name: string): ResolvedTarget | null {
-	const repo = config.records.repos.find(r => r.name === name);
+function resolveTarget(
+	config: WorkspaceConfig,
+	root: string,
+	name: string,
+	repos: RepositoryRecord[],
+	checkouts: ReturnType<typeof loadCheckouts>,
+): ResolvedTarget | null {
+	const repo = repos.find(r => r.name === name);
 	if (!repo) {
 		console.warn(`clone: unknown repo "${name}", skipped`);
 		return null;
 	}
 
-	const declared = config.checkouts.find(c => c.repo === name);
-	const location = declared?.location ?? `repos/${name.toLowerCase().replace(/\s+/g, '-')}`;
-	const branch = declared?.branch ?? 'main';
+	const override = checkouts.find(c => c.repo.name === name);
+	const location =
+		override?.location ?? join(config.clone.path, name.toLowerCase().replace(/\s+/g, '-'));
+	const branch = override?.branch ?? 'main';
 
 	return { name, repo, location, branch };
 }
 
-async function cloneRepo(target: ResolvedTarget, root: string): Promise<CloneResult> {
+async function cloneRepo(
+	target: ResolvedTarget,
+	root: string,
+	config: WorkspaceConfig,
+): Promise<CloneResult> {
 	const recordFile = join(
 		root,
-		'ops/records/checkouts',
+		config.records.checkouts.path,
 		`${target.name.toLowerCase().replace(/\s+/g, '-')}.art`,
 	);
 	const record = readCheckoutRecord(recordFile);
@@ -59,11 +75,16 @@ async function cloneRepo(target: ResolvedTarget, root: string): Promise<CloneRes
 		try {
 			await git.clone(target.repo.remote, location);
 			const actualBranch = await getCurrentBranch(dir);
-			saveCheckoutRecord(recordFile, {
-				name: target.name,
-				location,
-				branch: actualBranch || branch,
-			});
+			saveCheckoutRecord(
+				recordFile,
+				{
+					name: target.name,
+					location,
+					branch: actualBranch || branch,
+				},
+				config,
+				root,
+			);
 			return {
 				name: target.name,
 				location,
@@ -104,11 +125,16 @@ async function cloneRepo(target: ResolvedTarget, root: string): Promise<CloneRes
 		};
 	}
 
-	saveCheckoutRecord(recordFile, {
-		name: target.name,
-		location,
-		branch: actualBranch,
-	});
+	saveCheckoutRecord(
+		recordFile,
+		{
+			name: target.name,
+			location,
+			branch: actualBranch,
+		},
+		config,
+		root,
+	);
 
 	return {
 		name: target.name,
@@ -143,15 +169,17 @@ function formatResultsTable(results: CloneResult[]): string {
 
 export async function runClone({ root, names }: CloneOptions): Promise<void> {
 	const config = await loadWorkspaceConfig(root);
+	const repos = loadRepositories(config, root);
+	const checkouts = loadCheckouts(config, root);
 
 	let targets: ResolvedTarget[];
 	if (!names || names.length === 0 || (names.length === 1 && names[0] === 'all')) {
-		targets = config.records.repos
-			.map(repo => resolveTarget(config, repo.name))
+		targets = repos
+			.map(repo => resolveTarget(config, root, repo.name, repos, checkouts))
 			.filter((t): t is ResolvedTarget => t !== null);
 	} else {
 		targets = names
-			.map(name => resolveTarget(config, name))
+			.map(name => resolveTarget(config, root, name, repos, checkouts))
 			.filter((t): t is ResolvedTarget => t !== null);
 	}
 
@@ -162,7 +190,7 @@ export async function runClone({ root, names }: CloneOptions): Promise<void> {
 
 	const results: CloneResult[] = [];
 	for (const target of targets) {
-		const result = await cloneRepo(target, root);
+		const result = await cloneRepo(target, root, config);
 		results.push(result);
 	}
 

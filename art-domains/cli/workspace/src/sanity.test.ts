@@ -49,29 +49,48 @@ afterEach(() => {
 	vi.restoreAllMocks();
 });
 
-function writeManifest(
-	root: string,
-	repos: Array<{ name: string; remote?: string }>,
-	checkouts: Array<{ repo: string; location: string; branch?: string }> = [],
-) {
-	const reposStr = repos
-		.map(
-			r =>
-				`{ name: '${r.name}', remote: '${r.remote ?? `git@example.com:${r.name.toLowerCase()}.git`}', consumers: [] }`,
-		)
-		.join(',\n      ');
-	const checkoutsStr = checkouts
-		.map(c => `{ repo: '${c.repo}', location: '${c.location}', branch: '${c.branch ?? 'main'}' }`)
-		.join(',\n      ');
+function writeManifest(root: string) {
 	writeFileSync(
 		join(root, '.art-workspace.mts'),
 		`export default {
+  clone: { path: 'repos' },
   records: {
-    workspace: { name: 'Test', purpose: 'test', remote: 'git@example.com:ws.git', branch: 'main' },
-    repos: [${reposStr}],
+    repositories: { path: 'ops/records/repositories' },
+    checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },
   },
-  checkouts: [${checkoutsStr}],
 }
+`,
+	);
+}
+
+function writeRepoRecord(root: string, name: string, remote: string) {
+	const dir = join(root, 'ops/records/repositories');
+	mkdirSync(dir, { recursive: true });
+	writeFileSync(
+		join(dir, `${name.toLowerCase().replace(/\s+/g, '-')}.art`),
+		`# Module
+
+## Repository: ${name}
+
+**Purpose:** test
+
+**Remote:** \`${remote}\`
+`,
+	);
+}
+
+function writeCheckoutRecord(root: string, name: string, location: string, branch = 'main') {
+	const dir = join(root, 'ops/records/checkouts');
+	mkdirSync(dir, { recursive: true });
+	writeFileSync(
+		join(dir, `${name.toLowerCase().replace(/\s+/g, '-')}.art`),
+		`# Module
+
+## Checkout: ${name}
+
+**Location:** \`${location}\`
+
+**Branch:** \`${branch}\`
 `,
 	);
 }
@@ -79,7 +98,9 @@ function writeManifest(
 describe('sanity command', () => {
 	it('reports "repo not cloned" for a missing checkout', async () => {
 		const root = makeTempDir();
-		writeManifest(root, [{ name: 'Missing' }], [{ repo: 'Missing', location: 'repos/missing' }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'Missing', 'git@example.com:missing.git');
+		writeCheckoutRecord(root, 'Missing', 'repos/missing');
 
 		await runSanity({ root, auto: false });
 
@@ -96,7 +117,9 @@ describe('sanity command', () => {
 		const git = simpleGit(repoDir);
 		await git.push('origin', 'main', ['--set-upstream']);
 
-		writeManifest(root, [{ name: 'Green' }], [{ repo: 'Green', location: 'repos/green' }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'Green', 'git@example.com:green.git');
+		writeCheckoutRecord(root, 'Green', 'repos/green');
 
 		await runSanity({ root, auto: false });
 
@@ -113,7 +136,9 @@ describe('sanity command', () => {
 		await git.push('origin', 'main', ['--set-upstream']);
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeManifest(root, [{ name: 'Dirty' }], [{ repo: 'Dirty', location: 'repos/dirty' }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'Dirty', 'git@example.com:dirty.git');
+		writeCheckoutRecord(root, 'Dirty', 'repos/dirty');
 
 		await runSanity({ root, auto: false });
 
@@ -128,7 +153,9 @@ describe('sanity command', () => {
 		await initGitRepo(repoDir, { withRemote: true });
 		await commitFile(repoDir, 'file.txt');
 
-		writeManifest(root, [{ name: 'Unpushed' }], [{ repo: 'Unpushed', location: 'repos/unpushed' }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'Unpushed', 'git@example.com:unpushed.git');
+		writeCheckoutRecord(root, 'Unpushed', 'repos/unpushed');
 
 		await runSanity({ root, auto: false });
 
@@ -143,7 +170,9 @@ describe('sanity command', () => {
 		await initGitRepo(repoDir, { withRemote: true });
 		await commitFile(repoDir, 'file.txt');
 
-		writeManifest(root, [{ name: 'AutoPush' }], [{ repo: 'AutoPush', location: 'repos/autopush' }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'AutoPush', 'git@example.com:autopush.git');
+		writeCheckoutRecord(root, 'AutoPush', 'repos/autopush');
 
 		await runSanity({ root, auto: true });
 
@@ -160,11 +189,9 @@ describe('sanity command', () => {
 		await commitFile(repoDir, 'file.txt');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeManifest(
-			root,
-			[{ name: 'DirtyNoAuto' }],
-			[{ repo: 'DirtyNoAuto', location: 'repos/dirtynoauto' }],
-		);
+		writeManifest(root);
+		writeRepoRecord(root, 'DirtyNoAuto', 'git@example.com:dirtynoauto.git');
+		writeCheckoutRecord(root, 'DirtyNoAuto', 'repos/dirtynoauto');
 
 		await runSanity({ root, auto: true });
 
@@ -183,7 +210,9 @@ describe('sanity command', () => {
 		const headSha = await git.revparse(['HEAD']);
 		await git.checkout(headSha.trim());
 
-		writeManifest(root, [{ name: 'Detached' }], [{ repo: 'Detached', location: 'repos/detached' }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'Detached', 'git@example.com:detached.git');
+		writeCheckoutRecord(root, 'Detached', 'repos/detached');
 
 		await runSanity({ root, auto: false });
 
@@ -215,7 +244,9 @@ describe('sanity command', () => {
 			// expected conflict
 		}
 
-		writeManifest(root, [{ name: 'Conflict' }], [{ repo: 'Conflict', location: 'repos/conflict' }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'Conflict', 'git@example.com:conflict.git');
+		writeCheckoutRecord(root, 'Conflict', 'repos/conflict');
 
 		await runSanity({ root, auto: false });
 

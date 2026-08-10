@@ -5,18 +5,12 @@ import { Command } from 'commander';
 import { runClone } from './clone';
 import { runSanity } from './sanity';
 
-export { defineConfig, locateCheckouts, loadWorkspaceConfig, verifyCheckouts } from './config';
-export type {
-	CheckoutConfig,
-	RepositoryCheckout,
-	RepositoryRecord,
-	WorkspaceConfig,
-	WorkspaceRecord,
-} from './config';
+export { defineConfig, loadWorkspaceConfig, verifyCheckouts } from './config';
+export type { RepositoryCheckout, RepositoryRecord, WorkspaceConfig } from './config';
 
 const program = new Command();
 
-program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.8');
+program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.9');
 
 program
 	.command('clone')

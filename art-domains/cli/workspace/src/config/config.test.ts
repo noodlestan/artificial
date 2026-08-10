@@ -4,24 +4,18 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import type { WorkspaceConfig } from './types';
+import type { RepositoryCheckout, WorkspaceConfig } from './types';
 
-import { defineConfig, loadWorkspaceConfig, locateCheckouts, verifyCheckouts } from './index';
+import { defineConfig, loadWorkspaceConfig, verifyCheckouts } from './index';
 
-function makeWorkspaceConfig(
-	repos: WorkspaceConfig['records']['repos'],
-	checkouts: WorkspaceConfig['checkouts'] = [],
-): WorkspaceConfig {
+function makeWorkspaceConfig(overrides?: Partial<WorkspaceConfig>): WorkspaceConfig {
 	return {
+		clone: { path: 'repos' },
 		records: {
-			workspace: {
-				name: 'Fixture',
-				purpose: 'fixture workspace',
-				remote: 'git@example.com:workspace.git',
-			},
-			repos,
+			repositories: { path: 'ops/records/repositories' },
+			checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },
 		},
-		checkouts,
+		...overrides,
 	};
 }
 
@@ -42,73 +36,9 @@ afterEach(() => {
 
 describe('defineConfig', () => {
 	it('returns the input config unchanged', () => {
-		const config = makeWorkspaceConfig([]);
+		const config = makeWorkspaceConfig();
 
 		expect(defineConfig(config)).toBe(config);
-	});
-});
-
-describe('locateCheckouts', () => {
-	it('returns one RepositoryCheckout per declared checkout entry', () => {
-		const config = makeWorkspaceConfig(
-			[
-				{ name: 'A', remote: 'git@example.com:a.git' },
-				{ name: 'B', remote: 'git@example.com:b.git' },
-			],
-			[
-				{ repo: 'A', location: 'repos/a', branch: 'dev' },
-				{ repo: 'B', location: 'repos/b', branch: 'main' },
-			],
-		);
-
-		const checkouts = locateCheckouts(config);
-
-		expect(checkouts).toHaveLength(2);
-		expect(checkouts[0]).toEqual({
-			repo: config.records.repos[0],
-			location: 'repos/a',
-			branch: 'dev',
-		});
-		expect(checkouts[1]).toEqual({
-			repo: config.records.repos[1],
-			location: 'repos/b',
-			branch: 'main',
-		});
-	});
-
-	it('skips a checkout entry for an unknown repo with a warning', () => {
-		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-		const config = makeWorkspaceConfig(
-			[{ name: 'A', remote: 'git@example.com:a.git' }],
-			[
-				{ repo: 'A', location: 'repos/a', branch: 'main' },
-				{ repo: 'Unknown', location: 'repos/unknown', branch: 'main' },
-			],
-		);
-
-		const checkouts = locateCheckouts(config);
-
-		expect(checkouts).toHaveLength(1);
-		expect(warn).toHaveBeenCalledWith(expect.stringContaining('Unknown'));
-	});
-
-	it('returns an empty list when checkouts is empty', () => {
-		expect(locateCheckouts(makeWorkspaceConfig([], []))).toEqual([]);
-	});
-
-	it('returns two entries when two checkout entries reference the same repo', () => {
-		const config = makeWorkspaceConfig(
-			[{ name: 'A', remote: 'git@example.com:a.git' }],
-			[
-				{ repo: 'A', location: 'repos/a', branch: 'main' },
-				{ repo: 'A', location: 'repos/a-dev', branch: 'dev' },
-			],
-		);
-
-		const checkouts = locateCheckouts(config);
-
-		expect(checkouts).toHaveLength(2);
-		expect(checkouts.map(checkout => checkout.location)).toEqual(['repos/a', 'repos/a-dev']);
 	});
 });
 
@@ -118,25 +48,23 @@ describe('loadWorkspaceConfig', () => {
 		writeFileSync(
 			join(root, '.art-workspace.mts'),
 			`export default {
+  clone: { path: 'repos' },
   records: {
-    workspace: {
-      name: 'Fixture',
-      purpose: 'fixture workspace',
-      remote: 'git@example.com:workspace.git',
-    },
-    repos: [{ name: 'A', remote: 'git@example.com:a.git' }],
+    repositories: { path: 'ops/records/repositories' },
+    checkouts: { path: 'ops/records/checkouts', template: '.agents/domains/workspace/templates/checkout.art.njk' },
   },
-  checkouts: [{ repo: 'A', location: 'repos/a', branch: 'main' }],
 }
 `,
 		);
 
 		const config = await loadWorkspaceConfig(root);
 
-		expect(config.records.workspace.name).toBe('Fixture');
-		expect(config.records.repos).toHaveLength(1);
-		expect(config.checkouts).toHaveLength(1);
-		expect(config.checkouts[0].repo).toBe('A');
+		expect(config.clone.path).toBe('repos');
+		expect(config.records.repositories.path).toBe('ops/records/repositories');
+		expect(config.records.checkouts.path).toBe('ops/records/checkouts');
+		expect(config.records.checkouts.template).toBe(
+			'.agents/domains/workspace/templates/checkout.art.njk',
+		);
 	});
 
 	it('scaffolds an empty template and warns when the manifest is missing', async () => {
@@ -147,8 +75,8 @@ describe('loadWorkspaceConfig', () => {
 
 		expect(existsSync(join(root, '.art-workspace.mts'))).toBe(true);
 		expect(warn).toHaveBeenCalled();
-		expect(config.records.workspace.remote).toBe('');
-		expect(config.records.repos).toEqual([]);
+		expect(config.clone.path).toBe('repos');
+		expect(config.records.repositories.path).toBe('ops/records/repositories');
 	});
 
 	it('reports the manifest path when the manifest throws on import', async () => {
@@ -160,14 +88,18 @@ describe('loadWorkspaceConfig', () => {
 });
 
 describe('verifyCheckouts', () => {
+	function makeCheckout(overrides?: Partial<RepositoryCheckout>): RepositoryCheckout {
+		return {
+			repo: { name: 'A', remote: 'git@example.com:a.git' },
+			location: 'repos/a',
+			branch: 'main',
+			...overrides,
+		};
+	}
+
 	it('fills only the requested fields', async () => {
 		const root = makeTempDir();
-		const checkouts = locateCheckouts(
-			makeWorkspaceConfig(
-				[{ name: 'A', remote: 'git@example.com:a.git' }],
-				[{ repo: 'A', location: 'repos/a', branch: 'main' }],
-			),
-		);
+		const checkouts = [makeCheckout()];
 
 		await verifyCheckouts(checkouts, { exists: true }, root);
 
@@ -178,12 +110,7 @@ describe('verifyCheckouts', () => {
 
 	it('sets exists: false for a missing directory', async () => {
 		const root = makeTempDir();
-		const checkouts = locateCheckouts(
-			makeWorkspaceConfig(
-				[{ name: 'A', remote: 'git@example.com:a.git' }],
-				[{ repo: 'A', location: 'repos/a', branch: 'main' }],
-			),
-		);
+		const checkouts = [makeCheckout()];
 
 		await verifyCheckouts(checkouts, { exists: true }, root);
 
@@ -196,12 +123,7 @@ describe('verifyCheckouts', () => {
 		const { mkdirSync } = await import('node:fs');
 		mkdirSync(repoDir, { recursive: true });
 
-		const checkouts = locateCheckouts(
-			makeWorkspaceConfig(
-				[{ name: 'A', remote: 'git@example.com:a.git' }],
-				[{ repo: 'A', location: 'repos/a', branch: 'main' }],
-			),
-		);
+		const checkouts = [makeCheckout()];
 
 		await verifyCheckouts(checkouts, { exists: true }, root);
 
@@ -210,12 +132,7 @@ describe('verifyCheckouts', () => {
 
 	it('sets pushed: false for a missing directory', async () => {
 		const root = makeTempDir();
-		const checkouts = locateCheckouts(
-			makeWorkspaceConfig(
-				[{ name: 'A', remote: 'git@example.com:a.git' }],
-				[{ repo: 'A', location: 'repos/a', branch: 'main' }],
-			),
-		);
+		const checkouts = [makeCheckout()];
 
 		await verifyCheckouts(checkouts, { pushed: true }, root);
 
@@ -235,12 +152,7 @@ describe('verifyCheckouts', () => {
 		exec('git add .', { cwd: repoDir });
 		exec('git commit -m "initial"', { cwd: repoDir });
 
-		const checkouts = locateCheckouts(
-			makeWorkspaceConfig(
-				[{ name: 'A', remote: 'git@example.com:a.git' }],
-				[{ repo: 'A', location: 'repos/a', branch: 'main' }],
-			),
-		);
+		const checkouts = [makeCheckout()];
 
 		await verifyCheckouts(checkouts, { pushed: true }, root);
 
@@ -262,12 +174,7 @@ describe('verifyCheckouts', () => {
 		execSync('git commit -m "initial"', { cwd: repoDir });
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		const checkouts = locateCheckouts(
-			makeWorkspaceConfig(
-				[{ name: 'A', remote: 'git@example.com:a.git' }],
-				[{ repo: 'A', location: 'repos/a', branch: 'main' }],
-			),
-		);
+		const checkouts = [makeCheckout()];
 
 		await verifyCheckouts(checkouts, { pushed: true }, root);
 

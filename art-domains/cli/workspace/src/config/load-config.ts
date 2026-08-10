@@ -10,17 +10,11 @@ const MANIFEST_FILE = '.art-workspace.mts';
 const TEMP_FILE = '.art-workspace-bundle.mjs';
 
 const EMPTY_TEMPLATE = `export default {
+	clone: { path: 'repos' },
 	records: {
-		workspace: {
-			name: '',
-			purpose: '',
-			description: '',
-			remote: '',
-			branch: '',
-		},
-		repos: [],
+		repositories: { path: 'ops/records/repositories' },
+		checkouts: { path: 'ops/records/checkouts', template: '.agents/domains/workspace/templates/checkout.art.njk' },
 	},
-	checkouts: [],
 }
 `;
 
@@ -28,10 +22,6 @@ function formatError(error: unknown): string {
 	return error instanceof Error ? error.message : String(error);
 }
 
-/**
- * Locate (or scaffold) the workspace manifest, transpile it to JS with esbuild
- * bundle-at-runtime (Vite-style), import it, and return the resolved config.
- */
 export async function loadWorkspaceConfig(root: string): Promise<WorkspaceConfig> {
 	const manifestPath = join(root, MANIFEST_FILE);
 

@@ -2,8 +2,9 @@ import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
 
-import { loadWorkspaceConfig, locateCheckouts, verifyCheckouts } from './config';
+import { loadWorkspaceConfig, verifyCheckouts } from './config';
 import { getCurrentBranch, isDetachedHead } from './private/branching';
+import { loadCheckouts } from './private/records/checkout-record';
 import { getUnpushedCount, hasMergeConflicts, hasRemote, isDirty } from './private/validate';
 import type { RepoStatus } from './types';
 
@@ -114,7 +115,7 @@ function formatTable(rows: RepoStatus[]): string {
 
 export async function runSanity({ root, auto }: SanityOptions): Promise<void> {
 	const config = await loadWorkspaceConfig(root);
-	const checkouts = locateCheckouts(config);
+	const checkouts = loadCheckouts(config, root);
 	await verifyCheckouts(checkouts, { exists: true, pushed: true }, root);
 
 	const statuses: RepoStatus[] = [];

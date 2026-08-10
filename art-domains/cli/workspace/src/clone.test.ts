@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -48,26 +48,48 @@ afterEach(() => {
 	process.exitCode = undefined;
 });
 
-function writeManifest(
-	root: string,
-	repos: Array<{ name: string; remote: string }>,
-	checkouts: Array<{ repo: string; location: string; branch?: string }> = [],
-) {
-	const reposStr = repos
-		.map(r => `{ name: '${r.name}', remote: '${r.remote}', consumers: [] }`)
-		.join(',\n      ');
-	const checkoutsStr = checkouts
-		.map(c => `{ repo: '${c.repo}', location: '${c.location}', branch: '${c.branch ?? 'main'}' }`)
-		.join(',\n      ');
+function writeManifest(root: string) {
 	writeFileSync(
 		join(root, '.art-workspace.mts'),
 		`export default {
+  clone: { path: 'repos' },
   records: {
-    workspace: { name: 'Test', purpose: 'test', remote: 'git@example.com:ws.git', branch: 'main' },
-    repos: [${reposStr}],
+    repositories: { path: 'ops/records/repositories' },
+    checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },
   },
-  checkouts: [${checkoutsStr}],
 }
+`,
+	);
+}
+
+function writeRepoRecord(root: string, name: string, remote: string) {
+	const dir = join(root, 'ops/records/repositories');
+	mkdirSync(dir, { recursive: true });
+	writeFileSync(
+		join(dir, `${name.toLowerCase().replace(/\s+/g, '-')}.art`),
+		`# Module
+
+## Repository: ${name}
+
+**Purpose:** test
+
+**Remote:** \`${remote}\`
+`,
+	);
+}
+
+function writeCheckoutRecordFile(root: string, name: string, location: string, branch = 'main') {
+	const dir = join(root, 'ops/records/checkouts');
+	mkdirSync(dir, { recursive: true });
+	writeFileSync(
+		join(dir, `${name.toLowerCase().replace(/\s+/g, '-')}.art`),
+		`# Module
+
+## Checkout: ${name}
+
+**Location:** \`${location}\`
+
+**Branch:** \`${branch}\`
 `,
 	);
 }
@@ -78,7 +100,8 @@ describe('clone command', () => {
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
 
-		writeManifest(root, [{ name: 'Artificial', remote: bareDir }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir);
 
 		await runClone({ root, names: ['Artificial'] });
 
@@ -86,7 +109,6 @@ describe('clone command', () => {
 		expect(() => simpleGit(checkoutDir).status()).not.toThrow();
 
 		const recordFile = join(root, 'ops/records/checkouts/artificial.art');
-		const { readFileSync } = await import('node:fs');
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: Artificial');
 		expect(content).toContain('**Location:** `repos/artificial`');
@@ -100,11 +122,9 @@ describe('clone command', () => {
 		const workingDir = join(root, 'working/artificial');
 		await initWorkingRepo(workingDir, bareDir);
 
-		writeManifest(
-			root,
-			[{ name: 'Artificial', remote: bareDir }],
-			[{ repo: 'Artificial', location: 'working/artificial' }],
-		);
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir);
+		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial');
 
 		await runClone({ root, names: ['Artificial'] });
 
@@ -120,11 +140,9 @@ describe('clone command', () => {
 		await initWorkingRepo(workingDir, bareDir);
 		writeFileSync(join(workingDir, 'dirty.txt'), 'dirty');
 
-		writeManifest(
-			root,
-			[{ name: 'Artificial', remote: bareDir }],
-			[{ repo: 'Artificial', location: 'working/artificial' }],
-		);
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir);
+		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial');
 
 		await runClone({ root, names: ['Artificial'] });
 
@@ -143,11 +161,9 @@ describe('clone command', () => {
 		const git = simpleGit(workingDir);
 		await git.checkoutLocalBranch('feature');
 
-		writeManifest(
-			root,
-			[{ name: 'Artificial', remote: bareDir }],
-			[{ repo: 'Artificial', location: 'working/artificial', branch: 'main' }],
-		);
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir);
+		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial', 'main');
 
 		await runClone({ root, names: ['Artificial'] });
 
@@ -158,7 +174,7 @@ describe('clone command', () => {
 
 	it('warns and skips an unknown repo name', async () => {
 		const root = makeTempDir();
-		writeManifest(root, []);
+		writeManifest(root);
 
 		await runClone({ root, names: ['Unknown'] });
 
@@ -175,10 +191,9 @@ describe('clone command', () => {
 		const bareDir2 = join(root, 'bare/repo2');
 		await initBareRepo(bareDir2);
 
-		writeManifest(root, [
-			{ name: 'Repo1', remote: bareDir1 },
-			{ name: 'Repo2', remote: bareDir2 },
-		]);
+		writeManifest(root);
+		writeRepoRecord(root, 'Repo1', bareDir1);
+		writeRepoRecord(root, 'Repo2', bareDir2);
 
 		await runClone({ root, names: ['all'] });
 
@@ -192,12 +207,12 @@ describe('clone command', () => {
 		const bareDir = join(root, 'bare/my-repo');
 		await initBareRepo(bareDir);
 
-		writeManifest(root, [{ name: 'My Repo', remote: bareDir }]);
+		writeManifest(root);
+		writeRepoRecord(root, 'My Repo', bareDir);
 
 		await runClone({ root, names: ['My Repo'] });
 
 		const checkoutDir = join(root, 'repos/my-repo');
-		const { existsSync } = await import('node:fs');
 		expect(existsSync(checkoutDir)).toBe(true);
 	});
 
@@ -206,16 +221,13 @@ describe('clone command', () => {
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
 
-		writeManifest(
-			root,
-			[{ name: 'Artificial', remote: bareDir }],
-			[{ repo: 'Artificial', location: 'custom/location', branch: 'develop' }],
-		);
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir);
+		writeCheckoutRecordFile(root, 'Artificial', 'custom/location', 'develop');
 
 		await runClone({ root, names: ['Artificial'] });
 
 		const checkoutDir = join(root, 'custom/location');
-		const { existsSync } = await import('node:fs');
 		expect(existsSync(checkoutDir)).toBe(true);
 	});
 });

@@ -1,17 +1,16 @@
 export interface WorkspaceConfig {
-	records: {
-		workspace: WorkspaceRecord;
-		repos: RepositoryRecord[];
+	clone: {
+		path: string;
 	};
-	checkouts: CheckoutConfig[];
-}
-
-export interface WorkspaceRecord {
-	name: string;
-	purpose: string;
-	description?: string;
-	remote: string;
-	branch?: string;
+	records: {
+		repositories: {
+			path: string;
+		};
+		checkouts: {
+			path: string;
+			template: string;
+		};
+	};
 }
 
 export interface RepositoryRecord {
@@ -19,13 +18,7 @@ export interface RepositoryRecord {
 	purpose?: string;
 	description?: string;
 	remote: string;
-	consumers?: string[];
-}
-
-export interface CheckoutConfig {
-	repo: string;
-	location: string;
-	branch: string;
+	consumers?: string;
 }
 
 export interface RepositoryCheckout {
