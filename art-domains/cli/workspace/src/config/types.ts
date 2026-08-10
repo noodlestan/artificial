@@ -29,3 +29,9 @@ export interface RepositoryCheckout {
 	pushed?: boolean;
 	published?: boolean;
 }
+
+export interface CheckoutRecord {
+	name: string;
+	location: string;
+	branch: string;
+}

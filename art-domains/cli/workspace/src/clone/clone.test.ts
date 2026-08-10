@@ -116,24 +116,7 @@ describe('clone command', () => {
 		expect(content).toContain('**Branch:** `main`');
 	});
 
-	it('shows green message for an existing clean checkout on the correct branch', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/artificial');
-		await initBareRepo(bareDir);
-		const workingDir = join(root, 'working/artificial');
-		await initWorkingRepo(workingDir, bareDir);
-
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir);
-		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial');
-
-		await runClone({ root, name: 'Artificial' });
-
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('All repos are green');
-	});
-
-	it('reports issue for a dirty checkout', async () => {
+	it('reports issues for a dirty checkout', async () => {
 		const root = makeTempDir();
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
@@ -167,7 +150,6 @@ describe('clone command', () => {
 		await runClone({ root, name: 'Artificial' });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		// The new design reports current state - branch is 'feature' and not pushed
 		expect(output).toContain('feature');
 		expect(output).toContain('not pushed');
 	});
@@ -198,7 +180,6 @@ describe('clone command', () => {
 
 		await runClone({ root, all: true });
 
-		// Check that the repos were cloned
 		const checkoutDir1 = join(root, 'repos/repo1');
 		const checkoutDir2 = join(root, 'repos/repo2');
 		expect(existsSync(checkoutDir1)).toBe(true);

@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
 
-import type { VerifyNeeds } from '../types';
+import type { VerifyNeeds } from '../shared/types';
 
 import type { RepositoryCheckout } from './types';
 

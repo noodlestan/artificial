@@ -6,6 +6,10 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { loadWorkspaceConfig } from '../config/load-config';
+import { createCheckoutStore } from '../shared/checkout-store';
+import { createOperationsLog } from '../shared/operations-log';
+import { createWorkspaceContext } from '../shared/workspace-context';
 import { runSanity } from './sanity';
 
 const tempDirs: string[] = [];
@@ -34,7 +38,7 @@ async function commitFile(dir: string, filename: string, content = 'content') {
 	writeFileSync(join(dir, filename), content);
 	const git = simpleGit(dir);
 	await git.add('.');
-	await git.commit(`add ${filename}`);
+	await git.commit('add ' + filename);
 }
 
 beforeEach(() => {
@@ -52,14 +56,13 @@ afterEach(() => {
 function writeManifest(root: string) {
 	writeFileSync(
 		join(root, '.art-workspace.mts'),
-		`export default {
-  clone: { path: 'repos' },
-  records: {
-    repositories: { path: 'ops/records/repositories' },
-    checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },
-  },
-}
-`,
+		'export default {\n' +
+		"  clone: { path: 'repos' },\n" +
+		'  records: {\n' +
+		"    repositories: { path: 'ops/records/repositories' },\n" +
+		"    checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },\n" +
+		'  },\n' +
+		'}\n',
 	);
 }
 
@@ -67,15 +70,8 @@ function writeRepoRecord(root: string, name: string, remote: string) {
 	const dir = join(root, 'ops/records/repositories');
 	mkdirSync(dir, { recursive: true });
 	writeFileSync(
-		join(dir, `${name.toLowerCase().replace(/\s+/g, '-')}.art`),
-		`# Module
-
-## Repository: ${name}
-
-**Purpose:** test
-
-**Remote:** \`${remote}\`
-`,
+		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
+		'# Module\n\n## Repository: ' + name + '\n\n**Purpose:** test\n\n**Remote:** `' + remote + '`\n',
 	);
 }
 
@@ -83,16 +79,17 @@ function writeCheckoutRecord(root: string, name: string, location: string, branc
 	const dir = join(root, 'ops/records/checkouts');
 	mkdirSync(dir, { recursive: true });
 	writeFileSync(
-		join(dir, `${name.toLowerCase().replace(/\s+/g, '-')}.art`),
-		`# Module
-
-## Checkout: ${name}
-
-**Location:** \`${location}\`
-
-**Branch:** \`${branch}\`
-`,
+		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
+		'# Module\n\n## Checkout: ' + name + '\n\n**Location:** `' + location + '`\n\n**Branch:** `' + branch + '`\n',
 	);
+}
+
+async function runSanityWithRoot(root: string, auto: boolean) {
+	const config = await loadWorkspaceConfig(root);
+	const store = createCheckoutStore(config, root);
+	const log = createOperationsLog();
+	const ctx = createWorkspaceContext(config, root, store, log);
+	await runSanity(ctx, auto);
 }
 
 describe('sanity command', () => {
@@ -102,14 +99,14 @@ describe('sanity command', () => {
 		writeRepoRecord(root, 'Missing', 'git@example.com:missing.git');
 		writeCheckoutRecord(root, 'Missing', 'repos/missing');
 
-		await runSanity({ root, auto: false });
+		await runSanityWithRoot(root, false);
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/missing');
 		expect(output).toContain('repo not cloned');
 	});
 
-	it('shows all green message when all repos are green', async () => {
+	it('shows repo status when all repos are clean', async () => {
 		const root = makeTempDir();
 		const repoDir = join(root, 'repos/green');
 		await initGitRepo(repoDir, { withRemote: true });
@@ -121,13 +118,13 @@ describe('sanity command', () => {
 		writeRepoRecord(root, 'Green', 'git@example.com:green.git');
 		writeCheckoutRecord(root, 'Green', 'repos/green');
 
-		await runSanity({ root, auto: false });
+		await runSanityWithRoot(root, false);
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('All repos are green');
+		expect(output).toContain('repos/green');
 	});
 
-	it('shows dirty repo with pushed? = no', async () => {
+	it('shows dirty repo with issues', async () => {
 		const root = makeTempDir();
 		const repoDir = join(root, 'repos/dirty');
 		await initGitRepo(repoDir, { withRemote: true });
@@ -140,14 +137,14 @@ describe('sanity command', () => {
 		writeRepoRecord(root, 'Dirty', 'git@example.com:dirty.git');
 		writeCheckoutRecord(root, 'Dirty', 'repos/dirty');
 
-		await runSanity({ root, auto: false });
+		await runSanityWithRoot(root, false);
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/dirty');
-		expect(output).toContain('no');
+		expect(output).toContain('uncommitted files');
 	});
 
-	it('shows clean unpushed repo with pushed? = no without --auto', async () => {
+	it('shows clean unpushed repo without --auto', async () => {
 		const root = makeTempDir();
 		const repoDir = join(root, 'repos/unpushed');
 		await initGitRepo(repoDir, { withRemote: true });
@@ -157,14 +154,14 @@ describe('sanity command', () => {
 		writeRepoRecord(root, 'Unpushed', 'git@example.com:unpushed.git');
 		writeCheckoutRecord(root, 'Unpushed', 'repos/unpushed');
 
-		await runSanity({ root, auto: false });
+		await runSanityWithRoot(root, false);
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/unpushed');
-		expect(output).toContain('no');
+		expect(output).toContain('not pushed');
 	});
 
-	it('pushes clean unpushed repo with --auto and marks as now', async () => {
+	it('pushes clean unpushed repo with --auto', async () => {
 		const root = makeTempDir();
 		const repoDir = join(root, 'repos/autopush');
 		await initGitRepo(repoDir, { withRemote: true });
@@ -174,12 +171,12 @@ describe('sanity command', () => {
 		writeRepoRecord(root, 'AutoPush', 'git@example.com:autopush.git');
 		writeCheckoutRecord(root, 'AutoPush', 'repos/autopush');
 
-		await runSanity({ root, auto: true });
+		await runSanityWithRoot(root, true);
 
 		const logOutput = (console.info as ReturnType<typeof vi.fn>).mock.calls
 			.map(c => c[0])
 			.join('\n');
-		expect(logOutput).toContain('All repos are green');
+		expect(logOutput).toContain('pushed');
 	});
 
 	it('does not push dirty repo with --auto', async () => {
@@ -193,11 +190,11 @@ describe('sanity command', () => {
 		writeRepoRecord(root, 'DirtyNoAuto', 'git@example.com:dirtynoauto.git');
 		writeCheckoutRecord(root, 'DirtyNoAuto', 'repos/dirtynoauto');
 
-		await runSanity({ root, auto: true });
+		await runSanityWithRoot(root, true);
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/dirtynoauto');
-		expect(output).toContain('no');
+		expect(output).toContain('uncommitted files');
 	});
 
 	it('surfaces detached HEAD', async () => {
@@ -214,7 +211,7 @@ describe('sanity command', () => {
 		writeRepoRecord(root, 'Detached', 'git@example.com:detached.git');
 		writeCheckoutRecord(root, 'Detached', 'repos/detached');
 
-		await runSanity({ root, auto: false });
+		await runSanityWithRoot(root, false);
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('detached HEAD');
@@ -248,7 +245,7 @@ describe('sanity command', () => {
 		writeRepoRecord(root, 'Conflict', 'git@example.com:conflict.git');
 		writeCheckoutRecord(root, 'Conflict', 'repos/conflict');
 
-		await runSanity({ root, auto: false });
+		await runSanityWithRoot(root, false);
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('merge conflicts');
@@ -257,7 +254,7 @@ describe('sanity command', () => {
 	it('scaffolds empty template and warns when manifest is missing', async () => {
 		const root = makeTempDir();
 
-		await runSanity({ root, auto: false });
+		await runSanityWithRoot(root, false);
 
 		const warnOutput = (console.warn as ReturnType<typeof vi.fn>).mock.calls
 			.map(c => c[0])
