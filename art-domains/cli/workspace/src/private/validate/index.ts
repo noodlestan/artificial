@@ -49,7 +49,8 @@ export async function getUnpushedCount(dir: string): Promise<number> {
 			b => b === `origin/${status.current}` || b === `remotes/origin/${status.current}`,
 		);
 		if (!tracking) {
-			return 0;
+			// No tracking branch means the branch hasn't been pushed yet
+			return -1;
 		}
 		const ahead = await git.raw(['rev-list', '--count', `${tracking}..HEAD`]);
 		return Number.parseInt(ahead.trim(), 10);

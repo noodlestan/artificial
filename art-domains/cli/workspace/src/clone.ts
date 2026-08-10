@@ -3,201 +3,121 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 
 import { loadWorkspaceConfig } from './config';
-import type { RepositoryRecord, WorkspaceConfig } from './config/types';
 import { getCurrentBranch } from './private/branching';
+import { createCheckoutStore } from './private/checkout-store';
 import {
 	loadCheckouts,
-	readCheckoutRecord,
 	saveCheckoutRecord,
 } from './private/records/checkout-record';
 import { loadRepositories } from './private/records/repository-record';
-import { dirExists, isDirty } from './private/validate';
+import { presentCheckoutStatus } from './private/present';
+import {
+	scanAllCheckouts,
+	scanCheckout,
+	scanExtraneousCheckouts,
+} from './private/scan';
 
 interface CloneOptions {
 	root: string;
-	names?: string[];
-}
-
-interface CloneResult {
-	name: string;
-	location: string;
-	branch: string;
-	status: 'cloned' | 'exists' | 'issue';
-	issues: string[];
-}
-
-interface ResolvedTarget {
-	name: string;
-	repo: RepositoryRecord;
-	location: string;
-	branch: string;
-}
-
-function resolveTarget(
-	config: WorkspaceConfig,
-	root: string,
-	name: string,
-	repos: RepositoryRecord[],
-	checkouts: ReturnType<typeof loadCheckouts>,
-): ResolvedTarget | null {
-	const repo = repos.find(r => r.name === name);
-	if (!repo) {
-		console.warn(`clone: unknown repo "${name}", skipped`);
-		return null;
-	}
-
-	const override = checkouts.find(c => c.repo.name === name);
-	const location =
-		override?.location ?? join(config.clone.path, name.toLowerCase().replace(/\s+/g, '-'));
-	const branch = override?.branch ?? 'main';
-
-	return { name, repo, location, branch };
+	all?: boolean;
+	name?: string;
+	target?: string;
 }
 
 async function cloneRepo(
-	target: ResolvedTarget,
+	repoName: string,
+	location: string,
+	remote: string,
+	config: Awaited<ReturnType<typeof loadWorkspaceConfig>>,
 	root: string,
-	config: WorkspaceConfig,
-): Promise<CloneResult> {
-	const recordFile = join(
-		root,
-		config.records.checkouts.path,
-		`${target.name.toLowerCase().replace(/\s+/g, '-')}.art`,
-	);
-	const record = readCheckoutRecord(recordFile);
-
-	const location = record.location || target.location;
-	const branch = record.branch || target.branch;
-	const dir = join(root, location);
-
-	if (!dirExists(root, location)) {
-		const git = simpleGit(root);
-		try {
-			await git.clone(target.repo.remote, location);
-			const actualBranch = await getCurrentBranch(dir);
-			saveCheckoutRecord(
-				recordFile,
-				{
-					name: target.name,
-					location,
-					branch: actualBranch || branch,
-				},
-				config,
-				root,
-			);
-			return {
-				name: target.name,
+): Promise<boolean> {
+	const git = simpleGit(root);
+	try {
+		await git.clone(remote, location);
+		const recordFile = join(
+			root,
+			config.records.checkouts.path,
+			`${repoName.toLowerCase().replace(/\s+/g, '-')}.art`,
+		);
+		const actualBranch = await getCurrentBranch(join(root, location));
+		saveCheckoutRecord(
+			recordFile,
+			{
+				name: repoName,
 				location,
-				branch: actualBranch || branch,
-				status: 'cloned',
-				issues: [],
-			};
-		} catch (err) {
-			return {
-				name: target.name,
-				location,
-				branch,
-				status: 'issue',
-				issues: [`clone failed: ${err instanceof Error ? err.message : String(err)}`],
-			};
-		}
+				branch: actualBranch || 'main',
+			},
+			config,
+			root,
+		);
+		return true;
+	} catch (err) {
+		console.error(`clone failed: ${err instanceof Error ? err.message : String(err)}`);
+		return false;
 	}
-
-	const dirty = await isDirty(dir);
-	if (dirty) {
-		return {
-			name: target.name,
-			location,
-			branch,
-			status: 'issue',
-			issues: ['dirty working tree'],
-		};
-	}
-
-	const actualBranch = await getCurrentBranch(dir);
-	if (actualBranch !== branch) {
-		return {
-			name: target.name,
-			location,
-			branch: actualBranch,
-			status: 'issue',
-			issues: [`branch mismatch: expected "${branch}", found "${actualBranch}"`],
-		};
-	}
-
-	saveCheckoutRecord(
-		recordFile,
-		{
-			name: target.name,
-			location,
-			branch: actualBranch,
-		},
-		config,
-		root,
-	);
-
-	return {
-		name: target.name,
-		location,
-		branch: actualBranch,
-		status: 'exists',
-		issues: [],
-	};
 }
 
-function formatResultsTable(results: CloneResult[]): string {
-	const headers = ['repo', 'location', 'branch', 'status', 'issues'];
-	const data = results.map(r => [
-		r.name,
-		r.location,
-		r.branch,
-		r.status,
-		r.issues.join('; ') || '-',
-	]);
-
-	const allRows = [headers, ...data];
-	const colWidths = headers.map((_, colIdx) =>
-		Math.max(...allRows.map(row => String(row[colIdx]).length)),
-	);
-
-	const lines = allRows.map(row =>
-		row.map((cell, i) => String(cell).padEnd(colWidths[i])).join('  '),
-	);
-
-	return lines.join('\n');
-}
-
-export async function runClone({ root, names }: CloneOptions): Promise<void> {
+export async function runClone({ root, all, name, target }: CloneOptions): Promise<void> {
 	const config = await loadWorkspaceConfig(root);
+	const store = createCheckoutStore(config, root);
 	const repos = loadRepositories(config, root);
-	const checkouts = loadCheckouts(config, root);
+	const existingCheckouts = loadCheckouts(config, root);
 
-	let targets: ResolvedTarget[];
-	if (!names || names.length === 0 || (names.length === 1 && names[0] === 'all')) {
-		targets = repos
-			.map(repo => resolveTarget(config, root, repo.name, repos, checkouts))
-			.filter((t): t is ResolvedTarget => t !== null);
-	} else {
-		targets = names
-			.map(name => resolveTarget(config, root, name, repos, checkouts))
-			.filter((t): t is ResolvedTarget => t !== null);
-	}
-
-	if (targets.length === 0) {
-		console.info('clone: no targets to clone');
+	if (all) {
+		// Clone all repos
+		for (const repo of repos) {
+			const override = existingCheckouts.find(c => c.repo.name === repo.name);
+			const location = override?.location ?? join(config.clone.path, repo.name.toLowerCase().replace(/\s+/g, '-'));
+			store.addCheckout(repo, location);
+		}
+		
+		// Clone repos that don't exist
+		for (const checkout of store.getAllCheckouts()) {
+			await scanCheckout(store, checkout.name, root);
+			const scanned = store.getCheckout(checkout.name);
+			if (!scanned?.exists && checkout.repo) {
+				const success = await cloneRepo(checkout.name, checkout.location, checkout.repo.remote, config, root);
+				if (success) {
+					await scanCheckout(store, checkout.name, root);
+				}
+			}
+		}
+		
+		presentCheckoutStatus(store);
 		return;
 	}
 
-	const results: CloneResult[] = [];
-	for (const target of targets) {
-		const result = await cloneRepo(target, root, config);
-		results.push(result);
+	if (name) {
+		// Clone specific repo
+		const repo = repos.find(r => r.name === name);
+		if (!repo) {
+			console.error(`clone: unknown repo "${name}"`);
+			process.exitCode = 1;
+			return;
+		}
+
+		const override = existingCheckouts.find(c => c.repo.name === name);
+		const location = target ?? override?.location ?? join(config.clone.path, name.toLowerCase().replace(/\s+/g, '-'));
+		store.addCheckout(repo, location);
+		await scanCheckout(store, name, root);
+
+		const checkout = store.getCheckout(name);
+		if (!checkout?.exists) {
+			const success = await cloneRepo(name, location, repo.remote, config, root);
+			if (!success) {
+				process.exitCode = 1;
+				return;
+			}
+			await scanCheckout(store, name, root);
+		}
+
+		presentCheckoutStatus(store);
+		return;
 	}
 
-	console.info(formatResultsTable(results));
-
-	const hasIssues = results.some(r => r.status === 'issue');
-	if (hasIssues) {
-		process.exitCode = 1;
-	}
+	// Neither --all nor name: report status like sanity
+	store.loadExistingCheckouts();
+	await scanAllCheckouts(store, root);
+	await scanExtraneousCheckouts(store, config, root);
+	presentCheckoutStatus(store);
 }

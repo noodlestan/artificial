@@ -38,6 +38,7 @@ async function initWorkingRepo(dir: string, bareDir: string): Promise<void> {
 beforeEach(() => {
 	vi.spyOn(console, 'info').mockImplementation(() => {});
 	vi.spyOn(console, 'warn').mockImplementation(() => {});
+	vi.spyOn(console, 'error').mockImplementation(() => {});
 });
 
 afterEach(() => {
@@ -103,7 +104,7 @@ describe('clone command', () => {
 		writeManifest(root);
 		writeRepoRecord(root, 'Artificial', bareDir);
 
-		await runClone({ root, names: ['Artificial'] });
+		await runClone({ root, name: 'Artificial' });
 
 		const checkoutDir = join(root, 'repos/artificial');
 		expect(() => simpleGit(checkoutDir).status()).not.toThrow();
@@ -115,7 +116,7 @@ describe('clone command', () => {
 		expect(content).toContain('**Branch:** `main`');
 	});
 
-	it('reports "exists" for an existing clean checkout on the correct branch', async () => {
+	it('shows green message for an existing clean checkout on the correct branch', async () => {
 		const root = makeTempDir();
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
@@ -126,13 +127,13 @@ describe('clone command', () => {
 		writeRepoRecord(root, 'Artificial', bareDir);
 		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial');
 
-		await runClone({ root, names: ['Artificial'] });
+		await runClone({ root, name: 'Artificial' });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('exists');
+		expect(output).toContain('All repos are green');
 	});
 
-	it('reports an issue for a dirty checkout', async () => {
+	it('reports issue for a dirty checkout', async () => {
 		const root = makeTempDir();
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
@@ -144,15 +145,13 @@ describe('clone command', () => {
 		writeRepoRecord(root, 'Artificial', bareDir);
 		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial');
 
-		await runClone({ root, names: ['Artificial'] });
+		await runClone({ root, name: 'Artificial' });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('issue');
-		expect(output).toContain('dirty');
-		expect(process.exitCode).toBe(1);
+		expect(output).toContain('uncommitted files');
 	});
 
-	it('reports an issue for a branch mismatch', async () => {
+	it('reports current branch even if different from checkout record', async () => {
 		const root = makeTempDir();
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
@@ -165,26 +164,28 @@ describe('clone command', () => {
 		writeRepoRecord(root, 'Artificial', bareDir);
 		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial', 'main');
 
-		await runClone({ root, names: ['Artificial'] });
+		await runClone({ root, name: 'Artificial' });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('issue');
-		expect(output).toContain('branch mismatch');
+		// The new design reports current state - branch is 'feature' and not pushed
+		expect(output).toContain('feature');
+		expect(output).toContain('not pushed');
 	});
 
-	it('warns and skips an unknown repo name', async () => {
+	it('errors for an unknown repo name', async () => {
 		const root = makeTempDir();
 		writeManifest(root);
 
-		await runClone({ root, names: ['Unknown'] });
+		await runClone({ root, name: 'Unknown' });
 
-		const warnOutput = (console.warn as ReturnType<typeof vi.fn>).mock.calls
+		const errorOutput = (console.error as ReturnType<typeof vi.fn>).mock.calls
 			.map(c => c[0])
 			.join('\n');
-		expect(warnOutput).toContain('Unknown');
+		expect(errorOutput).toContain('Unknown');
+		expect(process.exitCode).toBe(1);
 	});
 
-	it('clones all repos when "all" is passed', async () => {
+	it('clones all repos when --all is passed', async () => {
 		const root = makeTempDir();
 		const bareDir1 = join(root, 'bare/repo1');
 		await initBareRepo(bareDir1);
@@ -195,11 +196,13 @@ describe('clone command', () => {
 		writeRepoRecord(root, 'Repo1', bareDir1);
 		writeRepoRecord(root, 'Repo2', bareDir2);
 
-		await runClone({ root, names: ['all'] });
+		await runClone({ root, all: true });
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('Repo1');
-		expect(output).toContain('Repo2');
+		// Check that the repos were cloned
+		const checkoutDir1 = join(root, 'repos/repo1');
+		const checkoutDir2 = join(root, 'repos/repo2');
+		expect(existsSync(checkoutDir1)).toBe(true);
+		expect(existsSync(checkoutDir2)).toBe(true);
 	});
 
 	it('resolves default location and branch when no checkout override exists', async () => {
@@ -210,7 +213,7 @@ describe('clone command', () => {
 		writeManifest(root);
 		writeRepoRecord(root, 'My Repo', bareDir);
 
-		await runClone({ root, names: ['My Repo'] });
+		await runClone({ root, name: 'My Repo' });
 
 		const checkoutDir = join(root, 'repos/my-repo');
 		expect(existsSync(checkoutDir)).toBe(true);
@@ -225,7 +228,7 @@ describe('clone command', () => {
 		writeRepoRecord(root, 'Artificial', bareDir);
 		writeCheckoutRecordFile(root, 'Artificial', 'custom/location', 'develop');
 
-		await runClone({ root, names: ['Artificial'] });
+		await runClone({ root, name: 'Artificial' });
 
 		const checkoutDir = join(root, 'custom/location');
 		expect(existsSync(checkoutDir)).toBe(true);

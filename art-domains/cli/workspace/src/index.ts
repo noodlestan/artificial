@@ -15,10 +15,12 @@ program.name('art-workspace').description('Workspace orchestration CLI').version
 program
 	.command('clone')
 	.description('Clone repos from manifest')
-	.argument('[names...]', 'repo names to clone (or "all")')
-	.action(async (names: string[]) => {
+	.option('--all', 'clone all repos')
+	.argument('[name]', 'repo name to clone')
+	.argument('[target]', 'target location (relative to checkouts path)')
+	.action(async (name: string | undefined, target: string | undefined, options: { all?: boolean }) => {
 		const root = process.cwd();
-		await runClone({ root, names });
+		await runClone({ root, all: options.all, name, target });
 	});
 
 program
