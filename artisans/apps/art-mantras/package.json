@@ -7,6 +7,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "serve": "node src/serve.js"
+    "serve": "node src/serve.js",
+    "lint": "prettier . -c && eslint .",
+    "lint:fix": "prettier . -c --write && eslint . --fix"
   }
 }

@@ -18,7 +18,7 @@ export function presentCheckoutReport(store: CheckoutStore): void {
 	const checkouts = store.getAllCheckouts();
 	checkouts.sort((a, b) => a.repo.name.localeCompare(b.repo.name));
 
-	const headers = ['repo', 'location', 'branch', 'issues'];
+	const headers = ['repo', 'location', 'branch', 'states'];
 	const rows = checkouts.map(c => [
 		c.repo.name,
 		c.record.location,
@@ -26,7 +26,9 @@ export function presentCheckoutReport(store: CheckoutStore): void {
 		c.issues.join('; ') || 'clean',
 	]);
 
+	console.info('Checkout Report:');
 	console.info(formatTable(rows, headers));
+	console.info('');
 }
 
 export function presentOperationsReport(log: OperationsLog): void {
@@ -38,7 +40,9 @@ export function presentOperationsReport(log: OperationsLog): void {
 	const headers = ['repo', 'operation', 'detail'];
 	const rows = operations.map(op => [op.repo, op.operation, op.detail]);
 
+	console.info('Operations Report:');
 	console.info(formatTable(rows, headers));
+	console.info('');
 }
 
 export function presentExtraneousReport(store: CheckoutStore): void {
@@ -47,12 +51,14 @@ export function presentExtraneousReport(store: CheckoutStore): void {
 		return;
 	}
 
-	const headers = ['directory', 'branch', 'issues'];
+	const headers = ['directory', 'branch', 'states'];
 	const rows = extraneous.map(c => [
 		c.record.location,
 		c.record.branch,
 		c.issues.join('; ') || 'clean',
 	]);
 
+	console.info('Extraneous Report:');
 	console.info(formatTable(rows, headers));
+	console.info('');
 }

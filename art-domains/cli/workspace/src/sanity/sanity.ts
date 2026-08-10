@@ -7,11 +7,22 @@ import {
 	presentExtraneousReport,
 	presentOperationsReport,
 } from '../clone/private/present';
-import { scanAllCheckouts, scanExtraneousCheckouts } from '../shared/scan-checkout';
+import { scanAllCheckouts, scanCheckout, scanExtraneousCheckouts } from '../shared/scan-checkout';
 import type { WorkspaceContext } from '../shared/workspace-context';
+
+const WORKSPACE_REPO = {
+	name: 'Workspace',
+	purpose: 'Workspace meta-repo',
+	remote: 'git@github.com:noodlestan/workspace.git',
+};
 
 export async function runSanity(ctx: WorkspaceContext, auto: boolean): Promise<void> {
 	ctx.store.loadExistingCheckouts();
+
+	// Add workspace root as a checkout
+	const wsCheckout = ctx.store.addCheckout(WORKSPACE_REPO, '.');
+	await scanCheckout(ctx, wsCheckout);
+
 	await scanAllCheckouts(ctx);
 	await scanExtraneousCheckouts(ctx);
 

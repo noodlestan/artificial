@@ -4,9 +4,7 @@
       "id": "A1",
       "letter": "A",
       "constant": true,
-      "strong": [
-        "Artificial"
-      ],
+      "strong": ["Artificial"],
       "pool": [],
       "banned": []
     },
@@ -14,10 +12,7 @@
       "id": "R",
       "letter": "R",
       "constant": false,
-      "strong": [
-        "Resources",
-        "Regenerative"
-      ],
+      "strong": ["Resources", "Regenerative"],
       "pool": [
         "Resource",
         "Resources",
@@ -44,10 +39,7 @@
       "id": "T",
       "letter": "T",
       "constant": false,
-      "strong": [
-        "Tree",
-        "Targeted"
-      ],
+      "strong": ["Tree", "Targeted"],
       "pool": [
         "Tree",
         "Targeted",
@@ -70,12 +62,7 @@
       "id": "I1",
       "letter": "I",
       "constant": false,
-      "strong": [
-        "Instruction",
-        "Indexed",
-        "Imperative",
-        "Intent"
-      ],
+      "strong": ["Instruction", "Indexed", "Imperative", "Intent"],
       "pool": [
         "Instruction",
         "Integrated",
@@ -108,11 +95,7 @@
       "id": "F",
       "letter": "F",
       "constant": false,
-      "strong": [
-        "Facets",
-        "Formal",
-        "Foundational"
-      ],
+      "strong": ["Facets", "Formal", "Foundational"],
       "pool": [
         "Facets",
         "Faceted",
@@ -135,12 +118,7 @@
       "id": "I2",
       "letter": "I",
       "constant": false,
-      "strong": [
-        "Instruction",
-        "Indexed",
-        "Imperative",
-        "Intent"
-      ],
+      "strong": ["Instruction", "Indexed", "Imperative", "Intent"],
       "pool": [
         "Instruction",
         "Integrated",
@@ -173,10 +151,7 @@
       "id": "C",
       "letter": "C",
       "constant": false,
-      "strong": [
-        "Compiler",
-        "Composable"
-      ],
+      "strong": ["Compiler", "Composable"],
       "pool": [
         "Compiled",
         "Canonical",
@@ -204,12 +179,7 @@
       "id": "I3",
       "letter": "I",
       "constant": false,
-      "strong": [
-        "Instruction",
-        "Indexed",
-        "Imperative",
-        "Intent"
-      ],
+      "strong": ["Instruction", "Indexed", "Imperative", "Intent"],
       "pool": [
         "Instruction",
         "Integrated",
@@ -242,11 +212,7 @@
       "id": "A2",
       "letter": "A",
       "constant": false,
-      "strong": [
-        "Art",
-        "Agents",
-        "Authorable"
-      ],
+      "strong": ["Art", "Agents", "Authorable"],
       "pool": [
         "Art",
         "Agents",
@@ -272,9 +238,7 @@
       "id": "L",
       "letter": "L",
       "constant": false,
-      "strong": [
-        "Language"
-      ],
+      "strong": ["Language"],
       "pool": [
         "Language",
         "Layers",
@@ -296,10 +260,7 @@
       "id": "S",
       "letter": "S",
       "constant": false,
-      "strong": [
-        "Services",
-        "System"
-      ],
+      "strong": ["Services", "System"],
       "pool": [
         "Services",
         "System",
