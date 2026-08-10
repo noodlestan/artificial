@@ -1,5 +1,6 @@
-import type { WorkspaceContext } from '../shared/workspace-context';
 import { scanAllCheckouts, scanExtraneousCheckouts } from '../shared/scan-checkout';
+import type { WorkspaceContext } from '../shared/workspace-context';
+
 import { presentCheckoutReport, presentExtraneousReport } from './private/present';
 
 export async function cloneStatus(ctx: WorkspaceContext): Promise<void> {

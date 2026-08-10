@@ -1,7 +1,8 @@
+import { loadCheckouts } from '../config/load-checkouts';
 import type { RepositoryRecord, WorkspaceConfig } from '../config/types';
+
 import type { Checkout } from './checkout';
 import { createCheckout } from './checkout';
-import { loadCheckouts } from '../config/load-checkouts';
 
 export interface CheckoutStore {
 	addCheckout(repo: RepositoryRecord, location: string): Checkout;
@@ -15,10 +16,7 @@ export interface CheckoutStore {
 	syncRecords(): void;
 }
 
-export function createCheckoutStore(
-	config: WorkspaceConfig,
-	root: string,
-): CheckoutStore {
+export function createCheckoutStore(config: WorkspaceConfig, root: string): CheckoutStore {
 	const checkouts = new Map<string, Checkout>();
 
 	return {
@@ -33,11 +31,7 @@ export function createCheckoutStore(
 			for (const record of records) {
 				const key = record.repo.name.toLowerCase();
 				if (!checkouts.has(key)) {
-					const checkout = createCheckout(
-						record.repo,
-						record.location,
-						record.branch,
-					);
+					const checkout = createCheckout(record.repo, record.location, record.branch);
 					checkouts.set(key, checkout);
 				}
 			}

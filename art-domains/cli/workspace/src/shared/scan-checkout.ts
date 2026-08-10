@@ -1,19 +1,17 @@
 import { readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-import type { WorkspaceContext } from './workspace-context';
-import type { Checkout } from './checkout';
 import { getCurrentBranch } from '../private/git/get-current-branch';
-import { isDetachedHead } from '../private/git/is-detached-head';
-import { hasMergeConflicts } from '../private/git/has-merge-conflicts';
-import { isDirty } from '../private/git/is-dirty';
-import { hasRemote } from '../private/git/has-remote';
 import { getUnpushedCount } from '../private/git/get-unpushed-count';
+import { hasMergeConflicts } from '../private/git/has-merge-conflicts';
+import { hasRemote } from '../private/git/has-remote';
+import { isDetachedHead } from '../private/git/is-detached-head';
+import { isDirty } from '../private/git/is-dirty';
 
-export async function scanCheckout(
-	ctx: WorkspaceContext,
-	checkout: Checkout,
-): Promise<Checkout> {
+import type { Checkout } from './checkout';
+import type { WorkspaceContext } from './workspace-context';
+
+export async function scanCheckout(ctx: WorkspaceContext, checkout: Checkout): Promise<Checkout> {
 	const dir = join(ctx.root, checkout.record.location);
 
 	try {

@@ -1,14 +1,13 @@
 import { join } from 'node:path';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
-import type { WorkspaceContext } from '../shared/workspace-context';
-import type { Checkout } from '../shared/checkout';
 import { loadCheckouts } from '../config/load-checkouts';
-import { defaultLocation } from './private/default-location';
-import { cloneRepo } from './private/clone-repo';
-import { scanCheckout, scanAllCheckouts, scanExtraneousCheckouts } from '../shared/scan-checkout';
-import { presentCheckoutReport, presentOperationsReport, presentExtraneousReport } from './private/present';
 import { saveCheckoutRecord } from '../private/records/checkout-record';
+import { scanCheckout } from '../shared/scan-checkout';
+import type { WorkspaceContext } from '../shared/workspace-context';
+
+import { cloneRepo } from './private/clone-repo';
+import { defaultLocation } from './private/default-location';
+import { presentCheckoutReport, presentOperationsReport } from './private/present';
 
 export async function cloneAll(ctx: WorkspaceContext): Promise<void> {
 	const { loadRepositories } = await import('../config/load-repositories');
@@ -28,16 +27,10 @@ export async function cloneAll(ctx: WorkspaceContext): Promise<void> {
 	for (const checkout of ctx.store.getAllCheckouts()) {
 		const scanned = await scanCheckout(ctx, checkout);
 		if (!scanned.exists) {
-			const success = await cloneRepo(
-				join(ctx.root, scanned.record.location),
-				scanned.repo.remote,
-			);
+			const success = await cloneRepo(join(ctx.root, scanned.record.location), scanned.repo.remote);
 			if (success) {
 				const rescan = await scanCheckout(ctx, scanned);
-				ctx.log.cloned(
-					rescan.repo.name,
-					'to ' + rescan.record.location,
-				);
+				ctx.log.cloned(rescan.repo.name, 'to ' + rescan.record.location);
 				const recordFile = join(
 					ctx.root,
 					ctx.config.records.checkouts.path,

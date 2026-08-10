@@ -2,9 +2,13 @@ import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
 
-import type { WorkspaceContext } from '../shared/workspace-context';
+import {
+	presentCheckoutReport,
+	presentExtraneousReport,
+	presentOperationsReport,
+} from '../clone/private/present';
 import { scanAllCheckouts, scanExtraneousCheckouts } from '../shared/scan-checkout';
-import { presentCheckoutReport, presentOperationsReport, presentExtraneousReport } from '../clone/private/present';
+import type { WorkspaceContext } from '../shared/workspace-context';
 
 export async function runSanity(ctx: WorkspaceContext, auto: boolean): Promise<void> {
 	ctx.store.loadExistingCheckouts();
@@ -30,19 +34,14 @@ export async function runSanity(ctx: WorkspaceContext, auto: boolean): Promise<v
 			const dir = join(ctx.root, checkout.record.location);
 			const git = simpleGit(dir);
 			try {
-				await git.push('origin', checkout.record.branch);
+				await git.push('origin', checkout.branch);
 				const updated = {
 					...checkout,
 					unpushed: 0,
-					issues: checkout.issues.filter(
-						i => !/\d+ commit/.test(i) && i !== 'not pushed',
-					),
+					issues: checkout.issues.filter(i => !/\d+ commit/.test(i) && i !== 'not pushed'),
 				};
 				ctx.store.setCheckout(updated);
-				ctx.log.pushed(
-					checkout.repo.name,
-					'to origin/' + checkout.record.branch,
-				);
+				ctx.log.pushed(checkout.repo.name, 'to origin/' + checkout.branch);
 			} catch {
 				// push failed, leave as-is
 			}

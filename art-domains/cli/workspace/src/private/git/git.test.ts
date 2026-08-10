@@ -6,11 +6,11 @@ import simpleGit from 'simple-git';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { getCurrentBranch } from './get-current-branch';
-import { isDetachedHead } from './is-detached-head';
-import { hasMergeConflicts } from './has-merge-conflicts';
-import { isDirty } from './is-dirty';
-import { hasRemote } from './has-remote';
 import { getUnpushedCount } from './get-unpushed-count';
+import { hasMergeConflicts } from './has-merge-conflicts';
+import { hasRemote } from './has-remote';
+import { isDetachedHead } from './is-detached-head';
+import { isDirty } from './is-dirty';
 
 const tempDirs: string[] = [];
 

@@ -1,12 +1,13 @@
 import { join } from 'node:path';
 
-import type { WorkspaceContext } from '../shared/workspace-context';
 import { loadCheckouts } from '../config/load-checkouts';
-import { defaultLocation } from './private/default-location';
-import { cloneRepo } from './private/clone-repo';
-import { scanCheckout } from '../shared/scan-checkout';
-import { presentCheckoutReport, presentOperationsReport } from './private/present';
 import { saveCheckoutRecord } from '../private/records/checkout-record';
+import { scanCheckout } from '../shared/scan-checkout';
+import type { WorkspaceContext } from '../shared/workspace-context';
+
+import { cloneRepo } from './private/clone-repo';
+import { defaultLocation } from './private/default-location';
+import { presentCheckoutReport, presentOperationsReport } from './private/present';
 
 export async function cloneSpecific(
 	ctx: WorkspaceContext,
@@ -28,6 +29,13 @@ export async function cloneSpecific(
 	const existingRecords = loadCheckouts(ctx.config, ctx.root);
 
 	let checkout = ctx.store.findCheckout(canonical);
+	if (checkout && target && checkout.record.location !== target) {
+		console.error(
+			`clone: ${repo.name} already exists at ${checkout.record.location}. Remove it first or use a different name.`,
+		);
+		process.exitCode = 1;
+		return;
+	}
 	if (!checkout) {
 		const override = existingRecords.find(r => r.repo.name === repo.name);
 		const location = target ?? override?.location ?? defaultLocation(repo);
@@ -36,10 +44,7 @@ export async function cloneSpecific(
 
 	const scanned = await scanCheckout(ctx, checkout);
 	if (!scanned.exists) {
-		const success = await cloneRepo(
-			join(ctx.root, scanned.record.location),
-			repo.remote,
-		);
+		const success = await cloneRepo(join(ctx.root, scanned.record.location), repo.remote);
 		if (!success) {
 			process.exitCode = 1;
 			return;

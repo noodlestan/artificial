@@ -1,7 +1,9 @@
-import type { WorkspaceConfig } from './types';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+
 import { readRepositoryRecord } from '../private/records/repository-record';
+
+import type { WorkspaceConfig } from './types';
 
 export function loadRepositories(
 	config: WorkspaceConfig,

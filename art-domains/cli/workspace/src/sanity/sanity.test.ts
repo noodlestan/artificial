@@ -10,6 +10,7 @@ import { loadWorkspaceConfig } from '../config/load-config';
 import { createCheckoutStore } from '../shared/checkout-store';
 import { createOperationsLog } from '../shared/operations-log';
 import { createWorkspaceContext } from '../shared/workspace-context';
+
 import { runSanity } from './sanity';
 
 const tempDirs: string[] = [];
@@ -57,12 +58,12 @@ function writeManifest(root: string) {
 	writeFileSync(
 		join(root, '.art-workspace.mts'),
 		'export default {\n' +
-		"  clone: { path: 'repos' },\n" +
-		'  records: {\n' +
-		"    repositories: { path: 'ops/records/repositories' },\n" +
-		"    checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },\n" +
-		'  },\n' +
-		'}\n',
+			"  clone: { path: 'repos' },\n" +
+			'  records: {\n' +
+			"    repositories: { path: 'ops/records/repositories' },\n" +
+			"    checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },\n" +
+			'  },\n' +
+			'}\n',
 	);
 }
 
@@ -71,7 +72,11 @@ function writeRepoRecord(root: string, name: string, remote: string) {
 	mkdirSync(dir, { recursive: true });
 	writeFileSync(
 		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
-		'# Module\n\n## Repository: ' + name + '\n\n**Purpose:** test\n\n**Remote:** `' + remote + '`\n',
+		'# Module\n\n## Repository: ' +
+			name +
+			'\n\n**Purpose:** test\n\n**Remote:** `' +
+			remote +
+			'`\n',
 	);
 }
 
@@ -80,7 +85,13 @@ function writeCheckoutRecord(root: string, name: string, location: string, branc
 	mkdirSync(dir, { recursive: true });
 	writeFileSync(
 		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
-		'# Module\n\n## Checkout: ' + name + '\n\n**Location:** `' + location + '`\n\n**Branch:** `' + branch + '`\n',
+		'# Module\n\n## Checkout: ' +
+			name +
+			'\n\n**Location:** `' +
+			location +
+			'`\n\n**Branch:** `' +
+			branch +
+			'`\n',
 	);
 }
 

@@ -18,11 +18,7 @@ export interface Checkout {
 	extraneous: boolean;
 }
 
-export function createCheckout(
-	repo: RepositoryRecord,
-	location: string,
-	branch: string,
-): Checkout {
+export function createCheckout(repo: RepositoryRecord, location: string, branch: string): Checkout {
 	return {
 		repo,
 		record: { name: repo.name, location, branch },

@@ -1,4 +1,5 @@
 import type { WorkspaceConfig } from '../config/types';
+
 import type { CheckoutStore } from './checkout-store';
 import type { OperationsLog } from './operations-log';
 

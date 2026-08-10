@@ -7,6 +7,7 @@ import { loadRepositories } from './repository-record';
 
 export interface CheckoutRecord {
 	name: string;
+	repository?: string;
 	location: string;
 	branch: string;
 }
@@ -14,6 +15,8 @@ export interface CheckoutRecord {
 const HARDCODED_TEMPLATE = `# Module
 
 ## Checkout: {{ name }}
+
+**Repository:** {{ repository }}
 
 **Location:** \`{{ location }}\`
 
@@ -33,10 +36,15 @@ export function saveCheckoutRecord(
 			template = readFileSync(templatePath, 'utf-8');
 		}
 	}
-	const content = template
+	let content = template
 		.replace('{{ name }}', data.name)
+		.replace('{{ repository }}', data.repository ?? '')
 		.replace('{{ location }}', data.location)
 		.replace('{{ branch }}', data.branch);
+	// Remove empty repository line if not provided
+	if (!data.repository) {
+		content = content.replace(/\*\*Repository:\*\*\s*\n\n?/g, '');
+	}
 	mkdirSync(dirname(file), { recursive: true });
 	writeFileSync(file, content);
 }
@@ -55,6 +63,7 @@ export function readCheckoutRecord(file: string): CheckoutRecord {
 	const content = readFileSync(file, 'utf-8');
 
 	const nameMatch = content.match(/## Checkout:\s*(.+)/);
+	const repositoryMatch = content.match(/\*\*Repository:\*\*\s*(.+)/);
 	const locationMatch = content.match(/\*\*Location:\*\*\s*`([^`]+)`/);
 	const branchMatch = content.match(/\*\*Branch:\*\*\s*`([^`]+)`/);
 
@@ -70,6 +79,7 @@ export function readCheckoutRecord(file: string): CheckoutRecord {
 
 	return {
 		name: nameMatch?.[1]?.trim() ?? defaults.name,
+		repository: repositoryMatch?.[1]?.trim(),
 		location: locationMatch?.[1]?.trim() ?? defaults.location,
 		branch: branchMatch?.[1]?.trim() ?? defaults.branch,
 	};

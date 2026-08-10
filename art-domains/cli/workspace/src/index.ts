@@ -2,12 +2,12 @@
 
 import { Command } from 'commander';
 
-import { runClone } from './clone/clone';
-import { runSanity } from './sanity/sanity';
 import { runBranch } from './branch/branch';
+import { runClone } from './clone/clone';
 import { runLink } from './link/link';
-import { runUnlink } from './unlink/unlink';
 import { runPublish } from './publish/publish';
+import { runSanity } from './sanity/sanity';
+import { runUnlink } from './unlink/unlink';
 
 export { defineConfig, loadWorkspaceConfig, verifyCheckouts } from './config';
 export type { RepositoryCheckout, RepositoryRecord, WorkspaceConfig } from './config';
@@ -22,10 +22,12 @@ program
 	.option('--all', 'clone all repos')
 	.argument('[name]', 'repo name to clone')
 	.argument('[target]', 'target location (relative to checkouts path)')
-	.action(async (name: string | undefined, target: string | undefined, options: { all?: boolean }) => {
-		const root = process.cwd();
-		await runClone({ root, all: options.all, name, target });
-	});
+	.action(
+		async (name: string | undefined, target: string | undefined, options: { all?: boolean }) => {
+			const root = process.cwd();
+			await runClone({ root, all: options.all, name, target });
+		},
+	);
 
 program
 	.command('branch')
