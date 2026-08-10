@@ -2,7 +2,7 @@
 
 **Plan:** `poc-parse`
 
-**commit.Id:** `smoke-parse-corpus`
+**commit.Id:** `smoke-parse-section-block`
 
 These are your instructions. They include a section at the end on how to report back to requester.
 
@@ -14,11 +14,11 @@ The plan workflow (see `artificials/_guide.md` → Planning Workflow → Working
 
 1. **This instruction is self-contained.** Everything you need is in this file plus its mandatory reading — never rely on session memory, chat context, or details relayed by the user.
 2. **Your report is self-contained.** The rendered report file carries the full trail: evidence, changes, verification results, blockers, feedback. Your chat response is only a pointer to it.
-3. **User interaction is minimal.** The user relays this instruction to the delegator and expects a light confirmation: a happy face and up to 3 bullet points — done `smoke-parse-corpus`, created `src/parse/smoke-parse.ts`, thumbs up. If something goes horribly wrong, report the blocker instead of a summary.
+3. **User interaction is minimal.** The user relays this instruction to the delegator and expects a light confirmation: a happy face and up to 3 bullet points — done `smoke-parse-section-block`, created `src/parse/smoke-parse.ts`, thumbs up. If something goes horribly wrong, report the blocker instead of a summary.
 
 ## Goals
 
-Prove that micromark can tokenize the art syntax before building the full record builder. Parse the corpus (6 ADR files + `section-block.art`) through micromark and inspect the token event stream to confirm:
+Prove that micromark can tokenize the art syntax before building the full record builder. Parse the smoke-parse target files (6 ADR files + `section-block.art`) through micromark and inspect the token event stream to confirm:
 
 - `**Field:**` (including block fields)
 - `::READ` directives
@@ -32,12 +32,12 @@ tokenize as expected. Record findings in a report that feeds Step 4 and settles 
 - `.agents/domains/plans/definitions/index.md` — plan, implementation-instructions, delegation, and report definitions.
 - `.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
 - `.agents/domains/plans/templates/report__template.md` — the report format you render at the end.
-- `artificials/_backlog/plan-poc-parse/plan.md` — the plan; this commit is `smoke-parse-corpus`.
+- `artificials/_backlog/plan-poc-parse/plan.md` — the plan; this commit is `smoke-parse-section-block`.
 - `artificials/_guide.md` — the Artificials System overview: the compiler pipeline, the declaration model (`# Kind: Name`), and the kind-agnostic parser. Context only.
-- `artificials/_architect.md` — Approach (micromark substrate) + Step 3 (smoke-parse the corpus).
+- `artificials/_architect.md` — Approach (micromark substrate) + Step 3 (smoke-parse the target files).
 - `artificials/_wip.md` — only to identify the current step; NEVER modify it.
 - `artificials/architecture/records/adr/_research.md` — best practices 1–6; esp. #1 (two layers) and #6 (early spike insight: `# Kind: Name` is plain ATX heading).
-- `artificials/art-js/spec/grammar/constructs/structural/section-block.art` — the spec file to include in the corpus.
+- `artificials/art-js/spec/grammar/constructs/structural/section-block.art` — the spec file to include in the smoke-parse target.
 
 - RULE: You MUST follow any links under `## Mandatory Reading` sections found in the listed files.
 - RULE: If you are unable to read a file linked under `## Mandatory Reading` you must stop and REPORT A BLOCKER.
@@ -46,7 +46,7 @@ tokenize as expected. Record findings in a report that feeds Step 4 and settles 
 
 Create `src/parse/smoke-parse.ts` (relative to `art-js/cli/poc-parse/`) that:
 
-1. Reads the corpus files:
+1. Reads the smoke-parse target files:
    - `architecture/records/adr/_research.md`
    - `architecture/records/adr/compiler.art`
    - `architecture/records/adr/configuration.art`
@@ -67,7 +67,7 @@ Create `src/parse/smoke-parse.ts` (relative to `art-js/cli/poc-parse/`) that:
    - Tags (`(#identifier)`) — do they tokenize as plain text or something else?
    - Code fences — do they tokenize correctly?
 
-5. Writes findings to `_backlog/plan-poc-parse/instructions/smoke-parse-corpus__findings.md` with:
+5. Writes findings to `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md` with:
    - Summary of what tokenizes as expected
    - Surprises or gaps
    - Recommendation: micromark direct vs indirections (e.g., `mdast-util-from-markdown`)
@@ -84,7 +84,7 @@ Create `src/parse/smoke-parse.ts` (relative to `art-js/cli/poc-parse/`) that:
 ## Rules
 
 - NEVER modify `artificials/_guide.md`, `artificials/_architect.md`, `artificials/_wip.md`, `artificials/_backlog/plan-poc-parse/plan.md`, `.agents/domains/plans/**`, or any `artificials/architecture/records/**` file.
-- Only create: `art-js/cli/poc-parse/src/parse/smoke-parse.ts` and `_backlog/plan-poc-parse/instructions/smoke-parse-corpus__findings.md`. Do NOT touch `src/index.ts`, `src/parse/types.ts`, `package.json`, tsconfigs, or any other existing file.
+- Only create: `art-js/cli/poc-parse/src/parse/smoke-parse.ts` and `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md`. Do NOT touch `src/index.ts`, `src/parse/types.ts`, `package.json`, tsconfigs, or any other existing file.
 - Do NOT run `npm run lint` or `npm run lint:fix` — prettier/eslint are not installed (dev deps deliberately deferred; the deferral lifts when the package's lint/CI is first exercised, POC step 4+). Type-check with `tsc --noEmit` directly (see Final Verification).
 - If the plan or a reference is ambiguous or contradicts the repo conventions: resolve it with the simplest reading, and record the finding + a ready-to-apply change snippet in your report. Never code against a plan you silently changed in your head.
 - RULE: If a command reports errors, attempt to fix them.
@@ -96,17 +96,17 @@ Create `src/parse/smoke-parse.ts` (relative to `art-js/cli/poc-parse/`) that:
 
 **Sanity check**
 
-The artificials POC step 3 goal is met: the corpus parses through micromark, token events are inspected, and findings are recorded in a report that settles the substrate decision.
+The artificials POC step 3 goal is met: the target files parse through micromark, token events are inspected, and findings are recorded in a report that settles the substrate decision.
 
 **Verification steps**
 
 - Execute `npx tsc --noEmit` in `art-js/cli/poc-parse/` — resolves the repo root's typescript and `@types/node` (upward node_modules walk); must exit 0 with no errors. If `npx` attempts to download typescript, run the repo-root binary directly: `../../../../node_modules/.bin/tsc --noEmit`.
 - Execute `npx tsx src/parse/smoke-parse.ts` in `art-js/cli/poc-parse/` — must run without errors and produce output. If `npx` attempts to download tsx, install it first: `npm install -D tsx` (this is allowed for this step only).
-- Re-read `_backlog/plan-poc-parse/instructions/smoke-parse-corpus__findings.md` and confirm it contains:
+- Re-read `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md` and confirm it contains:
   - Summary of what tokenizes as expected
   - Surprises or gaps
   - Recommendation: micromark direct vs indirections
-- Confirm `git status` shows exactly two new files: `art-js/cli/poc-parse/src/parse/smoke-parse.ts` and `_backlog/plan-poc-parse/instructions/smoke-parse-corpus__findings.md`.
+- Confirm `git status` shows exactly two new files: `art-js/cli/poc-parse/src/parse/smoke-parse.ts` and `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md`.
 
 ## How to Report Back to the Delegator
 
@@ -114,9 +114,9 @@ The artificials POC step 3 goal is met: the corpus parses through micromark, tok
 2. Gather the evidence of changes made and outcomes achieved, or the blocker error details.
 3. If your prompt included a `DIRECTIVE FEEDBACK:`:
    1. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your feedback.
-4. Render the report file to `_backlog/plan-poc-parse/instructions/smoke-parse-corpus__report.md` — reports are co-located with their instruction file (`plan-{id}/instructions/{id}__report.md`, per `files/index.md`).
+4. Render the report file to `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__report.md` — reports are co-located with their instruction file (`plan-{id}/instructions/{id}__report.md`, per `files/index.md`).
 5. Generate the response and send it back to the delegator.
-6. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `smoke-parse-corpus`, created `src/parse/smoke-parse.ts`, thumbs up). The full trail lives in the report file; never repeat it in chat.
+6. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `smoke-parse-section-block`, created `src/parse/smoke-parse.ts`, thumbs up). The full trail lives in the report file; never repeat it in chat.
 
 DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `artificials/_architect.md`, or `artificials/_wip.md`. Never silently "fix in code only" — the planner applies these changes later.
 
