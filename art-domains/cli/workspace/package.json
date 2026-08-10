@@ -30,10 +30,10 @@
     "simple-git": "^3.24.0"
   },
   "devDependencies": {
-    "@types/node": "^25.9.3",
+    "@noodlestan/esbuild": "^0.0.11",
+    "@types/node": "^25.9.5",
     "@vitest/coverage-v8": "^1.6.1",
     "typescript": "^5.4.0",
-    "vitest": "^1.4.0",
-    "@noodlestan/esbuild": "^0.0.11"
+    "vitest": "^1.4.0"
   }
 }

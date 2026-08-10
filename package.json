@@ -34,6 +34,7 @@
     "@noodlestan/esbuild": "^0.0.11",
     "@noodlestan/eslint-config": "^0.0.7",
     "@noodlestan/tsconfig": "^0.0.11",
+    "@types/node": "^25.9.3",
     "eslint": "8.57.1",
     "lefthook": "2.1.9",
     "prettier": "3.8.4",
