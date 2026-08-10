@@ -1,6 +1,6 @@
 {
   "name": "@art-domains/workspace-cli",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Workspace orchestration CLI",
   "type": "module",
   "bin": {
