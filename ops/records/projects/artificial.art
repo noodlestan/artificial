@@ -6,6 +6,10 @@
 
 **Description:** Collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.
 
+**Remote:** `git@github.com:noodlestan/artificial.git`
+
+**Canonical Name:** `noodlestan/artificial`
+
 **Path:** `./`
 
 **Version:** `0.0.1`
@@ -18,6 +22,12 @@
 - Namespace: Artisans
 - Namespace: Art Domains
 
+**Workspaces:**
+
+- `art-domains/*`
+- `art-js/*`
+- `artisans/*`
+
 **Scaffolders:**
 
 - Scaffolder Files: Project README
@@ -28,6 +38,23 @@
 - Scaffolder Skeleton: Project Skeleton
 
 **PackageFile:** package.json
+
+**Setup:**
+
+```
+# run at root of repository, not per package
+npm ci
+```
+
+**Verification:**
+
+```
+# per package modified
+npm run lint:fix # to fix formatting issues automatically
+npm run lint # to report other issues
+npm run build
+npm run test
+```
 
 **Scripts:**
 

@@ -1,5 +1,5 @@
 {
-  "name": "artificial",
+  "name": "noodlestan/artificial",
   "version": "0.0.1",
   "description": "A collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.",
   "author": "Noodlestan",
@@ -7,17 +7,9 @@
   "private": true,
   "packageManager": "npm@10.2.3",
   "workspaces": [
-    "art-js/cli/bin/",
-    "art-js/cli/dev-server/",
-    "art-js/cli/poc-parse/",
-    "art-js/cli/watcher/",
-    "art-js/libs/bundler/",
-    "art-js/libs/parser/",
-    "art-js/libs/primitives/",
-    "art-js/libs/program/",
-    "art-js/libs/validator/",
-    "art-js/spec/",
-    "artisans/apps/art-mantras/"
+    "art-domains/*",
+    "art-js/*",
+    "artisans/*"
   ],
   "engines": {
     "node": ">=18"
