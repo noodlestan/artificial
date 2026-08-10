@@ -1,6 +1,8 @@
 # Artificials Plan
 
-Forward-looking work for the artificials toolchain. Decisions live in the ADRs (`architecture/records/adr/`); this file tracks the work ahead only. The current WIP tracker is `_wip.md`; the plan steps below map 1:1 to its ACTIONABLE items.
+Forward-looking work for the artificials toolchain. Decisions live in the ADRs (`architecture/records/adr/`); this file tracks the work ahead only.
+
+Short termtracker is `_wip.md` (no done items there).
 
 ## Approach
 

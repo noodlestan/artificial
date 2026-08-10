@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-import { parse, preprocess, postprocess } from 'micromark';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+
+import { parse, postprocess, preprocess } from 'micromark';
 
 const REPO_ROOT = resolve(import.meta.dirname, '../../../../../../..');
 const FINDINGS_PATH = resolve(
@@ -52,19 +53,21 @@ interface TokenSummary {
 }
 
 function collectTokenSummary(events: TokenSummary['file'], allEvents: TokenEvent[]): TokenSummary {
-	const enterEvents = allEvents.filter((e) => e.enterExit === 'enter');
+	const enterEvents = allEvents.filter(e => e.enterExit === 'enter');
 
-	const headingTokens = enterEvents.filter((e) => e.type === 'atxHeading');
-	const strongTokens = enterEvents.filter((e) => e.type === 'strong');
-	const codeFenceTokens = enterEvents.filter((e) => e.type === 'codeFenced');
+	const headingTokens = enterEvents.filter(e => e.type === 'atxHeading');
+	const strongTokens = enterEvents.filter(e => e.type === 'strong');
+	const codeFenceTokens = enterEvents.filter(e => e.type === 'codeFenced');
 
 	// Directives: look for data tokens containing :: inside paragraphs
 	// Tags: look for data tokens containing (#identifier) patterns
-	const dataTokens = allEvents.filter((e) => e.type === 'data');
+	const dataTokens = allEvents.filter(e => e.type === 'data');
 	const directiveCount = dataTokens.filter(
-		(e) => e.type === 'data' && allEvents.some(
-			(ev) => ev.enterExit === 'enter' && ev.type === 'data' && ev.start.line === e.start.line,
-		),
+		e =>
+			e.type === 'data' &&
+			allEvents.some(
+				ev => ev.enterExit === 'enter' && ev.type === 'data' && ev.start.line === e.start.line,
+			),
 	).length;
 
 	// Simpler approach: count enter events for specific types
@@ -95,11 +98,11 @@ function analyseFile(filePath: string) {
 	const content = readFileSync(fullPath, 'utf-8');
 
 	const events = getEvents(content);
-	const enterEvents = events.filter((e) => e.enterExit === 'enter');
+	const enterEvents = events.filter(e => e.enterExit === 'enter');
 
-	const headingEvents = enterEvents.filter((e) => e.type === 'atxHeading');
-	const strongEvents = enterEvents.filter((e) => e.type === 'strong');
-	const codeFenceEvents = enterEvents.filter((e) => e.type === 'codeFenced');
+	const headingEvents = enterEvents.filter(e => e.type === 'atxHeading');
+	const strongEvents = enterEvents.filter(e => e.type === 'strong');
+	const codeFenceEvents = enterEvents.filter(e => e.type === 'codeFenced');
 
 	// Count directives: look for text patterns in the raw content
 	const directiveMatches = content.match(/^::\w+/gm) || [];
@@ -154,7 +157,7 @@ function main() {
 		totalCodeFence += summary.codeFenceCount;
 
 		const content = readFileSync(resolve(REPO_ROOT, filePath), 'utf-8');
-		const directiveLines = content.split('\n').filter((l) => /^::\w+/.test(l.trim()));
+		const directiveLines = content.split('\n').filter(l => /^::\w+/.test(l.trim()));
 		const tagMatches = content.match(/\(#\w+\)/g) || [];
 
 		allExamples.push({
@@ -280,7 +283,7 @@ Code fences (\`\`\`) tokenize correctly as \`codeFenced\` tokens. The fence info
 
 | File | Headings | Strong | Directives | Tags | Code Fences |
 |------|----------|--------|------------|------|-------------|
-${summaries.map((s) => `| ${s.file} | ${s.headingCount} | ${s.strongCount} | ${s.directiveCount} | ${s.tagCount} | ${s.codeFenceCount} |`).join('\n')}
+${summaries.map(s => `| ${s.file} | ${s.headingCount} | ${s.strongCount} | ${s.directiveCount} | ${s.tagCount} | ${s.codeFenceCount} |`).join('\n')}
 | **Total** | **${totalHeading}** | **${totalStrong}** | **${totalDirective}** | **${totalTag}** | **${totalCodeFence}** |
 
 ## Surprises and Gaps

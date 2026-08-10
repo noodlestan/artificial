@@ -14,7 +14,7 @@ Race the art-mantras micro app to a committable, all-use-cases bootstrap — one
 
 ## Source Tasks
 
-No `task-{id}/task.md` files exist for this module — work is tracked in the module's `_wip.md` → Actions (repo-root-relative links):
+No `task-{id}/task.md` files exist for this plan. Plan was generated from:
 
 - [Art Mantras WIP — the 12-step race](artisans/apps/art-mantras/_wip.md)
 - [Art Mantras Plan — design contract](artisans/apps/art-mantras/_architect.md)

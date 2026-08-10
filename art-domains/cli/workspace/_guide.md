@@ -11,15 +11,15 @@ The workspace configuration is a TypeScript module (`.art-workspace.mts`) at the
 ```typescript
 interface WorkspaceConfig {
   clone: {
-    path: string;  // Where repos are cloned (e.g., 'repos')
+    path: string; // Where repos are cloned (e.g., 'repos')
   };
   records: {
     repositories: {
-      path: string;  // Path to repository records (e.g., 'ops/records/repositories')
+      path: string; // Path to repository records (e.g., 'ops/records/repositories')
     };
     checkouts: {
-      path: string;      // Path to checkout records (e.g., 'ops/records/checkouts')
-      template: string;  // Template for generating checkout records
+      path: string; // Path to checkout records (e.g., 'ops/records/checkouts')
+      template: string; // Template for generating checkout records
     };
   };
 }
@@ -75,6 +75,7 @@ Type declarations are emitted (`dist/index.d.ts`) and the `exports` map ensures 
 ### Why `.mts`?
 
 The root `package.json` has no `"type": "module"`. The explicit `.mts` extension:
+
 - Pins ESM for Node and bundlers
 - Is unambiguous under Node's native type-stripping
 - Signals TypeScript authoring to editors and tooling
