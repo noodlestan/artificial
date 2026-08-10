@@ -58,11 +58,15 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `artificials/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`
 
-### `smoke-parse` - `PLANNED`
+### `smoke-parse` - `DONE`
 
-**Commit Message:** `poc-parse: smoke-parse a construct file`
+**Commit Message:** `poc-parse: smoke-parse the corpus through micromark`
 
 **Instructions File:** `artificials/_backlog/plan-poc-parse/instructions/smoke-parse.md`
+
+**Evidence:** commits `147ab64` (smoke-parse), `aa8db92` (report); artefacts — `art-js/cli/poc-parse/src/parse/smoke-parse.ts` (micromark tokenization of 8 target files: 41 headings, 114 strong emphasis, 3 directives, 2 tags, 5 code fences), `artificials/_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md` (recommendation: micromark direct).
+
+**Report:** `artificials/_backlog/plan-poc-parse/instructions/smoke-parse-section-block__report.md`
 
 ### `construct-stack-record-builder` - `DRAFT`
 
@@ -101,5 +105,6 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 ## Feedback
 
-- `scaffold-poc-parse`: see `artificials/_backlog/plan-poc-parse/instructions/scaffold-poc-parse__report.md`. Key planner items F1–F3 (workspace entry in `artificials/package.json` not repo-root; scaffolder naming `Scaffolder Skeleton: CLI Package`; `ci` deferred, no build/deps yet) + technical-writer items F4–F5 (tsconfig extends path; README link targets).
-- `core-record-schema`: see `artificials/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`. Key planner item F1 (stale `_research.md` path: `artificials/architecture/records/adr/_research.md` → `artificials/ops/records/adr/_research.md`; affects plan.md lines 21, 37 and \_architect.md line 11).
+- `scaffold-poc-parse`: see `repos/artificial/_backlog/plan-poc-parse/instructions/scaffold-poc-parse__report.md`. Key planner items F1–F3 (workspace entry in `artificials/package.json` not repo-root; scaffolder naming `Scaffolder Skeleton: CLI Package`; `ci` deferred, no build/deps yet) + technical-writer items F4–F5 (tsconfig extends path; README link targets).
+- `core-record-schema`: see `repos/artificial/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`. Key planner item F1 (stale `_research.md` path: `artificials/architecture/records/adr/_research.md` → `artificials/ops/records/adr/_research.md`; affects plan.md lines 21, 37 and \_architect.md line 11).
+- `smoke-parse`: see `repos/artificial/_backlog/plan-poc-parse/instructions/smoke-parse-section-block__report.md`. Planner items F1–F3 (micromark API: `preprocess() → parse().document().write() → postprocess()` pipeline, not `parse()` directly; event shape `[enterExit, token, context]`, not `[token, type, enterExit]`; micromark transitive dep note). Technical-writer item F4 (findings recommendation clarifies "micromark direct" means "micromark + our own thin from-markdown layer", two-layer architecture preserved).

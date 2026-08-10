@@ -76,7 +76,9 @@ Code fences (```) tokenize correctly as `codeFenced` tokens. The fence info (lan
 
 ## Recommendation: Micromark Direct vs Indirections
 
-**Recommendation: Use micromark directly (no `mdast-util-from-markdown` indirection).**
+**Recommendation: Use micromark directly with our own thin from-markdown layer (no `mdast-util-from-markdown` indirection).**
+
+This preserves the two-layer architecture from `_research.md` best practice #1: micromark owns syntax (tokens), our construct-stack builder owns semantics (records). "Micromark direct" means we skip mdast-util-from-markdown's record mapping, not that we skip the semantic layer entirely.
 
 Rationale:
 
