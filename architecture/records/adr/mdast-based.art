@@ -1,0 +1,34 @@
+# Module
+
+## Decision: mdast-Based Parse Strategy
+
+**Status:** Adopted
+
+**Context:** The parse POC explored two substrate strategies: (1) build directly on micromark token events, or (2) build on mdast, the AST layer of the unified ecosystem. The micromark approach (`micromark-first.art`) was implemented and revealed that tokens are too low-level — manual span reconstruction, complex stack logic, and flattened structured content made the builder a monolith.
+
+mdast sits between micromark (syntax) and remark (pipeline). It provides a tree of typed nodes (`heading`, `strong`, `list`, `paragraph`, etc.) with children, positions, and inline content already reconstructed. This is exactly the layer where art's construct classification belongs.
+
+**Decision:** Parse markdown to mdast using `mdast-util-from-markdown`, then visit each node with `unist-util-visit` and map it to art records using a factory pattern.
+
+The factory system:
+- Each known construct (SectionBlock, FieldBlock, Tag) has a factory with `detect`, `create`, and `visitChildren` methods.
+- `detect` checks if an mdast node qualifies (e.g. heading text matches `# Kind: Name`, strong text matches `**Field:**`).
+- `create` builds the art record from the mdast node.
+- `visitChildren` determines whether the factory handles the subtree or the visitor should recurse.
+- Unmatched nodes fall back to `NaturalBlock`.
+
+**Consequences:**
+- mdast handles token reconstruction — strong spans are complete, nesting is resolved, inline formatting is preserved.
+- The factory pattern cleanly separates detection from construction — each construct is an isolated unit.
+- NaturalBlock can have structured content (`.children`) when inside a FieldBlock with lists — mdast gives us list items as typed nodes.
+- Position objects are clean — mdast positions don't carry internal micromark fields.
+- Section nesting is driven by heading level — mdast headings are flat siblings, level determines parent/child relationships.
+- Dependencies: `mdast-util-from-markdown` (parses markdown → mdast), `unist-util-visit` (traverses the tree).
+
+**Rejected alternative:** Micromark-first (`micromark-first.art`) — direct token events with an explicit stack. Superseded because tokens are the wrong abstraction boundary for record building.
+
+**Research basis:**
+- `_research.md` best practice #1: "Two layers, always — micromark owns syntax, we own semantics." mdast is the semantics layer.
+- `_research.md` best practice #2: "Explicit stack + enter/exit hooks" — the factory pattern is the mdast equivalent, but cleaner.
+- Surveyed projects: mdx-js/mdx (mdast as the extension boundary), remarkjs/remark (full pipeline), mdast-util-from-markdown (the from-markdown pattern).
+- `language.art` construct containment rules inform factory detection patterns.

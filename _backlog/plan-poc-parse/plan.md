@@ -48,7 +48,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `artificials/_backlog/plan-poc-parse/instructions/scaffold-poc-parse__report.md`
 
-### `core-record-schema` - `DONE`
+### `core-record-schema` - `COMMITTED`
 
 **Commit Message:** `poc-parse: add core record schema types`
 
@@ -58,7 +58,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `artificials/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`
 
-### `smoke-parse` - `DONE`
+### `smoke-parse` - `COMMITTED`
 
 **Commit Message:** `poc-parse: smoke-parse the corpus through micromark`
 
@@ -78,11 +78,21 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/_backlog/plan-poc-parse/instructions/construct-stack-record-builder__report.md`
 
-### `cross-check-grammar-wip` - `DRAFT`
+### `mdast-based-parse` - `COMMITTED`
+
+**Commit Message:** `poc-parse: replace micromark builder with mdast-based parser`
+
+**Instructions File:** `repos/artificial/_backlog/plan-poc-parse/instructions/mdast-based-parse.md`
+
+**Evidence:** commit `11c3d04`; artefacts — rewritten `art-js/cli/poc-parse/src/parse/builder.ts` (mdast-based), new `art-js/cli/poc-parse/src/parse/factory.ts`, `types.ts` (`NaturalBlock.children`), `package.json` + workspace `package-lock.json` (deps `mdast-util-from-markdown`, `unist-util-visit`). `tsc --noEmit` exit 0; `npm run lint` clean; EC1–EC8 verified across `build-tools-dev.art`, `language.art`, `section-block.art`.
+
+**Report:** `repos/artificial/_backlog/plan-poc-parse/instructions/mdast-based-parse__report.md`
+
+### `cross-check-grammar-wip` - `PLANNED`
 
 **Commit Message:** `poc-parse: cross-check grammar wip`
 
-**Instructions File:** none yet
+**Instructions File:** `repos/artificial/_backlog/plan-poc-parse/instructions/cross-check-grammar-wip.md`
 
 ### `grammar-spec-fixes` - `DRAFT`
 
