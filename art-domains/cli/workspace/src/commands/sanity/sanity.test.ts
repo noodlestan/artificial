@@ -6,10 +6,10 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { loadWorkspaceConfig } from '../config/load-config';
-import { createCheckoutStore } from '../shared/checkout-store';
-import { createOperationsLog } from '../shared/operations-log';
-import { createWorkspaceContext } from '../shared/workspace-context';
+import { loadWorkspaceConfig } from '../../config/load-config';
+import { createCheckoutStore } from '../../shared/checkout-store';
+import { createOperationsLog } from '../../shared/operations-log';
+import { createWorkspaceContext } from '../../shared/workspace-context';
 
 import { runSanity } from './sanity';
 

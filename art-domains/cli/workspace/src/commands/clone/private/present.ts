@@ -1,5 +1,5 @@
-import type { CheckoutStore } from '../../shared/checkout-store';
-import type { OperationsLog } from '../../shared/operations-log';
+import type { CheckoutStore } from '../../../shared/checkout-store';
+import type { OperationsLog } from '../../../shared/operations-log';
 
 function formatTable(rows: string[][], headers: string[]): string {
 	const allRows = [headers, ...rows];

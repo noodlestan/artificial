@@ -1,9 +1,9 @@
 import { join } from 'node:path';
 
-import { loadCheckouts } from '../config/load-checkouts';
-import { saveCheckoutRecord } from '../private/records/checkout-record';
-import { scanCheckout } from '../shared/scan-checkout';
-import type { WorkspaceContext } from '../shared/workspace-context';
+import { loadCheckouts } from '../../config/load-checkouts';
+import { saveCheckoutRecord } from '../../private/records/checkout-record';
+import { scanCheckout } from '../../shared/scan-checkout';
+import type { WorkspaceContext } from '../../shared/workspace-context';
 
 import { cloneRepo } from './private/clone-repo';
 import { defaultLocation } from './private/default-location';
@@ -14,7 +14,7 @@ export async function cloneSpecific(
 	name: string,
 	target?: string,
 ): Promise<void> {
-	const { loadRepositories } = await import('../config/load-repositories');
+	const { loadRepositories } = await import('../../config/load-repositories');
 	const repos = loadRepositories(ctx.config, ctx.root);
 
 	const canonical = name.startsWith('@') ? name.split('/')[1] : name;
@@ -56,7 +56,7 @@ export async function cloneSpecific(
 			ctx.config.records.checkouts.path,
 			`${rescan.repo.name.toLowerCase().replace(/\s+/g, '-')}.art`,
 		);
-		const { getCurrentBranch } = await import('../private/git/get-current-branch');
+		const { getCurrentBranch } = await import('../../private/git/get-current-branch');
 		const actualBranch = await getCurrentBranch(join(ctx.root, rescan.record.location));
 		saveCheckoutRecord(
 			recordFile,

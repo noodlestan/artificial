@@ -2,12 +2,12 @@
 
 import { Command } from 'commander';
 
-import { runBranch } from './branch/branch';
-import { runClone } from './clone/clone';
-import { runLink } from './link/link';
-import { runPublish } from './publish/publish';
-import { runSanity } from './sanity/sanity';
-import { runUnlink } from './unlink/unlink';
+import { runBranch } from './commands/branch/branch';
+import { runClone } from './commands/clone/clone';
+import { runLink } from './commands/link/link';
+import { runPublish } from './commands/publish/publish';
+import { runSanity } from './commands/sanity/sanity';
+import { runUnlink } from './commands/unlink/unlink';
 
 export { defineConfig, loadWorkspaceConfig, verifyCheckouts } from './config';
 export type { RepositoryCheckout, RepositoryRecord, WorkspaceConfig } from './config';

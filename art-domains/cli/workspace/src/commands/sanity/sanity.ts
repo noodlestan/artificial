@@ -3,12 +3,16 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 
 import {
+	scanAllCheckouts,
+	scanCheckout,
+	scanExtraneousCheckouts,
+} from '../../shared/scan-checkout';
+import type { WorkspaceContext } from '../../shared/workspace-context';
+import {
 	presentCheckoutReport,
 	presentExtraneousReport,
 	presentOperationsReport,
 } from '../clone/private/present';
-import { scanAllCheckouts, scanCheckout, scanExtraneousCheckouts } from '../shared/scan-checkout';
-import type { WorkspaceContext } from '../shared/workspace-context';
 
 const WORKSPACE_REPO = {
 	name: 'Workspace',
