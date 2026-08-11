@@ -7,7 +7,7 @@ export type OperationOutcome = 'success' | 'failure';
 export interface OperationBase {
 	operation: string;
 	ts: Date;
-	checkout: Checkout;
+	checkout?: Checkout;
 	outcome: OperationOutcome;
 	message(): string;
 }

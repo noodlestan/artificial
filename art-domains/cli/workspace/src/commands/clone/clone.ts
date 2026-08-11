@@ -1,4 +1,6 @@
 import { loadWorkspaceConfig } from '../../config/load-config';
+import { presentCheckoutReport } from '../../private/present/present-checkout-report';
+import { presentOperationsReport } from '../../private/present/present-operations-report';
 import { createCheckoutStore } from '../../shared/checkout-store';
 import { createOperationsLog } from '../../shared/operations-log';
 import { createWorkspaceContext } from '../../shared/workspace-context';
@@ -28,14 +30,15 @@ export async function runClone({
 
 	if (all) {
 		await cloneAll(ctx);
-		return ctx;
-	}
-
-	if (name) {
+	} else if (name) {
 		await cloneSpecific(ctx, name, target);
-		return ctx;
+	} else {
+		await cloneStatus(ctx);
 	}
 
-	await cloneStatus(ctx);
+	presentCheckoutReport(ctx.store);
+	presentOperationsReport(ctx.log);
+	ctx.store.syncRecords();
+
 	return ctx;
 }

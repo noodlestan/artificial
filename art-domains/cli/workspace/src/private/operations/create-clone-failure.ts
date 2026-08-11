@@ -15,21 +15,24 @@ function extractReason(raw: string): string {
 	return match ? match[1] : (raw.split('\n')[0]?.trim() ?? 'unknown error');
 }
 
-export function createCloneFailure(checkout: Checkout, e: unknown): CloneFailure {
+export function createCloneFailure(checkout?: Checkout, e?: unknown): CloneFailure {
 	const rawError = e instanceof Error ? e.message : String(e);
+
+	const location = checkout?.record.location || 'unknown';
+	const repoName = checkout?.repo.name || 'unknmown';
 
 	return {
 		ts: new Date(),
 		checkout,
 		outcome: 'failure',
 		operation: 'clone',
-		location: checkout.record.location,
+		location: checkout?.record.location || 'unknown',
 		error: rawError,
 		message() {
-			return `clone failed on ${checkout.repo.name}: ${extractReason(this.error)}`;
+			return `clone failed on ${repoName}: ${extractReason(this.error)}`;
 		},
 		errorSerialized() {
-			return `CloneError: ${checkout.repo.name} at ${checkout.record.location} — ${this.message()}\n\n${formatRawError(this.error)}`;
+			return `CloneError: ${repoName} at ${location} — ${this.message()}\n\n${formatRawError(this.error)}`;
 		},
 	};
 }

@@ -11,7 +11,7 @@ export function presentOperationsReport(log: OperationsLog): void {
 	const headers = ['', 'repo', 'operation', 'message'];
 	const rows = operations.map(op => [
 		op.outcome === 'success' ? '🟢' : '🔴',
-		op.checkout.repo.name,
+		op.checkout?.repo.name || 'unknown',
 		op.operation,
 		op.message(),
 	]);

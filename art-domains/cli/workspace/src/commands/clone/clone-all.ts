@@ -1,6 +1,4 @@
 import { loadCheckouts } from '../../config/load-checkouts';
-import { presentCheckoutReport } from '../../private/present/present-checkout-report';
-import { presentOperationsReport } from '../../private/present/present-operations-report';
 import type { WorkspaceContext } from '../../shared/workspace-context';
 
 import { cloneIfMissing } from './private/clone-if-missing';
@@ -24,8 +22,4 @@ export async function cloneAll(ctx: WorkspaceContext): Promise<void> {
 	for (const checkout of ctx.store.getAllCheckouts()) {
 		await cloneIfMissing(ctx, checkout);
 	}
-
-	presentCheckoutReport(ctx.store);
-	presentOperationsReport(ctx.log);
-	ctx.store.syncRecords();
 }
