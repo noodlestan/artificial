@@ -31,10 +31,19 @@ program
 
 program
 	.command('branch')
-	.description('Branch across repos')
-	.action(async () => {
+	.description('Branch across checkouts')
+	.argument('<branch>', 'branch name to create or switch to')
+	.argument('[checkouts...]', 'checkouts to branch (default: all checkouts)')
+	.action(async (branch: string, checkoutNames: string[]) => {
 		const root = process.cwd();
-		await runBranch({ root });
+		const config = await (await import('./config/load-config')).loadWorkspaceConfig(root);
+		const { createCheckoutStore } = await import('./shared/checkout-store');
+		const { createOperationsLog } = await import('./shared/operations-log');
+		const { createWorkspaceContext } = await import('./shared/workspace-context');
+		const store = createCheckoutStore(config, root);
+		const log = createOperationsLog();
+		const ctx = createWorkspaceContext(config, root, store, log);
+		await runBranch(ctx, branch, checkoutNames);
 	});
 
 program

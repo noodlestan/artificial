@@ -32,6 +32,7 @@ export interface RepositoryCheckout {
 
 export interface CheckoutRecord {
 	name: string;
+	repository?: string;
 	location: string;
 	branch: string;
 }

@@ -16,6 +16,10 @@ export function loadCheckouts(config: WorkspaceConfig, root: string): Repository
 	const checkouts: RepositoryCheckout[] = [];
 	for (const file of files) {
 		const record = readCheckoutRecord(join(dir, file));
+		if (!record.name) {
+			console.warn('checkout record with empty name, skipped');
+			continue;
+		}
 		const repo = repos.find(r => r.name === record.name);
 		if (repo) {
 			checkouts.push({
@@ -24,7 +28,14 @@ export function loadCheckouts(config: WorkspaceConfig, root: string): Repository
 				branch: record.branch,
 			});
 		} else {
-			console.warn(`checkout ${record.name}: no such repository record, skipped`);
+			console.warn(
+				`checkout ${record.name}: no matching repository record, using synthetic repository`,
+			);
+			checkouts.push({
+				repo: { name: record.name, remote: '' },
+				location: record.location,
+				branch: record.branch,
+			});
 		}
 	}
 	return checkouts;

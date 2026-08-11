@@ -1,12 +1,8 @@
-import type { RepositoryRecord } from '../config/types';
+import type { CheckoutRecord, RepositoryRecord } from '../config/types';
 
 export interface Checkout {
 	repo: RepositoryRecord;
-	record: {
-		name: string;
-		location: string;
-		branch: string;
-	};
+	record: CheckoutRecord;
 	exists: boolean;
 	branch: string;
 	remoteBranch: string | null;

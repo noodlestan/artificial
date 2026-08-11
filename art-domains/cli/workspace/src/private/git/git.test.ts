@@ -8,6 +8,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { getCurrentBranch } from './get-current-branch';
 import { getRemoteBranch } from './get-remote-branch';
 import { getUnpushedCount } from './get-unpushed-count';
+import { hasLocalBranch } from './has-local-branch';
 import { hasMergeConflicts } from './has-merge-conflicts';
 import { hasRemote } from './has-remote';
 import { isDetachedHead } from './is-detached-head';
@@ -86,6 +87,28 @@ describe('hasMergeConflicts', () => {
 		const conflicts = await hasMergeConflicts(dir);
 
 		expect(conflicts).toBe(false);
+	});
+});
+
+describe('hasLocalBranch', () => {
+	it('returns true when the branch exists locally', async () => {
+		const dir = makeTempDir();
+		await initGitRepo(dir);
+		const git = simpleGit(dir);
+		await git.checkoutLocalBranch('feature');
+
+		const exists = await hasLocalBranch(dir, 'feature');
+
+		expect(exists).toBe(true);
+	});
+
+	it('returns false when the branch does not exist locally', async () => {
+		const dir = makeTempDir();
+		await initGitRepo(dir);
+
+		const exists = await hasLocalBranch(dir, 'nonexistent');
+
+		expect(exists).toBe(false);
 	});
 });
 
