@@ -68,11 +68,15 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `artificials/_backlog/plan-poc-parse/instructions/smoke-parse-section-block__report.md`
 
-### `construct-stack-record-builder` - `DRAFT`
+### `construct-stack-record-builder` - `COMMITTED`
 
 **Commit Message:** `poc-parse: add construct-stack record builder`
 
-**Instructions File:** none yet
+**Instructions File:** `repos/artificial/_backlog/plan-poc-parse/instructions/construct-stack-record-builder.md`
+
+**Evidence:** commit `7d23a6e`; artefacts — `art-js/cli/poc-parse/src/parse/builder.ts` (`buildDocument(markdown): Document` construct-stack builder), `art-js/cli/poc-parse/src/parse/parse.ts` (parse entry point + CLI), deleted `art-js/cli/poc-parse/src/parse/smoke-parse.ts`. `tsc --noEmit` clean; parse CLI emits JSON `SectionBlock`/`FieldBlock`/`NaturalBlock`/`Tag` records (corpus regression matches smoke counts; both tags surfaced).
+
+**Report:** `repos/artificial/_backlog/plan-poc-parse/instructions/construct-stack-record-builder__report.md`
 
 ### `cross-check-grammar-wip` - `DRAFT`
 
@@ -108,3 +112,4 @@ For the delegatee (shared context; per-step context is in each instruction file)
 - `scaffold-poc-parse`: see `repos/artificial/_backlog/plan-poc-parse/instructions/scaffold-poc-parse__report.md`. Key planner items F1–F3 (workspace entry in `artificials/package.json` not repo-root; scaffolder naming `Scaffolder Skeleton: CLI Package`; `ci` deferred, no build/deps yet) + technical-writer items F4–F5 (tsconfig extends path; README link targets).
 - `core-record-schema`: see `repos/artificial/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`. Key planner item F1 (stale `_research.md` path: `artificials/architecture/records/adr/_research.md` → `artificials/ops/records/adr/_research.md`; affects plan.md lines 21, 37 and \_architect.md line 11).
 - `smoke-parse`: see `repos/artificial/_backlog/plan-poc-parse/instructions/smoke-parse-section-block__report.md`. Planner items F1–F3 (micromark API: `preprocess() → parse().document().write() → postprocess()` pipeline, not `parse()` directly; event shape `[enterExit, token, context]`, not `[token, type, enterExit]`; micromark transitive dep note). Technical-writer item F4 (findings recommendation clarifies "micromark direct" means "micromark + our own thin from-markdown layer", two-layer architecture preserved).
+- `construct-stack-record-builder`: see `repos/artificial/_backlog/plan-poc-parse/instructions/construct-stack-record-builder__report.md`. Planner items P1–P4 (field stays open until a terminator, not popped at strong exit; sections nest by heading level via `closeSections`, not popped at atxHeading exit; CLI reads `process.argv[2]`; CLI resolves the file arg cwd-first then against workspace root). Technical-writer items T1–T2 (lint deps ARE installed — lift the "Do NOT run npm run lint" note; consider excluding fenced spans from tag detection).
