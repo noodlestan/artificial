@@ -5,7 +5,7 @@ Workspace orchestration CLI for the Noodlestan ecosystem.
 ## Commands
 
 - `art-workspace clone` — Clone repos from manifest
-- `art-workspace branch` — Branch across repos
+- `art-workspace branch` — Branch across checkouts
 - `art-workspace link` — Symlink packages for local dev
 - `art-workspace sanity` — Check repo status
 - `art-workspace publish` — Publish packages

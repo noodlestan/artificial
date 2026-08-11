@@ -15,7 +15,7 @@ This file tracks the forward-looking plan: why, principles, NFRs, definitions, c
 
 ## Why
 
-The Noodlestan ecosystem spans multiple independent repositories (`artificial`, `purrception`, `purrtrait`, `purrpose`, `no-comply`, `workspace-tooling`). Each repo builds standalone, but cross-repo development requires coordination: cloning all repos, branching across them, symlinking for local dev, and publishing packages. The workspace meta-repo orchestrates this workflow.
+The Noodlestan ecosystem spans multiple independent repositories (`artificial`, `purrception`, `purrtrait`, `purrpose`, `no-comply`, `workspace-tooling`). Each repo builds standalone, but cross-repo development requires coordination: cloning relevant repositories to controlled checkouts, branching across them, symlinking for local dev, and publishing packages. The workspace meta-repo orchestrates this workflow.
 
 ## Principles
 

@@ -44,13 +44,14 @@ Repo names are case-insensitive and package names (e.g. `@noodlestan/artificial`
 
 ## Branch
 
-**Usage:** `branch <branch> [<repo>...]`
+**Usage:** `branch <branch> [<checkout-name>...]`
 
-Create and checkout the same feature branch in each specified repository, enabling coordinated cross-repo development. Procedure: for each repo — create branch, checkout, record a `branch created` operation. Present Checkout Report + Operations Report.
+Create and checkout the same feature branch in each specified checkout (all checkouts when none specified), enabling coordinated cross-repo development. Procedure: for each checkout — create branch if needed, checkout, record a `branch created` operation. Update the checkout record's branch. Present Checkout Report + Operations Report.
 
 **Edge cases:**
 
-- Repo not cloned → skip with warning, log operation.
+- Unknown checkout → warn on stderr, skip.
+- Checkout not cloned → skip with warning, log failure operation.
 - Branch already exists → checkout the existing branch.
 - Uncommitted changes → warn but proceed (`git checkout -b` handles this).
 

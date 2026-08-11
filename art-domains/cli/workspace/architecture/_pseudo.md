@@ -213,29 +213,25 @@ clone(all, name, target)
   presentExtraneousReport(ctx.store)
 ```
 
-### Command: branch <branch> [<repos...>]
+### Command: branch <branch> [<checkoutNames...>]
 
-**Responsibility:** Create and checkout a feature branch across multiple repos (all repos when none specified). Present Checkout Report + Operations Report.
+**Responsibility:** Create and checkout a feature branch across multiple checkouts (all checkouts when none specified), update checkout records and present Checkout Report + Operations Report.
 
 ```pseudo
-branch(name, repoNames)
+branch(name, checkoutNames)
   ctx = createWorkspaceContext(config, root, store, log)
-  repos = loadRepositories(ctx)
-  repoNames = repoNames.length > 0 ? repoNames : repos.map(r => r.name)   // no repos → all
+  ctx.store.loadExistingCheckouts()
+  checkouts = ctx.store.getAllCheckouts()
+  checkoutNames = checkoutNames.length > 0 ? checkoutNames : checkouts.map(c => c.record.name)   // no checkouts → all
 
-  for repoName in repoNames:
-    repo = repos.find(r => r.name.toLowerCase() === repoName.toLowerCase())
-    if not repo:
-      print warning "unknown repo: " + repoName
-      continue
-
-    checkout = ctx.store.findCheckout(repo.name)
+  for checkoutName in checkoutNames:
+    checkout = ctx.store.findCheckout(checkoutName)
     if not checkout:
-      print warning "not cloned: " + repo.name
+      print warning "unknown checkout: " + checkoutName
       continue
     checkout = scanCheckout(ctx, checkout)
     if not checkout.exists:
-      ctx.log.log(createBranchFailure(checkout, name, "repo not cloned"))
+      ctx.log.log(createBranchFailure(checkout, name, "checkout not cloned"))
       continue
 
     dir = join(ctx.root, checkout.record.location)
@@ -258,8 +254,8 @@ branch(name, repoNames)
 ```
 
 **Edge cases:**
-- Unknown repo: warn on stderr, skip (no checkout to attach an operation to)
-- Repo not cloned: log `branch created` failure "repo not cloned", skip
+- Unknown checkout: warn on stderr, skip (no checkout to attach an operation to)
+- Checkout not cloned: log `branch created` failure "checkout not cloned", skip
 - Branch already exists: switch to the existing branch, log success "switched to {branch}"
 - Uncommitted changes: warn but proceed (git checkout handles this)
 

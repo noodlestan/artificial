@@ -182,12 +182,18 @@ Implement `art-workspace branch` command.
 
 **Use case:**
 
-- `art-workspace branch feat/x [repos...]` → create/switch to `feat/x` in the specified repos (all repos when omitted).
+- `art-workspace branch feat/x [checkout-name, ...]` → create/switch to `feat/x` in the specified checkouts.
 
 **Responsibilities:**
 
-- Parse branch name and repo list
-- Create or checkout branch in each specified repo
+- Parse branch name and checkout
+- Load checkout list and validate checkouts exist
+- Checkout branch in each specified checkout
+
+**Also in scope (record-layer cleanup, first steps):**
+
+- Single `CheckoutRecord` type — remove the duplicate in `src/private/records/checkout-record.ts` and the inline `record` shape in `src/shared/checkout.ts`; keep the definition in `src/config/types.ts` (gains `repository?`).
+- Single `loadCheckouts` loader — remove the duplicate in `src/private/records/checkout-record.ts`; keep `src/config/load-checkouts.ts`; move the loader tests to `src/config/load-checkouts.test.ts`.
 
 **Pseudo details:** `architecture/_pseudo.md` → Use Cases → branch command.
 
