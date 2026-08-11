@@ -1,6 +1,6 @@
 # Pseudo: Workspace CLI
 
-Description of the CLI parts: entry point, data structures, use cases (expanded from architect file), and main auxiliary functions. Zero real code — bodies prescribe what to do, not how to implement.
+Mostly useful for prototyping data structures or interactions (but these are detailed in `architecture/{topic}.md` files once settled) and for defining expectations (BDD) and logic (pseudo) for use cases. Zero real code — bodies prescribe what to do, not how to implement.
 
 ## Entry Point
 
@@ -16,146 +16,82 @@ main
 
 ## Data Structures
 
-### Records
+Detailed definitions live in `architecture/context-model.md`. Symbols relevant to the use cases below:
 
-**WorkspaceRecord:** `$WORKSPACE/.agents/domains/workspace/structures/workspace__structure.md`
-**RepositoryRecord:** `$WORKSPACE/.agents/domains/workspace/structures/repository__structure.md`
-**CheckoutRecord:** `$WORKSPACE/.agents/domains/workspace/structures/checkout__structure.md`
+- **WorkspaceContext** — single object passed to all routines: `config`, `root`, `store`, `log`
+- **CheckoutStore** — in-memory checkout state: `addCheckout`, `loadExistingCheckouts`, `findCheckout` (case-insensitive), `setCheckout`, `getAllCheckouts`, `markExtraneous`, `syncRecords`
+- **Checkout** — per-repo state: `repo`, `record` (name/location/branch), `exists`, `branch`, `remoteBranch`, `dirty`, `unpushed`, `issues`, `extraneous`
+- **Records** — `WorkspaceRecord`, `RepositoryRecord`, `CheckoutRecord` (structure files in `.agents/domains/workspace/structures/`)
 
-### WorkspaceContext
+## Operation Logs
 
-Per-command invocation context. Passed as a single object to all routines — never destructured.
+Detailed definitions live in `architecture/operations-log.md`. Symbols relevant to the use cases below:
 
-```
-WorkspaceContext
-  config: WorkspaceConfig
-  root: string
-  store: CheckoutStore
-  log: OperationsLog
-```
-
-### CheckoutStore
-
-In-memory state of all known checkouts. Created per command invocation.
-
-```
-CheckoutStore
-  checkouts: Map<name, Checkout>    // keys are lowercase
-
-  addCheckout(repo, location) → Checkout     // creates in store (records synced separately)
-  loadExistingCheckouts()                    // hydrate from disk records into store
-  findCheckout(name) → Checkout             // case-insensitive lookup
-  getCheckout(name) → Checkout              // exact (lowercase) lookup
-  setCheckout(checkout)                     // replace checkout in store by name
-  getAllCheckouts() → Checkout[]
-  markExtraneous(location) → Checkout        // creates without persisting
-  getExtraneous() → Checkout[]
-  syncRecords()                              // persist store state to disk records
-```
-
-### Checkout
-
-Individual repo checkout state.
-
-```
-Checkout
-  repo: RepositoryRecord
-  record: { name, location, branch }   // persisted fields; branch is the recorded branch, not the scanned one
-  exists: boolean
-  branch: string                       // scanned branch (or record default before scan)
-  remoteBranch: string | null          // null = no tracking branch (new/untracked)
-  detached: boolean
-  conflicts: boolean
-  dirty: boolean
-  hasRemote: boolean
-  unpushed: number                     // 0 = nothing to push, >0 = commits ahead of remoteBranch
-  issues: string[]
-  extraneous: boolean
-```
-
-Notes: `name`/`location`/`branch` are read as `checkout.repo.name`, `checkout.record.location`, `checkout.branch`. A repo with no remote branch is not an issue — it has `remoteBranch: null` and push creates the branch on the remote.
-
-### OperationsLog
-
-Append-only log of side effects performed during a command. Side effects are typed operations created by factories in `src/private/operations/` and appended with `log(operation)`.
-
-```
-OperationsLog
-  log(operation)        // append a typed Operation
-  all() → Operation[]
-  since(ts) → Operation[]
-  latest(number) → Operation[]
-```
-
-### Operation
-
-Typed operation records. Every operation carries the checkout it acted on, its outcome, and a `message()` used in the Operations Report.
-
-```
-OperationBase
-  operation: string   // one of: clone | push | publish | branch created | linked | unlink
-  ts: date
-  checkout: Checkout
-  outcome: 'success' | 'failure'
-  message() → string
-
-OperationSuccess extends OperationBase   // outcome: 'success'
-OperationFailure extends OperationBase   // outcome: 'failure'
-  error: string
-  errorSerialized() → string
-
-// Successes carry their specifics; failures mirror them and add error/errorSerialized:
-CloneSuccess    { operation: 'clone', location }
-PushSuccess     { operation: 'push', branch }
-PublishSuccess  { operation: 'publish', package, version }
-BranchSuccess   { operation: 'branch created', branch }
-LinkedSuccess   { operation: 'linked', package, target }
-UnlinkSuccess   { operation: 'unlink', package, source }
-
-CloneFailure, PushFailure, PublishFailure, BranchFailure, LinkedFailure, UnlinkFailure
-```
-
-Factories (one file per factory in `src/private/operations/`): `createCloneSuccess(checkout)`, `createPushSuccess(checkout, branch)`, `createPushFailure(checkout, branch, error)`, `createBranchSuccess(checkout, branch, message?)`, and so on — messages are fixed by the factory unless noted.
+- **OperationsLog** — append-only: `log(operation)`, `all()`, `since(ts)`, `latest(n)`
+- **Operation** — `operation` kind, `ts`, `checkout`, `outcome` (success/failure), `message()`
+- **Kinds** — `clone`, `push`, `publish`, `branch created`, `linked`, `unlink`
+- **Factories** — one per kind in `src/private/operations/`: `createCloneSuccess`, `createPushSuccess`, `createPushFailure`, `createBranchSuccess`, `createBranchFailure`, etc.
 
 ## Reports
 
-Every command that touches checkouts produces one or more reports. Reports are presented as markdown tables. Always the full table — no collapsing. Each report prints a header line (e.g. `Checkout Report:`), the table, and an empty line after the table. Presenters live in `src/private/present/` — one function per file (`format-table` shared).
+Detailed definitions live in `architecture/reports.md`. Symbols relevant to the use cases below:
 
-### Checkout Report
-
-The primary status table. Present after every command that reads or mutates checkouts. Headers: `repo | location | branch | states`; rows sorted by repo name; `states` is `issues` joined with `; ` or `clean`.
-
-### Operations Report
-
-Appended when a command performs side effects. Omitted when nothing was done. Headers: `'' | repo | operation | message`; column zero carries the outcome marker (🟢 success / 🔴 failure).
-
-|     | repo        | operation       | message                 |
-| --- | ----------- | --------------- | ----------------------- |
-| 🟢  | artificial  | clone           | to repos/artificial     |
-| 🟢  | purrception | push            | to origin/feat/x        |
-| 🔴  | purrception | push            | failed to push some refs |
-
-### Extraneous Report
-
-Directories under the checkouts path with no matching record. Presented by `clone` (no-args) and `sanity`. Headers: `directory | branch | states`; rows read `record.location` and `record.branch`.
-
-| directory      | branch | states            |
-| -------------- | ------ | ----------------- |
-| my-test-clone  | main   | clean             |
-| old-experiment | -      | uncommitted files |
+- **Checkout Report** — `repo | location | branch | states`; presented after every command that reads or mutates checkouts
+- **Operations Report** — `🟢/🔴 | repo | operation | message`; appended when side effects occurred
+- **Extraneous Report** — `directory | branch | states`; directories under checkouts path with no matching record
 
 ## Use Cases
 
-### Command: clone [--all] [name] [target]
+### Command: clone [--all] [name] [location]
 
 **Responsibility (clone --all):** Bootstrap workspace by cloning all repos, updating records, and presenting the Checkout Report with Operations Report.
 
-**Responsibility (clone <repo>):** Clone a single repo for targeted work, update records, and present the Checkout Report with Operations Report.
+**Responsibility (clone <repo>):** Clone a single repo. The first argument is the repository name (manifest lookup). The optional second argument is a location basename under the config checkouts path. The checkout name is the location basename (or the repo name when no location is given). Multiple checkouts of the same repo are supported.
 
 **Responsibility (clone, no args):** Present the Checkout Report and Extraneous Report without cloning.
 
+
+**BDD:**
+
+```gherkin
+Feature: Clone single repo
+  Scenario: clone with default location
+    Given repo "Artificial" exists in the manifest
+    When I run "art-workspace clone Artificial"
+    Then checkout "Artificial" is created at "repos/artificial"
+    And the Checkout Report contains "Artificial"
+
+  Scenario: clone with explicit location
+    Given repo "Artificial" exists in the manifest
+    When I run "art-workspace clone Artificial foo"
+    Then checkout "foo" is created at "repos/foo"
+    And the Checkout Report contains "foo"
+
+  Scenario: clone is idempotent
+    Given checkout "Artificial" exists at "repos/artificial"
+    When I run "art-workspace clone Artificial"
+    Then no new checkout is created
+    And the Checkout Report contains "Artificial"
+
+  Scenario: unknown repo fails
+    When I run "art-workspace clone Unknown"
+    Then a clone failure is logged for "unknown repo"
+
+  Scenario: location taken by different checkout
+    Given checkout "foo" exists at "repos/foo"
+    When I run "art-workspace clone Artificial foo"
+    Then a clone failure is logged for "location repos/foo is already used"
+
+  Scenario: checkout exists at different location
+    Given checkout "Artificial" exists at "repos/artificial"
+    When I run "art-workspace clone Artificial custom"
+    Then a clone failure is logged for "cannot clone to repos/custom"
+```
+
+**Pseudo:**
+
 ```pseudo
-clone(all, name, target)
+clone(all, name, location)
   ctx = createWorkspaceContext(config, root, store, log)
   repos = loadRepositories(ctx)
   ctx.store.loadExistingCheckouts()
@@ -165,14 +101,14 @@ clone(all, name, target)
 
     for repo in repos:
       if not ctx.store.findCheckout(repo.name):
-        override = existingRecords.find(r => r.name === repo.name)
-        location = override?.location ?? defaultLocation(repo)
-        ctx.store.addCheckout(repo, location)
+        override = existingRecords.find(r => r.repo.name === repo.name)
+        loc = override?.location ?? defaultLocation(repo)
+        ctx.store.addCheckout(repo, loc)
 
     for checkout in ctx.store.getAllCheckouts():
       checkout = scanCheckout(ctx, checkout)
       if not checkout.exists:
-        cloneRepo(checkout.location, checkout.repo.remote)
+        cloneRepo(checkout.record.location, checkout.repo.remote)
         checkout = scanCheckout(ctx, checkout)
         ctx.log.log(createCloneSuccess(checkout))
 
@@ -185,19 +121,34 @@ clone(all, name, target)
     canonical = name.startsWith("@") ? name.split("/")[1] : name
     repo = repos.find(r => r.name.toLowerCase() === canonical.toLowerCase())
     if not repo:
-      report error "unknown repo"
+      ctx.log.log(createCloneFailure(unknownCheckout, 'unknown repo "' + name + '"'))
       return
 
-    existingRecords = loadCheckouts(ctx)
-    checkout = ctx.store.findCheckout(canonical)
-    if not checkout:
-      override = existingRecords.find(r => r.name === repo.name)
-      location = target ?? override?.location ?? defaultLocation(repo)
-      checkout = ctx.store.addCheckout(repo, location)
+    // Derive checkout name and resolved location
+    checkoutName = location ? basename(location) : repo.name
+    resolvedLocation = join(ctx.config.records.checkouts.path, checkoutName.toLowerCase().replace(/\s+/g, "-"))
+
+    // Match by checkout name
+    existing = ctx.store.findCheckout(checkoutName)
+    if existing:
+      if existing.record.location !== resolvedLocation:
+        ctx.log.log(createCloneFailure(existing, "checkout for '" + repo.name + "' exists at " + existing.record.location + ", cannot clone to " + resolvedLocation))
+        return
+      // Idempotent — same location
+      checkout = existing
+    else:
+      // Check if location is taken by a different checkout
+      allCheckouts = ctx.store.getAllCheckouts()
+      conflicting = allCheckouts.find(c => c.record.location === resolvedLocation)
+      if conflicting:
+        ctx.log.log(createCloneFailure(conflicting, "location " + resolvedLocation + " is already used by checkout '" + conflicting.record.name + "'"))
+        return
+
+      checkout = ctx.store.addCheckout(repo, resolvedLocation)
 
     checkout = scanCheckout(ctx, checkout)
     if not checkout.exists:
-      cloneRepo(checkout.location, repo.remote)
+      cloneRepo(checkout.record.location, repo.remote)
       checkout = scanCheckout(ctx, checkout)
       ctx.log.log(createCloneSuccess(checkout))
 
@@ -216,6 +167,8 @@ clone(all, name, target)
 ### Command: branch <branch> [<checkoutNames...>]
 
 **Responsibility:** Create and checkout a feature branch across multiple checkouts (all checkouts when none specified), update checkout records and present Checkout Report + Operations Report.
+
+**Pseudo:**
 
 ```pseudo
 branch(name, checkoutNames)
@@ -253,11 +206,41 @@ branch(name, checkoutNames)
   ctx.store.syncRecords()
 ```
 
-**Edge cases:**
-- Unknown checkout: warn on stderr, skip (no checkout to attach an operation to)
-- Checkout not cloned: log `branch created` failure "checkout not cloned", skip
-- Branch already exists: switch to the existing branch, log success "switched to {branch}"
-- Uncommitted changes: warn but proceed (git checkout handles this)
+**BDD:**
+
+```gherkin
+Feature: Branch across checkouts
+  Scenario: branch creates new branch in specified checkouts
+    Given checkout "Artificial" is cloned on branch "main"
+    And checkout "Purrception" is cloned on branch "main"
+    When I run "art-workspace branch feat/x Artificial Purrception"
+    Then branch "feat/x" exists in checkout "Artificial"
+    And branch "feat/x" exists in checkout "Purrception"
+    And the Operations Report contains "Artificial | branch created"
+    And the Operations Report contains "Purrception | branch created"
+
+  Scenario: branch defaults to all checkouts when none specified
+    Given checkout "Artificial" is cloned on branch "main"
+    And checkout "Purrception" is cloned on branch "main"
+    When I run "art-workspace branch feat/x"
+    Then branch "feat/x" exists in checkout "Artificial"
+    And branch "feat/x" exists in checkout "Purrception"
+
+  Scenario: branch switches to existing branch
+    Given checkout "Artificial" has branch "feat/x"
+    When I run "art-workspace branch feat/x Artificial"
+    Then the Operations Report contains "Artificial | branch created | switched to feat/x"
+
+  Scenario: unknown checkout warns and skips
+    When I run "art-workspace branch feat/x Unknown"
+    Then a warning is printed for "unknown checkout: Unknown"
+    And no operations are logged
+
+  Scenario: uncloned checkout logs failure
+    Given checkout "Artificial" is not cloned
+    When I run "art-workspace branch feat/x Artificial"
+    Then the Operations Report contains "Artificial | branch created | failure"
+```
 
 ### Command: link <repo> [namespaces] [packages]
 
@@ -291,11 +274,6 @@ link(repo, namespaces, packages)
 
   presentOperationsReport(ctx.log)
 ```
-
-**Edge cases:**
-- Consumer not cloned: skip with warning
-- Existing symlink: replace
-- Existing directory (npm-installed): error — don't overwrite without confirmation
 
 ### Command: unlink <repo> [namespaces] [packages]
 
@@ -333,39 +311,12 @@ unlink(repo, namespaces, packages)
   presentOperationsReport(ctx.log)
 ```
 
-**Edge cases:**
-- Consumer not cloned: skip with warning
-- Not a symlink: skip (npm-installed)
-- Symlink doesn't exist: skip
-- npm install fails: report error, continue
-
-### Command: sanity [--auto]
-
-**Responsibility:** Check git status across all repos plus the workspace root. Present Checkout Report + Extraneous Report + Operations Report. With --auto, push clean unpushed repos and sync records.
-
-```pseudo
-sanity(auto)
-  ctx = createWorkspaceContext(config, root, store, log)
-
-  ctx.store.loadExistingCheckouts()
-  wsCheckout = ctx.store.addCheckout(workspaceRepo, ".")   // workspace root as a checkout
-  scanCheckout(ctx, wsCheckout)
-  scanAllCheckouts(ctx)
-  scanExtraneousCheckouts(ctx)
-
-  if auto:
-    pushCleanCheckouts(ctx)   // per checkout: shouldPushCheckout → pushCheckout
-
-  presentCheckoutReport(ctx.store)
-  presentExtraneousReport(ctx.store)
-  presentOperationsReport(ctx.log)
-  if auto:
-    ctx.store.syncRecords()
-```
 
 ### Command: publish [--auto]
 
 **Responsibility:** Push repos and publish packages to npm. Present Checkout Report + Operations Report.
+
+**Pseudo:**
 
 ```pseudo
 publish(auto)
@@ -398,13 +349,6 @@ publish(auto)
     ctx.store.syncRecords()
 ```
 
-**Edge cases:**
-- Repo not cloned: skip with warning
-- No remote configured: skip push, log issue
-- Package already published: skip
-- npm publish fails: report error, continue with other packages
-- OTP required: error if `--auto`
-
 ## Auxiliary Functions
 
 ### Function: createWorkspaceContext(config, root, store, log)
@@ -423,6 +367,8 @@ createWorkspaceContext(config, root, store, log)
 ### Function: scanCheckout(ctx, checkout)
 
 **Responsibility:** Read git state from filesystem, create a new checkout instance with updated state, and set it in the store. Returns the new checkout.
+
+**Pseudo:**
 
 ```pseudo
 scanCheckout(ctx, checkout)
@@ -460,6 +406,8 @@ scanCheckout(ctx, checkout)
 
 **Responsibility:** Scan all checkouts in the store.
 
+**Pseudo:**
+
 ```pseudo
 scanAllCheckouts(ctx)
   for checkout in ctx.store.getAllCheckouts():
@@ -469,6 +417,8 @@ scanAllCheckouts(ctx)
 ### Function: scanExtraneousCheckouts(ctx)
 
 **Responsibility:** Scan for extraneous (non-record based) checkouts under config.checkouts.path.
+
+**Pseudo:**
 
 ```pseudo
 scanExtraneousCheckouts(ctx)
@@ -486,6 +436,8 @@ scanExtraneousCheckouts(ctx)
 
 **Responsibility:** Decide whether a checkout should be pushed by `sanity --auto`.
 
+**Pseudo:**
+
 ```pseudo
 shouldPushCheckout(checkout)
   if not checkout.exists: return false
@@ -499,6 +451,8 @@ shouldPushCheckout(checkout)
 ### Function: pushCheckout(ctx, checkout)
 
 **Responsibility:** Push a checkout's branch to origin. Creates the branch on the remote when it has no upstream (`remoteBranch` null).
+
+**Pseudo:**
 
 ```pseudo
 pushCheckout(ctx, checkout)
@@ -518,6 +472,8 @@ pushCheckout(ctx, checkout)
 
 **Responsibility:** Check whether a branch exists locally in a repo.
 
+**Pseudo:**
+
 ```pseudo
 hasLocalBranch(dir, branch)
   git rev-parse --verify --quiet refs/heads/branch in dir
@@ -527,6 +483,8 @@ hasLocalBranch(dir, branch)
 ### Function: presentCheckoutReport(store)
 
 **Responsibility:** Present the Checkout Report ordered by repo name.
+
+**Pseudo:**
 
 ```pseudo
 presentCheckoutReport(store)
@@ -540,6 +498,8 @@ presentCheckoutReport(store)
 ### Function: presentOperationsReport(log)
 
 **Responsibility:** Present the Operations Report. Omitted when no operations occurred.
+
+**Pseudo:**
 
 ```pseudo
 presentOperationsReport(log)
@@ -556,6 +516,8 @@ presentOperationsReport(log)
 
 **Responsibility:** Present the Extraneous Report. Omitted when none found.
 
+**Pseudo:**
+
 ```pseudo
 presentExtraneousReport(store)
   extraneous = store.getExtraneous()
@@ -570,6 +532,8 @@ presentExtraneousReport(store)
 ### Function: loadWorkspaceConfig(root)
 
 **Responsibility:** Load and parse the workspace config from `.art-workspace.mts`.
+
+**Pseudo:**
 
 ```pseudo
 loadWorkspaceConfig(root)
@@ -586,6 +550,8 @@ loadWorkspaceConfig(root)
 
 **Responsibility:** Read all repository records from the records directory.
 
+**Pseudo:**
+
 ```pseudo
 loadRepositories(ctx)
   scan ctx.config.records.repositories.path
@@ -596,6 +562,8 @@ loadRepositories(ctx)
 ### Function: loadCheckouts(ctx)
 
 **Responsibility:** Read all checkout records from the checkouts directory.
+
+**Pseudo:**
 
 ```pseudo
 loadCheckouts(ctx)
@@ -608,6 +576,8 @@ loadCheckouts(ctx)
 
 **Responsibility:** Clone a git repository to the specified location.
 
+**Pseudo:**
+
 ```pseudo
 cloneRepo(location, remote)
   git clone remote location
@@ -616,6 +586,8 @@ cloneRepo(location, remote)
 ### Function: defaultLocation(repo)
 
 **Responsibility:** Compute the default checkout location for a repository.
+
+**Pseudo:**
 
 ```pseudo
 defaultLocation(repo)

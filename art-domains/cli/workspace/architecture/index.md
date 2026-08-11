@@ -1,6 +1,14 @@
 # Architecture: Workspace CLI
 
-The workspace meta-repo orchestrates cross-repo work within an ecosystem. The workspace CLI (`@art-domains/workspace-cli`, binary `art-workspace`) is the tooling that performs that orchestration: it clones repositories, branches across them, symlinks packages for local development, checks repository status, and publishes packages.
+**Status:** `WORKING`
+
+**Pseudo:** `art-domains/cli/workspace/architecture/_pseudo.md`
+
+**Plans:**
+
+- `art-domains/cli/workspace/_backlog/3-now/plan-workspace-cli/plan.md` - `WORKING`
+
+**Description:** A workspace meta-repo orchestrates cross-repo work within an ecosystem via a workspace CLI (`@art-domains/workspace-cli`, binary `art-workspace`) that clones repositories, branches across checkouts, symlinks packages for local development, checks repository status, and publishes packages.
 
 ## Why
 
@@ -56,34 +64,9 @@ The CLI loads `.art-workspace.mts` at runtime by bundling it with esbuild (Vite-
 
 ## Use Cases
 
+- **Sanity** — check git status across all repos; with `--auto`, push clean unpushed repos.
 - **Clone** — bootstrap the workspace by cloning all repos (`clone --all`), clone a single repo (`clone <repo> [<target>]`), or report status without cloning (`clone`).
 - **Branch** — create and checkout the same feature branch across multiple repos for coordinated feature work.
-- **Link / Unlink** — symlink local packages into consumers' `node_modules` for local dev; remove the symlinks and restore npm packages.
-- **Sanity** — check git status across all repos; with `--auto`, push clean unpushed repos.
 - **Publish** — push repos and publish packages to npm.
+- **Link / Unlink** — symlink local packages into consumers' `node_modules` for local dev; remove the symlinks and restore npm packages.
 
-## Current State
-
-**Pseudo:** `art-domains/cli/workspace/architecture/_pseudo.md`
-
-**Implemented:**
-
-- Config system — `.art-workspace.mts` loading via esbuild bundle-at-runtime, typed `defineConfig`, record loading (repositories, checkouts).
-- Data model — `WorkspaceContext`, `CheckoutStore`, `Checkout`, `OperationsLog`, git-state scanning, record parsing, report presenters.
-- `clone` — all / specific / status modes, with Checkout Report and Operations Report.
-- `sanity` — full status scan with Extraneous Report, and `--auto` push.
-
-**Designed, not yet implemented:**
-
-- `branch`, `link`, `unlink`, `publish` — commands exist as stubs; the designed procedures are captured in `commands.md`.
-- Record syncing — `syncRecords()` (persisting store state to disk checkout records) is stubbed.
-- Reactive `watch` mode — designed to layer onto the same store and log APIs.
-
-## References
-
-- `config.md` — the configuration system (manifest, authoring, loading, exports).
-- `commands.md` — the command surface, procedures, and edge cases.
-- `context-model.md` — `WorkspaceContext`, `CheckoutStore`, `Checkout`, and records.
-- `operations-log.md` — `OperationsLog` and `Operation`.
-- `reports.md` — the checkout, operations, and extraneous reports.
-- `records/adr/` — decision records: `cli.art` (package structure, config, tooling), `execution-model.art` (imperative first, reactive later), `publish.art` (publish-then-symlink, npm registry).

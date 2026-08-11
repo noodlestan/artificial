@@ -6,8 +6,8 @@ The command surface of the workspace CLI, their procedures, and their edge cases
 
 | command | usage | status |
 | --- | --- | --- |
-| `clone` | `clone [--all] [<repo>] [<target>]` | implemented |
-| `branch` | `branch <branch> [<repo>...]` | designed |
+| `clone` | `clone [--all] [<repo>] [<location>]` | implemented |
+| `branch` | `branch <branch> [<checkout-name>...]` | implemented |
 | `link` | `link <repo> [<namespaces>] [<packages>]` | designed |
 | `unlink` | `unlink <repo> [<namespaces>] [<packages>]` | designed |
 | `sanity` | `sanity [--auto]` | implemented |
@@ -27,20 +27,24 @@ Commands share the same skeleton:
 
 ## Clone
 
-**Usage:** `clone [--all] [<repo>] [<target>]`
+**Usage:** `clone [--all] [<repo>] [<location>]`
 
 Three modes:
 
 - **`clone --all`** — bootstrap the workspace by cloning all repos from the workspace record, updating records, and presenting the Checkout Report with Operations Report.
-- **`clone <repo> [<target>]`** — clone a single repo for targeted work. Location resolution: argument → record override → default (`repos/{repo}`). Update records, present Checkout Report + Operations Report.
+- **`clone <repo> [<location>]`** — clone a single repo for targeted work. The first argument is the repository name (must exist in the manifest). The optional second argument is a location basename under the config checkouts path (e.g. `foo` → `repos/foo`). When omitted, the location defaults to `repos/{repo-name}`. The checkout name is the location basename (or the repo name when no location is given). Multiple checkouts of the same repo are supported — each gets a unique name derived from its location.
 - **`clone`** (no args) — status mode: present the Checkout Report and Extraneous Report without cloning.
+
+Location resolution: `join(config.records.checkouts.path, basename(location))`. The `basename()` call handles both bare names (`foo` → `repos/foo`) and full paths (`repos/foo` → `repos/foo`) — no double-prefix.
 
 Repo names are case-insensitive and package names (e.g. `@noodlestan/artificial`) are interchangeable with repo names. Cloning an existing checkout is idempotent — it reports the current state instead of cloning again.
 
 **Edge cases:**
 
-- Unknown repo name → error "unknown repo".
-- Custom target location must handle a previous checkout: either remove the old directory or refuse until the old checkout is cleaned up.
+- Unknown repo name → log `clone` failure: `unknown repo "{name}"`.
+- Location already used by a different checkout → log failure: `location {loc} is already used by checkout '{name}'`.
+- Checkout for this repo exists at a different location → log failure: `checkout for '{repo}' exists at {existing}, cannot clone to {resolved}`.
+- All unhappy paths produce a log operation (success or failure) with a clear message — never a silent return.
 
 ## Branch
 
@@ -109,5 +113,5 @@ Push repos and publish packages to npm. Procedure: iterate repos → check git �
 
 ## Implementation Status
 
-- **Implemented:** `clone` (all / specific / status) and `sanity` (scan + `--auto` push), on top of the shared data model and reports.
-- **Stubbed:** `branch`, `link`, `unlink`, `publish` — command entry points exist but print "TODO"; the procedures above are the designed behaviour (from `_backlog/_architect.md` use cases and the pseudo contract).
+- **Implemented:** `clone` (all / specific / status), `sanity` (scan + `--auto` push), and `branch` (create/switch across checkouts), on top of the shared data model and reports.
+- **Stubbed:** `link`, `unlink`, `publish` — command entry points exist but print "TODO"; the procedures above are the designed behaviour (from `_backlog/_architect.md` use cases and the pseudo contract).

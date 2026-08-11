@@ -56,3 +56,8 @@ None.
 ### For the crew
 
 The `@typescript-eslint/no-unused-vars` rule does not respect `_` prefix convention (rule set to `ERROR` without `argsIgnorePattern`). Used `eslint-disable-next-line` for stub function params.
+
+## Branch-Command Feedback (carried from branch-command iteration)
+
+- `npm run lint` fails on pre-existing prettier doc formatting only (`_backlog/` and `architecture/`, 42 files, none in `src/`); `eslint .` and `tsc --noEmit` pass. Pre-existing, not introduced by this work.
+- `npm run ci` is not runnable — no `ci` script defined in the package. Add a `ci` script to `package.json` (follow-up).
