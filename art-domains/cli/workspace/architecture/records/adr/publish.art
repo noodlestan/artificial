@@ -1,0 +1,39 @@
+# Module: Publish
+
+**Purpose:** Decisions about how packages are published, consumed across repos, and managed for local development.
+
+## Decision: Publish-Then-Symlink Pattern
+
+**Status:** Accepted
+
+**Context:** Cross-repo dependencies need a reliable consumption pattern that works with standard npm tooling and supports local development. Git-URL dependencies don't work for monorepo subdirectories (npm only installs the root package of a git dep, no `#path:` support). The delivery bridge pattern (root `main`/`types`/`exports` pointing to ONE package) doesn't scale when consumers need multiple packages from the same repo.
+
+**Decision:** Publish packages to npm, then use workspace-level symlinks for local development.
+
+**Consequences:** 
+- Standard npm tooling works (versioning, lockfiles, CI)
+- No git-URL hacks or delivery bridges
+- Symlinks for local dev are fast and reliable
+- Scales to any number of packages per repo
+- Need to publish packages before they can be consumed
+- Need workspace-level symlink orchestration tooling (`ops symlink <repo>`)
+
+## Decision: npm as Package Registry
+
+**Status:** Accepted
+
+**Context:** Packages need a registry for distribution. Options include git URLs, file: paths, or a proper package registry.
+
+**Decision:** Use npm as the package registry for all cross-repo dependencies.
+
+**Consequences:** Standard tooling works, versioning is explicit, lockfiles are reliable, CI/CD integrates naturally.
+
+## Decision: Workspace-Level Symlinks for Local Development
+
+**Status:** Accepted
+
+**Context:** When developing across repos, changes need to be visible without publishing on every edit.
+
+**Decision:** Use workspace-level symlinks to override npm-installed packages with local checkouts during development.
+
+**Consequences:** Fast iteration, no publish cycle needed for local dev, requires orchestration tooling.

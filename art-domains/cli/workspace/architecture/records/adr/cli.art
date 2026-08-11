@@ -1,0 +1,155 @@
+# Module: Workspace CLI
+
+**Purpose:** Decisions about the workspace orchestration tooling — its package structure, manifest format, and data sources.
+
+## Decision: CLI Package in Artificial Ecosystem
+
+**Status:** Adopted
+
+**Context:** The workspace meta-repo currently hosts cross-repo orchestration commands (`ops clone/branch/symlink/preview`) as shell scripts and manual processes. As the ecosystem grows, these commands need a proper home with versioning, testing, and distribution.
+
+**Decision:** Create `@art-domains/workspace-cli` at `repos/artificial/art-domains/cli/workspace` (bin: `art-workspace`). The CLI hosts workspace orchestration commands: `clone`, `branch`, `symlink`, `preview`. It follows the art-domains pattern: CLI package for commands, companion domain package (`@art-domains/workspace`) for structures and resources.
+
+**Consequences:** Workspace commands become versioned, testable, distributable. Artificial repo becomes the home for workspace tooling (in addition to art toolchain). Requires migrating current ops scripts to TypeScript.
+
+## Decision: Workspace Root as Private npm Package
+
+**Status:** Adopted
+
+**Context:** The workspace meta-repo was deliberately "not a build root" and had no `package.json`. To install and expose the workspace CLI and its npm scripts (`workspace`, `workspace:sanity`, `workspace:publish`), the workspace root needs a package manifest. This could be misread as turning the workspace into a build root.
+
+**Decision:** Create a root `package.json` at the workspace root: `name: noodlestan-workspace`, `private: true`, no runtime dependencies, a single devDependency (`@art-domains/workspace-cli`), and tooling scripts only. The root package is a **tooling manifest, not a build root**: it produces no build artifacts, has no release or publish pipeline, and hosts no application code. "Not a build root" is preserved — the workspace coordinates and consumes; it does not build or publish.
+
+**Consequences:** npm scripts and `npx` work at the workspace level; the CLI is installed once and exposed as `art-workspace`. The tooling-manifest vs build-root distinction stays visible in the workspace description ("the workspace meta-repo; it is not a build root") and by keeping root dependencies minimal. Risk of scope creep toward build-root behavior is guarded by that description.
+
+## Decision: Type-safe Configuration in Workspace Root
+
+**Status:** Adopted
+
+**Context:** Workspace commands need to know where repos are cloned, where records live, and where checkouts are stored. A configuration file provides this information, but maintaining it separately from the records creates duplicate sources of truth. The manifest is loaded by the CLI via esbuild bundle-at-runtime, and the manifest imports `defineConfig` from the CLI package itself. This makes the package's entry point a public authoring API that consumers (the manifest) type-check against. Without explicit typings and an exports map, the import degrades to `any` or fails to resolve. The manifest's import pulls the CLI package entry into the load-time bundle, which includes `commander` (v12, CommonJS). esbuild inlining that CJS code into ESM output keeps `require('node:events')`, which throws under pure-ESM Node.
+
+**Decision:** Author `.art-workspace.mts` at workspace root as a TypeScript ESM module. It exports workspace paths (`WorkspaceConfig`: clone path, records paths for repositories and checkouts). The format is `.mts` because the root `package.json` has no `"type": "module"`: the explicit `.mts` extension pins ESM for Node and bundlers, is unambiguous under Node's native type-stripping, and signals TypeScript authoring to editors and tooling. The config is manually authored, not generated (see "Manifest Mirrors Records Structures; Checkouts Derived at Entry Point"). Split the authoring surface from the command surface: `src/config.ts` owns `defineConfig`, the config types, `locateCheckouts`, and `loadWorkspaceConfig` — zero runtime deps beyond `esbuild` (ESM-friendly). The package exports a dedicated subpath `@art-domains/workspace-cli/config` (`exports` map: `./config` → `types` + `import`), and the manifest imports from it: `import { defineConfig } from '@art-domains/workspace-cli/config'`. The main entry (`src/index.ts`) re-exports the config module for the CLI commands and backwards compatibility. Export from the CLI package entry: `defineConfig` (typed authoring helper for the manifest) and the config types `WorkspaceConfig`, `WorkspaceRecord`, `RepositoryRecord` mirroring `Structure: Workspace` and `Structure: Repository`. Emit type declarations (`dist/index.d.ts`) and add an `exports` map so imports resolve and type-check in the `.mts` manifest.
+
+**Consequences:** Type-safe, importable config for tools. Records remain the source of truth; no duplicate maintenance once the generator lands. Tools get IDE support and type checking when consuming the manifest. The root `package.json` stays CommonJS-defaulted without needing `"type": "module"`. The CLI command surface (commander, simple-git) never enters the manifest bundle. Commander stays a runtime dependency of the CLI, loaded by Node's loader when the CLI runs — never esbuild-inlined. Stable, typed authoring surface; the manifest gets IDE support and compile-time validation. The API is locked early — renaming types or exports is a breaking change once consumers exist (the manifest is the first consumer). Amends "Manifest Mirrors Records Structures; Checkouts Derived at Entry Point": the public authoring API is the `/config` subpath; the main entry re-exports for the CLI.
+
+## Decision: Runtime Config Loading — esbuild Bundle-at-Runtime
+
+**Status:** Adopted
+
+**Context:** The manifest is a `.mts` TypeScript module, but the compiled CLI is plain ESM JavaScript running in Node. Node cannot natively execute TypeScript (until recent type-stripping versions), so the CLI must transpile the manifest before importing it. The manifest also imports `defineConfig` from the CLI package itself.
+
+**Decision:** Load the manifest with esbuild bundle-at-runtime (Vite-style): read `.art-workspace.mts`, run `esbuild.build({ entryPoints, bundle: true, write: false, format: 'esm', platform: 'node' })`, write the bundled output to a temp `.mjs`, then `await import()`. The manifest's `import { defineConfig } from '@art-domains/workspace-cli'` is resolved from the consumer `node_modules` and inlined. `esbuild` becomes a **runtime dependency** of `@art-domains/workspace-cli` (currently dev-only via `@noodlestan/esbuild`).
+
+**Consequences:** Works on any supported Node version with full TypeScript support. Adds `esbuild` as a runtime dependency. Alternative (Node native type stripping, `--experimental-strip-types`) would be dependency-free but requires Node ≥ 22.6 and only erasable TS syntax; reconsider when the minimum Node version is guaranteed.
+
+## Decision: Manifest Mirrors Records Structures; Checkouts Derived at Entry Point
+
+**Status:** Adopted
+
+**Context:** The manifest (`WorkspaceConfig`) was initially sketched with record file paths. The workspace structures (`Structure: Workspace`, `Structure: Repository`) define the data shapes, and repository records carry a `checkout` field.
+
+**Decision:** `WorkspaceConfig` mirrors the structures: `records.workspace` and `records.repos` hold rendered record data — not `.art` file names or paths. A render process reads and interprets all records and prepares the data the CLI needs; extra record fields may pass through as-is. At entry point the CLI builds the checkouts list from `records.repos[].checkout`. The config is manually authored, not generated.
+
+**Consequences:** Single source of truth preserved (records). Checkout paths live in repository records for now; a dedicated `Structure: Checkout` (checkouts persisted in their own `.art` file managed by CLI commands) is a follow-up. Manifest and records stay in sync manually until the generator lands.
+
+## Decision: Checkouts as CLI-Managed Records — Structure: Checkout
+
+**Status:** Proposed
+
+**Context:** Checkout paths currently live in repository records (`records.repos[].checkout`) and the CLI derives the checkouts list at entry point. Commands that mutate checkouts (`clone`, `delete`, `branch`, ...) would write into repository records, mixing repo facts (remote, purpose, consumers) with workspace-local state (where the repo is checked out).
+
+**Decision:** Introduce a `Structure: Checkout` and persist checkouts in their own `.art` file managed by the CLI — `clone`, `delete`, `branch`, ... add/update/remove entries. Repository records keep repo facts; checkouts become workspace-local state owned by the CLI. Until this lands, checkouts stay in repository records and are derived at entry point.
+
+**Consequences:** Cleaner ownership — CLI commands own checkout state, repository records stay read-only facts. Requires a checkout records type and a renderer update; until adopted, the derived-from-repos approach stands.
+
+## Decision: Records as Source of Truth
+
+**Status:** Adopted
+
+**Context:** The workspace tracks repository information in `ops/records/repositories/{repo}.art` and `ops/records/workspace.art`. These records are human-readable, structured, and maintained by agents. A separate machine-readable manifest would duplicate this information.
+
+**Decision:** Records are the source of truth for workspace structure. Generated files (`.art-workspace.mts`) are derived from records, not maintained separately. Commands read the generated manifest, which is regenerated when records change.
+
+**Consequences:** Single source of truth eliminates sync issues. Records stay human-friendly. Generated manifest provides machine-readable access when needed.
+
+## Decision: CLI Framework — Commander
+
+**Status:** Adopted
+
+**Context:** The CLI has 5 commands with various options (`--auto`, repo lists, namespace filters). Need a framework that handles subcommands well without being overkill.
+
+**Decision:** Use `commander` as the CLI framework. It's lightweight, widely used, and handles subcommands effectively. Alternatives considered: `yargs` (heavier, not much more capable for this scope), `oclif` (overkill for 5 commands), custom parser (unnecessary work).
+
+**Consequences:** Standard CLI argument parsing, help generation, and subcommand routing. Well-documented, widely understood. Minimal dependency footprint.
+
+## Decision: Git Library — simple-git
+
+**Status:** Adopted
+
+**Context:** CLI commands need to execute git operations (status, push, clone, branch). Options: `simple-git` library or `node:child_process` directly.
+
+**Decision:** Use `simple-git` for git operations. It provides a convenient API over git commands, handles edge cases, and reduces boilerplate. Alternative: `child_process` is zero-dep but more verbose and error-prone.
+
+**Consequences:** Adds a runtime dependency, but gains convenience and reliability. Git operations are centralized in one library, easier to test and maintain.
+
+## Decision: Build Process — @noodlestan/esbuild
+
+**Status:** Adopted
+
+**Context:** CLI needs to be compiled to executable JavaScript. Options: `@noodlestan/esbuild`, `tsc` only, `vite`.
+
+**Decision:** Use `@noodlestan/esbuild` for building the CLI. Consistent with other repos in the ecosystem, fast builds, proven toolchain. Alternative: `tsc` only is simpler but slower; `vite` is overkill for a CLI tool.
+
+**Consequences:** Consistent build process across the ecosystem. Fast builds. Requires esbuild configuration for CLI entry point.
+
+## Decision: UI/UX — Tables + Minimal Colors
+
+**Status:** Adopted
+
+**Context:** CLI commands produce output that needs to be readable. Options: minimal plain text, colored output, tables, progress indicators.
+
+**Decision:** Use tables for structured output (sanity/publish reports) and minimal colors for status indication (green/yellow/red). Progress indicators are deferred (overkill for now).
+
+**Consequences:** Readable, structured output. Tables are required by the spec for sanity/publish commands. Colors improve readability without being distracting.
+
+## Decision: Testing — vitest, Unit + Integration
+
+**Status:** Adopted
+
+**Context:** CLI needs tests to ensure correctness. Options: unit tests only, unit + integration, E2E tests.
+
+**Decision:** Use `vitest` for testing (consistent with other repos). Unit tests for logic, integration tests for git/npm commands (mocked or temp directories). E2E tests with real repos are deferred (overkill and fragile).
+
+**Consequences:** Consistent testing framework across ecosystem. Good coverage without excessive complexity. Integration tests catch git/npm edge cases.
+
+## Decision: Testing Strategy — Opportunistic Process (It Depends)
+
+<!-- WIP Promote to Noodlestan Principles -->
+
+**Status:** Adopted
+
+**Context:** Packages in the ecosystem need a testing approach. The usual "test pyramid" prescribes a shape — many unit tests, fewer integration tests, rare end-to-end — and the shape starts dictating what you write. That is backwards: the risk of a failure should dictate the test, not a diagram. We are old-school XP practitioners: we like processes, not pyramids.
+
+**Decision:** Test opportunistically, as a process:
+
+- **Test first, when you can.** Red-green-refactor: write the failing test, watch it fail, make it pass, then clean up. The red test makes the design problem concrete before the code exists.
+- **BDD informs design.** Write Given/When/Then specs as a design conversation first — they force you to name responsibilities, isolate dependencies, and state outcomes before implementation. The test is the executable form of the spec.
+- **Testability is a design goal.** If something is hard to test, the design is telling you something: split the responsibility, inject the dependency. Testability and good design are the same motion.
+- **Every unit gets at least a minimum viable test.** No untested unit leaves the door. Minimal is fine — the test exists to catch regressions, not to impress.
+- **Test integrations too.** Git, npm, config loading — test them with fixtures and temp directories, not just mocks. Mocks prove your code against itself; fixtures prove it against the real world.
+- **Regressions get a test before the fix is trusted.** A fix without a regression test is a guess.
+- **The shape "it depends".** No prescribed ratios. A critical publish path gets deeper coverage; a trivially safe constant gets a smoke test. The cost of testing stays proportional to the cost of failure.
+
+Amends "Testing — vitest, Unit + Integration": the tooling decision stands (vitest); this decision replaces the ratio framing with the process.
+
+**Consequences:** Tests follow the shape of the code and the risk, not a template. Risk: without a pyramid, coverage can drift — guarded by the minimum-viable-test rule and a coverage floor in CI (see `workspace-config`), which is a safety net, not a dictator.
+
+## Decision: Type Safety — Strict TypeScript
+
+**Status:** Adopted
+
+**Context:** CLI is written in TypeScript. Options: strict mode, relaxed mode, JavaScript.
+
+**Decision:** Use full TypeScript with strict mode enabled. Consistent with other repos in the ecosystem. Catches type errors at compile time.
+
+**Consequences:** Safer code, better IDE support, easier refactoring. Requires more upfront type definitions but pays off in maintainability.
