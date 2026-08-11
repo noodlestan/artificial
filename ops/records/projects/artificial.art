@@ -41,15 +41,17 @@
 
 **Setup:**
 
-```
-# run at root of repository, not per package
-npm ci
+Run at root of repository, not per package:
+
+```bash
+npm ci # to install dependencies.
 ```
 
 **Verification:**
 
-```
-# per package modified
+Run per package modified:
+
+```bash
 npm run lint:fix # to fix formatting issues automatically
 npm run lint # to report other issues
 npm run build
