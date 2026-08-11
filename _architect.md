@@ -10,19 +10,19 @@ Short termtracker is `_wip.md` (no done items there).
 
 **Schema-first, in TS.** The core record schema (what a construct is: kind, name, fields, children) is defined as composable TS types — the parser's output contract. The ouroboros dissolves in JS land: TS types are the metalanguage (ground truth for the parser); the `.art` spec files are the object language (domain descriptions), caught up later and verified by the (unimplemented) bootstrap check. Core schema in TS now; domain schemas in `.art` later.
 
-**Micromark substrate.** Parsing builds directly on micromark — the same extension base GFM, MDX, and directives use — with our own thin extension (enter/exit hooks per token type) and an explicit construct stack. The parser emits art's own AST records (`SectionBlock`, `FieldBlock`, `NaturalBlock`, `ExampleBlock`, `Tag`), not mdast: no unist-util-visit, no remark/unified packages. Unified's extension-trio pattern (syntax extension, record types, renderer support) is mirrored when language plugins land. Whether the parse slice consumes micromark directly or declares indirections (e.g. `mdast-util-from-markdown`) is a spike decision; the research framing it is `architecture/records/adr/_research.md`.
+**mdast substrate.** Parsing builds on mdast — the AST layer of the unified ecosystem — using `mdast-util-from-markdown` to parse markdown into typed nodes, then a factory-based visitor to classify nodes into art records (`SectionBlock`, `FieldBlock`, `NaturalBlock`, `Tag`). The factory pattern separates detection (does this node qualify?) from construction (create the record) from visitation (should we recurse into children?). Micromark handles syntax internally; we own semantics at the mdast layer. See `architecture/records/adr/mdast-based.art` for the adopted approach and `architecture/records/adr/micromark-first.art` for the superseded alternative.
 
 ## Work ahead
 
 ### Step 0 — Best-practices research (done 2026-08-08)
 
-Surveyed projects doing "similar things" on top of micromark and extracted the best practices that shape the spike. Captured in `architecture/records/adr/_research.md`. Key takeaways:
+Surveyed projects on the unified ecosystem and extracted the best practices that shape the spike. Captured in `architecture/records/adr/_research.md`. Key takeaways:
 
-- Two-layer design: micromark owns syntax (tokens), a `from-markdown`-style stage owns semantics (records).
-- Construct-stack record builder (enter/exit hooks per token type + explicit stack) is the established pattern.
-- 4-part extension anatomy (syntax, HTML/rendering, from-markdown, to-markdown); the POC ships syntax (if any) + from-markdown only.
+- Two-layer design: micromark owns syntax (tokens), mdast owns semantics (AST nodes).
+- Construct-stack pattern (enter/exit hooks + explicit stack) is the established way to build records from tokens — but mdast already does this, so we use mdast as the boundary.
+- 4-part extension anatomy (syntax, HTML/rendering, from-markdown, to-markdown); the POC ships from-markdown + to-markdown only.
 - Open registries + derived unions (mdast `RootContentMap`); position metadata on every record.
-- Early insight: `# Kind: Name` is plain ATX markdown, so the composing trio is likely a semantic-stage concern, not a custom micromark construct. Tag is the custom-syntax candidate.
+- Early insight: `# Kind: Name` is plain ATX markdown, so the composing trio is a semantic-stage concern, not a custom syntax extension. Tag is the custom-syntax candidate.
 
 ### Step 1 — Scaffold the `poc-parse` package (done 2026-08-08, commit `ea047db0`)
 
@@ -32,7 +32,7 @@ Surveyed projects doing "similar things" on top of micromark and extracted the b
 - Scaffold `art-js/cli/poc-parse/` per repo conventions — the `skeleton-cli` shape (package.json, tsconfig variants, README), matching sibling CLI packages like `art-js/cli/bin/`.
 - Add the workspace entry `art-js/cli/poc-parse/` to the `workspaces` array in `artificials/package.json` (the module-root package.json that owns the art-js workspaces; the repo-root `package.json` does not include art-js). Run `npm install` in `artificials/` to register it.
 - **Verification:** `npm run dev` in the package dir prints the welcome banner and exits 0.
-- **Deliberately deferred:** micromark vs indirections, the record schema, any parsing logic. The substrate choice belongs to Step 3+ (see `_research.md` open questions).
+- **Deliberately deferred:** the record schema, any parsing logic. The substrate choice (mdast) was settled in Step 3–4.
 
 ### Step 2 — Core record schema as composable TS types
 
@@ -42,19 +42,20 @@ Surveyed projects doing "similar things" on top of micromark and extracted the b
 - Records carry source position metadata; depth and parent are derived from the tree, not stored.
 - Schema-first: TS types are the metalanguage ground truth for the parser; the `.art` spec files are the object language, caught up later by the bootstrap check.
 
-### Step 3 — Smoke-parse the corpus through micromark
+### Step 3 — Smoke-parse the corpus
 
 **Goal:** prove the token stream supports the grammar, before building the record builder.
 
-- Parse the corpus — 6 ADR files + one spec file — through micromark and inspect the token event stream.
+- Parse the corpus — 6 ADR files + one spec file — through micromark (via mdast) and inspect the token event stream.
 - Confirm `**Field:**` (incl. block fields), `::READ`, `#tags`, code fences tokenize as expected.
-- Record findings; they feed Step 4 and settle the substrate decision (micromark direct vs indirections).
+- Record findings; they feed Step 4 and settle the substrate decision (micromark direct vs mdast layer).
 
-### Step 4 — Construct-stack record builder
+### Step 4 — mdast-based record builder
 
-**Goal:** schema-typed records from the token stream.
+**Goal:** schema-typed records from the mdast AST.
 
-- micromark extension (enter/exit hooks per token type + explicit stack) producing schema-typed records.
+- mdast-based builder: `fromMarkdown` → `unist-util-visit` → factory pattern → art records.
+- Factories detect known constructs (SectionBlock, FieldBlock, Tag) and create typed records; unmatched nodes become NaturalBlock.
 - **Proof:** the ADR corpus parses into `SectionBlock` / `FieldBlock` / `NaturalBlock` records.
 
 ### Step 5 — Cross-check against the grammar WIP

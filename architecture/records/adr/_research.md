@@ -50,7 +50,7 @@
 5. **Positions are sacred.** Tokens carry start/end positions; carry them into records; derive depth/parent from the tree, never store it.
 6. **Early spike insight.** `# Kind: Name` is a plain CommonMark ATX heading — micromark already tokenises it. SectionBlock/FieldBlock/NaturalBlock containment is therefore a semantic-stage (from-markdown) concern, not a custom micromark construct. The genuine custom-syntax candidates are the closed-syntax elements (e.g. Tag).
 
-## Open spike questions
+## Spike decisions (resolved)
 
-- micromark direct vs indirections (e.g. the `mdast-util-from-markdown` layer) — to be decided by the spike itself.
-- Which constructs need a custom micromark syntax extension vs semantic-stage handling (initial hypothesis: none for the composing trio; Tag is the candidate).
+- **micromark direct vs indirections:** Resolved — adopted mdast layer (`mdast-util-from-markdown`). See `architecture/records/adr/mdast-based.art` (adopted) and `architecture/records/adr/micromark-first.art` (superseded).
+- **Custom syntax extensions vs semantic-stage handling:** Resolved — no custom micromark syntax extensions needed. The composing trio (SectionBlock, FieldBlock, NaturalBlock) is pure semantic-stage classification. Tag detection uses regex in text content, not a custom syntax extension.
