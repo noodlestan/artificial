@@ -10,16 +10,16 @@
 
 ### Changes
 
-| Instruction Goal | Outcome |
-| --- | --- |
-| Dedup the `CheckoutRecord` type (Step 1) | Single canonical definition in `config/types.ts`; removed duplicate in `checkout-record.ts` and the inline shape in `Checkout` |
-| Dedup the `loadCheckouts` loader (Step 2) | Single config loader; tests moved to `src/config/load-checkouts.test.ts` |
-| Branch operation factories (Step 3) | `createBranchSuccess` / `createBranchFailure` added, mirroring the push factories |
-| `hasLocalBranch` git helper (Step 4) | Added with positive and negative test cases |
-| Resolve checkouts by record name (Step 5) | Unmatched records hydrate with a synthetic repository and resolve by checkout name; unnamed records are skipped |
-| Implement the branch command (Step 6) | `runBranch(ctx, branch, checkoutNames)` full flow with scan, failure ops, store update, and both reports |
-| Wire the CLI arguments (Step 7) | `branch <branch> [checkouts...]` action builds ctx and calls `runBranch` |
-| Command tests (Step 8) | Seven-scenario suite covering the required cases; 80 tests pass |
+| Instruction Goal                          | Outcome                                                                                                                        |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Dedup the `CheckoutRecord` type (Step 1)  | Single canonical definition in `config/types.ts`; removed duplicate in `checkout-record.ts` and the inline shape in `Checkout` |
+| Dedup the `loadCheckouts` loader (Step 2) | Single config loader; tests moved to `src/config/load-checkouts.test.ts`                                                       |
+| Branch operation factories (Step 3)       | `createBranchSuccess` / `createBranchFailure` added, mirroring the push factories                                              |
+| `hasLocalBranch` git helper (Step 4)      | Added with positive and negative test cases                                                                                    |
+| Resolve checkouts by record name (Step 5) | Unmatched records hydrate with a synthetic repository and resolve by checkout name; unnamed records are skipped                |
+| Implement the branch command (Step 6)     | `runBranch(ctx, branch, checkoutNames)` full flow with scan, failure ops, store update, and both reports                       |
+| Wire the CLI arguments (Step 7)           | `branch <branch> [checkouts...]` action builds ctx and calls `runBranch`                                                       |
+| Command tests (Step 8)                    | Seven-scenario suite covering the required cases; 80 tests pass                                                                |
 
 #### Files changed
 

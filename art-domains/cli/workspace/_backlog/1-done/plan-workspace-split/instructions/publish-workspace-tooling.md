@@ -21,6 +21,7 @@ The plan workflow (see `artificials/_guide.md` → Planning Workflow → Working
 ## Goals
 
 Publish the three workspace-tooling packages to npm:
+
 - `@noodlestan/esbuild` 0.0.11
 - `@noodlestan/tsconfig` 0.0.11
 - `@noodlestan/eslint-config` 0.0.7

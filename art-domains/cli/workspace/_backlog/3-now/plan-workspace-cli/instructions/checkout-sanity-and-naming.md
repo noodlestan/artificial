@@ -24,12 +24,12 @@ Fix four sanity-reporting issues and adopt a consistent checkout naming conventi
 
 **Sanity fixes:**
 
-| scenario | current | desired |
-| --- | --- | --- |
-| checkout record exists, directory missing (Conventions, Purrpose) | `repo not cloned` | `no checkout` |
-| checkout record exists, repo record missing (Purrtrait) | `clean` (synthetic repo) | `unknown project` — project column empty, states shows `unknown project` |
-| directory exists, repo record exists, no checkout record (Purrception) | not listed | shown in Extraneous Report |
-| directory exists, no records at all (repos/blah) | not listed | shown in Extraneous Report |
+| scenario                                                               | current                  | desired                                                                  |
+| ---------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------ |
+| checkout record exists, directory missing (Conventions, Purrpose)      | `repo not cloned`        | `no checkout`                                                            |
+| checkout record exists, repo record missing (Purrtrait)                | `clean` (synthetic repo) | `unknown project` — project column empty, states shows `unknown project` |
+| directory exists, repo record exists, no checkout record (Purrception) | not listed               | shown in Extraneous Report                                               |
+| directory exists, no records at all (repos/blah)                       | not listed               | shown in Extraneous Report                                               |
 
 **Naming convention:**
 
@@ -64,10 +64,10 @@ In `src/shared/scan-checkout.ts`, update the `!dirExists` branch (line 27):
 
 ```ts
 // Before:
-issues: ['repo not cloned']
+issues: ['repo not cloned'];
 
 // After:
-issues: ['no checkout']
+issues: ['no checkout'];
 ```
 
 Also, after the git-state scan block (after line 54), add a check for synthetic repos:
@@ -75,7 +75,7 @@ Also, after the git-state scan block (after line 54), add a check for synthetic 
 ```ts
 // After the catch block, before the if (detached) checks:
 if (checkout.repo.remote === '') {
-    issues.unshift('unknown project');
+  issues.unshift('unknown project');
 }
 ```
 
@@ -105,10 +105,10 @@ In `src/private/present/present-checkout-report.ts`, update the row mapping (lin
 
 ```ts
 const rows = checkouts.map(c => [
-    c.repo.remote === '' ? '' : c.repo.name,
-    c.record.location,
-    c.branch,
-    c.issues.join('; ') || 'clean',
+  c.repo.remote === '' ? '' : c.repo.name,
+  c.record.location,
+  c.branch,
+  c.issues.join('; ') || 'clean',
 ]);
 ```
 
@@ -116,9 +116,9 @@ Also update the sort (line 7) to handle empty repo names — synthetic repos sor
 
 ```ts
 checkouts.sort((a, b) => {
-    if (a.repo.remote === '' && b.repo.remote !== '') return 1;
-    if (a.repo.remote !== '' && b.repo.remote === '') return -1;
-    return a.repo.name.localeCompare(b.repo.name);
+  if (a.repo.remote === '' && b.repo.remote !== '') return 1;
+  if (a.repo.remote !== '' && b.repo.remote === '') return -1;
+  return a.repo.name.localeCompare(b.repo.name);
 });
 ```
 
@@ -141,26 +141,26 @@ New flow:
 const locationBasename = target ? basename(target) : repo.name.toLowerCase().replace(/\s+/g, '-');
 const checkoutName = target ? `${repo.name}-${locationBasename}` : repo.name;
 const resolvedLocation = target
-    ? join(ctx.config.clone.path, locationBasename)
-    : defaultLocation(repo);
+  ? join(ctx.config.clone.path, locationBasename)
+  : defaultLocation(repo);
 
 // Find existing by checkout name
 let checkout = ctx.store.findCheckout(checkoutName);
 if (checkout && checkout.record.location !== resolvedLocation) {
-    const msg = `checkout for '${repo.name}' exists at ${checkout.record.location}. Cannot clone to ${resolvedLocation}.`;
-    ctx.log.log(createCloneFailure(checkout, msg));
-    return;
+  const msg = `checkout for '${repo.name}' exists at ${checkout.record.location}. Cannot clone to ${resolvedLocation}.`;
+  ctx.log.log(createCloneFailure(checkout, msg));
+  return;
 }
 if (!checkout) {
-    // Check if location is taken by a different checkout
-    const allCheckouts = ctx.store.getAllCheckouts();
-    const conflicting = allCheckouts.find(c => c.record.location === resolvedLocation);
-    if (conflicting) {
-        const msg = `location ${resolvedLocation} is already used by checkout '${conflicting.record.name}'.`;
-        ctx.log.log(createCloneFailure(conflicting, msg));
-        return;
-    }
-    checkout = ctx.store.addCheckout(repo, resolvedLocation);
+  // Check if location is taken by a different checkout
+  const allCheckouts = ctx.store.getAllCheckouts();
+  const conflicting = allCheckouts.find(c => c.record.location === resolvedLocation);
+  if (conflicting) {
+    const msg = `location ${resolvedLocation} is already used by checkout '${conflicting.record.name}'.`;
+    ctx.log.log(createCloneFailure(conflicting, msg));
+    return;
+  }
+  checkout = ctx.store.addCheckout(repo, resolvedLocation);
 }
 ```
 
@@ -174,9 +174,9 @@ Current (line 32–36):
 
 ```ts
 const recordFile = join(
-    ctx.root,
-    ctx.config.records.checkouts.path,
-    `${rescan.repo.name.toLowerCase().replace(/\s+/g, '-')}.art`,
+  ctx.root,
+  ctx.config.records.checkouts.path,
+  `${rescan.repo.name.toLowerCase().replace(/\s+/g, '-')}.art`,
 );
 ```
 
@@ -186,16 +186,16 @@ This requires updating `createCheckout` in `src/shared/checkout.ts` to accept an
 
 ```ts
 export function createCheckout(
-    repo: RepositoryRecord,
-    location: string,
-    branch: string,
-    name?: string,
+  repo: RepositoryRecord,
+  location: string,
+  branch: string,
+  name?: string,
 ): Checkout {
-    return {
-        repo,
-        record: { name: name ?? repo.name, location, branch },
-        // ... rest unchanged
-    };
+  return {
+    repo,
+    record: { name: name ?? repo.name, location, branch },
+    // ... rest unchanged
+  };
 }
 ```
 
@@ -219,9 +219,9 @@ Back in `clone-if-missing.ts`, the filename becomes:
 
 ```ts
 const recordFile = join(
-    ctx.root,
-    ctx.config.records.checkouts.path,
-    `${rescan.record.name.toLowerCase().replace(/\s+/g, '-')}.art`,
+  ctx.root,
+  ctx.config.records.checkouts.path,
+  `${rescan.record.name.toLowerCase().replace(/\s+/g, '-')}.art`,
 );
 ```
 
@@ -229,15 +229,15 @@ And the saved record heading uses the repo name (not the checkout name):
 
 ```ts
 saveCheckoutRecord(
-    recordFile,
-    {
-        name: rescan.repo.name,  // heading: ## Checkout: {repo.name}
-        repository: `Repository: ${rescan.repo.name}`,
-        location: rescan.record.location,
-        branch: actualBranch || 'main',
-    },
-    ctx.config,
-    ctx.root,
+  recordFile,
+  {
+    name: rescan.repo.name, // heading: ## Checkout: {repo.name}
+    repository: `Repository: ${rescan.repo.name}`,
+    location: rescan.record.location,
+    branch: actualBranch || 'main',
+  },
+  ctx.config,
+  ctx.root,
 );
 ```
 

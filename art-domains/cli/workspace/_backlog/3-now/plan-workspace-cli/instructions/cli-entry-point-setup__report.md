@@ -12,11 +12,11 @@
 
 Table of changes anchored on the Instruction Goals:
 
-| Instruction Goal | Result |
-| --- | --- |
-| Setup the CLI entry point with commander | `src/index.ts` created with `#!/usr/bin/env node` shebang, `Command` import, and `program` instance with name `art-workspace`, description `Workspace orchestration CLI`, version `0.0.1`. |
-| Configure command routing structure for all 5 commands (clone, branch, link, sanity, publish) | Each command registered with a description and a placeholder action printing its `<command> command - TODO` message. |
-| Establish the basic CLI skeleton | `program.parse()` at the end; package.json `bin` → `./dist/index.js`, build script preserves the shebang and produces a runnable ESM bundle; `npm install` + `npm run build` succeed. |
+| Instruction Goal                                                                              | Result                                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Setup the CLI entry point with commander                                                      | `src/index.ts` created with `#!/usr/bin/env node` shebang, `Command` import, and `program` instance with name `art-workspace`, description `Workspace orchestration CLI`, version `0.0.1`. |
+| Configure command routing structure for all 5 commands (clone, branch, link, sanity, publish) | Each command registered with a description and a placeholder action printing its `<command> command - TODO` message.                                                                       |
+| Establish the basic CLI skeleton                                                              | `program.parse()` at the end; package.json `bin` → `./dist/index.js`, build script preserves the shebang and produces a runnable ESM bundle; `npm install` + `npm run build` succeed.      |
 
 #### Files changed
 

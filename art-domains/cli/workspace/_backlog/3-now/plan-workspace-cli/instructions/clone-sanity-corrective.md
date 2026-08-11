@@ -52,6 +52,7 @@ Fix lint errors, build failures, and 3 correctness issues found during manual te
 **Symptom:** `art-workspace clone Purrception custom/purrception-test` silently ignores the target when a checkout for `Purrception` already exists.
 
 **Fix:** When `target` is provided and a checkout already exists at a different location, either:
+
 - Option A: Move the checkout (update record + rename directory)
 - Option B: Refuse with an error message: "Checkout already exists at {existing}. Remove it first or use a different name."
 
@@ -62,6 +63,7 @@ Choose whichever is simpler and safer. Option B is recommended — moving checko
 **Symptom:** `ops/records/checkouts/*.art` lose the `**Repository:**` field after a CLI roundtrip (clone/sanity reads and rewrites the record).
 
 **Fix:** `saveCheckoutRecord` must preserve all fields from the loaded `CheckoutRecord`. The record template or renderer must include the `**Repository:**` field. Check:
+
 - The checkout record template at `.agents/domains/workspace/templates/checkout.art.njk`
 - The `saveCheckoutRecord` function in `src/private/records/checkout-record.ts`
 - Ensure the `repository` field is read from disk and written back

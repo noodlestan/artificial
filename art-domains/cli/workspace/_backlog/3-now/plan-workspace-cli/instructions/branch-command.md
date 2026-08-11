@@ -91,13 +91,13 @@ Create `src/private/git/has-local-branch.ts`:
 
 ```ts
 export async function hasLocalBranch(dir: string, branch: string): Promise<boolean> {
-	const git = simpleGit(dir);
-	try {
-		await git.raw(['rev-parse', '--verify', '--quiet', `refs/heads/${branch}`]);
-		return true;
-	} catch {
-		return false;
-	}
+  const git = simpleGit(dir);
+  try {
+    await git.raw(['rev-parse', '--verify', '--quiet', `refs/heads/${branch}`]);
+    return true;
+  } catch {
+    return false;
+  }
 }
 ```
 
@@ -125,10 +125,10 @@ Rewrite `src/commands/branch/branch.ts`. Replace the `({ root })` options signat
 
 ```ts
 export async function runBranch(
-	ctx: WorkspaceContext,
-	branch: string,
-	checkoutNames: string[],
-): Promise<void>
+  ctx: WorkspaceContext,
+  branch: string,
+  checkoutNames: string[],
+): Promise<void>;
 ```
 
 Flow:
@@ -157,21 +157,21 @@ In `src/index.ts`, replace the `branch` command block (currently takes no argume
 
 ```ts
 program
-	.command('branch')
-	.description('Branch across checkouts')
-	.argument('<branch>', 'branch name to create or switch to')
-	.argument('[checkouts...]', 'checkouts to branch (default: all checkouts)')
-	.action(async (branch: string, checkoutNames: string[]) => {
-		const root = process.cwd();
-		const config = await (await import('./config/load-config')).loadWorkspaceConfig(root);
-		const { createCheckoutStore } = await import('./shared/checkout-store');
-		const { createOperationsLog } = await import('./shared/operations-log');
-		const { createWorkspaceContext } = await import('./shared/workspace-context');
-		const store = createCheckoutStore(config, root);
-		const log = createOperationsLog();
-		const ctx = createWorkspaceContext(config, root, store, log);
-		await runBranch(ctx, branch, checkoutNames);
-	});
+  .command('branch')
+  .description('Branch across checkouts')
+  .argument('<branch>', 'branch name to create or switch to')
+  .argument('[checkouts...]', 'checkouts to branch (default: all checkouts)')
+  .action(async (branch: string, checkoutNames: string[]) => {
+    const root = process.cwd();
+    const config = await (await import('./config/load-config')).loadWorkspaceConfig(root);
+    const { createCheckoutStore } = await import('./shared/checkout-store');
+    const { createOperationsLog } = await import('./shared/operations-log');
+    const { createWorkspaceContext } = await import('./shared/workspace-context');
+    const store = createCheckoutStore(config, root);
+    const log = createOperationsLog();
+    const ctx = createWorkspaceContext(config, root, store, log);
+    await runBranch(ctx, branch, checkoutNames);
+  });
 ```
 
 ### Step 8 — Write the command tests

@@ -52,25 +52,27 @@ None.
 
 Package layout confirmed:
 
-| dir | package | version |
-| --- | --- | --- |
-| `art-js/spec/` | `@art-js/artificials-spec` | 0.0.1 |
-| `art-js/libs/primitives/` | `@art-js/artificials-primitives` | 0.0.1 |
-| `art-js/libs/parser/` | `@art-js/artificials-parser` | 0.0.1 |
-| `art-js/libs/validator/` | `@art-js/artificials-validator` | 0.0.1 |
-| `art-js/libs/bundler/` | `@art-js/artificials-bundler` | 0.0.1 |
-| `art-js/libs/program/` | `@art-js/artificials-program` | 0.0.1 |
-| `art-js/cli/bin/` | `@art-js/artificials-bin` | 0.0.1 |
-| `art-js/cli/dev-server/` | `@art-js/artificials-dev-server` | 0.0.1 |
-| `art-js/cli/watcher/` | `@art-js/artificials-watcher` | 0.0.1 |
-| `art-js/cli/poc-parse/` | `@art-js/poc-parse` | 0.0.1 |
-| `artisans/apps/art-mantras/` | `@artisans/art-mantras` | 0.0.1 |
+| dir                          | package                          | version |
+| ---------------------------- | -------------------------------- | ------- |
+| `art-js/spec/`               | `@art-js/artificials-spec`       | 0.0.1   |
+| `art-js/libs/primitives/`    | `@art-js/artificials-primitives` | 0.0.1   |
+| `art-js/libs/parser/`        | `@art-js/artificials-parser`     | 0.0.1   |
+| `art-js/libs/validator/`     | `@art-js/artificials-validator`  | 0.0.1   |
+| `art-js/libs/bundler/`       | `@art-js/artificials-bundler`    | 0.0.1   |
+| `art-js/libs/program/`       | `@art-js/artificials-program`    | 0.0.1   |
+| `art-js/cli/bin/`            | `@art-js/artificials-bin`        | 0.0.1   |
+| `art-js/cli/dev-server/`     | `@art-js/artificials-dev-server` | 0.0.1   |
+| `art-js/cli/watcher/`        | `@art-js/artificials-watcher`    | 0.0.1   |
+| `art-js/cli/poc-parse/`      | `@art-js/poc-parse`              | 0.0.1   |
+| `artisans/apps/art-mantras/` | `@artisans/art-mantras`          | 0.0.1   |
 
 Git-URL pins used:
+
 - `"@noodlestan/eslint-config": "git+ssh://git@github.com/noodlestan/eslint-config.git#main"`
 - `"@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main"`
 
 Scripts rewired from parent-install bins:
+
 - `art-js/cli/dev-server`: `"build": "no-comply-build"` → `"build": "esbuild-cli"`, `"dev": "no-comply-watch"` → `"dev": "esbuild-cli-watch"`
 - `art-js/cli/watcher`: `"build": "no-comply-build"` → `"build": "esbuild-cli"`, `"dev": "no-comply-watch"` → `"dev": "esbuild-cli-watch"`
 

@@ -42,9 +42,13 @@ Close the latent runtime gap in the `workspace-config` delivery: the authored ma
 ## Changes
 
 ### 1. Expose the `./config` subpath and emit `dist/config/index.js`
+
 ### 2. Build, test, coverage
+
 ### 3. Publish 0.0.3 and consume at the workspace root
+
 ### 4. Switch the manifest import to the subpath
+
 ### 5. Verify the load-time bundle is clean ESM
 
 ## Rules

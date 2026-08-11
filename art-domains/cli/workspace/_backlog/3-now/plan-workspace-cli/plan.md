@@ -76,7 +76,7 @@ Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli
 
 **Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/clone-sanity-corrective.md`
 
-**Report:** [clone-sanity-corrective__report.md](./instructions/clone-sanity-corrective__report.md)
+**Report:** [clone-sanity-corrective\_\_report.md](./instructions/clone-sanity-corrective__report.md)
 
 ### `sanity-workspace` - `COMMITTED`
 
@@ -94,7 +94,7 @@ Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli
 
 **Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/branch-command.md`
 
-**Report:** [branch-command__report.md](./instructions/branch-command__report.md)
+**Report:** [branch-command\_\_report.md](./instructions/branch-command__report.md)
 
 **Note:** Pre-existing lint issues in `_backlog/` and `architecture/` (42 files, none in `src/`). No `ci` script in package.json (follow-up).
 
@@ -116,20 +116,20 @@ Adopt a consistent checkout naming convention and fix four sanity-reporting issu
 
 Examples:
 
-| command | checkout name | directory | record file |
-| --- | --- | --- | --- |
-| `clone Artificial` | Artificial | `repos/Artificial/` | `Artificial.art` |
-| `clone Artificial foo` | Artificial-foo | `repos/Artificial-foo/` | `Artificial-foo.art` |
-| `clone "No Comply" dev` | No Comply-dev | `repos/No Comply-dev/` | `no-comply-dev.art` |
+| command                 | checkout name  | directory               | record file          |
+| ----------------------- | -------------- | ----------------------- | -------------------- |
+| `clone Artificial`      | Artificial     | `repos/Artificial/`     | `Artificial.art`     |
+| `clone Artificial foo`  | Artificial-foo | `repos/Artificial-foo/` | `Artificial-foo.art` |
+| `clone "No Comply" dev` | No Comply-dev  | `repos/No Comply-dev/`  | `no-comply-dev.art`  |
 
 #### Sanity states fixes
 
-| scenario | current | desired |
-| --- | --- | --- |
-| checkout record exists, directory missing (Conventions, Purrpose) | `repo not cloned` | `no checkout` |
-| checkout record exists, repo record missing (Purrtrait) | `clean` (synthetic repo) | `unknown project` — project column empty, states shows `unknown project` |
-| directory exists, repo record exists, no checkout record (Purrception) | not listed | shown in Extraneous Report |
-| directory exists, no records at all (repos/blah) | not listed | shown in Extraneous Report |
+| scenario                                                               | current                  | desired                                                                  |
+| ---------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------ |
+| checkout record exists, directory missing (Conventions, Purrpose)      | `repo not cloned`        | `no checkout`                                                            |
+| checkout record exists, repo record missing (Purrtrait)                | `clean` (synthetic repo) | `unknown project` — project column empty, states shows `unknown project` |
+| directory exists, repo record exists, no checkout record (Purrception) | not listed               | shown in Extraneous Report                                               |
+| directory exists, no records at all (repos/blah)                       | not listed               | shown in Extraneous Report                                               |
 
 #### Responsibilities
 

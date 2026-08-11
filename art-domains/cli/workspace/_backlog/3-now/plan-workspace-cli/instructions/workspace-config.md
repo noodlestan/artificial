@@ -47,10 +47,15 @@ Implement the workspace config layer of the CLI package and author the workspace
 ## Changes
 
 ### 1. Set up test coverage in the CLI package
+
 ### 2. CLI package — types, defineConfig, locateCheckouts, loadWorkspaceConfig
+
 ### 3. Build + package — esbuild runtime dep, d.ts emission, exports map, version bump
+
 ### 4. Publish 0.0.2 and consume at the workspace root
+
 ### 5. Author `.art-workspace.mts` at the workspace root
+
 ### 6. End-to-end verification
 
 ## Rules
@@ -139,14 +144,16 @@ In `repos/artificial/art-domains/cli/workspace/package.json`:
 Create `.art-workspace.mts` at the workspace root (next to `package.json`). It imports `defineConfig` from the package and mirrors the records. Start from this shape and align every field with the records (name from the `## Repository:` heading; `purpose`/`description`/`consumers` copied from the record when present, otherwise omitted/`[]`):
 
 ```ts
-import { defineConfig } from '@art-domains/workspace-cli'
+import { defineConfig } from '@art-domains/workspace-cli';
 
 export default defineConfig({
   records: {
     workspace: {
       name: 'Noodlestan',
-      purpose: 'Orchestrate the Noodlestan multi-repo workspace: clone repos, branch across clones, symlink projects to preview changes, and resolve cross-repo dependencies.',
-      description: 'The workspace meta-repo for Noodlestan projects. It is not a build root — every project repo builds standalone. It hosts shared context (artificial bootstrap, domains, agents, skills) and the ops workflow, and it is the home of the repository records.',
+      purpose:
+        'Orchestrate the Noodlestan multi-repo workspace: clone repos, branch across clones, symlink projects to preview changes, and resolve cross-repo dependencies.',
+      description:
+        'The workspace meta-repo for Noodlestan projects. It is not a build root — every project repo builds standalone. It hosts shared context (artificial bootstrap, domains, agents, skills) and the ops workflow, and it is the home of the repository records.',
       remote: 'git@github.com:noodlestan/workspace.git',
       branch: 'main',
     },
@@ -169,7 +176,7 @@ export default defineConfig({
       //   consumers: ['artificial', 'purrception', 'purrtrait', 'purrpose', 'no-comply'] (from its record)
     ],
   },
-})
+});
 ```
 
 - All 7 repos have `checkout: repos/<name>` and `branch: main` in their records — copy them verbatim.

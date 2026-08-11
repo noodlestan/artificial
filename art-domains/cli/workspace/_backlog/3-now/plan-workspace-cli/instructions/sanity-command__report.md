@@ -10,13 +10,13 @@
 
 ### Changes
 
-| Goal | Status | Evidence |
-|------|--------|----------|
-| `verifyCheckouts` in config module | Done | `src/config/verify-checkouts.ts` created, exported from `src/config/index.ts`; fills only requested fields (`exists`, `pushed`); missing dir → `exists: false`; no remote → `pushed: false`; dirty tree → `pushed: false` |
-| `sanity` command | Done | `src/sanity.ts` created with `runSanity({ root, auto })`; wired into `src/index.ts` with `--auto` option; classifies green vs non-green; table output with `repo/directory | branch | issues | pushed?` |
-| `--auto` push | Done | Pushes clean unpushed repos only; marks as `pushed? = now`; never pushes dirty repos |
-| Tests per BDD spec | Done | 23 tests pass (14 config + 9 sanity); coverage 94% lines, 100% functions, 79% branches |
-| Publish 0.0.7 and consume | Done | `@art-domains/workspace-cli@0.0.7` published to npm; workspace root devDependency bumped to `0.0.7`; `art-workspace sanity` runs end-to-end |
+| Goal                               | Status | Evidence                                                                                                                                                                                                                  |
+| ---------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------ | -------- |
+| `verifyCheckouts` in config module | Done   | `src/config/verify-checkouts.ts` created, exported from `src/config/index.ts`; fills only requested fields (`exists`, `pushed`); missing dir → `exists: false`; no remote → `pushed: false`; dirty tree → `pushed: false` |
+| `sanity` command                   | Done   | `src/sanity.ts` created with `runSanity({ root, auto })`; wired into `src/index.ts` with `--auto` option; classifies green vs non-green; table output with `repo/directory                                                | branch | issues | pushed?` |
+| `--auto` push                      | Done   | Pushes clean unpushed repos only; marks as `pushed? = now`; never pushes dirty repos                                                                                                                                      |
+| Tests per BDD spec                 | Done   | 23 tests pass (14 config + 9 sanity); coverage 94% lines, 100% functions, 79% branches                                                                                                                                    |
+| Publish 0.0.7 and consume          | Done   | `@art-domains/workspace-cli@0.0.7` published to npm; workspace root devDependency bumped to `0.0.7`; `art-workspace sanity` runs end-to-end                                                                               |
 
 #### Files changed
 
@@ -44,6 +44,7 @@ The instruction was clear and self-contained. The BDD spec in `plan__pseudo__san
    **Problem:** The runtime esbuild bundle was inlining `esbuild` and `simple-git` from the config module, causing "Dynamic require of 'fs' is not supported" when the temp bundle was loaded as ESM.
    **Decision:** Added `external: ['node:fs', 'node:os', 'node:path', 'node:url', 'fs', 'os', 'path', 'url', 'esbuild', 'simple-git']` to the esbuild options, and wrote the temp bundle to the workspace root (not `/tmp`) so it can resolve packages from the workspace root's `node_modules`.
    **READY-TO-APPLY snippet for `plan__pseudo__config.md`:**
+
    ```
    output = esbuild.build({
      entryPoints: [path],
@@ -60,6 +61,7 @@ The instruction was clear and self-contained. The BDD spec in `plan__pseudo__san
    **Problem:** The spec says "For each 'unpushed' repo (clean working tree, unpushed commits): git push". But repos without a tracking branch have `pushed: false` from `verifyCheckouts` but no "ahead" issue, so the push condition needs to check for remote presence, not just "ahead" commits.
    **Decision:** Changed the push condition to: if `pushed === 'no'` and no "no remote" issue, attempt push.
    **READY-TO-APPLY snippet for `plan__pseudo__sanity.md`:**
+
    ```
    5. If `--auto` flag provided
       - For each repo where pushed = 'no' and issues does not contain 'no remote':

@@ -10,13 +10,13 @@
 
 ### Changes
 
-| Issue | Fix |
-| --- | --- |
-| Lint errors | Removed unused imports from `clone-all.ts`, `load-repositories.ts`, `branch.ts`; added `eslint-disable-next-line` for unused params on stub commands (branch, link, publish, unlink) |
-| Build failures | No build failures after lint was clean — `tsc --noEmit` and `esbuild` pass |
-| Push log wrong branch | `sanity.ts:44` — changed `checkout.record.branch` to `checkout.branch` so the log reflects the scanned git branch, not the stale record value |
-| Custom location ignored | `clone-specific.ts:31-36` — added early return with error when `target` is provided and checkout exists at a different location |
-| Lossy record roundtrip | `checkout-record.ts` — added optional `repository` field to `CheckoutRecord` interface; `readCheckoutRecord` now parses `**Repository:**`; `saveCheckoutRecord` writes it when present (strips empty line when absent); updated hardcoded template and external `.agents/domains/workspace/templates/checkout.art.njk` |
+| Issue                   | Fix                                                                                                                                                                                                                                                                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lint errors             | Removed unused imports from `clone-all.ts`, `load-repositories.ts`, `branch.ts`; added `eslint-disable-next-line` for unused params on stub commands (branch, link, publish, unlink)                                                                                                                                   |
+| Build failures          | No build failures after lint was clean — `tsc --noEmit` and `esbuild` pass                                                                                                                                                                                                                                             |
+| Push log wrong branch   | `sanity.ts:44` — changed `checkout.record.branch` to `checkout.branch` so the log reflects the scanned git branch, not the stale record value                                                                                                                                                                          |
+| Custom location ignored | `clone-specific.ts:31-36` — added early return with error when `target` is provided and checkout exists at a different location                                                                                                                                                                                        |
+| Lossy record roundtrip  | `checkout-record.ts` — added optional `repository` field to `CheckoutRecord` interface; `readCheckoutRecord` now parses `**Repository:**`; `saveCheckoutRecord` writes it when present (strips empty line when absent); updated hardcoded template and external `.agents/domains/workspace/templates/checkout.art.njk` |
 
 #### Files changed
 
@@ -32,11 +32,11 @@
 
 ### Verification
 
-| Step | Result |
-| --- | --- |
-| `npm run lint` | ✅ clean |
-| `npm run build` | ✅ passes |
-| `npm run test` | ✅ 67/67 pass |
+| Step                    | Result                                                                                 |
+| ----------------------- | -------------------------------------------------------------------------------------- |
+| `npm run lint`          | ✅ clean                                                                               |
+| `npm run build`         | ✅ passes                                                                              |
+| `npm run test`          | ✅ 67/67 pass                                                                          |
 | `npm run test:coverage` | ✅ 88.88% stmts, 81.19% branches, 88.33% funcs, 88.88% lines (thresholds: 70/60/70/70) |
 
 ## Blockers (if any)

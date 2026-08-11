@@ -50,7 +50,6 @@ Detailed definitions live in `architecture/reports.md`. Symbols relevant to the 
 
 **Responsibility (clone, no args):** Present the Checkout Report and Extraneous Report without cloning.
 
-
 **BDD:**
 
 ```gherkin
@@ -310,7 +309,6 @@ unlink(repo, namespaces, packages)
 
   presentOperationsReport(ctx.log)
 ```
-
 
 ### Command: publish [--auto]
 

@@ -40,11 +40,11 @@ Update `ops/records/repositories/workspace-tooling.art` only:
 
 - Replace the `**Packages:**` section with a table (or per-package entries) carrying the confirmed facts from the `init-workspace-tooling` report:
 
-  | dir | package | version | bins |
-  | --- | --- | --- | --- |
-  | `cli/esbuild-cli` | `@noodlestan/esbuild` | 0.0.11 | `noodlestan/esbuild-cli` → `./bin/build.mjs`, `noodlestan/esbuild-cli-watch` → `./bin/watch.mjs` |
-  | `configs/tsconfig` | `@noodlestan/tsconfig` | 0.0.11 | — (configs only) |
-  | `configs/eslint-config` | `@noodlestan/eslint-config` | 0.0.7 | — (main `.eslintrc.cjs`) |
+  | dir                     | package                     | version | bins                                                                                             |
+  | ----------------------- | --------------------------- | ------- | ------------------------------------------------------------------------------------------------ |
+  | `cli/esbuild-cli`       | `@noodlestan/esbuild`       | 0.0.11  | `noodlestan/esbuild-cli` → `./bin/build.mjs`, `noodlestan/esbuild-cli-watch` → `./bin/watch.mjs` |
+  | `configs/tsconfig`      | `@noodlestan/tsconfig`      | 0.0.11  | — (configs only)                                                                                 |
+  | `configs/eslint-config` | `@noodlestan/eslint-config` | 0.0.7   | — (main `.eslintrc.cjs`)                                                                         |
 
 - Drop the "exact bin names confirmed at extraction" placeholder — the names are now concrete.
 - Add a `**Delivery:**` note documenting the git-URL root bridge: the root `@noodlestan/workspace-tooling` `package.json` carries `bin` entries (pointing at `cli/esbuild-cli/bin/*.mjs`) plus the esbuild runtime `dependencies`, so consumers can alias `"@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main"` — npm installs only the root package of a git dep (`#path:` unsupported). Note that only the esbuild wrapper is bridged at the root today; eslint-config/tsconfig are consumed from the same root install via their cloned content (`configs/...`) or an ops symlink.

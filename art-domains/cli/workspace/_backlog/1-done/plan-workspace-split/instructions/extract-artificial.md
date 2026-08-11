@@ -109,7 +109,7 @@ Execute all the steps autonomously, one by one, including running the **validati
 ### Step 2 — Scaffold the `noodlestan/artificial` repo root
 
 - Clone the empty repo into `repos/artificial/` (`repos/` is gitignored in the workspace; the clone is not committed to the workspace).
-- Scaffold the root mirroring the workspace-tooling repo conventions (see `repos/workspace-tooling/` for the pattern): `LICENSE-MIT` (Noodlestan MIT — copy from the migration source), `README.md` (repo name, purpose, packages table), `.gitignore` (node_modules, dist, *.tsbuildinfo, coverage), `.npmrc`, `.nvmrc` (`24.15.0`), `.prettierrc`, `.prettierignore`, `.eslintrc.cjs` (see Step 4), `tsconfig.json` (see Step 4), `turbo.json` (see Step 4), `lefthook.yml` (see Step 6).
+- Scaffold the root mirroring the workspace-tooling repo conventions (see `repos/workspace-tooling/` for the pattern): `LICENSE-MIT` (Noodlestan MIT — copy from the migration source), `README.md` (repo name, purpose, packages table), `.gitignore` (node_modules, dist, \*.tsbuildinfo, coverage), `.npmrc`, `.nvmrc` (`24.15.0`), `.prettierrc`, `.prettierignore`, `.eslintrc.cjs` (see Step 4), `tsconfig.json` (see Step 4), `turbo.json` (see Step 4), `lefthook.yml` (see Step 6).
 - Root `package.json`: rename the package `artificials` → `artificial` (private, version 0.0.1, keep the description), `packageManager: npm@10.2.3`, engines node `>=18` (keep the migration source's engine range — the workspace-tooling repo uses `24.15.0`, but do not force it here unless the installed toolchain requires it), keep the `workspaces` list minus `tools/build/`, and add the script/toolchain changes from Step 4.
 
 **Validation:** `repos/artificial/` exists with `origin` configured and no commits on `main`.

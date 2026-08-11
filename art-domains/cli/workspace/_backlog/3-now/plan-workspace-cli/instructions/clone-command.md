@@ -37,29 +37,29 @@ Implement the `art-workspace clone` command (idempotent) with CLI-managed checko
 
 **CLI package (`$CLI`) — source:**
 
-| File | Change |
-|---|---|
-| `src/config/types.ts` | `WorkspaceConfig` gains `checkouts: CheckoutConfig[]`; new `CheckoutConfig { repo, location, branch }`; `RepositoryRecord` drops `checkout?`/`branch?`; `RepositoryCheckout.repo` resolved by name from `CheckoutConfig.repo` |
-| `src/config/define-config.ts` | `locateCheckouts` resolves from `config.checkouts` (one `RepositoryCheckout` per entry; unknown repo → warn + skip); empty list → empty result |
-| `src/config/index.ts` | export the new types |
-| `src/types.ts` | move shared types used by 2+ modules (repo status, verify needs, ...) here |
-| `src/private/validate/*.ts` | extracted checks (dir exists, git status/clean, branch match) shared by sanity + clone |
-| `src/private/branching/*.ts` | branch helpers (current branch, branch match) |
-| `src/private/records/checkout-record.ts` | `saveCheckoutRecord(file, data)` — render the checkout template (HARDCODED resolution for now); `readCheckoutRecord(file)` — regex name/location/branch |
-| `src/clone.ts` (new) | clone command per `plan__pseudo__clone.md` |
-| `src/index.ts` | wire `clone` (remove the TODO stub) |
-| `src/sanity.ts` | derive checkouts from `config.checkouts`; use the private helpers; `console.log` → `console.info`; delete `eslint-disable-next-line no-console` comments |
-| `src/sanity.test.ts` | spies → `console.info`; remove the file-level `eslint-disable no-console` comment |
-| tests (new) | unit: record IO, `resolveTarget`, clone decisions; integration: temp repo + temp root |
-| `package.json` | version `0.0.8` |
+| File                                     | Change                                                                                                                                                                                                                        |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/config/types.ts`                    | `WorkspaceConfig` gains `checkouts: CheckoutConfig[]`; new `CheckoutConfig { repo, location, branch }`; `RepositoryRecord` drops `checkout?`/`branch?`; `RepositoryCheckout.repo` resolved by name from `CheckoutConfig.repo` |
+| `src/config/define-config.ts`            | `locateCheckouts` resolves from `config.checkouts` (one `RepositoryCheckout` per entry; unknown repo → warn + skip); empty list → empty result                                                                                |
+| `src/config/index.ts`                    | export the new types                                                                                                                                                                                                          |
+| `src/types.ts`                           | move shared types used by 2+ modules (repo status, verify needs, ...) here                                                                                                                                                    |
+| `src/private/validate/*.ts`              | extracted checks (dir exists, git status/clean, branch match) shared by sanity + clone                                                                                                                                        |
+| `src/private/branching/*.ts`             | branch helpers (current branch, branch match)                                                                                                                                                                                 |
+| `src/private/records/checkout-record.ts` | `saveCheckoutRecord(file, data)` — render the checkout template (HARDCODED resolution for now); `readCheckoutRecord(file)` — regex name/location/branch                                                                       |
+| `src/clone.ts` (new)                     | clone command per `plan__pseudo__clone.md`                                                                                                                                                                                    |
+| `src/index.ts`                           | wire `clone` (remove the TODO stub)                                                                                                                                                                                           |
+| `src/sanity.ts`                          | derive checkouts from `config.checkouts`; use the private helpers; `console.log` → `console.info`; delete `eslint-disable-next-line no-console` comments                                                                      |
+| `src/sanity.test.ts`                     | spies → `console.info`; remove the file-level `eslint-disable no-console` comment                                                                                                                                             |
+| tests (new)                              | unit: record IO, `resolveTarget`, clone decisions; integration: temp repo + temp root                                                                                                                                         |
+| `package.json`                           | version `0.0.8`                                                                                                                                                                                                               |
 
 **Workspace (`$ROOT`) — authoring (commit after validation):**
 
-| File | Change |
-|---|---|
-| `.art-workspace.mts` | add `checkouts: []`; drop per-repo `checkout`/`branch` fields |
+| File                             | Change                                                                             |
+| -------------------------------- | ---------------------------------------------------------------------------------- |
+| `.art-workspace.mts`             | add `checkouts: []`; drop per-repo `checkout`/`branch` fields                      |
 | `ops/records/repositories/*.art` | drop `**Checkout:**`/`**Branch:**` lines (records mirror the Repository structure) |
-| `ops/records/checkouts/*.art` | created by `clone` at runtime; not committed by hand |
+| `ops/records/checkouts/*.art`    | created by `clone` at runtime; not committed by hand                               |
 
 ## Rules
 

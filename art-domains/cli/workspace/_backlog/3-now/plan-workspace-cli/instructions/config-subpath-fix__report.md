@@ -12,13 +12,13 @@
 
 All five goals were met: `@art-domains/workspace-cli@0.0.3` exposes the `./config` subpath (declarations + JS emitted), the manifest imports `defineConfig` from the subpath, and the load-time bundle is clean ESM — no `require` calls.
 
-| Instruction Goal | Status | Evidence |
-| --- | --- | --- |
-| Add `./config` export entry and emit `dist/config/index.js` | DONE | `exports` map has `./config` → `types` + `import`; build script extended with second esbuild invocation for `src/config/index.ts`; version bumped to `0.0.3` |
-| Build, test, coverage pass | DONE | `npm run build` emits `dist/index.js`, `dist/index.d.ts`, `dist/config/index.js`, `dist/config/index.d.ts`; `npm test` → 8/8 pass; `npm run lint` → pass; `npm run test:coverage` → lines 96.26 / functions 100 / branches 84.61 / statements 96.26 (floor met) |
-| Publish 0.0.3 and consume at workspace root | DONE | `npm publish` → `+ @art-domains/workspace-cli@0.0.3`; `program.version('0.0.3')` aligned; root devDependency bumped to `0.0.3`; `npm install` succeeded; `node_modules/@art-domains/workspace-cli/dist/config/index.js` exists |
-| Switch manifest import to subpath | DONE | `.art-workspace.mts` imports from `@art-domains/workspace-cli/config`; manifest still has workspace + 7 repo entries (8 `name` fields) |
-| Verify load-time bundle is clean ESM | DONE | esbuild bundle check prints `clean ESM bundle, no require() calls; bytes: 112331` and exits 0; `tsc --noEmit --module nodenext` passes; `art-workspace --help` boots; `art-workspace --version` prints `0.0.3` |
+| Instruction Goal                                            | Status | Evidence                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Add `./config` export entry and emit `dist/config/index.js` | DONE   | `exports` map has `./config` → `types` + `import`; build script extended with second esbuild invocation for `src/config/index.ts`; version bumped to `0.0.3`                                                                                                    |
+| Build, test, coverage pass                                  | DONE   | `npm run build` emits `dist/index.js`, `dist/index.d.ts`, `dist/config/index.js`, `dist/config/index.d.ts`; `npm test` → 8/8 pass; `npm run lint` → pass; `npm run test:coverage` → lines 96.26 / functions 100 / branches 84.61 / statements 96.26 (floor met) |
+| Publish 0.0.3 and consume at workspace root                 | DONE   | `npm publish` → `+ @art-domains/workspace-cli@0.0.3`; `program.version('0.0.3')` aligned; root devDependency bumped to `0.0.3`; `npm install` succeeded; `node_modules/@art-domains/workspace-cli/dist/config/index.js` exists                                  |
+| Switch manifest import to subpath                           | DONE   | `.art-workspace.mts` imports from `@art-domains/workspace-cli/config`; manifest still has workspace + 7 repo entries (8 `name` fields)                                                                                                                          |
+| Verify load-time bundle is clean ESM                        | DONE   | esbuild bundle check prints `clean ESM bundle, no require() calls; bytes: 112331` and exits 0; `tsc --noEmit --module nodenext` passes; `art-workspace --help` boots; `art-workspace --version` prints `0.0.3`                                                  |
 
 #### Files changed
 

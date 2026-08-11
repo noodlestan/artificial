@@ -21,6 +21,7 @@ The plan workflow (see `artificials/_guide.md` → Planning Workflow → Working
 ## Goals
 
 Publish all packages from the four family repositories to npm:
+
 - **purrception** (4 packages): `@purrception/primitives`, `@purrception/lang-ts`, `@purrception/source-fs`, `@purrception/lang-ts-extract` (all 0.0.11)
 - **artificial** (11 packages): `@art-js/*` and `@artisans/*` packages (all 0.0.1)
 - **purrtrait** (5 packages): `@purrtrait/lang-ts`, `@purrtrait/code-renderer`, `@purrtrait/solid-code`, `@purrtrait/view-tsx`, `@purrtrait/client-tsx` (all 0.0.11)
@@ -48,7 +49,7 @@ Publish all packages from the four family repositories to npm:
 1. **Verify npm authentication** — ensure `npm whoami` returns a valid user.
 2. **Publish purrception packages** — publish all 4 packages in dependency order (primitives first, then lang-ts, then source-fs, then lang-ts-extract).
 3. **Publish artificial packages** — publish all 11 packages (no internal dependencies, can be published in any order).
-4. **Publish purrtrait packages** — publish all 5 packages (depends on @purrception/* which is now published).
+4. **Publish purrtrait packages** — publish all 5 packages (depends on @purrception/\* which is now published).
 5. **Attempt to publish purrpose packages** — publish all 3 packages. If the reverse edge causes failures, document and continue.
 6. **Verify publication** — confirm each package is available on npm with `npm view {package} version`.
 
@@ -69,6 +70,7 @@ Publish all packages from the four family repositories to npm:
   2. REPORT A BLOCKER with the list of packages and the command the user needs to run manually: `npm publish --access public --otp={code}` for each package.
 
 ## Rules to Report".
+
 - RULE: Do NOT use `--no-verify` for commits in the family repos unless absolutely necessary (the pre-commit should pass).
 - RULE: If npm authentication fails, REPORT A BLOCKER immediately.
 - RULE: If purrpose publish fails due to the reverse edge, document the failure and continue — do not REPORT A BLOCKER for this specific case.
@@ -166,7 +168,7 @@ Execute all the steps autonomously, one by one, including running the **validati
 **Instructions:**
 
 1. Navigate to the purrtrait repository: `cd repos/purrtrait`.
-2. Publish all packages (depends on @purrception/* which is now published):
+2. Publish all packages (depends on @purrception/\* which is now published):
    - `cd libs/lang-ts && npm publish --access public && cd ../..`
    - `cd libs/code-renderer && npm publish --access public && cd ../..`
    - `cd libs/solid-code && npm publish --access public && cd ../..`

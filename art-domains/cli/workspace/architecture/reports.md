@@ -8,10 +8,10 @@ The primary status table, presented after every command that reads or mutates ch
 
 Columns: `repo`, `location`, `branch`, `states`. `states` is the joined list of issues (e.g. `uncommitted files`, `N commits ahead`) or `clean`.
 
-| repo        | location       | branch | states              |
-| ----------- | -------------- | ------ | ------------------- |
-| artificial  | repos/artificial | main | clean              |
-| purrception | repos/purrception | feat/x | 2 commits ahead    |
+| repo        | location          | branch | states          |
+| ----------- | ----------------- | ------ | --------------- |
+| artificial  | repos/artificial  | main   | clean           |
+| purrception | repos/purrception | feat/x | 2 commits ahead |
 
 ## Operations Report
 
@@ -19,10 +19,10 @@ Appended when a command performs side effects; omitted when nothing was done. Ea
 
 Columns: ``, `repo`, `operation`, `message`.
 
-|     | repo        | operation | detail                     |
-| --- | ----------- | --------- | -------------------------- |
-| 🟢  | artificial  | clone     | cloned to repos/artificial |
-| 🟢  | purrception | push      | 2 commits to origin/feat/x |
+|     | repo        | operation | detail                       |
+| --- | ----------- | --------- | ---------------------------- |
+| 🟢  | artificial  | clone     | cloned to repos/artificial   |
+| 🟢  | purrception | push      | 2 commits to origin/feat/x   |
 | 🔴  | no-comply   | publish   | @no-comply/core@1.2.3 failed |
 
 ## Extraneous Report
@@ -31,7 +31,7 @@ Directories under the clone path with no matching checkout record. Presented by 
 
 Columns: `directory`, `branch`, `states`.
 
-| directory      | branch  | states             |
-| -------------- | ------- | ------------------ |
-| my-test-clone  | main    | clean              |
-| old-experiment | feature | uncommitted files  |
+| directory      | branch  | states            |
+| -------------- | ------- | ----------------- |
+| my-test-clone  | main    | clean             |
+| old-experiment | feature | uncommitted files |

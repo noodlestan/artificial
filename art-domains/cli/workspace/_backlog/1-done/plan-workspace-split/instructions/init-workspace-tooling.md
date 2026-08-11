@@ -87,7 +87,7 @@ Execute all the steps autonomously, one by one, including running the **validati
 
 ### Step 2 — Scaffold the repo root
 
-- Add `LICENSE-MIT` (Noodlestan MIT — copy the license text from the migration sources), `README.md` (repo name, purpose, packages table), `.gitignore` (node_modules, dist, *.tsbuildinfo), `.npmrc`, `.nvmrc` (`24.15.0`), `.prettierrc`, `.prettierignore`, `.eslintrc.js` (mirroring the project-skeleton conventions), `tsconfig.json`, `turbo.json` (pipeline: build, lint, test), `lefthook.yml` (pre-commit hooks running the scoped lint/typecheck).
+- Add `LICENSE-MIT` (Noodlestan MIT — copy the license text from the migration sources), `README.md` (repo name, purpose, packages table), `.gitignore` (node_modules, dist, \*.tsbuildinfo), `.npmrc`, `.nvmrc` (`24.15.0`), `.prettierrc`, `.prettierignore`, `.eslintrc.js` (mirroring the project-skeleton conventions), `tsconfig.json`, `turbo.json` (pipeline: build, lint, test), `lefthook.yml` (pre-commit hooks running the scoped lint/typecheck).
 - Root `package.json`: name `@noodlestan/workspace-tooling` (private), `packageManager: npm@10.2.3`, engines `node 24.15.0`, `workspaces: ["cli/*", "configs/*"]`, scripts `lint`, `lint:fix`, `build`, `test`.
 
 **Validation:** `npm install` at the repo root succeeds and creates `package-lock.json`.

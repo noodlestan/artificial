@@ -10,13 +10,13 @@
 
 ### Changes
 
-| Goal | Status | Detail |
-|------|--------|--------|
-| Create namespace record | Done | `repos/artificial/ops/records/namespaces/workspace.art` created |
-| Create package record | Done | `repos/artificial/ops/records/packages/workspace-cli.art` created |
-| Create dependency records | Done | `repos/artificial/ops/records/dependencies/workspace-cli-dev.art` created with 6 dependencies + 1 dependency set |
-| Update project record | Done | Added `- Namespace: Workspace Tools` to artificial.art Namespaces section |
-| Scaffold package structure | Done | Created `repos/artificial/art-domains/cli/workspace/` with src/index.ts, package.json, tsconfig.json, README.md, .gitignore |
+| Goal                       | Status | Detail                                                                                                                      |
+| -------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------- |
+| Create namespace record    | Done   | `repos/artificial/ops/records/namespaces/workspace.art` created                                                             |
+| Create package record      | Done   | `repos/artificial/ops/records/packages/workspace-cli.art` created                                                           |
+| Create dependency records  | Done   | `repos/artificial/ops/records/dependencies/workspace-cli-dev.art` created with 6 dependencies + 1 dependency set            |
+| Update project record      | Done   | Added `- Namespace: Workspace Tools` to artificial.art Namespaces section                                                   |
+| Scaffold package structure | Done   | Created `repos/artificial/art-domains/cli/workspace/` with src/index.ts, package.json, tsconfig.json, README.md, .gitignore |
 
 #### Files changed
 

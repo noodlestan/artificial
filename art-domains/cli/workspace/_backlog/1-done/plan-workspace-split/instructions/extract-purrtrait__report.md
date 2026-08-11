@@ -47,15 +47,16 @@ None.
 
 Package layout confirmed:
 
-| dir | package | version |
-| --- | --- | --- |
-| `libs/lang-ts/` | `@purrtrait/lang-ts` | 0.0.11 |
-| `libs/code-renderer/` | `@purrtrait/code-renderer` | 0.0.11 |
-| `libs/solid-code/` | `@purrtrait/solid-code` | 0.0.11 |
-| `libs/view-tsx/` | `@purrtrait/view-tsx` | 0.0.11 |
-| `libs/client-tsx/` | `@purrtrait/client-tsx` | 0.0.11 |
+| dir                   | package                    | version |
+| --------------------- | -------------------------- | ------- |
+| `libs/lang-ts/`       | `@purrtrait/lang-ts`       | 0.0.11  |
+| `libs/code-renderer/` | `@purrtrait/code-renderer` | 0.0.11  |
+| `libs/solid-code/`    | `@purrtrait/solid-code`    | 0.0.11  |
+| `libs/view-tsx/`      | `@purrtrait/view-tsx`      | 0.0.11  |
+| `libs/client-tsx/`    | `@purrtrait/client-tsx`    | 0.0.11  |
 
 Git-URL pins used:
+
 - `"@noodlestan/eslint-config": "git+ssh://git@github.com/noodlestan/eslint-config.git#main"`
 - `"@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main"`
 - `"@purrception/lang-ts": "git+ssh://git@github.com/noodlestan/purrception.git#main"`

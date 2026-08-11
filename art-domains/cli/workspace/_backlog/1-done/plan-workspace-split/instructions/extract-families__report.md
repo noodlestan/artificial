@@ -33,18 +33,20 @@ Package rewires: `cli/source-fs/package.json` and `cli/lang-ts-extract/package.j
 
 **Package layout confirmed:**
 
-| dir | package | version |
-| --- | --- | --- |
-| `libs/primitives/` | `@purrception/primitives` | 0.0.11 |
-| `libs/lang-ts/` | `@purrception/lang-ts` | 0.0.11 |
-| `cli/source-fs/` | `@purrception/source-fs` | 0.0.11 |
-| `cli/lang-ts-extract/` | `@purrception/lang-ts-extract` | 0.0.11 |
+| dir                    | package                        | version |
+| ---------------------- | ------------------------------ | ------- |
+| `libs/primitives/`     | `@purrception/primitives`      | 0.0.11  |
+| `libs/lang-ts/`        | `@purrception/lang-ts`         | 0.0.11  |
+| `cli/source-fs/`       | `@purrception/source-fs`       | 0.0.11  |
+| `cli/lang-ts-extract/` | `@purrception/lang-ts-extract` | 0.0.11  |
 
 **Git-URL pins used:**
+
 - `"@noodlestan/eslint-config": "git+ssh://git@github.com/noodlestan/eslint-config.git#main"`
 - `"@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main"`
 
 **Scripts rewired from parent-install bins:**
+
 - `cli/source-fs`: `"build": "no-comply-build"` → `"build": "esbuild-cli"`, `"dev": "no-comply-watch"` → `"dev": "esbuild-cli-watch"`
 - `cli/lang-ts-extract`: `"build": "no-comply-build"` → `"build": "esbuild-cli"`, `"dev": "no-comply-watch"` → `"dev": "esbuild-cli-watch"`
 

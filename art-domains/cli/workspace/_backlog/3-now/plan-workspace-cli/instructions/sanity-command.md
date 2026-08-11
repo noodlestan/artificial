@@ -44,8 +44,11 @@ Implement `art-workspace sanity` as the first end-to-end consumer of the config 
 ## Changes
 
 ### 1. `verifyCheckouts` in the CLI package config module
+
 ### 2. The `sanity` command — classification, `--auto` push, table output
+
 ### 3. Tests per the BDD spec (unit + integration)
+
 ### 4. Build + publish 0.0.4 and consume at the workspace root
 
 ## Rules

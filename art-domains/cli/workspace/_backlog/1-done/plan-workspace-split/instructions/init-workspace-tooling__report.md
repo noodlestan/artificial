@@ -23,6 +23,7 @@ Root scaffold (`repos/workspace-tooling/`): `package.json`, `package-lock.json`,
 `configs/eslint-config/` — migrated from `../../eslint-config/` as `@noodlestan/eslint-config` 0.0.7 (byte-identical): `src/**`, `test/**`, `package.json`, `tsconfig.json`, `LICENSE-MIT`, `README.md`, `lefthook.yml`, `.eslintrc.cjs` (the `main` entry), `.prettierrc` (the package's own — see feedback).
 
 Repo commits (workspace-tooling only, both pushed to `origin main`):
+
 - `5205244 workspace-tooling: init monorepo and migrate tooling packages`
 - `80a5a11 workspace-tooling: expose esbuild-cli bins at repo root for git-URL consumption`
 
@@ -38,11 +39,11 @@ None.
 
 Package layout landed exactly as specified:
 
-| dir | package | version | bins |
-| --- | --- | --- | --- |
-| `cli/esbuild-cli` | `@noodlestan/esbuild` | 0.0.11 | `noodlestan/esbuild-cli` → `./bin/build.mjs`, `noodlestan/esbuild-cli-watch` → `./bin/watch.mjs` |
-| `configs/tsconfig` | `@noodlestan/tsconfig` | 0.0.11 | — (configs only) |
-| `configs/eslint-config` | `@noodlestan/eslint-config` | 0.0.7 | — (main `.eslintrc.cjs`) |
+| dir                     | package                     | version | bins                                                                                             |
+| ----------------------- | --------------------------- | ------- | ------------------------------------------------------------------------------------------------ |
+| `cli/esbuild-cli`       | `@noodlestan/esbuild`       | 0.0.11  | `noodlestan/esbuild-cli` → `./bin/build.mjs`, `noodlestan/esbuild-cli-watch` → `./bin/watch.mjs` |
+| `configs/tsconfig`      | `@noodlestan/tsconfig`      | 0.0.11  | — (configs only)                                                                                 |
+| `configs/eslint-config` | `@noodlestan/eslint-config` | 0.0.7   | — (main `.eslintrc.cjs`)                                                                         |
 
 - **`where`:** Step 8 (git-URL consumption) / `ops/_architect.md` Follow-ups ("De-risk git-URL deps"). **problem:** npm (11.12.1) installs **only the root package** of a git dependency; subdirectory installs are unsupported (`#path:` fragment unmerged in pacote). The plain `git+ssh://git@github.com/noodlestan/workspace-tooling.git` install yields a private root package with no bins, so `node_modules/@noodlestan/esbuild` did not resolve as instructed. **decision:** added a minimal delivery bridge to the root `package.json` — `bin` entries pointing at `cli/esbuild-cli/bin/*.mjs` plus the esbuild runtime `dependencies`. Consumers now alias `"@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main"` and get a working, invokable wrapper. READY-TO-APPLY for `ops/_architect.md` Follow-ups:
   ```

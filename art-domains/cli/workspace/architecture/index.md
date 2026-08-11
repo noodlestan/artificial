@@ -22,7 +22,6 @@ An ecosystem spans multiple independent repositories (`artificial`, `purrception
 - **Flexibility** — symlinks for active local dev, npm packages for published deps.
 - **Traceability** — records document every repo's structure and checkout state.
 
-
 ## Definitions
 
 - **Workspace:** A **meta-repo** that provides context for humans and agents alike (knowledge, references, instructions) and tools to work simultaneously across repositories. Example: `noodlestan/workspace`.
@@ -38,9 +37,9 @@ An ecosystem spans multiple independent repositories (`artificial`, `purrception
 
 The workspace owns:
 
-- **Records**  — Workspace config and repository and checkouts records (source of truth). Example: `$WORKSPACE/ops/records/`
-- **Config**  — The `.art-workspace.mts` module at the workspace root, defines paths (records, templates, checkouts), importable by tools. See `architecture/config.md`.
-- **Context**  — Agent instructions and reference material. Example: `$WORKSPACE/.agents/`, `$WORKSPACE/reference/`.
+- **Records** — Workspace config and repository and checkouts records (source of truth). Example: `$WORKSPACE/ops/records/`
+- **Config** — The `.art-workspace.mts` module at the workspace root, defines paths (records, templates, checkouts), importable by tools. See `architecture/config.md`.
+- **Context** — Agent instructions and reference material. Example: `$WORKSPACE/.agents/`, `$WORKSPACE/reference/`.
 - **Checkouts** — The cloned repositories under a checkout path, whose state is scanned from git and tracked in records. Examples: `repos/{checkout-name}`.
 
 Commands run as **imperative one-shot processes**: each invocation creates a `WorkspaceContext` (an in-memory `CheckoutStore` plus `OperationsLog`), performs work, presents reports, and exits. The design stays clean enough that a reactive layer (`npm run workspace watch`) can subscribe to the same store and log APIs without rearchitecting: the store is rehydratable from disk, the log is append-only, and record syncing is explicit rather than automatic. See `records/adr/execution-model.art`.
@@ -69,4 +68,3 @@ The CLI loads `.art-workspace.mts` at runtime by bundling it with esbuild (Vite-
 - **Branch** — create and checkout the same feature branch across multiple repos for coordinated feature work.
 - **Publish** — push repos and publish packages to npm.
 - **Link / Unlink** — symlink local packages into consumers' `node_modules` for local dev; remove the symlinks and restore npm packages.
-

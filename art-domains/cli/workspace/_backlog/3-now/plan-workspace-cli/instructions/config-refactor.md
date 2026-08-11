@@ -36,25 +36,25 @@ Refactor the config contract from **records injection** to **config params (path
 
 **CLI package (`$CLI`) — source:**
 
-| File | Change |
-|---|---|
-| `src/config/types.ts` | `WorkspaceConfig` = paths-only shape (`clone.path`, `records.repositories.path`, `records.checkouts.path`/`template`); drop `records.workspace`, `records.repos`, `CheckoutConfig`; `RepositoryRecord.consumers` becomes raw `string` |
-| `src/config/define-config.ts` | `defineConfig` type-checks the new shape (identity); remove `locateCheckouts` (superseded) |
-| `src/config/load-config.ts` | mechanism unchanged |
-| `src/config/index.ts` | export the new types; drop `locateCheckouts` export |
-| `src/private/records/repository-record.ts` (new) | `readRepositoryRecord(file)` + `loadRepositories(config, root)` |
-| `src/private/records/checkout-record.ts` | `saveCheckoutRecord` reads the template from `config.records.checkouts.template` (fallback: current hardcoded template if the file is missing); add `loadCheckouts(config, root)` |
-| `src/sanity.ts` | checkouts from `loadCheckouts(config, root)` |
-| `src/clone.ts` | targets from `loadRepositories(config, root)`; default location `join(config.clone.path, name)`; overrides from `loadCheckouts(config, root)` |
-| tests | update config/sanity/clone tests; add `repository-record` + `loadRepositories`/`loadCheckouts` unit tests |
-| `package.json` | version `0.0.9` |
+| File                                             | Change                                                                                                                                                                                                                                |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/config/types.ts`                            | `WorkspaceConfig` = paths-only shape (`clone.path`, `records.repositories.path`, `records.checkouts.path`/`template`); drop `records.workspace`, `records.repos`, `CheckoutConfig`; `RepositoryRecord.consumers` becomes raw `string` |
+| `src/config/define-config.ts`                    | `defineConfig` type-checks the new shape (identity); remove `locateCheckouts` (superseded)                                                                                                                                            |
+| `src/config/load-config.ts`                      | mechanism unchanged                                                                                                                                                                                                                   |
+| `src/config/index.ts`                            | export the new types; drop `locateCheckouts` export                                                                                                                                                                                   |
+| `src/private/records/repository-record.ts` (new) | `readRepositoryRecord(file)` + `loadRepositories(config, root)`                                                                                                                                                                       |
+| `src/private/records/checkout-record.ts`         | `saveCheckoutRecord` reads the template from `config.records.checkouts.template` (fallback: current hardcoded template if the file is missing); add `loadCheckouts(config, root)`                                                     |
+| `src/sanity.ts`                                  | checkouts from `loadCheckouts(config, root)`                                                                                                                                                                                          |
+| `src/clone.ts`                                   | targets from `loadRepositories(config, root)`; default location `join(config.clone.path, name)`; overrides from `loadCheckouts(config, root)`                                                                                         |
+| tests                                            | update config/sanity/clone tests; add `repository-record` + `loadRepositories`/`loadCheckouts` unit tests                                                                                                                             |
+| `package.json`                                   | version `0.0.9`                                                                                                                                                                                                                       |
 
 **Workspace (`$ROOT`) — authoring (commit after validation):**
 
-| File | Change |
-|---|---|
+| File                 | Change                                                                                             |
+| -------------------- | -------------------------------------------------------------------------------------------------- |
 | `.art-workspace.mts` | rewritten to the paths-only shape; `checkouts: []` and `records.repos`/`records.workspace` removed |
-| `ops/records/*` | untouched (records are the source of truth; `ops/records/workspace.art` stays as a domain record) |
+| `ops/records/*`      | untouched (records are the source of truth; `ops/records/workspace.art` stays as a domain record)  |
 
 ## Rules
 

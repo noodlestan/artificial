@@ -4,14 +4,14 @@ The command surface of the workspace CLI, their procedures, and their edge cases
 
 ## Command Surface
 
-| command | usage | status |
-| --- | --- | --- |
-| `clone` | `clone [--all] [<repo>] [<location>]` | implemented |
-| `branch` | `branch <branch> [<checkout-name>...]` | implemented |
-| `link` | `link <repo> [<namespaces>] [<packages>]` | designed |
-| `unlink` | `unlink <repo> [<namespaces>] [<packages>]` | designed |
-| `sanity` | `sanity [--auto]` | implemented |
-| `publish` | `publish [--auto]` | designed |
+| command   | usage                                       | status      |
+| --------- | ------------------------------------------- | ----------- |
+| `clone`   | `clone [--all] [<repo>] [<location>]`       | implemented |
+| `branch`  | `branch <branch> [<checkout-name>...]`      | implemented |
+| `link`    | `link <repo> [<namespaces>] [<packages>]`   | designed    |
+| `unlink`  | `unlink <repo> [<namespaces>] [<packages>]` | designed    |
+| `sanity`  | `sanity [--auto]`                           | implemented |
+| `publish` | `publish [--auto]`                          | designed    |
 
 Every command that touches checkouts presents reports (see `reports.md`).
 

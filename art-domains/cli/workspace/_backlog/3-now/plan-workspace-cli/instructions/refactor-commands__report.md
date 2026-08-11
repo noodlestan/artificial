@@ -16,57 +16,57 @@ Moved existing code into the new one-command-per-directory, one-function-per-fil
 
 #### Files changed
 
-| File | Action | Description |
-|------|--------|-------------|
-| `src/types.ts` | Moved → `src/shared/types.ts` | `VerifyNeeds`, `RepoStatus` types relocated to shared |
-| `src/private/checkout-store.ts` | Moved → `src/shared/checkout-store.ts` | `CheckoutStore` + `createCheckoutStore` relocated to shared |
-| `src/private/present.ts` | Moved → `src/clone/private/present.ts` | Presentation logic (Checkout, Operations, Extraneous reports) relocated to clone command |
-| `src/private/scan.ts` | Moved → `src/shared/scan-checkout.ts` | `scanCheckout`, `scanAllCheckouts`, `scanExtraneousCheckouts` relocated to shared |
-| `src/private/branching/index.ts` | Split → `src/private/git/get-current-branch.ts`, `src/private/git/is-detached-head.ts` | One function per file |
-| `src/private/validate/index.ts` | Split → `src/private/git/has-merge-conflicts.ts`, `src/private/git/is-dirty.ts`, `src/private/git/has-remote.ts`, `src/private/git/get-unpushed-count.ts` | One function per file |
-| `src/clone.ts` | Split → `src/clone/clone.ts`, `src/clone/clone-all.ts`, `src/clone/clone-specific.ts`, `src/clone/clone-status.ts` | Clone command split by mode (all/specific/status) |
-| `src/clone.test.ts` | Moved → `src/clone/clone.test.ts` | Test collocated with clone command |
-| `src/sanity.ts` | Moved → `src/sanity/sanity.ts` | Sanity command relocated |
-| `src/sanity.test.ts` | Moved → `src/sanity/sanity.test.ts` | Test collocated with sanity command |
-| `src/clone/private/default-location.ts` | Created | `defaultLocation()` extracted from clone logic |
-| `src/clone/private/clone-repo.ts` | Created | `cloneRepo()` extracted from clone logic |
-| `src/config/load-repositories.ts` | Created | `loadRepositories()` extracted from config |
-| `src/config/load-checkouts.ts` | Created | `loadCheckouts()` extracted from config |
-| `src/shared/checkout.ts` | Created | `Checkout` type + `createCheckout()` |
-| `src/shared/workspace-context.ts` | Created | `WorkspaceContext` type + `createWorkspaceContext()` |
-| `src/shared/operations-log.ts` | Created | `OperationsLog` type + `createOperationsLog()` with all operation methods |
-| `src/shared/scan-checkout.ts` | Created | `scanCheckout()`, `scanAllCheckouts()`, `scanExtraneousCheckouts()` standalone functions |
-| `src/shared/sync-records.ts` | Created | `syncRecords()` placeholder |
-| `src/shared/shared.test.ts` | Created | Tests for shared modules (Checkout, CheckoutStore, OperationsLog, WorkspaceContext) |
-| `src/private/git/git.test.ts` | Created | Tests for git helpers |
-| `src/branch/branch.ts` | Created | Stub command handler |
-| `src/branch/branch.test.ts` | Created | Placeholder test |
-| `src/link/link.ts` | Created | Stub command handler |
-| `src/link/link.test.ts` | Created | Placeholder test |
-| `src/unlink/unlink.ts` | Created | Stub command handler |
-| `src/unlink/unlink.test.ts` | Created | Placeholder test |
-| `src/publish/publish.ts` | Created | Stub command handler |
-| `src/publish/publish.test.ts` | Created | Placeholder test |
-| `src/index.ts` | Updated | Entry point now imports from new command directories |
-| `src/config/index.ts` | Updated | Re-exports from `../shared/types` instead of `../types` |
-| `src/config/types.ts` | Updated | Added `CheckoutRecord` type |
-| `src/config/verify-checkouts.ts` | Updated | Import path changed to `../shared/types` |
-| `src/config/config.test.ts` | Updated | Import path changed to `./types` |
+| File                                    | Action                                                                                                                                                    | Description                                                                              |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `src/types.ts`                          | Moved → `src/shared/types.ts`                                                                                                                             | `VerifyNeeds`, `RepoStatus` types relocated to shared                                    |
+| `src/private/checkout-store.ts`         | Moved → `src/shared/checkout-store.ts`                                                                                                                    | `CheckoutStore` + `createCheckoutStore` relocated to shared                              |
+| `src/private/present.ts`                | Moved → `src/clone/private/present.ts`                                                                                                                    | Presentation logic (Checkout, Operations, Extraneous reports) relocated to clone command |
+| `src/private/scan.ts`                   | Moved → `src/shared/scan-checkout.ts`                                                                                                                     | `scanCheckout`, `scanAllCheckouts`, `scanExtraneousCheckouts` relocated to shared        |
+| `src/private/branching/index.ts`        | Split → `src/private/git/get-current-branch.ts`, `src/private/git/is-detached-head.ts`                                                                    | One function per file                                                                    |
+| `src/private/validate/index.ts`         | Split → `src/private/git/has-merge-conflicts.ts`, `src/private/git/is-dirty.ts`, `src/private/git/has-remote.ts`, `src/private/git/get-unpushed-count.ts` | One function per file                                                                    |
+| `src/clone.ts`                          | Split → `src/clone/clone.ts`, `src/clone/clone-all.ts`, `src/clone/clone-specific.ts`, `src/clone/clone-status.ts`                                        | Clone command split by mode (all/specific/status)                                        |
+| `src/clone.test.ts`                     | Moved → `src/clone/clone.test.ts`                                                                                                                         | Test collocated with clone command                                                       |
+| `src/sanity.ts`                         | Moved → `src/sanity/sanity.ts`                                                                                                                            | Sanity command relocated                                                                 |
+| `src/sanity.test.ts`                    | Moved → `src/sanity/sanity.test.ts`                                                                                                                       | Test collocated with sanity command                                                      |
+| `src/clone/private/default-location.ts` | Created                                                                                                                                                   | `defaultLocation()` extracted from clone logic                                           |
+| `src/clone/private/clone-repo.ts`       | Created                                                                                                                                                   | `cloneRepo()` extracted from clone logic                                                 |
+| `src/config/load-repositories.ts`       | Created                                                                                                                                                   | `loadRepositories()` extracted from config                                               |
+| `src/config/load-checkouts.ts`          | Created                                                                                                                                                   | `loadCheckouts()` extracted from config                                                  |
+| `src/shared/checkout.ts`                | Created                                                                                                                                                   | `Checkout` type + `createCheckout()`                                                     |
+| `src/shared/workspace-context.ts`       | Created                                                                                                                                                   | `WorkspaceContext` type + `createWorkspaceContext()`                                     |
+| `src/shared/operations-log.ts`          | Created                                                                                                                                                   | `OperationsLog` type + `createOperationsLog()` with all operation methods                |
+| `src/shared/scan-checkout.ts`           | Created                                                                                                                                                   | `scanCheckout()`, `scanAllCheckouts()`, `scanExtraneousCheckouts()` standalone functions |
+| `src/shared/sync-records.ts`            | Created                                                                                                                                                   | `syncRecords()` placeholder                                                              |
+| `src/shared/shared.test.ts`             | Created                                                                                                                                                   | Tests for shared modules (Checkout, CheckoutStore, OperationsLog, WorkspaceContext)      |
+| `src/private/git/git.test.ts`           | Created                                                                                                                                                   | Tests for git helpers                                                                    |
+| `src/branch/branch.ts`                  | Created                                                                                                                                                   | Stub command handler                                                                     |
+| `src/branch/branch.test.ts`             | Created                                                                                                                                                   | Placeholder test                                                                         |
+| `src/link/link.ts`                      | Created                                                                                                                                                   | Stub command handler                                                                     |
+| `src/link/link.test.ts`                 | Created                                                                                                                                                   | Placeholder test                                                                         |
+| `src/unlink/unlink.ts`                  | Created                                                                                                                                                   | Stub command handler                                                                     |
+| `src/unlink/unlink.test.ts`             | Created                                                                                                                                                   | Placeholder test                                                                         |
+| `src/publish/publish.ts`                | Created                                                                                                                                                   | Stub command handler                                                                     |
+| `src/publish/publish.test.ts`           | Created                                                                                                                                                   | Placeholder test                                                                         |
+| `src/index.ts`                          | Updated                                                                                                                                                   | Entry point now imports from new command directories                                     |
+| `src/config/index.ts`                   | Updated                                                                                                                                                   | Re-exports from `../shared/types` instead of `../types`                                  |
+| `src/config/types.ts`                   | Updated                                                                                                                                                   | Added `CheckoutRecord` type                                                              |
+| `src/config/verify-checkouts.ts`        | Updated                                                                                                                                                   | Import path changed to `../shared/types`                                                 |
+| `src/config/config.test.ts`             | Updated                                                                                                                                                   | Import path changed to `./types`                                                         |
 
 #### Files removed
 
-| File | Reason |
-|------|--------|
-| `src/types.ts` | Moved to `src/shared/types.ts` |
-| `src/private/checkout-store.ts` | Moved to `src/shared/checkout-store.ts` |
-| `src/private/present.ts` | Moved to `src/clone/private/present.ts` |
-| `src/private/scan.ts` | Moved to `src/shared/scan-checkout.ts` |
-| `src/private/branching/index.ts` | Split into individual files under `src/private/git/` |
-| `src/private/validate/index.ts` | Split into individual files under `src/private/git/` |
-| `src/clone.ts` | Split into `src/clone/clone.ts`, `clone-all.ts`, `clone-specific.ts`, `clone-status.ts` |
-| `src/clone.test.ts` | Moved to `src/clone/clone.test.ts` |
-| `src/sanity.ts` | Moved to `src/sanity/sanity.ts` |
-| `src/sanity.test.ts` | Moved to `src/sanity/sanity.test.ts` |
+| File                             | Reason                                                                                  |
+| -------------------------------- | --------------------------------------------------------------------------------------- |
+| `src/types.ts`                   | Moved to `src/shared/types.ts`                                                          |
+| `src/private/checkout-store.ts`  | Moved to `src/shared/checkout-store.ts`                                                 |
+| `src/private/present.ts`         | Moved to `src/clone/private/present.ts`                                                 |
+| `src/private/scan.ts`            | Moved to `src/shared/scan-checkout.ts`                                                  |
+| `src/private/branching/index.ts` | Split into individual files under `src/private/git/`                                    |
+| `src/private/validate/index.ts`  | Split into individual files under `src/private/git/`                                    |
+| `src/clone.ts`                   | Split into `src/clone/clone.ts`, `clone-all.ts`, `clone-specific.ts`, `clone-status.ts` |
+| `src/clone.test.ts`              | Moved to `src/clone/clone.test.ts`                                                      |
+| `src/sanity.ts`                  | Moved to `src/sanity/sanity.ts`                                                         |
+| `src/sanity.test.ts`             | Moved to `src/sanity/sanity.test.ts`                                                    |
 
 ### Verification Results
 

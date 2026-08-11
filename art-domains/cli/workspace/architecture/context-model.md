@@ -9,9 +9,9 @@ Per-command invocation context. Passed as a single object to all routines — ne
 ```typescript
 interface WorkspaceContext {
   config: WorkspaceConfig; // loaded from .art-workspace.mts
-  root: string;            // workspace root (process.cwd() at invocation)
-  store: CheckoutStore;    // in-memory checkout state
-  log: OperationsLog;      // append-only side-effect log
+  root: string; // workspace root (process.cwd() at invocation)
+  store: CheckoutStore; // in-memory checkout state
+  log: OperationsLog; // append-only side-effect log
 }
 ```
 
@@ -19,17 +19,17 @@ interface WorkspaceContext {
 
 In-memory state of all known checkouts. Created per command invocation and hydrated from disk records. Keys are lowercase repo names.
 
-| member | semantics |
-| --- | --- |
-| `addCheckout(repo, location)` | create a checkout in the store (records synced separately) |
-| `loadExistingCheckouts()` | hydrate the store from checkout records on disk |
-| `findCheckout(name)` | case-insensitive lookup; strips package scope (`@ns/name` → `name`) |
-| `getCheckout(name)` | exact lowercase lookup |
-| `setCheckout(checkout)` | replace a checkout in the store by name |
-| `getAllCheckouts()` | all checkouts |
-| `markExtraneous(location)` | create a checkout without persisting (extraneous marker) |
-| `getExtraneous()` | checkouts marked extraneous |
-| `syncRecords()` | persist store state to disk records (designed; stubbed) |
+| member                        | semantics                                                           |
+| ----------------------------- | ------------------------------------------------------------------- |
+| `addCheckout(repo, location)` | create a checkout in the store (records synced separately)          |
+| `loadExistingCheckouts()`     | hydrate the store from checkout records on disk                     |
+| `findCheckout(name)`          | case-insensitive lookup; strips package scope (`@ns/name` → `name`) |
+| `getCheckout(name)`           | exact lowercase lookup                                              |
+| `setCheckout(checkout)`       | replace a checkout in the store by name                             |
+| `getAllCheckouts()`           | all checkouts                                                       |
+| `markExtraneous(location)`    | create a checkout without persisting (extraneous marker)            |
+| `getExtraneous()`             | checkouts marked extraneous                                         |
+| `syncRecords()`               | persist store state to disk records (designed; stubbed)             |
 
 ## Checkout
 
@@ -40,14 +40,14 @@ interface Checkout {
   repo: RepositoryRecord;
   record: CheckoutRecord; // name, location, branch
   exists: boolean;
-  branch: string;          // scanned branch (record default before scan)
+  branch: string; // scanned branch (record default before scan)
   remoteBranch: string | null; // null = no tracking branch (new/untracked)
-  detached: boolean;   // detached HEAD
-  conflicts: boolean;  // merge conflicts
-  dirty: boolean;      // uncommitted files
+  detached: boolean; // detached HEAD
+  conflicts: boolean; // merge conflicts
+  dirty: boolean; // uncommitted files
   hasRemote: boolean;
-  unpushed: number;    // 0 = nothing to push, >0 = commits ahead of remoteBranch
-  issues: string[];    // human-readable states, e.g. "uncommitted files"
+  unpushed: number; // 0 = nothing to push, >0 = commits ahead of remoteBranch
+  issues: string[]; // human-readable states, e.g. "uncommitted files"
   extraneous: boolean; // directory with no matching record
 }
 ```

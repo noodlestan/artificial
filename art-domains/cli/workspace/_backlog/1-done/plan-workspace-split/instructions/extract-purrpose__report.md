@@ -45,13 +45,14 @@ None.
 
 Package layout confirmed:
 
-| dir | package | version |
-| --- | --- | --- |
-| `libs/client-babel/` | `@purrpose/client-babel` | 0.0.11 |
-| `libs/client-babel-preset-solidjs/` | `@purrpose/client-babel-preset-solidjs` | 0.0.11 |
-| `libs/solid-shiki-service/` | `@purrpose/solid-shiki-service` | 0.0.11 |
+| dir                                 | package                                 | version |
+| ----------------------------------- | --------------------------------------- | ------- |
+| `libs/client-babel/`                | `@purrpose/client-babel`                | 0.0.11  |
+| `libs/client-babel-preset-solidjs/` | `@purrpose/client-babel-preset-solidjs` | 0.0.11  |
+| `libs/solid-shiki-service/`         | `@purrpose/solid-shiki-service`         | 0.0.11  |
 
 Git-URL pins used:
+
 - `"@noodlestan/eslint-config": "git+ssh://git@github.com/noodlestan/eslint-config.git#main"`
 - `"@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main"`
 

@@ -52,16 +52,19 @@ The delivery bridge pattern (root `main`/`types`/`exports` pointing to ONE packa
 The current delivery bridge pattern can only expose ONE package per repo at the root level. When a consumer aliases multiple packages from the same repo (e.g., `"@purrception/source-fs": "git+ssh://..."` and `"@purrception/primitives": "git+ssh://..."`), npm installs the root package multiple times, and the root's `main`/`types` only point to one package (lang-ts for purrception, solid-shiki-service for purrpose).
 
 **Impact:**
+
 - Lib packages (solid-primitives, solid-accessibility, solid-contexts, solid-composables, standard-ui, meta) build successfully — they primarily need `@purrception/lang-ts` and `@purrception/primitives`, which are exposed by the purrception delivery bridge.
 - CLI packages (mybin, meta-extract) fail to build — they need `@purrception/source-fs` and `@purrception/lang-ts-extract`, which are NOT exposed by the purrception delivery bridge.
 - Demo app (standard-ui-demo) fails to build — it needs `@purrtrait/view-tsx`, `@purrtrait/client-tsx`, etc., which are NOT exposed by the purrtrait delivery bridge.
 
 **Attempted solutions:**
+
 1. Added `file:cli/source-fs` and `file:cli/lang-ts-extract` to purrception's root `dependencies` — npm created copies of the entire repo instead of symlinks to the subdirectories.
 2. Attempted to use npm `exports` field with subpath exports — this would require consumers to import from `@purrception/source-fs/source-fs` instead of `@purrception/source-fs`, requiring significant source code changes.
 
 **Required solution:**
 The provider repos (purrception, purrtrait, purrpose) need a more sophisticated delivery bridge pattern that supports multiple consumable packages. Options:
+
 1. Use npm workspaces' native subdirectory installation (requires npm to support `#path:` for git deps, which is not yet merged in pacote).
 2. Publish packages to npm and consume via npm registry (the "publish-then-symlink" pattern mentioned in the plan's follow-ups).
 3. Refactor the provider repos to expose all consumable packages via a single root entry point (not feasible for packages with different purposes).
@@ -77,20 +80,21 @@ The provider repos (purrception, purrtrait, purrpose) need a more sophisticated 
 
 Package layout confirmed:
 
-| dir | package | version |
-| --- | --- | --- |
-| `libs/solid-primitives/` | `@no-comply/solid-primitives` | 0.0.11 |
-| `libs/solid-accessibility/` | `@no-comply/solid-accessibility` | 0.0.11 |
-| `libs/solid-contexts/` | `@no-comply/solid-contexts` | 0.0.11 |
-| `libs/solid-composables/` | `@no-comply/solid-composables` | 0.0.11 |
-| `libs/standard-ui/` | `@no-comply/standard-ui` | 0.0.11 |
-| `libs/solid-dev-tools/` | `@no-comply/solid-dev-tools` | 0.0.11 |
-| `libs/meta/` | `@no-comply/meta` | 0.0.11 |
-| `cli/meta-extract/` | `@no-comply/meta-extract` | 0.0.11 |
-| `cli/mybin/` | `@no-comply/mybin` | 0.0.1 |
-| `apps/standard-ui-demo/` | `@no-comply/standard-ui-demo` | 0.0.11 |
+| dir                         | package                          | version |
+| --------------------------- | -------------------------------- | ------- |
+| `libs/solid-primitives/`    | `@no-comply/solid-primitives`    | 0.0.11  |
+| `libs/solid-accessibility/` | `@no-comply/solid-accessibility` | 0.0.11  |
+| `libs/solid-contexts/`      | `@no-comply/solid-contexts`      | 0.0.11  |
+| `libs/solid-composables/`   | `@no-comply/solid-composables`   | 0.0.11  |
+| `libs/standard-ui/`         | `@no-comply/standard-ui`         | 0.0.11  |
+| `libs/solid-dev-tools/`     | `@no-comply/solid-dev-tools`     | 0.0.11  |
+| `libs/meta/`                | `@no-comply/meta`                | 0.0.11  |
+| `cli/meta-extract/`         | `@no-comply/meta-extract`        | 0.0.11  |
+| `cli/mybin/`                | `@no-comply/mybin`               | 0.0.1   |
+| `apps/standard-ui-demo/`    | `@no-comply/standard-ui-demo`    | 0.0.11  |
 
 Git-URL pins used:
+
 - `"@noodlestan/eslint-config": "git+ssh://git@github.com/noodlestan/eslint-config.git#main"`
 - `"@noodlestan/esbuild": "git+ssh://git@github.com/noodlestan/workspace-tooling.git#main"`
 - `"@purrception/lang-ts": "git+ssh://git@github.com/noodlestan/purrception.git#main"`
@@ -107,6 +111,7 @@ Git-URL pins used:
 - `"@purrpose/solid-shiki-service": "git+ssh://git@github.com/noodlestan/purrpose.git#main"`
 
 Scripts rewired from parent-install bins:
+
 - `cli/mybin`: `"build": "no-comply-build"` → `"build": "esbuild-cli"`, `"dev": "no-comply-watch"` → `"dev": "esbuild-cli-watch"`
 - `cli/meta-extract`: `"build": "no-comply-build"` → `"build": "esbuild-cli"`, `"dev": "no-comply-watch"` → `"dev": "esbuild-cli-watch"`
 

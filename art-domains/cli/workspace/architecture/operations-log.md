@@ -6,12 +6,12 @@ The side-effect log of a command invocation.
 
 Append-only log of the side effects performed during a command invocation. Created per command; discarded at the end of the invocation (see `index.md` — Execution Model). Its append-only nature means it can be replayed or streamed by a future reactive layer.
 
-| member | semantics |
-| --- | --- |
-| `log(operation)` | append an operation |
-| `all()` | all operations, in order |
-| `since(ts)` | operations after a timestamp |
-| `latest(n)` | the last `n` operations |
+| member           | semantics                    |
+| ---------------- | ---------------------------- |
+| `log(operation)` | append an operation          |
+| `all()`          | all operations, in order     |
+| `since(ts)`      | operations after a timestamp |
+| `latest(n)`      | the last `n` operations      |
 
 ## Operation
 

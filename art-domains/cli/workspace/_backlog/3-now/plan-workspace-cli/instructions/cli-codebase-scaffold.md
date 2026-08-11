@@ -249,7 +249,7 @@ console.log('art-workspace CLI - placeholder');
 
 **README.md**:
 
-```markdown
+````markdown
 # @art-domains/workspace-cli
 
 Workspace orchestration CLI for the Noodlestan ecosystem.
@@ -267,21 +267,25 @@ Workspace orchestration CLI for the Noodlestan ecosystem.
 ```bash
 npm install -g @art-domains/workspace-cli
 ```
+````
 
 ## Usage
 
 ```bash
 art-workspace --help
 ```
+
 ```
 
 **.gitignore**:
 
 ```
+
 node_modules/
 dist/
-*.log
+\*.log
 .DS_Store
+
 ```
 
 ## Rules
@@ -378,3 +382,4 @@ The goal is met: package structure is scaffolded and records are updated to refl
 DIRECTIVE FEEDBACK: render your report with the report template. Include, for every ambiguity, omission, or contradiction found while implementing: `where` (the plan/instruction section involved), `problem`, `decision` (the simplest reading you implemented), and a READY-TO-APPLY snippet for the plan file, `_architect.md`, or records.
 
 Thank you for your service.
+```

@@ -16,40 +16,40 @@ Implemented the `art-workspace clone` command with CLI-managed checkout records,
 
 **CLI package (`$CLI`) — committed in `artificial` repo (commit `5e77152`):**
 
-| File | Change |
-|---|---|
-| `src/config/types.ts` | Added `CheckoutConfig` interface; added `checkouts: CheckoutConfig[]` to `WorkspaceConfig`; removed `checkout?`/`branch?` from `RepositoryRecord` |
-| `src/config/define-config.ts` | `locateCheckouts` now iterates `config.checkouts` and resolves repo by name; warns + skips unknown repos |
-| `src/config/index.ts` | Export `CheckoutConfig` type; re-export `VerifyNeeds` from shared types |
-| `src/config/load-config.ts` | Empty template now includes `checkouts: []` |
-| `src/config/verify-checkouts.ts` | Uses shared `VerifyNeeds` type from `src/types.ts` |
-| `src/config/config.test.ts` | Updated tests for new config contract (checkouts array instead of per-repo checkout/branch) |
-| `src/types.ts` | New file: shared types (`VerifyNeeds`, `RepoStatus`) |
-| `src/private/branching/index.ts` | New file: branch helpers (`getCurrentBranch`, `isDetachedHead`, `branchMatches`) |
-| `src/private/validate/index.ts` | New file: validation helpers (`dirExists`, `isDirty`, `hasMergeConflicts`, `hasRemote`, `getUnpushedCount`, `isClean`) |
-| `src/private/records/checkout-record.ts` | New file: `saveCheckoutRecord` (renders template), `readCheckoutRecord` (regex parses) |
-| `src/private/records/checkout-record.test.ts` | New file: unit tests for record IO |
-| `src/clone.ts` | New file: clone command implementation |
-| `src/clone.test.ts` | New file: unit + integration tests for clone command |
-| `src/sanity.ts` | Uses private helpers; `console.log` → `console.info`; removed `eslint-disable` comments |
-| `src/sanity.test.ts` | Updated for new config contract; spies on `console.info`; removed file-level eslint-disable |
-| `src/index.ts` | Wired `clone` command (replaced TODO stub); version bumped to `0.0.8` |
-| `package.json` | Version bumped to `0.0.8` |
+| File                                          | Change                                                                                                                                            |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/config/types.ts`                         | Added `CheckoutConfig` interface; added `checkouts: CheckoutConfig[]` to `WorkspaceConfig`; removed `checkout?`/`branch?` from `RepositoryRecord` |
+| `src/config/define-config.ts`                 | `locateCheckouts` now iterates `config.checkouts` and resolves repo by name; warns + skips unknown repos                                          |
+| `src/config/index.ts`                         | Export `CheckoutConfig` type; re-export `VerifyNeeds` from shared types                                                                           |
+| `src/config/load-config.ts`                   | Empty template now includes `checkouts: []`                                                                                                       |
+| `src/config/verify-checkouts.ts`              | Uses shared `VerifyNeeds` type from `src/types.ts`                                                                                                |
+| `src/config/config.test.ts`                   | Updated tests for new config contract (checkouts array instead of per-repo checkout/branch)                                                       |
+| `src/types.ts`                                | New file: shared types (`VerifyNeeds`, `RepoStatus`)                                                                                              |
+| `src/private/branching/index.ts`              | New file: branch helpers (`getCurrentBranch`, `isDetachedHead`, `branchMatches`)                                                                  |
+| `src/private/validate/index.ts`               | New file: validation helpers (`dirExists`, `isDirty`, `hasMergeConflicts`, `hasRemote`, `getUnpushedCount`, `isClean`)                            |
+| `src/private/records/checkout-record.ts`      | New file: `saveCheckoutRecord` (renders template), `readCheckoutRecord` (regex parses)                                                            |
+| `src/private/records/checkout-record.test.ts` | New file: unit tests for record IO                                                                                                                |
+| `src/clone.ts`                                | New file: clone command implementation                                                                                                            |
+| `src/clone.test.ts`                           | New file: unit + integration tests for clone command                                                                                              |
+| `src/sanity.ts`                               | Uses private helpers; `console.log` → `console.info`; removed `eslint-disable` comments                                                           |
+| `src/sanity.test.ts`                          | Updated for new config contract; spies on `console.info`; removed file-level eslint-disable                                                       |
+| `src/index.ts`                                | Wired `clone` command (replaced TODO stub); version bumped to `0.0.8`                                                                             |
+| `package.json`                                | Version bumped to `0.0.8`                                                                                                                         |
 
 **Workspace (`$ROOT`) — uncommitted (for architect validation):**
 
-| File | Change |
-|---|---|
-| `.art-workspace.mts` | Added `checkouts: []`; dropped per-repo `checkout`/`branch` fields |
-| `ops/records/repositories/artificial.art` | Dropped `**Checkout:**`/`**Branch:**` lines |
-| `ops/records/repositories/conventions.art` | Dropped `**Checkout:**`/`**Branch:**` lines |
-| `ops/records/repositories/no-comply.art` | Dropped `**Checkout:**`/`**Branch:**` lines |
-| `ops/records/repositories/purrception.art` | Dropped `**Checkout:**`/`**Branch:**` lines |
-| `ops/records/repositories/purrpose.art` | Dropped `**Checkout:**`/`**Branch:**` lines |
-| `ops/records/repositories/purrtrait.art` | Dropped `**Checkout:**`/`**Branch:**` lines |
-| `ops/records/repositories/workspace-tooling.art` | Dropped `**Checkout:**`/`**Branch:**` lines |
-| `package.json` | Bumped devDependency `@art-domains/workspace-cli` to `0.0.8` |
-| `package-lock.json` | Updated by `npm install` |
+| File                                             | Change                                                             |
+| ------------------------------------------------ | ------------------------------------------------------------------ |
+| `.art-workspace.mts`                             | Added `checkouts: []`; dropped per-repo `checkout`/`branch` fields |
+| `ops/records/repositories/artificial.art`        | Dropped `**Checkout:**`/`**Branch:**` lines                        |
+| `ops/records/repositories/conventions.art`       | Dropped `**Checkout:**`/`**Branch:**` lines                        |
+| `ops/records/repositories/no-comply.art`         | Dropped `**Checkout:**`/`**Branch:**` lines                        |
+| `ops/records/repositories/purrception.art`       | Dropped `**Checkout:**`/`**Branch:**` lines                        |
+| `ops/records/repositories/purrpose.art`          | Dropped `**Checkout:**`/`**Branch:**` lines                        |
+| `ops/records/repositories/purrtrait.art`         | Dropped `**Checkout:**`/`**Branch:**` lines                        |
+| `ops/records/repositories/workspace-tooling.art` | Dropped `**Checkout:**`/`**Branch:**` lines                        |
+| `package.json`                                   | Bumped devDependency `@art-domains/workspace-cli` to `0.0.8`       |
+| `package-lock.json`                              | Updated by `npm install`                                           |
 
 ### Validation Results
 

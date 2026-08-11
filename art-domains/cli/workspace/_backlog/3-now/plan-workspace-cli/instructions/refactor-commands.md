@@ -144,6 +144,7 @@ Implement the new data model per `ops/_pseudo.md` and refactor clone/sanity to u
 ## Final Verification
 
 **Sanity check:**
+
 - `art-workspace clone --all` shows full Checkout Report table (no "All repos are green ✓")
 - `art-workspace clone artificial` works (case-insensitive)
 - `art-workspace clone` shows Checkout Report + Extraneous Report
@@ -151,6 +152,7 @@ Implement the new data model per `ops/_pseudo.md` and refactor clone/sanity to u
 - `art-workspace sanity --auto` pushes and shows Operations Report
 
 **Verification steps:**
+
 - Execute `npm run lint` in the workspace CLI package
 - Execute `npm run build` in the workspace CLI package
 - Execute `npm run test` in the workspace CLI package
