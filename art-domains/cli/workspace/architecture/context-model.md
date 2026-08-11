@@ -33,20 +33,20 @@ In-memory state of all known checkouts. Created per command invocation and hydra
 
 ## Checkout
 
-Individual repo checkout state. State fields are populated by `scanCheckout` reading git from the filesystem; convenience accessors are derived from the record.
+Individual repo checkout state. State fields are populated by `scanCheckout` reading git from the filesystem; `repo` and `record` come from the store.
 
 ```typescript
 interface Checkout {
   repo: RepositoryRecord;
   record: CheckoutRecord; // name, location, branch
   exists: boolean;
-  branch: string;
-  remoteBranch: string | null;
+  branch: string;          // scanned branch (record default before scan)
+  remoteBranch: string | null; // null = no tracking branch (new/untracked)
   detached: boolean;   // detached HEAD
   conflicts: boolean;  // merge conflicts
   dirty: boolean;      // uncommitted files
   hasRemote: boolean;
-  unpushed: number;    // -1 = no tracking branch, 0 = pushed, >0 = commits ahead
+  unpushed: number;    // 0 = nothing to push, >0 = commits ahead of remoteBranch
   issues: string[];    // human-readable states, e.g. "uncommitted files"
   extraneous: boolean; // directory with no matching record
 }

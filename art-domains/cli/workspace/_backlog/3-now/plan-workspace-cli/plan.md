@@ -14,23 +14,23 @@ Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli
 
 ## Source Tasks
 
-- [Taken from Architect Briefing: Workspace Ops](ops/_architect.md)
+- [Taken from Architect Briefing: Workspace CLI](_backlog/_architect.md)
 
 ## Mandatory Reading
 
-- `ops/_architect.md` — workspace architecture, principles, NFRs, use cases
-- `ops/_pseudo.md` — CLI pseudo-code: data structures, use cases, auxiliary functions
-- `ops/_adr/cli.art` — CLI package decisions (location, manifest format, records as source of truth, tech stack)
-- `ops/_adr/execution-model.art` — imperative-first, reactive-later execution model
-- `ops/records/workspace.art` — workspace record with known repositories
-- `ops/records/repositories/*.art` — per-repo records
-- `.agents/domains/workspace/structures/` — Structure: Workspace, Structure: Repository, Structure: Checkout
+- `_backlog/_architect.md` — workspace architecture, principles, NFRs, use cases
+- `architecture/_pseudo.md` — CLI pseudo-code: data structures, use cases, auxiliary functions
+- `architecture/records/adr/cli.art` — CLI package decisions (location, manifest format, records as source of truth, tech stack)
+- `architecture/records/adr/execution-model.art` — imperative-first, reactive-later execution model
+- `$WORKSPACE/ops/records/workspace.art` — workspace record with known repositories
+- `$WORKSPACE/ops/records/repositories/*.art` — per-repo records
+- `$WORKSPACE/.agents/domains/workspace/structures/` — Structure: Workspace, Structure: Repository, Structure: Checkout
 
 ## Commits
 
 ### `cli-codebase-decisions` - `COMMITTED`
 
-**Commit:** `04fae35` — commander, simple-git, @noodlestan/esbuild, vitest, strict TypeScript, tables + minimal colors. **Record:** `ops/_adr/cli.art`
+**Commit:** `04fae35` — commander, simple-git, @noodlestan/esbuild, vitest, strict TypeScript, tables + minimal colors. **Record:** `architecture/records/adr/cli.art`
 
 ### `cli-codebase-scaffold` - `COMMITTED`
 
@@ -66,7 +66,7 @@ Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli
 
 **Commit:** `7e07c05`
 
-**Instructions File:** `ops/_backlog/3-now/plan-workspace-cli/instructions/refactor-commands.md`
+**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/refactor-commands.md`
 
 **Report:** [refactor-commands\_\_report.md](./instructions/refactor-commands__report.md)
 
@@ -90,7 +90,7 @@ Fix lint errors, build failures, and 3 correctness issues found during manual te
 4. **Custom location ignored** — `clone <repo> <target>` silently skips target when checkout already exists. Either move the checkout or refuse with an error.
 5. **Lossy record roundtrip** — `**Repository:**` field stripped from checkout records on save. `saveCheckoutRecord` must preserve all fields from the loaded record.
 
-**Instructions File:** `ops/_backlog/3-now/plan-workspace-cli/instructions/clone-sanity-corrective.md`
+**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/clone-sanity-corrective.md`
 
 **Report:** [clone-sanity-corrective__report.md](./instructions/clone-sanity-corrective__report.md)
 
@@ -104,7 +104,11 @@ Fix lint errors, build failures, and 3 correctness issues found during manual te
 
 ### `sanity-workspace` - `COMMITTED`
 
-**Commit Message:** `feat(workspace-cli): add workspace repo to sanity report`
+**Commits:**
+
+- `531824c` (artificial) — `feat(workspace-cli): add sanity-workspace, report headers, lint scripts`
+- `01d85dd` (artificial) — `feat(workspace-cli): log push failures in sanity --auto`
+- `aea2484` (artificial) — `feat(workspace-cli): formal operation logs, fix sanity --auto push of untracked branches, per-unit tests`
 
 Implement workspace-level sanity: the root repo (`@noodlestan/workspace`) is scanned alongside project checkouts and appears in the Checkout Report as `WORKSPACE`.
 
@@ -159,32 +163,39 @@ Feature: Report formatting
     Then the Checkout Report header contains "states" not "issues"
 ```
 
-**Note:** Depends on `refactor-commands` and `clone-sanity-corrective` landing first.
+**Note:** Delegated directly from this plan section — no separate instruction file, and no `__report.md` was produced. Feedback reconstructed from the commit trail:
+
+**Feedback (reconstructed):**
+
+- `sanity --auto` did not push branches without an upstream — fixed by capturing `remoteBranch` in `scanCheckout` (`getRemoteBranch`) and creating the branch on the remote on push (the `-1` "not pushed" sentinel was removed).
+- Ad-hoc `log.cloned()/pushed()` replaced with the structured `Operation` model: `OperationsLog.log(operation)` plus factories in `src/private/operations/` (`createPushSuccess`/`createPushFailure`, `createCloneSuccess`/`createCloneFailure`).
+- Presenters moved to `src/private/present/` — one function per file; the Operations Report gained a `🟢`/`🔴` outcome column in column zero.
+- Monolithic `shared.test.ts` split per unit (`operations-log`, `checkout`, `checkout-store`, `workspace-context`); the `--auto` push test now asserts an actual push.
 
 ### `branch-command` - `DRAFT`
 
 **Commit Message:** `feat(workspace-cli): implement branch command`
 
-**Instructions File:** `ops/_backlog/3-now/plan-workspace-cli/instructions/branch-command.md`
+**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/branch-command.md`
 
 Implement `art-workspace branch` command.
 
 **Use case:**
 
-- `art-workspace branch feat/x in artificial purrception` → create/switch to `feat/x` in specified repos.
+- `art-workspace branch feat/x [repos...]` → create/switch to `feat/x` in the specified repos (all repos when omitted).
 
 **Responsibilities:**
 
 - Parse branch name and repo list
 - Create or checkout branch in each specified repo
 
-**Pseudo details:** `ops/_pseudo.md` → Use Cases → branch command.
+**Pseudo details:** `architecture/_pseudo.md` → Use Cases → branch command.
 
 ### `link-command` - `DRAFT`
 
 **Commit Message:** `feat(workspace-cli): implement link command`
 
-**Instructions File:** `ops/_backlog/3-now/plan-workspace-cli/instructions/link-command.md`
+**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/link-command.md`
 
 Implement `art-workspace link` command.
 
@@ -198,13 +209,13 @@ Implement `art-workspace link` command.
 - Find consumer repos (from manifest "consumers" field)
 - Create symlinks in consumer `node_modules/` pointing to source packages
 
-**Pseudo details:** `ops/_pseudo.md` → Use Cases → link command.
+**Pseudo details:** `architecture/_pseudo.md` → Use Cases → link command.
 
 ### `unlink-command` - `DRAFT`
 
 **Commit Message:** `feat(workspace-cli): implement unlink command`
 
-**Instructions File:** `ops/_backlog/3-now/plan-workspace-cli/instructions/unlink-command.md`
+**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/unlink-command.md`
 
 Implement `art-workspace unlink` command.
 
@@ -218,13 +229,13 @@ Implement `art-workspace unlink` command.
 - Remove symlinks from consumer `node_modules/`
 - Run `npm install` in affected consumers to restore npm-installed versions
 
-**Pseudo details:** `ops/_pseudo.md` → Use Cases → unlink command.
+**Pseudo details:** `architecture/_pseudo.md` → Use Cases → unlink command.
 
 ### `publish-command` - `DRAFT`
 
 **Commit Message:** `feat(workspace-cli): implement publish command`
 
-**Instructions File:** `ops/_backlog/3-now/plan-workspace-cli/instructions/publish-command.md`
+**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/publish-command.md`
 
 Implement `art-workspace publish` command.
 
@@ -239,13 +250,13 @@ Implement `art-workspace publish` command.
 - If `--auto`: publish unpublished packages
 - Report table with push and publish status
 
-**Pseudo details:** `ops/_pseudo.md` → Use Cases → publish command.
+**Pseudo details:** `architecture/_pseudo.md` → Use Cases → publish command.
 
 ### `manifest-generator` - `DRAFT`
 
 **Commit Message:** `feat(workspace-cli): generate workspace manifest from records`
 
-**Instructions File:** `ops/_backlog/3-now/plan-workspace-cli/instructions/manifest-generator.md`
+**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/manifest-generator.md`
 
 Auto-generate `.art-workspace.mts` from the records. **MANDATORY before the plan is delivered** — replaces the manually-authored manifest.
 
@@ -260,13 +271,13 @@ Auto-generate `.art-workspace.mts` from the records. **MANDATORY before the plan
 - `art-workspace generate` reproduces the manually-authored manifest (diff clean)
 - After a records edit, re-running the generator reflects the change
 
-**Pseudo details:** `ops/_pseudo.md` → Auxiliary Functions → loadWorkspaceConfig.
+**Pseudo details:** `architecture/_pseudo.md` → Auxiliary Functions → loadWorkspaceConfig.
 
 ### `github-workflows` - `DRAFT`
 
 **Commit Message:** `ci: add GitHub Actions workflow`
 
-**Instructions File:** `ops/_backlog/3-now/plan-workspace-cli/instructions/github-workflow.md`
+**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/github-workflow.md`
 
 Add GitHub Actions CI workflows to every project repo and the workspace.
 
@@ -277,7 +288,7 @@ Add GitHub Actions CI workflows to every project repo and the workspace.
 - **Publishing workflow** — formalize the publish-then-symlink pattern into a Workflow resource with agent modes, skills, and commands.
 - **Prepare `@art-domains/workspace` domain** — after `@art-domains/workspace-cli` is established, prepare the domain package to host workspace structures and other resources.
 - **Checkout structure** — done in `clone-command` planning: `.agents/domains/workspace/structures/checkout__structure.md` + template `.agents/domains/workspace/templates/checkout.art.njk`; record IO lands with the clone iteration.
-- **Checkouts as CLI-managed records** — implemented in `clone-command`: `ops/records/checkouts/<name>.art` via `saveCheckoutRecord`/`readCheckoutRecord` (template + regex for now).
+- **Checkouts as CLI-managed records** — implemented in `clone-command`: `$WORKSPACE/ops/records/checkouts/<name>.art` via `saveCheckoutRecord`/`readCheckoutRecord` (template + regex for now). **Note:** `CheckoutStore.syncRecords()` is still a no-op — the store sync isn't wired to `saveCheckoutRecord`; commands call `syncRecords()` with no effect. Deferred.
 - **`art` parser for records** — replace regex `readCheckoutRecord`/`readRepositoryRecord` with the real `art` parser when available (deferred "later").
 - **Template-engine governance** — `records.checkouts.template` (manifest path) replaces the HARDCODED template in `config-refactor`; formalize template location/versioning (follow-up).
 - **Structured consumers** — repository records carry `consumers` as raw text for now; structured parsing is a follow-up.

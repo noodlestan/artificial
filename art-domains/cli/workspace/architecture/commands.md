@@ -13,14 +13,14 @@ The command surface of the workspace CLI, their procedures, and their edge cases
 | `sanity` | `sanity [--auto]` | implemented |
 | `publish` | `publish [--auto]` | designed |
 
-Every command that touches checkouts presents reports (see `operations-log.md`).
+Every command that touches checkouts presents reports (see `reports.md`).
 
 ## Common Data Flow
 
 Commands share the same skeleton:
 
 1. Load the config (`.art-workspace.mts`).
-2. Create a `WorkspaceContext` — a `CheckoutStore` plus an `OperationsLog` (see `context.md`).
+2. Create a `WorkspaceContext` — a `CheckoutStore` plus an `OperationsLog` (see `context-model.md`).
 3. Load repository records; hydrate existing checkouts from checkout records.
 4. Scan git state; perform the command's work, recording side effects in the log.
 5. Present reports; sync records back to disk (designed — `syncRecords()` is stubbed).
@@ -109,4 +109,4 @@ Push repos and publish packages to npm. Procedure: iterate repos → check git �
 ## Implementation Status
 
 - **Implemented:** `clone` (all / specific / status) and `sanity` (scan + `--auto` push), on top of the shared data model and reports.
-- **Stubbed:** `branch`, `link`, `unlink`, `publish` — command entry points exist but print "TODO"; the procedures above are the designed behaviour (from `ops/_architect.md` use cases and the pseudo contract).
+- **Stubbed:** `branch`, `link`, `unlink`, `publish` — command entry points exist but print "TODO"; the procedures above are the designed behaviour (from `_backlog/_architect.md` use cases and the pseudo contract).

@@ -18,9 +18,9 @@ main
 
 ### Records
 
-**WorkspaceRecord:** `.agents/domains/workspace/structures/workspace__structure.md`
-**RepositoryRecord:** `.agents/domains/workspace/structures/repository__structure.md`
-**CheckoutRecord:** `.agents/domains/workspace/structures/checkout__structure.md`
+**WorkspaceRecord:** `$WORKSPACE/.agents/domains/workspace/structures/workspace__structure.md`
+**RepositoryRecord:** `$WORKSPACE/.agents/domains/workspace/structures/repository__structure.md`
+**CheckoutRecord:** `$WORKSPACE/.agents/domains/workspace/structures/checkout__structure.md`
 
 ### WorkspaceContext
 
@@ -58,38 +58,30 @@ CheckoutStore
 Individual repo checkout state.
 
 ```
-Checkout //
+Checkout
   repo: RepositoryRecord
-  record: CheckoutRecord // contains kind,name,location/branch, and eventually (purpose, description)
+  record: { name, location, branch }   // persisted fields; branch is the recorded branch, not the scanned one
   exists: boolean
+  branch: string                       // scanned branch (or record default before scan)
+  remoteBranch: string | null          // null = no tracking branch (new/untracked)
   detached: boolean
   conflicts: boolean
   dirty: boolean
   hasRemote: boolean
-  unpushed: number       // -1 = no tracking branch, 0 = pushed, >0 = commits ahead
+  unpushed: number                     // 0 = nothing to push, >0 = commits ahead of remoteBranch
   issues: string[]
   extraneous: boolean
-
-  // convenience accessors — derived from record
-  name → string          // record.name, lowercase
-  location → string      // record.location
-  branch → string        // record.branch
 ```
+
+Notes: `name`/`location`/`branch` are read as `checkout.repo.name`, `checkout.record.location`, `checkout.branch`. A repo with no remote branch is not an issue — it has `remoteBranch: null` and push creates the branch on the remote.
 
 ### OperationsLog
 
-Append-only log of side effects performed during a command.
+Append-only log of side effects performed during a command. Side effects are typed operations created by factories in `src/private/operations/` and appended with `log(operation)`.
 
 ```
 OperationsLog
-  operations: Operation[]
-
-  cloned(repo, detail)
-  pushed(repo, detail)
-  published(repo, detail)
-  branchCreated(repo, detail)
-  linked(repo, detail)
-  unlinked(repo, detail)
+  log(operation)        // append a typed Operation
   all() → Operation[]
   since(ts) → Operation[]
   latest(number) → Operation[]
@@ -97,40 +89,60 @@ OperationsLog
 
 ### Operation
 
+Typed operation records. Every operation carries the checkout it acted on, its outcome, and a `message()` used in the Operations Report.
+
 ```
-Operation
+OperationBase
+  operation: string   // one of: clone | push | publish | branch created | linked | unlink
   ts: date
-  repo: string
-  operation: string     // one of: cloned | pushed | published | branch created | linked | unlinked
-  detail: string
+  checkout: Checkout
+  outcome: 'success' | 'failure'
+  message() → string
+
+OperationSuccess extends OperationBase   // outcome: 'success'
+OperationFailure extends OperationBase   // outcome: 'failure'
+  error: string
+  errorSerialized() → string
+
+// Successes carry their specifics; failures mirror them and add error/errorSerialized:
+CloneSuccess    { operation: 'clone', location }
+PushSuccess     { operation: 'push', branch }
+PublishSuccess  { operation: 'publish', package, version }
+BranchSuccess   { operation: 'branch created', branch }
+LinkedSuccess   { operation: 'linked', package, target }
+UnlinkSuccess   { operation: 'unlink', package, source }
+
+CloneFailure, PushFailure, PublishFailure, BranchFailure, LinkedFailure, UnlinkFailure
 ```
+
+Factories (one file per factory in `src/private/operations/`): `createCloneSuccess(checkout)`, `createPushSuccess(checkout, branch)`, `createPushFailure(checkout, branch, error)`, `createBranchSuccess(checkout, branch, message?)`, and so on — messages are fixed by the factory unless noted.
 
 ## Reports
 
-Every command that touches checkouts produces one or more reports. Reports are presented as markdown tables. Always the full table — no collapsing. Each report has a header line (e.g. `Checkout Report:`) and an empty line after the table.
+Every command that touches checkouts produces one or more reports. Reports are presented as markdown tables. Always the full table — no collapsing. Each report prints a header line (e.g. `Checkout Report:`), the table, and an empty line after the table. Presenters live in `src/private/present/` — one function per file (`format-table` shared).
 
 ### Checkout Report
 
-The primary status table. Present after every command that reads or mutates checkouts.
+The primary status table. Present after every command that reads or mutates checkouts. Headers: `repo | location | branch | states`; rows sorted by repo name; `states` is `issues` joined with `; ` or `clean`.
 
 ### Operations Report
 
-Appended when a command performs side effects. Omitted when nothing was done.
+Appended when a command performs side effects. Omitted when nothing was done. Headers: `'' | repo | operation | message`; column zero carries the outcome marker (🟢 success / 🔴 failure).
 
-| repo        | operation | detail                     |
-| ----------- | --------- | -------------------------- |
-| artificial  | cloned    | to repos/artificial        |
-| purrception | pushed    | 2 commits to origin/feat/x |
-| no-comply   | published | @no-comply/core@1.2.3      |
+|     | repo        | operation       | message                 |
+| --- | ----------- | --------------- | ----------------------- |
+| 🟢  | artificial  | clone           | to repos/artificial     |
+| 🟢  | purrception | push            | to origin/feat/x        |
+| 🔴  | purrception | push            | failed to push some refs |
 
 ### Extraneous Report
 
-Directories under the checkouts path with no matching record. Presented by `clone` (no-args) and `sanity`.
+Directories under the checkouts path with no matching record. Presented by `clone` (no-args) and `sanity`. Headers: `directory | branch | states`; rows read `record.location` and `record.branch`.
 
-| directory      | branch  | states             |
-| -------------- | ------- | ----------------- |
-| my-test-clone  | main    | —                 |
-| old-experiment | feature | uncommitted files |
+| directory      | branch | states            |
+| -------------- | ------ | ----------------- |
+| my-test-clone  | main   | clean             |
+| old-experiment | -      | uncommitted files |
 
 ## Use Cases
 
@@ -144,7 +156,7 @@ Directories under the checkouts path with no matching record. Presented by `clon
 
 ```pseudo
 clone(all, name, target)
-  ctx = createWorkspaceContext(config, root)
+  ctx = createWorkspaceContext(config, root, store, log)
   repos = loadRepositories(ctx)
   ctx.store.loadExistingCheckouts()
 
@@ -162,7 +174,7 @@ clone(all, name, target)
       if not checkout.exists:
         cloneRepo(checkout.location, checkout.repo.remote)
         checkout = scanCheckout(ctx, checkout)
-        ctx.log.cloned(checkout.repo.name, "to " + checkout.location)
+        ctx.log.log(createCloneSuccess(checkout))
 
     presentCheckoutReport(ctx.store)
     presentOperationsReport(ctx.log)
@@ -187,7 +199,7 @@ clone(all, name, target)
     if not checkout.exists:
       cloneRepo(checkout.location, repo.remote)
       checkout = scanCheckout(ctx, checkout)
-      ctx.log.cloned(checkout.repo.name, "to " + checkout.location)
+      ctx.log.log(createCloneSuccess(checkout))
 
     presentCheckoutReport(ctx.store)
     presentOperationsReport(ctx.log)
@@ -201,30 +213,44 @@ clone(all, name, target)
   presentExtraneousReport(ctx.store)
 ```
 
-### Command: branch <name> in <repos...>
+### Command: branch <branch> [<repos...>]
 
-**Responsibility:** Create and checkout a feature branch across multiple repos. Present Checkout Report + Operations Report.
+**Responsibility:** Create and checkout a feature branch across multiple repos (all repos when none specified). Present Checkout Report + Operations Report.
 
 ```pseudo
-branch(name, repos)
-  ctx = createWorkspaceContext(config, root)
+branch(name, repoNames)
+  ctx = createWorkspaceContext(config, root, store, log)
   repos = loadRepositories(ctx)
+  repoNames = repoNames.length > 0 ? repoNames : repos.map(r => r.name)   // no repos → all
 
-  for repoName in repos:
+  for repoName in repoNames:
     repo = repos.find(r => r.name.toLowerCase() === repoName.toLowerCase())
     if not repo:
-      ctx.log.branchCreated(repoName, "skipped — unknown repo")
+      print warning "unknown repo: " + repoName
       continue
 
     checkout = ctx.store.findCheckout(repo.name)
-    if not checkout or not checkout.exists:
-      ctx.log.branchCreated(repo.name, "skipped — not cloned")
+    if not checkout:
+      print warning "not cloned: " + repo.name
+      continue
+    checkout = scanCheckout(ctx, checkout)
+    if not checkout.exists:
+      ctx.log.log(createBranchFailure(checkout, name, "repo not cloned"))
       continue
 
-    dir = join(ctx.root, checkout.location)
-    git checkout -b name in dir
-    ctx.store.setCheckout({ ...checkout, branch: name })
-    ctx.log.branchCreated(checkout.repo.name, "branch " + name)
+    dir = join(ctx.root, checkout.record.location)
+    if hasLocalBranch(dir, name):
+      git checkout name in dir
+      ctx.log.log(createBranchSuccess(checkout, name, "switched to " + name))
+    else:
+      try:
+        git checkout -b name in dir
+        ctx.log.log(createBranchSuccess(checkout, name))
+      catch error:
+        ctx.log.log(createBranchFailure(checkout, name, error))
+
+    updated = { ...checkout, branch: name, record: { ...checkout.record, branch: name } }
+    ctx.store.setCheckout(updated)
 
   presentCheckoutReport(ctx.store)
   presentOperationsReport(ctx.log)
@@ -232,9 +258,10 @@ branch(name, repos)
 ```
 
 **Edge cases:**
-- Repo not cloned: skip with warning, log operation
-- Branch already exists: checkout existing branch
-- Uncommitted changes: warn but proceed (git checkout -b handles this)
+- Unknown repo: warn on stderr, skip (no checkout to attach an operation to)
+- Repo not cloned: log `branch created` failure "repo not cloned", skip
+- Branch already exists: switch to the existing branch, log success "switched to {branch}"
+- Uncommitted changes: warn but proceed (git checkout handles this)
 
 ### Command: link <repo> [namespaces] [packages]
 
@@ -242,7 +269,7 @@ branch(name, repos)
 
 ```pseudo
 link(repo, namespaces, packages)
-  ctx = createWorkspaceConfig(config, root)
+  ctx = createWorkspaceContext(config, root, store, log)
   repos = loadRepositories(ctx)
 
   source = repos.find(r => r.name.toLowerCase() === repo.toLowerCase())
@@ -264,9 +291,9 @@ link(repo, namespaces, packages)
       source_ = join(ctx.root, source.checkout.location, pkg.path)
       rm -rf target
       ln -s source_ target
-      ctx.log.linked(source.name, pkg.name + " → " + consumer.name)
+      ctx.log.log(createLinkedSuccess(checkout, pkg.name, target))
 
-  presentOperationsReport(log)
+  presentOperationsReport(ctx.log)
 ```
 
 **Edge cases:**
@@ -280,7 +307,7 @@ link(repo, namespaces, packages)
 
 ```pseudo
 unlink(repo, namespaces, packages)
-  ctx = createWorkspaceContext(config, root)
+  ctx = createWorkspaceContext(config, root, store, log)
   repos = loadRepositories(ctx)
 
   source = repos.find(r => r.name.toLowerCase() === repo.toLowerCase())
@@ -302,12 +329,12 @@ unlink(repo, namespaces, packages)
       if isSymlink(target):
         rm target
         affected.add(consumerDir)
-        ctx.log.unlinked(source.name, pkg.name + " from " + consumer.name)
+        ctx.log.log(createUnlinkSuccess(checkout, pkg.name, source))
 
   for dir in affected:
     npm install in dir
 
-  presentOperationsReport(log)
+  presentOperationsReport(ctx.log)
 ```
 
 **Edge cases:**
@@ -318,23 +345,20 @@ unlink(repo, namespaces, packages)
 
 ### Command: sanity [--auto]
 
-**Responsibility:** Check git status across all repos. Present Checkout Report + Extraneous Report. With --auto, push clean unpushed repos and append Operations Report.
+**Responsibility:** Check git status across all repos plus the workspace root. Present Checkout Report + Extraneous Report + Operations Report. With --auto, push clean unpushed repos and sync records.
 
 ```pseudo
 sanity(auto)
-  ctx = createWorkspaceContext(config, root)
+  ctx = createWorkspaceContext(config, root, store, log)
 
   ctx.store.loadExistingCheckouts()
+  wsCheckout = ctx.store.addCheckout(workspaceRepo, ".")   // workspace root as a checkout
+  scanCheckout(ctx, wsCheckout)
   scanAllCheckouts(ctx)
   scanExtraneousCheckouts(ctx)
 
   if auto:
-    for checkout in ctx.store.getAllCheckouts():
-      if not checkout.dirty and checkout.unpushed > 0 and checkout.hasRemote:
-        git push origin checkout.branch
-        updated = { ...checkout, unpushed: 0 }
-        ctx.store.setCheckout(updated)
-        ctx.log.pushed(checkout.repo.name, "to origin/" + checkout.branch)
+    pushCleanCheckouts(ctx)   // per checkout: shouldPushCheckout → pushCheckout
 
   presentCheckoutReport(ctx.store)
   presentExtraneousReport(ctx.store)
@@ -349,7 +373,7 @@ sanity(auto)
 
 ```pseudo
 publish(auto)
-  ctx = createWorkspaceContext(config, root)
+  ctx = createWorkspaceContext(config, root, store, log)
   repos = loadRepositories(ctx)
   ctx.store.loadExistingCheckouts()
   scanAllCheckouts(ctx)
@@ -360,7 +384,7 @@ publish(auto)
       git push origin checkout.branch
       updated = { ...checkout, unpushed: 0 }
       ctx.store.setCheckout(updated)
-      ctx.log.pushed(checkout.repo.name, "to origin/" + checkout.branch)
+      ctx.log.log(createPushSuccess(checkout, checkout.branch))
 
     // Publish unpublished packages
     packages = findPackages(checkout.repo)
@@ -370,7 +394,7 @@ publish(auto)
       published = npmIsPublished(pkg.name, version)
       if not published and auto:
         npm publish --access public in pkg.path
-        ctx.log.published(checkout.repo.name, pkg.name + "@" + version)
+        ctx.log.log(createPublishSuccess(checkout, pkg.name, version))
 
   presentCheckoutReport(ctx.store)
   presentOperationsReport(ctx.log)
@@ -387,16 +411,16 @@ publish(auto)
 
 ## Auxiliary Functions
 
-### Function: createWorkspaceContext(config, root)
+### Function: createWorkspaceContext(config, root, store, log)
 
-**Responsibility:** Create a WorkspaceContext with CheckoutStore and OperationsLog.
+**Responsibility:** Assemble a WorkspaceContext. The store and log are created by the command entry point (see the `src/index.ts` wiring — sanity pattern) because the store needs the config and root.
 
 ```pseudo
-createWorkspaceContext(config, root)
+createWorkspaceContext(config, root, store, log)
   ctx.config = config
   ctx.root = root
-  ctx.store = new CheckoutStore
-  ctx.log = new OperationsLog
+  ctx.store = store
+  ctx.log = log
   return ctx
 ```
 
@@ -406,30 +430,32 @@ createWorkspaceContext(config, root)
 
 ```pseudo
 scanCheckout(ctx, checkout)
-  dir = join(ctx.root, checkout.location)
+  dir = join(ctx.root, checkout.record.location)
 
   if not dirExists(dir):
     updated = { ...checkout, exists: false, issues: ["repo not cloned"] }
     ctx.store.setCheckout(updated)
     return updated
 
-  exists = true
-  branch = getCurrentBranch(dir)
-  detached = isDetachedHead(dir)
-  conflicts = hasMergeConflicts(dir)
-  dirty = isDirty(dir)
-  hasRemote = hasRemote(dir)
-  unpushed = getUnpushedCount(dir)  // -1 = no tracking branch, 0 = pushed, >0 = commits ahead
-
   issues = []
+  try:
+    branch = getCurrentBranch(dir)
+    detached = isDetachedHead(dir)
+    conflicts = hasMergeConflicts(dir)
+    dirty = isDirty(dir)
+    hasRemote = hasRemote(dir)
+    remoteBranch = hasRemote ? getRemoteBranch(dir) : null
+    unpushed = remoteBranch ? getUnpushedCount(dir, remoteBranch) : 0
+  catch:
+    issues.push("git error")
+
   if detached: issues.push("detached HEAD")
   if conflicts: issues.push("merge conflicts")
   if not hasRemote: issues.push("no remote")
   if dirty: issues.push("uncommitted files")
-  if unpushed === -1: issues.push("not pushed")
-  else if unpushed > 0: issues.push("N commits ahead")
+  if unpushed > 0: issues.push("N commits ahead")
 
-  updated = { ...checkout, exists, branch, detached, conflicts, dirty, hasRemote, unpushed, issues }
+  updated = { ...checkout, exists: true, branch, remoteBranch, detached, conflicts, dirty, hasRemote, unpushed, issues }
   ctx.store.setCheckout(updated)
   return updated
 ```
@@ -460,15 +486,59 @@ scanExtraneousCheckouts(ctx)
       scanCheckout(ctx, checkout)
 ```
 
+### Function: shouldPushCheckout(checkout)
+
+**Responsibility:** Decide whether a checkout should be pushed by `sanity --auto`.
+
+```pseudo
+shouldPushCheckout(checkout)
+  if not checkout.exists: return false
+  if checkout.extraneous: return false
+  if any issue blocks push: return false   // detached, conflicts, dirty, git error
+  if checkout.unpushed === 0: return false
+  if checkout.issues includes "no remote": return false
+  return true
+```
+
+### Function: pushCheckout(ctx, checkout)
+
+**Responsibility:** Push a checkout's branch to origin. Creates the branch on the remote when it has no upstream (`remoteBranch` null).
+
+```pseudo
+pushCheckout(ctx, checkout)
+  try:
+    git push origin checkout.branch in dir
+    updated = { ...checkout, unpushed: 0, issues: issues minus "N commits ahead" }
+    ctx.store.setCheckout(updated)
+    ctx.log.log(createPushSuccess(checkout, checkout.branch))
+  catch error:
+    op = createPushFailure(checkout, checkout.branch, error)
+    updated = { ...checkout, issues: issues plus op.message() }
+    ctx.store.setCheckout(updated)
+    ctx.log.log(op)
+```
+
+### Function: hasLocalBranch(dir, branch)
+
+**Responsibility:** Check whether a branch exists locally in a repo.
+
+```pseudo
+hasLocalBranch(dir, branch)
+  git rev-parse --verify --quiet refs/heads/branch in dir
+  return exit code 0
+```
+
 ### Function: presentCheckoutReport(store)
 
-**Responsibility:** Present the Checkout Report ordered by package name.
+**Responsibility:** Present the Checkout Report ordered by repo name.
 
 ```pseudo
 presentCheckoutReport(store)
   checkouts = store.getAllCheckouts()
-  checkouts.sort(by package name)
-  print table (repo, location, branch, states)
+  checkouts.sort(by repo name)
+  print "Checkout Report:"
+  print table (repo, location, branch, states)   // states = issues.join("; ") or "clean"
+  print ""                                       // empty line after the table
 ```
 
 ### Function: presentOperationsReport(log)
@@ -481,7 +551,9 @@ presentOperationsReport(log)
   if operations is empty:
     return
 
-  print table (repo, operation, detail)
+  print "Operations Report:"
+  print table ('', repo, operation, message)   // '' = outcome marker: 🟢 success / 🔴 failure
+  print ""
 ```
 
 ### Function: presentExtraneousReport(store)
@@ -494,7 +566,9 @@ presentExtraneousReport(store)
   if extraneous is empty:
     return
 
-  print table (directory, branch, states)
+  print "Extraneous Report:"
+  print table (directory, branch, states)   // directory = record.location, branch = record.branch
+  print ""
 ```
 
 ### Function: loadWorkspaceConfig(root)

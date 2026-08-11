@@ -1,6 +1,6 @@
 # Parking Lot: Workspace CLI
 
-The high level briefing, principles, requirements are in `_architect.md`. Backlog plans are derived from here.
+The high level briefing, principles, requirements are in `_backlog/_architect.md`. Backlog plans are derived from here.
 The plans live in `_backlog/` and contain delegatable instructions.
 This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **PENDING** / **BLOCKER** / **FOLLOW-UPS** (not in scope). No done items here — completed work is recorded in `_backlog/`.
 
