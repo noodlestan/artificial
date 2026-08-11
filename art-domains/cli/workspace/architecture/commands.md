@@ -32,10 +32,10 @@ Commands share the same skeleton:
 Three modes:
 
 - **`clone --all`** — bootstrap the workspace by cloning all repos from the workspace record, updating records, and presenting the Checkout Report with Operations Report.
-- **`clone <repo> [<location>]`** — clone a single repo for targeted work. The first argument is the repository name (must exist in the manifest). The optional second argument is a location basename under the config checkouts path (e.g. `foo` → `repos/foo`). When omitted, the location defaults to `repos/{repo-name}`. The checkout name is the location basename (or the repo name when no location is given). Multiple checkouts of the same repo are supported — each gets a unique name derived from its location.
+- **`clone <repo> [<location>]`** — clone a single repo for targeted work. The first argument is the repository name (must exist in the manifest). The optional second argument is a location basename under the config checkouts path (e.g. `foo` → `repos/foo`). When omitted, the location defaults to `repos/{repo-name}`. The checkout name is `{repo-name}` at the default location, or `{repo-name}-{location}` at a custom location. Multiple checkouts of the same repo are supported — each gets a unique name derived from its location.
 - **`clone`** (no args) — status mode: present the Checkout Report and Extraneous Report without cloning.
 
-Location resolution: `join(config.records.checkouts.path, basename(location))`. The `basename()` call handles both bare names (`foo` → `repos/foo`) and full paths (`repos/foo` → `repos/foo`) — no double-prefix.
+Location resolution: `join(config.clone.path, basename(location))` when a location is given, or `defaultLocation(repo)` (which produces `repos/{repo-name-lowercased}`) when omitted.
 
 Repo names are case-insensitive and package names (e.g. `@noodlestan/artificial`) are interchangeable with repo names. Cloning an existing checkout is idempotent — it reports the current state instead of cloning again.
 

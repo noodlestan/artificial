@@ -104,7 +104,7 @@ async function runSanityWithRoot(root: string, auto: boolean) {
 }
 
 describe('sanity command', () => {
-	it('reports "repo not cloned" for a missing checkout', async () => {
+	it('reports "no checkout" for a missing checkout', async () => {
 		const root = makeTempDir();
 		writeManifest(root);
 		writeRepoRecord(root, 'Missing', 'git@example.com:missing.git');
@@ -114,7 +114,7 @@ describe('sanity command', () => {
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/missing');
-		expect(output).toContain('repo not cloned');
+		expect(output).toContain('no checkout');
 	});
 
 	it('shows repo status when all repos are clean', async () => {
@@ -275,5 +275,35 @@ describe('sanity command', () => {
 			.map(c => c[0])
 			.join('\n');
 		expect(warnOutput).toContain('.art-workspace.mts');
+	});
+
+	it('reports "unknown project" for a synthetic repo with missing repo record', async () => {
+		const root = makeTempDir();
+		const repoDir = join(root, 'repos/orphan');
+		await initGitRepo(repoDir, { withRemote: true });
+		await commitFile(repoDir, 'file.txt');
+
+		writeManifest(root);
+		writeCheckoutRecord(root, 'Orphan', 'repos/orphan');
+
+		await runSanityWithRoot(root, false);
+
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		expect(output).toContain('unknown project');
+	});
+
+	it('shows extraneous directories in the Extraneous Report', async () => {
+		const root = makeTempDir();
+		const repoDir = join(root, 'repos/blah');
+		await initGitRepo(repoDir, { withRemote: true });
+		await commitFile(repoDir, 'file.txt');
+
+		writeManifest(root);
+
+		await runSanityWithRoot(root, false);
+
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		expect(output).toContain('Extraneous Report');
+		expect(output).toContain('repos/blah');
 	});
 });

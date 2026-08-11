@@ -32,7 +32,7 @@ export async function cloneIfMissing(
 	const recordFile = join(
 		ctx.root,
 		ctx.config.records.checkouts.path,
-		`${rescan.repo.name.toLowerCase().replace(/\s+/g, '-')}.art`,
+		`${rescan.record.name.toLowerCase().replace(/\s+/g, '-')}.art`,
 	);
 	const { getCurrentBranch } = await import('../../../private/git/get-current-branch');
 	const actualBranch = await getCurrentBranch(join(ctx.root, rescan.record.location));
@@ -40,6 +40,7 @@ export async function cloneIfMissing(
 		recordFile,
 		{
 			name: rescan.repo.name,
+			repository: `Repository: ${rescan.repo.name}`,
 			location: rescan.record.location,
 			branch: actualBranch || 'main',
 		},

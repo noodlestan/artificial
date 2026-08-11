@@ -24,7 +24,7 @@ export async function scanCheckout(ctx: WorkspaceContext, checkout: Checkout): P
 	}
 
 	if (!dirExists) {
-		const updated = { ...checkout, exists: false, issues: ['repo not cloned'] };
+		const updated = { ...checkout, exists: false, issues: ['no checkout'] };
 		ctx.store.setCheckout(updated);
 		return updated;
 	}
@@ -51,6 +51,10 @@ export async function scanCheckout(ctx: WorkspaceContext, checkout: Checkout): P
 		}
 	} catch {
 		issues.push('git error');
+	}
+
+	if (checkout.repo.remote === '') {
+		issues.unshift('unknown project');
 	}
 
 	if (detached) {
@@ -93,7 +97,7 @@ export async function scanAllCheckouts(ctx: WorkspaceContext): Promise<void> {
 }
 
 export async function scanExtraneousCheckouts(ctx: WorkspaceContext): Promise<void> {
-	const checkoutsPath = join(ctx.root, ctx.config.records.checkouts.path);
+	const checkoutsPath = join(ctx.root, ctx.config.clone.path);
 	const recordedLocations = ctx.store.getAllCheckouts().map(c => c.record.location);
 
 	try {

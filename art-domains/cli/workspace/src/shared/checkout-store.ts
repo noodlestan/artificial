@@ -1,11 +1,15 @@
+import { existsSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { loadCheckouts } from '../config/load-checkouts';
 import type { RepositoryRecord, WorkspaceConfig } from '../config/types';
+import { readCheckoutRecord } from '../private/records/checkout-record';
 
 import type { Checkout } from './checkout';
 import { createCheckout } from './checkout';
 
 export interface CheckoutStore {
-	addCheckout(repo: RepositoryRecord, location: string): Checkout;
+	addCheckout(repo: RepositoryRecord, location: string, name?: string): Checkout;
 	loadExistingCheckouts(): void;
 	findCheckout(name: string): Checkout | undefined;
 	getCheckout(name: string): Checkout | undefined;
@@ -20,8 +24,8 @@ export function createCheckoutStore(config: WorkspaceConfig, root: string): Chec
 	const checkouts = new Map<string, Checkout>();
 
 	return {
-		addCheckout(repo: RepositoryRecord, location: string): Checkout {
-			const checkout = createCheckout(repo, location, 'main');
+		addCheckout(repo: RepositoryRecord, location: string, name?: string): Checkout {
+			const checkout = createCheckout(repo, location, 'main', name);
 			checkouts.set(checkout.record.name.toLowerCase(), checkout);
 			return checkout;
 		},
@@ -33,6 +37,26 @@ export function createCheckoutStore(config: WorkspaceConfig, root: string): Chec
 				if (!checkouts.has(key)) {
 					const checkout = createCheckout(record.repo, record.location, record.branch);
 					checkouts.set(key, checkout);
+				}
+			}
+			// Also store under checkout names derived from record files
+			const dir = join(root, config.records.checkouts.path);
+			if (existsSync(dir)) {
+				const files = readdirSync(dir).filter(f => f.endsWith('.art'));
+				for (const file of files) {
+					const rec = readCheckoutRecord(join(dir, file));
+					if (rec.name) {
+						const nameKey = rec.name.toLowerCase();
+						if (!checkouts.has(nameKey)) {
+							// Find by location since we don't have the repo name key
+							const existing = Array.from(checkouts.values()).find(
+								c => c.record.location === rec.location,
+							);
+							if (existing) {
+								checkouts.set(nameKey, existing);
+							}
+						}
+					}
 				}
 			}
 		},

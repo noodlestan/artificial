@@ -125,8 +125,8 @@ clone(all, name, location)
       return
 
     // Derive checkout name and resolved location
-    checkoutName = location ? basename(location) : repo.name
-    resolvedLocation = join(ctx.config.records.checkouts.path, checkoutName.toLowerCase().replace(/\s+/g, "-"))
+    checkoutName = location ? repo.name + "-" + basename(location) : repo.name
+    resolvedLocation = location ? join(ctx.config.clone.path, basename(location)) : defaultLocation(repo)
 
     // Match by checkout name
     existing = ctx.store.findCheckout(checkoutName)
@@ -375,7 +375,7 @@ scanCheckout(ctx, checkout)
   dir = join(ctx.root, checkout.record.location)
 
   if not dirExists(dir):
-    updated = { ...checkout, exists: false, issues: ["repo not cloned"] }
+    updated = { ...checkout, exists: false, issues: ["no checkout"] }
     ctx.store.setCheckout(updated)
     return updated
 
@@ -390,6 +390,9 @@ scanCheckout(ctx, checkout)
     unpushed = remoteBranch ? getUnpushedCount(dir, remoteBranch) : 0
   catch:
     issues.push("git error")
+
+  if checkout.repo.remote === '':
+    issues.unshift("unknown project")
 
   if detached: issues.push("detached HEAD")
   if conflicts: issues.push("merge conflicts")
@@ -416,13 +419,13 @@ scanAllCheckouts(ctx)
 
 ### Function: scanExtraneousCheckouts(ctx)
 
-**Responsibility:** Scan for extraneous (non-record based) checkouts under config.checkouts.path.
+**Responsibility:** Scan for extraneous (non-record based) checkouts under config.clone.path.
 
 **Pseudo:**
 
 ```pseudo
 scanExtraneousCheckouts(ctx)
-  checkoutsPath = join(ctx.root, ctx.config.records.checkouts.path)
+  checkoutsPath = join(ctx.root, ctx.config.clone.path)
   recordedLocations = ctx.store.getAllCheckouts().map(c => c.location)
 
   for dir in listDirectories(checkoutsPath):

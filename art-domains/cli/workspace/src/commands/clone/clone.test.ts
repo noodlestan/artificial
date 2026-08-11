@@ -120,13 +120,13 @@ describe('clone command', () => {
 		const root = makeTempDir();
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
-		const workingDir = join(root, 'working/artificial');
+		const workingDir = join(root, 'repos/artificial');
 		await initWorkingRepo(workingDir, bareDir);
 		writeFileSync(join(workingDir, 'dirty.txt'), 'dirty');
 
 		writeManifest(root);
 		writeRepoRecord(root, 'Artificial', bareDir);
-		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial');
+		writeCheckoutRecordFile(root, 'Artificial', 'repos/artificial');
 
 		await runClone({ root, name: 'Artificial' });
 
@@ -138,14 +138,14 @@ describe('clone command', () => {
 		const root = makeTempDir();
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
-		const workingDir = join(root, 'working/artificial');
+		const workingDir = join(root, 'repos/artificial');
 		await initWorkingRepo(workingDir, bareDir);
 		const git = simpleGit(workingDir);
 		await git.checkoutLocalBranch('feature');
 
 		writeManifest(root);
 		writeRepoRecord(root, 'Artificial', bareDir);
-		writeCheckoutRecordFile(root, 'Artificial', 'working/artificial', 'main');
+		writeCheckoutRecordFile(root, 'Artificial', 'repos/artificial', 'main');
 
 		await runClone({ root, name: 'Artificial' });
 
@@ -198,18 +198,89 @@ describe('clone command', () => {
 		expect(existsSync(checkoutDir)).toBe(true);
 	});
 
-	it('uses declared override for location and branch', async () => {
+	it('uses target location when specified', async () => {
 		const root = makeTempDir();
 		const bareDir = join(root, 'bare/artificial');
 		await initBareRepo(bareDir);
 
 		writeManifest(root);
 		writeRepoRecord(root, 'Artificial', bareDir);
-		writeCheckoutRecordFile(root, 'Artificial', 'custom/location', 'develop');
+
+		await runClone({ root, name: 'Artificial', target: 'custom' });
+
+		const checkoutDir = join(root, 'repos/custom');
+		expect(existsSync(checkoutDir)).toBe(true);
+	});
+
+	it('creates checkout named Artificial-foo when cloning Artificial to foo', async () => {
+		const root = makeTempDir();
+		const bareDir = join(root, 'bare/artificial');
+		await initBareRepo(bareDir);
+
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir);
+
+		await runClone({ root, name: 'Artificial', target: 'foo' });
+
+		const checkoutDir = join(root, 'repos/foo');
+		expect(existsSync(checkoutDir)).toBe(true);
+
+		const recordFile = join(root, 'ops/records/checkouts/artificial-foo.art');
+		expect(existsSync(recordFile)).toBe(true);
+		const content = readFileSync(recordFile, 'utf-8');
+		expect(content).toContain('## Checkout: Artificial');
+		expect(content).toContain('**Location:** `repos/foo`');
+	});
+
+	it('is idempotent when cloning an existing checkout', async () => {
+		const root = makeTempDir();
+		const bareDir = join(root, 'bare/artificial');
+		await initBareRepo(bareDir);
+
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir);
+
+		await runClone({ root, name: 'Artificial' });
+		await runClone({ root, name: 'Artificial' });
+
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		expect(output).toContain('repos/artificial');
+	});
+
+	it('fails when location is already used by a different checkout', async () => {
+		const root = makeTempDir();
+		const bareDir1 = join(root, 'bare/artificial');
+		await initBareRepo(bareDir1);
+		const bareDir2 = join(root, 'bare/other');
+		await initBareRepo(bareDir2);
+
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir1);
+		writeRepoRecord(root, 'Other', bareDir2);
 
 		await runClone({ root, name: 'Artificial' });
 
-		const checkoutDir = join(root, 'custom/location');
-		expect(existsSync(checkoutDir)).toBe(true);
+		const ctx = await runClone({ root, name: 'Other', target: 'artificial' });
+		const ops = ctx.log.all();
+		const failures = ops.filter(o => o.outcome === 'failure');
+		expect(failures.length).toBeGreaterThan(0);
+		expect(failures[0].message()).toContain('already used by checkout');
+	});
+
+	it('allows multiple checkouts of the same repo with different locations', async () => {
+		const root = makeTempDir();
+		const bareDir = join(root, 'bare/artificial');
+		await initBareRepo(bareDir);
+
+		writeManifest(root);
+		writeRepoRecord(root, 'Artificial', bareDir);
+
+		await runClone({ root, name: 'Artificial' });
+		await runClone({ root, name: 'Artificial', target: 'custom' });
+
+		const checkoutDir1 = join(root, 'repos/artificial');
+		const checkoutDir2 = join(root, 'repos/custom');
+		expect(existsSync(checkoutDir1)).toBe(true);
+		expect(existsSync(checkoutDir2)).toBe(true);
 	});
 });

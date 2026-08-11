@@ -15,10 +15,15 @@ export interface Checkout {
 	extraneous: boolean;
 }
 
-export function createCheckout(repo: RepositoryRecord, location: string, branch: string): Checkout {
+export function createCheckout(
+	repo: RepositoryRecord,
+	location: string,
+	branch: string,
+	name?: string,
+): Checkout {
 	return {
 		repo,
-		record: { name: repo.name, location, branch },
+		record: { name: name ?? repo.name, location, branch },
 		exists: false,
 		branch,
 		remoteBranch: null,
