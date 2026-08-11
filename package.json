@@ -7,9 +7,9 @@
   "private": true,
   "packageManager": "npm@10.2.3",
   "workspaces": [
-    "art-domains/*",
-    "art-js/*",
-    "artisans/*"
+    "art-domains/**",
+    "art-js/**",
+    "artisans/**"
   ],
   "engines": {
     "node": ">=18"

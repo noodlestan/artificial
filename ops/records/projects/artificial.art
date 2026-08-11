@@ -24,9 +24,9 @@
 
 **Workspaces:**
 
-- `art-domains/*`
-- `art-js/*`
-- `artisans/*`
+- `art-domains/**`
+- `art-js/**`
+- `artisans/**`
 
 **Scaffolders:**
 
