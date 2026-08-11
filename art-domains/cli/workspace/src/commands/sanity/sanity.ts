@@ -57,8 +57,14 @@ export async function runSanity(ctx: WorkspaceContext, auto: boolean): Promise<v
 				};
 				ctx.store.setCheckout(updated);
 				ctx.log.pushed(checkout.repo.name, 'to origin/' + checkout.branch);
-			} catch {
-				// push failed, leave as-is
+			} catch (e) {
+				const msg = e instanceof Error ? e.message : String(e);
+				const updated = {
+					...checkout,
+					issues: [...checkout.issues, `push failed: ${msg}`],
+				};
+				ctx.store.setCheckout(updated);
+				ctx.log.pushed(checkout.repo.name, `FAILED — ${msg}`);
 			}
 		}
 	}
