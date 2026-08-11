@@ -73,3 +73,13 @@
 **Decision:** Tags are aligned to the four projections: `#author`, `#generator`, `#operator`, `#indexer`. Tags determine inclusion, exclusion, or transformation of content per projection.
 
 **Consequences:** The tag set is constrained by the projection taxonomy (see `distribution.art`).
+
+## Decision: Parser Containment Model
+
+**Status:** Adopted
+
+**Context:** The grammar spec files described containment loosely. The mdast-based parser implements explicit containment rules that need to be reflected in the spec.
+
+**Decision:** SectionBlocks nest by heading level. FieldBlock values terminate at the next FieldBlock, SectionBlock, or end of enclosing SectionBlock. NaturalBlock is the catch-all for any unclassified content. Tags are detected in prose via regex, not in code blocks.
+
+**Consequences:** The spec files now match the parser implementation. The containment model is unambiguous for both parsers and spec readers.

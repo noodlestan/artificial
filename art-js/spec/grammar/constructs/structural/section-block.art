@@ -18,21 +18,24 @@
 
 ```
 SectionBlock {
-    kind?: <NaturalName>
-    name: <NaturalName>
-    tags?: <Tag>[]
-    content: <NaturalBlock>
+    kind?: string          // optional; present when heading has "Kind: Name" form
+    name: string           // resource name
+    tags?: Tag[]           // optional projection tags
+    content: NaturalBlock  // associated content (catch-all classification)
 }
 ```
 
 **Syntax:**
 
 ```art
-<syntax-block-header> =
-    ### [<NaturalName (section-block.kind)>: ]<NaturalName (section-block.name)>
-
+// Form 1: Name only
 <SectionBlock> =
-    <syntax-block-header> [<Tags>]
+    # <name> [<Tags>]
+    <NaturalBlock>
+
+// Form 2: Kind and Name
+<SectionBlock> =
+    # <kind>: <name> [<Tags>]
     <NaturalBlock>
 ```
 

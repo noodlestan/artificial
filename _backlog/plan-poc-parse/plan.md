@@ -91,17 +91,15 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Reason:** Written for micromark-based builder. All fixes (FieldBlock detection, position cleanup, NaturalBlock enrichment) already done by mdast-based parser.
 
-### `grammar-spec-fixes` - `PLANNED`
+### `grammar-spec-fixes` - `COMMITTED`
 
 **Commit Message:** `poc-parse: fix grammar spec gaps`
 
 **Instructions File:** `repos/artificial/_backlog/plan-poc-parse/instructions/grammar-spec-fixes.md`
 
-### `grammar-spec-fixes` - `DRAFT`
+**Evidence:** commit `aaadf70`; artefacts — `art-js/spec/grammar/constructs/structural/field-block.art` (containment rules fixed), `art-js/spec/grammar/constructs/structural/section-block.art` (kind/name clarified), `art-js/spec/grammar/constructs/structural/natural-block.art` (catch-all purpose, `children` field added), `art-js/spec/grammar/expressions/tag.art` (prose-only detection clarified), `art-js/architecture/records/adr/language.art` (Parser Containment Model decision added). `tsc --noEmit` exit 0; `npm run lint` clean.
 
-**Commit Message:** `poc-parse: fix grammar spec gaps`
-
-**Instructions File:** none yet
+**Report:** `repos/artificial/_backlog/plan-poc-parse/instructions/grammar-spec-fixes__report.md`
 
 ### `first-constructs-vertical-slice` - `DRAFT`
 

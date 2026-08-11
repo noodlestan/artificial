@@ -12,7 +12,7 @@
 
 **Purpose:** Represent a named property within a SectionBlock.
 
-**Description:** A FieldBlock associates a name with a value within a SectionBlock. The value of the FieldBlock is the NaturalBlock that follows the field identifier, up to the next FieldBlock, FieldInline, InlineDeclaration, or SectionBlock, or the end of the enclosing SectionBlock.
+**Description:** A FieldBlock associates a name with a value within a SectionBlock. The value of the FieldBlock is the NaturalBlock that follows the field identifier. The value terminates at the next FieldBlock, FieldInline, InlineDeclaration, SectionBlock, or the end of the enclosing SectionBlock. A FieldBlock MUST NOT contain a SectionBlock or a nested FieldBlock — these constructs break out of the field's value scope.
 
 <!-- refine content rules -->
 
@@ -39,7 +39,6 @@ FieldBlock {
 - A FieldBlock MUST define a value.
 - A FieldBlock MAY be tagged with one or more Tag.
 - A FieldBlock value consists of all following content until the next FieldBlock, FieldInline, InlineDeclaration, SectionBlock, or the end of the enclosing SectionBlock.
-- A FieldBlock value MAY contain procedure blocks, example blocks, directives, and raw Markdown content.
 - A FieldBlock MUST NOT contain a SectionBlock.
 - A FieldBlock MUST NOT contain a nested FieldBlock.
 

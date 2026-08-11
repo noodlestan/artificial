@@ -4,11 +4,20 @@
 
 **Category:** Structural
 
-**Purpose:** Provide a construct for including additional material within other constructs.
+**Purpose:** The catch-all classification for any content that does not match another construct.
 
-**Description:** NaturalBlock represents content associated with a construct through the construct's syntax rules. Example: The content of a SectionBlock, or of a FieldBlock.
+**Description:** NaturalBlock is the default: any content that does not match a SectionBlock, FieldBlock, or other construct classifies as a NaturalBlock. Plain Markdown is never invalid — it classifies as NaturalBlock. This realises the "Any Markdown is Valid `.art`" decision: unclassified content is always welcome and never rejected.
 
-NaturalBlock is the catch-all classification: any content that does not match another construct is a NaturalBlock. Plain Markdown is never invalid — it classifies as NaturalBlock.
+NaturalBlock is the content carrier for SectionBlocks and FieldBlocks: the content of a SectionBlock or the value of a FieldBlock is a NaturalBlock.
+
+**Schema:**
+
+```
+NaturalBlock {
+    value: string              // raw markdown content (lossless round-trip)
+    children?: BlockContent[]  // parsed sub-records when content is structured (e.g. list items)
+}
+```
 
 **Rules:**
 

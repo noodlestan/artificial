@@ -12,6 +12,8 @@
 
 **Description:** Tags are the projection mechanism: they attach to resource declarations (SectionBlock headings) and definitions, and determine inclusion, exclusion, or transformation of content per projection. Tags are aligned to the four projections — `#author`, `#generator`, `#operator`, `#indexer` — so a tagged declaration knows which projections it belongs to. Multiple tags are space-separated. The values and meaning of tags are usually defined via VocabularyDeclaration.
 
+Tags are detected in prose content via regex — not inside fenced code blocks or inline code. A tag in a code block is literal text, not a tag construct. Tags found in prose attach to the nearest enclosing SectionBlock.
+
 **Syntax:**
 
 Single tag:
