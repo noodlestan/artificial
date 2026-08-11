@@ -2,6 +2,9 @@
   "name": "@art-domains/workspace-cli",
   "version": "0.0.12",
   "description": "Workspace orchestration CLI",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": true,
   "type": "module",
   "bin": {
     "art-workspace": "./dist/index.js"
@@ -16,14 +19,21 @@
       "import": "./dist/config/index.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --packages=external && esbuild src/config/index.ts --bundle --platform=node --outfile=dist/config/index.js --format=esm --packages=external && tsc --emitDeclarationOnly",
-    "dev": "npm run build -- --watch",
+    "build": "npm run build:main && npm run build:config && tsc --emitDeclarationOnly",
+    "build:clean": "rm -rf dist",
+    "build:main": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --packages=external",
+    "build:config": "esbuild src/config/index.ts --bundle --platform=node --outfile=dist/config/index.js --format=esm --packages=external",
+    "dev": "npm run build:main -- --watch",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
-    "lint:fix": "prettier . -c --write && eslint . --fix"
+    "lint:fix": "prettier . -c --write && eslint . --fix",
+    "ci": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
     "commander": "^12.0.0",

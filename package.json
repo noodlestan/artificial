@@ -20,6 +20,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "test": "turbo run test",
+    "extract": "echo no purrception yet!",
     "ci": "turbo run ci"
   },
   "devDependencies": {

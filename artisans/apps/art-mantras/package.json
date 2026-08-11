@@ -9,6 +9,7 @@
   "scripts": {
     "serve": "node src/serve.js",
     "lint": "prettier . -c && eslint .",
-    "lint:fix": "prettier . -c --write && eslint . --fix"
+    "lint:fix": "prettier . -c --write && eslint . --fix",
+    "ci": "npm run lint"
   }
 }
