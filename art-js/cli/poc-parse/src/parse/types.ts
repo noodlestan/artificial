@@ -43,8 +43,10 @@ export interface FieldBlock extends RecordBase {
 /** NaturalBlock — the catch-all: plain markdown not classified as art. */
 export interface NaturalBlock extends RecordBase {
 	construct: 'NaturalBlock';
-	/** Raw markdown content. */
+	/** Raw markdown content (always present, lossless round-trip). */
 	value: string;
+	/** Parsed sub-records when the content is structured (e.g. list items). */
+	children?: BlockContent[];
 }
 
 /** Tag — a projection tag `(#identifier)`. */

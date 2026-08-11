@@ -30,5 +30,9 @@
     "lint:fix": "prettier . -c --write && eslint . --fix",
     "build:clean": "rm -rf dist",
     "test": "echo none yet"
+  },
+  "dependencies": {
+    "mdast-util-from-markdown": "^2.0.0",
+    "unist-util-visit": "^5.0.0"
   }
 }
