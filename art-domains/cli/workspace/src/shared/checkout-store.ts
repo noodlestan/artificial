@@ -64,6 +64,7 @@ export function createCheckoutStore(config: WorkspaceConfig, root: string): Chec
 				record: { name, location, branch: '-' },
 				exists: false,
 				branch: '-',
+				remoteBranch: null,
 				detached: false,
 				conflicts: false,
 				dirty: false,

@@ -2,6 +2,7 @@ import { loadWorkspaceConfig } from '../../config/load-config';
 import { createCheckoutStore } from '../../shared/checkout-store';
 import { createOperationsLog } from '../../shared/operations-log';
 import { createWorkspaceContext } from '../../shared/workspace-context';
+import type { WorkspaceContext } from '../../shared/workspace-context';
 
 import { cloneAll } from './clone-all';
 import { cloneSpecific } from './clone-specific';
@@ -14,7 +15,12 @@ interface CloneOptions {
 	target?: string;
 }
 
-export async function runClone({ root, all, name, target }: CloneOptions): Promise<void> {
+export async function runClone({
+	root,
+	all,
+	name,
+	target,
+}: CloneOptions): Promise<WorkspaceContext> {
 	const config = await loadWorkspaceConfig(root);
 	const store = createCheckoutStore(config, root);
 	const log = createOperationsLog();
@@ -22,13 +28,14 @@ export async function runClone({ root, all, name, target }: CloneOptions): Promi
 
 	if (all) {
 		await cloneAll(ctx);
-		return;
+		return ctx;
 	}
 
 	if (name) {
 		await cloneSpecific(ctx, name, target);
-		return;
+		return ctx;
 	}
 
 	await cloneStatus(ctx);
+	return ctx;
 }

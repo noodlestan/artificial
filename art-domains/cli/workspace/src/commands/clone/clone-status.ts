@@ -1,7 +1,7 @@
+import { presentCheckoutReport } from '../../private/present/present-checkout-report';
+import { presentExtraneousReport } from '../../private/present/present-extraneous-report';
 import { scanAllCheckouts, scanExtraneousCheckouts } from '../../shared/scan-checkout';
 import type { WorkspaceContext } from '../../shared/workspace-context';
-
-import { presentCheckoutReport, presentExtraneousReport } from './private/present';
 
 export async function cloneStatus(ctx: WorkspaceContext): Promise<void> {
 	ctx.store.loadExistingCheckouts();

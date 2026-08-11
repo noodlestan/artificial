@@ -1,20 +1,19 @@
 import simpleGit from 'simple-git';
 
-export async function getUnpushedCount(dir: string): Promise<number> {
+export async function getUnpushedCount(dir: string, remoteBranch: string | null): Promise<number> {
 	const git = simpleGit(dir);
 	try {
 		const status = await git.status();
 		if (!status.current || status.current === 'HEAD') {
 			return 0;
 		}
-		const branches = await git.branch();
-		const tracking = branches.all.find(
-			b => b === `origin/${status.current}` || b === `remotes/origin/${status.current}`,
-		);
-		if (!tracking) {
-			return -1;
+		if (remoteBranch) {
+			const ahead = await git.raw(['rev-list', '--count', `${remoteBranch}..HEAD`]);
+			return Number.parseInt(ahead.trim(), 10);
 		}
-		const ahead = await git.raw(['rev-list', '--count', `${tracking}..HEAD`]);
+		// New branch with no remote counterpart: count commits not reachable
+		// from any remote-tracking branch.
+		const ahead = await git.raw(['rev-list', '--count', 'HEAD', '--not', '--remotes=origin']);
 		return Number.parseInt(ahead.trim(), 10);
 	} catch {
 		return 0;

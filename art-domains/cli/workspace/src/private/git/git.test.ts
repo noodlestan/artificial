@@ -6,6 +6,7 @@ import simpleGit from 'simple-git';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { getCurrentBranch } from './get-current-branch';
+import { getRemoteBranch } from './get-remote-branch';
 import { getUnpushedCount } from './get-unpushed-count';
 import { hasMergeConflicts } from './has-merge-conflicts';
 import { hasRemote } from './has-remote';
@@ -120,13 +121,57 @@ describe('hasRemote', () => {
 	});
 });
 
-describe('getUnpushedCount', () => {
-	it('returns -1 for branch with no tracking', async () => {
+describe('getRemoteBranch', () => {
+	it('returns null when the branch has no remote counterpart', async () => {
 		const dir = makeTempDir();
 		await initGitRepo(dir);
 
-		const count = await getUnpushedCount(dir);
+		const remote = await getRemoteBranch(dir);
 
-		expect(count).toBe(-1);
+		expect(remote).toBeNull();
+	});
+
+	it('returns the remote branch name when it exists on origin', async () => {
+		const dir = makeTempDir();
+		await initGitRepo(dir);
+		const bareDir = makeTempDir();
+		const bareGit = simpleGit(bareDir);
+		await bareGit.init(true);
+		const git = simpleGit(dir);
+		await git.addRemote('origin', bareDir);
+		await git.push('origin', 'main', ['--set-upstream']);
+
+		const remote = await getRemoteBranch(dir);
+
+		expect(remote).toBe('origin/main');
+	});
+});
+
+describe('getUnpushedCount', () => {
+	it('returns the count of local commits for a branch with no remote counterpart', async () => {
+		const dir = makeTempDir();
+		await initGitRepo(dir);
+
+		const count = await getUnpushedCount(dir, null);
+
+		expect(count).toBe(1);
+	});
+
+	it('returns commits ahead of the remote branch', async () => {
+		const dir = makeTempDir();
+		await initGitRepo(dir);
+		const bareDir = makeTempDir();
+		const bareGit = simpleGit(bareDir);
+		await bareGit.init(true);
+		const git = simpleGit(dir);
+		await git.addRemote('origin', bareDir);
+		await git.push('origin', 'main', ['--set-upstream']);
+		writeFileSync(join(dir, 'second.txt'), 'second');
+		await git.add('.');
+		await git.commit('second');
+
+		const count = await getUnpushedCount(dir, 'origin/main');
+
+		expect(count).toBe(1);
 	});
 });

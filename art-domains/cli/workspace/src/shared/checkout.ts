@@ -9,6 +9,7 @@ export interface Checkout {
 	};
 	exists: boolean;
 	branch: string;
+	remoteBranch: string | null;
 	detached: boolean;
 	conflicts: boolean;
 	dirty: boolean;
@@ -24,6 +25,7 @@ export function createCheckout(repo: RepositoryRecord, location: string, branch:
 		record: { name: repo.name, location, branch },
 		exists: false,
 		branch,
+		remoteBranch: null,
 		detached: false,
 		conflicts: false,
 		dirty: false,

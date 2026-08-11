@@ -1,18 +1,7 @@
-export interface Operation {
-	ts: Date;
-	repo: string;
-	operation: string;
-	detail: string;
-}
+import type { Operation } from '../private/operations/types';
 
 export interface OperationsLog {
-	operations: Operation[];
-	cloned(repo: string, detail: string): void;
-	pushed(repo: string, detail: string): void;
-	published(repo: string, detail: string): void;
-	branchCreated(repo: string, detail: string): void;
-	linked(repo: string, detail: string): void;
-	unlinked(repo: string, detail: string): void;
+	log(operation: Operation): void;
 	all(): Operation[];
 	since(ts: Date): Operation[];
 	latest(n: number): Operation[];
@@ -21,35 +10,9 @@ export interface OperationsLog {
 export function createOperationsLog(): OperationsLog {
 	const operations: Operation[] = [];
 
-	function add(operation: string, repo: string, detail: string): void {
-		operations.push({ ts: new Date(), repo, operation, detail });
-	}
-
 	return {
-		operations,
-
-		cloned(repo: string, detail: string): void {
-			add('cloned', repo, detail);
-		},
-
-		pushed(repo: string, detail: string): void {
-			add('pushed', repo, detail);
-		},
-
-		published(repo: string, detail: string): void {
-			add('published', repo, detail);
-		},
-
-		branchCreated(repo: string, detail: string): void {
-			add('branch created', repo, detail);
-		},
-
-		linked(repo: string, detail: string): void {
-			add('linked', repo, detail);
-		},
-
-		unlinked(repo: string, detail: string): void {
-			add('unlinked', repo, detail);
+		log(operation: Operation): void {
+			operations.push(operation);
 		},
 
 		all(): Operation[] {

@@ -151,20 +151,18 @@ describe('clone command', () => {
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('feature');
-		expect(output).toContain('not pushed');
 	});
 
 	it('errors for an unknown repo name', async () => {
 		const root = makeTempDir();
 		writeManifest(root);
 
-		await runClone({ root, name: 'Unknown' });
+		const ctx = await runClone({ root, name: 'Unknown' });
 
-		const errorOutput = (console.error as ReturnType<typeof vi.fn>).mock.calls
-			.map(c => c[0])
-			.join('\n');
-		expect(errorOutput).toContain('Unknown');
-		expect(process.exitCode).toBe(1);
+		const ops = ctx.log.all();
+		expect(ops).toHaveLength(1);
+		expect(ops[0].outcome).toBe('failure');
+		expect(ops[0].message()).toContain('Unknown');
 	});
 
 	it('clones all repos when --all is passed', async () => {

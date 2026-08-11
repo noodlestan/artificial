@@ -169,7 +169,7 @@ describe('sanity command', () => {
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/unpushed');
-		expect(output).toContain('not pushed');
+		expect(output).toContain('1 commit ahead');
 	});
 
 	it('pushes clean unpushed repo with --auto', async () => {
@@ -177,6 +177,9 @@ describe('sanity command', () => {
 		const repoDir = join(root, 'repos/autopush');
 		await initGitRepo(repoDir, { withRemote: true });
 		await commitFile(repoDir, 'file.txt');
+		const git = simpleGit(repoDir);
+		await git.push('origin', 'main', ['--set-upstream']);
+		await commitFile(repoDir, 'file2.txt');
 
 		writeManifest(root);
 		writeRepoRecord(root, 'AutoPush', 'git@example.com:autopush.git');
@@ -187,7 +190,8 @@ describe('sanity command', () => {
 		const logOutput = (console.info as ReturnType<typeof vi.fn>).mock.calls
 			.map(c => c[0])
 			.join('\n');
-		expect(logOutput).toContain('pushed');
+		expect(logOutput).toContain('push');
+		expect(logOutput).toContain('origin/main');
 	});
 
 	it('does not push dirty repo with --auto', async () => {

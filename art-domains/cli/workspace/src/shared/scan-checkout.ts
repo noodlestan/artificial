@@ -1,7 +1,8 @@
-import { readdirSync, statSync } from 'node:fs';
+import { access, readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
 import { getCurrentBranch } from '../private/git/get-current-branch';
+import { getRemoteBranch } from '../private/git/get-remote-branch';
 import { getUnpushedCount } from '../private/git/get-unpushed-count';
 import { hasMergeConflicts } from '../private/git/has-merge-conflicts';
 import { hasRemote } from '../private/git/has-remote';
@@ -14,14 +15,15 @@ import type { WorkspaceContext } from './workspace-context';
 export async function scanCheckout(ctx: WorkspaceContext, checkout: Checkout): Promise<Checkout> {
 	const dir = join(ctx.root, checkout.record.location);
 
+	let dirExists = false;
 	try {
-		const stat = statSync(dir);
-		if (!stat.isDirectory()) {
-			const updated = { ...checkout, exists: false, issues: ['repo not cloned'] };
-			ctx.store.setCheckout(updated);
-			return updated;
-		}
+		await access(dir);
+		dirExists = true;
 	} catch {
+		dirExists = false;
+	}
+
+	if (!dirExists) {
 		const updated = { ...checkout, exists: false, issues: ['repo not cloned'] };
 		ctx.store.setCheckout(updated);
 		return updated;
@@ -33,6 +35,7 @@ export async function scanCheckout(ctx: WorkspaceContext, checkout: Checkout): P
 	let conflicts = false;
 	let dirty = false;
 	let hasRemoteVal = false;
+	let remoteBranch: string | null = null;
 	let unpushed = 0;
 
 	try {
@@ -43,7 +46,8 @@ export async function scanCheckout(ctx: WorkspaceContext, checkout: Checkout): P
 		hasRemoteVal = await hasRemote(dir);
 
 		if (hasRemoteVal && branch !== '-' && branch !== 'HEAD') {
-			unpushed = await getUnpushedCount(dir);
+			remoteBranch = await getRemoteBranch(dir);
+			unpushed = await getUnpushedCount(dir, remoteBranch);
 		}
 	} catch {
 		issues.push('git error');
@@ -61,9 +65,7 @@ export async function scanCheckout(ctx: WorkspaceContext, checkout: Checkout): P
 	if (dirty) {
 		issues.push('uncommitted files');
 	}
-	if (unpushed === -1) {
-		issues.push('not pushed');
-	} else if (unpushed > 0) {
+	if (unpushed > 0) {
 		issues.push(`${unpushed} commit${unpushed !== 1 ? 's' : ''} ahead`);
 	}
 
@@ -71,6 +73,7 @@ export async function scanCheckout(ctx: WorkspaceContext, checkout: Checkout): P
 		...checkout,
 		exists: true,
 		branch,
+		remoteBranch,
 		detached,
 		conflicts,
 		dirty,
@@ -94,7 +97,7 @@ export async function scanExtraneousCheckouts(ctx: WorkspaceContext): Promise<vo
 	const recordedLocations = ctx.store.getAllCheckouts().map(c => c.record.location);
 
 	try {
-		const entries = readdirSync(checkoutsPath, { withFileTypes: true });
+		const entries = await readdir(checkoutsPath, { withFileTypes: true });
 		for (const entry of entries) {
 			if (!entry.isDirectory()) {
 				continue;
