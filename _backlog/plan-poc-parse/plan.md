@@ -87,11 +87,15 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/_backlog/plan-poc-parse/instructions/mdast-based-parse__report.md`
 
-### `cross-check-grammar-wip` - `PLANNED`
+### `cross-check-grammar-wip` - `CANCELLED`
 
-**Commit Message:** `poc-parse: cross-check grammar wip`
+**Reason:** Written for micromark-based builder. All fixes (FieldBlock detection, position cleanup, NaturalBlock enrichment) already done by mdast-based parser.
 
-**Instructions File:** `repos/artificial/_backlog/plan-poc-parse/instructions/cross-check-grammar-wip.md`
+### `grammar-spec-fixes` - `PLANNED`
+
+**Commit Message:** `poc-parse: fix grammar spec gaps`
+
+**Instructions File:** `repos/artificial/_backlog/plan-poc-parse/instructions/grammar-spec-fixes.md`
 
 ### `grammar-spec-fixes` - `DRAFT`
 
