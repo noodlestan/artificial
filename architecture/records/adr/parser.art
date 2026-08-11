@@ -1,4 +1,4 @@
-# Module
+# Module: Parser
 
 ## Decision: mdast-Based Parse Strategy
 
@@ -11,6 +11,7 @@ mdast sits between micromark (syntax) and remark (pipeline). It provides a tree 
 **Decision:** Parse markdown to mdast using `mdast-util-from-markdown`, then visit each node with `unist-util-visit` and map it to art records using a factory pattern.
 
 The factory system:
+
 - Each known construct (SectionBlock, FieldBlock, Tag) has a factory with `detect`, `create`, and `visitChildren` methods.
 - `detect` checks if an mdast node qualifies (e.g. heading text matches `# Kind: Name`, strong text matches `**Field:**`).
 - `create` builds the art record from the mdast node.
@@ -18,6 +19,7 @@ The factory system:
 - Unmatched nodes fall back to `NaturalBlock`.
 
 **Consequences:**
+
 - mdast handles token reconstruction — strong spans are complete, nesting is resolved, inline formatting is preserved.
 - The factory pattern cleanly separates detection from construction — each construct is an isolated unit.
 - NaturalBlock can have structured content (`.children`) when inside a FieldBlock with lists — mdast gives us list items as typed nodes.
@@ -28,7 +30,18 @@ The factory system:
 **Rejected alternative:** Micromark-first (`micromark-first.art`) — direct token events with an explicit stack. Superseded because tokens are the wrong abstraction boundary for record building.
 
 **Research basis:**
+
 - `_research.md` best practice #1: "Two layers, always — micromark owns syntax, we own semantics." mdast is the semantics layer.
 - `_research.md` best practice #2: "Explicit stack + enter/exit hooks" — the factory pattern is the mdast equivalent, but cleaner.
 - Surveyed projects: mdx-js/mdx (mdast as the extension boundary), remarkjs/remark (full pipeline), mdast-util-from-markdown (the from-markdown pattern).
 - `language.art` construct containment rules inform factory detection patterns.
+
+## Decision: Kind-Agnostic Parser
+
+**Status:** Adopted
+
+**Context:** Every SectionBlock arrives as `# Kind: Name`. If the parser enumerated known kinds it would have to grow with the language: every kind a domain introduces would be a core change, breaking Closed Syntax, Open Semantics, and creating two code paths (known kinds typed, unknown kinds generic). The alternative — the parser knowing nothing about kinds — needs to be stated explicitly, or extract/transform/validator packages will assume parse-time kind knowledge that is not there.
+
+**Decision:** The parser is kind-agnostic: `kind` is an open string, captured but never enumerated or interpreted at parse time. Any `# Kind: Name` heading becomes a generic SectionBlock record; kind semantics are resolved downstream (extract/transform/validator) via the structures that define each kind. This mirrors micromark, where token types are open strings that extensions add to without touching the core.
+
+**Consequences:** Parse never rejects and never special-cases; the core schema stays frozen (only construct forms are enumerated); per-kind typed records are an extract concern; the schema exposes kinds as an open registry for domain augmentations.

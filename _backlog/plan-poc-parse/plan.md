@@ -10,7 +10,7 @@
 
 ## Summary
 
-POC-first spike of the artificials parser: a self-contained, CLI-executable package `@art-js/poc-parse` at `art-js/cli/poc-parse/`, internally partitioned along the pipeline boundaries (parse/extract/transform/render). Exercise the parse slice on one construct file first; schema-first in TS (types as the metalanguage); micromark substrate; then reconcile the grammar WIP as the parser exercises it. Covers POC Steps 1–7; reactivity, template-engine research, and the precompiled rewrite are explicit follow-ups.
+POC-first spike of the artificials parser: a self-contained, CLI-executable package `@art-js/poc-parse` at `art-js/cli/poc-parse/` based on `mdast`.
 
 ## Source Tasks
 
@@ -32,9 +32,8 @@ For the delegator (execution mechanics):
 For the delegatee (shared context; per-step context is in each instruction file):
 
 - `artificials/_guide.md` — artificials system overview: compiler pipeline and compilation model.
-- `artificials/_architect.md` — approach and the step being executed.
-- `artificials/_wip.md` — the ACTIONABLE list; identifies the current step.
-- `artificials/architecture/records/adr/_research.md` — substrate research behind the spike.
+- `artificials/architecture/index.md` — architecture overview.
+- `artificials/architecture/records/adr/parser.md` — substrate research behind the spike.
 
 ## Commits
 
@@ -116,10 +115,3 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 - Commit convention — all commits use `git commit --no-verify` to skip the pre-commit CI hooks (lefthook `clean` + `extract`); also documented in the module `_module.md` next-move routines.
 - Convention — delegation and report files are co-located in `plan-{id}/instructions/` (`{id}.md` + `{id}__report.md`). `files/index.md` naming patterns and `execute-plan/SKILL.md` delegation-file link rule reconciled to this on 2026-08-08; all subsequent instructions and reports render into `instructions/`.
-
-## Feedback
-
-- `scaffold-poc-parse`: see `repos/artificial/_backlog/plan-poc-parse/instructions/scaffold-poc-parse__report.md`. Key planner items F1–F3 (workspace entry in `artificials/package.json` not repo-root; scaffolder naming `Scaffolder Skeleton: CLI Package`; `ci` deferred, no build/deps yet) + technical-writer items F4–F5 (tsconfig extends path; README link targets).
-- `core-record-schema`: see `repos/artificial/_backlog/plan-poc-parse/instructions/core-record-schema__report.md`. Key planner item F1 (stale `_research.md` path: `artificials/architecture/records/adr/_research.md` → `artificials/ops/records/adr/_research.md`; affects plan.md lines 21, 37 and \_architect.md line 11).
-- `smoke-parse`: see `repos/artificial/_backlog/plan-poc-parse/instructions/smoke-parse-section-block__report.md`. Planner items F1–F3 (micromark API: `preprocess() → parse().document().write() → postprocess()` pipeline, not `parse()` directly; event shape `[enterExit, token, context]`, not `[token, type, enterExit]`; micromark transitive dep note). Technical-writer item F4 (findings recommendation clarifies "micromark direct" means "micromark + our own thin from-markdown layer", two-layer architecture preserved).
-- `construct-stack-record-builder`: see `repos/artificial/_backlog/plan-poc-parse/instructions/construct-stack-record-builder__report.md`. Planner items P1–P4 (field stays open until a terminator, not popped at strong exit; sections nest by heading level via `closeSections`, not popped at atxHeading exit; CLI reads `process.argv[2]`; CLI resolves the file arg cwd-first then against workspace root). Technical-writer items T1–T2 (lint deps ARE installed — lift the "Do NOT run npm run lint" note; consider excluding fenced spans from tag detection).
