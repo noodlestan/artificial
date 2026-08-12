@@ -1,40 +1,28 @@
+import type { WorkspaceContext } from '../../private/context/workspace-context';
 import { presentCheckoutReport } from '../../private/present/present-checkout-report';
 import { presentExtraneousReport } from '../../private/present/present-extraneous-report';
 import { presentOperationsReport } from '../../private/present/present-operations-report';
-import {
-	scanAllCheckouts,
-	scanCheckout,
-	scanExtraneousCheckouts,
-} from '../../shared/scan-checkout';
-import type { WorkspaceContext } from '../../shared/workspace-context';
+import { loadCheckoutRecords } from '../../private/records/load-checkout-records';
+import { loadRepositoryRecords } from '../../private/records/load-repository-rercords';
+import { hydrateStoreFromRecords } from '../../private/store/hydrate-store-from-records';
+import { scanAllCheckoutsStates } from '../../shared/scan-all-checkouts-states';
+import { scanExtraneousCheckouts } from '../../shared/scanExtraneousCheckouts';
 
 import { pushCleanCheckouts } from './private/push-clean-checkouts';
 
-const WORKSPACE_REPO = {
-	name: 'Workspace',
-	purpose: 'Workspace meta-repo',
-	remote: 'git@github.com:noodlestan/workspace.git',
-};
+export async function runSanity(ctx: WorkspaceContext, options: { auto: boolean }): Promise<void> {
+	const repos = loadRepositoryRecords(ctx.config);
+	const records = loadCheckoutRecords(ctx.config, repos);
+	hydrateStoreFromRecords(ctx, records);
 
-export async function runSanity(ctx: WorkspaceContext, auto: boolean): Promise<void> {
-	ctx.store.loadExistingCheckouts();
-
-	// Add workspace root as a checkout
-	const wsCheckout = ctx.store.addCheckout(WORKSPACE_REPO, '.');
-	await scanCheckout(ctx, wsCheckout);
-
-	await scanAllCheckouts(ctx);
+	await scanAllCheckoutsStates(ctx);
 	await scanExtraneousCheckouts(ctx);
 
-	if (auto) {
+	if (options.auto) {
 		await pushCleanCheckouts(ctx);
 	}
 
-	presentCheckoutReport(ctx.store);
+	presentCheckoutReport(ctx);
 	presentExtraneousReport(ctx.store);
 	presentOperationsReport(ctx.log);
-
-	if (auto) {
-		ctx.store.syncRecords();
-	}
 }

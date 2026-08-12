@@ -1,4 +1,4 @@
-import type { Checkout } from '../../shared/checkout';
+import type { Checkout } from '../store/create-checkout';
 
 import type { CloneSuccess } from './types';
 

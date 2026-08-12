@@ -1,9 +1,13 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
 import { afterEach, describe, expect, it } from 'vitest';
+
+import { commitFile } from '../../test/commit-file';
+import { initGitRepo } from '../../test/init-repo';
+import { makeTempDir } from '../../test/make-temp-dir';
+import { removeTempDirs } from '../../test/remove-temp-dirs';
 
 import { getCurrentBranch } from './get-current-branch';
 import { getRemoteBranch } from './get-remote-branch';
@@ -16,32 +20,13 @@ import { isDirty } from './is-dirty';
 
 const tempDirs: string[] = [];
 
-function makeTempDir(): string {
-	const dir = mkdtempSync(join(tmpdir(), 'art-git-test-'));
-	tempDirs.push(dir);
-	return dir;
-}
-
-async function initGitRepo(dir: string): Promise<void> {
-	mkdirSync(dir, { recursive: true });
-	const git = simpleGit(dir);
-	await git.init();
-	await git.addConfig('user.email', 'test@example.com');
-	await git.addConfig('user.name', 'Test');
-	writeFileSync(join(dir, 'file.txt'), 'initial');
-	await git.add('.');
-	await git.commit('initial');
-}
-
 afterEach(() => {
-	for (const dir of tempDirs.splice(0)) {
-		rmSync(dir, { recursive: true, force: true });
-	}
+	removeTempDirs(tempDirs);
 });
 
 describe('getCurrentBranch', () => {
 	it('returns the current branch name', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 		const git = simpleGit(dir);
 		await git.checkoutLocalBranch('feature');
@@ -52,7 +37,7 @@ describe('getCurrentBranch', () => {
 	});
 
 	it('returns - on error', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 
 		const branch = await getCurrentBranch(dir);
 
@@ -62,7 +47,7 @@ describe('getCurrentBranch', () => {
 
 describe('isDetachedHead', () => {
 	it('returns false on a normal branch', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 
 		const detached = await isDetachedHead(dir);
@@ -71,7 +56,7 @@ describe('isDetachedHead', () => {
 	});
 
 	it('returns false on error', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 
 		const detached = await isDetachedHead(dir);
 
@@ -81,7 +66,7 @@ describe('isDetachedHead', () => {
 
 describe('hasMergeConflicts', () => {
 	it('returns false for clean repo', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 
 		const conflicts = await hasMergeConflicts(dir);
@@ -90,11 +75,12 @@ describe('hasMergeConflicts', () => {
 	});
 });
 
-describe('hasLocalBranch', () => {
+describe.only('hasLocalBranch', () => {
 	it('returns true when the branch exists locally', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 		const git = simpleGit(dir);
+		await commitFile(dir, 'file.txt');
 		await git.checkoutLocalBranch('feature');
 
 		const exists = await hasLocalBranch(dir, 'feature');
@@ -103,7 +89,7 @@ describe('hasLocalBranch', () => {
 	});
 
 	it('returns false when the branch does not exist locally', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 
 		const exists = await hasLocalBranch(dir, 'nonexistent');
@@ -114,7 +100,7 @@ describe('hasLocalBranch', () => {
 
 describe('isDirty', () => {
 	it('returns false for clean repo', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 
 		const dirty = await isDirty(dir);
@@ -123,7 +109,7 @@ describe('isDirty', () => {
 	});
 
 	it('returns true for dirty repo', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 		writeFileSync(join(dir, 'new.txt'), 'new');
 
@@ -135,7 +121,7 @@ describe('isDirty', () => {
 
 describe('hasRemote', () => {
 	it('returns false for repo with no remote', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 
 		const remote = await hasRemote(dir);
@@ -146,7 +132,7 @@ describe('hasRemote', () => {
 
 describe('getRemoteBranch', () => {
 	it('returns null when the branch has no remote counterpart', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 
 		const remote = await getRemoteBranch(dir);
@@ -155,9 +141,9 @@ describe('getRemoteBranch', () => {
 	});
 
 	it('returns the remote branch name when it exists on origin', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
-		const bareDir = makeTempDir();
+		const bareDir = makeTempDir(tempDirs);
 		const bareGit = simpleGit(bareDir);
 		await bareGit.init(true);
 		const git = simpleGit(dir);
@@ -172,7 +158,7 @@ describe('getRemoteBranch', () => {
 
 describe('getUnpushedCount', () => {
 	it('returns the count of local commits for a branch with no remote counterpart', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
 
 		const count = await getUnpushedCount(dir, null);
@@ -181,9 +167,9 @@ describe('getUnpushedCount', () => {
 	});
 
 	it('returns commits ahead of the remote branch', async () => {
-		const dir = makeTempDir();
+		const dir = makeTempDir(tempDirs);
 		await initGitRepo(dir);
-		const bareDir = makeTempDir();
+		const bareDir = makeTempDir(tempDirs);
 		const bareGit = simpleGit(bareDir);
 		await bareGit.init(true);
 		const git = simpleGit(dir);

@@ -1,4 +1,4 @@
-import type { Checkout } from '../../shared/checkout';
+import type { Checkout } from '../store/create-checkout';
 
 import type { CloneFailure } from './types';
 
@@ -19,7 +19,7 @@ export function createCloneFailure(checkout?: Checkout, e?: unknown): CloneFailu
 	const rawError = e instanceof Error ? e.message : String(e);
 
 	const location = checkout?.record.location || 'unknown';
-	const repoName = checkout?.repo.name || 'unknmown';
+	const repoName = checkout?.repo?.name || 'unknmown';
 
 	return {
 		ts: new Date(),

@@ -1,31 +1,28 @@
-import { join } from 'node:path';
-
 import simpleGit from 'simple-git';
 
+import type { WorkspaceContext } from '../../../private/context/workspace-context';
 import { createPushFailure } from '../../../private/operations/create-push-failure';
 import { createPushSuccess } from '../../../private/operations/create-push-success';
-import type { Checkout } from '../../../shared/checkout';
-import type { WorkspaceContext } from '../../../shared/workspace-context';
+import { type Checkout } from '../../../private/store/create-checkout';
 
 export async function pushCheckout(ctx: WorkspaceContext, checkout: Checkout): Promise<void> {
-	const dir = join(ctx.root, checkout.record.location);
-	const git = simpleGit(dir);
+	const git = simpleGit(checkout.path);
 	try {
-		await git.push('origin', checkout.branch);
+		await git.push('origin', checkout.record.branch);
 		const updated = {
 			...checkout,
 			unpushed: 0,
 			issues: checkout.issues.filter(i => !/\d+ commit/.test(i)),
 		};
-		ctx.store.setCheckout(updated);
-		ctx.log.log(createPushSuccess(checkout, checkout.branch));
+		ctx.store.updateCheckout(updated);
+		ctx.log.log(createPushSuccess(checkout, checkout.record.branch));
 	} catch (error) {
-		const op = createPushFailure(checkout, checkout.branch, error);
+		const op = createPushFailure(checkout, checkout.record.branch, error);
 		const updated = {
 			...checkout,
 			issues: [...checkout.issues, op.message()],
 		};
-		ctx.store.setCheckout(updated);
+		ctx.store.updateCheckout(updated);
 		ctx.log.log(op);
 	}
 }

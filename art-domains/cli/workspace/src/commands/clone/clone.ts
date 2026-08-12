@@ -1,44 +1,38 @@
-import { loadWorkspaceConfig } from '../../config/load-config';
+import type { WorkspaceContext } from '../../private/context/workspace-context';
 import { presentCheckoutReport } from '../../private/present/present-checkout-report';
 import { presentOperationsReport } from '../../private/present/present-operations-report';
-import { createCheckoutStore } from '../../shared/checkout-store';
-import { createOperationsLog } from '../../shared/operations-log';
-import { createWorkspaceContext } from '../../shared/workspace-context';
-import type { WorkspaceContext } from '../../shared/workspace-context';
+import { loadCheckoutRecords } from '../../private/records/load-checkout-records';
+import { loadRepositoryRecords } from '../../private/records/load-repository-rercords';
+import { hydrateStoreFromRecords } from '../../private/store/hydrate-store-from-records';
 
 import { cloneAll } from './clone-all';
 import { cloneSpecific } from './clone-specific';
 import { cloneStatus } from './clone-status';
 
 interface CloneOptions {
-	root: string;
 	all?: boolean;
-	name?: string;
-	target?: string;
+	repoName?: string;
+	checkoutInput?: string;
 }
 
-export async function runClone({
-	root,
-	all,
-	name,
-	target,
-}: CloneOptions): Promise<WorkspaceContext> {
-	const config = await loadWorkspaceConfig(root);
-	const store = createCheckoutStore(config, root);
-	const log = createOperationsLog();
-	const ctx = createWorkspaceContext(config, root, store, log);
+export async function runClone(
+	ctx: WorkspaceContext,
+	{ all, repoName, checkoutInput }: CloneOptions,
+): Promise<WorkspaceContext> {
+	const repos = loadRepositoryRecords(ctx.config);
+	const records = loadCheckoutRecords(ctx.config, repos);
+	hydrateStoreFromRecords(ctx, records);
 
 	if (all) {
-		await cloneAll(ctx);
-	} else if (name) {
-		await cloneSpecific(ctx, name, target);
+		await cloneAll(ctx, repos);
+	} else if (repoName) {
+		await cloneSpecific(ctx, repoName, checkoutInput);
 	} else {
 		await cloneStatus(ctx);
 	}
 
-	presentCheckoutReport(ctx.store);
+	presentCheckoutReport(ctx);
 	presentOperationsReport(ctx.log);
-	ctx.store.syncRecords();
 
 	return ctx;
 }

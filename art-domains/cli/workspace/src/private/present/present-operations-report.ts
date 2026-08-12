@@ -1,4 +1,4 @@
-import type { OperationsLog } from '../../shared/operations-log';
+import type { OperationsLog } from '../log/operations-log';
 
 import { formatTable } from './format-table';
 
@@ -11,7 +11,7 @@ export function presentOperationsReport(log: OperationsLog): void {
 	const headers = ['', 'repo', 'operation', 'message'];
 	const rows = operations.map(op => [
 		op.outcome === 'success' ? '🟢' : '🔴',
-		op.checkout?.repo.name || 'unknown',
+		op.checkout?.repo?.name || 'unknown',
 		op.operation,
 		op.message(),
 	]);

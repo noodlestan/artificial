@@ -1,4 +1,4 @@
-import type { Checkout } from '../../shared/checkout';
+import type { Checkout } from '../store/create-checkout';
 
 import type { BranchFailure } from './types';
 
@@ -16,9 +16,9 @@ function extractReason(raw: string): string {
 }
 
 export function createBranchFailure(
-	checkout: Checkout,
 	branch: string,
 	error: unknown,
+	checkout?: Checkout,
 ): BranchFailure {
 	const rawError = error instanceof Error ? error.message : String(error);
 
@@ -33,7 +33,7 @@ export function createBranchFailure(
 			return extractReason(this.error);
 		},
 		errorSerialized() {
-			return `BranchError: ${checkout.repo.name} on ${branch} — ${this.message()}\n\n${formatRawError(this.error)}`;
+			return `BranchError: ${checkout?.repo?.name} on ${branch} — ${this.message()}\n\n${formatRawError(this.error)}`;
 		},
 	};
 }

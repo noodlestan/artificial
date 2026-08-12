@@ -1,4 +1,4 @@
-import type { Operation } from '../private/operations/types';
+import type { Operation } from '../operations/types';
 
 export interface OperationsLog {
 	log(operation: Operation): void;

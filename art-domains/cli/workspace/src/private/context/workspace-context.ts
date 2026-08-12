@@ -1,20 +1,17 @@
-import type { WorkspaceConfig } from '../config/types';
-
-import type { CheckoutStore } from './checkout-store';
-import type { OperationsLog } from './operations-log';
+import type { WorkspaceConfig } from '../../config/types';
+import type { OperationsLog } from '../log/operations-log';
+import { CheckoutStore } from '../store/checkout-store';
 
 export interface WorkspaceContext {
 	config: WorkspaceConfig;
-	root: string;
 	store: CheckoutStore;
 	log: OperationsLog;
 }
 
 export function createWorkspaceContext(
 	config: WorkspaceConfig,
-	root: string,
 	store: CheckoutStore,
 	log: OperationsLog,
 ): WorkspaceContext {
-	return { config, root, store, log };
+	return { config, store, log };
 }

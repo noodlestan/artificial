@@ -1,241 +1,196 @@
 /* eslint-disable no-console */
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 
-import { loadWorkspaceConfig } from '../../config/load-config';
-import { createCheckoutStore } from '../../shared/checkout-store';
-import { createOperationsLog } from '../../shared/operations-log';
-import { createWorkspaceContext } from '../../shared/workspace-context';
+import { commitFile } from '../../test/commit-file';
+import { createCommandContext } from '../../test/create-command-context';
+import { initWorkingRepo } from '../../test/init-working-repo';
+import { makeTempDir } from '../../test/make-temp-dir';
+import { removeTempDirs } from '../../test/remove-temp-dirs';
+import { writeCheckoutRecord } from '../../test/write-checkout-record';
+import { writeRepoRecord } from '../../test/write-repo-record';
 
 import { runSanity } from './sanity';
 
 const tempDirs: string[] = [];
 
-function makeTempDir(): string {
-	const dir = mkdtempSync(join(tmpdir(), 'art-sanity-test-'));
-	tempDirs.push(dir);
-	return dir;
-}
-
-async function initGitRepo(dir: string, opts?: { withRemote?: boolean }) {
-	mkdirSync(dir, { recursive: true });
-	const git = simpleGit(dir);
-	await git.init();
-	await git.addConfig('user.email', 'test@example.com');
-	await git.addConfig('user.name', 'Test');
-	if (opts?.withRemote) {
-		const bareDir = makeTempDir();
-		const bareGit = simpleGit(bareDir);
-		await bareGit.init(true);
-		await git.addRemote('origin', bareDir);
-	}
-}
-
-async function commitFile(dir: string, filename: string, content = 'content') {
-	writeFileSync(join(dir, filename), content);
-	const git = simpleGit(dir);
-	await git.add('.');
-	await git.commit('add ' + filename);
-}
-
-beforeEach(() => {
-	vi.spyOn(console, 'info').mockImplementation(() => {});
-	vi.spyOn(console, 'warn').mockImplementation(() => {});
-});
-
 afterEach(() => {
-	for (const dir of tempDirs.splice(0)) {
-		rmSync(dir, { recursive: true, force: true });
-	}
-	vi.restoreAllMocks();
+	removeTempDirs(tempDirs);
 });
-
-function writeManifest(root: string) {
-	writeFileSync(
-		join(root, '.art-workspace.mts'),
-		'export default {\n' +
-			"  clone: { path: 'repos' },\n" +
-			'  records: {\n' +
-			"    repositories: { path: 'ops/records/repositories' },\n" +
-			"    checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },\n" +
-			'  },\n' +
-			'}\n',
-	);
-}
-
-function writeRepoRecord(root: string, name: string, remote: string) {
-	const dir = join(root, 'ops/records/repositories');
-	mkdirSync(dir, { recursive: true });
-	writeFileSync(
-		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
-		'# Module\n\n## Repository: ' +
-			name +
-			'\n\n**Purpose:** test\n\n**Remote:** `' +
-			remote +
-			'`\n',
-	);
-}
-
-function writeCheckoutRecord(root: string, name: string, location: string, branch = 'main') {
-	const dir = join(root, 'ops/records/checkouts');
-	mkdirSync(dir, { recursive: true });
-	writeFileSync(
-		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
-		'# Module\n\n## Checkout: ' +
-			name +
-			'\n\n**Location:** `' +
-			location +
-			'`\n\n**Branch:** `' +
-			branch +
-			'`\n',
-	);
-}
-
-async function runSanityWithRoot(root: string, auto: boolean) {
-	const config = await loadWorkspaceConfig(root);
-	const store = createCheckoutStore(config, root);
-	const log = createOperationsLog();
-	const ctx = createWorkspaceContext(config, root, store, log);
-	await runSanity(ctx, auto);
-}
 
 describe('sanity command', () => {
 	it('reports "no checkout" for a missing checkout', async () => {
-		const root = makeTempDir();
-		writeManifest(root);
-		writeRepoRecord(root, 'Missing', 'git@example.com:missing.git');
-		writeCheckoutRecord(root, 'Missing', 'repos/missing');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
 
-		await runSanityWithRoot(root, false);
+		writeRepoRecord(tempDir, 'Foo Bar', 'git@example.com:foo-bar.git');
+		writeCheckoutRecord(tempDir, 'Foo Bar', 'Foo Bar', 'foo-bar', 'ouch');
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('repos/missing');
-		expect(output).toContain('no checkout');
+		await runSanity(ctx, { auto: false });
+
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(false);
+		expect(checkouts[0].issues).toEqual(['no checkout']);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(0);
 	});
 
 	it('shows repo status when all repos are clean', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/green');
-		await initGitRepo(repoDir, { withRemote: true });
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'green');
+		await initWorkingRepo(repoDir, bareDir);
 		await commitFile(repoDir, 'file.txt');
 		const git = simpleGit(repoDir);
 		await git.push('origin', 'main', ['--set-upstream']);
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Green', 'git@example.com:green.git');
-		writeCheckoutRecord(root, 'Green', 'repos/green');
+		writeRepoRecord(tempDir, 'Green', 'git@example.com:green.git');
+		writeCheckoutRecord(tempDir, 'Green', 'Green', 'green');
 
-		await runSanityWithRoot(root, false);
+		await runSanity(ctx, { auto: false });
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('repos/green');
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].issues).toEqual([]);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(0);
 	});
 
 	it('shows dirty repo with issues', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/dirty');
-		await initGitRepo(repoDir, { withRemote: true });
-		await commitFile(repoDir, 'file.txt');
-		const git = simpleGit(repoDir);
-		await git.push('origin', 'main', ['--set-upstream']);
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'dirty');
+		await initWorkingRepo(repoDir, bareDir);
+		// await commitFile(repoDir, 'file.txt');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Dirty', 'git@example.com:dirty.git');
-		writeCheckoutRecord(root, 'Dirty', 'repos/dirty');
+		writeRepoRecord(tempDir, 'Dirty', 'git@example.com:dirty.git');
+		writeCheckoutRecord(tempDir, 'Dirty', 'Dirty', 'dirty');
 
-		await runSanityWithRoot(root, false);
+		await runSanity(ctx, { auto: false });
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('repos/dirty');
-		expect(output).toContain('uncommitted files');
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].issues).toEqual(['uncommitted files']);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(0);
 	});
 
 	it('shows clean unpushed repo without --auto', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/unpushed');
-		await initGitRepo(repoDir, { withRemote: true });
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'unpushed');
+		await initWorkingRepo(repoDir, bareDir);
 		await commitFile(repoDir, 'file.txt');
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Unpushed', 'git@example.com:unpushed.git');
-		writeCheckoutRecord(root, 'Unpushed', 'repos/unpushed');
+		writeRepoRecord(tempDir, 'Unpushed', 'git@example.com:unpushed.git');
+		writeCheckoutRecord(tempDir, 'Unpushed', 'Unpushed', 'unpushed');
 
-		await runSanityWithRoot(root, false);
+		await runSanity(ctx, { auto: false });
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('repos/unpushed');
-		expect(output).toContain('1 commit ahead');
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].issues).toEqual(['1 commit ahead']);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(0);
 	});
 
 	it('pushes clean unpushed repo with --auto', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/autopush');
-		await initGitRepo(repoDir, { withRemote: true });
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'autopush');
+		await initWorkingRepo(repoDir, bareDir);
 		await commitFile(repoDir, 'file.txt');
 		const git = simpleGit(repoDir);
 		await git.push('origin', 'main', ['--set-upstream']);
 		await commitFile(repoDir, 'file2.txt');
 
-		writeManifest(root);
-		writeRepoRecord(root, 'AutoPush', 'git@example.com:autopush.git');
-		writeCheckoutRecord(root, 'AutoPush', 'repos/autopush');
+		writeRepoRecord(tempDir, 'AutoPush', 'git@example.com:autopush.git');
+		writeCheckoutRecord(tempDir, 'AutoPush', 'AutoPush', 'autopush');
 
-		await runSanityWithRoot(root, true);
+		await runSanity(ctx, { auto: true });
 
-		const logOutput = (console.info as ReturnType<typeof vi.fn>).mock.calls
-			.map(c => c[0])
-			.join('\n');
-		expect(logOutput).toContain('push');
-		expect(logOutput).toContain('origin/main');
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].issues).toEqual([]);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(1);
+		expect(ops[0].operation).toEqual('push');
+		expect(ops[0].message()).toEqual('to origin/main');
 	});
 
 	it('does not push dirty repo with --auto', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/dirtynoauto');
-		await initGitRepo(repoDir, { withRemote: true });
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'dirtynoauto');
+		await initWorkingRepo(repoDir, bareDir);
 		await commitFile(repoDir, 'file.txt');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeManifest(root);
-		writeRepoRecord(root, 'DirtyNoAuto', 'git@example.com:dirtynoauto.git');
-		writeCheckoutRecord(root, 'DirtyNoAuto', 'repos/dirtynoauto');
+		writeRepoRecord(tempDir, 'DirtyNoAuto', 'git@example.com:dirtynoauto.git');
+		writeCheckoutRecord(tempDir, 'DirtyNoAuto', 'DirtyNoAuto', 'dirtynoauto');
 
-		await runSanityWithRoot(root, true);
+		await runSanity(ctx, { auto: true });
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('repos/dirtynoauto');
-		expect(output).toContain('uncommitted files');
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].issues).toEqual(['uncommitted files', '1 commit ahead']);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(0);
 	});
 
 	it('surfaces detached HEAD', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/detached');
-		await initGitRepo(repoDir, { withRemote: true });
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'detached');
+		await initWorkingRepo(repoDir, bareDir);
 		await commitFile(repoDir, 'file.txt');
 		const git = simpleGit(repoDir);
 		await git.push('origin', 'main', ['--set-upstream']);
 		const headSha = await git.revparse(['HEAD']);
 		await git.checkout(headSha.trim());
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Detached', 'git@example.com:detached.git');
-		writeCheckoutRecord(root, 'Detached', 'repos/detached');
+		writeRepoRecord(tempDir, 'Detached', 'git@example.com:detached.git');
+		writeCheckoutRecord(tempDir, 'Detached', 'Detached', 'detached');
 
-		await runSanityWithRoot(root, false);
+		await runSanity(ctx, { auto: false });
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('detached HEAD');
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].issues).toEqual(['detached HEAD']);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(0);
 	});
 
 	it('surfaces merge conflicts', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/conflict');
-		await initGitRepo(repoDir, { withRemote: true });
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'conflict');
+		await initWorkingRepo(repoDir, bareDir);
 		await commitFile(repoDir, 'file.txt', 'base');
 		const git = simpleGit(repoDir);
 		await git.push('origin', 'main', ['--set-upstream']);
@@ -256,54 +211,58 @@ describe('sanity command', () => {
 			// expected conflict
 		}
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Conflict', 'git@example.com:conflict.git');
-		writeCheckoutRecord(root, 'Conflict', 'repos/conflict');
+		writeRepoRecord(tempDir, 'Conflict', 'git@example.com:conflict.git');
+		writeCheckoutRecord(tempDir, 'Conflict', 'Conflict', 'conflict');
 
-		await runSanityWithRoot(root, false);
+		await runSanity(ctx, { auto: false });
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('merge conflicts');
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].issues).toEqual(['merge conflicts', 'uncommitted files', '1 commit ahead']);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(0);
 	});
 
-	it('scaffolds empty template and warns when manifest is missing', async () => {
-		const root = makeTempDir();
+	it('reports "unknown project" for a checkout with missing repo record', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
 
-		await runSanityWithRoot(root, false);
+		const repoDir = join(tempDir, ctx.config.clone.path, 'orphan');
+		await initWorkingRepo(repoDir, bareDir);
 
-		const warnOutput = (console.warn as ReturnType<typeof vi.fn>).mock.calls
-			.map(c => c[0])
-			.join('\n');
-		expect(warnOutput).toContain('.art-workspace.mts');
-	});
+		writeCheckoutRecord(tempDir, 'Orphan', 'Orphan', 'orphan');
 
-	it('reports "unknown project" for a synthetic repo with missing repo record', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/orphan');
-		await initGitRepo(repoDir, { withRemote: true });
-		await commitFile(repoDir, 'file.txt');
+		await runSanity(ctx, { auto: false });
 
-		writeManifest(root);
-		writeCheckoutRecord(root, 'Orphan', 'repos/orphan');
-
-		await runSanityWithRoot(root, false);
-
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('unknown project');
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].issues).toEqual(['unknown project']);
+		const ops = ctx.log.all();
+		expect(ops.length).toEqual(0);
 	});
 
 	it('shows extraneous directories in the Extraneous Report', async () => {
-		const root = makeTempDir();
-		const repoDir = join(root, 'repos/blah');
-		await initGitRepo(repoDir, { withRemote: true });
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'orphan');
+		await initWorkingRepo(repoDir, bareDir);
 		await commitFile(repoDir, 'file.txt');
 
-		writeManifest(root);
+		await runSanity(ctx, { auto: false });
 
-		await runSanityWithRoot(root, false);
+		const checkouts = ctx.store.getAllCheckouts();
+		expect(checkouts.length).toEqual(1);
+		expect(checkouts[0].exists).toEqual(true);
+		expect(checkouts[0].extraneous).toEqual(true);
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('Extraneous Report');
-		expect(output).toContain('repos/blah');
+		const extraenous = ctx.store.getExtraneous();
+		expect(extraenous.length).toEqual(1);
+		expect(extraenous[0].exists).toEqual(true);
+		expect(extraenous[0].extraneous).toEqual(true);
 	});
 });

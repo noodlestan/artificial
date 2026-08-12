@@ -1,39 +1,20 @@
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { createCommandContext } from '../../test/create-command-context';
+import { initBareRepo } from '../../test/init-bare-repo';
+import { initWorkingRepo } from '../../test/init-working-repo';
+import { makeTempDir } from '../../test/make-temp-dir';
+import { removeTempDirs } from '../../test/remove-temp-dirs';
+import { writeCheckoutRecord } from '../../test/write-checkout-record';
+import { writeRepoRecord } from '../../test/write-repo-record';
+
 import { runClone } from './clone';
 
 const tempDirs: string[] = [];
-
-function makeTempDir(): string {
-	const dir = mkdtempSync(join(tmpdir(), 'art-clone-test-'));
-	tempDirs.push(dir);
-	return dir;
-}
-
-async function initBareRepo(dir: string): Promise<string> {
-	mkdirSync(dir, { recursive: true });
-	const git = simpleGit(dir);
-	await git.init(true);
-	return dir;
-}
-
-async function initWorkingRepo(dir: string, bareDir: string): Promise<void> {
-	mkdirSync(dir, { recursive: true });
-	const git = simpleGit(dir);
-	await git.init();
-	await git.addConfig('user.email', 'test@example.com');
-	await git.addConfig('user.name', 'Test');
-	await git.addRemote('origin', bareDir);
-	writeFileSync(join(dir, 'README.md'), '# Test');
-	await git.add('.');
-	await git.commit('initial');
-	await git.push('origin', 'main', ['--set-upstream']);
-}
 
 beforeEach(() => {
 	vi.spyOn(console, 'info').mockImplementation(() => {});
@@ -42,122 +23,74 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-	for (const dir of tempDirs.splice(0)) {
-		rmSync(dir, { recursive: true, force: true });
-	}
+	removeTempDirs(tempDirs);
 	vi.restoreAllMocks();
-	process.exitCode = undefined;
 });
-
-function writeManifest(root: string) {
-	writeFileSync(
-		join(root, '.art-workspace.mts'),
-		`export default {
-  clone: { path: 'repos' },
-  records: {
-    repositories: { path: 'ops/records/repositories' },
-    checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },
-  },
-}
-`,
-	);
-}
-
-function writeRepoRecord(root: string, name: string, remote: string) {
-	const dir = join(root, 'ops/records/repositories');
-	mkdirSync(dir, { recursive: true });
-	writeFileSync(
-		join(dir, `${name.toLowerCase().replace(/\s+/g, '-')}.art`),
-		`# Module
-
-## Repository: ${name}
-
-**Purpose:** test
-
-**Remote:** \`${remote}\`
-`,
-	);
-}
-
-function writeCheckoutRecordFile(root: string, name: string, location: string, branch = 'main') {
-	const dir = join(root, 'ops/records/checkouts');
-	mkdirSync(dir, { recursive: true });
-	writeFileSync(
-		join(dir, `${name.toLowerCase().replace(/\s+/g, '-')}.art`),
-		`# Module
-
-## Checkout: ${name}
-
-**Location:** \`${location}\`
-
-**Branch:** \`${branch}\`
-`,
-	);
-}
 
 describe('clone command', () => {
 	it('clones a missing repo and creates the checkout record', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/artificial');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+
+		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepo(bareDir);
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir);
+		writeRepoRecord(tempDir, 'Artificial', bareDir);
 
-		await runClone({ root, name: 'Artificial' });
+		await runClone(ctx, { repoName: 'Artificial' });
 
-		const checkoutDir = join(root, 'repos/artificial');
-		expect(() => simpleGit(checkoutDir).status()).not.toThrow();
+		const repoDir = join(tempDir, ctx.config.clone.path, 'artificial');
+		expect(() => simpleGit(repoDir).status()).not.toThrow();
 
-		const recordFile = join(root, 'ops/records/checkouts/artificial.art');
+		const recordFile = join(tempDir, 'ops/records/checkouts/artificial.art');
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: Artificial');
-		expect(content).toContain('**Location:** `repos/artificial`');
+		expect(content).toContain('**Location:** `artificial`');
 		expect(content).toContain('**Branch:** `main`');
 	});
 
 	it('reports issues for a dirty checkout', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/artificial');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepo(bareDir);
-		const workingDir = join(root, 'repos/artificial');
+		const workingDir = join(tempDir, 'repos/artificial');
 		await initWorkingRepo(workingDir, bareDir);
 		writeFileSync(join(workingDir, 'dirty.txt'), 'dirty');
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir);
-		writeCheckoutRecordFile(root, 'Artificial', 'repos/artificial');
+		writeRepoRecord(tempDir, 'Artificial', bareDir);
+		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
-		await runClone({ root, name: 'Artificial' });
+		await runClone(ctx, { repoName: 'Artificial' });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('uncommitted files');
 	});
 
 	it('reports current branch even if different from checkout record', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/artificial');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepo(bareDir);
-		const workingDir = join(root, 'repos/artificial');
+		const workingDir = join(tempDir, 'repos/artificial');
 		await initWorkingRepo(workingDir, bareDir);
 		const git = simpleGit(workingDir);
 		await git.checkoutLocalBranch('feature');
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir);
-		writeCheckoutRecordFile(root, 'Artificial', 'repos/artificial', 'main');
+		writeRepoRecord(tempDir, 'Artificial', bareDir);
+		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
-		await runClone({ root, name: 'Artificial' });
+		await runClone(ctx, { repoName: 'Artificial' });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('feature');
 	});
 
 	it('errors for an unknown repo name', async () => {
-		const root = makeTempDir();
-		writeManifest(root);
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
 
-		const ctx = await runClone({ root, name: 'Unknown' });
+		await runClone(ctx, { repoName: 'Unknown' });
 
 		const ops = ctx.log.all();
 		expect(ops).toHaveLength(1);
@@ -166,120 +99,100 @@ describe('clone command', () => {
 	});
 
 	it('clones all repos when --all is passed', async () => {
-		const root = makeTempDir();
-		const bareDir1 = join(root, 'bare/repo1');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+		const bareDir1 = join(tempDir, 'bare/repo1');
 		await initBareRepo(bareDir1);
-		const bareDir2 = join(root, 'bare/repo2');
+		const bareDir2 = join(tempDir, 'bare/repo2');
 		await initBareRepo(bareDir2);
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Repo1', bareDir1);
-		writeRepoRecord(root, 'Repo2', bareDir2);
+		writeRepoRecord(tempDir, 'Repo A', bareDir1);
+		writeRepoRecord(tempDir, 'Repo B', bareDir2);
 
-		await runClone({ root, all: true });
+		await runClone(ctx, { all: true });
 
-		const checkoutDir1 = join(root, 'repos/repo1');
-		const checkoutDir2 = join(root, 'repos/repo2');
+		const checkoutDir1 = join(tempDir, ctx.config.clone.path, 'repo-a');
+		const checkoutDir2 = join(tempDir, ctx.config.clone.path, 'repo-b');
 		expect(existsSync(checkoutDir1)).toBe(true);
 		expect(existsSync(checkoutDir2)).toBe(true);
 	});
 
 	it('resolves default location and branch when no checkout override exists', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/my-repo');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+		const bareDir = join(tempDir, 'bare/my-repo');
 		await initBareRepo(bareDir);
 
-		writeManifest(root);
-		writeRepoRecord(root, 'My Repo', bareDir);
+		writeRepoRecord(tempDir, 'My Repo', bareDir);
 
-		await runClone({ root, name: 'My Repo' });
+		await runClone(ctx, { repoName: 'My Repo' });
 
-		const checkoutDir = join(root, 'repos/my-repo');
+		const checkoutDir = join(tempDir, ctx.config.clone.path, 'my-repo');
 		expect(existsSync(checkoutDir)).toBe(true);
 	});
 
 	it('uses target location when specified', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/artificial');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepo(bareDir);
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir);
+		writeRepoRecord(tempDir, 'Artificial', bareDir);
 
-		await runClone({ root, name: 'Artificial', target: 'custom' });
+		await runClone(ctx, { repoName: 'Artificial', checkoutInput: 'custom' });
 
-		const checkoutDir = join(root, 'repos/custom');
+		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial-custom');
 		expect(existsSync(checkoutDir)).toBe(true);
 	});
 
 	it('creates checkout named Artificial-foo when cloning Artificial to foo', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/artificial');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepo(bareDir);
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir);
+		writeRepoRecord(tempDir, 'Artificial', bareDir);
 
-		await runClone({ root, name: 'Artificial', target: 'foo' });
+		await runClone(ctx, { repoName: 'Artificial', checkoutInput: 'foo' });
 
-		const checkoutDir = join(root, 'repos/foo');
+		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial-foo');
 		expect(existsSync(checkoutDir)).toBe(true);
 
-		const recordFile = join(root, 'ops/records/checkouts/artificial-foo.art');
+		const recordFile = join(tempDir, 'ops/records/checkouts/artificial-@-foo.art');
 		expect(existsSync(recordFile)).toBe(true);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: Artificial');
-		expect(content).toContain('**Location:** `repos/foo`');
+		expect(content).toContain('**Location:** `artificial-foo`');
 	});
 
 	it('is idempotent when cloning an existing checkout', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/artificial');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepo(bareDir);
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir);
+		writeRepoRecord(tempDir, 'Artificial', bareDir);
 
-		await runClone({ root, name: 'Artificial' });
-		await runClone({ root, name: 'Artificial' });
+		await runClone(ctx, { repoName: 'Artificial' });
+		await runClone(ctx, { repoName: 'Artificial' });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('repos/artificial');
 	});
 
-	it('fails when location is already used by a different checkout', async () => {
-		const root = makeTempDir();
-		const bareDir1 = join(root, 'bare/artificial');
-		await initBareRepo(bareDir1);
-		const bareDir2 = join(root, 'bare/other');
-		await initBareRepo(bareDir2);
-
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir1);
-		writeRepoRecord(root, 'Other', bareDir2);
-
-		await runClone({ root, name: 'Artificial' });
-
-		const ctx = await runClone({ root, name: 'Other', target: 'artificial' });
-		const ops = ctx.log.all();
-		const failures = ops.filter(o => o.outcome === 'failure');
-		expect(failures.length).toBeGreaterThan(0);
-		expect(failures[0].message()).toContain('already used by checkout');
-	});
-
 	it('allows multiple checkouts of the same repo with different locations', async () => {
-		const root = makeTempDir();
-		const bareDir = join(root, 'bare/artificial');
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepo(bareDir);
 
-		writeManifest(root);
-		writeRepoRecord(root, 'Artificial', bareDir);
+		writeRepoRecord(tempDir, 'Artificial', bareDir);
 
-		await runClone({ root, name: 'Artificial' });
-		await runClone({ root, name: 'Artificial', target: 'custom' });
+		await runClone(ctx, { repoName: 'Artificial' });
+		await runClone(ctx, { repoName: 'Artificial', checkoutInput: 'custom' });
 
-		const checkoutDir1 = join(root, 'repos/artificial');
-		const checkoutDir2 = join(root, 'repos/custom');
+		const checkoutDir1 = join(tempDir, ctx.config.clone.path, 'artificial');
+		const checkoutDir2 = join(tempDir, ctx.config.clone.path, 'artificial-custom');
 		expect(existsSync(checkoutDir1)).toBe(true);
 		expect(existsSync(checkoutDir2)).toBe(true);
 	});

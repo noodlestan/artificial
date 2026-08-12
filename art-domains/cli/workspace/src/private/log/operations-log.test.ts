@@ -1,12 +1,15 @@
 import { describe, expect, it } from 'vitest';
 
-import { createCloneSuccess } from '../private/operations/create-clone-success';
+import { makeConfig } from '../../test/make-config';
+import { createCloneSuccess } from '../operations/create-clone-success';
+import { createCheckout } from '../store/create-checkout';
 
-import { createCheckout } from './checkout';
 import { createOperationsLog } from './operations-log';
 
 function makeCheckout(name: string) {
-	return createCheckout({ name, remote: `git@example.com:${name}.git` }, `repos/${name}`, 'main');
+	const config = makeConfig('.');
+	const repo = { name, remote: `git@example.com:${name}.git` };
+	return createCheckout(config, repo.name, repo, 'main');
 }
 
 describe('createOperationsLog', () => {
@@ -19,7 +22,7 @@ describe('createOperationsLog', () => {
 		const ops = operations.all();
 		expect(ops).toHaveLength(1);
 		expect(ops[0].operation).toBe('clone');
-		expect(ops[0].checkout.repo.name).toBe('test');
+		expect(ops[0].checkout?.repo?.name).toBe('test');
 	});
 
 	it('returns empty array when no operations', () => {
@@ -37,7 +40,7 @@ describe('createOperationsLog', () => {
 
 		const ops = operations.since(before);
 		expect(ops).toHaveLength(1);
-		expect(ops[0].checkout.repo.name).toBe('b');
+		expect(ops[0].checkout?.repo?.name).toBe('b');
 	});
 
 	it('latest returns last n operations', () => {
@@ -48,7 +51,7 @@ describe('createOperationsLog', () => {
 
 		const ops = operations.latest(2);
 		expect(ops).toHaveLength(2);
-		expect(ops[0].checkout.repo.name).toBe('b');
-		expect(ops[1].checkout.repo.name).toBe('c');
+		expect(ops[0].checkout?.repo?.name).toBe('b');
+		expect(ops[1].checkout?.repo?.name).toBe('c');
 	});
 });

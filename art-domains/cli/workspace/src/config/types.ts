@@ -2,6 +2,9 @@ export interface WorkspaceConfig {
 	clone: {
 		path: string;
 	};
+	root: {
+		path: string;
+	};
 	records: {
 		repositories: {
 			path: string;
@@ -13,26 +16,11 @@ export interface WorkspaceConfig {
 	};
 }
 
-export interface RepositoryRecord {
-	name: string;
-	purpose?: string;
-	description?: string;
-	remote: string;
-	consumers?: string;
-}
-
-export interface RepositoryCheckout {
-	repo: RepositoryRecord;
-	location: string;
-	branch: string;
-	exists?: boolean;
-	pushed?: boolean;
-	published?: boolean;
-}
-
-export interface CheckoutRecord {
-	name: string;
-	repository?: string;
-	location: string;
-	branch: string;
+export interface PartialWorkspaceConfig {
+	clone?: Partial<WorkspaceConfig['clone']>;
+	root?: Partial<WorkspaceConfig['root']>;
+	records?: {
+		repositories?: Partial<WorkspaceConfig['records']['repositories']>;
+		checkouts?: Partial<WorkspaceConfig['records']['checkouts']>;
+	};
 }

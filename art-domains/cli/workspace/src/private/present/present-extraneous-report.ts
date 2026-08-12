@@ -1,4 +1,4 @@
-import type { CheckoutStore } from '../../shared/checkout-store';
+import type { CheckoutStore } from '../store/checkout-store';
 
 import { formatTable } from './format-table';
 
@@ -15,7 +15,7 @@ export function presentExtraneousReport(store: CheckoutStore): void {
 		c.issues.join('; ') || 'clean',
 	]);
 
-	console.info('Extraneous Report:');
+	console.info('Untracked:');
 	console.info(formatTable(rows, headers));
 	console.info('');
 }

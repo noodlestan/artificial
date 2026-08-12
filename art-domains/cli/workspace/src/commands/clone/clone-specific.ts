@@ -1,57 +1,49 @@
-import { basename, join } from 'node:path';
-
+import type { WorkspaceContext } from '../../private/context/workspace-context';
 import { createCloneFailure } from '../../private/operations/create-clone-failure';
-import { scanCheckout } from '../../shared/scan-checkout';
-import type { WorkspaceContext } from '../../shared/workspace-context';
+import { loadRepositoryRecords } from '../../private/records/load-repository-rercords';
+import { createCheckout } from '../../private/store/create-checkout';
+import { createCheckoutLocation } from '../../private/store/create-checkout-location';
+import { scanCheckoutState } from '../../shared/scan-checkout-state';
 
 import { cloneIfMissing } from './private/clone-if-missing';
-import { defaultLocation } from './private/default-location';
 
 export async function cloneSpecific(
 	ctx: WorkspaceContext,
-	name: string,
-	target?: string,
+	repoName: string,
+	checkoutInput?: string,
 ): Promise<void> {
-	const { loadRepositories } = await import('../../config/load-repositories');
-	const repos = loadRepositories(ctx.config, ctx.root);
-
-	const canonical = name.startsWith('@') ? name.split('/')[1] : name;
+	const repos = loadRepositoryRecords(ctx.config);
+	const canonical = repoName.startsWith('@') ? repoName.split('/')[1] : repoName;
 	const repo = repos.find(r => r.name.toLowerCase() === canonical.toLowerCase());
+
 	if (!repo) {
-		ctx.log.log(createCloneFailure(undefined, `unknown repo "${name}"`));
+		ctx.log.log(createCloneFailure(undefined, `unknown repo "${repoName}"`));
 		return;
 	}
 
-	ctx.store.loadExistingCheckouts();
-
-	// Derive checkout name: repo-name (default) or repo-name-location (custom)
-	const locationBasename = target ? basename(target) : repo.name.toLowerCase().replace(/\s+/g, '-');
-	const checkoutName = target ? `${repo.name}-${locationBasename}` : repo.name;
-	const resolvedLocation = target
-		? join(ctx.config.clone.path, locationBasename)
-		: defaultLocation(repo);
-
-	// Find existing by checkout name
-	let checkout = ctx.store.findCheckout(checkoutName);
-	if (checkout && checkout.record.location !== resolvedLocation) {
-		const msg = `checkout for '${repo.name}' exists at ${checkout.record.location}. Cannot clone to ${resolvedLocation}.`;
+	const location = createCheckoutLocation(repo, checkoutInput);
+	const checkout = ctx.store.getCheckoutForLocation(location);
+	if (checkout && checkout.record.location !== location) {
+		const msg = `checkout for '${repo.name}' exists at ${checkout.record.location}. Cannot clone to ${location}.`;
 		ctx.log.log(createCloneFailure(checkout, msg));
 		return;
 	}
 	if (!checkout) {
-		// Check if location is taken by a different checkout
 		const allCheckouts = ctx.store.getAllCheckouts();
-		const conflicting = allCheckouts.find(c => c.record.location === resolvedLocation);
+		const conflicting = allCheckouts.find(c => c.record.location === location);
 		if (conflicting) {
-			const msg = `location ${resolvedLocation} is already used by checkout '${conflicting.record.name}'.`;
+			const msg = `location ${location} is already used by checkout '${conflicting.record.name}'.`;
 			ctx.log.log(createCloneFailure(conflicting, msg));
 			return;
 		}
-		checkout = ctx.store.addCheckout(repo, resolvedLocation, checkoutName);
+
+		const checkoutName = checkoutInput ? `${repo.name} @ ${checkoutInput}` : repo.name;
+		const checkout = createCheckout(ctx.config, location, repo, 'main', checkoutName);
+		ctx.store.addCheckout(checkout);
+		await cloneIfMissing(ctx, checkout);
+		await scanCheckoutState(ctx, checkout);
+	} else {
+		await cloneIfMissing(ctx, checkout);
+		await scanCheckoutState(ctx, checkout);
 	}
-
-	const scanned = await scanCheckout(ctx, checkout);
-	const rescan = await cloneIfMissing(ctx, scanned);
-
-	// WHAT IS THIS?
 }

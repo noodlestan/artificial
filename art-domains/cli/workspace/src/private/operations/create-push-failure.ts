@@ -1,4 +1,4 @@
-import type { Checkout } from '../../shared/checkout';
+import type { Checkout } from '../store/create-checkout';
 
 import type { PushFailure } from './types';
 
@@ -33,7 +33,7 @@ export function createPushFailure(checkout: Checkout, branch: string, error: unk
 			return toMessage(this.error);
 		},
 		errorSerialized() {
-			return `PushError: ${checkout.repo.name} on ${branch} — ${this.message()}\n\n${formatRawError(this.error)}`;
+			return `PushError: ${checkout.repo?.name} on ${branch} — ${this.message()}\n\n${formatRawError(this.error)}`;
 		},
 	};
 }

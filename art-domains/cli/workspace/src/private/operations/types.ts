@@ -1,4 +1,4 @@
-import { Checkout } from '../../shared/checkout';
+import type { Checkout } from '../store/create-checkout';
 
 export type OperationOutcome = 'success' | 'failure';
 
@@ -9,7 +9,7 @@ export interface OperationBase {
 	ts: Date;
 	checkout?: Checkout;
 	outcome: OperationOutcome;
-	message(): string;
+	message: () => string;
 }
 
 // --- Outcome-specific bases ---
@@ -21,7 +21,7 @@ export interface OperationSuccess extends OperationBase {
 export interface OperationFailure extends OperationBase {
 	outcome: 'failure';
 	error: string;
-	errorSerialized(): string;
+	errorSerialized: () => string;
 }
 
 // --- Specific success types ---

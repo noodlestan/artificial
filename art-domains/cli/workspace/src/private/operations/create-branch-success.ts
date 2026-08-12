@@ -1,4 +1,4 @@
-import type { Checkout } from '../../shared/checkout';
+import type { Checkout } from '../store/create-checkout';
 
 import type { BranchSuccess } from './types';
 
@@ -14,7 +14,7 @@ export function createBranchSuccess(
 		operation: 'branch created',
 		branch,
 		message() {
-			return message ?? `created ${branch}`;
+			return message || '<empty>';
 		},
 	};
 }

@@ -8,13 +8,32 @@ import { runLink } from './commands/link/link';
 import { runPublish } from './commands/publish/publish';
 import { runSanity } from './commands/sanity/sanity';
 import { runUnlink } from './commands/unlink/unlink';
+import { loadWorkspaceConfig } from './config/load-config';
+import { createWorkspaceContext } from './private/context/workspace-context';
+import { createOperationsLog } from './private/log/operations-log';
+import { createCheckoutStore } from './private/store/checkout-store';
 
-export { defineConfig, loadWorkspaceConfig, verifyCheckouts } from './config';
-export type { RepositoryCheckout, RepositoryRecord, WorkspaceConfig } from './config';
+export { defineConfig, loadWorkspaceConfig } from './config';
+export type { WorkspaceConfig } from './config';
 
 const program = new Command();
 
 program.name('art-workspace').description('Workspace orchestration CLI').version('0.0.9');
+
+program
+	.command('sanity')
+	.description('Check git status across all repos')
+	.option('--auto', 'push clean unpushed repos')
+	.action(async (options: { auto?: boolean }) => {
+		const root = process.cwd();
+		const config = await loadWorkspaceConfig(root);
+		const store = createCheckoutStore();
+		const log = createOperationsLog();
+		const ctx = createWorkspaceContext(config, store, log);
+
+		const auto = options.auto ?? false;
+		await runSanity(ctx, { auto });
+	});
 
 program
 	.command('clone')
@@ -23,9 +42,18 @@ program
 	.argument('[name]', 'repo name to clone')
 	.argument('[target]', 'target location (relative to checkouts path)')
 	.action(
-		async (name: string | undefined, target: string | undefined, options: { all?: boolean }) => {
+		async (
+			repoName: string | undefined,
+			checkoutInput: string | undefined,
+			options: { all?: boolean },
+		) => {
 			const root = process.cwd();
-			await runClone({ root, all: options.all, name, target });
+			const config = await loadWorkspaceConfig(root);
+			const store = createCheckoutStore();
+			const log = createOperationsLog();
+			const ctx = createWorkspaceContext(config, store, log);
+
+			await runClone(ctx, { all: options.all, repoName, checkoutInput });
 		},
 	);
 
@@ -34,16 +62,13 @@ program
 	.description('Branch across checkouts')
 	.argument('<branch>', 'branch name to create or switch to')
 	.argument('[checkouts...]', 'checkouts to branch (default: all checkouts)')
-	.action(async (branch: string, checkoutNames: string[]) => {
+	.action(async (branch: string, checkoutLocations: string[]) => {
 		const root = process.cwd();
-		const config = await (await import('./config/load-config')).loadWorkspaceConfig(root);
-		const { createCheckoutStore } = await import('./shared/checkout-store');
-		const { createOperationsLog } = await import('./shared/operations-log');
-		const { createWorkspaceContext } = await import('./shared/workspace-context');
-		const store = createCheckoutStore(config, root);
+		const config = await loadWorkspaceConfig(root);
+		const store = createCheckoutStore();
 		const log = createOperationsLog();
-		const ctx = createWorkspaceContext(config, root, store, log);
-		await runBranch(ctx, branch, checkoutNames);
+		const ctx = createWorkspaceContext(config, store, log);
+		await runBranch(ctx, { branch, checkoutLocations });
 	});
 
 program
@@ -60,22 +85,6 @@ program
 	.action(async () => {
 		const root = process.cwd();
 		await runUnlink({ root });
-	});
-
-program
-	.command('sanity')
-	.description('Check git status across all repos')
-	.option('--auto', 'push clean unpushed repos')
-	.action(async (options: { auto?: boolean }) => {
-		const root = process.cwd();
-		const config = await (await import('./config/load-config')).loadWorkspaceConfig(root);
-		const { createCheckoutStore } = await import('./shared/checkout-store');
-		const { createOperationsLog } = await import('./shared/operations-log');
-		const { createWorkspaceContext } = await import('./shared/workspace-context');
-		const store = createCheckoutStore(config, root);
-		const log = createOperationsLog();
-		const ctx = createWorkspaceContext(config, root, store, log);
-		await runSanity(ctx, options.auto ?? false);
 	});
 
 program

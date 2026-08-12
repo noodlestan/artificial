@@ -1,21 +1,14 @@
-import { loadCheckouts } from '../../config/load-checkouts';
-import type { WorkspaceContext } from '../../shared/workspace-context';
+import type { WorkspaceContext } from '../../private/context/workspace-context';
+import { RepositoryRecord } from '../../private/records/types';
+import { createCheckout } from '../../private/store/create-checkout';
 
 import { cloneIfMissing } from './private/clone-if-missing';
-import { defaultLocation } from './private/default-location';
 
-export async function cloneAll(ctx: WorkspaceContext): Promise<void> {
-	const { loadRepositories } = await import('../../config/load-repositories');
-	const repos = loadRepositories(ctx.config, ctx.root);
-
-	ctx.store.loadExistingCheckouts();
-	const existingRecords = loadCheckouts(ctx.config, ctx.root);
-
+export async function cloneAll(ctx: WorkspaceContext, repos: RepositoryRecord[]): Promise<void> {
 	for (const repo of repos) {
-		if (!ctx.store.findCheckout(repo.name)) {
-			const override = existingRecords.find(r => r.repo.name === repo.name);
-			const location = override?.location ?? defaultLocation(repo);
-			ctx.store.addCheckout(repo, location);
+		if (!ctx.store.getCheckoutOfRepo(repo.name)) {
+			const checkout = createCheckout(ctx.config, repo.name, repo);
+			ctx.store.addCheckout(checkout);
 		}
 	}
 

@@ -58,29 +58,6 @@ Fix four sanity-reporting issues and adopt a consistent checkout naming conventi
 
 ## Changes
 
-### Step 1 — Fix scanCheckout states
-
-In `src/shared/scan-checkout.ts`, update the `!dirExists` branch (line 27):
-
-```ts
-// Before:
-issues: ['repo not cloned'];
-
-// After:
-issues: ['no checkout'];
-```
-
-Also, after the git-state scan block (after line 54), add a check for synthetic repos:
-
-```ts
-// After the catch block, before the if (detached) checks:
-if (checkout.repo.remote === '') {
-  issues.unshift('unknown project');
-}
-```
-
-This sets "unknown project" for checkouts whose repo record is missing (synthetic repo with `remote: ''`). The `unshift` puts it at the front of the issues list so it appears first in the states column.
-
 ### Step 2 — Fix scanExtraneousCheckouts path
 
 In `src/shared/scan-checkout.ts`, the `scanExtraneousCheckouts` function (line 96) scans the wrong directory. It uses `ctx.config.records.checkouts.path` (the records directory `ops/records/checkouts/`) instead of the actual checkout directories.
@@ -203,7 +180,7 @@ And updating `addCheckout` in `src/shared/checkout-store.ts` to pass it through:
 
 ```ts
 addCheckout(repo: RepositoryRecord, location: string, name?: string): Checkout {
-    const checkout = createCheckout(repo, location, 'main', name);
+    const checkout = createCheckout(repo, location, 'main');
     checkouts.set(checkout.record.name.toLowerCase(), checkout);
     return checkout;
 }

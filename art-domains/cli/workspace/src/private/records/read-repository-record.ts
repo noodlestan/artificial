@@ -1,7 +1,6 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
 
-import type { RepositoryRecord, WorkspaceConfig } from '../../config/types';
+import type { RepositoryRecord } from './types';
 
 export function readRepositoryRecord(file: string): RepositoryRecord {
 	const defaults: RepositoryRecord = { name: '', remote: '' };
@@ -32,13 +31,4 @@ export function readRepositoryRecord(file: string): RepositoryRecord {
 		...(descriptionMatch ? { description: descriptionMatch[1].trim() } : {}),
 		...(consumersMatch ? { consumers: consumersMatch[1].trim() } : {}),
 	};
-}
-
-export function loadRepositories(config: WorkspaceConfig, root: string): RepositoryRecord[] {
-	const dir = join(root, config.records.repositories.path);
-	if (!existsSync(dir)) {
-		return [];
-	}
-	const files = readdirSync(dir).filter(f => f.endsWith('.art'));
-	return files.map(f => readRepositoryRecord(join(dir, f)));
 }

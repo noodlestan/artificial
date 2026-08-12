@@ -1,9 +1,3 @@
-export interface VerifyNeeds {
-	exists?: boolean;
-	pushed?: boolean;
-	published?: boolean;
-}
-
 export interface RepoStatus {
 	name: string;
 	location: string;

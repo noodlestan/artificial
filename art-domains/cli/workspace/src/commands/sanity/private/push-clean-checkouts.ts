@@ -1,4 +1,4 @@
-import type { WorkspaceContext } from '../../../shared/workspace-context';
+import type { WorkspaceContext } from '../../../private/context/workspace-context';
 
 import { pushCheckout } from './push-checkout';
 import { shouldPushCheckout } from './should-push-checkout';
