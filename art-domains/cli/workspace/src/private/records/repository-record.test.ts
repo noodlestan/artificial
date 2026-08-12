@@ -3,11 +3,11 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { makeTempDir } from '../../test/make-temp-dir';
-import { removeTempDirs } from '../../test/remove-temp-dirs';
-import { writeRepoRecord } from '../../test/write-repo-record';
+import { makeTempDir } from '../../test/makeTempDir';
+import { removeTempDirs } from '../../test/removeTempDirs';
+import { writeRepoRecord } from '../../test/writeRepoRecord';
 
-import { readRepositoryRecord } from './read-repository-record';
+import { readRepositoryRecord } from './readRepositoryRecord';
 
 export const tempDirs: string[] = [];
 

@@ -1,4 +1,4 @@
-import type { OperationsLog } from '../log/operations-log';
+import type { OperationsLog } from '../log/createOperationsLog';
 
 import { formatTable } from './format-table';
 

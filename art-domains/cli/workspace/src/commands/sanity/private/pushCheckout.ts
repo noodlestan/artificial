@@ -1,8 +1,8 @@
 import simpleGit from 'simple-git';
 
-import type { WorkspaceContext } from '../../../private/context/workspace-context';
-import { createPushFailure } from '../../../private/operations/create-push-failure';
-import { createPushSuccess } from '../../../private/operations/create-push-success';
+import type { WorkspaceContext } from '../../../private/context/createWorkspaceContext';
+import { createPushFailure } from '../../../private/operations/createPushFailure';
+import { createPushSuccess } from '../../../private/operations/createPushSuccess';
 import { type Checkout } from '../../../private/store/create-checkout';
 
 export async function pushCheckout(ctx: WorkspaceContext, checkout: Checkout): Promise<void> {

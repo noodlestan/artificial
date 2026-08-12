@@ -3,7 +3,7 @@ import path, { join } from 'node:path';
 import { WorkspaceConfig } from '../../config';
 import { CheckoutRecord, RepositoryRecord } from '../records/types';
 
-import { safePath } from './safe-path';
+import { safePath } from './safePath';
 
 export interface Checkout {
 	repo?: RepositoryRecord;

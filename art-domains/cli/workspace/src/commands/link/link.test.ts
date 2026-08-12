@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { runLink } from './link';
+import { runLink } from './runLink';
 
 describe('link command', () => {
 	it('is a placeholder', async () => {

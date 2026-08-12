@@ -1,12 +1,12 @@
-import type { WorkspaceContext } from '../../private/context/workspace-context';
-import { createCloneFailure } from '../../private/operations/create-clone-failure';
-import { saveCheckoutRecord } from '../../private/records/save-checkout-record';
+import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
+import { createCloneFailure } from '../../private/operations/createCloneFailure';
+import { saveCheckoutRecord } from '../../private/records/saveCheckoutRecord';
 import type { RepositoryRecord } from '../../private/records/types';
 import { createCheckout } from '../../private/store/create-checkout';
-import { createCheckoutLocation } from '../../private/store/create-checkout-location';
-import { scanCheckoutState } from '../../shared/scan-checkout-state';
+import { createCheckoutLocation } from '../../private/store/createCheckoutLocation';
+import { scanCheckoutState } from '../../shared/scanCheckoutState';
 
-import { cloneIfMissing } from './private/clone-if-missing';
+import { cloneIfMissing } from './private/cloneIfMissing';
 
 export async function cloneSpecific(
 	ctx: WorkspaceContext,

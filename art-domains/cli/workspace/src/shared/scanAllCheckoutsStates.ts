@@ -1,6 +1,6 @@
-import type { WorkspaceContext } from '../private/context/workspace-context';
+import type { WorkspaceContext } from '../private/context/createWorkspaceContext';
 
-import { scanCheckoutState } from './scan-checkout-state';
+import { scanCheckoutState } from './scanCheckoutState';
 
 export async function scanAllCheckoutsStates(ctx: WorkspaceContext): Promise<void> {
 	for (const checkout of ctx.store.getAllCheckouts()) {

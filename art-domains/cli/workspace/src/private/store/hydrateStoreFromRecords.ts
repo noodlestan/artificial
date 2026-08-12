@@ -1,4 +1,4 @@
-import type { WorkspaceContext } from '../context/workspace-context';
+import type { WorkspaceContext } from '../context/createWorkspaceContext';
 import { RepositoryCheckoutRecord } from '../records/types';
 
 import { createCheckout } from './create-checkout';

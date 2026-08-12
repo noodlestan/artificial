@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import { makeConfig } from '../../test/make-config';
-import { createOperationsLog } from '../log/operations-log';
-import { createCheckoutStore } from '../store/checkout-store';
+import { createOperationsLog } from '../log/createOperationsLog';
+import { createCheckoutStore } from '../store/createCheckoutStore';
 
-import { createWorkspaceContext } from './workspace-context';
+import { createWorkspaceContext } from './createWorkspaceContext';
 
 describe('createWorkspaceContext', () => {
 	it('creates context with config, root, store, and log', () => {

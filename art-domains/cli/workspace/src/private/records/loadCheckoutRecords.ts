@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { WorkspaceConfig } from '../../config';
 
-import { readCheckoutRecord } from './read-checkout-record';
+import { readCheckoutRecord } from './readCheckoutRecord';
 import { RepositoryCheckoutRecord, RepositoryRecord } from './types';
 export function loadCheckoutRecords(
 	config: WorkspaceConfig,

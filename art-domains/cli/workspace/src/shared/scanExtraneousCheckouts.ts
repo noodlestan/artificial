@@ -1,9 +1,9 @@
 import { readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
-import type { WorkspaceContext } from '../private/context/workspace-context';
+import type { WorkspaceContext } from '../private/context/createWorkspaceContext';
 
-import { scanCheckoutState } from './scan-checkout-state';
+import { scanCheckoutState } from './scanCheckoutState';
 
 export async function scanExtraneousCheckouts(ctx: WorkspaceContext): Promise<void> {
 	const checkoutsPath = join(ctx.config.root.path, ctx.config.clone.path);

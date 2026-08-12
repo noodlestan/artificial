@@ -5,14 +5,14 @@ import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createCommandContext } from '../../test/create-command-context';
-import { initBareRepo } from '../../test/init-bare-repo';
-import { initWorkingRepo } from '../../test/init-working-repo';
-import { makeTempDir } from '../../test/make-temp-dir';
-import { removeTempDirs } from '../../test/remove-temp-dirs';
-import { writeCheckoutRecord } from '../../test/write-checkout-record';
-import { writeRepoRecord } from '../../test/write-repo-record';
+import { initBareRepo } from '../../test/initBareRepo';
+import { initWorkingRepo } from '../../test/initWorkingRepo';
+import { makeTempDir } from '../../test/makeTempDir';
+import { removeTempDirs } from '../../test/removeTempDirs';
+import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
+import { writeRepoRecord } from '../../test/writeRepoRecord';
 
-import { runClone } from './clone';
+import { runClone } from './runClone';
 
 const tempDirs: string[] = [];
 

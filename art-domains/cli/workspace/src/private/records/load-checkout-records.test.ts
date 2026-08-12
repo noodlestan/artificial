@@ -4,11 +4,11 @@ import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { WorkspaceConfig } from '../../config';
-import { makeTempDir } from '../../test/make-temp-dir';
-import { removeTempDirs } from '../../test/remove-temp-dirs';
-import { writeCheckoutRecord } from '../../test/write-checkout-record';
+import { makeTempDir } from '../../test/makeTempDir';
+import { removeTempDirs } from '../../test/removeTempDirs';
+import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
 
-import { loadCheckoutRecords } from './load-checkout-records';
+import { loadCheckoutRecords } from './loadCheckoutRecords';
 
 const tempDirs: string[] = [];
 

@@ -1,7 +1,7 @@
-import type { WorkspaceContext } from '../../../private/context/workspace-context';
+import type { WorkspaceContext } from '../../../private/context/createWorkspaceContext';
 
-import { pushCheckout } from './push-checkout';
-import { shouldPushCheckout } from './should-push-checkout';
+import { pushCheckout } from './pushCheckout';
+import { shouldPushCheckout } from './shouldPushCheckout';
 
 export async function pushCleanCheckouts(ctx: WorkspaceContext): Promise<void> {
 	for (const checkout of ctx.store.getAllCheckouts()) {

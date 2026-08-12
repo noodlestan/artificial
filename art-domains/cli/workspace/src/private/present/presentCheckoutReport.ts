@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 
-import { WorkspaceContext } from '../context/workspace-context';
+import { WorkspaceContext } from '../context/createWorkspaceContext';
 
 import { formatTable } from './format-table';
 

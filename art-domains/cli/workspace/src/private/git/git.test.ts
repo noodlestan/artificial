@@ -5,18 +5,18 @@ import simpleGit from 'simple-git';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import { commitFile } from '../../test/commit-file';
-import { initGitRepo } from '../../test/init-repo';
-import { makeTempDir } from '../../test/make-temp-dir';
-import { removeTempDirs } from '../../test/remove-temp-dirs';
+import { initGitRepo } from '../../test/initGitRepo';
+import { makeTempDir } from '../../test/makeTempDir';
+import { removeTempDirs } from '../../test/removeTempDirs';
 
-import { getCurrentBranch } from './get-current-branch';
-import { getRemoteBranch } from './get-remote-branch';
-import { getUnpushedCount } from './get-unpushed-count';
-import { hasLocalBranch } from './has-local-branch';
-import { hasMergeConflicts } from './has-merge-conflicts';
+import { getCurrentBranch } from './getCurrentBranch';
+import { getRemoteBranch } from './getRemoteBranch';
+import { getUnpushedCount } from './getUnpushedCount';
 import { hasRemote } from './has-remote';
-import { isDetachedHead } from './is-detached-head';
+import { hasLocalBranch } from './hasLocalBranch';
+import { hasMergeConflicts } from './hasMergeConflicts';
 import { isDirty } from './is-dirty';
+import { isDetachedHead } from './isDetachedHead';
 
 const tempDirs: string[] = [];
 

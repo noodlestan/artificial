@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { WorkspaceConfig } from '../../config';
 
-import { readRepositoryRecord } from './read-repository-record';
+import { readRepositoryRecord } from './readRepositoryRecord';
 import { RepositoryRecord } from './types';
 
 export function loadRepositoryRecords(config: WorkspaceConfig): RepositoryRecord[] {

@@ -1,6 +1,6 @@
 import type { Checkout } from '../../../private/store/create-checkout';
 
-import { doesIssueBlockPush } from './does-issue-block-push';
+import { doesIssueBlockPush } from './doesIssueBlockPush';
 
 export function shouldPushCheckout(checkout: Checkout): boolean {
 	if (!checkout.exists) return false;

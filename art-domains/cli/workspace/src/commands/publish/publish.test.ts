@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { runPublish } from './publish';
+import { runPublish } from './runPublish';
 
 describe('publish command', () => {
 	it('is a placeholder', async () => {

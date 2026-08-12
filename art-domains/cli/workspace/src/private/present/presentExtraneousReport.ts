@@ -1,4 +1,4 @@
-import type { CheckoutStore } from '../store/checkout-store';
+import type { CheckoutStore } from '../store/createCheckoutStore';
 
 import { formatTable } from './format-table';
 

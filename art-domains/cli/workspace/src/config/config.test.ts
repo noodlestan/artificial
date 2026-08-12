@@ -4,8 +4,8 @@ import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { makeConfig } from '../test/make-config';
-import { makeTempDir } from '../test/make-temp-dir';
-import { removeTempDirs } from '../test/remove-temp-dirs';
+import { makeTempDir } from '../test/makeTempDir';
+import { removeTempDirs } from '../test/removeTempDirs';
 
 import { defineConfig, loadWorkspaceConfig } from './index';
 

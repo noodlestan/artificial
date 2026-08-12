@@ -3,18 +3,18 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createBranchFailure } from '../../private/operations/create-branch-failure';
-import { createBranchSuccess } from '../../private/operations/create-branch-success';
+import { createBranchFailure } from '../../private/operations/createBranchFailure';
+import { createBranchSuccess } from '../../private/operations/createBranchSuccess';
 import { createCheckout } from '../../private/store/create-checkout';
 import { commitFile } from '../../test/commit-file';
 import { createCommandContext } from '../../test/create-command-context';
-import { initGitRepo } from '../../test/init-repo';
-import { makeTempDir } from '../../test/make-temp-dir';
-import { removeTempDirs } from '../../test/remove-temp-dirs';
-import { writeCheckoutRecord } from '../../test/write-checkout-record';
-import { writeRepoRecord } from '../../test/write-repo-record';
+import { initGitRepo } from '../../test/initGitRepo';
+import { makeTempDir } from '../../test/makeTempDir';
+import { removeTempDirs } from '../../test/removeTempDirs';
+import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
+import { writeRepoRecord } from '../../test/writeRepoRecord';
 
-import { runBranch } from './branch';
+import { runBranch } from './runBranch';
 
 const tempDirs: string[] = [];
 

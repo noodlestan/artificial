@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import { makeConfig } from '../../test/make-config';
 
-import { createCheckoutStore } from './checkout-store';
 import { createCheckout } from './create-checkout';
+import { createCheckoutStore } from './createCheckoutStore';
 
 describe('createCheckoutStore', () => {
 	it('addCheckout stores the provided checkout', () => {

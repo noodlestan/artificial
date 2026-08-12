@@ -1,8 +1,8 @@
-import type { WorkspaceContext } from '../../private/context/workspace-context';
+import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { RepositoryRecord } from '../../private/records/types';
 import { createCheckout } from '../../private/store/create-checkout';
 
-import { cloneIfMissing } from './private/clone-if-missing';
+import { cloneIfMissing } from './private/cloneIfMissing';
 
 export async function cloneAll(ctx: WorkspaceContext, repos: RepositoryRecord[]): Promise<void> {
 	for (const repo of repos) {

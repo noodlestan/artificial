@@ -1,12 +1,12 @@
 import simpleGit from 'simple-git';
 
-import type { WorkspaceContext } from '../../../private/context/workspace-context';
-import { getCurrentBranch } from '../../../private/git/get-current-branch';
-import { createCloneFailure } from '../../../private/operations/create-clone-failure';
-import { createCloneSuccess } from '../../../private/operations/create-clone-success';
-import { saveCheckoutRecord } from '../../../private/records/save-checkout-record';
+import type { WorkspaceContext } from '../../../private/context/createWorkspaceContext';
+import { getCurrentBranch } from '../../../private/git/getCurrentBranch';
+import { createCloneFailure } from '../../../private/operations/createCloneFailure';
+import { createCloneSuccess } from '../../../private/operations/createCloneSuccess';
+import { saveCheckoutRecord } from '../../../private/records/saveCheckoutRecord';
 import type { Checkout } from '../../../private/store/create-checkout';
-import { scanCheckoutState } from '../../../shared/scan-checkout-state';
+import { scanCheckoutState } from '../../../shared/scanCheckoutState';
 
 export async function cloneIfMissing(
 	ctx: WorkspaceContext,

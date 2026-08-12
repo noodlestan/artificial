@@ -1,6 +1,9 @@
-import { WorkspaceContext, createWorkspaceContext } from '../private/context/workspace-context';
-import { createOperationsLog } from '../private/log/operations-log';
-import { createCheckoutStore } from '../private/store/checkout-store';
+import {
+	WorkspaceContext,
+	createWorkspaceContext,
+} from '../private/context/createWorkspaceContext';
+import { createOperationsLog } from '../private/log/createOperationsLog';
+import { createCheckoutStore } from '../private/store/createCheckoutStore';
 
 import { makeConfig } from './make-config';
 

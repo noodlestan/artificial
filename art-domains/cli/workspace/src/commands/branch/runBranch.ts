@@ -1,15 +1,15 @@
-import type { WorkspaceContext } from '../../private/context/workspace-context';
-import { createBranchFailure } from '../../private/operations/create-branch-failure';
-import { createBranchSuccess } from '../../private/operations/create-branch-success';
-import { presentCheckoutReport } from '../../private/present/present-checkout-report';
-import { presentOperationsReport } from '../../private/present/present-operations-report';
-import { loadCheckoutRecords } from '../../private/records/load-checkout-records';
-import { loadRepositoryRecords } from '../../private/records/load-repository-rercords';
-import { saveCheckoutRecord } from '../../private/records/save-checkout-record';
-import { hydrateStoreFromRecords } from '../../private/store/hydrate-store-from-records';
-import { scanCheckoutState } from '../../shared/scan-checkout-state';
+import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
+import { createBranchFailure } from '../../private/operations/createBranchFailure';
+import { createBranchSuccess } from '../../private/operations/createBranchSuccess';
+import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
+import { presentOperationsReport } from '../../private/present/presentOperationsReport';
+import { loadCheckoutRecords } from '../../private/records/loadCheckoutRecords';
+import { loadRepositoryRecords } from '../../private/records/loadRepositoryRecords';
+import { saveCheckoutRecord } from '../../private/records/saveCheckoutRecord';
+import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
+import { scanCheckoutState } from '../../shared/scanCheckoutState';
 
-import { createOrSwitchBranch } from './private/create-or-switch-branch';
+import { createOrSwitchBranch } from './private/createOrSwitchBranch';
 
 export async function runBranch(
 	ctx: WorkspaceContext,

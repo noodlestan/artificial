@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import { makeConfig } from '../../test/make-config';
-import { createCloneSuccess } from '../operations/create-clone-success';
+import { createCloneSuccess } from '../operations/createCloneSuccess';
 import { createCheckout } from '../store/create-checkout';
 
-import { createOperationsLog } from './operations-log';
+import { createOperationsLog } from './createOperationsLog';
 
 function makeCheckout(name: string) {
 	const config = makeConfig('.');

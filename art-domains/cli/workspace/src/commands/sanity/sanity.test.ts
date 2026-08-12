@@ -7,13 +7,13 @@ import { afterEach, describe, expect, it } from 'vitest';
 
 import { commitFile } from '../../test/commit-file';
 import { createCommandContext } from '../../test/create-command-context';
-import { initWorkingRepo } from '../../test/init-working-repo';
-import { makeTempDir } from '../../test/make-temp-dir';
-import { removeTempDirs } from '../../test/remove-temp-dirs';
-import { writeCheckoutRecord } from '../../test/write-checkout-record';
-import { writeRepoRecord } from '../../test/write-repo-record';
+import { initWorkingRepo } from '../../test/initWorkingRepo';
+import { makeTempDir } from '../../test/makeTempDir';
+import { removeTempDirs } from '../../test/removeTempDirs';
+import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
+import { writeRepoRecord } from '../../test/writeRepoRecord';
 
-import { runSanity } from './sanity';
+import { runSanity } from './runSanity';
 
 const tempDirs: string[] = [];
 
