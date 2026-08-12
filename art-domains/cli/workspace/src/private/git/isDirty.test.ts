@@ -7,7 +7,7 @@ import { initGitRepo } from '../../test/initGitRepo';
 import { makeTempDir } from '../../test/makeTempDir';
 import { removeTempDirs } from '../../test/removeTempDirs';
 
-import { isDirty } from './is-dirty';
+import { isDirty } from './isDirty';
 
 const tempDirs: string[] = [];
 

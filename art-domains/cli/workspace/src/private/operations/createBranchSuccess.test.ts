@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { createCheckout } from '../../private/store/create-checkout';
-import { createCommandContext } from '../../test/create-command-context';
+import { createCheckout } from '../../private/store/createCheckout';
+import { createCommandContext } from '../../test/createCommandContext';
 import { makeTempDir } from '../../test/makeTempDir';
 import { removeTempDirs } from '../../test/removeTempDirs';
 

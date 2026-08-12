@@ -3,8 +3,8 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { commitFile } from '../../test/commit-file';
-import { createCommandContext } from '../../test/create-command-context';
+import { commitFile } from '../../test/commitFile';
+import { createCommandContext } from '../../test/createCommandContext';
 import { initGitRepo } from '../../test/initGitRepo';
 import { makeTempDir } from '../../test/makeTempDir';
 import { removeTempDirs } from '../../test/removeTempDirs';

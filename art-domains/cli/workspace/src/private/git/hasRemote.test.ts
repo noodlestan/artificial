@@ -4,7 +4,7 @@ import { initGitRepo } from '../../test/initGitRepo';
 import { makeTempDir } from '../../test/makeTempDir';
 import { removeTempDirs } from '../../test/removeTempDirs';
 
-import { hasRemote } from './has-remote';
+import { hasRemote } from './hasRemote';
 
 const tempDirs: string[] = [];
 

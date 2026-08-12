@@ -1,6 +1,6 @@
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { RepositoryRecord } from '../../private/records/types';
-import { createCheckout } from '../../private/store/create-checkout';
+import { createCheckout } from '../../private/store/createCheckout';
 
 import { cloneIfMissing } from './private/cloneIfMissing';
 

@@ -1,6 +1,6 @@
 import type { CheckoutStore } from '../store/createCheckoutStore';
 
-import { formatTable } from './format-table';
+import { formatTable } from './formatTable';
 
 export function presentExtraneousReport(store: CheckoutStore): void {
 	const extraneous = store.getExtraneous();

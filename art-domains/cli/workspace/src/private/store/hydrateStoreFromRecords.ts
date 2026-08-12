@@ -1,7 +1,7 @@
 import type { WorkspaceContext } from '../context/createWorkspaceContext';
 import { RepositoryCheckoutRecord } from '../records/types';
 
-import { createCheckout } from './create-checkout';
+import { createCheckout } from './createCheckout';
 
 export function hydrateStoreFromRecords(
 	ctx: WorkspaceContext,

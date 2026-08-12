@@ -2,7 +2,7 @@ import { join } from 'node:path';
 
 import { WorkspaceContext } from '../context/createWorkspaceContext';
 
-import { formatTable } from './format-table';
+import { formatTable } from './formatTable';
 
 export function presentCheckoutReport(ctx: WorkspaceContext): void {
 	const checkouts = ctx.store.getAllCheckouts();

@@ -5,7 +5,7 @@ import { getCurrentBranch } from '../../../private/git/getCurrentBranch';
 import { createCloneFailure } from '../../../private/operations/createCloneFailure';
 import { createCloneSuccess } from '../../../private/operations/createCloneSuccess';
 import { saveCheckoutRecord } from '../../../private/records/saveCheckoutRecord';
-import type { Checkout } from '../../../private/store/create-checkout';
+import type { Checkout } from '../../../private/store/createCheckout';
 import { scanCheckoutState } from '../../../shared/scanCheckoutState';
 
 export async function cloneIfMissing(

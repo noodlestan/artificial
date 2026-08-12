@@ -5,7 +5,7 @@ import {
 import { createOperationsLog } from '../private/log/createOperationsLog';
 import { createCheckoutStore } from '../private/store/createCheckoutStore';
 
-import { makeConfig } from './make-config';
+import { makeConfig } from './makeConfig';
 
 export function createCommandContext(tempDir: string): WorkspaceContext {
 	const config = makeConfig(tempDir);

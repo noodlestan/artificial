@@ -1,6 +1,6 @@
 import { WorkspaceConfig } from '../../config';
 
-import { type Checkout, createCheckout } from './create-checkout';
+import { type Checkout, createCheckout } from './createCheckout';
 
 export interface CheckoutStore {
 	addCheckout: (checkout: Checkout) => void;

@@ -1,7 +1,7 @@
 import simpleGit from 'simple-git';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { commitFile } from '../../test/commit-file';
+import { commitFile } from '../../test/commitFile';
 import { initGitRepo } from '../../test/initGitRepo';
 import { makeTempDir } from '../../test/makeTempDir';
 import { removeTempDirs } from '../../test/removeTempDirs';

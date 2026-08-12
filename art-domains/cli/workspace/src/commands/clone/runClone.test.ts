@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createCommandContext } from '../../test/create-command-context';
+import { createCommandContext } from '../../test/createCommandContext';
 import { initBareRepo } from '../../test/initBareRepo';
 import { initWorkingRepo } from '../../test/initWorkingRepo';
 import { makeTempDir } from '../../test/makeTempDir';

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { makeConfig } from '../../test/make-config';
+import { makeConfig } from '../../test/makeConfig';
 
-import { createCheckout } from './create-checkout';
+import { createCheckout } from './createCheckout';
 
 describe('createCheckout', () => {
 	it('factory defaults', () => {

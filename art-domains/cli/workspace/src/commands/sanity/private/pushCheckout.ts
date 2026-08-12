@@ -3,7 +3,7 @@ import simpleGit from 'simple-git';
 import type { WorkspaceContext } from '../../../private/context/createWorkspaceContext';
 import { createPushFailure } from '../../../private/operations/createPushFailure';
 import { createPushSuccess } from '../../../private/operations/createPushSuccess';
-import { type Checkout } from '../../../private/store/create-checkout';
+import { type Checkout } from '../../../private/store/createCheckout';
 
 export async function pushCheckout(ctx: WorkspaceContext, checkout: Checkout): Promise<void> {
 	const git = simpleGit(checkout.path);

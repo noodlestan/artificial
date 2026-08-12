@@ -4,11 +4,11 @@ import type { WorkspaceContext } from '../private/context/createWorkspaceContext
 import { getCurrentBranch } from '../private/git/getCurrentBranch';
 import { getRemoteBranch } from '../private/git/getRemoteBranch';
 import { getUnpushedCount } from '../private/git/getUnpushedCount';
-import { hasRemote } from '../private/git/has-remote';
 import { hasMergeConflicts } from '../private/git/hasMergeConflicts';
-import { isDirty } from '../private/git/is-dirty';
+import { hasRemote } from '../private/git/hasRemote';
 import { isDetachedHead } from '../private/git/isDetachedHead';
-import type { Checkout } from '../private/store/create-checkout';
+import { isDirty } from '../private/git/isDirty';
+import type { Checkout } from '../private/store/createCheckout';
 
 export async function scanCheckoutState(
 	ctx: WorkspaceContext,

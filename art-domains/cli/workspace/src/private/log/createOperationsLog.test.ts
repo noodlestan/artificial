@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { makeConfig } from '../../test/make-config';
+import { makeConfig } from '../../test/makeConfig';
 import { createCloneSuccess } from '../operations/createCloneSuccess';
-import { createCheckout } from '../store/create-checkout';
+import { createCheckout } from '../store/createCheckout';
 
 import { createOperationsLog } from './createOperationsLog';
 

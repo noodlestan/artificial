@@ -2,7 +2,7 @@ import type { WorkspaceContext } from '../../private/context/createWorkspaceCont
 import { createCloneFailure } from '../../private/operations/createCloneFailure';
 import { saveCheckoutRecord } from '../../private/records/saveCheckoutRecord';
 import type { RepositoryRecord } from '../../private/records/types';
-import { createCheckout } from '../../private/store/create-checkout';
+import { createCheckout } from '../../private/store/createCheckout';
 import { createCheckoutLocation } from '../../private/store/createCheckoutLocation';
 import { scanCheckoutState } from '../../shared/scanCheckoutState';
 

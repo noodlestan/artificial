@@ -1,4 +1,4 @@
-import type { Checkout } from '../../../private/store/create-checkout';
+import type { Checkout } from '../../../private/store/createCheckout';
 
 import { doesIssueBlockPush } from './doesIssueBlockPush';
 

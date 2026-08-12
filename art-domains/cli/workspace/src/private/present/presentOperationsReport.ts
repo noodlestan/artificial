@@ -1,6 +1,6 @@
 import type { OperationsLog } from '../log/createOperationsLog';
 
-import { formatTable } from './format-table';
+import { formatTable } from './formatTable';
 
 export function presentOperationsReport(log: OperationsLog): void {
 	const operations = log.all();
