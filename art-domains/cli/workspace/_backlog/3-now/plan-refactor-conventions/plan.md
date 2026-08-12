@@ -10,7 +10,7 @@
 
 ## Summary
 
-Enforce file naming conventions in `@art-domains/workspace-cli` source and tests: camelCase filenames matching the exported function name, one function per file, one function tested per file, test filename matching the tested file. The pre-plan scan also found latent test skips (`describe.only`, `it.only`) and stray comments; they are bundled into the respective commits. Pure refactor — zero behavior changes.
+Enforce file naming conventions in `@art-domains/workspace-cli` source and tests: camelCase filenames matching the exported function name, one function per file, one function tested per file, test filename matching the tested file. Iteration 2 adds: remaining 9 kebab-case renames + a minimum test per untested production file (23 files), with explicit skip list (entry points, barrels, type-only modules, test helpers). Pure refactor/test — zero behavior changes.
 
 ## Source Tasks
 
@@ -86,10 +86,23 @@ This plan derives from a direct user request (conventions enforcement), not from
 - Rename 9 files missed by `rename-source-files` (planner classification error): `define-config.ts`, `has-remote.ts`, `is-dirty.ts`, `format-table.ts`, `create-checkout.ts` + `create-checkout.test.ts`, `commit-file.ts`, `create-command-context.ts`, `make-config.ts`
 - Update all import statements across `src/`
 
+### `add-missing-tests` - `PLANNED`
+
+**Commit Message:** `test(workspace-cli): add minimum test per untested production file`
+
+**Instructions File:** `_backlog/3-now/plan-refactor-conventions/instructions/add-missing-tests.md`
+
+**CHANGELOG:**
+
+- Add one minimum test per untested production file (23 files): 9 command modules, 4 operation factories, 4 presenters, 3 store modules, 3 shared modules
+- Skip files (no tests): `src/index.ts` (CLI entry point), `src/config/index.ts` (barrel), 4 type-only modules, 10 `src/test/` helpers
+- Depends on `rename-remaining-files` (paths referenced post-rename)
+
 ## Follow ups
 
 - Stub commands `runLink`, `runPublish`, `runUnlink` remain TODO stubs; their `eslint-disable-next-line` directives stay until implementation lands.
 - `architecture/commands.md` carries uncommitted WIP for the link/unlink/repo redesign (not part of this plan) — left untouched.
+- `presentCheckoutReport.ts` sort comparator ends with `|| -1` — likely inverted-sort latent bug; flagged for the bug-fixing session, not this plan.
 
 ## Feedback
 
