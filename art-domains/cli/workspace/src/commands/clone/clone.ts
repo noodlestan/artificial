@@ -26,7 +26,7 @@ export async function runClone(
 	if (all) {
 		await cloneAll(ctx, repos);
 	} else if (repoName) {
-		await cloneSpecific(ctx, repoName, checkoutInput);
+		await cloneSpecific(ctx, repos, repoName, checkoutInput);
 	} else {
 		await cloneStatus(ctx);
 	}

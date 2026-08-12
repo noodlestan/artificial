@@ -23,7 +23,7 @@ export async function scanCheckoutState(
 	}
 
 	if (!dirExists) {
-		const updated = { ...checkout, exists: false, issues: ['no checkout'] };
+		const updated = { ...checkout, exists: false, issues: ['not cloned'] };
 		ctx.store.updateCheckout(updated);
 		return updated;
 	}

@@ -1,6 +1,7 @@
 import type { WorkspaceContext } from '../../private/context/workspace-context';
 import { createCloneFailure } from '../../private/operations/create-clone-failure';
-import { loadRepositoryRecords } from '../../private/records/load-repository-rercords';
+import { saveCheckoutRecord } from '../../private/records/save-checkout-record';
+import type { RepositoryRecord } from '../../private/records/types';
 import { createCheckout } from '../../private/store/create-checkout';
 import { createCheckoutLocation } from '../../private/store/create-checkout-location';
 import { scanCheckoutState } from '../../shared/scan-checkout-state';
@@ -9,10 +10,10 @@ import { cloneIfMissing } from './private/clone-if-missing';
 
 export async function cloneSpecific(
 	ctx: WorkspaceContext,
+	repos: RepositoryRecord[],
 	repoName: string,
 	checkoutInput?: string,
 ): Promise<void> {
-	const repos = loadRepositoryRecords(ctx.config);
 	const canonical = repoName.startsWith('@') ? repoName.split('/')[1] : repoName;
 	const repo = repos.find(r => r.name.toLowerCase() === canonical.toLowerCase());
 
@@ -39,7 +40,10 @@ export async function cloneSpecific(
 
 		const checkoutName = checkoutInput ? `${repo.name} @ ${checkoutInput}` : repo.name;
 		const checkout = createCheckout(ctx.config, location, repo, 'main', checkoutName);
+
 		ctx.store.addCheckout(checkout);
+		await saveCheckoutRecord(ctx.config, checkout.record.name, checkout.record);
+
 		await cloneIfMissing(ctx, checkout);
 		await scanCheckoutState(ctx, checkout);
 	} else {

@@ -22,7 +22,7 @@ afterEach(() => {
 });
 
 describe('sanity command', () => {
-	it('reports "no checkout" for a missing checkout', async () => {
+	it('reports "not cloned" for a missing checkout', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = await createCommandContext(tempDir);
 
@@ -34,7 +34,7 @@ describe('sanity command', () => {
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
 		expect(checkouts[0].exists).toEqual(false);
-		expect(checkouts[0].issues).toEqual(['no checkout']);
+		expect(checkouts[0].issues).toEqual(['not cloned']);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});

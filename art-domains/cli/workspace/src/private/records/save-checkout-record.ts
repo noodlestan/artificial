@@ -16,26 +16,34 @@ const HARDCODED_TEMPLATE = `# Module
 **Branch:** \`{{ branch }}\`
 `;
 
-export function saveCheckoutRecord(
+export async function saveCheckoutRecord(
 	config: WorkspaceConfig,
 	file: string,
 	data: CheckoutRecord,
-): void {
+): Promise<string> {
 	let template = HARDCODED_TEMPLATE;
 	const templatePath = join(config.root.path, config.records.checkouts.template);
 	if (existsSync(templatePath)) {
 		template = readFileSync(templatePath, 'utf-8');
 	}
 
+	const fileName = join(
+		config.root.path,
+		config.records.checkouts.path,
+		`${file.toLowerCase().replace(/\s+/g, '-')}.art`,
+	);
+
 	let content = template
 		.replace('{{ name }}', data.name)
 		.replace('{{ repository }}', data.repository ?? '')
 		.replace('{{ location }}', data.location)
 		.replace('{{ branch }}', data.branch);
-	// Remove empty repository line if not provided
+
 	if (!data.repository) {
 		content = content.replace(/\*\*Repository:\*\*\s*\n\n?/g, '');
 	}
-	mkdirSync(dirname(file), { recursive: true });
-	writeFileSync(file, content);
+	mkdirSync(dirname(fileName), { recursive: true });
+	writeFileSync(fileName, content);
+
+	return fileName;
 }

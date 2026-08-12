@@ -1,5 +1,3 @@
-import { join } from 'node:path';
-
 import simpleGit from 'simple-git';
 
 import type { WorkspaceContext } from '../../../private/context/workspace-context';
@@ -34,13 +32,8 @@ export async function cloneIfMissing(
 	const rescan = await scanCheckoutState(ctx, scanned);
 	ctx.log.log(createCloneSuccess(rescan));
 
-	const recordFile = join(
-		ctx.config.root.path,
-		ctx.config.records.checkouts.path,
-		`${rescan.record.name.toLowerCase().replace(/\s+/g, '-')}.art`,
-	);
 	const actualBranch = await getCurrentBranch(scanned.path);
-	saveCheckoutRecord(ctx.config, recordFile, {
+	await saveCheckoutRecord(ctx.config, rescan.record.name, {
 		name: rescan.record.name,
 		repository: `Repository: ${rescan.repo?.name}`,
 		location: rescan.record.location,

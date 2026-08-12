@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import type { WorkspaceConfig } from '../../config/types';
+import { makeConfig } from '../../test/make-config';
 import { makeTempDir } from '../../test/make-temp-dir';
 import { removeTempDirs } from '../../test/remove-temp-dirs';
 
@@ -12,31 +12,20 @@ import { saveCheckoutRecord } from './save-checkout-record';
 
 const tempDirs: string[] = [];
 
-function makeConfig(checkoutPath: string, templatePath: string): WorkspaceConfig {
-	return {
-		clone: { path: 'repos' },
-		root: { path: '.' },
-		records: {
-			repositories: { path: 'ops/records/repositories' },
-			checkouts: { path: checkoutPath, template: templatePath },
-		},
-	};
-}
-
 afterEach(() => {
 	removeTempDirs(tempDirs);
 	vi.restoreAllMocks();
 });
 
 describe('checkout record IO', () => {
-	it('saves and reads a checkout record round-trip', () => {
+	it('saves and reads a checkout record round-trip', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig('ops/records/checkouts', 'template.art.njk');
+		const config = makeConfig(tempDir);
 		const file = join(tempDir, 'test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
-		saveCheckoutRecord(config, file, data);
-		const read = readCheckoutRecord(file);
+		const saved = await saveCheckoutRecord(config, file, data);
+		const read = readCheckoutRecord(saved);
 
 		expect(read).toEqual(data);
 	});
@@ -65,41 +54,41 @@ describe('checkout record IO', () => {
 		expect(warn).toHaveBeenCalledWith(expect.stringContaining('missing branch'));
 	});
 
-	it('saved record contains expected markers', () => {
+	it('saved record contains expected markers', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig('ops/records/checkouts', 'template.art.njk');
+		const config = makeConfig(tempDir);
 		const file = join(tempDir, 'test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
-		saveCheckoutRecord(config, file, data);
-		const content = readFileSync(file, 'utf-8');
+		const saved = await saveCheckoutRecord(config, file, data);
+		const content = readFileSync(saved, 'utf-8');
 
 		expect(content).toContain('## Checkout: Artificial');
 		expect(content).toContain('**Location:** `repos/artificial`');
 		expect(content).toContain('**Branch:** `main`');
 	});
 
-	it('renders from the template file when config and root are provided', () => {
+	it('renders from the template file when config and root are provided', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig('ops/records/checkouts', 'template.art.njk');
+		const config = makeConfig(tempDir);
 		const file = join(tempDir, 'ops/records/checkouts/test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
-		saveCheckoutRecord(config, file, data);
-		const content = readFileSync(file, 'utf-8');
+		const saved = await saveCheckoutRecord(config, file, data);
+		const content = readFileSync(saved, 'utf-8');
 
 		expect(content).toContain('## Checkout: Artificial');
 		expect(content).toContain('**Location:** `repos/artificial`');
 	});
 
-	it('falls back to hardcoded template when template file is missing', () => {
+	it('falls back to hardcoded template when template file is missing', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig('ops/records/checkouts', 'nonexistent-template.art.njk');
+		const config = makeConfig(tempDir);
 		const file = join(tempDir, 'ops/records/checkouts/test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
-		saveCheckoutRecord(config, file, data);
-		const content = readFileSync(file, 'utf-8');
+		const saved = await saveCheckoutRecord(config, file, data);
+		const content = readFileSync(saved, 'utf-8');
 
 		expect(content).toContain('## Checkout: Artificial');
 		expect(content).toContain('**Location:** `repos/artificial`');

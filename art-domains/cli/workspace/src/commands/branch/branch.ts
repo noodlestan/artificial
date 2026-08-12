@@ -5,6 +5,7 @@ import { presentCheckoutReport } from '../../private/present/present-checkout-re
 import { presentOperationsReport } from '../../private/present/present-operations-report';
 import { loadCheckoutRecords } from '../../private/records/load-checkout-records';
 import { loadRepositoryRecords } from '../../private/records/load-repository-rercords';
+import { saveCheckoutRecord } from '../../private/records/save-checkout-record';
 import { hydrateStoreFromRecords } from '../../private/store/hydrate-store-from-records';
 import { scanCheckoutState } from '../../shared/scan-checkout-state';
 
@@ -48,12 +49,15 @@ export async function runBranch(
 			} else {
 				ctx.log.log(createBranchSuccess(checkout, branch, `switched to ${branch}`));
 			}
+
+			const updated = { ...checkout, record: { ...checkout.record, branch } };
+			ctx.store.updateCheckout(updated);
+			const scanned = await scanCheckoutState(ctx, updated);
+			await saveCheckoutRecord(ctx.config, scanned.record.name, scanned.record);
 		} catch (error) {
 			ctx.log.log(createBranchFailure(branch, error, checkout));
 			continue;
 		}
-
-		ctx.store.updateCheckout({ ...checkout, record: { ...checkout.record, branch } });
 	}
 
 	presentCheckoutReport(ctx);
