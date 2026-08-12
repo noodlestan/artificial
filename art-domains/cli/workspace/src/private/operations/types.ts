@@ -2,8 +2,6 @@ import type { Checkout } from '../store/create-checkout';
 
 export type OperationOutcome = 'success' | 'failure';
 
-// --- Base ---
-
 export interface OperationBase {
 	operation: string;
 	ts: Date;
@@ -11,8 +9,6 @@ export interface OperationBase {
 	outcome: OperationOutcome;
 	message: () => string;
 }
-
-// --- Outcome-specific bases ---
 
 export interface OperationSuccess extends OperationBase {
 	outcome: 'success';
@@ -23,8 +19,6 @@ export interface OperationFailure extends OperationBase {
 	error: string;
 	errorSerialized: () => string;
 }
-
-// --- Specific success types ---
 
 export interface CloneSuccess extends OperationSuccess {
 	operation: 'clone';
@@ -59,8 +53,6 @@ export interface UnlinkSuccess extends OperationSuccess {
 	source: string;
 }
 
-// --- Specific failure types ---
-
 export interface PushFailure extends OperationFailure {
 	operation: 'push';
 	branch: string;
@@ -93,8 +85,6 @@ export interface CloneFailure extends OperationFailure {
 	operation: 'clone';
 	location: string;
 }
-
-// --- Union ---
 
 export type Operation =
 	| CloneSuccess

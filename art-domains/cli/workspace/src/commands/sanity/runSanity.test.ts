@@ -70,7 +70,6 @@ describe('sanity command', () => {
 
 		const repoDir = join(tempDir, ctx.config.clone.path, 'dirty');
 		await initWorkingRepo(repoDir, bareDir);
-		// await commitFile(repoDir, 'file.txt');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
 		writeRepoRecord(tempDir, 'Dirty', 'git@example.com:dirty.git');
@@ -208,7 +207,7 @@ describe('sanity command', () => {
 		try {
 			await git.merge(['feature']);
 		} catch {
-			// expected conflict
+			// empty
 		}
 
 		writeRepoRecord(tempDir, 'Conflict', 'git@example.com:conflict.git');
