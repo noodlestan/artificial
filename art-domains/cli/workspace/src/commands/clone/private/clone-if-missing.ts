@@ -35,7 +35,7 @@ export async function cloneIfMissing(
 	const actualBranch = await getCurrentBranch(scanned.path);
 	await saveCheckoutRecord(ctx.config, rescan.record.name, {
 		name: rescan.record.name,
-		repository: `Repository: ${rescan.repo?.name}`,
+		repository: rescan.repo?.name,
 		location: rescan.record.location,
 		branch: actualBranch || 'main',
 	});

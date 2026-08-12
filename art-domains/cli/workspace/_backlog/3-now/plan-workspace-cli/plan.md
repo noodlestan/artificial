@@ -98,49 +98,9 @@ Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli
 
 **Note:** Pre-existing lint issues in `_backlog/` and `architecture/` (42 files, none in `src/`). No `ci` script in package.json (follow-up).
 
-### `checkout-sanity-and-naming` - `PLANNED`
+### `refactor-conventions` - `DRAFT`
 
-**Commit Message:** `feat(workspace-cli): checkout naming convention, sanity states corrections, extraneous detection`
-
-**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/checkout-sanity-and-naming.md`
-
-Adopt a consistent checkout naming convention and fix four sanity-reporting issues found during manual testing.
-
-#### Checkout naming convention
-
-- **checkout name** = `{repo-name}` when at default location, or `{repo-name}-{location}` when at a custom location
-- **directory** = `repos/{checkout name}/`
-- **record file** = `ops/records/checkouts/{checkout name}.art`
-- **record heading** = `## Checkout: {Repository Name}` (the human-readable repo name)
-- **record fields**: `**Repository:**`, `**Location:**` (full path), `**Branch:**`
-
-Examples:
-
-| command                 | checkout name  | directory               | record file          |
-| ----------------------- | -------------- | ----------------------- | -------------------- |
-| `clone Artificial`      | Artificial     | `repos/Artificial/`     | `Artificial.art`     |
-| `clone Artificial foo`  | Artificial-foo | `repos/Artificial-foo/` | `Artificial-foo.art` |
-| `clone "No Comply" dev` | No Comply-dev  | `repos/No Comply-dev/`  | `no-comply-dev.art`  |
-
-#### Sanity states fixes
-
-| scenario                                                               | current                  | desired                                                                  |
-| ---------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------ |
-| checkout record exists, directory missing (Conventions, Purrpose)      | `repo not cloned`        | `no checkout`                                                            |
-| checkout record exists, repo record missing (Purrtrait)                | `clean` (synthetic repo) | `unknown project` — project column empty, states shows `unknown project` |
-| directory exists, repo record exists, no checkout record (Purrception) | not listed               | shown in Extraneous Report                                               |
-| directory exists, no records at all (repos/blah)                       | not listed               | shown in Extraneous Report                                               |
-
-#### Responsibilities
-
-- Rename checkout name derivation in `cloneSpecific`: `repo-name` (default) or `repo-name-location` (custom)
-- `cloneIfMissing`: save record with checkout name as filename, heading `## Checkout: {repo.name}`, include `**Repository:**` resource reference
-- `scanCheckout`: when checkout record exists but directory missing → set `issues: ["no checkout"]` (not `["repo not cloned"]`)
-- `scanCheckout`: when repo record is missing (synthetic) → set `issues: ["unknown project"]`
-- `presentCheckoutReport`: when repo is synthetic (no real repo record), leave project column empty
-- Investigate and fix `scanExtraneousCheckouts`: directories under `repos/` without matching checkout records must appear in Extraneous Report
-
-**Pseudo details:** `architecture/_pseudo.md` → Use Cases → clone command, sanity command, Auxiliary Functions → `scanCheckout`, `scanExtraneousCheckouts`.
+**Commit Message:** `feat(workspace-cli): refactor conventions`
 
 ### `link-command` - `DRAFT`
 
