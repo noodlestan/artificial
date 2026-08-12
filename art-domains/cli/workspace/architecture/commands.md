@@ -7,9 +7,9 @@ The command surface of the workspace CLI, their procedures, and their edge cases
 | command   | usage                                       | status      |
 | --------- | ------------------------------------------- | ----------- |
 | `sanity`  | `sanity [--auto]`                           | implemented |
+| `repo`    | `repo <repo>`                               | designed    |
 | `clone`   | `clone [--all] [<repo>] [<location>]`       | implemented |
 | `branch`  | `branch <branch> [<checkout-name>...]`      | implemented |
-| `repo`    | `repo <repo>`                               | designed    |
 | `link`    | `link <repo> [<namespaces>] [<packages>]`   | designed    |
 | `unlink`  | `unlink <repo> [<namespaces>] [<packages>]` | designed    |
 | `publish` | `publish [--auto]`                          | designed    |
@@ -32,7 +32,19 @@ Commands share the same skeleton:
 
 Check git status across all repos. Procedure: load existing checkouts → scan all → scan extraneous → present Checkout Report + Extraneous Report. With `--auto`, additionally push clean unpushed repos, append the Operations Report, and sync records.
 
-`sanity` also adds the workspace root itself as a checkout, so the workspace repo is part of the report.
+The `sanity` command also adds the workspace root itself as a checkout, so the workspace repo is part of the report.
+
+## Repo
+
+**Usage:** `repo [<checkout>, ...]`
+
+Lists repositories under active checkouts, listing their resources, their namespaces and their packages. The infrastructure for this command is needed for `symlink` and `publish`. Works for one or more checkouts. Read all `checkout` records for project, namespaces, and packages (assume records are at`ops/records/{kind})`). Collect a PackageStateRecord with cannonical name, version, published version, branch, dircetory, states (resolve each `packagePath` - `<location>/{project-path}/{namespace-path}/{package-path}` and read the package.json file to see the current version andrRun npm info to see last published version). For each checkout report `checkout.repo`, `checkout.location`, `checkout.branch`, `checkout.states` followed by a PackageStateReport for packages in that repo.
+
+**Edge cases:**
+
+- Location repository does not exist.
+- Location repository does not have project, namespace, or package records.
+- Project, namespace, or package record in location repository is invalid.
 
 ## Clone
 
@@ -139,21 +151,36 @@ Feature: Branch across checkouts
 
 ## Link
 
-**Usage:** `link <repo> [<namespaces>] [<packages>]`
+**Usage:** `link <location> <package> [<target>]`
 
-Symlink local packages from a source repo into consumers' `node_modules` for local development, optionally filtered by namespace or package name. Procedure: identify packages → find consumers → create symlinks in `node_modules` → record `linked` operations → present Operations Report.
+Symlink a source package from a repo checkout location into a target location (`node_modules`) for local development. The `<location>` and `<target>` params are both checkout locations and should resolve to existing checkouts. If `target` is ommited the link is created in root workspace `node_modules/`. Read the `location` repository records for project, namespaces, and packages (assume records are at`ops/records/{kind})`). Match package to input `<package>`. Resolve `packagePath` - `<location>/{project-path}/{namespace-path}/{package-path}`. Resolve `<target>/node-modules/{canonical-name}`. Check if is dir/file - remove it. Create symlink to `packagePath`.
 
 **Edge cases:**
 
-- Consumer not cloned → skip with warning.
+- Location repository does not exist.
+- Location repository does not have project, namespace, or package records.
+- Project, namespace, or package record in location repository is invalid.
+- Consumer not cloned → link operation failure.
 - Existing symlink → replace.
-- Existing directory (npm-installed) → error — don't overwrite without confirmation.
+- Existing directory (npm-installed) → replace.
+- Link target uses canonical-name, may contain a namspace that results in directory that need to be created (ensured) before creating the basename link.
+
+## Links
+
+**Usage:** `links`
+
+Show symlink sources. Find all potential node_module files. Scan workspace node_modules and all known repositories for project records (assume records are at `{checkout}/ops/records/project/*.art`) and resolve `<checkout-location>/{project-path}/node-modules/` and resolve the root package from `{config.root.path}/node_modules`. List all dirs, check it it is a synlink, if it starts with @ list subdrectories and fhckec if it a symlink. Collect all links un a list and present the SymlinkReport.
+
+**Edge cases:**
+
+- Known respository does not have project records.
+- Project record in known repository is invalid.
 
 ## Unlink
 
-**Usage:** `unlink <repo> [<namespaces>] [<packages>]`
+**Usage:** `unlink <repo> <package> <target>`
 
-Remove package symlinks from consumers' `node_modules` and run `npm install` to restore published versions. Procedure: identify symlinks → remove them → run `npm install` in affected consumers → record `unlink` operations → present Operations Report.
+Remove package symlink from target consumer `node_modules` and run `npm install` to restore published versions. Procedure: identify symlinks → remove them → run `npm install` in affected consumers → record `unlink` operations → present Operations Report.
 
 **Edge cases:**
 
