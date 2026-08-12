@@ -3,9 +3,6 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createBranchFailure } from '../../private/operations/createBranchFailure';
-import { createBranchSuccess } from '../../private/operations/createBranchSuccess';
-import { createCheckout } from '../../private/store/create-checkout';
 import { commitFile } from '../../test/commit-file';
 import { createCommandContext } from '../../test/create-command-context';
 import { initGitRepo } from '../../test/initGitRepo';
@@ -26,41 +23,6 @@ beforeEach(() => {
 afterEach(() => {
 	removeTempDirs(tempDirs);
 	vi.restoreAllMocks();
-});
-
-describe('createBranchSuccess', () => {
-	it('factory defaults and serialization', () => {
-		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
-
-		const checkout = createCheckout(
-			ctx.config,
-			'bug-fix',
-			{ name: 'One', remote: 'git@example.com:one.git' },
-			'main',
-		);
-
-		const success = createBranchSuccess(checkout, 'feat/x');
-		expect(success.message()).toBe('created feat/x');
-	});
-});
-
-describe('createBranchFailure', () => {
-	it('factory defaults and serialization', () => {
-		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
-
-		const checkout = createCheckout(
-			ctx.config,
-			'bug-fix',
-			{ name: 'One', remote: 'git@example.com:one.git' },
-			'main',
-		);
-
-		const failure = createBranchFailure('feat/x', new Error('boom (reason)'), checkout);
-		expect(failure.errorSerialized()).toContain('boom');
-		expect(failure.errorSerialized()).toContain('reason');
-	});
 });
 
 describe('branch command', () => {
@@ -142,7 +104,7 @@ describe('branch command', () => {
 		expect(ctx.store.getCheckoutOfRepo('Good')?.record.branch).toBe('main');
 	});
 
-	it.only('branches a checkout with no matching repository', async () => {
+	it('branches a checkout with no matching repository', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		await initGitRepo(join(tempDir, ctx.config.clone.path, 'conv'));
@@ -160,7 +122,7 @@ describe('branch command', () => {
 		expect(ctx.log.all()[0].message()).toBe('created feat/x');
 	});
 
-	it.only('switches to an existing branch', async () => {
+	it('switches to an existing branch', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'one');

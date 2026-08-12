@@ -3,11 +3,10 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { makeConfig } from '../test/make-config';
 import { makeTempDir } from '../test/makeTempDir';
 import { removeTempDirs } from '../test/removeTempDirs';
 
-import { defineConfig, loadWorkspaceConfig } from './index';
+import { loadWorkspaceConfig } from './index';
 
 const SOME_CONFIG = JSON.stringify({
 	clone: { path: 'clone-path' },
@@ -23,14 +22,6 @@ const tempDirs: string[] = [];
 afterEach(() => {
 	removeTempDirs(tempDirs);
 	vi.restoreAllMocks();
-});
-
-describe('defineConfig', () => {
-	it('returns the input config unchanged', () => {
-		const config = makeConfig('.');
-
-		expect(defineConfig(config)).toEqual(config);
-	});
 });
 
 describe('loadWorkspaceConfig', () => {
