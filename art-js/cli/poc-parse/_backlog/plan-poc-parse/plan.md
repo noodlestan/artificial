@@ -101,9 +101,15 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/_backlog/plan-poc-parse/instructions/grammar-spec-fixes__report.md`
 
-### `first-constructs-vertical-slice` - `DRAFT`
+### `extract-mdast-transparently` - `DRAFT`
 
-**Commit Message:** `poc-parse: land first constructs and prep vertical slice`
+**Commit Message:** `poc-parse: ruthless rewrite for mdast transparency`
+
+**Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/extract-mdast-transparently.md`
+
+### `first-constructs-slice` - `DRAFT`
+
+**Commit Message:** `poc-parse: land first constructs vertical slice`
 
 **Instructions File:** none yet
 

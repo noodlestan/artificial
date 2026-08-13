@@ -21,11 +21,14 @@ All fixtures are in `fixtures/` relative to this file.
 **Input:** `### Routine: List Tasks`
 
 **Expected output:**
-- `SectionBlock` with `kind: "Routine"`, `name: "List Tasks"`
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/section-block.md | grep -A5 '"kind": "Routine"'
+```json
+{
+  "construct": "SectionBlock",
+  "kind": "Routine",
+  "name": "List Tasks",
+  "children": []
+}
 ```
 
 ---
@@ -37,12 +40,16 @@ npx tsx src/parse/parse.ts fixtures/section-block.md | grep -A5 '"kind": "Routin
 **Input:** `## Rules`
 
 **Expected output:**
-- `SectionBlock` with `name: "Rules"`, no `kind` field
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/section-block.md | grep -A3 '"name": "Rules"'
+```json
+{
+  "construct": "SectionBlock",
+  "name": "Rules",
+  "children": []
+}
 ```
+
+Note: no `kind` field present.
 
 ---
 
@@ -53,11 +60,15 @@ npx tsx src/parse/parse.ts fixtures/section-block.md | grep -A3 '"name": "Rules"
 **Input:** `### Decision: Two Main Use Cases (#generator)`
 
 **Expected output:**
-- `SectionBlock` with `name: "Two Main Use Cases"`, `tags: [{ name: "generator" }]`
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/section-block.md | grep -A5 '"generator"'
+```json
+{
+  "construct": "SectionBlock",
+  "kind": "Decision",
+  "name": "Two Main Use Cases",
+  "tags": [{ "construct": "Tag", "name": "generator" }],
+  "children": []
+}
 ```
 
 ---
@@ -69,11 +80,18 @@ npx tsx src/parse/parse.ts fixtures/section-block.md | grep -A5 '"generator"'
 **Input:** `**Purpose:** Generate and manage agent instructions.`
 
 **Expected output:**
-- `FieldBlock` with `name: "Purpose"`, `value` containing `NaturalBlock` with `value: "Generate and manage agent instructions."`
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A8 '"name": "Purpose"'
+```json
+{
+  "construct": "FieldBlock",
+  "name": "Purpose",
+  "value": [
+    {
+      "construct": "NaturalBlock",
+      "value": "Generate and manage agent instructions."
+    }
+  ]
+}
 ```
 
 ---
@@ -85,11 +103,18 @@ npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A8 '"name": "Purpose"
 **Input:** `` **Canonical Name:** `@noodlestan/artificial` ``
 
 **Expected output:**
-- `FieldBlock` with `name: "Canonical Name"`, value contains backtick text
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A8 '"name": "Canonical Name"'
+```json
+{
+  "construct": "FieldBlock",
+  "name": "Canonical Name",
+  "value": [
+    {
+      "construct": "NaturalBlock",
+      "value": "`@noodlestan/artificial`"
+    }
+  ]
+}
 ```
 
 ---
@@ -99,6 +124,7 @@ npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A8 '"name": "Canonica
 **Fixture:** `fixtures/field-block.md`
 
 **Input:**
+
 ```markdown
 **Dependencies:**
 
@@ -107,12 +133,22 @@ npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A8 '"name": "Canonica
 ```
 
 **Expected output:**
-- `FieldBlock` with `name: "Dependencies"`
-- `value` is array of `NaturalBlock` children (list items parsed)
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A15 '"name": "Dependencies"'
+```json
+{
+  "construct": "FieldBlock",
+  "name": "Dependencies",
+  "value": [
+    {
+      "construct": "NaturalBlock",
+      "type": "list",
+      "children": [
+        { "construct": "NaturalBlock", "value": "Package Dependency Set: Build Tools" },
+        { "construct": "NaturalBlock", "value": "Package Dependency Set: Project Tools" }
+      ]
+    }
+  ]
+}
 ```
 
 ---
@@ -122,6 +158,7 @@ npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A15 '"name": "Depende
 **Fixture:** `fixtures/field-block.md`
 
 **Input:**
+
 ```markdown
 **Scripts:**
 
@@ -132,12 +169,19 @@ npm run test
 ```
 
 **Expected output:**
-- `FieldBlock` with `name: "Scripts"`
-- Value contains code block (type `code` with `lang`)
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A10 '"name": "Scripts"'
+```json
+{
+  "construct": "FieldBlock",
+  "name": "Scripts",
+  "value": [
+    {
+      "construct": "NaturalBlock",
+      "type": "code",
+      "value": "npm run build\nnpm run test"
+    }
+  ]
+}
 ```
 
 ---
@@ -149,11 +193,13 @@ npx tsx src/parse/parse.ts fixtures/field-block.md | grep -A10 '"name": "Scripts
 **Input:** `Lorem ipsum dolor sit amet.` (paragraph under `## Rules`)
 
 **Expected output:**
-- `NaturalBlock` with `value: "Lorem ipsum dolor sit amet."`
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/section-block.md | grep -A3 '"Lorem ipsum"'
+```json
+{
+  "construct": "NaturalBlock",
+  "type": "paragraph",
+  "value": "Lorem ipsum dolor sit amet."
+}
 ```
 
 ---
@@ -165,12 +211,8 @@ npx tsx src/parse/parse.ts fixtures/section-block.md | grep -A3 '"Lorem ipsum"'
 **Input:** `Content with (#generator) tag`
 
 **Expected output:**
-- Tag detected with `name: "generator"`
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/section-block.md | grep -B2 -A2 '"generator"'
-```
+Tag detected with `name: "generator"` somewhere in the output.
 
 ---
 
@@ -181,13 +223,8 @@ npx tsx src/parse/parse.ts fixtures/section-block.md | grep -B2 -A2 '"generator"
 **Input:** Fenced code block containing `(#generator)`
 
 **Expected output:**
-- No Tag records from inside the code block
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/markdown.md | grep -c '"Tag"'
-# Expected: count of tags only from prose, not from code
-```
+No `Tag` records from inside the code block. Tags should only be detected in prose, not in code.
 
 ---
 
@@ -198,12 +235,17 @@ npx tsx src/parse/parse.ts fixtures/markdown.md | grep -c '"Tag"'
 **Input:** Fenced code block with ` ```javascript `
 
 **Expected output:**
-- NaturalBlock with raw value preserving the fences, OR structured code node
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/markdown.md | grep -A5 '"```javascript"'
+```json
+{
+  "construct": "NaturalBlock",
+  "type": "code",
+  "lang": "javascript",
+  "value": "..."
+}
 ```
+
+The `lang` field should be preserved from the mdast node.
 
 ---
 
@@ -212,6 +254,7 @@ npx tsx src/parse/parse.ts fixtures/markdown.md | grep -A5 '"```javascript"'
 **Fixture:** `fixtures/markdown.md`
 
 **Input:**
+
 ```markdown
 - Item one
 - Item two
@@ -219,11 +262,17 @@ npx tsx src/parse/parse.ts fixtures/markdown.md | grep -A5 '"```javascript"'
 ```
 
 **Expected output:**
-- NaturalBlock with `children` array containing 3 items
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/markdown.md | grep -A10 '"Item one"'
+```json
+{
+  "construct": "NaturalBlock",
+  "type": "list",
+  "children": [
+    { "construct": "NaturalBlock", "value": "Item one" },
+    { "construct": "NaturalBlock", "value": "Item two" },
+    { "construct": "NaturalBlock", "value": "Item three" }
+  ]
+}
 ```
 
 ---
@@ -235,12 +284,16 @@ npx tsx src/parse/parse.ts fixtures/markdown.md | grep -A10 '"Item one"'
 **Input:** Markdown table
 
 **Expected output:**
-- NaturalBlock with raw table text
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/markdown.md | grep -A5 '| Name |'
+```json
+{
+  "construct": "NaturalBlock",
+  "type": "table",
+  "value": "| Name | ... |"
+}
 ```
+
+The raw table text should be preserved.
 
 ---
 
@@ -251,20 +304,31 @@ npx tsx src/parse/parse.ts fixtures/markdown.md | grep -A5 '| Name |'
 **Input:** `# Section Block Fixtures` (level 1) containing `## Rules` (level 2) containing `### Routine: List Tasks` (level 3)
 
 **Expected output:**
-- Level 1 SectionBlock → child Level 2 SectionBlock → child Level 3 SectionBlock
 
-**Verify:**
-```bash
-npx tsx src/parse/parse.ts fixtures/section-block.md | python3 -c "
-import json, sys
-data = json.load(sys.stdin)
-outer = data['children'][0]
-print(f\"Level 1: {outer['name']}\")
-inner = outer['children'][0]
-print(f\"  Level 2: {inner['name']}\")
-innermost = inner['children'][0]
-print(f\"    Level 3: {innermost['name']} kind={innermost.get('kind')}\")
-"
+```json
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "SectionBlock",
+      "name": "Section Block Fixtures",
+      "children": [
+        {
+          "construct": "SectionBlock",
+          "name": "Rules",
+          "children": [
+            {
+              "construct": "SectionBlock",
+              "kind": "Routine",
+              "name": "List Tasks",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ---
@@ -273,8 +337,6 @@ print(f\"    Level 3: {innermost['name']} kind={innermost.get('kind')}\")
 
 **Fixture:** `fixtures/markdown.md`
 
-**Verify no internal fields:**
-```bash
-npx tsx src/parse/parse.ts fixtures/markdown.md | grep -c '_bufferIndex'
-# Expected: 0
-```
+**Expected output:**
+
+All `position` objects should have only `start` and `end` fields, each with `line`, `column`, `offset`. No internal mdast fields like `_bufferIndex` or `_index` should be present.

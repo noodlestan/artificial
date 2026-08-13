@@ -16,19 +16,19 @@
 interface VisitContext {
   // What construct is currently collecting children
   capturing(): string | undefined
-  
+
   // Get the current target for new records
   target(): BlockContent[]
-  
+
   // Push a record to the current target
   push(record: Construct): void
-  
+
   // Close current context, return parent
   close(): VisitContext | undefined
-  
+
   // Source markdown for raw slicing
   source: string
-  
+
   // Last position for gap detection
   lastEnd: Point | undefined
 }
@@ -39,16 +39,16 @@ function createNestedContext(
   source?: string
 ): VisitContext {
   const children: BlockContent[] = []
-  
+
   return {
     capturing() {
       return structure
     },
-    
+
     target() {
       return children
     },
-    
+
     push(record: Construct) {
       // Tags go to section, not children
       if (record.construct === 'Tag') {
@@ -56,15 +56,15 @@ function createNestedContext(
         if (section) (section.tags ??= []).push(record)
         return
       }
-      
+
       // Add to current context's children
       children.push(record)
     },
-    
+
     close() {
       return parentContext
     },
-    
+
     source: source ?? parentContext?.source ?? '',
     lastEnd: undefined
   }
@@ -105,9 +105,9 @@ function buildDocument(markdown: string): Document {
   tree = fromMarkdown(markdown)
   document = { construct: 'Document', children: [] }
   context = createDocumentContext(markdown)
-  
+
   visit(tree, node => visitNode(node, context))
-  
+
   return document
 }
 ```
@@ -118,23 +118,23 @@ function buildDocument(markdown: string): Document {
 function visitNode(node: MdastNode, context: VisitContext): Skip | undefined {
   // Skip root, it's just a container
   if (node.type === 'root') return undefined
-  
+
   // Handle paragraph children specially
   if (node.type === 'paragraph') {
     return visitParagraph(node, context)
   }
-  
+
   // Try each factory in order
   factory = getFactory(node, context)
-  
+
   if (factory) {
     record = factory.create(node, context)
-    
+
     // Flush any gap before this record
     if (record.position) {
       flushGap(context, record.position.start)
     }
-    
+
     // Handle capture phase transitions
     if (record.construct === 'SectionBlock') {
       handleSectionBlock(record, node, context)
@@ -145,7 +145,7 @@ function visitNode(node: MdastNode, context: VisitContext): Skip | undefined {
     else {
       context.push(record)
     }
-    
+
     // Update lastEnd
     if (record.position) {
       context.lastEnd = {
@@ -154,20 +154,20 @@ function visitNode(node: MdastNode, context: VisitContext): Skip | undefined {
         offset: record.position.end.offset
       }
     }
-    
+
     return factory.visitChildren ? undefined : SKIP
   }
-  
+
   // NaturalBlock fallback — transparent wrapper
   record = createNaturalBlock(node, context)
-  
+
   // Flush any gap before this record
   if (record.position) {
     flushGap(context, record.position.start)
   }
-  
+
   context.push(record)
-  
+
   // Update lastEnd
   if (record.position) {
     context.lastEnd = {
@@ -176,7 +176,7 @@ function visitNode(node: MdastNode, context: VisitContext): Skip | undefined {
       offset: record.position.end.offset
     }
   }
-  
+
   return SKIP
 }
 ```
@@ -189,21 +189,21 @@ function visitParagraph(node: Paragraph, context: VisitContext): Skip {
   if (node.children.length > 0 && isFieldStrong(node.children[0], context)) {
     // Create field block from paragraph
     record = createFieldBlockFromParagraph(node, context)
-    
+
     // Flush any gap before this record
     if (record.position) {
       flushGap(context, record.position.start)
     }
-    
+
     // Close previous field if any
     if (context.capturing() === 'FieldBlock') {
       context = context.close()
     }
-    
+
     // Push to current context and start field capture
     context.push(record)
     context = createNestedContext('FieldBlock', context)
-    
+
     // Update lastEnd
     if (record.position) {
       context.lastEnd = {
@@ -212,20 +212,20 @@ function visitParagraph(node: Paragraph, context: VisitContext): Skip {
         offset: record.position.end.offset
       }
     }
-    
+
     return SKIP
   }
-  
+
   // Otherwise, treat as NaturalBlock
   record = createNaturalBlock(node, context)
-  
+
   // Flush any gap before this record
   if (record.position) {
     flushGap(context, record.position.start)
   }
-  
+
   context.push(record)
-  
+
   // Update lastEnd
   if (record.position) {
     context.lastEnd = {
@@ -234,7 +234,7 @@ function visitParagraph(node: Paragraph, context: VisitContext): Skip {
       offset: record.position.end.offset
     }
   }
-  
+
   return SKIP
 }
 ```
@@ -247,7 +247,7 @@ function handleSectionBlock(record: SectionBlock, node: MdastNode, context: Visi
   if (context.capturing() === 'FieldBlock') {
     context = context.close()
   }
-  
+
   // Close sections at or above this depth
   heading = node as Heading
   while (context.capturing() === 'SectionBlock') {
@@ -258,10 +258,10 @@ function handleSectionBlock(record: SectionBlock, node: MdastNode, context: Visi
       break
     }
   }
-  
+
   // Push to current context
   context.push(record)
-  
+
   // Start section capture
   context = createNestedContext('SectionBlock', context)
 }
@@ -275,10 +275,10 @@ function handleFieldBlock(record: FieldBlock, context: VisitContext): void {
   if (context.capturing() === 'FieldBlock') {
     context = context.close()
   }
-  
+
   // Push to current context
   context.push(record)
-  
+
   // Start field capture
   context = createNestedContext('FieldBlock', context)
 }
@@ -295,7 +295,7 @@ function createNaturalBlock(node: MdastNode, context: VisitContext): NaturalBloc
     value: rawSlice(node, context),     // raw markdown
     position: cleanPosition(node.position)
   }
-  
+
   // Copy any other mdast attributes based on type
   if (node.type === 'code') {
     code = node as Code
@@ -308,11 +308,11 @@ function createNaturalBlock(node: MdastNode, context: VisitContext): NaturalBloc
   }
   else if (node.type === 'blockquote') {
     // Preserve blockquote structure
-    block.children = node.children.map(child => 
+    block.children = node.children.map(child =>
       createNaturalBlock(child, context)
     )
   }
-  
+
   return block
 }
 ```
@@ -323,12 +323,12 @@ function createNaturalBlock(node: MdastNode, context: VisitContext): NaturalBloc
 function createFieldBlockFromParagraph(paragraph: Paragraph, context: VisitContext): FieldBlock {
   // Get the strong node (first child)
   strong = paragraph.children[0] as Strong
-  
+
   // Extract field name
   inner = stripStrong(strong, context)
   colonIndex = inner.indexOf(':')
   name = inner.slice(0, colonIndex).trim()
-  
+
   // Create field record
   field = {
     construct: 'FieldBlock',
@@ -336,7 +336,7 @@ function createFieldBlockFromParagraph(paragraph: Paragraph, context: VisitConte
     value: [],
     position: cleanPosition(paragraph.position)
   }
-  
+
   // Add inline value after colon
   remainder = inner.slice(colonIndex + 1)
   if (remainder) {
@@ -347,12 +347,12 @@ function createFieldBlockFromParagraph(paragraph: Paragraph, context: VisitConte
       position: cleanPosition(strong.position)
     })
   }
-  
+
   // Add remaining paragraph children as NaturalBlocks
   for (child of paragraph.children.slice(1)) {
     field.value.push(createNaturalBlock(child, context))
   }
-  
+
   return field
 }
 ```
@@ -403,13 +403,13 @@ function flushGap(context: VisitContext, start: Point): void {
 function getFactory(node: MdastNode, context: VisitContext): ConstructFactory | null {
   // Section blocks first — they change capture phase
   if (sectionBlockFactory.detect(node, context)) return sectionBlockFactory
-  
+
   // Field blocks second — they start field capture
   if (fieldBlockFactory.detect(node, context)) return fieldBlockFactory
-  
+
   // Tags third — they go to section
   if (tagFactory.detect(node, context)) return tagFactory
-  
+
   // Everything else is NaturalBlock
   return null
 }

@@ -35,15 +35,15 @@ Second paragraph after a blank line.
 
 [Reference link][ref]
 
-[ref]: https://example.com "Reference"
+[ref]: https://example.com 'Reference'
 
 ## Emphasis
 
-This is *italic*.
+This is _italic_.
 
 This is **bold**.
 
-This is ***bold and italic***.
+This is **_bold and italic_**.
 
 This is ~~strikethrough~~.
 
@@ -53,7 +53,7 @@ Inline `code` in a paragraph.
 
 ```javascript
 function hello() {
-  console.log("world");
+  console.log('world');
 }
 ```
 
@@ -79,11 +79,11 @@ def greet(name):
 
 ## Tables
 
-| Name | Type | Required |
-|------|------|----------|
-| id | string | yes |
-| name | string | yes |
-| value | number | no |
+| Name  | Type   | Required |
+| ----- | ------ | -------- |
+| id    | string | yes      |
+| name  | string | yes      |
+| value | number | no       |
 
 ## Horizontal Rule
 

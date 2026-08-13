@@ -43,19 +43,15 @@ npm run build
 npm run test
 ```
 
-## Records Management
-
-The workspace maintains ops records at `ops/records` detailing project configurations, namespaces, packages, dependencies, scaffolding and more.
-
 ## References
 
-The workspace maintains an architecture reference at `architecture/index.md` and decision records at `architecture/records/adr`.
+The project maintains an architecture reference at `../../../architecture/index.md` and decision records at `../../../architecture/records/adr`.
 
 ## Planning Workflow
 
 This project plans its work with the plan workflow defined in `$WORKSPACE/.agents/domains/plans/`.
 
-Each project manages its own backlog in a local `_backlog/` directory with a `_guide.md` entry point containing layout, references, verification, and workflows.
+This project manages its own backlog in a local `_backlog/`.
 
 The short-term focus is captured in `_backlog/_parking-lot.md` – actionable items, pending questions, blockers, and follow-ups (no done items).
 
