@@ -154,6 +154,42 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/define-parser-builder-construct-layers__report.md`
 
+### `split-factory-modules` - `PLANNED`
+
+**Commit Message:** `poc-parse: split factory into modular structure`
+
+**Instructions File:** `_backlog/plan-poc-parse/instructions/split-factory-modules.md`
+
+**Scope:**
+
+- Split `factory.ts` into modular structure:
+  - `types.ts` — keep existing types (already exists, update if needed)
+  - `framework/` — one function per file:
+    - `createNestedContext.ts`
+    - `createDocumentContext.ts`
+    - `cleanPosition.ts`
+    - `rawSlice.ts`
+    - `getFactory.ts`
+    - `findTagable.ts`
+    - `sectionDepth.ts`
+    - `flushGap.ts`
+  - `constructs/{construct}/{functionName}.ts` — construct-specific code:
+    - `SectionBlock/factory.ts`
+    - `SectionBlock/handler.ts`
+    - `FieldBlock/factory.ts`
+    - `FieldBlock/handler.ts`
+    - `FieldBlock/preProcessor.ts`
+    - `NaturalBlock/factory.ts`
+    - `Tag/factory.ts`
+    - `Tag/handler.ts`
+  - `index.ts` — re-exports public API
+
+**Final Verification:**
+
+1. `npm run ci` must pass
+2. Run fixture 3x: `npx tsx src/parse/parse.ts fixtures/markdown.md > fixtures/markdown.art.json`
+3. All 3 JSON outputs must be identical (no changes between runs)
+
 ## Follow ups
 
 - Race execution cycle — one commit per delegator session; after each delegation the planner session analyses the sub-agent report and feedback and authors the next instruction batch (increasing sizes, e.g. 2–3, then 4–5–6). Remaining commits move `DRAFT` → `PLANNED` as their instruction files are written.
