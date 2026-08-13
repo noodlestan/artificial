@@ -1,24 +1,11 @@
 import type { Paragraph, Strong } from 'mdast';
 
 import { cleanPosition } from '../../framework/cleanPosition';
-import type { MdastNode, VisitContext } from '../../framework/createNestedContext';
-import type { ConstructFactory } from '../../framework/getFactory';
-import { rawSlice } from '../../framework/rawSlice';
+import type { ConstructFactory, MdastNode, VisitContext } from '../../framework/types';
 import type { FieldBlock } from '../../types';
 import { createNaturalBlock } from '../NaturalBlock/factory';
 
-const FIELD_TEXT_PATTERN = /^[A-Za-z][A-Za-z ]*:(?:\s|$)/;
-
-function stripStrong(node: Strong, context: VisitContext): string {
-	const raw = rawSlice(node, context);
-	if (raw.length >= 4 && raw.startsWith('**') && raw.endsWith('**')) return raw.slice(2, -2);
-	if (raw.length >= 4 && raw.startsWith('__') && raw.endsWith('__')) return raw.slice(2, -2);
-	return raw;
-}
-
-function isFieldStrong(node: import('mdast').Nodes, context: VisitContext): node is Strong {
-	return node.type === 'strong' && FIELD_TEXT_PATTERN.test(stripStrong(node as Strong, context));
-}
+import { isFieldStrong, stripStrong } from './private/isFieldStrong';
 
 export function createFieldBlockFromParagraph(
 	paragraph: Paragraph,

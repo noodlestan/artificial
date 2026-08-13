@@ -1,9 +1,8 @@
 import type { List } from 'mdast';
 
 import { cleanPosition } from '../../framework/cleanPosition';
-import type { MdastNode, VisitContext } from '../../framework/createNestedContext';
-import type { ConstructFactory } from '../../framework/getFactory';
 import { rawSlice } from '../../framework/rawSlice';
+import type { ConstructFactory, MdastNode, VisitContext } from '../../framework/types';
 import type { NaturalBlock } from '../../types';
 export function createNaturalBlock(node: MdastNode, context: VisitContext): NaturalBlock {
 	const block: NaturalBlock = {

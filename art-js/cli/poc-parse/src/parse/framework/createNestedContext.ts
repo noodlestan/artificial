@@ -1,17 +1,8 @@
-import type { Node } from 'unist';
+import type { BlockContent, SectionBlock } from '../types';
 
-import type { BlockContent, Point, SectionBlock } from '../types';
+import type { VisitContext } from './types';
 
-export type MdastNode = Node;
-
-export interface VisitContext {
-	capturing(): string | undefined;
-	target(): BlockContent[];
-	push(record: BlockContent): void;
-	parent(): VisitContext | undefined;
-	source: string;
-	lastEnd: Point | undefined;
-}
+export type { VisitContext };
 
 const sectionMap = new WeakMap<VisitContext, SectionBlock>();
 

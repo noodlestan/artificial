@@ -1,55 +1,29 @@
-import { createFieldBlockFromParagraph, fieldBlockFactory } from './constructs/FieldBlock/factory';
-import { createFieldBlockHandler } from './constructs/FieldBlock/handler';
-import { createFieldDetectionPreProcessor } from './constructs/FieldBlock/preProcessor';
-import type { ConstructPreProcessor } from './constructs/FieldBlock/preProcessor';
-import { createNaturalBlock, naturalBlockFactory } from './constructs/NaturalBlock/factory';
-import { sectionBlockFactory } from './constructs/SectionBlock/factory';
-import { createSectionBlockHandler } from './constructs/SectionBlock/handler';
-import type { ConstructHandler } from './constructs/SectionBlock/handler';
-import { tagFactory } from './constructs/Tag/factory';
-import { createTagRoutingHandler } from './constructs/Tag/handler';
+import {
+	createFieldBlockFromParagraph,
+	createFieldBlockHandler,
+	createFieldDetectionPreProcessor,
+	fieldBlockFactory,
+} from './constructs/FieldBlock';
+import { createNaturalBlock, naturalBlockFactory } from './constructs/NaturalBlock';
+import { createSectionBlockHandler, sectionBlockFactory } from './constructs/SectionBlock';
+import { createTagRoutingHandler, tagFactory } from './constructs/Tag';
 import { cleanPosition } from './framework/cleanPosition';
 import { createDocumentContext } from './framework/createDocumentContext';
 import { createNestedContext } from './framework/createNestedContext';
-import type { MdastNode, VisitContext } from './framework/createNestedContext';
 import { findTagable } from './framework/findTagable';
 import { flushGap } from './framework/flushGap';
 import { getFactory } from './framework/getFactory';
-import type { ConstructFactory } from './framework/getFactory';
 import { rawSlice } from './framework/rawSlice';
 import { sectionDepth } from './framework/sectionDepth';
 
-export interface ParserConfig {
-	preProcessors: ConstructPreProcessor[];
-	factories: ConstructFactory[];
-	handlers: ConstructHandler[];
-}
+// Re-export framework types
+export type { ConstructFactory, MdastNode, VisitContext } from './framework/types';
 
-const BLOCK_TYPES = new Set([
-	'paragraph',
-	'code',
-	'list',
-	'blockquote',
-	'table',
-	'thematicBreak',
-	'html',
-	'definition',
-]);
+// Re-export construct public APIs
+export type { ConstructPreProcessor } from './constructs/FieldBlock';
+export type { ConstructHandler } from './constructs/SectionBlock';
 
-export function isBlockType(type: string): boolean {
-	return BLOCK_TYPES.has(type);
-}
-
-export function createDefaultConfig(): ParserConfig {
-	return {
-		preProcessors: [createFieldDetectionPreProcessor()],
-		factories: [sectionBlockFactory, tagFactory],
-		handlers: [createSectionBlockHandler(), createFieldBlockHandler(), createTagRoutingHandler()],
-	};
-}
-
-export type { MdastNode, VisitContext, ConstructFactory, ConstructHandler, ConstructPreProcessor };
-
+// Re-export construct implementations
 export {
 	cleanPosition,
 	createDocumentContext,
@@ -70,3 +44,8 @@ export {
 	sectionDepth,
 	tagFactory,
 };
+
+// Local exports
+export { isBlockType } from './constants';
+export { createDefaultConfig } from './config';
+export type { ParserConfig } from './config';

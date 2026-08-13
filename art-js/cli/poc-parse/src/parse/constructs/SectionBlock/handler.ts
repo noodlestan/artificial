@@ -1,7 +1,7 @@
 import { createNestedContext } from '../../framework/createNestedContext';
-import type { MdastNode, VisitContext } from '../../framework/createNestedContext';
 import { findTagable } from '../../framework/findTagable';
 import { sectionDepth } from '../../framework/sectionDepth';
+import type { MdastNode, VisitContext } from '../../framework/types';
 import type { Construct, SectionBlock } from '../../types';
 
 export interface ConstructHandler {

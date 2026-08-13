@@ -4,7 +4,7 @@
 
 set -e
 
-FIXTURES=("markdown.md" "section-block.md" "field-block.md")
+FIXTURES=("markdown.md" "section-block.md" "field-block.md" "parser.art" "configuration.art")
 EXIT_CODE=0
 
 for fixture in "${FIXTURES[@]}"; do
@@ -27,7 +27,8 @@ for fixture in "${FIXTURES[@]}"; do
   fi
   
   # Also update the committed fixture
-  cp "/tmp/${fixture}.run1.json" "fixtures/${fixture%.md}.art.json"
+  base="${fixture%.*}"
+  cp "/tmp/${fixture}.run1.json" "fixtures/${base}.art.json"
 done
 
 if [ $EXIT_CODE -eq 0 ]; then

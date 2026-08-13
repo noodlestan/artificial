@@ -1,7 +1,7 @@
 import type { SectionBlock } from '../types';
 
-import type { VisitContext } from './createNestedContext';
 import { getSectionMap } from './createNestedContext';
+import type { VisitContext } from './types';
 
 export function findTagable(context: VisitContext): SectionBlock | undefined {
 	const sectionMap = getSectionMap();

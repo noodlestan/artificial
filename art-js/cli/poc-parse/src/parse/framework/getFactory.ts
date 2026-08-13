@@ -1,12 +1,6 @@
-import type { Construct } from '../types';
+import type { ConstructFactory, MdastNode, VisitContext } from './types';
 
-import type { MdastNode, VisitContext } from './createNestedContext';
-
-export interface ConstructFactory {
-	detect(node: MdastNode, context: VisitContext): boolean;
-	create(node: MdastNode, context: VisitContext): Construct;
-	shouldVisit: boolean;
-}
+export type { ConstructFactory };
 
 export function getFactory(
 	node: MdastNode,

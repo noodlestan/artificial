@@ -1,6 +1,6 @@
 import type { Paragraph } from 'mdast';
 
-import type { MdastNode, VisitContext } from '../../framework/createNestedContext';
+import type { MdastNode, VisitContext } from '../../framework/types';
 import type { Construct } from '../../types';
 
 import { createFieldBlockFromParagraph, isFieldStrong } from './factory';

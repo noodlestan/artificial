@@ -1,6 +1,6 @@
 import type { NaturalBlock, Point } from '../types';
 
-import type { VisitContext } from './createNestedContext';
+import type { VisitContext } from './types';
 
 export function flushGap(
 	start: Point,

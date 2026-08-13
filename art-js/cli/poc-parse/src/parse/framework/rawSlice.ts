@@ -1,4 +1,4 @@
-import type { MdastNode, VisitContext } from './createNestedContext';
+import type { MdastNode, VisitContext } from './types';
 
 export function rawSlice(node: MdastNode, context: VisitContext): string {
 	if (!node.position?.start || !node.position?.end) return '';

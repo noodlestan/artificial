@@ -1,20 +1,12 @@
 import type { Heading } from 'mdast';
 
 import { cleanPosition } from '../../framework/cleanPosition';
-import type { ConstructFactory } from '../../framework/getFactory';
 import { rawSlice } from '../../framework/rawSlice';
-import type { SectionBlock, Tag } from '../../types';
+import type { ConstructFactory } from '../../framework/types';
+import type { SectionBlock } from '../../types';
 
-const TAG_PATTERN_G = /\(#([\w-]+)\)/g;
-const KIND_PATTERN = /^([\w-]+(?: [\w-]+)*):\s*(.+)$/;
-
-function extractTags(text: string): Tag[] {
-	const tags: Tag[] = [];
-	for (const match of text.matchAll(TAG_PATTERN_G)) {
-		tags.push({ construct: 'Tag', name: match[1] });
-	}
-	return tags;
-}
+import { KIND_PATTERN, TAG_PATTERN_G } from './constants';
+import { extractTags } from './private/extractTags';
 
 export const sectionBlockFactory: ConstructFactory = {
 	detect(node) {

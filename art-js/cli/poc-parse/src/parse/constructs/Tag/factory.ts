@@ -1,10 +1,10 @@
 import type { Text } from 'mdast';
 
 import { cleanPosition } from '../../framework/cleanPosition';
-import type { ConstructFactory } from '../../framework/getFactory';
+import type { ConstructFactory } from '../../framework/types';
 import type { Tag } from '../../types';
 
-const TAG_PATTERN = /\(#([\w-]+)\)/;
+import { TAG_PATTERN } from './constants';
 
 export const tagFactory: ConstructFactory = {
 	detect(node) {
