@@ -25,36 +25,32 @@ src/                — application source
 
 ## Setup
 
-Run at root of repository, not per package:
+Run from repository root (monorepo):
 
 ```bash
 npm ci # to install dependencies.
+npm run ci # to verify build is green before starting
 ```
 
 ## Verification
 
-Run per package modified:
+Run from this package directory:
 
 ```bash
-npm run serve # to start the development server
+npm run lint:fix # to fix formatting issues automatically
+npm run lint # to report other issues (prettier, eslint, tsc --noEmit)
+npm run build # to start the development server
+```
+
+Runs on pre-commit hook from the repository root:
+
+```bash
+npm run ci # lint, build and test
 ```
 
 ## Deployment
 
-Build and deploy to AWS:
-
-```bash
-npm run build                                    # build dist/ artifacts
-aws s3 sync dist/ s3://art-mantras-noodlestan-org-prod --delete
-aws cloudfront create-invalidation --distribution-id E3MR81TGFNVD2W --paths "/*"
-```
-
-**Environments:**
-
-- **Production:** https://art-mantras.noodlestan.org (bucket: `art-mantras-noodlestan-org-prod`, distribution: `E3MR81TGFNVD2W`)
-- **Staging:** https://stage-art-mantras.noodlestan.org (bucket: `art-mantras-noodlestan-org-stage`, distribution: `EVVYS72BO8V4I`)
-
-**Infrastructure:** Managed in `$WORKSPACE/repos/terraform/domains/noodlestan/websites/art-mantras/`
+See `ops/records/deployment.art` for deployment commands, environments, and infrastructure details.
 
 ## Records Management
 
