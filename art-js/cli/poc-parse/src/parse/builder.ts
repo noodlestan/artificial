@@ -5,7 +5,7 @@ import { SKIP, visit } from 'unist-util-visit';
 
 import { createDocumentContext, createNaturalBlock, getFactory, isBlockType } from './factory';
 import type { ConstructHandler, ParserConfig, VisitContext } from './factory';
-import type { Construct, Document, NaturalBlock, Point } from './types';
+import type { BlockContent, Construct, Document, NaturalBlock, Point } from './types';
 
 interface HandleResult {
 	record: Construct;
@@ -85,7 +85,7 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 			if (handler) {
 				currentContext = handler.handle(record, node, currentContext);
 			} else {
-				currentContext.push(record);
+				currentContext.push(record as BlockContent);
 			}
 
 			if (record.position) {
@@ -104,7 +104,7 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 			if (handler) {
 				currentContext = handler.handle(record, node, currentContext);
 			} else {
-				currentContext.push(record);
+				currentContext.push(record as BlockContent);
 			}
 
 			if (record.position) {

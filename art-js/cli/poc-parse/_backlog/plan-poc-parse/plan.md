@@ -144,20 +144,15 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/abstract-builder__report.md`
 
-### `define-parser-builder-construct-layers` - `DRAFT`
+### `define-parser-builder-construct-layers` - `COMMITTED`
 
 **Commit Message:** `poc-parse: define parser builder construct layers`
 
 **Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/define-parser-builder-construct-layers.md`
 
-**Scope:**
-- Clean `VisitContext` — remove `detectField`, `_section` (construct-specific pollution)
-- Remove `isInlineNode` / `INLINE_TYPES` — let factories handle all nodes uniformly
-- Create `ConstructPreProcessor` contract for field detection (before factory)
-- Move tag detection out of `VisitContext.push()` into a handler
-- Inject everything into `buildDocument` — no default args, `ParserConfig` interface
-- Create `createDefaultConfig()` entry point
-- Update `parse.ts` to use injected config
+**Evidence:** commit `04b54be`; artefacts — rewritten `art-js/cli/poc-parse/src/parse/factory.ts` (removed `detectField`/`_section` from `VisitContext`, removed `INLINE_TYPES`/`isInlineNode`, added `BLOCK_TYPES`/`isBlockType`, added `ConstructPreProcessor` interface + `createFieldDetectionPreProcessor`, added `createTagRoutingHandler`, moved section tracking to `WeakMap<VisitContext, SectionBlock>`, added `ParserConfig` interface + `createDefaultConfig`), rewritten `art-js/cli/poc-parse/src/parse/builder.ts` (removed default handlers arg, added `ParserConfig` param to `buildDocument`, added `tryPreProcessors` for pre-factory detection, replaced `isInlineNode` with `isBlockType` check), updated `art-js/cli/poc-parse/src/parse/parse.ts` (imports `createDefaultConfig`, passes config to `buildDocument`). `npm run lint` exit 0; TC1 verified.
+
+**Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/define-parser-builder-construct-layers__report.md`
 
 ## Follow ups
 

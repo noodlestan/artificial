@@ -17,7 +17,7 @@ export type MdastNode = Node;
 export interface VisitContext {
 	capturing(): string | undefined;
 	target(): BlockContent[];
-	push(record: Construct): void;
+	push(record: BlockContent): void;
 	parent(): VisitContext | undefined;
 	source: string;
 	lastEnd: Point | undefined;
@@ -42,6 +42,7 @@ const BLOCK_TYPES = new Set([
 	'table',
 	'thematicBreak',
 	'html',
+	'definition',
 ]);
 
 const sectionMap = new WeakMap<VisitContext, SectionBlock>();
@@ -298,7 +299,7 @@ export function createSectionBlockHandler(
 				}
 			}
 
-			ctx.push(record);
+			ctx.push(record as SectionBlock);
 			const newCtx = createNestedCtx('SectionBlock', ctx, undefined, section.children, section);
 			newCtx.lastEnd = ctx.lastEnd;
 			return newCtx;
@@ -325,7 +326,7 @@ export function createFieldBlockHandler(
 				}
 			}
 
-			ctx.push(record);
+			ctx.push(record as FieldBlock);
 			const newCtx = createNestedCtx('FieldBlock', ctx, undefined, field.value);
 			newCtx.lastEnd = ctx.lastEnd;
 			return newCtx;
@@ -370,7 +371,7 @@ export function createNestedContext(
 		target() {
 			return children;
 		},
-		push(record: Construct) {
+		push(record: BlockContent) {
 			children.push(record);
 		},
 		parent() {

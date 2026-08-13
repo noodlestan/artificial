@@ -29,7 +29,8 @@
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix",
     "build:clean": "rm -rf dist",
-    "test": "echo none yet"
+    "test": "echo none yet",
+    "ci": "npm run lint && npm run test"
   },
   "dependencies": {
     "mdast-util-from-markdown": "^2.0.0",

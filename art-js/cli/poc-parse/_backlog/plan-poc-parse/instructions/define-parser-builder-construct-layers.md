@@ -21,6 +21,7 @@ The plan workflow (see `repos/artificial/_guide.md` → Planning Workflow → Wo
 This iteration establishes **total separation between layers** in the parser/builder/construct architecture. The current implementation has pollution that mixes concerns:
 
 **Current pollution:**
+
 1. `detectField(paragraph)` on `VisitContext` — construct-specific logic hardcoded into context
 2. `_section?: SectionBlock` on `VisitContext` — construct-specific state hardcoded into context
 3. `isInlineNode()` / `INLINE_TYPES` — wrong assumption that inline nodes are not parsed (we have `%identifiers` as inline constructs)
@@ -28,6 +29,7 @@ This iteration establishes **total separation between layers** in the parser/bui
 5. Tag detection hardcoded in `VisitContext.push()` — should be a handler
 
 **Target architecture:**
+
 - `VisitContext` is a **pure container** — no construct-specific logic, only generic push/parent/target
 - `ConstructFactory` detects and creates records — independent of context state
 - `ConstructHandler` processes records — receives context, returns new context
@@ -64,6 +66,7 @@ export interface VisitContext {
 ```
 
 Remove:
+
 - `detectField(paragraph: Paragraph): FieldBlock | null` — will be a handler
 - `_section?: SectionBlock` — will be injected differently
 
@@ -83,7 +86,7 @@ Move field detection from context into a handler:
 
 ```typescript
 export function createFieldDetectionHandler(
-  createNestedCtx: typeof createNestedContext
+  createNestedCtx: typeof createNestedContext,
 ): ConstructHandler {
   return {
     canHandle(record) {
@@ -94,7 +97,7 @@ export function createFieldDetectionHandler(
     handle(record, node, context) {
       // Not used — field detection is a pre-processing step
       return context;
-    }
+    },
   };
 }
 ```
@@ -115,6 +118,7 @@ The `buildDocument` would try pre-processors before factories.
 ### Step 4 — Move tag detection out of `VisitContext.push()`
 
 Currently, `push()` has hardcoded tag routing:
+
 ```typescript
 if (record.construct === 'Tag') {
   const s = findTagable(ctx);
@@ -136,7 +140,7 @@ export function createTagRoutingHandler(): ConstructHandler {
       // This needs access to the context chain
       // ... implementation
       return context;
-    }
+    },
   };
 }
 ```
@@ -174,6 +178,7 @@ export function createDefaultConfig(): ParserConfig {
 ```
 
 The entry point (`parse.ts`) would use:
+
 ```typescript
 const config = createDefaultConfig();
 const doc = buildDocument(markdown, config);
@@ -182,6 +187,7 @@ const doc = buildDocument(markdown, config);
 ### Step 6 — Update `parse.ts` entry point
 
 Update `repos/artificial/art-js/cli/poc-parse/src/parse/parse.ts` to:
+
 1. Import `createDefaultConfig` and `buildDocument`
 2. Create config and pass to `buildDocument`
 3. No default args in `buildDocument` signature
@@ -207,6 +213,7 @@ Update `repos/artificial/art-js/cli/poc-parse/src/parse/parse.ts` to:
 **Sanity check**
 
 The parser/builder/construct layers are cleanly separated:
+
 - `VisitContext` is a pure container (no construct-specific logic)
 - `ConstructFactory` detects and creates records
 - `ConstructHandler` processes records after creation
