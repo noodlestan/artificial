@@ -3,9 +3,16 @@ import { fromMarkdown } from 'mdast-util-from-markdown';
 import type { Node } from 'unist';
 import { SKIP, visit } from 'unist-util-visit';
 
-import { createDocumentContext, createNaturalBlock, getFactory, isBlockType } from './factory';
-import type { ConstructHandler, ParserConfig, VisitContext } from './factory';
-import type { BlockContent, Construct, Document, NaturalBlock, Point } from './types';
+import type { BlockContent, Construct, Document, Point } from './types';
+
+import {
+	createDocumentContext,
+	createNaturalBlock,
+	flushGap,
+	getFactory,
+	isBlockType,
+} from './index';
+import type { ConstructHandler, ParserConfig, VisitContext } from './index';
 
 interface HandleResult {
 	record: Construct;
@@ -22,20 +29,6 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 	function updateLastEnd(end: Point): void {
 		lastEnd = { line: end.line, column: end.column, offset: end.offset };
 		currentContext.lastEnd = lastEnd;
-	}
-
-	function flushGap(start: Point): void {
-		if (lastEnd && start.offset > lastEnd.offset) {
-			const gap = markdown.slice(lastEnd.offset, start.offset);
-			if (gap) {
-				const gapBlock: NaturalBlock = {
-					construct: 'NaturalBlock',
-					type: 'text',
-					value: gap,
-				};
-				currentContext.push(gapBlock);
-			}
-		}
 	}
 
 	function tryPreProcessors(node: Node): HandleResult | null {
@@ -65,7 +58,7 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 
 	function handleNaturalBlock(node: Node): typeof SKIP | undefined {
 		const record = createNaturalBlock(node as Nodes, currentContext);
-		if (record.position) flushGap(record.position.start);
+		if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
 		currentContext.push(record);
 		if (record.position) {
 			updateLastEnd(record.position.end);
@@ -80,7 +73,7 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 		if (preResult) {
 			const { record, handler } = preResult;
 
-			if (record.position) flushGap(record.position.start);
+			if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
 
 			if (handler) {
 				currentContext = handler.handle(record, node, currentContext);
@@ -99,7 +92,7 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 		if (factoryResult) {
 			const { record, handler, shouldVisit } = factoryResult;
 
-			if (record.position) flushGap(record.position.start);
+			if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
 
 			if (handler) {
 				currentContext = handler.handle(record, node, currentContext);

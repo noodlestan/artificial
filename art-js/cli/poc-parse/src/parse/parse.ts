@@ -4,8 +4,9 @@ import { isAbsolute, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { buildDocument } from './builder';
-import { createDefaultConfig } from './factory';
 import type { Document } from './types';
+
+import { createDefaultConfig } from './index';
 
 export function parse(markdown: string): Document {
 	const config = createDefaultConfig();
