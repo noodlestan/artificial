@@ -29,7 +29,21 @@ Fix repo command showing "unknown package" for every package, followed by hydrat
 
 **Commit Message:** `fix(workspace-cli): repo command resolves package states correctly`
 
-Fix repo command showing "unknown package" for every package. Investigate graph loading, package resolution, and why hydrated checkout list appears after package states.
+Fix repo command showing "unknown package" for every package, followed by duplicate checkout list.
+
+**Root cause:**
+
+1. `readNamespaceRecord.ts` parser uses regex that only captures first line of `**Packages:**` section
+2. Actual record format uses multi-line list: `**Packages:**\n\n- Package: Name1\n- Package: Name2`
+3. Parser extracts `- Package: Name1` instead of `Name1`, causing package lookup to fail
+4. `runRepo.ts` presents checkout report inside per-checkout loop instead of after
+
+**Solution:**
+
+1. Fix `readNamespaceRecord.ts` to parse list format (mirror `readProjectRecord.ts` namespace parsing)
+2. Move report presentation outside the loop in `runRepo.ts`
+3. Update test helper `writeNamespaceRecord.ts` to use list format (match actual records)
+4. Update tests to verify list format parsing
 
 **Use case:**
 
@@ -39,11 +53,11 @@ Fix repo command showing "unknown package" for every package. Investigate graph 
 
 **Responsibilities:**
 
-- Investigate why packages show as "unknown"
-- Fix graph loading to correctly resolve package records
-- Fix package state resolution (version, published version)
-- Remove duplicate checkout list output
-- Verify with existing tests
+- Fix namespace record parser to handle list format
+- Extract package names from `- Package: {name}` lines
+- Move report presentation outside per-checkout loop
+- Update test helper to write list format
+- Verify all tests pass
 
 **Edge cases:**
 
@@ -52,6 +66,8 @@ Fix repo command showing "unknown package" for every package. Investigate graph 
 - Project record missing
 - package.json missing
 - npm info fails
+- Empty packages list
+- Multiple packages in list
 
 **Pseudo details:** `architecture/_pseudo.md` → Use Cases → repo command.
 

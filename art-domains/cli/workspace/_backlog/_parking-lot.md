@@ -35,9 +35,9 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 - **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
 - **Spawn 2 architects** — to expand DRAFT plans into full instruction files:
-  - `implement-sanity-workspace-report` (ONE)
-  - `fix-clone-command-report` (TWO)
-  - `fix-repo-command-graph-loading` (THREE) — after ONE and TWO are planned
+  - `plan-implement-sanity-workspace-report` (ONE)
+  - `plan-fix-clone-command-report` (TWO)
+  - `plan-fix-repo-command-graph-loading` (THREE) — after ONE and TWO are planned
 
 ### PENDING
 
@@ -51,9 +51,9 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 - **Reverse edge resolution** — `purrpose → @no-comply/solid-primitives` is still using `file:` resolution. After no-comply packages are published to npm, rewire to npm version.
 
-- **repo-ci** — GitHub Actions workflows for all repos. **DRAFT** — see `milestone-workspace-one` plan. Not priority.
+- **repo-ci** — GitHub Actions workflows for all repos. **DRAFT** — needs instruction file. Not priority.
 
-- **Update CLI README** — match format of `art-js/cli/bin/README.md`, preserving command summary.
+- **Update CLI README** — match format of other CLI READMEs in the ecosystem, preserving command summary.
 
 ### BLOCKER
 

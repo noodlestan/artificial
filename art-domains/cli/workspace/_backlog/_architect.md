@@ -48,11 +48,11 @@ Complete the workspace CLI with remaining commands and infrastructure.
 
 **Next:** Bug fixes — see `_backlog/3-now/` for DRAFT plans:
 
-- `implement-sanity-workspace-report` — workspace as first-class checkout in sanity
-- `fix-clone-command-report` — clone report shows checkout list twice / without scanning
-- `fix-repo-command-graph-loading` — repo shows "unknown package" everywhere
+- `plan-implement-sanity-workspace-report` — workspace as first-class checkout in sanity
+- `plan-fix-clone-command-report` — clone report shows checkout list twice / without scanning
+- `plan-fix-repo-command-graph-loading` — repo shows "unknown package" everywhere
 
-**Later:** `pull`, `push`, `sync` commands — see `_backlog/3-now/implement-pull-push-sync/plan.md`.
+**Later:** `pull`, `push`, `sync` commands — see `_backlog/4-now/plan-implement-pull-push-sync/plan.md`.
 
 **Even later:** `link`, `links`, `unlink`, `publish`.
 
@@ -62,4 +62,4 @@ Complete the workspace CLI with remaining commands and infrastructure.
 - **Publishing workflow** — formalize the publish-then-symlink pattern into a Workflow resource with agent modes, skills, and commands.
 - **Prepare `@art-domains/workspace` domain** — after `@art-domains/workspace-cli` is established, prepare the domain package to host workspace structures and other resources, including a reference to the CLI companion package.
 - **Reverse edge resolution** — `purrpose → @no-comply/solid-primitives` is still using `file:` resolution. After no-comply packages are published to npm, rewire to npm version.
-- **`manifest-generator`** — auto-generate `.art-workspace.mts` from the records, replacing the manually-authored manifest (see `_backlog/3-now/implement-command-repo/plan.md`).
+- **`manifest-generator`** — auto-generate `.art-workspace.mts` from the records, replacing the manually-authored manifest (see `_backlog/3-now/plan-implement-command-repo/plan.md`).

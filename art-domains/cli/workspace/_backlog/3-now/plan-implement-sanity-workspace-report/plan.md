@@ -2,7 +2,7 @@
 
 **ID:** `implement-sanity-workspace-report`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Template:** `plan`
 

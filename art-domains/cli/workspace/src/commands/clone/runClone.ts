@@ -1,6 +1,4 @@
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
-import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
-import { presentOperationsReport } from '../../private/present/presentOperationsReport';
 import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
 import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
@@ -30,9 +28,6 @@ export async function runClone(
 	} else {
 		await cloneStatus(ctx);
 	}
-
-	presentCheckoutReport(ctx);
-	presentOperationsReport(ctx.log);
 
 	return ctx;
 }

@@ -1,4 +1,6 @@
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
+import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
+import { presentOperationsReport } from '../../private/present/presentOperationsReport';
 import { RepositoryRecord } from '../../private/records/types';
 import { createCheckout } from '../../private/store/createCheckout';
 
@@ -15,4 +17,7 @@ export async function cloneAll(ctx: WorkspaceContext, repos: RepositoryRecord[])
 	for (const checkout of ctx.store.getAllCheckouts()) {
 		await cloneIfMissing(ctx, checkout);
 	}
+
+	presentCheckoutReport(ctx);
+	presentOperationsReport(ctx.log);
 }
