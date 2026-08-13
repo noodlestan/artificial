@@ -4,7 +4,6 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 
 ## ACTIONABLE
 
-- **Plan `abstract-builder`** — rename `visitChildren` → `shouldVisit`, restructure `visitNode` with `maybeHandleFactory`, rename `visitParagraph` → `handleBlock`, extract `handleNaturalBlock`, move field detection into `VisitContext.detectField()`.
 - **Plan `first-constructs-slice`** — land the composing trio `SectionBlock` + `FieldBlock` + `NaturalBlock` (the ADR parses as proof), then `Tag` (critical path for projection classification).
 
 ## pending

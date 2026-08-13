@@ -66,7 +66,7 @@ The current `visitNode` has scattered logic. Refactor to use a systematic approa
    function maybeHandleFactory(
      node: MdastNode,
      context: VisitContext,
-     handlers: ConstructHandler[]
+     handlers: ConstructHandler[],
    ): HandleResult | null {
      // Skip root node
      if (node.type === 'root') return null;

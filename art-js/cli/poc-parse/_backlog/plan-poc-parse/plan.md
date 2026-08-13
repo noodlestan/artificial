@@ -121,27 +121,28 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/refine-parse-factories__report.md`
 
-### `abstract-builder` - `DRAFT`
+### `abstract-builder` - `COMMITTED`
 
 **Commit Message:** `poc-parse: abstract builder and encapsulate constructs`
 
 **Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/abstract-builder.md`
 
 **Scope:**
-<<<<<<< HEAD
 
 - Rename `close()` → `parent()` (clearer naming)
 - Rename `findParentSection()` → `findTagable()` (clearer purpose)
 - Refactor `buildDocument` to inject construct-specific logic via contract (no closures over construct types)
-- Small bug fixes if noticed during review
-=======
+- # Small bug fixes if noticed during review
 - Rename `visitChildren` → `shouldVisit` (clearer boolean)
 - Restructure `visitNode` with `maybeHandleFactory` (early return pattern)
 - Rename `visitParagraph` → `handleBlock` (block handler, not paragraph-specific)
 - Extract `handleNaturalBlock` (named function for natural block fallback)
 - Document inline node SKIP behavior
 - Move field detection into `VisitContext.detectField()` (encapsulate construct logic)
->>>>>>> 30e40b9 (plan(poc-parse): abstract-builder iteration + integrate refine-parse-factories)
+
+**Evidence:** commit `2b67209`; artefacts — rewritten `art-js/cli/poc-parse/src/parse/builder.ts` (`HandleResult` interface, `maybeHandleFactory` helper, `handleBlock`, `handleNaturalBlock`, restructured `visitNode` with early returns, uses `currentContext.detectField()`), rewritten `art-js/cli/poc-parse/src/parse/factory.ts` (`visitChildren` → `shouldVisit` in interface + 4 factories, `detectField` added to `VisitContext` interface and implemented in `createNestedContext`). `npm run lint` exit 0; TC1 verified.
+
+**Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/abstract-builder__report.md`
 
 ### `first-constructs-slice` - `DRAFT`
 
