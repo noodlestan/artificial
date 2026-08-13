@@ -154,41 +154,15 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/define-parser-builder-construct-layers__report.md`
 
-### `split-factory-modules` - `PLANNED`
+### `split-factory-modules` - `COMMITTED`
 
 **Commit Message:** `poc-parse: split factory into modular structure`
 
-**Instructions File:** `_backlog/plan-poc-parse/instructions/split-factory-modules.md`
+**Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/split-factory-modules.md`
 
-**Scope:**
+**Evidence:** commit `17ff016`; artefacts — deleted `art-js/cli/poc-parse/src/parse/factory.ts`, new `art-js/cli/poc-parse/src/parse/framework/` (8 files: `createNestedContext.ts`, `createDocumentContext.ts`, `cleanPosition.ts`, `rawSlice.ts`, `getFactory.ts`, `findTagable.ts`, `sectionDepth.ts`, `flushGap.ts`), new `art-js/cli/poc-parse/src/parse/constructs/` (8 files across `SectionBlock/`, `FieldBlock/`, `NaturalBlock/`, `Tag/`), new `art-js/cli/poc-parse/src/parse/index.ts` (barrel re-exports + `ParserConfig`/`createDefaultConfig`/`isBlockType`), updated `builder.ts` and `parse.ts` imports. `npm run ci` passes; 3 consecutive fixture runs produce identical JSON output.
 
-- Split `factory.ts` into modular structure:
-  - `types.ts` — keep existing types (already exists, update if needed)
-  - `framework/` — one function per file:
-    - `createNestedContext.ts`
-    - `createDocumentContext.ts`
-    - `cleanPosition.ts`
-    - `rawSlice.ts`
-    - `getFactory.ts`
-    - `findTagable.ts`
-    - `sectionDepth.ts`
-    - `flushGap.ts`
-  - `constructs/{construct}/{functionName}.ts` — construct-specific code:
-    - `SectionBlock/factory.ts`
-    - `SectionBlock/handler.ts`
-    - `FieldBlock/factory.ts`
-    - `FieldBlock/handler.ts`
-    - `FieldBlock/preProcessor.ts`
-    - `NaturalBlock/factory.ts`
-    - `Tag/factory.ts`
-    - `Tag/handler.ts`
-  - `index.ts` — re-exports public API
-
-**Final Verification:**
-
-1. `npm run ci` must pass
-2. Run fixture 3x: `npx tsx src/parse/parse.ts fixtures/markdown.md > fixtures/markdown.art.json`
-3. All 3 JSON outputs must be identical (no changes between runs)
+**Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/split-factory-modules__report.md`
 
 ## Follow ups
 
