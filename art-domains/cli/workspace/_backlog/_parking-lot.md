@@ -21,7 +21,6 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 | Workspace not first in Checkout Report                   | `npm run workspace sanity`                              | `WORKSPACE` row appears first                           | `WORKSPACE` appears sorted by name — create workspace checkout before loading records                               |
 | Clone refuses extraneous dir but no failure logged       | `clone Purrtrait bug-fix` when `repos/bug-fix` exists   | log clone failure operation                             | refuses silently, no operation in report                                                                            |
 | Extraneous with file (no .git) shows "uncommitted files" | `repos/blah` with a `foo` file                          | `unknown project; no git`                               | `unknown project; uncommitted files` — `.git` check should come before git introspection                            |
-| Repo shows unknown package everywhere                    | `npm run workspace repo`                                | package states resolved correctly                       | shows "unknown package" for every package, followed by hydrated checkout list                                       |
 
 ### PENDING FEATURES
 
@@ -32,8 +31,6 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 ### ACTIONABLE
 
 - **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
-- **Spawn architects** — to expand DRAFT plans into full instruction files:
-  - `plan-fix-repo-command-graph-loading` — repo shows "unknown package" everywhere
 
 ### PENDING
 

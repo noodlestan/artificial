@@ -2,7 +2,7 @@
 
 **ID:** `fix-repo-command-graph-loading`
 
-**Status:** `DRAFT`
+**Status:** `DONE`
 
 **Template:** `plan`
 
@@ -25,9 +25,19 @@ Fix repo command showing "unknown package" for every package, followed by hydrat
 
 ## Iterations
 
-### `fix-repo-command-graph-loading` - `PLANNED`
+### `fix-repo-command-graph-loading` - `DONE`
+
+**Commit:** `c5baa99`
 
 **Commit Message:** `fix(workspace-cli): repo command resolves package states correctly`
+
+**Outcome:** Fixed namespace record parser to handle multi-line list format, moved report presentation outside checkout loop, updated test helper to write list format. All 152 tests pass.
+
+**Files changed:**
+
+- `src/private/records/namespace/readNamespaceRecord.ts`
+- `src/commands/repo/runRepo.ts`
+- `src/test/writeProjectRecord.ts`
 
 Fix repo command showing "unknown package" for every package, followed by duplicate checkout list.
 
