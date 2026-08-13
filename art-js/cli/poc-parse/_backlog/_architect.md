@@ -16,6 +16,10 @@ Forward-looking work for the artificials parser POC. Decisions live in the ADRs 
 
 - `_backlog/plan-poc-parse/plan.md` - WORKING
 
+**Next iteration:** `define-parser-builder-construct-layers` — clean layer separation, injectable entry point, define construct contracts.
+
+**After that:** Pre-roundtrip (parse one art file, verify output structure matches expectations).
+
 ### MD Art Roundtrip
 
 Use one art file `ops/records/packages/art-mantras.art` to parse and serialize back with zero diffs. All code unit tested. Use contents of file as fixture stored in spec package, parser package needs to import from there.
