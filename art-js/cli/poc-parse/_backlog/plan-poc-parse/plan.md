@@ -164,6 +164,14 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/split-factory-modules__report.md`
 
+### `pre-roundtrip-validation` - `PLANNED`
+
+**Commit Message:** `poc-parse: pre-roundtrip validation on real art file`
+
+**Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/pre-roundtrip-validation.md`
+
+**Scope:** Parse `architecture/records/adr/language.art` and verify output structure matches expectations (SectionBlock/FieldBlock/NaturalBlock classification). Save output as fixture for regression testing.
+
 ## Follow ups
 
 - Race execution cycle — one commit per delegator session; after each delegation the planner session analyses the sub-agent report and feedback and authors the next instruction batch (increasing sizes, e.g. 2–3, then 4–5–6). Remaining commits move `DRAFT` → `PLANNED` as their instruction files are written.
