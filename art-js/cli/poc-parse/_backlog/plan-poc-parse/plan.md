@@ -164,13 +164,13 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/split-factory-modules__report.md`
 
-### `pre-roundtrip-validation` - `PLANNED`
+### `apply-conventions-and-extend-test-coverage` - `PLANNED`
 
-**Commit Message:** `poc-parse: pre-roundtrip validation on real art file`
+**Commit Message:** `refactor(poc-parse): apply conventions and extend test coverage`
 
-**Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/pre-roundtrip-validation.md`
+**Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/apply-conventions-and-extend-test-coverage.md`
 
-**Scope:** Parse `architecture/records/adr/language.art` and verify output structure matches expectations (SectionBlock/FieldBlock/NaturalBlock classification). Save output as fixture for regression testing.
+**Scope:** Prepare POC source code for migration to parser package.
 
 ## Follow ups
 
