@@ -3,11 +3,11 @@ import { createBranchFailure } from '../../private/operations/createBranchFailur
 import { createBranchSuccess } from '../../private/operations/createBranchSuccess';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
-import { loadCheckoutRecords } from '../../private/records/loadCheckoutRecords';
-import { loadRepositoryRecords } from '../../private/records/loadRepositoryRecords';
-import { saveCheckoutRecord } from '../../private/records/saveCheckoutRecord';
+import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
+import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
+import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
+import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
-import { scanCheckoutState } from '../../shared/scanCheckoutState';
 
 import { createOrSwitchBranch } from './private/createOrSwitchBranch';
 

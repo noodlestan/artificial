@@ -1,0 +1,113 @@
+import { execSync } from 'node:child_process';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
+import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
+import { presentPackageStateReport } from '../../private/present/presentPackageStateReport';
+import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
+import { loadProjectGraph } from '../../private/records/projectGraph/loadProjectGraph';
+import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
+import type { PackageStateRecord } from '../../private/records/types';
+import { scanAllCheckoutsStates } from '../../private/scan/scanAllCheckoutsStates';
+import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
+
+export async function runRepo(
+	ctx: WorkspaceContext,
+	options: { checkoutNames: string[] },
+): Promise<void> {
+	const repos = loadRepositoryRecords(ctx.config);
+	const records = loadCheckoutRecords(ctx.config, repos);
+	hydrateStoreFromRecords(ctx, records);
+	await scanAllCheckoutsStates(ctx);
+
+	const { checkoutNames } = options;
+
+	let targets;
+	if (checkoutNames.length === 0) {
+		targets = ctx.store.getAllCheckouts();
+	} else {
+		targets = [];
+		for (const name of checkoutNames) {
+			const checkout = ctx.store.getCheckoutByName(name);
+			if (!checkout) {
+				console.warn(`unknown checkout: ${name}`);
+				continue;
+			}
+			targets.push(checkout);
+		}
+	}
+
+	for (const checkout of targets) {
+		const graph = loadProjectGraph(checkout.path);
+
+		for (const w of graph.warnings) {
+			console.warn(w);
+		}
+
+		if (graph.projects.length === 0) {
+			const updated = { ...checkout, issues: [...checkout.issues, 'no project records'] };
+			ctx.store.updateCheckout(updated);
+			continue;
+		}
+
+		const packageStates: PackageStateRecord[] = [];
+
+		for (const project of graph.projects) {
+			for (const nsName of project.namespaceNames) {
+				const ns = graph.namespaces.get(nsName);
+				if (!ns) continue;
+				for (const pkgName of ns.packageNames) {
+					const pkg = graph.packages.get(pkgName);
+					if (!pkg) continue;
+
+					const pkgPath = join(checkout.path, project.path, ns.path, pkg.path);
+					const pkgJsonPath = join(pkgPath, 'package.json');
+
+					let version: string | null = null;
+					const states: string[] = [];
+
+					if (existsSync(pkgJsonPath)) {
+						try {
+							const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
+							version = pkgJson.version ?? null;
+						} catch {
+							states.push('no package.json');
+						}
+					} else {
+						states.push('no package.json');
+					}
+
+					let publishedVersion: string | null = null;
+					try {
+						const output = execSync(`npm info ${pkg.canonicalName} version`, {
+							encoding: 'utf-8',
+							timeout: 10000,
+						});
+						publishedVersion = output.trim() || null;
+					} catch {
+						publishedVersion = 'unknown';
+						states.push('npm info failed');
+					}
+
+					packageStates.push({
+						canonicalName: pkg.canonicalName,
+						version,
+						publishedVersion,
+						directory: pkgPath,
+						states,
+					});
+				}
+			}
+		}
+
+		presentCheckoutReport(ctx);
+		presentPackageStateReport(checkout, packageStates);
+	}
+
+	if (targets.length > 0 && checkoutNames.length === 0) {
+		// already presented per-checkout above
+	} else if (targets.length > 0) {
+		// already presented per-checkout above
+	}
+}

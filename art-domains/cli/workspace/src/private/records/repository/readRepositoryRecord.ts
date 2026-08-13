@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-import type { RepositoryRecord } from './types';
+import type { RepositoryRecord } from '../types';
 
 export function readRepositoryRecord(file: string): RepositoryRecord {
 	const defaults: RepositoryRecord = { name: '', remote: '' };

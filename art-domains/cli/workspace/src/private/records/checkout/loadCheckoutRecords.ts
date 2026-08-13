@@ -1,10 +1,10 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { WorkspaceConfig } from '../../config';
+import { WorkspaceConfig } from '../../../config';
+import { RepositoryCheckoutRecord, RepositoryRecord } from '../types';
 
 import { readCheckoutRecord } from './readCheckoutRecord';
-import { RepositoryCheckoutRecord, RepositoryRecord } from './types';
 export function loadCheckoutRecords(
 	config: WorkspaceConfig,
 	repos: RepositoryRecord[],

@@ -1,10 +1,10 @@
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { createCloneFailure } from '../../private/operations/createCloneFailure';
-import { saveCheckoutRecord } from '../../private/records/saveCheckoutRecord';
+import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
 import type { RepositoryRecord } from '../../private/records/types';
+import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
 import { createCheckout } from '../../private/store/createCheckout';
 import { createCheckoutLocation } from '../../private/store/createCheckoutLocation';
-import { scanCheckoutState } from '../../shared/scanCheckoutState';
 
 import { cloneIfMissing } from './private/cloneIfMissing';
 

@@ -1,7 +1,7 @@
 import { readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
-import type { WorkspaceContext } from '../private/context/createWorkspaceContext';
+import type { WorkspaceContext } from '../context/createWorkspaceContext';
 
 import { scanCheckoutState } from './scanCheckoutState';
 

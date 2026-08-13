@@ -1,9 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
-import type { WorkspaceConfig } from '../../config/types';
-
-import { CheckoutRecord } from './types';
+import type { WorkspaceConfig } from '../../../config/types';
+import { CheckoutRecord } from '../types';
 
 const HARDCODED_TEMPLATE = `# Module
 

@@ -3,9 +3,9 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
-import { writeRepoRecord } from '../../test/writeRepoRecord';
+import { makeTempDir } from '../../../test/makeTempDir';
+import { removeTempDirs } from '../../../test/removeTempDirs';
+import { writeRepoRecord } from '../../../test/writeRepoRecord';
 
 import { readRepositoryRecord } from './readRepositoryRecord';
 

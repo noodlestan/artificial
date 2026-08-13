@@ -6,6 +6,7 @@ import { runBranch } from './commands/branch/runBranch';
 import { runClone } from './commands/clone/runClone';
 import { runLink } from './commands/link/runLink';
 import { runPublish } from './commands/publish/runPublish';
+import { runRepo } from './commands/repo/runRepo';
 import { runSanity } from './commands/sanity/runSanity';
 import { runUnlink } from './commands/unlink/runUnlink';
 import { loadWorkspaceConfig } from './config/loadWorkspaceConfig';
@@ -69,6 +70,19 @@ program
 		const log = createOperationsLog();
 		const ctx = createWorkspaceContext(config, store, log);
 		await runBranch(ctx, { branch, checkoutLocations });
+	});
+
+program
+	.command('repo')
+	.description('List repositories, namespaces, and packages')
+	.argument('[checkouts...]', 'checkout names to list (default: all checkouts)')
+	.action(async (checkoutNames: string[]) => {
+		const root = process.cwd();
+		const config = await loadWorkspaceConfig(root);
+		const store = createCheckoutStore();
+		const log = createOperationsLog();
+		const ctx = createWorkspaceContext(config, store, log);
+		await runRepo(ctx, { checkoutNames });
 	});
 
 program

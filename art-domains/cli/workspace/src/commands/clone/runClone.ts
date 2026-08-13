@@ -1,8 +1,8 @@
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
-import { loadCheckoutRecords } from '../../private/records/loadCheckoutRecords';
-import { loadRepositoryRecords } from '../../private/records/loadRepositoryRecords';
+import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
+import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 
 import { cloneAll } from './cloneAll';

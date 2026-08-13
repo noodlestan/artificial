@@ -4,8 +4,8 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { loadCheckoutRecords } from '../../private/records/loadCheckoutRecords';
-import { loadRepositoryRecords } from '../../private/records/loadRepositoryRecords';
+import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
+import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 import { createCommandContext } from '../../test/createCommandContext';
 import { initBareRepo } from '../../test/initBareRepo';

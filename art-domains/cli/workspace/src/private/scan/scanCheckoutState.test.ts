@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { createCheckout } from '../private/store/createCheckout';
-import { createCommandContext } from '../test/createCommandContext';
-import { makeTempDir } from '../test/makeTempDir';
-import { removeTempDirs } from '../test/removeTempDirs';
+import { createCommandContext } from '../../test/createCommandContext';
+import { makeTempDir } from '../../test/makeTempDir';
+import { removeTempDirs } from '../../test/removeTempDirs';
+import { createCheckout } from '../store/createCheckout';
 
 import { scanCheckoutState } from './scanCheckoutState';
 

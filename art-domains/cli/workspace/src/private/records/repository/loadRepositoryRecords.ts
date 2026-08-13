@@ -1,10 +1,10 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { WorkspaceConfig } from '../../config';
+import { WorkspaceConfig } from '../../../config';
+import { RepositoryRecord } from '../types';
 
 import { readRepositoryRecord } from './readRepositoryRecord';
-import { RepositoryRecord } from './types';
 
 export function loadRepositoryRecords(config: WorkspaceConfig): RepositoryRecord[] {
 	const dir = join(config.root.path, config.records.repositories.path);

@@ -3,9 +3,9 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { createCommandContext } from '../test/createCommandContext';
-import { makeTempDir } from '../test/makeTempDir';
-import { removeTempDirs } from '../test/removeTempDirs';
+import { createCommandContext } from '../../test/createCommandContext';
+import { makeTempDir } from '../../test/makeTempDir';
+import { removeTempDirs } from '../../test/removeTempDirs';
 
 import { scanExtraneousCheckouts } from './scanExtraneousCheckouts';
 

@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-import type { CheckoutRecord } from './types';
+import type { CheckoutRecord } from '../types';
 
 export function readCheckoutRecord(file: string): CheckoutRecord {
 	const defaults: CheckoutRecord = {

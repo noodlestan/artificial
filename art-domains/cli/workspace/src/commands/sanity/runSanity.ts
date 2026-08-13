@@ -2,11 +2,11 @@ import type { WorkspaceContext } from '../../private/context/createWorkspaceCont
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentExtraneousReport } from '../../private/present/presentExtraneousReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
-import { loadCheckoutRecords } from '../../private/records/loadCheckoutRecords';
-import { loadRepositoryRecords } from '../../private/records/loadRepositoryRecords';
+import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
+import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
+import { scanAllCheckoutsStates } from '../../private/scan/scanAllCheckoutsStates';
+import { scanExtraneousCheckouts } from '../../private/scan/scanExtraneousCheckouts';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
-import { scanAllCheckoutsStates } from '../../shared/scanAllCheckoutsStates';
-import { scanExtraneousCheckouts } from '../../shared/scanExtraneousCheckouts';
 
 import { pushCleanCheckouts } from './private/pushCleanCheckouts';
 

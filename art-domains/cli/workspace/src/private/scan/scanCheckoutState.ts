@@ -1,14 +1,14 @@
 import { access } from 'node:fs/promises';
 
-import type { WorkspaceContext } from '../private/context/createWorkspaceContext';
-import { getCurrentBranch } from '../private/git/getCurrentBranch';
-import { getRemoteBranch } from '../private/git/getRemoteBranch';
-import { getUnpushedCount } from '../private/git/getUnpushedCount';
-import { hasMergeConflicts } from '../private/git/hasMergeConflicts';
-import { hasRemote } from '../private/git/hasRemote';
-import { isDetachedHead } from '../private/git/isDetachedHead';
-import { isDirty } from '../private/git/isDirty';
-import type { Checkout } from '../private/store/createCheckout';
+import type { WorkspaceContext } from '../context/createWorkspaceContext';
+import { getCurrentBranch } from '../git/getCurrentBranch';
+import { getRemoteBranch } from '../git/getRemoteBranch';
+import { getUnpushedCount } from '../git/getUnpushedCount';
+import { hasMergeConflicts } from '../git/hasMergeConflicts';
+import { hasRemote } from '../git/hasRemote';
+import { isDetachedHead } from '../git/isDetachedHead';
+import { isDirty } from '../git/isDirty';
+import type { Checkout } from '../store/createCheckout';
 
 export async function scanCheckoutState(
 	ctx: WorkspaceContext,
