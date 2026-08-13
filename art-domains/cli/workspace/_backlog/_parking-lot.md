@@ -24,7 +24,7 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ### ACTIONABLE
 
-- None current. Active implementation is tracked in `_backlog/3-now/plan-workspace-repo/plan.md`.
+- None current. Active implementation is tracked in `_backlog/3-now/implement-command-repo/plan.md` (DONE) and `_backlog/3-now/implement-pull-push-sync/plan.md` (PLANNED).
 
 ### PENDING
 

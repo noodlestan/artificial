@@ -47,6 +47,7 @@ interface Checkout {
   dirty: boolean; // uncommitted files
   hasRemote: boolean;
   unpushed: number; // 0 = nothing to push, >0 = commits ahead of remoteBranch
+  isBehind: boolean; // true = local branch is behind remote
   issues: string[]; // human-readable states, e.g. "uncommitted files"
   extraneous: boolean; // directory with no matching record
 }
@@ -75,76 +76,86 @@ Reading is hierarchical — **project first, then namespaces, then packages** �
 ```typescript
 interface ProjectRecord {
   name: string; // ## Project: Artificial
-  remote: string; // **Remote:** — clone source
-  canonicalName: string; // **Canonical Name:** — @scope/name
   path: string; // **Path:** — project root within the checkout
-  namespaces: string[]; // **Namespaces:** — names, linked to ProjectNamespace
-  workspaces: string[]; // **Workspaces:** — globs
-  purpose?: string;
-  description?: string;
-  version?: string;
-  packageManager?: string;
+  namespaceNames: string[]; // **Namespaces:** — names, linked to ProjectNamespace
 }
 
-interface ProjectNamespace {
+interface NamespaceRecord {
   name: string; // ## Namespace: Art Domains
   path: string; // **Path:** — relative to the project path
-  packages: string[]; // **Packages:** — names, linked to ProjectPackage
-  purpose?: string;
-  description?: string;
+  packageNames: string[]; // **Packages:** — names, linked to PackageRecord
 }
 
-interface ProjectPackage {
+interface PackageRecord {
   name: string; // ## Package: Art Mantras
   canonicalName: string; // **Canonical Name:** — @scope/name
   path: string; // **Path:** — package dir relative to the namespace path; package.json lives here
-  version?: string; // **Version:**
-  packageFile?: string; // **PackageFile:** — defaults to package.json
-  dependencies?: string[];
-  scripts?: string[];
+}
+
+interface ProjectGraph {
+  projects: ProjectRecord[];
+  namespaces: Map<string, NamespaceRecord>;
+  packages: Map<string, PackageRecord>;
+  warnings: string[];
 }
 ```
 
-The types are deliberately minimal: paths and remotes (what `repo`/`link`/`links`/`publish` resolve on disk) plus names and relationships (what links the hierarchy together). Optional fields are parsed when present.
+The types are deliberately minimal: paths and names (what `repo`/`link`/`links`/`publish` resolve on disk) plus relationships (what links the hierarchy together).
 
 ### Reader Organization
 
-The records layer (`src/private/records/`) is organized **by record kind**. Today it holds 2 kinds, implemented as flat files: repositories (read-only: `readRepositoryRecord`, `loadRepositoryRecords`) and checkouts (read/write: `readCheckoutRecord`, `saveCheckoutRecord`, `loadCheckoutRecords`), plus `types.ts`. The 3 project record kinds above will be added as a third kind family (all read-only):
+The records layer (`src/private/records/`) is organized **by record kind**:
 
 ```text
 src/private/records/
-  readRepositoryRecord.ts   # repository: read-only
-  loadRepositoryRecords.ts
-  readCheckoutRecord.ts     # checkout: read/write
-  saveCheckoutRecord.ts
-  loadCheckoutRecords.ts
+  repository/           # repository: read-only
+    readRepositoryRecord.ts
+    loadRepositoryRecords.ts
+  checkout/             # checkout: read/write
+    readCheckoutRecord.ts
+    saveCheckoutRecord.ts
+    loadCheckoutRecords.ts
+  project/              # project records: read-only
+    readProjectRecord.ts
+    readProjectRecords.ts
+  namespace/            # namespace records: read-only
+    readNamespaceRecord.ts
+    readNamespaceRecords.ts
+  package/              # package records: read-only
+    readPackageRecord.ts
+    readPackageRecords.ts
+  projectGraph/         # graph loading, consolidation, finding
+    loadProjectGraph.ts
+    consolidateProjectGraph.ts
+    findPackage.ts
   types.ts
-  # project kind family (designed): readProjectRecord, readNamespaceRecord,
-  # readPackageRecord, loadProjectRecords (the reading procedure entry point)
 ```
-
-`loadProjectRecords(checkout)` is the single entry point running the reading procedure: read projects → read namespaces → read packages → link by name (project `path` + namespace `path` + package `path` compose the on-disk package path).
 
 ### Reading Procedure
 
 ```text
-readProjectRecords(ctx, checkout)
-  recordsDir  = join(checkout.path, "ops/records")
-  projects    = readProjectRecord   (recordsDir/projects/*.art)
-  namespaces  = readNamespaceRecord (recordsDir/namespaces/*.art)
-  packages    = readPackageRecord   (recordsDir/packages/*.art)
-  link by name, warn on unresolved references
-  return projects (with namespaces and packages resolved)
+loadProjectGraph(checkoutPath)
+  projects    = readProjectRecords(join(checkoutPath, "ops/records/projects"))
+  namespaces  = readNamespaceRecords(join(checkoutPath, "ops/records/namespaces"))
+  packages    = readPackageRecords(join(checkoutPath, "ops/records/packages"))
+  return consolidateProjectGraph(projects, namespaces, packages)
 ```
+
+`consolidateProjectGraph` links projects → namespaces → packages by name, generates warnings for missing references, and returns a `ProjectGraph`.
+
+`findPackage(graph, packageName)` locates a package across all projects by canonical name first, then by plain name.
 
 ## Scanning
 
 - **`scanCheckoutState(ctx, checkout)`** — read git state from the filesystem, create a new checkout instance with updated state, and set it in the store (no direct mutation). Returns the new checkout.
 - **`scanAllCheckoutsStates(ctx)`** — scan every checkout in the store.
 - **`scanExtraneousCheckouts(ctx)`** — scan directories under the clone path that have no matching checkout record and mark them extraneous.
+- **`scanWorkspaceState(ctx)`** — scan workspace root state (temporary checkout, not persisted, not merged into store). Returns the workspace checkout with updated state.
 - **`hydrateStoreFromRecords(ctx, records)`** — create a checkout instance per `RepositoryCheckoutRecord` (`createCheckout(config, record.checkout.location, record.repo, record.checkout.branch, record.checkout.name)`) and add it to the store.
+- **`isCleanCheckout(checkout)`** — whether a checkout is clean (no uncommitted changes, no conflicts, not detached).
+- **`pullCheckout(ctx, checkout)`** — pull a checkout's branch from origin and clear the "behind" issue on success.
 
-Git state is read through small git-introspection helpers (branch, remote branch, unpushed count, merge conflicts, remote presence, detached head, dirty).
+Git state is read through small git-introspection helpers (branch, remote branch, unpushed count, behind count, merge conflicts, remote presence, detached head, dirty).
 
 ## Syncing
 

@@ -2,6 +2,16 @@
 
 Commands present their findings and side effects as markdown tables. Reports always show the full table — no collapsing — with a header line (e.g. `Checkouts:`) and an empty line after the table.
 
+## Workspace Report
+
+The workspace root status table, presented before the Checkout Report by every command that reads or mutates checkouts. Always shows 1 row for the workspace root.
+
+Columns: `repo`, `location`, `branch`, `states`. `states` is the joined list of issues (e.g. `uncommitted files`, `1 commit behind`) or `-` when clean.
+
+| repo | location | branch | states          |
+| ---- | -------- | ------ | --------------- |
+| -    | .        | main   | 1 commit behind |
+
 ## Checkout Report
 
 The primary status table, presented after every command that reads or mutates checkouts. Ordered by repo name; checkouts without a remote last.
@@ -40,12 +50,12 @@ Columns: `directory`, `branch`, `states`.
 
 Presented by `repo` after the Checkout Report, one per checkout. Lists each package's current version (from `package.json`), last published version (from `npm info`), and states.
 
-Columns: `canonical name`, `version`, `published`, `branch`, `directory`, `states`.
+Columns: `canonical name`, `version`, `published`, `directory`, `states`.
 
-| canonical name        | version | published | branch | directory                          | states          |
-| --------------------- | ------- | --------- | ------ | ---------------------------------- | --------------- |
-| @artisans/art-mantras | 0.0.1   | 0.0.1     | main   | repos/artificial/artisans/apps/... | clean           |
-| @artisans/art-doom    | 1.2.0   | unknown   | main   | repos/artificial/artisans/apps/... | npm info failed |
+| canonical name        | version | published | directory                          | states          |
+| --------------------- | ------- | --------- | ---------------------------------- | --------------- |
+| @artisans/art-mantras | 0.0.1   | 0.0.1     | repos/artificial/artisans/apps/... | clean           |
+| @artisans/art-doom    | 1.2.0   | unknown   | repos/artificial/artisans/apps/... | npm info failed |
 
 ## Symlink Report
 

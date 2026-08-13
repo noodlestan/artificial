@@ -44,11 +44,13 @@ The Noodlestan ecosystem spans multiple independent repositories (`artificial`, 
 
 Complete the workspace CLI with remaining commands and infrastructure.
 
-**Next:** `repo` command — list repositories, namespaces, and packages with version info. Prerequisite for `link` and `publish`.
+**DONE:** `repo` command — list repositories, namespaces, and packages with version info. (commit `76cd4b4`)
 
-**Later:** `link`, `links`, `unlink`, `publish` commands, plus `manifest-generator` and `github-workflows`.
+**Next:** `pull`, `push`, `sync` commands — cross-repo synchronization capabilities. See `_backlog/3-now/implement-pull-push-sync/plan.md`.
 
-See `_backlog/3-now/plan-workspace-repo/plan.md` for repo command details.
+**Later:** `link`, `links`, `unlink`, `publish`.
+
+See `_backlog/3-now/implement-command-repo/plan.md` for repo command details.
 
 ## Follow-ups
 
@@ -56,4 +58,4 @@ See `_backlog/3-now/plan-workspace-repo/plan.md` for repo command details.
 - **Publishing workflow** — formalize the publish-then-symlink pattern into a Workflow resource with agent modes, skills, and commands.
 - **Prepare `@art-domains/workspace` domain** — after `@art-domains/workspace-cli` is established, prepare the domain package to host workspace structures and other resources, including a reference to the CLI companion package.
 - **Reverse edge resolution** — `purrpose → @no-comply/solid-primitives` is still using `file:` resolution. After no-comply packages are published to npm, rewire to npm version.
-- **`manifest-generator`** — auto-generate `.art-workspace.mts` from the records, replacing the manually-authored manifest (see `_backlog/3-now/plan-workspace-repo/plan.md`).
+- **`manifest-generator`** — auto-generate `.art-workspace.mts` from the records, replacing the manually-authored manifest (see `_backlog/3-now/implement-command-repo/plan.md`).

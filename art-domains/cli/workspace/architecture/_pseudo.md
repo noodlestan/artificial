@@ -11,7 +11,7 @@ Mostly useful for prototyping data structures or interactions (but these are det
 ```pseudo
 main
   parse args with commander
-  route to: clone | branch | repo | link | links | unlink | sanity | publish
+  route to: clone | branch | repo | link | links | unlink | sanity | pull | push | sync | publish
 ```
 
 ## Data Structures
@@ -38,13 +38,14 @@ Detailed definitions live in `architecture/operations-log.md`. Symbols relevant 
 
 - **OperationsLog** — append-only: `log(operation)`, `all()`, `since(ts)`, `latest(n)`
 - **Operation** — `operation` kind, `ts`, `checkout`, `outcome` (success/failure), `message()`
-- **Kinds** — `clone`, `push`, `publish`, `branch created`, `linked`, `unlink`
-- **Factories** — one per kind in `src/private/operations/`: `createCloneSuccess`, `createPushSuccess`, `createPushFailure`, `createBranchSuccess`, `createBranchFailure`, `createLinkedSuccess`, `createLinkedFailure`, `createUnlinkSuccess`, `createUnlinkFailure`, etc. Read-only commands (`repo`, `links`) never log operations — their failures surface as report states.
+- **Kinds** — `clone`, `push`, `pull`, `publish`, `branch created`, `linked`, `unlink`
+- **Factories** — one per kind in `src/private/operations/`: `createCloneSuccess`, `createPushSuccess`, `createPushFailure`, `createPullSuccess`, `createPullFailure`, `createBranchSuccess`, `createBranchFailure`, `createLinkedSuccess`, `createLinkedFailure`, `createUnlinkSuccess`, `createUnlinkFailure`, etc. Read-only commands (`repo`, `links`) never log operations — their failures surface as report states.
 
 ## Reports
 
 Detailed definitions live in `architecture/reports.md`. Symbols relevant to the use cases below:
 
+- **Workspace Report** — `repo | location | branch | states`; header `Workspace:`; presents workspace root status (1 row only); states = `issues.join("; ")` or `-`; presented after every command that reads or mutates checkouts
 - **Checkout Report** — `repo | location | branch | states`; header `Checkouts:`; states = `issues.join("; ")` or `-`; presented after every command that reads or mutates checkouts
 - **Operations Report** — `🟢/🔴 | repo | operation | message`; header `Operations Report:`; appended when side effects occurred
 - **Extraneous Report** — `directory | branch | states`; header `Untracked:`; states = `issues.join("; ")` or `clean`; directories under the checkouts path with no matching record
@@ -320,6 +321,69 @@ unlink(location, package, target)
   presentOperationsReport(ctx.log)
 ```
 
+### Command: pull
+
+**Responsibility:** Pull from origin for all clean checkouts. No arguments — acts only on clean branches. Present Checkout Report + Operations Report.
+
+**Pseudo:**
+
+```pseudo
+pull()
+  ctx = createWorkspaceContext(config, store, log)
+  hydrate(ctx)
+  scanAllCheckoutsStates(ctx)
+
+  for checkout in ctx.store.getAllCheckouts():
+    if isCleanCheckout(checkout) and checkout.isBehind:
+      pullCheckout(ctx, checkout)
+
+  presentCheckoutReport(ctx)
+  presentOperationsReport(ctx.log)
+```
+
+### Command: push
+
+**Responsibility:** Push to origin for all clean checkouts. No arguments — acts only on clean branches. Try pull first if behind. Present Checkout Report + Operations Report.
+
+**Pseudo:**
+
+```pseudo
+push()
+  ctx = createWorkspaceContext(config, store, log)
+  hydrate(ctx)
+  scanAllCheckoutsStates(ctx)
+
+  for checkout in ctx.store.getAllCheckouts():
+    if isCleanCheckout(checkout) and checkout.unpushed > 0:
+      if checkout.isBehind:
+        pullCheckout(ctx, checkout)
+      pushCheckout(ctx, checkout)
+
+  presentCheckoutReport(ctx)
+  presentOperationsReport(ctx.log)
+```
+
+### Command: sync
+
+**Responsibility:** Sync all clean checkouts — pull then push regardless of captured states. No arguments — acts only on clean branches. Present Checkout Report + Operations Report.
+
+**Pseudo:**
+
+```pseudo
+sync()
+  ctx = createWorkspaceContext(config, store, log)
+  hydrate(ctx)
+  scanAllCheckoutsStates(ctx)
+
+  for checkout in ctx.store.getAllCheckouts():
+    if isCleanCheckout(checkout):
+      pullCheckout(ctx, checkout)
+      pushCheckout(ctx, checkout)
+
+  presentCheckoutReport(ctx)
+  presentOperationsReport(ctx.log)
+```
+
 ### Command: publish [--auto]
 
 **Responsibility:** Push repos and publish packages to npm. Present Checkout Report + Operations Report. Records are updated by the commands themselves via `saveCheckoutRecord`; there is no global records sync step.
@@ -365,6 +429,97 @@ createWorkspaceContext(config, store, log)
   return { config, store, log }
 ```
 
+### Function: createWorkspaceCheckout(config)
+
+**Responsibility:** Build a temporary checkout instance for the workspace root. Never persisted, never merged into the store. Used for workspace status reporting.
+
+```pseudo
+createWorkspaceCheckout(config)
+  return {
+    repo: null,
+    record: {
+      name: "WORKSPACE",
+      location: ".",
+      branch: getCurrentBranch(config.root.path),
+      repository: null,
+    },
+    path: config.root.path,
+    exists: true, remoteBranch: null, detached: false, conflicts: false,
+    dirty: false, hasRemote: false, unpushed: 0, isBehind: false, issues: [], extraneous: false,
+  }
+```
+
+### Function: scanWorkspaceState(ctx)
+
+**Responsibility:** Scan workspace root state without persisting to store. Returns the workspace checkout with updated state.
+
+```pseudo
+scanWorkspaceState(ctx)
+  workspace = createWorkspaceCheckout(ctx.config)
+
+  // Git layer
+  try:
+    workspace.branch = getCurrentBranch(workspace.path)
+    workspace.detached = isDetachedHead(workspace.path)
+    workspace.conflicts = hasMergeConflicts(workspace.path)
+    workspace.dirty = isDirty(workspace.path)
+    workspace.hasRemote = hasRemote(workspace.path)
+
+    hasBranch = workspace.branch !== "-" and workspace.branch !== "HEAD"
+    if workspace.hasRemote and hasBranch:
+      workspace.remoteBranch = getRemoteBranch(workspace.path)
+      workspace.unpushed = getUnpushedCount(workspace.path, workspace.remoteBranch)
+      workspace.isBehind = getBehindCount(workspace.path, workspace.remoteBranch) > 0
+  catch:
+    workspace.issues.push("git error")
+
+  // Issue layer
+  if workspace.detached: workspace.issues.push("detached HEAD")
+  if workspace.conflicts: workspace.issues.push("merge conflicts")
+  if not workspace.hasRemote: workspace.issues.push("no remote")
+  if workspace.dirty: workspace.issues.push("uncommitted files")
+  if workspace.unpushed > 0:
+    workspace.issues.push(workspace.unpushed === 1 ? "1 commit ahead" : "N commits ahead")
+  if workspace.isBehind:
+    behindCount = getBehindCount(workspace.path, workspace.remoteBranch)
+    workspace.issues.push(behindCount === 1 ? "1 commit behind" : "N commits behind")
+
+  return workspace
+```
+
+### Function: isCleanCheckout(checkout)
+
+**Responsibility:** Whether a checkout is clean (no uncommitted changes, no conflicts, not detached).
+
+```pseudo
+isCleanCheckout(checkout)
+  if not checkout.exists: return false
+  if checkout.extraneous: return false
+  if checkout.dirty: return false
+  if checkout.conflicts: return false
+  if checkout.detached: return false
+  return true
+```
+
+### Function: pullCheckout(ctx, checkout)
+
+**Responsibility:** Pull a checkout's branch from origin and clear the "behind" issue on success.
+
+```pseudo
+pullCheckout(ctx, checkout)
+  git = simpleGit(checkout.path)
+  try:
+    git.pull("origin", checkout.record.branch)
+    updated = { ...checkout, isBehind: false, issues: checkout.issues.filter(i => not /\d+ commit behind/.test(i)) }
+    ctx.store.updateCheckout(updated)
+    ctx.log.log(createPullSuccess(checkout, checkout.record.branch))
+  catch error:
+    op = createPullFailure(checkout, checkout.record.branch, error)
+    updated = { ...checkout, issues: [...checkout.issues, op.message()] }
+    ctx.store.updateCheckout(updated)
+    ctx.log.log(op)
+```
+
 ### Function: createCheckout(config, target, repo?, branch?, name?)
 
 **Responsibility:** Build a checkout instance. `target` is the location; `safePath` normalises it. The absolute `path` is `join(config.root.path, config.clone.path, location)`. Branch defaults to `main`; name defaults to `<repo> @ <target>`.
@@ -382,7 +537,7 @@ createCheckout(config, target, repo?, branch?, name?)
     },
     path: join(config.root.path, config.clone.path, location),
     exists: false, remoteBranch: null, detached: false, conflicts: false,
-    dirty: false, hasRemote: false, unpushed: 0, issues: [], extraneous: false,
+    dirty: false, hasRemote: false, unpushed: 0, isBehind: false, issues: [], extraneous: false,
   }
 ```
 
@@ -434,6 +589,7 @@ scanCheckoutState(ctx, checkout)
     if updated.hasRemote and hasBranch:
       updated.remoteBranch = getRemoteBranch(checkout.path)
       updated.unpushed = getUnpushedCount(checkout.path, updated.remoteBranch)
+      updated.isBehind = getBehindCount(checkout.path, updated.remoteBranch) > 0
   catch:
     updated.issues.push("git error")
 
@@ -447,6 +603,9 @@ scanCheckoutState(ctx, checkout)
   if updated.dirty: updated.issues.push("uncommitted files")
   if updated.unpushed > 0:
     updated.issues.push(updated.unpushed === 1 ? "1 commit ahead" : "N commits ahead")
+  if updated.isBehind:
+    behindCount = getBehindCount(checkout.path, updated.remoteBranch)
+    updated.issues.push(behindCount === 1 ? "1 commit behind" : "N commits behind")
 
   return ctx.store.updateCheckout(updated)
 ```
@@ -604,6 +763,22 @@ cloneIfMissing(ctx, checkout)
     branch: actualBranch || "main",
   })
   return rescan
+```
+
+### Function: presentWorkspaceReport(workspace)
+
+**Responsibility:** Present the Workspace Report (1 row only). Always presented before the Checkout Report.
+
+**Pseudo:**
+
+```pseudo
+presentWorkspaceReport(workspace)
+  print "Workspace:"
+  print table (repo, location, branch, states)
+    // repo = "-"
+    // location = workspace.record.location
+    // states = workspace.issues.join("; ") or "-"
+  print ""                                       // empty line after the table
 ```
 
 ### Function: presentCheckoutReport(ctx)

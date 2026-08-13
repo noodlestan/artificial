@@ -7,7 +7,10 @@ The command surface of the workspace CLI, their procedures, and their edge cases
 | command   | usage                                      | status      |
 | --------- | ------------------------------------------ | ----------- |
 | `sanity`  | `sanity [--auto]`                          | implemented |
-| `repo`    | `repo [<checkout-name>...]`                | designed    |
+| `pull`    | `pull`                                     | planned     |
+| `push`    | `push`                                     | planned     |
+| `sync`    | `sync`                                     | planned     |
+| `repo`    | `repo [<checkout-name>...]`                | implemented |
 | `clone`   | `clone [--all] [<repo>] [<location>]`      | implemented |
 | `branch`  | `branch <branch> [<checkout-location>...]` | implemented |
 | `link`    | `link <location> <package> [<target>]`     | designed    |
@@ -31,7 +34,191 @@ Commands share the same skeleton:
 
 **Usage:** `sanity [--auto]`
 
-Check git status across all repos. Procedure: load repository records → hydrate checkouts from checkout records → scan all → scan extraneous → present Checkout Report + Extraneous Report. With `--auto`, additionally push clean unpushed repos (see `sanity`'s `pushCleanCheckouts`) and append the Operations Report.
+Check git status across all repos. Procedure: load repository records → hydrate checkouts from checkout records → scan workspace root (create temporary checkout record, not persisted, not merged into store) → scan all checkouts → scan extraneous → present Workspace Report + Checkout Report + Extraneous Report. With `--auto`, additionally pull if behind (before pushing) and push clean unpushed repos (see `sanity`'s `pushCleanCheckouts`) and append the Operations Report.
+
+**BDD:**
+
+```gherkin
+Feature: Sanity check workspace status
+  Scenario: sanity shows workspace status
+    Given workspace root is on branch "main"
+    And checkout "Artificial" is cloned on branch "main"
+    When I run "art-workspace sanity"
+    Then the Workspace Report lists workspace root
+    And the Checkout Report lists "Artificial"
+
+  Scenario: sanity detects "is behind" state
+    Given workspace root is behind origin/main by 1 commit
+    When I run "art-workspace sanity"
+    Then the Workspace Report lists workspace root with state "1 commit behind"
+
+  Scenario: sanity --auto pulls if behind and clean
+    Given workspace root is behind origin/main by 1 commit
+    And workspace root has no uncommitted changes
+    When I run "art-workspace sanity --auto"
+    Then workspace root is pulled from origin
+    And a pull operation is logged with outcome success
+
+  Scenario: sanity --auto does not pull if dirty
+    Given workspace root is behind origin/main by 1 commit
+    And workspace root has uncommitted changes
+    When I run "art-workspace sanity --auto"
+    Then workspace root is not pulled
+    And the Workspace Report lists workspace root with state "uncommitted files; 1 commit behind"
+```
+
+**Edge cases:**
+
+- Workspace root has no remote → report state "no remote"
+- Workspace root is detached → report state "detached HEAD"
+- Workspace root has conflicts → report state "merge conflicts"
+- Workspace root pull fails → log failure, continue with other operations
+
+## Pull
+
+**Usage:** `pull`
+
+Pull from origin for all clean checkouts. No arguments — acts only on clean branches. Procedure: load repository records → hydrate checkouts from checkout records → scan all → for each checkout: if clean and behind, pull → present Checkout Report + Operations Report.
+
+**BDD:**
+
+```gherkin
+Feature: Pull from origin
+  Scenario: pull clean checkouts that are behind
+    Given checkout "Artificial" is cloned on branch "main" and is behind origin by 1 commit
+    And checkout "Artificial" has no uncommitted changes
+    When I run "art-workspace pull"
+    Then checkout "Artificial" is pulled from origin
+    And a pull operation is logged with outcome success
+    And the Checkout Report lists "Artificial" with no "behind" state
+
+  Scenario: pull skips dirty checkouts
+    Given checkout "Artificial" is cloned on branch "main" and is behind origin by 1 commit
+    And checkout "Artificial" has uncommitted changes
+    When I run "art-workspace pull"
+    Then checkout "Artificial" is not pulled
+    And the Checkout Report lists "Artificial" with state "uncommitted files; 1 commit behind"
+
+  Scenario: pull skips checkouts already up to date
+    Given checkout "Artificial" is cloned on branch "main" and is up to date with origin
+    When I run "art-workspace pull"
+    Then no pull operation is logged for "Artificial"
+
+  Scenario: pull skips checkouts not cloned
+    Given checkout "Purrception" is recorded but not cloned
+    When I run "art-workspace pull"
+    Then checkout "Purrception" is skipped with a warning
+```
+
+**Edge cases:**
+
+- Checkout not cloned → skip with warning.
+- Checkout has no remote → skip, report state "no remote".
+- Checkout is dirty (uncommitted changes) → skip, keep "uncommitted files" state.
+- Checkout has merge conflicts → skip, report state "merge conflicts".
+- Pull fails → log failure, continue with other checkouts.
+
+## Push
+
+**Usage:** `push`
+
+Push to origin for all clean checkouts. No arguments — acts only on clean branches. Procedure: load repository records → hydrate checkouts from checkout records → scan all → for each checkout: if clean and ahead, try pull first, then push → present Checkout Report + Operations Report.
+
+**BDD:**
+
+```gherkin
+Feature: Push to origin
+  Scenario: push clean checkouts that are ahead
+    Given checkout "Artificial" is cloned on branch "main" and is ahead of origin by 1 commit
+    And checkout "Artificial" has no uncommitted changes
+    When I run "art-workspace push"
+    Then checkout "Artificial" is pushed to origin
+    And a push operation is logged with outcome success
+    And the Checkout Report lists "Artificial" with no "ahead" state
+
+  Scenario: push tries pull first if behind
+    Given checkout "Artificial" is cloned on branch "main" and is ahead of origin by 1 commit
+    And checkout "Artificial" is also behind origin by 1 commit (diverged)
+    And checkout "Artificial" has no uncommitted changes
+    When I run "art-workspace push"
+    Then checkout "Artificial" is pulled first
+    And checkout "Artificial" is pushed to origin
+    And a pull operation is logged with outcome success
+    And a push operation is logged with outcome success
+
+  Scenario: push skips dirty checkouts
+    Given checkout "Artificial" is cloned on branch "main" and is ahead of origin by 1 commit
+    And checkout "Artificial" has uncommitted changes
+    When I run "art-workspace push"
+    Then checkout "Artificial" is not pushed
+    And the Checkout Report lists "Artificial" with state "uncommitted files; 1 commit ahead"
+
+  Scenario: push skips checkouts already up to date
+    Given checkout "Artificial" is cloned on branch "main" and is up to date with origin
+    When I run "art-workspace push"
+    Then no push operation is logged for "Artificial"
+
+  Scenario: push skips checkouts not cloned
+    Given checkout "Purrception" is recorded but not cloned
+    When I run "art-workspace push"
+    Then checkout "Purrception" is skipped with a warning
+```
+
+**Edge cases:**
+
+- Checkout not cloned → skip with warning.
+- Checkout has no remote → skip, report state "no remote".
+- Checkout is dirty (uncommitted changes) → skip, keep "uncommitted files" state.
+- Checkout has merge conflicts → skip, report state "merge conflicts".
+- Pull fails → log failure, skip push for this checkout.
+- Push fails → log failure, continue with other checkouts.
+
+## Sync
+
+**Usage:** `sync`
+
+Sync all clean checkouts — pull then push regardless of captured states. No arguments — acts only on clean branches. Procedure: load repository records → hydrate checkouts from checkout records → scan all → for each checkout: if clean, pull then push → present Checkout Report + Operations Report.
+
+**BDD:**
+
+```gherkin
+Feature: Sync checkouts
+  Scenario: sync clean checkouts
+    Given checkout "Artificial" is cloned on branch "main" and is behind origin by 1 commit
+    And checkout "Artificial" has no uncommitted changes
+    When I run "art-workspace sync"
+    Then checkout "Artificial" is pulled from origin
+    And checkout "Artificial" is pushed to origin
+    And a pull operation is logged with outcome success
+    And a push operation is logged with outcome success
+
+  Scenario: sync skips dirty checkouts
+    Given checkout "Artificial" is cloned on branch "main" and is behind origin by 1 commit
+    And checkout "Artificial" has uncommitted changes
+    When I run "art-workspace sync"
+    Then checkout "Artificial" is not pulled or pushed
+    And the Checkout Report lists "Artificial" with state "uncommitted files; 1 commit behind"
+
+  Scenario: sync skips checkouts not cloned
+    Given checkout "Purrception" is recorded but not cloned
+    When I run "art-workspace sync"
+    Then checkout "Purrception" is skipped with a warning
+
+  Scenario: sync works on up to date checkouts
+    Given checkout "Artificial" is cloned on branch "main" and is up to date with origin
+    When I run "art-workspace sync"
+    Then a pull operation is logged for "Artificial" (no-op)
+    And no push operation is logged for "Artificial"
+```
+
+**Edge cases:**
+
+- Checkout not cloned → skip with warning.
+- Checkout has no remote → skip, report state "no remote".
+- Checkout is dirty (uncommitted changes) → skip, keep "uncommitted files" state.
+- Checkout has merge conflicts → skip, report state "merge conflicts".
+- Pull fails → log failure, skip push for this checkout.
+- Push fails → log failure, continue with other checkouts.
 
 ## Repo
 

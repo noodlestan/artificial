@@ -2,7 +2,7 @@
 
 **ID:** `implement-command-repo`
 
-**Status:** `DRAFT`
+**Status:** `DONE`
 
 **Template:** `plan`
 
@@ -80,9 +80,24 @@ If any of these fail, resolve the issue before proceeding with implementation.
 
 ## Iterations
 
-### `repo-command` - `PLANNED`
+### `repo-command` - `DONE`
 
 **Commit Message:** `feat(workspace-cli): implement repo command`
+
+**Commit:** `76cd4b4`
+
+**Artefacts:**
+
+- `src/commands/repo/runRepo.ts` — repo command handler
+- `src/commands/repo/runRepo.test.ts` — BDD test scaffolds
+- `src/private/records/project/` — project record reading functions
+- `src/private/records/namespace/` — namespace record reading functions
+- `src/private/records/package/` — package record reading functions
+- `src/private/records/projectGraph/` — graph loading, consolidation, findPackage
+- `src/private/present/presentPackageStateReport.ts` — package state report presenter
+- Test scaffolds for all core functions
+
+**Report:** [repo-command\_\_report.md](./instructions/repo-command__report.md)
 
 Implement `art-workspace repo` command.
 
