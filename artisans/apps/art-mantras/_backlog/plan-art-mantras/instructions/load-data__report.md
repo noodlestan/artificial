@@ -10,11 +10,11 @@
 
 ### Changes
 
-| Instruction goal | Change |
-|---|---|
-| Implement `loadData()` + `main()` in `src/app.js` | Replaced the zero-code comment stub with the first real code: module-level `const FILE = "data.json"`, module-scope `let data;`, `loadData()` (fetch `FILE` → `response.json()`), and `main()` (DOM ready → `data = await loadData()` → held in module scope). `run(data)` is NOT called — deferred to step 3 (mount shell). Functions ordered utils → `main()` last, DOM-ready listener as the final statement. |
-| Wire the script tag in `src/index.html` | Added `<script type="module" src="app.js"></script>` before `</body>` — the only change; app now actually runs. |
-| Do NOT touch `src/serve.js`, `src/data.json`, `src/styles.css`, `package.json` | Untouched. `styles.css` remains a zero-code stub (step 12). |
+| Instruction goal                                                               | Change                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Implement `loadData()` + `main()` in `src/app.js`                              | Replaced the zero-code comment stub with the first real code: module-level `const FILE = "data.json"`, module-scope `let data;`, `loadData()` (fetch `FILE` → `response.json()`), and `main()` (DOM ready → `data = await loadData()` → held in module scope). `run(data)` is NOT called — deferred to step 3 (mount shell). Functions ordered utils → `main()` last, DOM-ready listener as the final statement. |
+| Wire the script tag in `src/index.html`                                        | Added `<script type="module" src="app.js"></script>` before `</body>` — the only change; app now actually runs.                                                                                                                                                                                                                                                                                                  |
+| Do NOT touch `src/serve.js`, `src/data.json`, `src/styles.css`, `package.json` | Untouched. `styles.css` remains a zero-code stub (step 12).                                                                                                                                                                                                                                                                                                                                                      |
 
 #### Files changed
 
@@ -22,6 +22,7 @@
 - `src/index.html` — module script tag (single added line).
 
 **Verification results (steps 1–3):**
+
 - `node --check src/app.js` — clean (from `artificials/artisans/apps/art-mantras/`).
 - `npm run serve` — server log shows only the startup line; no unexpected output.
 - `curl http://localhost:8000/` → `200`, markup includes `<script type="module" src="app.js"></script>`.
@@ -46,7 +47,8 @@ None.
    - `problem`: pseudo `main()` hands off to `run(data)` on DOM ready, but step 2 deliberately implements no `run()`. The implemented `main()` therefore deviates from the pseudo body until step 3 re-adds the hand-off.
    - `decision`: implemented the step contract — `main()` fetches and holds the data in module scope, no `run(data)` call. Adding `run(data)` in step 3 is a one-line re-add; nothing breaks.
    - Ready-to-apply snippet for `_pseudo.md`:
-     ```md
+
+     ````md
      ### Function: main()
 
      **Responsibility:** Wait for DOM readiness, load the data, and hand off to `run(data)`.
@@ -57,19 +59,29 @@ None.
          data = loadData()
          run(data)          // staged in the race: step 2 (load-data) holds data only; run() lands in step 3 (mount-shell)
      ```
+     ````
+
      ```
+
+     ```
+
 2. **Minor — `main()` is async (`await`).**
    - `where`: instruction Steps → Step 1 ("`data = loadData()`") and `_pseudo.md` → `main()`.
    - `problem`: `loadData()` is async, so a literal `data = loadData()` would hold a Promise, not the parsed data.
    - `decision`: wrote `data = await loadData()` in an async `main()` so the module-scope holder receives the resolved data — the step contract ("fetches … and holds it").
    - Ready-to-apply snippet for `_pseudo.md`:
-     ```md
+
+     ````md
      ```pseudo
      main
        on DOM ready:
          data = await loadData()
          run(data)
      ```
+     ````
+
+     ```
+
      ```
 
 ### For the technical writers

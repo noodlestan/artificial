@@ -14,11 +14,11 @@ Ruthless rewrite of parser from sectionStack/fieldStack architecture to context-
 
 #### Files changed
 
-| File | Change |
-|------|--------|
-| `src/parse/types.ts` | Extended `NaturalBlock` with `type?`, `lang?`, `meta?`, `[key: string]: unknown` index signature. Added `depth?: number` to `SectionBlock` for nesting. |
+| File                   | Change                                                                                                                                                                                                                                                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/parse/types.ts`   | Extended `NaturalBlock` with `type?`, `lang?`, `meta?`, `[key: string]: unknown` index signature. Added `depth?: number` to `SectionBlock` for nesting.                                                                                                                                                               |
 | `src/parse/factory.ts` | Complete rewrite. New `VisitContext` interface with `capturing()`, `target()`, `push()`, `close()`, `_section`. Implemented `createNestedContext`, `createDocumentContext`, `createNaturalBlock` (transparent spread), `createFieldBlockFromParagraph`, all factories, `findParentSection`, `flushGap`, `getFactory`. |
-| `src/parse/builder.ts` | Complete rewrite. `buildDocument` uses closure-based `currentContext` and `lastEnd`. Inner functions: `visitNode`, `visitParagraph`, `handleSectionBlock`, `handleFieldBlock`. Context transitions propagate `lastEnd`. |
+| `src/parse/builder.ts` | Complete rewrite. `buildDocument` uses closure-based `currentContext` and `lastEnd`. Inner functions: `visitNode`, `visitParagraph`, `handleSectionBlock`, `handleFieldBlock`. Context transitions propagate `lastEnd`.                                                                                               |
 
 ### Verification
 
@@ -33,6 +33,7 @@ Ruthless rewrite of parser from sectionStack/fieldStack architecture to context-
    **Problem:** The pseudo says to use `...node` spread for transparency, but also shows type-specific handling (`if node.type === 'code'`, `if node.type === 'list'`). The spread copies mdast `children` (e.g. inline text nodes for paragraphs, tableRow nodes for tables) which are NOT `BlockContent` records. This creates a type lie: `NaturalBlock.children` is typed as `BlockContent[]` but contains mdast nodes.  
    **Decision:** Accepted the type lie. The `value` field provides lossless round-trip. The mdast `children` are bonus transparency.  
    **Snippet for `_pseudo.md`:**
+
    ```markdown
    > **Note on children:** The spread copies mdast `children` verbatim (e.g. inline nodes for paragraphs, tableRow for tables). These are NOT `BlockContent` records. Only `list` and `blockquote` override `children` with parsed records. The `value` field is the canonical lossless content.
    ```
@@ -41,6 +42,7 @@ Ruthless rewrite of parser from sectionStack/fieldStack architecture to context-
    **Problem:** The pseudo's `findParentSection` walks up contexts looking for `capturing() === 'SectionBlock'` then checks `target()` children for a SectionBlock. But with `createNestedContext` where `target()` IS the section's children array, the last child of `target()` is content, not the section itself. The function would never find the section.  
    **Decision:** Added `_section?: SectionBlock` field to `VisitContext`. `findParentSection` walks up and returns the first context with `_section` set.  
    **Snippet for `_pseudo.md`:**
+
    ```markdown
    > `createNestedContext` accepts an optional `section` parameter. When creating a section context, pass the section record. `findParentSection` walks up the context chain returning the first `_section` found.
    ```
@@ -49,6 +51,7 @@ Ruthless rewrite of parser from sectionStack/fieldStack architecture to context-
    **Problem:** The pseudo's `sectionDepth` is a placeholder returning `1`. Proper nesting requires actual depth tracking.  
    **Decision:** Added `depth?: number` to `SectionBlock` type. Set by `sectionBlockFactory` from `heading.depth`.  
    **Snippet for `types.ts` section in plan:**
+
    ```markdown
    > Add `depth?: number` to `SectionBlock` for heading-level tracking.
    ```
@@ -57,6 +60,7 @@ Ruthless rewrite of parser from sectionStack/fieldStack architecture to context-
    **Problem:** The pseudo's `buildDocument` creates `document = { construct: 'Document', children: [] }` and `context = createDocumentContext(markdown)` separately. The document's children and the context's target are different arrays. At the end, `document.children` is never populated from the context.  
    **Decision:** Return `{ construct: 'Document', children: docContext.target() }` — use the document context's target directly.  
    **Snippet for `_pseudo.md`:**
+
    ```markdown
    > `buildDocument` returns `{ construct: 'Document', children: docContext.target() }`. The document context's target array accumulates all top-level records.
    ```
@@ -65,6 +69,7 @@ Ruthless rewrite of parser from sectionStack/fieldStack architecture to context-
    **Problem:** Non-field paragraphs return `SKIP` in the pseudo, which prevents tag detection in prose (TC9). Tags are inline text nodes inside paragraphs — if we skip children, we never see them.  
    **Decision:** Non-field paragraphs return `undefined` (visit children) to allow tag detection. Inline nodes that don't match `tagFactory` are skipped via `isInlineNode` check in `visitNode`.  
    **Snippet for `_pseudo.md`:**
+
    ```markdown
    > Non-field paragraphs return `undefined` (not `SKIP`) to visit children for tag detection. Inline nodes without tag matches are skipped in `visitNode` via `isInlineNode` check.
    ```
@@ -83,6 +88,7 @@ Ruthless rewrite of parser from sectionStack/fieldStack architecture to context-
    **Problem:** TC8 expects `{ "construct": "NaturalBlock", "type": "paragraph", "value": "..." }` without `children`. But the transparent spread includes mdast `children` (inline text nodes). The actual output has `children: [{ type: "text", value: "...", position: {...} }]`.  
    **Decision:** Output includes mdast children per transparency principle.  
    **Snippet for `_test.md`:**
+
    ```markdown
    > TC8 actual output includes `children` from mdast spread (inline text nodes). The `value` field is the canonical content. Update expected output to show `children` or note that extra mdast fields are present.
    ```

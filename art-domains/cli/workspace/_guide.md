@@ -33,21 +33,28 @@ ops/records         — workspace records the CLI reads, via the config ($WORKSP
 
 ## Setup
 
-Run at the package root (`art-domains/cli/workspace/`), after the artificial repo is installed:
+Run from repository root (monorepo):
 
 ```bash
-npm install # to install dependencies.
+npm ci # to install dependencies.
+npm run ci # to verify build is green before starting
 ```
 
 ## Verification
 
-Run from the package root:
+Run from this package directory:
 
 ```bash
 npm run lint:fix # to fix formatting issues automatically
 npm run lint # to report other issues (prettier, eslint, tsc --noEmit)
 npm run build
 npm run test
+```
+
+Runs on pre-commit hook from the repository root:
+
+```bash
+npm run ci # lint, build and test
 ```
 
 ## Planning Workflow

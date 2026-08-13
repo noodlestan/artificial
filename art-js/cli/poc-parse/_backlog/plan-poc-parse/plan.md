@@ -118,6 +118,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 **Instructions File:** none yet
 
 **Scope:**
+
 - Rename `close()` → `parent()` (clearer naming)
 - Rename `findParentSection()` → `findTagable()` (clearer purpose)
 - Refactor `buildDocument` to inject construct-specific logic via contract (no closures over construct types)

@@ -201,7 +201,6 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 - `bind-shuffle` (COMPLETED) — commit `a3261ea2`, exactly `src/app.js` (+18/-3). Re-roll verified headlessly (5 distinct mantra compositions across clicks, A1 constant, bindings reset, DOWNLOAD/+ mantra inert).
 
-
 - (planner, 2026-08-08) — applied: snippet 1 → `art-mantras/_architect.md` Layer: Serving ("package's `src/` directory"); snippet 2 → instruction verification wording ("modified by this delegation; pre-existing changes not counted"). Next instruction batch authored: `load-data`, `mount-shell`, `bind-shuffle` (commits → `PLANNED`).
 
 - `serve-hello-world` (COMPLETED) — `_architect.md` Layer: Serving says "Serves from the package directory" while `_pseudo.md`/instruction say "over `src/`". Implemented the explicit reading (serves from `src/`). Ready-to-apply snippet suggested for `_architect.md` (see report).

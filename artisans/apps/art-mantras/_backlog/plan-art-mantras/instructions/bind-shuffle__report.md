@@ -12,14 +12,14 @@
 
 Goal: land `apply()` (Entry Point) with its FIRST wired intent — `ui.toolbar.shuffle -> onNextShuffle()` — plus the initial render; clicking shuffle re-derives the output and re-renders the mantra row (pick-up bindings reset).
 
-| Goal | Status | Evidence |
-|---|---|---|
-| `onNextShuffle` closure in `run()` | done | `out = shuffle(store.serialize())` → `ui.renderMantra(out)` → `return out` |
-| `apply()` staged — initial render + wire ONLY `toolbar.shuffle` | done | initial `renderMantra`/`renderStrongs`/`renderBanned`; `ui.toolbar.shuffle = () => currentOutput = onNextShuffle()`; all other intent slots remain factory no-ops |
-| `run(data)` updated | done | `store = createStore(data); ui = mount(); output = shuffle(data)`; builds `onNextShuffle`; `apply(ui, store, output, onNextShuffle)`; initial render now inside `apply()` per pseudo; `onDownload` deferred |
-| `main()` unchanged | done | still `data = await loadData(); run(data)` |
-| Only `src/app.js` touched | done | see Files changed |
-| Commit | done | `a3261ea2` — `art-mantras: bind shuffle` — 1 file, +18/-3 |
+| Goal                                                            | Status | Evidence                                                                                                                                                                                                    |
+| --------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onNextShuffle` closure in `run()`                              | done   | `out = shuffle(store.serialize())` → `ui.renderMantra(out)` → `return out`                                                                                                                                  |
+| `apply()` staged — initial render + wire ONLY `toolbar.shuffle` | done   | initial `renderMantra`/`renderStrongs`/`renderBanned`; `ui.toolbar.shuffle = () => currentOutput = onNextShuffle()`; all other intent slots remain factory no-ops                                           |
+| `run(data)` updated                                             | done   | `store = createStore(data); ui = mount(); output = shuffle(data)`; builds `onNextShuffle`; `apply(ui, store, output, onNextShuffle)`; initial render now inside `apply()` per pseudo; `onDownload` deferred |
+| `main()` unchanged                                              | done   | still `data = await loadData(); run(data)`                                                                                                                                                                  |
+| Only `src/app.js` touched                                       | done   | see Files changed                                                                                                                                                                                           |
+| Commit                                                          | done   | `a3261ea2` — `art-mantras: bind shuffle` — 1 file, +18/-3                                                                                                                                                   |
 
 #### Files changed
 

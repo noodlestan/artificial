@@ -108,6 +108,7 @@ Execute all the steps autonomously, one by one, including running the **validati
 **Sanity check:** the app behaves exactly as after `mount-shell` — same buttons, same inertia, same render api — but the grid sections are now semantic `<table>`s.
 
 **Verification steps**
+
 - `node --check src/app.js` (from `artificials/artisans/apps/art-mantras/`).
 - `npm run serve` → `curl http://localhost:8000/` returns `200`; `/app.js` and `/data.json` `200` with correct content-types; unknown path `404`; clean serve log.
 - Headless DOM simulation as per Step 4 — structure assertions pass; all 94 buttons still inert; no throws; console clean.

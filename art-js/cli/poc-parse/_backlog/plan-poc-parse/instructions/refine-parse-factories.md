@@ -81,19 +81,23 @@ The current `buildDocument` has closures (`handleSectionBlock`, `handleFieldBloc
 
    ```typescript
    export const sectionBlockHandler: ConstructHandler = {
-     canHandle(record) { return record.construct === 'SectionBlock'; },
+     canHandle(record) {
+       return record.construct === 'SectionBlock';
+     },
      handle(record, node, context) {
        // ... section handling logic
        return newContext;
-     }
+     },
    };
 
    export const fieldBlockHandler: ConstructHandler = {
-     canHandle(record) { return record.construct === 'FieldBlock'; },
+     canHandle(record) {
+       return record.construct === 'FieldBlock';
+     },
      handle(record, node, context) {
        // ... field handling logic
        return newContext;
-     }
+     },
    };
    ```
 
@@ -102,7 +106,7 @@ The current `buildDocument` has closures (`handleSectionBlock`, `handleFieldBloc
    ```typescript
    export function buildDocument(
      markdown: string,
-     handlers: ConstructHandler[] = [sectionBlockHandler, fieldBlockHandler]
+     handlers: ConstructHandler[] = [sectionBlockHandler, fieldBlockHandler],
    ): Document {
      // ... visit logic uses handlers instead of closures
    }
