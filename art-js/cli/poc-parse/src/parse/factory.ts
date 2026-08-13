@@ -19,10 +19,8 @@ export interface VisitContext {
 	target(): BlockContent[];
 	push(record: Construct): void;
 	parent(): VisitContext | undefined;
-	detectField(paragraph: Paragraph): FieldBlock | null;
 	source: string;
 	lastEnd: Point | undefined;
-	_section?: SectionBlock;
 }
 
 export interface ConstructFactory {
@@ -36,20 +34,17 @@ const TAG_PATTERN_G = /\(#([\w-]+)\)/g;
 const KIND_PATTERN = /^([\w-]+(?: [\w-]+)*):\s*(.+)$/;
 const FIELD_TEXT_PATTERN = /^[A-Za-z][A-Za-z ]*:(?:\s|$)/;
 
-const INLINE_TYPES = new Set([
-	'text',
-	'emphasis',
-	'strong',
-	'delete',
+const BLOCK_TYPES = new Set([
+	'paragraph',
+	'code',
+	'list',
+	'blockquote',
+	'table',
+	'thematicBreak',
 	'html',
-	'inlineCode',
-	'break',
-	'image',
-	'imageReference',
-	'link',
-	'linkReference',
-	'footnoteReference',
 ]);
+
+const sectionMap = new WeakMap<VisitContext, SectionBlock>();
 
 export function cleanPosition(raw: UnistPosition | undefined): Position | undefined {
 	if (!raw?.start || !raw.end) return undefined;
@@ -83,14 +78,11 @@ function isFieldStrong(node: Nodes, context: VisitContext): node is Strong {
 	return node.type === 'strong' && FIELD_TEXT_PATTERN.test(stripStrong(node as Strong, context));
 }
 
-export function isInlineNode(node: MdastNode): boolean {
-	return INLINE_TYPES.has(node.type);
-}
-
 export function findTagable(context: VisitContext): SectionBlock | undefined {
 	let current: VisitContext | undefined = context;
 	while (current) {
-		if (current._section) return current._section;
+		const section = sectionMap.get(current);
+		if (section) return section;
 		current = current.parent();
 	}
 	return undefined;
@@ -238,6 +230,41 @@ export interface ConstructHandler {
 	handle(record: Construct, node: MdastNode, context: VisitContext): VisitContext;
 }
 
+export interface ConstructPreProcessor {
+	canPreProcess(node: MdastNode, context: VisitContext): boolean;
+	preProcess(node: MdastNode, context: VisitContext): Construct | null;
+}
+
+export function createFieldDetectionPreProcessor(): ConstructPreProcessor {
+	return {
+		canPreProcess(node, context) {
+			if (node.type === 'paragraph') {
+				const first = (node as Paragraph).children[0];
+				return first !== undefined && isFieldStrong(first, context);
+			}
+			return false;
+		},
+		preProcess(node, context) {
+			return createFieldBlockFromParagraph(node as Paragraph, context);
+		},
+	};
+}
+
+export function createTagRoutingHandler(): ConstructHandler {
+	return {
+		canHandle(record) {
+			return record.construct === 'Tag';
+		},
+		handle(record, _node, context) {
+			const section = findTagable(context);
+			if (section) {
+				(section.tags ??= []).push(record as Tag);
+			}
+			return context;
+		},
+	};
+}
+
 export function createSectionBlockHandler(
 	createNestedCtx: typeof createNestedContext,
 ): ConstructHandler {
@@ -306,11 +333,25 @@ export function createFieldBlockHandler(
 	};
 }
 
-export function getFactory(node: MdastNode, context: VisitContext): ConstructFactory | null {
-	if (sectionBlockFactory.detect(node, context)) return sectionBlockFactory;
-	if (fieldBlockFactory.detect(node, context)) return fieldBlockFactory;
-	if (tagFactory.detect(node, context)) return tagFactory;
+export function getFactory(
+	node: MdastNode,
+	context: VisitContext,
+	factories: ConstructFactory[],
+): ConstructFactory | null {
+	for (const factory of factories) {
+		if (factory.detect(node, context)) return factory;
+	}
 	return null;
+}
+
+export function isBlockType(type: string): boolean {
+	return BLOCK_TYPES.has(type);
+}
+
+export interface ParserConfig {
+	preProcessors: ConstructPreProcessor[];
+	factories: ConstructFactory[];
+	handlers: ConstructHandler[];
 }
 
 export function createNestedContext(
@@ -330,30 +371,34 @@ export function createNestedContext(
 			return children;
 		},
 		push(record: Construct) {
-			if (record.construct === 'Tag') {
-				const s = findTagable(ctx);
-				if (s) (s.tags ??= []).push(record);
-				return;
-			}
 			children.push(record);
 		},
 		parent() {
 			return parentContext;
 		},
-		detectField(paragraph: Paragraph): FieldBlock | null {
-			if (paragraph.children.length > 0 && isFieldStrong(paragraph.children[0], ctx)) {
-				return createFieldBlockFromParagraph(paragraph, ctx);
-			}
-			return null;
-		},
 		source: source ?? parentContext?.source ?? '',
 		lastEnd: parentContext?.lastEnd,
-		_section: section,
 	};
+
+	if (section) {
+		sectionMap.set(ctx, section);
+	}
 
 	return ctx;
 }
 
 export function createDocumentContext(source: string): VisitContext {
 	return createNestedContext('Document', undefined, source);
+}
+
+export function createDefaultConfig(): ParserConfig {
+	return {
+		preProcessors: [createFieldDetectionPreProcessor()],
+		factories: [sectionBlockFactory, tagFactory],
+		handlers: [
+			createSectionBlockHandler(createNestedContext),
+			createFieldBlockHandler(createNestedContext),
+			createTagRoutingHandler(),
+		],
+	};
 }

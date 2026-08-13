@@ -4,10 +4,12 @@ import { isAbsolute, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { buildDocument } from './builder';
+import { createDefaultConfig } from './factory';
 import type { Document } from './types';
 
 export function parse(markdown: string): Document {
-	return buildDocument(markdown);
+	const config = createDefaultConfig();
+	return buildDocument(markdown, config);
 }
 
 const REPO_ROOT = resolve(import.meta.dirname, '../../../../../../..');
