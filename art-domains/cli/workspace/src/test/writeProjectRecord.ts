@@ -49,10 +49,13 @@ export function writeNamespaceRecord(
 	mkdirSync(dir, { recursive: true });
 	const nsPath = options?.path ?? '.';
 	const packages = options?.packages ?? [];
-	const pkgLine = packages.length > 0 ? `\n**Packages:** ${packages.join(', ')}\n` : '';
+	const pkgLines =
+		packages.length > 0
+			? '\n**Packages:**\n' + packages.map(pkg => `- Package: ${pkg}`).join('\n') + '\n'
+			: '';
 	writeFileSync(
 		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
-		'# Module\n\n## Namespace: ' + name + '\n\n**Path:** `' + nsPath + '`' + pkgLine + '\n',
+		'# Module\n\n## Namespace: ' + name + '\n\n**Path:** `' + nsPath + '`' + pkgLines + '\n',
 	);
 }
 

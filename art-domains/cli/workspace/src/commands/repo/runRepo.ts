@@ -38,6 +38,8 @@ export async function runRepo(
 		}
 	}
 
+	const allPackageStates = new Map<string, PackageStateRecord[]>();
+
 	for (const checkout of targets) {
 		const graph = loadProjectGraph(checkout.path);
 
@@ -101,13 +103,12 @@ export async function runRepo(
 			}
 		}
 
-		presentCheckoutReport(ctx);
-		presentPackageStateReport(checkout, packageStates);
+		allPackageStates.set(checkout.record.name, packageStates);
 	}
 
-	if (targets.length > 0 && checkoutNames.length === 0) {
-		// already presented per-checkout above
-	} else if (targets.length > 0) {
-		// already presented per-checkout above
+	presentCheckoutReport(ctx);
+	for (const checkout of targets) {
+		const packageStates = allPackageStates.get(checkout.record.name) ?? [];
+		presentPackageStateReport(checkout, packageStates);
 	}
 }

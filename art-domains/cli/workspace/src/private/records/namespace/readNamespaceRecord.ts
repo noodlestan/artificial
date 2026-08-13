@@ -16,17 +16,20 @@ export function readNamespaceRecord(file: string): NamespaceRecord | null {
 	}
 
 	const pathMatch = content.match(/\*\*Path:\*\*\s*`([^`]+)`/);
-	const packagesMatch = content.match(/\*\*Packages:\*\*\s*(.+)/);
+	const packagesMatch = content.match(/\*\*Packages:\*\*\s*([\s\S]*?)(?=\n\n|\n\*\*|$)/);
+
+	let packageNames: string[] = [];
+	if (packagesMatch) {
+		packageNames = packagesMatch[1]
+			.split('\n')
+			.map(line => line.replace(/^-\s*Package:\s*/, '').trim())
+			.filter(Boolean);
+	}
 
 	return {
 		kind: 'namespace',
 		name: nameMatch[1].trim(),
 		path: pathMatch?.[1]?.trim() ?? '.',
-		packageNames: packagesMatch
-			? packagesMatch[1]
-					.split(',')
-					.map(s => s.trim())
-					.filter(Boolean)
-			: [],
+		packageNames,
 	};
 }
