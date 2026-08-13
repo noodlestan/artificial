@@ -10,33 +10,92 @@
 6. **Don't over-constrain syntax** — first approach was over-concerned with ill-defined rules
 7. **Structured and detailed** — don't throw away mdast's work
 
-## Constraints from Current Code
-
-1. **mdast tree structure** — we must work with mdast's traversal
-2. **Heading depth** — sections nest by depth, not by position
-3. **Paragraph children** — field detection happens inside paragraphs
-4. **List items** — they're nested in mdast, we need to flatten them
-5. **SectionStack** — tracks nested sections by heading depth
-6. **FieldStack** — tracks active field captures
-7. **currentChildren()** — returns field.value, section.children, or document.children
-
-## Context Structure
+## Context Factory
 
 ```pseudo
 interface VisitContext {
-  sectionStack: SectionBlock[]
-  fieldStack: FieldBlock[]
-  documentChildren: BlockContent[]
+  // What construct is currently collecting children
+  capturing(): string | undefined
+  
+  // Get the current target for new records
+  target(): BlockContent[]
+  
+  // Push a record to the current target
+  push(record: Construct): void
+  
+  // Close current context, return parent
+  close(): VisitContext | undefined
+  
+  // Source markdown for raw slicing
   source: string
-  capturePhase: CapturePhase
+  
+  // Last position for gap detection
   lastEnd: Point | undefined
 }
 
-enum CapturePhase {
-  NONE,                             // normal visiting
-  FIELD_VALUE,                      // inside a FieldBlock value
-  SECTION_CONTENT,                  // inside a SectionBlock content
+function createNestedContext(
+  structure: string,           // e.g., 'FieldBlock', 'SectionBlock'
+  parentContext?: VisitContext,
+  source?: string
+): VisitContext {
+  const children: BlockContent[] = []
+  
+  return {
+    capturing() {
+      return structure
+    },
+    
+    target() {
+      return children
+    },
+    
+    push(record: Construct) {
+      // Tags go to section, not children
+      if (record.construct === 'Tag') {
+        const section = findParentSection(parentContext)
+        if (section) (section.tags ??= []).push(record)
+        return
+      }
+      
+      // Add to current context's children
+      children.push(record)
+    },
+    
+    close() {
+      return parentContext
+    },
+    
+    source: source ?? parentContext?.source ?? '',
+    lastEnd: undefined
+  }
 }
+
+function createDocumentContext(source: string): VisitContext {
+  return createNestedContext('Document', undefined, source)
+}
+```
+
+## Context Chain Example
+
+```pseudo
+// Document level
+docCtx = createDocumentContext(markdown)
+// docCtx.capturing() === 'Document'
+
+// Enter SectionBlock
+sectionCtx = createNestedContext('SectionBlock', docCtx)
+// sectionCtx.capturing() === 'SectionBlock'
+// sectionCtx.target() === section.children
+
+// Enter FieldBlock inside Section
+fieldCtx = createNestedContext('FieldBlock', sectionCtx)
+// fieldCtx.capturing() === 'FieldBlock'
+// fieldCtx.target() === field.value
+
+// Encounter another SectionBlock while in FieldBlock
+// → close field context, create new section context
+fieldCtx.close()  // back to sectionCtx
+newSectionCtx = createNestedContext('SectionBlock', sectionCtx)
 ```
 
 ## Visitor Entry Point
@@ -45,19 +104,9 @@ enum CapturePhase {
 function buildDocument(markdown: string): Document {
   tree = fromMarkdown(markdown)
   document = { construct: 'Document', children: [] }
-  context = {
-    sectionStack: [],
-    fieldStack: [],
-    documentChildren: document.children,
-    source: markdown,
-    capturePhase: CapturePhase.NONE,
-    lastEnd: undefined
-  }
+  context = createDocumentContext(markdown)
   
   visit(tree, node => visitNode(node, context))
-  
-  // Close any remaining open sections
-  closeSections(context, 0)
   
   return document
 }
@@ -94,7 +143,7 @@ function visitNode(node: MdastNode, context: VisitContext): Skip | undefined {
       handleFieldBlock(record, context)
     }
     else {
-      pushToCurrentChildren(record, context)
+      context.push(record)
     }
     
     // Update lastEnd
@@ -117,7 +166,7 @@ function visitNode(node: MdastNode, context: VisitContext): Skip | undefined {
     flushGap(context, record.position.start)
   }
   
-  pushToCurrentChildren(record, context)
+  context.push(record)
   
   // Update lastEnd
   if (record.position) {
@@ -147,12 +196,13 @@ function visitParagraph(node: Paragraph, context: VisitContext): Skip {
     }
     
     // Close previous field if any
-    closeActiveField(context)
+    if (context.capturing() === 'FieldBlock') {
+      context = context.close()
+    }
     
-    // Push to current children and start field capture
-    pushToCurrentChildren(record, context)
-    context.fieldStack.push(record)
-    context.capturePhase = CapturePhase.FIELD_VALUE
+    // Push to current context and start field capture
+    context.push(record)
+    context = createNestedContext('FieldBlock', context)
     
     // Update lastEnd
     if (record.position) {
@@ -174,7 +224,7 @@ function visitParagraph(node: Paragraph, context: VisitContext): Skip {
     flushGap(context, record.position.start)
   }
   
-  pushToCurrentChildren(record, context)
+  context.push(record)
   
   // Update lastEnd
   if (record.position) {
@@ -194,18 +244,26 @@ function visitParagraph(node: Paragraph, context: VisitContext): Skip {
 ```pseudo
 function handleSectionBlock(record: SectionBlock, node: MdastNode, context: VisitContext): void {
   // Close any active field
-  closeActiveField(context)
+  if (context.capturing() === 'FieldBlock') {
+    context = context.close()
+  }
   
   // Close sections at or above this depth
   heading = node as Heading
-  closeSections(context, heading.depth)
+  while (context.capturing() === 'SectionBlock') {
+    const parentSection = findParentSection(context)
+    if (parentSection && sectionDepth(parentSection) >= heading.depth) {
+      context = context.close()
+    } else {
+      break
+    }
+  }
   
-  // Push to current children
-  pushToCurrentChildren(record, context)
+  // Push to current context
+  context.push(record)
   
   // Start section capture
-  context.sectionStack.push(record)
-  context.capturePhase = CapturePhase.SECTION_CONTENT
+  context = createNestedContext('SectionBlock', context)
 }
 ```
 
@@ -214,14 +272,15 @@ function handleSectionBlock(record: SectionBlock, node: MdastNode, context: Visi
 ```pseudo
 function handleFieldBlock(record: FieldBlock, context: VisitContext): void {
   // Close previous field if any
-  closeActiveField(context)
+  if (context.capturing() === 'FieldBlock') {
+    context = context.close()
+  }
   
-  // Push to current children
-  pushToCurrentChildren(record, context)
+  // Push to current context
+  context.push(record)
   
   // Start field capture
-  context.fieldStack.push(record)
-  context.capturePhase = CapturePhase.FIELD_VALUE
+  context = createNestedContext('FieldBlock', context)
 }
 ```
 
@@ -301,55 +360,29 @@ function createFieldBlockFromParagraph(paragraph: Paragraph, context: VisitConte
 ## Helper Functions
 
 ```pseudo
-function closeActiveField(context: VisitContext): void {
-  if (context.fieldStack.length > 0) {
-    context.fieldStack.pop()
-    context.capturePhase = CapturePhase.NONE
+function findParentSection(context: VisitContext): SectionBlock | undefined {
+  // Walk up context chain to find parent section
+  let current = context
+  while (current) {
+    if (current.capturing() === 'SectionBlock') {
+      // Return the section from the context's target
+      const children = current.target()
+      if (children.length > 0) {
+        const last = children[children.length - 1]
+        if (last.construct === 'SectionBlock') {
+          return last as SectionBlock
+        }
+      }
+    }
+    current = current.close()
   }
+  return undefined
 }
 
-function closeSections(context: VisitContext, minLevel: number): void {
-  while (context.sectionStack.length > 0) {
-    section = last(context.sectionStack)
-    if (sectionDepth(section) >= minLevel) {
-      context.sectionStack.pop()
-      parent = last(context.sectionStack)
-      if (parent) parent.children.push(section)
-      else context.documentChildren.push(section)
-    } else {
-      break
-    }
-  }
-}
-
-function pushToCurrentChildren(record: Construct, context: VisitContext): void {
-  // Tags go to section, not children
-  if (record.construct === 'Tag') {
-    section = last(context.sectionStack)
-    if (section) (section.tags ??= []).push(record)
-    return
-  }
-  
-  // If we're in field capture, add to field value
-  if (context.capturePhase === CapturePhase.FIELD_VALUE) {
-    field = last(context.fieldStack)
-    if (field) {
-      field.value.push(record)
-      return
-    }
-  }
-  
-  // If we're in section capture, add to section children
-  if (context.capturePhase === CapturePhase.SECTION_CONTENT) {
-    section = last(context.sectionStack)
-    if (section) {
-      section.children.push(record)
-      return
-    }
-  }
-  
-  // Default: add to document children
-  context.documentChildren.push(record)
+function sectionDepth(section: SectionBlock): number {
+  // Extract depth from position or name
+  // This is a placeholder — actual implementation would need to track depth
+  return 1
 }
 
 function flushGap(context: VisitContext, start: Point): void {
@@ -362,7 +395,7 @@ function flushGap(context: VisitContext, start: Point): void {
         value: gap,
         position: cleanPosition({ start: context.lastEnd, end: start })
       }
-      pushToCurrentChildren(gapBlock, context)
+      context.push(gapBlock)
     }
   }
 }
@@ -384,10 +417,11 @@ function getFactory(node: MdastNode, context: VisitContext): ConstructFactory | 
 
 ## Key Insight
 
-The capture phase context allows us to:
+The `createNestedContext` pattern allows us to:
 
-1. **Switch between factories** — when we encounter a SectionBlock while capturing a FieldBlock, we close the field and start section capture
+1. **Switch between factories** — when we encounter a SectionBlock while capturing a FieldBlock, we close the field context and create a new section context
 2. **Stop collecting siblings** — FieldBlock value stops when another FieldBlock or SectionBlock is encountered
 3. **Preserve structure** — we don't lose information by over-constraining syntax rules
+4. **Track what's capturing** — `capturing()` returns the construct type, or `undefined` if at document level
 
 This is similar to how `md => html` works with remark/rehype, but we classify sub-sections and fields while keeping everything else as-is.
