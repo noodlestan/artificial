@@ -4,9 +4,7 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 
 ## ACTIONABLE
 
-- **POC Step 5 — Cross-check against the grammar WIP (next):** enumerate gaps (grammar constructs the parser can't express yet).
-- **POC Step 6 — Grammar spec fixes as the parser exercises it:** `FieldBlock` containment rules (terminator/content lists omit `SectionBlock` and nested `FieldBlock`); stale `type?` vs `kind` in `section-block.art` Schema block; clarify `NaturalBlock` as the catch-all (markdown not classified as art); tag placement reconciled with FieldBlock/ExampleBlock tag support. Summarise into `language.art` (Construct Containment and the NaturalBlock Catch-all).
-- **POC Step 7 — First constructs to land:** the composing trio `SectionBlock` + `FieldBlock` + `NaturalBlock` (the ADR corpus parses as proof), then `Tag` (critical path for projection classification).
+- **POC Parse** — most actionable item: `art-js/cli/poc-parse/` is the current focus. See `art-js/cli/poc-parse/_backlog/_parking-lot.md` for detailed steps.
 
 ## pending
 

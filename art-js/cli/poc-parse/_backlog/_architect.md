@@ -1,8 +1,6 @@
-# Artificials Plan
+# POC Parse Plan
 
-Forward-looking work for the artificials toolchain. Decisions live in the ADRs (`architecture/records/adr/`); this file tracks the work ahead only.
-
-Short termtracker is `_parking-lot.md` (no done items there).
+Forward-looking work for the artificials parser POC. Decisions live in the ADRs (`architecture/records/adr/`); this file tracks the work ahead only.
 
 ## Approach
 
@@ -14,9 +12,9 @@ Short termtracker is `_parking-lot.md` (no done items there).
 
 ## Work ahead
 
-### POC Parse
+### POC Plan
 
-- `art-js/cli/poc-parse/_guide.md` — POC spike of the artificials parser
+- `_backlog/plan-poc-parse/plan.md` - WORKING
 
 ### MD Art Roundtrip
 
@@ -27,15 +25,3 @@ Use one art file `ops/records/packages/art-mantras.art` to parse and serialize b
 - libs/primitives for types, type assertions
 - libs/parser - md => mdast => artast
 - libs/serializer - artast => mdast => md
-
-### Reactive core (deferred)
-
-chokidar → signals → memo recompute. Only relevant once re-compile-on-change is needed (watcher, dev-server). Finalises **SolidJS Signals** and **Watcher Based on Chokidar**.
-
-### Template engine research (parallel)
-
-Evaluate Nunjucks / Handlebars / Liquid against the `.tart` requirements; define the pre-pass (natural-language directives → plugin syntax) and post-pass (agent processes natural language) boundary. Finalises **Create an accessory Template Language**.
-
-### Precompiled rewrite (after POC)
-
-Replace **Projections Precompiled and Committed** with install-time compilation + per-project overrides, using render-cost evidence from the POC. Updates `distribution.art`.
