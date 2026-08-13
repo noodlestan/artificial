@@ -18,7 +18,7 @@ export interface VisitContext {
 	capturing(): string | undefined;
 	target(): BlockContent[];
 	push(record: Construct): void;
-	close(): VisitContext | undefined;
+	parent(): VisitContext | undefined;
 	source: string;
 	lastEnd: Point | undefined;
 	_section?: SectionBlock;
@@ -86,11 +86,11 @@ export function isInlineNode(node: MdastNode): boolean {
 	return INLINE_TYPES.has(node.type);
 }
 
-export function findParentSection(context: VisitContext): SectionBlock | undefined {
+export function findTagable(context: VisitContext): SectionBlock | undefined {
 	let current: VisitContext | undefined = context;
 	while (current) {
 		if (current._section) return current._section;
-		current = current.close();
+		current = current.parent();
 	}
 	return undefined;
 }
@@ -232,6 +232,79 @@ export const naturalBlockFactory: ConstructFactory = {
 	visitChildren: false,
 };
 
+export interface ConstructHandler {
+	canHandle(record: Construct): boolean;
+	handle(record: Construct, node: MdastNode, context: VisitContext): VisitContext;
+}
+
+export function createSectionBlockHandler(
+	createNestedCtx: typeof createNestedContext,
+): ConstructHandler {
+	return {
+		canHandle(record) {
+			return record.construct === 'SectionBlock';
+		},
+		handle(record, node, context) {
+			const section = record as SectionBlock;
+			let ctx = context;
+
+			if (ctx.capturing() === 'FieldBlock') {
+				const p = ctx.parent();
+				if (p) {
+					p.lastEnd = ctx.lastEnd;
+					ctx = p;
+				}
+			}
+
+			const heading = node as unknown as { depth: number };
+			while (ctx.capturing() === 'SectionBlock') {
+				const parentSection = findTagable(ctx);
+				if (parentSection && sectionDepth(parentSection) >= heading.depth) {
+					const p = ctx.parent();
+					if (p) {
+						p.lastEnd = ctx.lastEnd;
+						ctx = p;
+					}
+				} else {
+					break;
+				}
+			}
+
+			ctx.push(record);
+			const newCtx = createNestedCtx('SectionBlock', ctx, undefined, section.children, section);
+			newCtx.lastEnd = ctx.lastEnd;
+			return newCtx;
+		},
+	};
+}
+
+export function createFieldBlockHandler(
+	createNestedCtx: typeof createNestedContext,
+): ConstructHandler {
+	return {
+		canHandle(record) {
+			return record.construct === 'FieldBlock';
+		},
+		handle(record, node, context) {
+			const field = record as FieldBlock;
+			let ctx = context;
+
+			if (ctx.capturing() === 'FieldBlock') {
+				const p = ctx.parent();
+				if (p) {
+					p.lastEnd = ctx.lastEnd;
+					ctx = p;
+				}
+			}
+
+			ctx.push(record);
+			const newCtx = createNestedCtx('FieldBlock', ctx, undefined, field.value);
+			newCtx.lastEnd = ctx.lastEnd;
+			return newCtx;
+		},
+	};
+}
+
 export function getFactory(node: MdastNode, context: VisitContext): ConstructFactory | null {
 	if (sectionBlockFactory.detect(node, context)) return sectionBlockFactory;
 	if (fieldBlockFactory.detect(node, context)) return fieldBlockFactory;
@@ -257,13 +330,13 @@ export function createNestedContext(
 		},
 		push(record: Construct) {
 			if (record.construct === 'Tag') {
-				const s = findParentSection(ctx);
+				const s = findTagable(ctx);
 				if (s) (s.tags ??= []).push(record);
 				return;
 			}
 			children.push(record);
 		},
-		close() {
+		parent() {
 			return parentContext;
 		},
 		source: source ?? parentContext?.source ?? '',

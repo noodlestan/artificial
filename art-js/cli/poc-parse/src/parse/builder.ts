@@ -6,17 +6,23 @@ import { SKIP, visit } from 'unist-util-visit';
 import {
 	createDocumentContext,
 	createFieldBlockFromParagraph,
+	createFieldBlockHandler,
 	createNaturalBlock,
 	createNestedContext,
-	findParentSection,
+	createSectionBlockHandler,
 	getFactory,
 	isInlineNode,
-	sectionDepth,
 } from './factory';
-import type { VisitContext } from './factory';
-import type { Document, FieldBlock, NaturalBlock, Point, SectionBlock } from './types';
+import type { ConstructHandler, VisitContext } from './factory';
+import type { Document, NaturalBlock, Point } from './types';
 
-export function buildDocument(markdown: string): Document {
+export function buildDocument(
+	markdown: string,
+	handlers: ConstructHandler[] = [
+		createSectionBlockHandler(createNestedContext),
+		createFieldBlockHandler(createNestedContext),
+	],
+): Document {
 	const tree = fromMarkdown(markdown);
 	const docContext = createDocumentContext(markdown);
 	let currentContext: VisitContext = docContext;
@@ -41,56 +47,6 @@ export function buildDocument(markdown: string): Document {
 		}
 	}
 
-	function handleSectionBlock(record: SectionBlock, node: Node): void {
-		if (currentContext.capturing() === 'FieldBlock') {
-			const parent = currentContext.close();
-			if (parent) {
-				parent.lastEnd = currentContext.lastEnd;
-				currentContext = parent;
-			}
-		}
-
-		const heading = node as unknown as { depth: number };
-		while (currentContext.capturing() === 'SectionBlock') {
-			const parentSection = findParentSection(currentContext);
-			if (parentSection && sectionDepth(parentSection) >= heading.depth) {
-				const parent = currentContext.close();
-				if (parent) {
-					parent.lastEnd = currentContext.lastEnd;
-					currentContext = parent;
-				}
-			} else {
-				break;
-			}
-		}
-
-		currentContext.push(record);
-		const newCtx = createNestedContext(
-			'SectionBlock',
-			currentContext,
-			undefined,
-			record.children,
-			record,
-		);
-		newCtx.lastEnd = currentContext.lastEnd;
-		currentContext = newCtx;
-	}
-
-	function handleFieldBlock(record: FieldBlock): void {
-		if (currentContext.capturing() === 'FieldBlock') {
-			const parent = currentContext.close();
-			if (parent) {
-				parent.lastEnd = currentContext.lastEnd;
-				currentContext = parent;
-			}
-		}
-
-		currentContext.push(record);
-		const newCtx = createNestedContext('FieldBlock', currentContext, undefined, record.value);
-		newCtx.lastEnd = currentContext.lastEnd;
-		currentContext = newCtx;
-	}
-
 	function visitParagraph(node: Paragraph): typeof SKIP | undefined {
 		if (node.children.length > 0 && node.children[0].type === 'strong') {
 			const strongNode = node.children[0];
@@ -112,7 +68,7 @@ export function buildDocument(markdown: string): Document {
 				if (record.position) flushGap(record.position.start);
 
 				if (currentContext.capturing() === 'FieldBlock') {
-					const parent = currentContext.close();
+					const parent = currentContext.parent();
 					if (parent) {
 						parent.lastEnd = currentContext.lastEnd;
 						currentContext = parent;
@@ -156,10 +112,9 @@ export function buildDocument(markdown: string): Document {
 
 			if (record.position) flushGap(record.position.start);
 
-			if (record.construct === 'SectionBlock') {
-				handleSectionBlock(record as SectionBlock, node);
-			} else if (record.construct === 'FieldBlock') {
-				handleFieldBlock(record as FieldBlock);
+			const handler = handlers.find(h => h.canHandle(record));
+			if (handler) {
+				currentContext = handler.handle(record, node, currentContext);
 			} else {
 				currentContext.push(record);
 			}
