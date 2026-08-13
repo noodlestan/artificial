@@ -2,7 +2,7 @@
 
 **ID:** `implement-command-repo`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `plan`
 
@@ -59,20 +59,19 @@ Implement the `repo` command for `@art-domains/workspace-cli`. Lists repositorie
 
 **Report:** [fix-repo-record-parsing\_\_report.md](./instructions/fix-repo-record-parsing__report.md)
 
-### `repo-test-coverage` - `PLANNED`
+### `repo-test-coverage` - `COMMITTED`
 
 **Commit Message:** `test(workspace-cli): implement repo command test coverage`
 
-**Instructions File:** [repo-test-coverage.md](./instructions/repo-test-coverage.md)
+**Commit:** `9227012`
 
-Implement the 35 missing tests for the repo command. Worker created test scaffolds with `it.todo()` but never implemented actual tests.
+**Artefacts:**
 
-**Use case:**
+- `src/commands/repo/runRepo.test.ts` — implemented 8 BDD scenario tests
+- `src/private/records/projectGraph/loadProjectGraph.test.ts` — implemented 24 record reading and graph tests
+- `src/private/present/presentPackageStateReport.test.ts` — implemented 4 package state report tests
 
-- Implement all 35 `it.todo()` tests in:
-  - `src/commands/repo/runRepo.test.ts` (8 tests)
-  - `src/private/records/projectGraph/loadProjectGraph.test.ts` (23 tests)
-  - `src/private/present/presentPackageStateReport.test.ts` (4 tests)
+**Report:** [repo-test-coverage\_\_report.md](./instructions/repo-test-coverage__report.md)
 
 ## Follow ups
 
