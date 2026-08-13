@@ -23,8 +23,8 @@ interface VisitContext {
   // Push a record to the current target
   push(record: Construct): void
 
-  // Return parent context (poorly named — should be `parent()`)
-  close(): VisitContext | undefined
+  // Return parent context (renamed from `close()` for clarity)
+  parent(): VisitContext | undefined
 
   // Source markdown for raw slicing
   source: string
@@ -66,7 +66,7 @@ function createNestedContext(
       children.push(record)
     },
 
-    close() {
+    parent() {
       return parentContext
     },
 
@@ -260,7 +260,7 @@ function handleSectionBlock(record: SectionBlock, node: MdastNode, context: Visi
   // Close sections at or above this depth
   heading = node as Heading
   while (context.capturing() === 'SectionBlock') {
-    const parentSection = findParentSection(context)
+    const parentSection = findTagable(context)
     if (parentSection && sectionDepth(parentSection) >= heading.depth) {
       context = context.close()
     } else {
@@ -373,7 +373,7 @@ function createFieldBlockFromParagraph(paragraph: Paragraph, context: VisitConte
 // Find the nearest section that can receive tags.
 // Walks up the context chain looking for a context with `_section` set.
 // (Could be renamed `findTagable` — it finds the section for tag routing.)
-function findParentSection(context: VisitContext): SectionBlock | undefined {
+function findTagable(context: VisitContext): SectionBlock | undefined {
   let current = context
   while (current) {
     if (current._section) return current._section
