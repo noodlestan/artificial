@@ -44,15 +44,17 @@ The Noodlestan ecosystem spans multiple independent repositories (`artificial`, 
 
 Complete the workspace CLI with remaining commands and infrastructure.
 
-**DONE:** `repo` command — list repositories, namespaces, and packages with version info. (commit `76cd4b4`)
+**Now Fixing:** `repo` command — list repositories, namespaces, and packages with version info. (commit `76cd4b4`, `c09e766`, `9227012`)
 
-**BLOCKED:** `repo` command has bugs — namespace parsing broken, missing `kind` field. See `_backlog/3-now/implement-command-repo/plan.md` (iteration `fix-repo-record-parsing`).
+**Next:** Bug fixes — see `_backlog/3-now/` for DRAFT plans:
 
-**Next:** `pull`, `push`, `sync` commands — cross-repo synchronization capabilities. See `_backlog/3-now/implement-pull-push-sync/plan.md`.
+- `implement-sanity-workspace-report` — workspace as first-class checkout in sanity
+- `fix-clone-command-report` — clone report shows checkout list twice / without scanning
+- `fix-repo-command-graph-loading` — repo shows "unknown package" everywhere
 
-**Later:** `link`, `links`, `unlink`, `publish`.
+**Later:** `pull`, `push`, `sync` commands — see `_backlog/3-now/implement-pull-push-sync/plan.md`.
 
-See `_backlog/3-now/implement-command-repo/plan.md` for repo command details.
+**Even later:** `link`, `links`, `unlink`, `publish`.
 
 ## Follow-ups
 

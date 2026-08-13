@@ -21,10 +21,23 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 | Workspace not first in Checkout Report                   | `npm run workspace sanity`                              | `WORKSPACE` row appears first                           | `WORKSPACE` appears sorted by name — create workspace checkout before loading records                               |
 | Clone refuses extraneous dir but no failure logged       | `clone Purrtrait bug-fix` when `repos/bug-fix` exists   | log clone failure operation                             | refuses silently, no operation in report                                                                            |
 | Extraneous with file (no .git) shows "uncommitted files" | `repos/blah` with a `foo` file                          | `unknown project; no git`                               | `unknown project; uncommitted files` — `.git` check should come before git introspection                            |
+| Clone outputs checkout list twice                        | `npm run workspace clone`                               | checkout list shown once                                | checkout list appears twice in output                                                                               |
+| Clone report shows checkout list without scanning        | `npm run workspace clone` (known project, not cloned)   | report shows only cloned checkout                       | report shows full checkout list without having scanned other repos                                                  |
+| Repo shows unknown package everywhere                    | `npm run workspace repo`                                | package states resolved correctly                       | shows "unknown package" for every package, followed by hydrated checkout list                                       |
+
+### PENDING FEATURES
+
+| feature                                     | description                                                                                                                                                                           | status |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| Workspace as first-class checkout in sanity | Treat workspace as a checkout for scanning (but store in `ctx.workspace` not `ctx.store`). Show "Workspace:" report before "Checkouts:". Update `createCommandContext.ts`. Unit test. | DRAFT  |
 
 ### ACTIONABLE
 
-- **Delegate `repo-test-coverage`** — implement 35 missing tests for the repo command. Instruction ready at `_backlog/3-now/implement-command-repo/instructions/repo-test-coverage.md`.
+- **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
+- **Spawn 2 architects** — to expand DRAFT plans into full instruction files:
+  - `implement-sanity-workspace-report` (ONE)
+  - `fix-clone-command-report` (TWO)
+  - `fix-repo-command-graph-loading` (THREE) — after ONE and TWO are planned
 
 ### PENDING
 
@@ -44,7 +57,7 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ### BLOCKER
 
-- **35 todo tests from repo command** — worker created test scaffolds but never implemented actual tests. See `_backlog/3-now/implement-command-repo/plan.md` (iteration `repo-test-coverage`, PLANNED).
+- None current.
 
 ### FOLLOW-UPS (not in scope)
 
