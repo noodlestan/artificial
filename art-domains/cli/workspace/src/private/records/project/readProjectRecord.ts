@@ -16,16 +16,20 @@ export function readProjectRecord(file: string): ProjectRecord | null {
 	}
 
 	const pathMatch = content.match(/\*\*Path:\*\*\s*`([^`]+)`/);
-	const namespacesMatch = content.match(/\*\*Namespaces:\*\*\s*(.+)/);
+	const namespacesMatch = content.match(/\*\*Namespaces:\*\*\s*([\s\S]*?)(?=\n\n|\n\*\*|$)/);
+
+	let namespaceNames: string[] = [];
+	if (namespacesMatch) {
+		namespaceNames = namespacesMatch[1]
+			.split('\n')
+			.map(line => line.replace(/^-\s*Namespace:\s*/, '').trim())
+			.filter(Boolean);
+	}
 
 	return {
+		kind: 'project',
 		name: nameMatch[1].trim(),
 		path: pathMatch?.[1]?.trim() ?? '.',
-		namespaceNames: namespacesMatch
-			? namespacesMatch[1]
-					.split(',')
-					.map(s => s.trim())
-					.filter(Boolean)
-			: [],
+		namespaceNames,
 	};
 }

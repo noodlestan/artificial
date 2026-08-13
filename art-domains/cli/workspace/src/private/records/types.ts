@@ -27,18 +27,21 @@ export interface PackageStateRecord {
 }
 
 export interface ProjectRecord {
+	kind: 'project';
 	name: string;
 	path: string;
 	namespaceNames: string[];
 }
 
 export interface NamespaceRecord {
+	kind: 'namespace';
 	name: string;
 	path: string;
 	packageNames: string[];
 }
 
 export interface PackageRecord {
+	kind: 'package';
 	name: string;
 	canonicalName: string;
 	path: string;

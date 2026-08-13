@@ -44,7 +44,8 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ### BLOCKER
 
-(none)
+- **Repo command bugs** — namespace parsing broken, missing `kind` field. See `_backlog/3-now/implement-command-repo/plan.md` (iteration `fix-repo-record-parsing`).
+- **35 todo tests from repo command** — worker created test scaffolds but never implemented actual tests. See `_backlog/3-now/implement-command-repo/plan.md` (iteration `repo-test-coverage`).
 
 ### FOLLOW-UPS (not in scope)
 

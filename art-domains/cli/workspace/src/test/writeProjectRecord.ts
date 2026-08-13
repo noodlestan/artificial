@@ -17,7 +17,10 @@ export function writeProjectRecord(
 	const canonicalName = options?.canonicalName ?? '@test/' + name.toLowerCase();
 	const projectPath = options?.path ?? '.';
 	const namespaces = options?.namespaces ?? [];
-	const nsLine = namespaces.length > 0 ? `\n**Namespaces:** ${namespaces.join(', ')}\n` : '';
+	const nsLines =
+		namespaces.length > 0
+			? '\n**Namespaces:**\n' + namespaces.map(ns => `- Namespace: ${ns}`).join('\n') + '\n'
+			: '';
 	writeFileSync(
 		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
 		'# Module\n\n## Project: ' +
@@ -29,7 +32,7 @@ export function writeProjectRecord(
 			'`\n\n**Path:** `' +
 			projectPath +
 			'`' +
-			nsLine +
+			nsLines +
 			'\n',
 	);
 }

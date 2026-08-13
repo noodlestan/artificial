@@ -30,13 +30,21 @@ Before writing implementation code, the worker MUST establish the test scaffolds
 
 ### Learnings from repo command implementation
 
-The repo command was successfully implemented with the following patterns (commit `76cd4b4`):
+The repo command was implemented with the following patterns (commit `76cd4b4`):
 
-- **Test-first approach with pending tests** — 35 pending tests created in step 2, implemented incrementally in step 4
+- **Test-first approach with pending tests** — 35 pending tests created in step 2, but worker never implemented actual tests (chronic case of missing tests). This is a lesson learned: **tests MUST be implemented, not just scaffolded**.
 - **Test helper pattern** — Created `src/test/writeProjectRecord.ts` similar to `writeCheckoutRecord.ts`
 - **Singular/plural pattern** — `readProjectRecord` / `readProjectRecords` works well for record reading functions
 - **6-step workflow** — Refactor → Test Scaffolds → Define Contracts → Implement Core → Implement Command → Wire to CLI
 - **All CI steps passed** — 9/9 tasks successful
+
+### Critical Lesson: Implement Tests, Don't Just Scaffold
+
+The worker created 35 `it.todo()` tests but never implemented them. This is unacceptable. The instruction file MUST:
+
+1. Create test scaffolds with `it.todo()` in step 2
+2. **Implement all tests** in subsequent steps (not just scaffold them)
+3. Verify no `it.todo()` tests remain in final verification
 
 ### Pre-work: Enhance scan functions
 
@@ -56,6 +64,9 @@ Create test files following the existing patterns in `src/`:
 - `src/commands/sync/runSync.test.ts` — unit tests for the sync command
 - `src/private/scan/scanWorkspaceState.test.ts` — unit tests for workspace state scanning
 - `src/private/present/presentWorkspaceReport.test.ts` — unit tests for presenting the Workspace Report
+- `src/private/git/getBehindCount.test.ts` — unit tests for behind count detection
+- `src/private/scan/isCleanCheckout.test.ts` — unit tests for clean checkout check
+- `src/private/git/pullCheckout.test.ts` — unit tests for pull checkout function
 
 ### Test-First Approach
 
@@ -73,11 +84,15 @@ Create test files following the existing patterns in `src/`:
 
 ### Conventions to Follow
 
+- **One function per file** — Each function gets its own file (e.g., `isCleanCheckout.ts`, `pullCheckout.ts`)
+- **camelCase file names** — Function files use camelCase matching the function name (e.g., `isCleanCheckout.ts`)
+- **Singular/plural pattern** — For record reading functions (e.g., `readProjectRecord` / `readProjectRecords`)
 - Use existing test patterns from `src/commands/clone/` and `src/commands/branch/`
 - Follow the data flow pattern: load config → create context → hydrate → execute → present reports
 - Use operation log factories from `src/private/operations/` for pull operations
 - Use report presentation patterns from `src/private/present/`
 - Workspace root checkout is temporary (not persisted, not merged into store)
+- **Tests MUST be implemented, not just scaffolded** — No `it.todo()` in final verification
 
 ## SETUP
 

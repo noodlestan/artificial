@@ -46,6 +46,8 @@ Complete the workspace CLI with remaining commands and infrastructure.
 
 **DONE:** `repo` command — list repositories, namespaces, and packages with version info. (commit `76cd4b4`)
 
+**BLOCKED:** `repo` command has bugs — namespace parsing broken, missing `kind` field. See `_backlog/3-now/implement-command-repo/plan.md` (iteration `fix-repo-record-parsing`).
+
 **Next:** `pull`, `push`, `sync` commands — cross-repo synchronization capabilities. See `_backlog/3-now/implement-pull-push-sync/plan.md`.
 
 **Later:** `link`, `links`, `unlink`, `publish`.

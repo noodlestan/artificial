@@ -19,6 +19,7 @@ export function readNamespaceRecord(file: string): NamespaceRecord | null {
 	const packagesMatch = content.match(/\*\*Packages:\*\*\s*(.+)/);
 
 	return {
+		kind: 'namespace',
 		name: nameMatch[1].trim(),
 		path: pathMatch?.[1]?.trim() ?? '.',
 		packageNames: packagesMatch

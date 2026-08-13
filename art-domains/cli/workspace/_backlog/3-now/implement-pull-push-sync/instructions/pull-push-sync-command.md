@@ -54,11 +54,15 @@ Execute all the steps autonomously, one by one, including running the **Verifica
 - RULE: If a verification command reports errors related to the scope of these instructions, attempt to fix them.
 - RULE: If the errors persist, inspect the cause before continuing.
 - RULE: If still unable to fix it, STOP and report back the error, following the "## How to Report Back".
+- RULE: **One function per file** — Each function gets its own file (e.g., `isCleanCheckout.ts`, `pullCheckout.ts`)
+- RULE: **camelCase file names** — Function files use camelCase matching the function name (e.g., `isCleanCheckout.ts`)
+- RULE: **Singular/plural pattern** — For record reading functions (e.g., `readProjectRecord` / `readProjectRecords`)
 - RULE: Use existing test patterns from `src/commands/clone/` and `src/commands/branch/`.
 - RULE: Use existing record patterns from `src/private/records/repository/` and `src/private/records/checkout/`.
 - RULE: Use existing presentation patterns from `src/private/present/`.
 - RULE: Workspace root checkout is temporary (not persisted, not merged into store).
 - RULE: Each function should be independently testable.
+- RULE: **Tests MUST be implemented, not just scaffolded** — No `it.todo()` in final verification.
 
 ### Step Verification commands
 
@@ -73,21 +77,29 @@ npm run test
 
 ## Changes
 
-- Add `getBehindCount(dir, remoteBranch)` function to `src/private/git/` (in step 1)
+- Add `getBehindCount(dir, remoteBranch)` function in `src/private/git/getBehindCount.ts` (in step 1)
 - Add `isBehind` field to `Checkout` type in `src/private/scan/types.ts` (in step 1)
 - Update `scanCheckoutState` to detect "is behind" state (in step 1)
 - Create `src/private/scan/scanWorkspaceState.ts` for workspace root scanning (in step 1)
-- Create test files: `src/commands/pull/runPull.test.ts`, `src/commands/push/runPush.test.ts`, `src/commands/sync/runSync.test.ts`, `src/private/scan/scanWorkspaceState.test.ts`, `src/private/present/presentWorkspaceReport.test.ts` (in step 2)
-- Define `isCleanCheckout`, `pullCheckout`, `presentWorkspaceReport` function signatures (in step 3)
-- Implement `isCleanCheckout(checkout)` helper function (in step 4)
-- Implement `pullCheckout(ctx, checkout)` helper function (in step 4)
-- Implement `scanWorkspaceState(ctx)` function (in step 4)
-- Implement `presentWorkspaceReport(workspace)` function (in step 4)
-- Implement `pull` command handler (in step 5)
-- Implement `push` command handler with pull-first logic (in step 5)
-- Implement `sync` command handler with pull-then-push logic (in step 5)
-- Enhance `sanity` command with workspace status and pull-if-behind (in step 6)
-- Wire `pull`, `push`, `sync` commands to CLI entry point (in step 7)
+- Create test files following one-function-per-file pattern (in step 2):
+  - `src/commands/pull/runPull.test.ts` — 4 tests from BDD scenarios
+  - `src/commands/push/runPush.test.ts` — 5 tests from BDD scenarios
+  - `src/commands/sync/runSync.test.ts` — 4 tests from BDD scenarios
+  - `src/private/scan/scanWorkspaceState.test.ts` — workspace state tests
+  - `src/private/present/presentWorkspaceReport.test.ts` — report tests
+  - `src/private/git/getBehindCount.test.ts` — behind count tests
+  - `src/private/scan/isCleanCheckout.test.ts` — clean checkout tests
+  - `src/private/git/pullCheckout.test.ts` — pull checkout tests
+- Define function signatures in separate files (in step 3):
+  - `src/private/scan/isCleanCheckout.ts`
+  - `src/private/git/pullCheckout.ts`
+  - `src/private/present/presentWorkspaceReport.ts`
+  - `src/private/git/getBehindCount.ts`
+  - `src/private/scan/scanWorkspaceState.ts`
+- Implement functions in their respective files (in step 4)
+- Implement pull, push, sync command handlers (in step 5)
+- Enhance sanity command with workspace status (in step 6)
+- Wire commands to CLI entry point (in step 7)
 
 ## Step Instructions
 
@@ -137,23 +149,28 @@ npm run ci # to verify build is green before starting
 
 1. Read the BDD scenarios from `$PROJECT/architecture/commands.md` → Pull, Push, Sync, Sanity sections
 2. Create `src/commands/pull/runPull.test.ts` with pending tests for each scenario:
-   - pull clean checkouts that are behind
-   - pull skips dirty checkouts
-   - pull skips checkouts already up to date
-   - pull skips checkouts not cloned
+   - "pull clean checkouts that are behind"
+   - "pull skips dirty checkouts"
+   - "pull skips checkouts already up to date"
+   - "pull skips checkouts not cloned"
 3. Create `src/commands/push/runPush.test.ts` with pending tests for each scenario:
-   - push clean checkouts that are ahead
-   - push tries pull first if behind
-   - push skips dirty checkouts
-   - push skips checkouts already up to date
-   - push skips checkouts not cloned
+   - "push clean checkouts that are ahead"
+   - "push tries pull first if behind"
+   - "push skips dirty checkouts"
+   - "push skips checkouts already up to date"
+   - "push skips checkouts not cloned"
 4. Create `src/commands/sync/runSync.test.ts` with pending tests for each scenario:
-   - sync clean checkouts
-   - sync skips dirty checkouts
-   - sync skips checkouts not cloned
-   - sync works on up to date checkouts
+   - "sync clean checkouts"
+   - "sync skips dirty checkouts"
+   - "sync skips checkouts not cloned"
+   - "sync works on up to date checkouts"
 5. Create `src/private/scan/scanWorkspaceState.test.ts` with tests for workspace state scanning
 6. Create `src/private/present/presentWorkspaceReport.test.ts` with tests for presenting the Workspace Report
+7. Create `src/private/git/getBehindCount.test.ts` with tests for behind count detection
+8. Create `src/private/scan/isCleanCheckout.test.ts` with tests for clean checkout check
+9. Create `src/private/git/pullCheckout.test.ts` with tests for pull checkout function
+
+**CRITICAL:** These are `it.todo()` scaffolds. You MUST implement the actual tests in steps 4-6. Do NOT leave `it.todo()` in final verification.
 
 **Extra Verification commands:**
 
@@ -176,33 +193,39 @@ npm run ci # to verify build is green before starting
 
 - Execute `npm run lint` in `$PROJECT` to verify types compile
 
-### Step 4/7 — Implement Core Functions
+### Step 4/7 — Implement Core Functions and Tests
 
-**Goal:** Implement the core functions following the pseudo-code.
+**Goal:** Implement the core functions and their tests following the pseudo-code.
 
 **Instructions:**
 
 1. Implement `isCleanCheckout(checkout: Checkout): boolean` in `src/private/scan/isCleanCheckout.ts`:
    - Check if checkout exists, not extraneous, not dirty, not conflicts, not detached
+   - Implement tests in `src/private/scan/isCleanCheckout.test.ts`
 2. Implement `pullCheckout(ctx: WorkspaceContext, checkout: Checkout): void` in `src/private/git/pullCheckout.ts`:
    - Use `simple-git` to pull from origin
    - Update checkout state (clear isBehind issue)
    - Log pull success/failure
+   - Implement tests in `src/private/git/pullCheckout.test.ts`
 3. Implement `scanWorkspaceState(ctx: WorkspaceContext): Checkout` in `src/private/scan/scanWorkspaceState.ts`:
    - Create temporary workspace checkout
    - Scan workspace root state
    - Return workspace checkout with updated state
+   - Implement tests in `src/private/scan/scanWorkspaceState.test.ts`
 4. Implement `presentWorkspaceReport(workspace: Checkout): void` in `src/private/present/presentWorkspaceReport.ts`:
    - Present table with 1 row for workspace root
    - Follow existing report presentation patterns
+   - Implement tests in `src/private/present/presentWorkspaceReport.test.ts`
+
+**CRITICAL:** You MUST implement the actual tests, not just scaffold them. Verify no `it.todo()` tests remain.
 
 **Extra Verification commands:**
 
-- Execute `npm run test` in `$PROJECT` to verify core functions pass tests
+- Execute `npm run test` in `$PROJECT` to verify core functions and tests pass
 
-### Step 5/7 — Implement pull, push, sync Commands
+### Step 5/7 — Implement pull, push, sync Commands and Tests
 
-**Goal:** Implement the command handlers.
+**Goal:** Implement the command handlers and their tests.
 
 **Instructions:**
 
@@ -210,18 +233,23 @@ npm run ci # to verify build is green before starting
    - Scan all checkouts
    - For each checkout: if clean and behind, pull
    - Present Checkout Report + Operations Report
+   - Implement tests in `src/commands/pull/runPull.test.ts` for all 4 BDD scenarios
 2. Create `src/commands/push/runPush.ts` following the pattern from `clone/runClone.ts`:
    - Scan all checkouts
    - For each checkout: if clean and ahead, try pull first if behind, then push
    - Present Checkout Report + Operations Report
+   - Implement tests in `src/commands/push/runPush.test.ts` for all 5 BDD scenarios
 3. Create `src/commands/sync/runSync.ts` following the pattern from `clone/runClone.ts`:
    - Scan all checkouts
    - For each checkout: if clean, pull then push
    - Present Checkout Report + Operations Report
+   - Implement tests in `src/commands/sync/runSync.test.ts` for all 4 BDD scenarios
+
+**CRITICAL:** You MUST implement the actual tests, not just scaffold them. Verify no `it.todo()` tests remain.
 
 **Extra Verification commands:**
 
-- Execute `npm run test` in `$PROJECT` to verify command handlers pass tests
+- Execute `npm run test` in `$PROJECT` to verify command handlers and tests pass
 
 ### Step 6/7 — Enhance sanity Command
 
@@ -287,6 +315,8 @@ Verify that:
 - Edge cases are handled correctly (dirty checkouts, no remote, detached HEAD, merge conflicts)
 - All commands are read-only (no operations logged for pull/push/sync, only sanity --auto logs operations)
 - All BDD scenarios from `architecture/commands.md` pass
+- **No `it.todo()` tests remain** — all tests must be implemented
+- **All test files follow one-function-per-file pattern**
 
 ## How to Report Back to the Delegator
 

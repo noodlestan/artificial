@@ -19,6 +19,7 @@ export function readPackageRecord(file: string): PackageRecord | null {
 	const pathMatch = content.match(/\*\*Path:\*\*\s*`([^`]+)`/);
 
 	return {
+		kind: 'package',
 		name: nameMatch[1].trim(),
 		canonicalName: canonicalNameMatch?.[1]?.trim() ?? '',
 		path: pathMatch?.[1]?.trim() ?? '',

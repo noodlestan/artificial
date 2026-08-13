@@ -125,6 +125,85 @@ Implement `art-workspace repo` command.
 
 **BDD:** `architecture/commands.md` → Repo section.
 
+### `repo-test-coverage` - `PLANNED`
+
+**Commit Message:** `test(workspace-cli): implement repo command test coverage`
+
+Implement the 35 missing tests for the repo command. Worker created test scaffolds with `it.todo()` but never implemented actual tests.
+
+**Use case:**
+
+- Implement all 35 `it.todo()` tests in:
+  - `src/commands/repo/runRepo.test.ts` (8 tests)
+  - `src/private/records/projectGraph/loadProjectGraph.test.ts` (23 tests)
+  - `src/private/present/presentPackageStateReport.test.ts` (4 tests)
+
+**Responsibilities:**
+
+- Implement BDD scenario tests for repo command
+- Implement unit tests for record reading functions
+- Implement unit tests for graph consolidation
+- Implement unit tests for package state report presenter
+- Ensure all tests pass
+
+**Edge cases:**
+
+- Empty directory handling
+- Missing files
+- Invalid format
+- Multi-line lists
+- Prefix stripping
+
+**Pseudo details:** `architecture/_pseudo.md` → Use Cases → repo command.
+
+**BDD:** `architecture/commands.md` → Repo section.
+
+### `fix-repo-record-parsing` - `DONE`
+
+**Commit Message:** `fix(workspace-cli): fix record parsing and add kind field`
+
+**Commit:** `c09e766`
+
+**Artefacts:**
+
+- `src/private/records/types.ts` — added `kind` field to `ProjectRecord`, `NamespaceRecord`, `PackageRecord`
+- `src/private/records/project/readProjectRecord.ts` — fixed namespace parsing for multi-line lists, added `kind: 'project'`
+- `src/private/records/namespace/readNamespaceRecord.ts` — added `kind: 'namespace'`
+- `src/private/records/package/readPackageRecord.ts` — added `kind: 'package'`
+- `src/test/writeProjectRecord.ts` — updated test helper for multi-line namespace format
+
+**Report:** [fix-repo-record-parsing\_\_report.md](./instructions/fix-repo-record-parsing__report.md)
+
+Fix record parsing issues and add `kind` field to all record types. The current implementation has bugs in namespace parsing and is missing the `kind` field which is needed for proper record identification.
+
+**Use case:**
+
+- Fix namespace parsing to handle multi-line lists
+- Strip `- Namespace: ` prefix from namespace names
+- Add `kind` field to all record types
+- Update parsing functions to populate `kind` field
+- Update test helpers to include `kind` field
+
+**Responsibilities:**
+
+- Update `readProjectRecord` to parse multi-line namespace lists
+- Update `readProjectRecord` to strip `- Namespace: ` prefix
+- Add `kind` field to `ProjectRecord`, `NamespaceRecord`, `PackageRecord` types
+- Update `readProjectRecord`, `readNamespaceRecord`, `readPackageRecord` to populate `kind`
+- Update `writeProjectRecord`, `writeNamespaceRecord`, `writePackageRecord` test helpers
+- Update all tests to assert `kind` field
+
+**Edge cases:**
+
+- Empty namespace lists
+- Namespace lists with only one entry
+- Namespace lists with leading/trailing whitespace
+- Missing `kind` field in existing records (backward compatibility)
+
+**Pseudo details:** `architecture/_pseudo.md` → Use Cases → record reading functions.
+
+**BDD:** `architecture/commands.md` → Repo section.
+
 ## Final Verification
 
 After implementation, execute the verification steps defined in `_guide.md`:
