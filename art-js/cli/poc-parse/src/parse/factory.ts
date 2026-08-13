@@ -19,6 +19,7 @@ export interface VisitContext {
 	target(): BlockContent[];
 	push(record: Construct): void;
 	parent(): VisitContext | undefined;
+	detectField(paragraph: Paragraph): FieldBlock | null;
 	source: string;
 	lastEnd: Point | undefined;
 	_section?: SectionBlock;
@@ -27,7 +28,7 @@ export interface VisitContext {
 export interface ConstructFactory {
 	detect(node: MdastNode, context: VisitContext): boolean;
 	create(node: MdastNode, context: VisitContext): Construct;
-	visitChildren: boolean;
+	shouldVisit: boolean;
 }
 
 const TAG_PATTERN = /\(#([\w-]+)\)/;
@@ -188,7 +189,7 @@ export const sectionBlockFactory: ConstructFactory = {
 		section.position = cleanPosition(heading.position);
 		return section;
 	},
-	visitChildren: false,
+	shouldVisit: false,
 };
 
 export const fieldBlockFactory: ConstructFactory = {
@@ -202,7 +203,7 @@ export const fieldBlockFactory: ConstructFactory = {
 	create(node, context) {
 		return createFieldBlockFromParagraph(node as Paragraph, context);
 	},
-	visitChildren: false,
+	shouldVisit: false,
 };
 
 export const tagFactory: ConstructFactory = {
@@ -219,7 +220,7 @@ export const tagFactory: ConstructFactory = {
 		tag.position = cleanPosition(text.position);
 		return tag;
 	},
-	visitChildren: false,
+	shouldVisit: false,
 };
 
 export const naturalBlockFactory: ConstructFactory = {
@@ -229,7 +230,7 @@ export const naturalBlockFactory: ConstructFactory = {
 	create(node, context) {
 		return createNaturalBlock(node, context);
 	},
-	visitChildren: false,
+	shouldVisit: false,
 };
 
 export interface ConstructHandler {
@@ -338,6 +339,12 @@ export function createNestedContext(
 		},
 		parent() {
 			return parentContext;
+		},
+		detectField(paragraph: Paragraph): FieldBlock | null {
+			if (paragraph.children.length > 0 && isFieldStrong(paragraph.children[0], ctx)) {
+				return createFieldBlockFromParagraph(paragraph, ctx);
+			}
+			return null;
 		},
 		source: source ?? parentContext?.source ?? '',
 		lastEnd: parentContext?.lastEnd,

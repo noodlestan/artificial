@@ -5,7 +5,6 @@ import { SKIP, visit } from 'unist-util-visit';
 
 import {
 	createDocumentContext,
-	createFieldBlockFromParagraph,
 	createFieldBlockHandler,
 	createNaturalBlock,
 	createNestedContext,
@@ -14,7 +13,13 @@ import {
 	isInlineNode,
 } from './factory';
 import type { ConstructHandler, VisitContext } from './factory';
-import type { Document, NaturalBlock, Point } from './types';
+import type { Construct, Document, NaturalBlock, Point } from './types';
+
+interface HandleResult {
+	record: Construct;
+	handler: ConstructHandler | null;
+	shouldVisit: boolean;
+}
 
 export function buildDocument(
 	markdown: string,
@@ -47,47 +52,56 @@ export function buildDocument(
 		}
 	}
 
-	function visitParagraph(node: Paragraph): typeof SKIP | undefined {
-		if (node.children.length > 0 && node.children[0].type === 'strong') {
-			const strongNode = node.children[0];
-			const raw =
-				strongNode.position?.start && strongNode.position?.end
-					? markdown.slice(strongNode.position.start.offset, strongNode.position.end.offset)
-					: '';
-			const inner =
-				raw.length >= 4 && raw.startsWith('**') && raw.endsWith('**')
-					? raw.slice(2, -2)
-					: raw.length >= 4 && raw.startsWith('__') && raw.endsWith('__')
-						? raw.slice(2, -2)
-						: raw;
-			const fieldPattern = /^[A-Za-z][A-Za-z ]*:(?:\s|$)/;
+	function maybeHandleFactory(node: Node): HandleResult | null {
+		// Skip root node
+		if (node.type === 'root') return null;
 
-			if (fieldPattern.test(inner)) {
-				const record = createFieldBlockFromParagraph(node, currentContext);
+		// Try to find a factory for this node
+		const factory = getFactory(node, currentContext);
+		if (!factory) return null;
 
-				if (record.position) flushGap(record.position.start);
+		// Create the record
+		const record = factory.create(node, currentContext);
 
-				if (currentContext.capturing() === 'FieldBlock') {
-					const parent = currentContext.parent();
-					if (parent) {
-						parent.lastEnd = currentContext.lastEnd;
-						currentContext = parent;
-					}
+		// Find a handler for this record
+		const handler = handlers.find(h => h.canHandle(record)) ?? null;
+
+		return { record, handler, shouldVisit: factory.shouldVisit };
+	}
+
+	/** Handle block nodes — field detection or natural block fallback. */
+	function handleBlock(node: Paragraph): typeof SKIP | undefined {
+		// Try field detection via context
+		const fieldRecord = currentContext.detectField(node);
+		if (fieldRecord) {
+			if (fieldRecord.position) flushGap(fieldRecord.position.start);
+
+			if (currentContext.capturing() === 'FieldBlock') {
+				const parent = currentContext.parent();
+				if (parent) {
+					parent.lastEnd = currentContext.lastEnd;
+					currentContext = parent;
 				}
-
-				currentContext.push(record);
-				const newCtx = createNestedContext('FieldBlock', currentContext, undefined, record.value);
-				newCtx.lastEnd = currentContext.lastEnd;
-				currentContext = newCtx;
-
-				if (record.position) {
-					updateLastEnd(record.position.end);
-				}
-
-				return SKIP;
 			}
+
+			currentContext.push(fieldRecord);
+			const newCtx = createNestedContext(
+				'FieldBlock',
+				currentContext,
+				undefined,
+				fieldRecord.value,
+			);
+			newCtx.lastEnd = currentContext.lastEnd;
+			currentContext = newCtx;
+
+			if (fieldRecord.position) {
+				updateLastEnd(fieldRecord.position.end);
+			}
+
+			return SKIP;
 		}
 
+		// Otherwise, treat as NaturalBlock
 		const record = createNaturalBlock(node as Nodes, currentContext);
 		if (record.position) flushGap(record.position.start);
 		currentContext.push(record);
@@ -95,24 +109,35 @@ export function buildDocument(
 			updateLastEnd(record.position.end);
 		}
 
+		// Return undefined (not SKIP) to visit children for tag detection
 		return undefined;
+	}
+
+	function handleNaturalBlock(node: Node): typeof SKIP {
+		const record = createNaturalBlock(node, currentContext);
+		if (record.position) flushGap(record.position.start);
+		currentContext.push(record);
+		if (record.position) {
+			updateLastEnd(record.position.end);
+		}
+		return SKIP;
 	}
 
 	function visitNode(node: Node): typeof SKIP | undefined {
 		if (node.type === 'root') return undefined;
 
+		// Handle paragraph specially (field detection + natural block)
 		if (node.type === 'paragraph') {
-			return visitParagraph(node as unknown as Paragraph);
+			return handleBlock(node as unknown as Paragraph);
 		}
 
-		const factory = getFactory(node, currentContext);
-
-		if (factory) {
-			const record = factory.create(node, currentContext);
+		// Try factory handling
+		const result = maybeHandleFactory(node);
+		if (result) {
+			const { record, handler, shouldVisit } = result;
 
 			if (record.position) flushGap(record.position.start);
 
-			const handler = handlers.find(h => h.canHandle(record));
 			if (handler) {
 				currentContext = handler.handle(record, node, currentContext);
 			} else {
@@ -123,19 +148,16 @@ export function buildDocument(
 				updateLastEnd(record.position.end);
 			}
 
-			return factory.visitChildren ? undefined : SKIP;
+			return shouldVisit ? undefined : SKIP;
 		}
 
+		// Inline nodes (text, emphasis, strong, etc.) are NOT visited further.
+		// We only want to visit block-level nodes for construct classification.
+		// Inline content is captured as part of NaturalBlock.value (raw markdown).
 		if (isInlineNode(node)) return SKIP;
 
-		const record = createNaturalBlock(node, currentContext);
-		if (record.position) flushGap(record.position.start);
-		currentContext.push(record);
-		if (record.position) {
-			updateLastEnd(record.position.end);
-		}
-
-		return SKIP;
+		// Handle natural block fallback
+		return handleNaturalBlock(node);
 	}
 
 	visit(tree, (n: Node) => visitNode(n));
