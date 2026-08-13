@@ -12,17 +12,17 @@ const distDir = join(rootDir, 'dist');
 
 // Create dist directory if it doesn't exist
 if (!existsSync(distDir)) {
-  mkdirSync(distDir, { recursive: true });
+	mkdirSync(distDir, { recursive: true });
 }
 
 // Copy all files from src to dist
 const filesToCopy = ['index.html', 'app.js', 'data.json', 'styles.css'];
 
 for (const file of filesToCopy) {
-  const srcPath = join(srcDir, file);
-  const distPath = join(distDir, file);
-  cpSync(srcPath, distPath);
-  console.log(`Copied ${file} to dist/`);
+	const srcPath = join(srcDir, file);
+	const distPath = join(distDir, file);
+	cpSync(srcPath, distPath);
+	console.info(`Copied ${file} to dist/`);
 }
 
-console.log('Build complete!');
+console.info('Build complete!');
