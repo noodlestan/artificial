@@ -24,7 +24,7 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ### ACTIONABLE
 
-- None current. Active implementation is tracked in `_backlog/3-now/plan-workspace-cli/plan.md`.
+- None current. Active implementation is tracked in `_backlog/3-now/plan-workspace-repo/plan.md`.
 
 ### PENDING
 
@@ -38,7 +38,7 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 - **Reverse edge resolution** — `purrpose → @no-comply/solid-primitives` is still using `file:` resolution. After no-comply packages are published to npm, rewire to npm version.
 
-- **repo-ci** — GitHub Actions workflows for all repos. **DRAFT** — instruction file at `_backlog/3-now/plan-workspace-cli/instructions/github-workflow.md`. Not priority.
+- **repo-ci** — GitHub Actions workflows for all repos. **DRAFT** — see `milestone-workspace-one` plan. Not priority.
 
 - **Update CLI README** — match format of `art-js/cli/bin/README.md`, preserving command summary.
 

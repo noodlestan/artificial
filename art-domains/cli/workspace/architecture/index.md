@@ -42,13 +42,13 @@ The workspace owns:
 - **Context** — Agent instructions and reference material. Example: `$WORKSPACE/.agents/`, `$WORKSPACE/reference/`.
 - **Checkouts** — The cloned repositories under a checkout path, whose state is scanned from git and tracked in records. Examples: `repos/{checkout-name}`.
 
-Commands run as **imperative one-shot processes**: each invocation creates a `WorkspaceContext` (an in-memory `CheckoutStore` plus `OperationsLog`), performs work, presents reports, and exits. The design stays clean enough that a reactive layer (`npm run workspace watch`) can subscribe to the same store and log APIs without rearchitecting: the store is rehydratable from disk, the log is append-only, and record syncing is explicit rather than automatic. See `records/adr/execution-model.art`.
+Commands run as **imperative one-shot processes**: each invocation creates a `WorkspaceContext` (an in-memory `CheckoutStore` plus `OperationsLog`), performs work, presents reports, and exits. The design stays clean enough that a reactive layer (`npm run workspace watch`) can subscribe to the same store and log APIs without rearchitecting: the store is rehydratable from disk, the log is append-only, and checkout records are saved per mutation by the commands themselves (`saveCheckoutRecord`) — there is no global sync step. See `records/adr/execution-model.art`.
 
 ### Data Model
 
 Every command operates on a `WorkspaceContext` holding:
 
-- **CheckoutStore** — in-memory state of all known checkouts, hydrated from checkout records, scanned for git state, and (in the designed flow) synced back to records.
+- **CheckoutStore** — in-memory state of all known checkouts, hydrated from checkout records (`hydrateStoreFromRecords`), scanned for git state; checkout records are saved per mutation by the commands (`saveCheckoutRecord`).
 - **OperationsLog** — append-only log of the side effects performed during the command (clone, push, publish, branch created, linked, unlink), each recorded with a success or failure outcome.
 
 Details in `context-model.md` and `operations-log.md`.
@@ -64,7 +64,7 @@ The CLI loads `.art-workspace.mts` at runtime by bundling it with esbuild (Vite-
 ## Use Cases
 
 - **Sanity** — check git status across all repos; with `--auto`, push clean unpushed repos.
-- **Clone** — bootstrap the workspace by cloning all repos (`clone --all`), clone a single repo (`clone <repo> [<target>]`), or report status without cloning (`clone`).
+- **Clone** — bootstrap the workspace by cloning all repos (`clone --all`), clone a single repo (`clone <repo> [<location>]`), or report status without cloning (`clone`).
 - **Branch** — create and checkout the same feature branch across multiple repos for coordinated feature work.
 - **Publish** — push repos and publish packages to npm.
 - **Link / Unlink** — symlink local packages into consumers' `node_modules` for local dev; remove the symlinks and restore npm packages.

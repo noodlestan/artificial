@@ -11,9 +11,11 @@ Rename the 9 remaining kebab-case files under `src/` to camelCase matching their
 ## Steps
 
 1. Verify the full set of remaining kebab-case files:
+
    ```
    find $SCOPE -name "*-*"
    ```
+
    Expected result: exactly these 9 files (nothing else with a hyphen should remain):
    - `src/config/define-config.ts`
    - `src/private/git/has-remote.ts`

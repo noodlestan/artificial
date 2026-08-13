@@ -4,15 +4,16 @@ The command surface of the workspace CLI, their procedures, and their edge cases
 
 ## Command Surface
 
-| command   | usage                                       | status      |
-| --------- | ------------------------------------------- | ----------- |
-| `sanity`  | `sanity [--auto]`                           | implemented |
-| `repo`    | `repo <repo>`                               | designed    |
-| `clone`   | `clone [--all] [<repo>] [<location>]`       | implemented |
-| `branch`  | `branch <branch> [<checkout-name>...]`      | implemented |
-| `link`    | `link <repo> [<namespaces>] [<packages>]`   | designed    |
-| `unlink`  | `unlink <repo> [<namespaces>] [<packages>]` | designed    |
-| `publish` | `publish [--auto]`                          | designed    |
+| command   | usage                                      | status      |
+| --------- | ------------------------------------------ | ----------- |
+| `sanity`  | `sanity [--auto]`                          | implemented |
+| `repo`    | `repo [<checkout-name>...]`                | designed    |
+| `clone`   | `clone [--all] [<repo>] [<location>]`      | implemented |
+| `branch`  | `branch <branch> [<checkout-location>...]` | implemented |
+| `link`    | `link <location> <package> [<target>]`     | designed    |
+| `links`   | `links`                                    | designed    |
+| `unlink`  | `unlink <location> <package> [<target>]`   | designed    |
+| `publish` | `publish [--auto]`                         | designed    |
 
 Every command that touches checkouts presents reports (see `reports.md`).
 
@@ -22,29 +23,84 @@ Commands share the same skeleton:
 
 1. Load the config (`.art-workspace.mts`).
 2. Create a `WorkspaceContext` — a `CheckoutStore` plus an `OperationsLog` (see `context-model.md`).
-3. Load repository records; hydrate existing checkouts from checkout records.
+3. Load repository records; hydrate existing checkouts from checkout records (`loadRepositoryRecords` → `loadCheckoutRecords` → `hydrateStoreFromRecords`).
 4. Scan git state; perform the command's work, recording side effects in the log.
-5. Present reports; sync records back to disk (designed — `syncRecords()` is stubbed).
+5. Present reports. Checkout records are saved per mutation by the commands themselves (`saveCheckoutRecord`) — there is no global sync step.
 
 ## Sanity
 
 **Usage:** `sanity [--auto]`
 
-Check git status across all repos. Procedure: load existing checkouts → scan all → scan extraneous → present Checkout Report + Extraneous Report. With `--auto`, additionally push clean unpushed repos, append the Operations Report, and sync records.
-
-The `sanity` command also adds the workspace root itself as a checkout, so the workspace repo is part of the report.
+Check git status across all repos. Procedure: load repository records → hydrate checkouts from checkout records → scan all → scan extraneous → present Checkout Report + Extraneous Report. With `--auto`, additionally push clean unpushed repos (see `sanity`'s `pushCleanCheckouts`) and append the Operations Report.
 
 ## Repo
 
-**Usage:** `repo [<checkout>, ...]`
+**Usage:** `repo [<checkout-name>...]`
 
-Lists repositories under active checkouts, listing their resources, their namespaces and their packages. The infrastructure for this command is needed for `symlink` and `publish`. Works for one or more checkouts. Read all `checkout` records for project, namespaces, and packages (assume records are at`ops/records/{kind})`). Collect a PackageStateRecord with cannonical name, version, published version, branch, dircetory, states (resolve each `packagePath` - `<location>/{project-path}/{namespace-path}/{package-path}` and read the package.json file to see the current version andrRun npm info to see last published version). For each checkout report `checkout.repo`, `checkout.location`, `checkout.branch`, `checkout.states` followed by a PackageStateReport for packages in that repo.
+List the repositories under active checkouts, their namespaces, and their packages. The infrastructure for this command is needed for `link` and `publish`. Works for one or more checkouts (all checkouts when none specified).
+
+Procedure: read the checkout's project records — project first, then namespaces, then packages (records live inside the checkout at `ops/records/{projects|namespaces|packages}`). For each package resolve `packagePath` = `{checkout.location}/{project-path}/{namespace-path}/{package-path}` and read its `package.json` (current version) and run `npm info` (last published version). Collect a `PackageStateRecord` (canonical name, version, published version, branch, directory, states) per package. For each checkout present its Checkout Report row (`repo | location | branch | states`) followed by the Package State Report for its packages.
+
+**BDD:**
+
+```gherkin
+Feature: List repositories and their packages
+  Scenario: list a single checkout's packages
+    Given checkout "Artificial" is cloned with project records
+    When I run "art-workspace repo Artificial"
+    Then the Checkout Report lists "Artificial"
+    And the Package State Report lists namespace "Art Domains"
+    And the Package State Report lists package "@artisans/art-mantras" with current version from package.json
+    And the Package State Report lists the published version from npm info
+
+  Scenario: repo defaults to all checkouts when none specified
+    Given checkouts "Artificial" and "Purrception" are cloned
+    When I run "art-workspace repo"
+    Then the Checkout Report lists "Artificial"
+    And the Checkout Report lists "Purrception"
+
+  Scenario: checkout has no project records
+    Given checkout "Purrception" is cloned without project records
+    When I run "art-workspace repo Purrception"
+    Then the Checkout Report lists "Purrception" with state "no project records"
+
+  Scenario: unknown checkout warns and skips
+    When I run "art-workspace repo Unknown"
+    Then a warning is printed for "unknown checkout: Unknown"
+
+  Scenario: project references a missing namespace
+    Given project "Artificial" lists namespace "Missing" with no namespace record
+    When I run "art-workspace repo Artificial"
+    Then a warning is printed for "unknown namespace: Missing"
+    And the missing namespace is skipped
+
+  Scenario: namespace references a missing package
+    Given namespace "Art Domains" lists package "Missing" with no package record
+    When I run "art-workspace repo Artificial"
+    Then a warning is printed for "unknown package: Missing"
+    And the missing package is skipped
+
+  Scenario: package path has no package.json
+    Given package "@artisans/art-mantras" has no package.json at its resolved path
+    When I run "art-workspace repo Artificial"
+    Then the Package State Report lists "@artisans/art-mantras" with state "no package.json"
+
+  Scenario: npm info fails
+    Given the npm registry is unreachable
+    When I run "art-workspace repo Artificial"
+    Then the Package State Report lists "@artisans/art-mantras" with published version "unknown"
+    And the Package State Report lists state "npm info failed"
+```
 
 **Edge cases:**
 
-- Location repository does not exist.
-- Location repository does not have project, namespace, or package records.
-- Project, namespace, or package record in location repository is invalid.
+- Unknown checkout → warn on stderr, skip.
+- No project records in the checkout → report the checkout with state `no project records`.
+- Project record references a missing namespace record → warn, skip the namespace.
+- Namespace record references a missing package record → warn, skip the package.
+- `package.json` missing at the resolved package path → package state `no package.json`.
+- `npm info` fails (unreachable registry, never published) → published version `unknown`, package state `npm info failed`.
+- `repo` is read-only: no operations are logged; per-package failures surface as package states in the report.
 
 ## Clone
 
@@ -53,7 +109,7 @@ Lists repositories under active checkouts, listing their resources, their namesp
 Three modes:
 
 - **`clone --all`** — bootstrap the workspace by cloning all repos from the workspace record, updating records, and presenting the Checkout Report with Operations Report.
-- **`clone <repo> [<location>]`** — clone a single repo for targeted work. The first argument is the repository name (must exist in the manifest). The optional second argument is a location basename under the config checkouts path (e.g. `foo` → `repos/foo`). When omitted, the location defaults to `repos/{repo-name}`. The checkout name is `{repo-name}` at the default location, or `{repo-name}-{location}` at a custom location. Multiple checkouts of the same repo are supported — each gets a unique name derived from its location.
+- **`clone <repo> [<location>]`** — clone a single repo for targeted work. The first argument is the repository name (case-insensitive manifest lookup; an `@scope/` prefix is stripped). The optional second argument is a location suffix: the resolved location is `safePath(<repo> <location>)` (e.g. `clone Artificial foo` → location `artificial foo` → `repos/artificial foo`). When omitted, the location defaults to `safePath(<repo>)` (e.g. `repos/artificial`). The checkout name is `{repo-name}` at the default location, or `{repo-name} @ {location}` at a custom location. Multiple checkouts of the same repo are not created by `clone` — a repo that already has a checkout at a different location is refused. Refuses when the target location is already used by another checkout.
 - **`clone`** (no args) — status mode: present the Checkout Report and Extraneous Report without cloning.
 
 **BDD:**
@@ -69,8 +125,8 @@ Feature: Clone single repo
   Scenario: clone with explicit location
     Given repo "Artificial" exists in the manifest
     When I run "art-workspace clone Artificial foo"
-    Then checkout "foo" is created at "repos/foo"
-    And the Checkout Report contains "foo"
+    Then checkout "Artificial @ foo" is created at "repos/artificial foo"
+    And the Checkout Report contains "Artificial @ foo"
 
   Scenario: clone is idempotent
     Given checkout "Artificial" exists at "repos/artificial"
@@ -83,37 +139,37 @@ Feature: Clone single repo
     Then a clone failure is logged for "unknown repo"
 
   Scenario: location taken by different checkout
-    Given checkout "foo" exists at "repos/foo"
+    Given checkout "foo" exists at "repos/artificial foo"
     When I run "art-workspace clone Artificial foo"
-    Then a clone failure is logged for "location repos/foo is already used"
+    Then a clone failure is logged for "location artificial foo is already used by checkout 'foo'"
 
   Scenario: checkout exists at different location
     Given checkout "Artificial" exists at "repos/artificial"
     When I run "art-workspace clone Artificial custom"
-    Then a clone failure is logged for "cannot clone to repos/custom"
+    Then a clone failure is logged for "checkout for 'Artificial' exists at artificial. Cannot clone to artificial custom"
 ```
 
 **Edge cases:**
 
 - Unknown repo name → log `clone` failure: `unknown repo "{name}"`.
+- Repo already has a checkout at a different location → log failure: `checkout for '{repo}' exists at {existing}, cannot clone to {resolved}`.
 - Location already used by a different checkout → log failure: `location {loc} is already used by checkout '{name}'`.
-- Checkout for this repo exists at a different location → log failure: `checkout for '{repo}' exists at {existing}, cannot clone to {resolved}`.
 - All unhappy paths produce a log operation (success or failure) with a clear message — never a silent return.
 
 ## Branch
 
-**Usage:** `branch <branch> [<checkout-name>...]`
+**Usage:** `branch <branch> [<checkout-location>...]`
 
-Create and checkout the same feature branch in each specified checkout (all checkouts when none specified), enabling coordinated cross-repo development. Procedure: for each checkout — create branch if needed, checkout, record a `branch created` operation. Update the checkout record's branch. Present Checkout Report + Operations Report.
+Create and checkout the same feature branch in each specified checkout (all checkouts when none specified, or when an empty list is passed), enabling coordinated cross-repo development. The optional arguments are checkout locations (basenames under the checkouts path). Procedure: for each location — resolve the checkout, scan, create/switch the branch, record a `branch created` operation (success `created {branch}` / `switched to {branch}`, or a failure). Update the checkout record's branch (`saveCheckoutRecord`). Present Checkout Report + Operations Report.
 
 **BDD:**
 
 ```gherkin
 Feature: Branch across checkouts
   Scenario: branch creates new branch in specified checkouts
-    Given checkout "Artificial" is cloned on branch "main"
-    And checkout "Purrception" is cloned on branch "main"
-    When I run "art-workspace branch feat/x Artificial Purrception"
+    Given checkout "Artificial" is cloned on branch "main" at "repos/artificial"
+    And checkout "Purrception" is cloned on branch "main" at "repos/purrception"
+    When I run "art-workspace branch feat/x artificial purrception"
     Then branch "feat/x" exists in checkout "Artificial"
     And branch "feat/x" exists in checkout "Purrception"
     And the Operations Report contains "Artificial | branch created"
@@ -128,72 +184,218 @@ Feature: Branch across checkouts
 
   Scenario: branch switches to existing branch
     Given checkout "Artificial" has branch "feat/x"
-    When I run "art-workspace branch feat/x Artificial"
+    When I run "art-workspace branch feat/x artificial"
     Then the Operations Report contains "Artificial | branch created | switched to feat/x"
 
-  Scenario: unknown checkout warns and skips
-    When I run "art-workspace branch feat/x Unknown"
-    Then a warning is printed for "unknown checkout: Unknown"
-    And no operations are logged
+  Scenario: unknown location logs failure
+    When I run "art-workspace branch feat/x unknown-location"
+    Then the Operations Report contains "branch created | failure"
+    And the failure message is "not cloned"
 
   Scenario: uncloned checkout logs failure
-    Given checkout "Artificial" is not cloned
-    When I run "art-workspace branch feat/x Artificial"
+    Given checkout "Artificial" is recorded but not cloned
+    When I run "art-workspace branch feat/x artificial"
     Then the Operations Report contains "Artificial | branch created | failure"
+    And the failure message is "checkout not cloned"
 ```
 
 **Edge cases:**
 
-- Unknown checkout → warn on stderr, skip.
-- Checkout not cloned → skip with warning, log failure operation.
-- Branch already exists → checkout the existing branch.
-- Uncommitted changes → warn but proceed (`git checkout -b` handles this).
+- Unknown location (no matching checkout record) → log branch failure `not cloned`, continue.
+- Checkout not cloned on disk → log branch failure `checkout not cloned`, continue.
+- Branch already exists → checkout the existing branch (`switched to {branch}`).
+- Uncommitted changes → `git checkout` may fail; the error is logged as a branch failure, continue.
 
 ## Link
 
 **Usage:** `link <location> <package> [<target>]`
 
-Symlink a source package from a repo checkout location into a target location (`node_modules`) for local development. The `<location>` and `<target>` params are both checkout locations and should resolve to existing checkouts. If `target` is ommited the link is created in root workspace `node_modules/`. Read the `location` repository records for project, namespaces, and packages (assume records are at`ops/records/{kind})`). Match package to input `<package>`. Resolve `packagePath` - `<location>/{project-path}/{namespace-path}/{package-path}`. Resolve `<target>/node-modules/{canonical-name}`. Check if is dir/file - remove it. Create symlink to `packagePath`.
+Symlink a source package from a repo checkout location into a target location (`node_modules`) for local development. The `<location>` and `<target>` params are both checkout locations and should resolve to existing checkouts. If `target` is omitted the link is created in root workspace `node_modules/`. Read the `location` repository's project records for project, namespaces, and packages (records are at `ops/records/{projects|namespaces|packages}`). Match package to input `<package>`. Resolve `packagePath` = `{location}/{project-path}/{namespace-path}/{package-path}`. Resolve `{target}/node_modules/{canonical-name}`. Check if is dir/file — remove it. Create symlink to `packagePath`.
+
+**BDD:**
+
+```gherkin
+Feature: Link a local package into a target checkout
+  Scenario: link package to default target
+    Given checkout "Artificial" is cloned with project records
+    And package "@artisans/art-mantras" exists at path "artisans/apps/art-mantras/"
+    When I run "art-workspace link Artificial @artisans/art-mantras"
+    Then a symlink is created at "node_modules/@artisans/art-mantras"
+    And the symlink points to "repos/artificial/artisans/apps/art-mantras/"
+    And a linked operation is logged with outcome success
+
+  Scenario: link package to explicit target
+    Given checkout "Purrception" is cloned
+    When I run "art-workspace link Artificial @artisans/art-mantras Purrception"
+    Then a symlink is created at "repos/purrception/node_modules/@artisans/art-mantras"
+
+  Scenario: link replaces an existing symlink
+    Given a symlink already exists at "node_modules/@artisans/art-mantras"
+    When I run "art-workspace link Artificial @artisans/art-mantras"
+    Then the existing symlink is removed
+    And a new symlink is created
+
+  Scenario: link replaces an npm-installed directory
+    Given a directory "node_modules/@artisans/art-mantras" exists
+    When I run "art-workspace link Artificial @artisans/art-mantras"
+    Then the existing directory is removed
+    And a symlink is created
+
+  Scenario: unknown package fails
+    When I run "art-workspace link Artificial @unknown/missing"
+    Then a linked operation is logged with outcome failure
+    And the failure message names the unknown package
+
+  Scenario: unknown location checkout fails
+    When I run "art-workspace link Unknown @artisans/art-mantras"
+    Then a linked operation is logged with outcome failure
+    And the failure message names the unknown location
+
+  Scenario: scoped target needs directory creation
+    Given no directory exists at "node_modules/@artisans"
+    When I run "art-workspace link Artificial @artisans/art-mantras"
+    Then the directory "node_modules/@artisans" is created
+    And the symlink is created at "node_modules/@artisans/art-mantras"
+```
 
 **Edge cases:**
 
-- Location repository does not exist.
-- Location repository does not have project, namespace, or package records.
-- Project, namespace, or package record in location repository is invalid.
-- Consumer not cloned → link operation failure.
+- Location repository does not exist / not cloned → link operation failure.
+- Location repository does not have project, namespace, or package records → failure.
+- Project, namespace, or package record in location repository is invalid → failure.
+- Unknown package name → link operation failure.
 - Existing symlink → replace.
 - Existing directory (npm-installed) → replace.
-- Link target uses canonical-name, may contain a namspace that results in directory that need to be created (ensured) before creating the basename link.
+- Link target uses canonical-name; a scoped name may need intermediate directories (ensured) before creating the basename link.
 
 ## Links
 
 **Usage:** `links`
 
-Show symlink sources. Find all potential node_module files. Scan workspace node_modules and all known repositories for project records (assume records are at `{checkout}/ops/records/project/*.art`) and resolve `<checkout-location>/{project-path}/node-modules/` and resolve the root package from `{config.root.path}/node_modules`. List all dirs, check it it is a synlink, if it starts with @ list subdrectories and fhckec if it a symlink. Collect all links un a list and present the SymlinkReport.
+Show symlink sources. Scan the workspace root `node_modules` and the `node_modules` of every known repository's projects (project records at `{checkout}/ops/records/projects`; resolve `{checkout-location}/{project-path}/node_modules`). For each entry that is a symlink — including scoped `@scope/pkg` subdirectories — collect a link (`package`, `location`). Present the Symlink Report.
+
+**BDD:**
+
+```gherkin
+Feature: Show symlink sources
+  Scenario: lists a linked package
+    Given package "@no-comply/core" is symlinked into checkout "Purrception" node_modules
+    When I run "art-workspace links"
+    Then the Symlink Report lists "@no-comply/core"
+    And the Symlink Report lists location "Purrception"
+
+  Scenario: lists scoped packages recursively
+    Given scoped package "@noodlestan/esbuild" is symlinked into the root node_modules
+    When I run "art-workspace links"
+    Then the Symlink Report lists "@noodlestan/esbuild"
+    And the Symlink Report lists location "workspace root"
+
+  Scenario: no symlinks found
+    When I run "art-workspace links"
+    Then the Symlink Report is empty
+
+  Scenario: repository without project records is skipped
+    Given repo "Purrception" has no project records
+    When I run "art-workspace links"
+    Then repo "Purrception" is skipped with a warning
+```
 
 **Edge cases:**
 
-- Known respository does not have project records.
-- Project record in known repository is invalid.
+- Known repository without project records → warn, skip.
+- Invalid project record → warn, skip the project.
+- Scoped packages (`@scope/...`) → check the subdirectory entries, not the scope directory itself.
+- `links` is read-only: no operations are logged.
 
 ## Unlink
 
-**Usage:** `unlink <repo> <package> <target>`
+**Usage:** `unlink <location> <package> [<target>]`
 
-Remove package symlink from target consumer `node_modules` and run `npm install` to restore published versions. Procedure: identify symlinks → remove them → run `npm install` in affected consumers → record `unlink` operations → present Operations Report.
+Remove a package symlink created by `link` and restore the published version with `npm install`. Params mirror `link`: `<location>` is the source checkout holding the package, `<package>` is the package name or canonical name, `<target>` is the consumer checkout location (defaults to the workspace root `node_modules/`). Procedure: read the source checkout's project records → resolve the package's canonical name → remove `{target}/node_modules/{canonical-name}` when it is a symlink → run `npm install` in the target → record `unlink` operations → present Operations Report.
+
+**BDD:**
+
+```gherkin
+Feature: Unlink a local package from a target checkout
+  Scenario: unlink removes an existing symlink and restores
+    Given a symlink exists at "repos/purrception/node_modules/@artisans/art-mantras"
+    When I run "art-workspace unlink Artificial @artisans/art-mantras Purrception"
+    Then the symlink is removed
+    And npm install runs in "repos/purrception"
+    And an unlink operation is logged with outcome success
+
+  Scenario: unlink defaults to workspace root target
+    Given a symlink exists at "node_modules/@artisans/art-mantras"
+    When I run "art-workspace unlink Artificial @artisans/art-mantras"
+    Then the symlink is removed
+    And npm install runs in the workspace root
+
+  Scenario: target entry is npm-installed, not a symlink
+    Given a directory "node_modules/@artisans/art-mantras" exists
+    When I run "art-workspace unlink Artificial @artisans/art-mantras"
+    Then nothing is removed
+    And no unlink operation is logged
+
+  Scenario: unknown package fails
+    When I run "art-workspace unlink Artificial @unknown/missing"
+    Then an unlink operation is logged with outcome failure
+    And the failure message names the unknown package
+
+  Scenario: unknown location checkout fails
+    When I run "art-workspace unlink Unknown @artisans/art-mantras"
+    Then an unlink operation is logged with outcome failure
+    And the failure message names the unknown location
+```
 
 **Edge cases:**
 
-- Consumer not cloned → skip with warning.
-- Not a symlink → skip (npm-installed).
-- Symlink doesn't exist → skip.
+- Location repository does not exist / not cloned → unlink operation failure.
+- Unknown package name → unlink operation failure.
+- Target entry is not a symlink (npm-installed) → skip, no operation.
+- Symlink doesn't exist → skip, no operation.
 - `npm install` fails → report error, continue.
 
 ## Publish
 
 **Usage:** `publish [--auto]`
 
-Push repos and publish packages to npm. Procedure: iterate repos → check git → if `--auto`: push → check package versions on npm → if `--auto`: publish unpublished packages → present Checkout Report + Operations Report.
+Push repos and publish packages to npm. Procedure: load existing checkouts → scan all → for each checkout: if `--auto`, push clean unpushed repos → read the checkout's project records (project → namespaces → packages) → check each package's version on npm → if `--auto`, publish unpublished packages → present Checkout Report + Operations Report.
+
+**BDD:**
+
+```gherkin
+Feature: Publish packages
+  Scenario: push and publish unpublished packages
+    Given checkout "Artificial" is cloned on branch "main" with 2 unpushed commits
+    And package "@artisans/art-mantras" at version 0.0.2 is unpublished
+    When I run "art-workspace publish --auto"
+    Then the branch is pushed to origin
+    And @artisans/art-mantras@0.0.2 is published to npm
+    And a push operation is logged with outcome success
+    And a publish operation is logged with outcome success
+
+  Scenario: already published packages are skipped
+    Given package "@artisans/art-mantras" at version 0.0.1 is already published
+    When I run "art-workspace publish --auto"
+    Then no publish operation is logged for "@artisans/art-mantras"
+
+  Scenario: repo not cloned is skipped
+    Given checkout "Purrception" is not cloned
+    When I run "art-workspace publish --auto"
+    Then checkout "Purrception" is skipped with a warning
+
+  Scenario: no remote skips the push
+    Given checkout "Artificial" has no remote
+    When I run "art-workspace publish --auto"
+    Then no push operation is logged for "Artificial"
+    And issue "no remote" is reported
+
+  Scenario: npm publish fails and continues
+    Given @artisans/art-mantras@0.0.2 fails to publish
+    When I run "art-workspace publish --auto"
+    Then a publish operation is logged with outcome failure for "@artisans/art-mantras"
+    And remaining packages are still processed
+```
 
 **Edge cases:**
 

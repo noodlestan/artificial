@@ -2,7 +2,7 @@
 
 Forward-looking work for the artificials toolchain. Decisions live in the ADRs (`architecture/records/adr/`); this file tracks the work ahead only.
 
-Short termtracker is `_wip.md` (no done items there).
+Short termtracker is `_parking-lot.md` (no done items there).
 
 ## Approach
 

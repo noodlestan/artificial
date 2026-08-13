@@ -1,8 +1,8 @@
-# Plan: Workspace CLI
+# Plan: Workspace CLI — Sanity, Clone, Branch
 
-**ID:** `workspace-cli`
+**ID:** `workspace-sanity-clone-branch`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `plan`
 
@@ -10,7 +10,7 @@
 
 ## Summary
 
-Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli/workspace` with bin `art-workspace`. The CLI hosts workspace orchestration commands: `clone`, `branch`, `link`, `sanity`, `publish`. First end-to-end test case is `sanity` command.
+Create `@art-domains/workspace-cli` package with implemented commands: `sanity`, `clone`, and `branch`. Includes config loading, checkout records, and core infrastructure.
 
 ## Source Tasks
 
@@ -22,9 +22,6 @@ Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli
 - `architecture/_pseudo.md` — CLI pseudo-code: data structures, use cases, auxiliary functions
 - `architecture/records/adr/cli.art` — CLI package decisions (location, manifest format, records as source of truth, tech stack)
 - `architecture/records/adr/execution-model.art` — imperative-first, reactive-later execution model
-- `$WORKSPACE/ops/records/workspace.art` — workspace record with known repositories
-- `$WORKSPACE/ops/records/repositories/*.art` — per-repo records
-- `$WORKSPACE/.agents/domains/workspace/structures/` — Structure: Workspace, Structure: Repository, Structure: Checkout
 
 ## Commits
 
@@ -74,6 +71,8 @@ Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli
 
 **Commit Message:** `fix(workspace-cli): lint, build, and clone/sanity correctness`
 
+**Commit:** `16265fb`
+
 **Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/clone-sanity-corrective.md`
 
 **Report:** [clone-sanity-corrective\_\_report.md](./instructions/clone-sanity-corrective__report.md)
@@ -97,102 +96,6 @@ Create `@art-domains/workspace-cli` package at `repos/artificial/art-domains/cli
 **Report:** [branch-command\_\_report.md](./instructions/branch-command__report.md)
 
 **Note:** Pre-existing lint issues in `_backlog/` and `architecture/` (42 files, none in `src/`). No `ci` script in package.json (follow-up).
-
-### `refactor-conventions` - `DRAFT`
-
-**Commit Message:** `feat(workspace-cli): refactor conventions`
-
-### `link-command` - `DRAFT`
-
-**Commit Message:** `feat(workspace-cli): implement link command`
-
-**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/link-command.md`
-
-Implement `art-workspace link` command.
-
-**Use case:**
-
-- `art-workspace link repository [namespaces] [packages]` → symlink all identified packages (optionally filtered by packages or namespaces, additive) into other repo consumers' `node_modules/` for local dev.
-
-**Responsibilities:**
-
-- Identify packages in source repo (all, or filtered by namespace/package name)
-- Find consumer repos (from manifest "consumers" field)
-- Create symlinks in consumer `node_modules/` pointing to source packages
-
-**Pseudo details:** `architecture/_pseudo.md` → Use Cases → link command.
-
-### `unlink-command` - `DRAFT`
-
-**Commit Message:** `feat(workspace-cli): implement unlink command`
-
-**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/unlink-command.md`
-
-Implement `art-workspace unlink` command.
-
-**Use case:**
-
-- `art-workspace unlink repository [namespaces] [packages]` → remove all symlinks to matching packages and run npm install again in affected consumers.
-
-**Responsibilities:**
-
-- Identify symlinks to remove (matching source repo packages)
-- Remove symlinks from consumer `node_modules/`
-- Run `npm install` in affected consumers to restore npm-installed versions
-
-**Pseudo details:** `architecture/_pseudo.md` → Use Cases → unlink command.
-
-### `publish-command` - `DRAFT`
-
-**Commit Message:** `feat(workspace-cli): implement publish command`
-
-**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/publish-command.md`
-
-Implement `art-workspace publish` command.
-
-**Use case:**
-
-- `art-workspace publish --auto` → for each repo: check git status, push clean unpushed repos if `--auto` provided marking them as "pushed now", then for each non-private package check if version is published on npm, publish if not and `--auto` provided. Report table: `repo/directory` | `branch` | `issues` | `pushed? (no/now/yes)` | `published? (no/now/yes)`.
-
-**Responsibilities:**
-
-- For each repo: check git status, optionally push
-- For each non-private package: check if version exists on npm
-- If `--auto`: publish unpublished packages
-- Report table with push and publish status
-
-**Pseudo details:** `architecture/_pseudo.md` → Use Cases → publish command.
-
-### `manifest-generator` - `DRAFT`
-
-**Commit Message:** `feat(workspace-cli): generate workspace manifest from records`
-
-**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/manifest-generator.md`
-
-Auto-generate `.art-workspace.mts` from the records. **MANDATORY before the plan is delivered** — replaces the manually-authored manifest.
-
-**Responsibilities:**
-
-- Implement a generator that reads and interprets the records (`workspace.art`, `repositories/*.art`) and renders `.art-workspace.mts` mirroring the structures
-- Wire it as a CLI command (e.g., `art-workspace generate`) so it can run on demand
-- Keep the render idempotent and never drop data the CLI needs (`checkout`, `remote`, `branch`, `consumers`)
-
-**Validation:**
-
-- `art-workspace generate` reproduces the manually-authored manifest (diff clean)
-- After a records edit, re-running the generator reflects the change
-
-**Pseudo details:** `architecture/_pseudo.md` → Auxiliary Functions → loadWorkspaceConfig.
-
-### `github-workflows` - `DRAFT`
-
-**Commit Message:** `ci: add GitHub Actions workflow`
-
-**Instructions File:** `_backlog/3-now/plan-workspace-cli/instructions/github-workflow.md`
-
-Add GitHub Actions CI workflows to every project repo and the workspace.
-
-**Note:** This is not priority. Deferred until other commands are implemented.
 
 ## Follow ups
 

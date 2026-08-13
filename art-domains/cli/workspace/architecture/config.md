@@ -12,6 +12,9 @@ The config is **manually authored, not generated**. Records (`ops/records/reposi
 
 ```typescript
 interface WorkspaceConfig {
+  root: {
+    path: string; // Workspace root; set by loadWorkspaceConfig to the invocation cwd
+  };
   clone: {
     path: string; // Where repos are cloned (e.g., 'repos')
   };
@@ -61,7 +64,7 @@ The config's `import { defineConfig } from '@art-domains/workspace-cli/config'` 
 
 The CLI package exports two surfaces:
 
-- **`@art-domains/workspace-cli/config`** — Authoring API for the manifest: `defineConfig`, `WorkspaceConfig`, `RepositoryRecord`, `RepositoryCheckout`, `loadWorkspaceConfig`, `verifyCheckouts`.
+- **`@art-domains/workspace-cli/config`** — Authoring API for the manifest: `defineConfig`, the `WorkspaceConfig` type, and `loadWorkspaceConfig`.
 - **`@art-domains/workspace-cli`** — Main entry (the `art-workspace` binary) re-exports the config module for the CLI commands and backwards compatibility.
 
 The `exports` map (`./config` → `types` + `import`) keeps the authoring surface stable: renaming types or exports is a breaking change once consumers exist — the manifest is the first consumer.
@@ -70,9 +73,9 @@ The `exports` map (`./config` → `types` + `import`) keeps the authoring surfac
 
 The config types mirror the workspace structures:
 
-- `WorkspaceConfig` — top-level config with paths.
+- `WorkspaceConfig` — top-level config with paths (`root.path`, `clone.path`, `records.*`).
 - `RepositoryRecord` — repository facts (name, remote, purpose, description, consumers).
-- `RepositoryCheckout` — checkout state (repo, location, branch, exists, pushed, published).
+- `CheckoutRecord` — checkout state (name, location, branch, repository).
 
 Type declarations are emitted (`dist/index.d.ts`) and the `exports` map ensures imports resolve and type-check in the `.mts` manifest.
 

@@ -2,7 +2,7 @@
 
 **ID:** `refactor-conventions`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -75,7 +75,7 @@ This plan derives from a direct user request (conventions enforcement), not from
 - Remove section-separator comments in `src/private/operations/types.ts`
 - Keep explanatory comments and `eslint-disable` directives (still required by stub commands)
 
-### `rename-remaining-files` - `PLANNED`
+### `rename-remaining-files` - `DONE`
 
 **Commit Message:** `refactor(workspace-cli): rename remaining kebab-case files to camelCase`
 
@@ -86,7 +86,7 @@ This plan derives from a direct user request (conventions enforcement), not from
 - Rename 9 files missed by `rename-source-files` (planner classification error): `define-config.ts`, `has-remote.ts`, `is-dirty.ts`, `format-table.ts`, `create-checkout.ts` + `create-checkout.test.ts`, `commit-file.ts`, `create-command-context.ts`, `make-config.ts`
 - Update all import statements across `src/`
 
-### `add-missing-tests` - `PLANNED`
+### `add-missing-tests` - `DONE`
 
 **Commit Message:** `test(workspace-cli): add minimum test per untested production file`
 
@@ -125,3 +125,15 @@ This plan derives from a direct user request (conventions enforcement), not from
 
 - `rename-source-files` misclassified 9 kebab-case files as conformant (hyphenated names are not camelCase). Corrected via `rename-remaining-files`.
 - Verified independently: 26 test files, 82 tests pass (0 skipped), renames in place.
+
+### rename-remaining-files (delegatee)
+
+- All 9 kebab-case files renamed to camelCase via `git mv`
+- ~37 files had imports updated, zero old paths remaining
+- 26 test files, 82 tests passed, build clean, pushed to `main`
+
+### add-missing-tests (delegatee)
+
+- Added 23 test files covering all untested production files (49 files, 114 tests total — up from 26/82)
+- Lint clean, build clean, coverage 96.23% statements / 100% functions
+- Committed `2782b2b` and pushed to `origin/main`

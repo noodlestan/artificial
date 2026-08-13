@@ -1,16 +1,16 @@
 # Workspace CLI — Reports
 
-Commands present their findings and side effects as markdown tables. Reports always show the full table — no collapsing — with a header line (e.g. `Checkout Report:`) and an empty line after the table.
+Commands present their findings and side effects as markdown tables. Reports always show the full table — no collapsing — with a header line (e.g. `Checkouts:`) and an empty line after the table.
 
 ## Checkout Report
 
-The primary status table, presented after every command that reads or mutates checkouts. Ordered by package name.
+The primary status table, presented after every command that reads or mutates checkouts. Ordered by repo name; checkouts without a remote last.
 
-Columns: `repo`, `location`, `branch`, `states`. `states` is the joined list of issues (e.g. `uncommitted files`, `N commits ahead`) or `clean`.
+Columns: `repo`, `location`, `branch`, `states`. `states` is the joined list of issues (e.g. `uncommitted files`, `2 commits ahead`) or `-` when clean. `location` is displayed relative to the checkouts path (e.g. `repos/artificial`).
 
 | repo        | location          | branch | states          |
 | ----------- | ----------------- | ------ | --------------- |
-| artificial  | repos/artificial  | main   | clean           |
+| artificial  | repos/artificial  | main   | -               |
 | purrception | repos/purrception | feat/x | 2 commits ahead |
 
 ## Operations Report
@@ -35,3 +35,25 @@ Columns: `directory`, `branch`, `states`.
 | -------------- | ------- | ----------------- |
 | my-test-clone  | main    | clean             |
 | old-experiment | feature | uncommitted files |
+
+## Package State Report
+
+Presented by `repo` after the Checkout Report, one per checkout. Lists each package's current version (from `package.json`), last published version (from `npm info`), and states.
+
+Columns: `canonical name`, `version`, `published`, `branch`, `directory`, `states`.
+
+| canonical name        | version | published | branch | directory                          | states          |
+| --------------------- | ------- | --------- | ------ | ---------------------------------- | --------------- |
+| @artisans/art-mantras | 0.0.1   | 0.0.1     | main   | repos/artificial/artisans/apps/... | clean           |
+| @artisans/art-doom    | 1.2.0   | unknown   | main   | repos/artificial/artisans/apps/... | npm info failed |
+
+## Symlink Report
+
+Presented by `links`. Lists symlinked packages found in the workspace root `node_modules` and known repository project `node_modules`. Omitted when no symlinks found.
+
+Columns: `package`, `location`.
+
+| package             | location       |
+| ------------------- | -------------- |
+| @no-comply/core     | purrception    |
+| @noodlestan/esbuild | workspace root |

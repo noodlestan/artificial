@@ -38,10 +38,22 @@ The Noodlestan ecosystem spans multiple independent repositories (`artificial`, 
 - **Tested** — every unit carries at least a minimum viable test, BDD specs guide design, and the testing shape follows need ("it depends"), not a prescribed ratio (see `architecture/records/adr/cli.art` → Testing Strategy).
 - **`npm run workspace watch`** — future mode that re-scans checkouts on filesystem events and re-reports without re-invocation. Store must be rehydratable from disk at any point.
 
+## Milestones
+
+### Milestone 1
+
+Complete the workspace CLI with remaining commands and infrastructure.
+
+**Next:** `repo` command — list repositories, namespaces, and packages with version info. Prerequisite for `link` and `publish`.
+
+**Later:** `link`, `links`, `unlink`, `publish` commands, plus `manifest-generator` and `github-workflows`.
+
+See `_backlog/3-now/plan-workspace-repo/plan.md` for repo command details.
+
 ## Follow-ups
 
 - **repo-ci** — GitHub Actions workflows for all repos (DRAFT, needs instruction file).
 - **Publishing workflow** — formalize the publish-then-symlink pattern into a Workflow resource with agent modes, skills, and commands.
 - **Prepare `@art-domains/workspace` domain** — after `@art-domains/workspace-cli` is established, prepare the domain package to host workspace structures and other resources, including a reference to the CLI companion package.
 - **Reverse edge resolution** — `purrpose → @no-comply/solid-primitives` is still using `file:` resolution. After no-comply packages are published to npm, rewire to npm version.
-- **`manifest-generator`** — auto-generate `.art-workspace.mts` from the records, replacing the manually-authored manifest (see `_backlog/3-now/plan-workspace-cli/plan.md`).
+- **`manifest-generator`** — auto-generate `.art-workspace.mts` from the records, replacing the manually-authored manifest (see `_backlog/3-now/plan-workspace-repo/plan.md`).

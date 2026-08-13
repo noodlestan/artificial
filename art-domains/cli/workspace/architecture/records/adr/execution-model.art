@@ -8,11 +8,11 @@
 
 **Context:** The workspace CLI runs as one-shot processes: `art-workspace clone`, `art-workspace sanity`, etc. Each invocation creates a `WorkspaceContext` (in-memory `CheckoutStore` + `OperationsLog`), performs work, presents reports, and exits. This is the simplest model that works — but the ecosystem will eventually need live updates: `npm run workspace watch` that re-scans on filesystem events, re-reports without re-invocation, and keeps a long-lived store in sync.
 
-**Decision:** Implement commands as imperative one-shot processes now. The `WorkspaceContext` is created per invocation, the store is populated from disk, mutations happen in memory, reports are presented, records are synced at the end, and the context is discarded. The design must stay clean enough that a reactive layer can subscribe to the same `CheckoutStore` and `OperationsLog` APIs without rearchitecting — specifically:
+**Decision:** Implement commands as imperative one-shot processes now. The `WorkspaceContext` is created per invocation, the store is populated from disk, mutations happen in memory, reports are presented, records are saved per mutation, and the context is discarded. The design must stay clean enough that a reactive layer can subscribe to the same `CheckoutStore` and `OperationsLog` APIs without rearchitecting — specifically:
 
-- `CheckoutStore` is rehydratable from disk at any point (`loadExistingCheckouts()`).
+- `CheckoutStore` is rehydratable from disk at any point (`hydrateStoreFromRecords(ctx, records)`).
 - `OperationsLog` is append-only and can be replayed or streamed.
 - `scanCheckout(ctx, checkout)` reads filesystem state on demand, creates a new checkout instance, and sets it in the store — no direct mutation.
-- `syncRecords()` is explicit, not automatic — a reactive layer can call it on debounce instead of per-mutation.
+- Checkout records are saved per mutation by the commands themselves (`saveCheckoutRecord`), not through a global end-of-run sync — a reactive layer can call the same save on debounce instead of per-mutation.
 
 **Consequences:** Simple, debuggable, testable commands today. The reactive layer (`watch` mode) becomes a thin shell: create context, subscribe to fs events, re-scan and re-report on change. No architectural rewrite required. Risk: if imperative commands accumulate hidden state or side effects outside the store/log, the reactive layer will need to account for them — guarded by keeping all mutation inside `CheckoutStore` and `OperationsLog` APIs.

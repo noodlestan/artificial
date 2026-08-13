@@ -50,14 +50,6 @@ npm run build
 npm run test
 ```
 
-## Records Management
-
-The workspace maintains records at `$WORKSPACE/ops/records` detailing repositories, checkouts, and the workspace itself. The CLI reads these records through the workspace config (`.art-workspace.mts` at the workspace root) — see `architecture/config.md` and `architecture/context-model.md`.
-
-## References
-
-The package maintains an architecture reference at `architecture/index.md` and decision records at `architecture/records/adr`.
-
 ## Planning Workflow
 
 This project plans its work with the plan workflow defined in `$WORKSPACE/.agents/domains/plans/index.md`.
