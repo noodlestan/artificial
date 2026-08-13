@@ -1,6 +1,6 @@
 # Implementation Instructions
 
-**Plan:** `md-art-roundtrip`
+**Plan:** `boostrap-packages`
 
 **commit.Id:** `bootstrap-primitives`
 
@@ -36,6 +36,7 @@ Bootstrap `@art-js/artificials-primitives` package with core types migrated from
 Create the following files in `repos/artificial/art-js/libs/primitives/src/`:
 
 **`point.ts`** — Point and Position types:
+
 ```typescript
 /** A point in the source. */
 export interface Point {
@@ -52,6 +53,7 @@ export interface Position {
 ```
 
 **`record.ts`** — Base record and construct interfaces:
+
 ```typescript
 import type { Position } from './point.js';
 
@@ -65,6 +67,7 @@ export interface RecordBase {
 ```
 
 **`constructs.ts`** — All construct interfaces:
+
 ```typescript
 import type { RecordBase } from './record.js';
 
@@ -123,6 +126,7 @@ export interface Document extends RecordBase {
 ```
 
 **`registry.ts`** — Open registries and derived types:
+
 ```typescript
 import type { FieldBlock, NaturalBlock, SectionBlock } from './constructs.js';
 import type { Tag } from './constructs.js';
@@ -148,16 +152,11 @@ export type Construct = ConstructMap[keyof ConstructMap];
 ```
 
 **`index.ts`** — Entry point re-exporting everything:
+
 ```typescript
 export type { Point, Position } from './point.js';
 export type { RecordBase } from './record.js';
-export type {
-  Tag,
-  SectionBlock,
-  FieldBlock,
-  NaturalBlock,
-  Document,
-} from './constructs.js';
+export type { Tag, SectionBlock, FieldBlock, NaturalBlock, Document } from './constructs.js';
 export type {
   BlockConstructMap,
   InlineConstructMap,
@@ -173,6 +172,7 @@ export type {
 Update `repos/artificial/art-js/libs/primitives/package.json`:
 
 1. Remove the Solid.js dev dependencies (not needed for types-only package):
+
    ```json
    "devDependencies": {}
    ```

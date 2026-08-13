@@ -1,4 +1,4 @@
-# Artificials Plan
+# Architecture Briefing: Artificial
 
 Forward-looking work for the artificials toolchain. Decisions live in the ADRs (`architecture/records/adr/`); this file tracks the work ahead only.
 
@@ -12,7 +12,7 @@ Short termtracker is `_parking-lot.md` (no done items there).
 
 **mdast substrate.** Parsing builds on mdast — the AST layer of the unified ecosystem — using `mdast-util-from-markdown` to parse markdown into typed nodes, then a factory-based visitor to classify nodes into art records (`SectionBlock`, `FieldBlock`, `NaturalBlock`, `Tag`). The factory pattern separates detection (does this node qualify?) from construction (create the record) from visitation (should we recurse into children?). We own semantics at the mdast layer. See `architecture/records/adr/mdast-based.art`.
 
-## Work ahead
+## Milestones
 
 ### POC Parse
 
@@ -20,13 +20,9 @@ Short termtracker is `_parking-lot.md` (no done items there).
 
 ### MD Art Roundtrip
 
-Use one art file `ops/records/packages/art-mantras.art` to parse and serialize back with zero diffs. All code unit tested. Use contents of file as fixture stored in spec package, parser package needs to import from there.
+Migrate poc-parse into proper packages (`primitives`, `parser`), verify lossless roundtrip (parse `.art` → serialize back → zero diffs), archive poc-parse, and publish v0.1.0. Each commit guarantees no source change breaks the roundtrip contract. Test harnesses: fixtures in `spec/`, automation to detect diffs in `.art.json` files.
 
-### Split POC into packages
-
-- libs/primitives for types, type assertions
-- libs/parser - md => mdast => artast
-- libs/serializer - artast => mdast => md
+- Milestone: `_backlog/4-next/plan-md-art-roundtrip/milestone-md-art-roundtrip.md`
 
 ### Reactive core (deferred)
 
