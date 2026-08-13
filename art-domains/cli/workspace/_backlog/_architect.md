@@ -46,10 +46,12 @@ Complete the workspace CLI with remaining commands and infrastructure.
 
 **Now Fixing:** `repo` command — list repositories, namespaces, and packages with version info. (commit `76cd4b4`, `c09e766`, `9227012`)
 
+**DONE:** `plan-fix-clone-command-report` — clone report shows checkout list twice / without scanning (commit `9eea8ab`)
+
+**READY:** `plan-implement-sanity-workspace-report` — workspace as first-class checkout in sanity
+
 **Next:** Bug fixes — see `_backlog/3-now/` for DRAFT plans:
 
-- `plan-implement-sanity-workspace-report` — workspace as first-class checkout in sanity
-- `plan-fix-clone-command-report` — clone report shows checkout list twice / without scanning
 - `plan-fix-repo-command-graph-loading` — repo shows "unknown package" everywhere
 
 **Later:** `pull`, `push`, `sync` commands — see `_backlog/4-now/plan-implement-pull-push-sync/plan.md`.

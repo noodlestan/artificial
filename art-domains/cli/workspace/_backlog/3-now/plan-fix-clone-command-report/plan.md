@@ -2,7 +2,7 @@
 
 **ID:** `fix-clone-command-report`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `plan`
 
@@ -79,7 +79,7 @@ From `commands.md` and `_pseudo.md`:
 
 ## Iterations
 
-### `fix-clone-command-report` - `PLANNED`
+### `fix-clone-command-report` - `DONE`
 
 **Commit Message:** `fix(workspace-cli): clone command report shows checkout list once and only for scanned repos`
 
@@ -121,3 +121,7 @@ Fix two bugs in clone command output: (1) checkout list appears twice, (2) repor
 ## Follow ups
 
 - None.
+
+**Commit:** `9eea8ab`
+
+**Report:** `instructions/fix-clone-command-report__report.md`
