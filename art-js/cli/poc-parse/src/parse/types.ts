@@ -30,6 +30,8 @@ export interface SectionBlock extends RecordBase {
 	tags?: Tag[];
 	/** Ordered block-level content, including FieldBlock records in source order. */
 	children: BlockContent[];
+	/** Heading depth (1–6), tracked for section nesting. */
+	depth?: number;
 }
 
 /** FieldBlock — a named property `**Name:**` within a SectionBlock. */
@@ -47,6 +49,14 @@ export interface NaturalBlock extends RecordBase {
 	value: string;
 	/** Parsed sub-records when the content is structured (e.g. list items). */
 	children?: BlockContent[];
+	/** mdast node type (e.g. 'paragraph', 'code', 'list', 'table'). */
+	type?: string;
+	/** Code language (for code blocks). */
+	lang?: string | null;
+	/** Code metadata (for code blocks). */
+	meta?: string | null;
+	/** Allow any other mdast attributes to pass through. */
+	[key: string]: unknown;
 }
 
 /** Tag — a projection tag `(#identifier)`. */

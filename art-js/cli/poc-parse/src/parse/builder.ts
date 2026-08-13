@@ -1,133 +1,189 @@
-import type { Heading } from 'mdast';
+import type { Nodes, Paragraph } from 'mdast';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import type { Node } from 'unist';
 import { SKIP, visit } from 'unist-util-visit';
 
-import { cleanPosition, getFactory, naturalBlockFactory } from './factory';
-import type { ConstructFactory, VisitContext } from './factory';
-import type {
-	BlockContent,
-	Construct,
-	Document,
-	FieldBlock,
-	NaturalBlock,
-	Point,
-	SectionBlock,
-} from './types';
+import {
+	createDocumentContext,
+	createFieldBlockFromParagraph,
+	createNaturalBlock,
+	createNestedContext,
+	findParentSection,
+	getFactory,
+	isInlineNode,
+	sectionDepth,
+} from './factory';
+import type { VisitContext } from './factory';
+import type { Document, FieldBlock, NaturalBlock, Point, SectionBlock } from './types';
 
-/**
- * Turns markdown into schema-typed records by parsing to mdast and mapping each
- * node to a construct through the factory pattern (see factory.ts).
- *
- * Known constructs (SectionBlock, FieldBlock, Tag) get a record from their
- * factory; everything else falls back to a NaturalBlock. Blank-line gaps
- * between records are preserved as NaturalBlocks (EC5).
- */
 export function buildDocument(markdown: string): Document {
 	const tree = fromMarkdown(markdown);
-	const document: Document = { construct: 'Document', children: [] };
-	const sectionStack: SectionBlock[] = [];
-	const sectionLevels: number[] = [];
-	const fieldStack: FieldBlock[] = [];
-	const context: VisitContext = {
-		sectionStack,
-		documentChildren: document.children,
-		source: markdown,
-	};
+	const docContext = createDocumentContext(markdown);
+	let currentContext: VisitContext = docContext;
 	let lastEnd: Point | undefined;
 
-	const currentChildren = (): BlockContent[] => {
-		const field = fieldStack[fieldStack.length - 1];
-		if (field) return field.value;
-		const section = sectionStack[sectionStack.length - 1];
-		if (section) return section.children;
-		return document.children;
-	};
+	function updateLastEnd(end: Point): void {
+		lastEnd = { line: end.line, column: end.column, offset: end.offset };
+		currentContext.lastEnd = lastEnd;
+	}
 
-	/** Emits a NaturalBlock for any source gap up to `start`, then records it. */
-	const flushGap = (start: Point): void => {
+	function flushGap(start: Point): void {
 		if (lastEnd && start.offset > lastEnd.offset) {
 			const gap = markdown.slice(lastEnd.offset, start.offset);
 			if (gap) {
 				const gapBlock: NaturalBlock = {
 					construct: 'NaturalBlock',
+					type: 'text',
 					value: gap,
-					position: cleanPosition({ start: lastEnd, end: start }),
 				};
-				currentChildren().push(gapBlock);
+				currentContext.push(gapBlock);
 			}
 		}
-		lastEnd = { line: start.line, column: start.column, offset: start.offset };
-	};
+	}
 
-	/** Pushes a record into the current field value, section, or document. */
-	const pushRecord = (record: Construct): void => {
-		if (record.construct === 'Tag') {
-			const section = sectionStack[sectionStack.length - 1];
-			if (section) (section.tags ??= []).push(record);
-			return;
+	function handleSectionBlock(record: SectionBlock, node: Node): void {
+		if (currentContext.capturing() === 'FieldBlock') {
+			const parent = currentContext.close();
+			if (parent) {
+				parent.lastEnd = currentContext.lastEnd;
+				currentContext = parent;
+			}
 		}
-		currentChildren().push(record);
-	};
 
-	const closeField = (): void => {
-		fieldStack.pop();
-	};
-
-	const closeSections = (minLevel: number): void => {
-		while (sectionLevels.length > 0 && sectionLevels[sectionLevels.length - 1] >= minLevel) {
-			sectionLevels.pop();
-			const section = sectionStack.pop() as SectionBlock;
-			const parent = sectionStack[sectionStack.length - 1];
-			if (parent) parent.children.push(section);
-			else document.children.push(section);
-		}
-	};
-
-	visit(tree, (node: Node) => {
-		if (node.type === 'root') return undefined;
-		const factory: ConstructFactory | null = getFactory(node, context);
-		if (factory) {
-			const record = factory.create(node, context);
-			if (record.position) flushGap(record.position.start);
-			if (record.construct === 'SectionBlock') {
-				const heading = node as Heading;
-				closeField();
-				closeSections(heading.depth);
-				sectionStack.push(record);
-				sectionLevels.push(heading.depth);
-			} else if (record.construct === 'FieldBlock') {
-				closeField();
-				pushRecord(record);
-				fieldStack.push(record);
+		const heading = node as unknown as { depth: number };
+		while (currentContext.capturing() === 'SectionBlock') {
+			const parentSection = findParentSection(currentContext);
+			if (parentSection && sectionDepth(parentSection) >= heading.depth) {
+				const parent = currentContext.close();
+				if (parent) {
+					parent.lastEnd = currentContext.lastEnd;
+					currentContext = parent;
+				}
 			} else {
-				pushRecord(record);
+				break;
 			}
+		}
+
+		currentContext.push(record);
+		const newCtx = createNestedContext(
+			'SectionBlock',
+			currentContext,
+			undefined,
+			record.children,
+			record,
+		);
+		newCtx.lastEnd = currentContext.lastEnd;
+		currentContext = newCtx;
+	}
+
+	function handleFieldBlock(record: FieldBlock): void {
+		if (currentContext.capturing() === 'FieldBlock') {
+			const parent = currentContext.close();
+			if (parent) {
+				parent.lastEnd = currentContext.lastEnd;
+				currentContext = parent;
+			}
+		}
+
+		currentContext.push(record);
+		const newCtx = createNestedContext('FieldBlock', currentContext, undefined, record.value);
+		newCtx.lastEnd = currentContext.lastEnd;
+		currentContext = newCtx;
+	}
+
+	function visitParagraph(node: Paragraph): typeof SKIP | undefined {
+		if (node.children.length > 0 && node.children[0].type === 'strong') {
+			const strongNode = node.children[0];
+			const raw =
+				strongNode.position?.start && strongNode.position?.end
+					? markdown.slice(strongNode.position.start.offset, strongNode.position.end.offset)
+					: '';
+			const inner =
+				raw.length >= 4 && raw.startsWith('**') && raw.endsWith('**')
+					? raw.slice(2, -2)
+					: raw.length >= 4 && raw.startsWith('__') && raw.endsWith('__')
+						? raw.slice(2, -2)
+						: raw;
+			const fieldPattern = /^[A-Za-z][A-Za-z ]*:(?:\s|$)/;
+
+			if (fieldPattern.test(inner)) {
+				const record = createFieldBlockFromParagraph(node, currentContext);
+
+				if (record.position) flushGap(record.position.start);
+
+				if (currentContext.capturing() === 'FieldBlock') {
+					const parent = currentContext.close();
+					if (parent) {
+						parent.lastEnd = currentContext.lastEnd;
+						currentContext = parent;
+					}
+				}
+
+				currentContext.push(record);
+				const newCtx = createNestedContext('FieldBlock', currentContext, undefined, record.value);
+				newCtx.lastEnd = currentContext.lastEnd;
+				currentContext = newCtx;
+
+				if (record.position) {
+					updateLastEnd(record.position.end);
+				}
+
+				return SKIP;
+			}
+		}
+
+		const record = createNaturalBlock(node as Nodes, currentContext);
+		if (record.position) flushGap(record.position.start);
+		currentContext.push(record);
+		if (record.position) {
+			updateLastEnd(record.position.end);
+		}
+
+		return undefined;
+	}
+
+	function visitNode(node: Node): typeof SKIP | undefined {
+		if (node.type === 'root') return undefined;
+
+		if (node.type === 'paragraph') {
+			return visitParagraph(node as unknown as Paragraph);
+		}
+
+		const factory = getFactory(node, currentContext);
+
+		if (factory) {
+			const record = factory.create(node, currentContext);
+
+			if (record.position) flushGap(record.position.start);
+
+			if (record.construct === 'SectionBlock') {
+				handleSectionBlock(record as SectionBlock, node);
+			} else if (record.construct === 'FieldBlock') {
+				handleFieldBlock(record as FieldBlock);
+			} else {
+				currentContext.push(record);
+			}
+
 			if (record.position) {
-				lastEnd = {
-					line: record.position.end.line,
-					column: record.position.end.column,
-					offset: record.position.end.offset,
-				};
+				updateLastEnd(record.position.end);
 			}
+
 			return factory.visitChildren ? undefined : SKIP;
 		}
-		if (node.type === 'paragraph') return undefined;
-		const record = naturalBlockFactory.create(node, context);
+
+		if (isInlineNode(node)) return SKIP;
+
+		const record = createNaturalBlock(node, currentContext);
 		if (record.position) flushGap(record.position.start);
-		pushRecord(record);
+		currentContext.push(record);
 		if (record.position) {
-			lastEnd = {
-				line: record.position.end.line,
-				column: record.position.end.column,
-				offset: record.position.end.offset,
-			};
+			updateLastEnd(record.position.end);
 		}
+
 		return SKIP;
-	});
+	}
 
-	closeField();
-	closeSections(0);
+	visit(tree, (n: Node) => visitNode(n));
 
-	return document;
+	return { construct: 'Document', children: docContext.target() };
 }
