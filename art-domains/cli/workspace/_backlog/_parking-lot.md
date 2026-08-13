@@ -24,7 +24,7 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ### ACTIONABLE
 
-- None current. Active implementation is tracked in `_backlog/3-now/implement-command-repo/plan.md` (DONE) and `_backlog/3-now/implement-pull-push-sync/plan.md` (PLANNED).
+- **Delegate `repo-test-coverage`** — implement 35 missing tests for the repo command. Instruction ready at `_backlog/3-now/implement-command-repo/instructions/repo-test-coverage.md`.
 
 ### PENDING
 
@@ -44,8 +44,7 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ### BLOCKER
 
-- **Repo command bugs** — namespace parsing broken, missing `kind` field. See `_backlog/3-now/implement-command-repo/plan.md` (iteration `fix-repo-record-parsing`).
-- **35 todo tests from repo command** — worker created test scaffolds but never implemented actual tests. See `_backlog/3-now/implement-command-repo/plan.md` (iteration `repo-test-coverage`).
+- **35 todo tests from repo command** — worker created test scaffolds but never implemented actual tests. See `_backlog/3-now/implement-command-repo/plan.md` (iteration `repo-test-coverage`, PLANNED).
 
 ### FOLLOW-UPS (not in scope)
 
