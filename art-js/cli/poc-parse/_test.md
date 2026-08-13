@@ -198,9 +198,19 @@ npm run test
 {
   "construct": "NaturalBlock",
   "type": "paragraph",
-  "value": "Lorem ipsum dolor sit amet."
+  "value": "Lorem ipsum dolor sit amet.",
+  "children": [
+    {
+      "type": "text",
+      "value": "Lorem ipsum dolor sit amet.",
+      "position": { "start": {...}, "end": {...} }
+    }
+  ],
+  "position": { "start": {...}, "end": {...} }
 }
 ```
+
+Note: The transparent spread includes mdast `children` (inline text nodes). The `value` field is the canonical content.
 
 ---
 
@@ -208,11 +218,33 @@ npm run test
 
 **Fixture:** `fixtures/section-block.md`
 
-**Input:** `Content with (#generator) tag`
+**Input:** `(#generator)` (paragraph under `### Decision: Two Main Use Cases`)
 
 **Expected output:**
 
-Tag detected with `name: "generator"` somewhere in the output.
+The tag is attached to the parent section's `tags` array:
+
+```json
+{
+  "construct": "SectionBlock",
+  "kind": "Decision",
+  "name": "Two Main Use Cases",
+  "tags": [
+    { "construct": "Tag", "name": "generator", "position": {...} }
+  ],
+  "children": [
+    ...
+    {
+      "construct": "NaturalBlock",
+      "type": "paragraph",
+      "value": "(#generator)",
+      "children": [...]
+    }
+  ]
+}
+```
+
+Note: The tag is detected and attached to the section. The paragraph NaturalBlock retains the raw text including the tag pattern — both are present in output.
 
 ---
 

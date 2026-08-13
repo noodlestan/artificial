@@ -4,13 +4,13 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 
 ## ACTIONABLE
 
-- **Plan `extract-mdast-transparently`** — re-derive parser from `_pseudo.md` (context-aware visiting with `createNestedContext`), replacing current `builder.ts`/`factory.ts` implementation.
+- **Plan `refine-parse-factories`** — rename `close()` → `parent()`, `findParentSection()` → `findTagable()`, refactor `buildDocument` to inject construct-specific logic via contract.
 - **Plan `first-constructs-slice`** — land the composing trio `SectionBlock` + `FieldBlock` + `NaturalBlock` (the ADR corpus parses as proof), then `Tag` (critical path for projection classification).
 
 ## pending
 
-1. **ARCH:** How are tags in prose (not in headings) currently handled? The factory detects tags on `text` nodes, but the builder attaches them to `section.tags`. What about tags in field values or natural blocks?
-2. **ARCH:** `_pseudo.md` states "NaturalBlock is a transparent wrapper — copy ALL mdast node attributes" but the implementation only copies specific attributes. Does the TS declaration for `NaturalBlock` have all mdast node fields? Can we extend it and use `{ ...destruct }` or `{ ...assign }` to ensure everything is copied?
+1. **ARCH:** Gap NaturalBlocks (`type: "text"`, `value: "\n\n"`) appear between sections. Should pure-whitespace gaps be filtered in a future iteration?
+2. **ARCH:** `fieldBlockFactory` is exported but effectively dead code (paragraphs handled by `visitParagraph` before `getFactory`). Keep for API completeness or remove?
 
 ## BLOCKER
 

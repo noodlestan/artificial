@@ -109,7 +109,7 @@ Create `repos/artificial/art-js/cli/poc-parse/src/parse/factory.ts` following `_
      ```typescript
      const block: NaturalBlock = {
        construct: 'NaturalBlock',
-       ...node,  // copy ALL mdast attributes
+       ...node, // copy ALL mdast attributes
        value: rawSlice(node, context),
        position: cleanPosition(node.position),
      };

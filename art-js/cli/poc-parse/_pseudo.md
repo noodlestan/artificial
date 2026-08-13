@@ -23,7 +23,7 @@ interface VisitContext {
   // Push a record to the current target
   push(record: Construct): void
 
-  // Close current context, return parent
+  // Return parent context (poorly named — should be `parent()`)
   close(): VisitContext | undefined
 
   // Source markdown for raw slicing
@@ -31,16 +31,21 @@ interface VisitContext {
 
   // Last position for gap detection
   lastEnd: Point | undefined
+
+  // Section record if this context is capturing a section (for tag routing)
+  _section?: SectionBlock
 }
 
 function createNestedContext(
   structure: string,           // e.g., 'FieldBlock', 'SectionBlock'
   parentContext?: VisitContext,
-  source?: string
+  source?: string,
+  targetArray?: BlockContent[], // optional: use existing array instead of new one
+  section?: SectionBlock        // optional: section record for tag routing
 ): VisitContext {
-  const children: BlockContent[] = []
+  const children = targetArray ?? []
 
-  return {
+  const ctx: VisitContext = {
     capturing() {
       return structure
     },
@@ -52,8 +57,8 @@ function createNestedContext(
     push(record: Construct) {
       // Tags go to section, not children
       if (record.construct === 'Tag') {
-        const section = findParentSection(parentContext)
-        if (section) (section.tags ??= []).push(record)
+        const s = findTagable(ctx)
+        if (s) (s.tags ??= []).push(record)
         return
       }
 
@@ -66,8 +71,11 @@ function createNestedContext(
     },
 
     source: source ?? parentContext?.source ?? '',
-    lastEnd: undefined
+    lastEnd: parentContext?.lastEnd,
+    _section: section
   }
+
+  return ctx
 }
 
 function createDocumentContext(source: string): VisitContext {
@@ -103,12 +111,12 @@ newSectionCtx = createNestedContext('SectionBlock', sectionCtx)
 ```pseudo
 function buildDocument(markdown: string): Document {
   tree = fromMarkdown(markdown)
-  document = { construct: 'Document', children: [] }
-  context = createDocumentContext(markdown)
+  docContext = createDocumentContext(markdown)
 
-  visit(tree, node => visitNode(node, context))
+  visit(tree, node => visitNode(node, docContext))
 
-  return document
+  // Return document with the context's accumulated children
+  return { construct: 'Document', children: docContext.target() }
 }
 ```
 
@@ -184,7 +192,7 @@ function visitNode(node: MdastNode, context: VisitContext): Skip | undefined {
 ## Paragraph Visitor (Handles Field Detection)
 
 ```pseudo
-function visitParagraph(node: Paragraph, context: VisitContext): Skip {
+function visitParagraph(node: Paragraph, context: VisitContext): Skip | undefined {
   // Check if paragraph starts with a field
   if (node.children.length > 0 && isFieldStrong(node.children[0], context)) {
     // Create field block from paragraph
@@ -235,7 +243,8 @@ function visitParagraph(node: Paragraph, context: VisitContext): Skip {
     }
   }
 
-  return SKIP
+  // Return undefined (not SKIP) to visit children for tag detection
+  return undefined
 }
 ```
 
@@ -288,21 +297,16 @@ function handleFieldBlock(record: FieldBlock, context: VisitContext): void {
 
 ```pseudo
 function createNaturalBlock(node: MdastNode, context: VisitContext): NaturalBlock {
-  // Copy ALL mdast attributes
+  // Copy ALL mdast attributes via spread (transparent wrapper)
   block = {
     construct: 'NaturalBlock',
-    type: node.type,                    // preserve mdast type
-    value: rawSlice(node, context),     // raw markdown
+    ...node,                              // spread ALL mdast attributes
+    value: rawSlice(node, context),       // raw markdown (canonical lossless content)
     position: cleanPosition(node.position)
   }
 
-  // Copy any other mdast attributes based on type
-  if (node.type === 'code') {
-    code = node as Code
-    block.lang = code.lang              // code language
-    block.meta = code.meta              // code metadata
-  }
-  else if (node.type === 'list') {
+  // Override children only for list/blockquote (to parse sub-items as records)
+  if (node.type === 'list') {
     list = node as List
     block.children = parseListChildren(list, context)
   }
@@ -312,6 +316,12 @@ function createNaturalBlock(node: MdastNode, context: VisitContext): NaturalBloc
       createNaturalBlock(child, context)
     )
   }
+
+  // Note: The spread copies mdast `children` verbatim (e.g. inline text nodes
+  // for paragraphs, tableRow nodes for tables). These are NOT `BlockContent`
+  // records — they are raw mdast nodes. The `value` field is the canonical
+  // lossless content. Only `list` and `blockquote` override `children` with
+  // parsed records.
 
   return block
 }
@@ -360,29 +370,21 @@ function createFieldBlockFromParagraph(paragraph: Paragraph, context: VisitConte
 ## Helper Functions
 
 ```pseudo
+// Find the nearest section that can receive tags.
+// Walks up the context chain looking for a context with `_section` set.
+// (Could be renamed `findTagable` — it finds the section for tag routing.)
 function findParentSection(context: VisitContext): SectionBlock | undefined {
-  // Walk up context chain to find parent section
   let current = context
   while (current) {
-    if (current.capturing() === 'SectionBlock') {
-      // Return the section from the context's target
-      const children = current.target()
-      if (children.length > 0) {
-        const last = children[children.length - 1]
-        if (last.construct === 'SectionBlock') {
-          return last as SectionBlock
-        }
-      }
-    }
+    if (current._section) return current._section
     current = current.close()
   }
   return undefined
 }
 
+// Section depth is tracked via the `depth` field on SectionBlock
 function sectionDepth(section: SectionBlock): number {
-  // Extract depth from position or name
-  // This is a placeholder — actual implementation would need to track depth
-  return 1
+  return section.depth ?? 1
 }
 
 function flushGap(context: VisitContext, start: Point): void {

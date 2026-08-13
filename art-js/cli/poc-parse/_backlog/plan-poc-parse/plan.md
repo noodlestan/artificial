@@ -101,11 +101,27 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/_backlog/plan-poc-parse/instructions/grammar-spec-fixes__report.md`
 
-### `extract-mdast-transparently` - `DRAFT`
+### `extract-mdast-transparently` - `COMMITTED`
 
 **Commit Message:** `poc-parse: ruthless rewrite for mdast transparency`
 
 **Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/extract-mdast-transparently.md`
+
+**Evidence:** commit `e3b76c9`; artefacts — rewritten `art-js/cli/poc-parse/src/parse/builder.ts` (context-aware visiting with `createNestedContext`), rewritten `art-js/cli/poc-parse/src/parse/factory.ts` (VisitContext, factories, helpers), extended `art-js/cli/poc-parse/src/parse/types.ts` (`NaturalBlock` transparent with index signature `[key: string]: unknown`). `npm run lint` exit 0; TC1 verified — `SectionBlock { kind: "Routine", name: "List Tasks" }` output confirmed.
+
+**Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/extract-mdast-transparently__report.md`
+
+### `refine-parse-factories` - `DRAFT`
+
+**Commit Message:** `poc-parse: refine parse factories and builder`
+
+**Instructions File:** none yet
+
+**Scope:**
+- Rename `close()` → `parent()` (clearer naming)
+- Rename `findParentSection()` → `findTagable()` (clearer purpose)
+- Refactor `buildDocument` to inject construct-specific logic via contract (no closures over construct types)
+- Small bug fixes if noticed during review
 
 ### `first-constructs-slice` - `DRAFT`
 
