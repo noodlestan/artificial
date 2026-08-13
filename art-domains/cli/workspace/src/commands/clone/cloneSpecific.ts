@@ -23,31 +23,26 @@ export async function cloneSpecific(
 	}
 
 	const location = createCheckoutLocation(repo, checkoutInput);
-	const checkout = ctx.store.getCheckoutForLocation(location);
-	if (checkout && checkout.record.location !== location) {
-		const msg = `checkout for '${repo.name}' exists at ${checkout.record.location}. Cannot clone to ${location}.`;
-		ctx.log.log(createCloneFailure(checkout, msg));
+
+	const existing = ctx.store.getCheckoutForLocation(location);
+	if (existing && existing.repo?.name !== repo.name) {
+		const msg = `location ${location} is already used by checkout '${existing.record.name}'.`;
+		ctx.log.log(createCloneFailure(existing, msg));
 		return;
 	}
-	if (!checkout) {
-		const allCheckouts = ctx.store.getAllCheckouts();
-		const conflicting = allCheckouts.find(c => c.record.location === location);
-		if (conflicting) {
-			const msg = `location ${location} is already used by checkout '${conflicting.record.name}'.`;
-			ctx.log.log(createCloneFailure(conflicting, msg));
-			return;
-		}
 
+	if (!existing) {
 		const checkoutName = checkoutInput ? `${repo.name} @ ${checkoutInput}` : repo.name;
-		const checkout = createCheckout(ctx.config, location, repo, 'main', checkoutName);
+		const created = createCheckout(ctx.config, location, repo, 'main', checkoutName);
 
-		ctx.store.addCheckout(checkout);
-		await saveCheckoutRecord(ctx.config, checkout.record.name, checkout.record);
+		ctx.store.addCheckout(created);
+		await saveCheckoutRecord(ctx.config, created.record.name, created.record);
 
-		await cloneIfMissing(ctx, checkout);
-		await scanCheckoutState(ctx, checkout);
-	} else {
-		await cloneIfMissing(ctx, checkout);
-		await scanCheckoutState(ctx, checkout);
+		await cloneIfMissing(ctx, created);
+		await scanCheckoutState(ctx, created);
+		return;
 	}
+
+	await cloneIfMissing(ctx, existing);
+	await scanCheckoutState(ctx, existing);
 }

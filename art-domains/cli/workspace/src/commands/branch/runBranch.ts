@@ -33,12 +33,8 @@ export async function runBranch(
 		}
 
 		checkout = await scanCheckoutState(ctx, checkout);
-		if (!checkout) {
-			ctx.log.log(createBranchFailure(branch, 'uknown checkout', checkout));
-			continue;
-		}
 		if (!checkout.exists) {
-			ctx.log.log(createBranchFailure(branch, 'checkout not clond', checkout));
+			ctx.log.log(createBranchFailure(branch, 'checkout not cloned', checkout));
 			continue;
 		}
 
