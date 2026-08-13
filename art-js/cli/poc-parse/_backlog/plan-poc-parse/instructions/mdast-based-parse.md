@@ -21,6 +21,7 @@ The plan workflow (see `repos/artificial/_guide.md` → Planning Workflow → Wo
 Replace the micromark token-event builder with an mdast-based builder. Instead of listening to raw enter/exit events, we parse markdown to mdast (the rawest AST in the unified ecosystem), then visit each node and map it to our record types using a factory pattern.
 
 The approach:
+
 1. Parse markdown → mdast using `mdast-util-from-markdown`.
 2. Visit each mdast node with `unist-util-visit`.
 3. For each node, check if it qualifies as a known construct (SectionBlock, FieldBlock, Tag, etc.).
@@ -49,6 +50,7 @@ These are known issues from the previous micromark-based builder and round-trip 
 ### EC1 — Multi-word field names
 
 `**Canonical Name:**` must be detected as a FieldBlock, not a NaturalBlock. The detection pattern must match:
+
 - `**Purpose:**` (single word + colon)
 - `**Canonical Name:**` (multi-word + colon)
 - `**Package Dependency Set:**` (multi-word + colon)
@@ -59,12 +61,13 @@ These are known issues from the previous micromark-based builder and round-trip 
 When a FieldBlock contains a list (e.g. `**Dependencies:**` with `- Package Dependency: Esbuild`), the list items must be parsed as structured content, not flattened to raw text.
 
 The NaturalBlock value model must support structured content:
+
 - `.value: string` — raw markdown (always present, for lossless round-trip)
 - `.children?: BlockContent[]` — parsed sub-records (when content is structured, e.g. list items)
 
 ### EC3 — Tags inside fenced code blocks
 
-Tags `(#identifier)` inside fenced code blocks (``` ```md ... ``` `) must NOT be detected as Tag records. Only tags in prose content should be classified.
+Tags `(#identifier)` inside fenced code blocks (` `md ... ``` `) must NOT be detected as Tag records. Only tags in prose content should be classified.
 
 ### EC4 — Heading text with inline markup
 
@@ -85,6 +88,7 @@ Strip internal micromark fields (`_bufferIndex`, `_index`) from all position rec
 ### EC8 — Section nesting by heading level
 
 Headings are flat siblings in mdast. Nesting is driven by heading level:
+
 - `# Module` (level 1) → top-level SectionBlock
 - `## Package Dependency: Esbuild` (level 2) → child of `# Module`
 - `### Field` (level 3) → child of `## Package Dependency`
@@ -104,6 +108,7 @@ Run `npm install` in `repos/artificial/art-js/cli/poc-parse/` to register them.
 Create `repos/artificial/art-js/cli/poc-parse/src/parse/factory.ts` that:
 
 1. Defines a `VisitContext` type:
+
    ```typescript
    interface VisitContext {
      sectionStack: SectionBlock[];
@@ -112,6 +117,7 @@ Create `repos/artificial/art-js/cli/poc-parse/src/parse/factory.ts` that:
    ```
 
 2. Defines a `ConstructFactory` interface:
+
    ```typescript
    interface ConstructFactory {
      /** Can this mdast node be mapped to our construct? */

@@ -12,11 +12,11 @@
 
 #### Files changed
 
-| File | Change | Description |
-| --- | --- | --- |
-| `art-js/cli/poc-parse/src/parse/builder.ts` | created | `buildDocument(markdown): Document` — construct-stack record builder. Runs `preprocess() → parse().document().write() → postprocess(doc.events)`, maintains an explicit section + field stack, hooks `atxHeading`/`atxHeadingText`/`strong`/`paragraph`/`codeFenced`/`codeIndented`/`codeText`/`link`/`autolink`/`data`/`lineEnding` enter/exit events, extracts `kind`/`name`/tags from headings, detects `**Field:**` spans, classifies everything else as `NaturalBlock`, and attaches `Tag`s to the nearest open `SectionBlock`. |
-| `art-js/cli/poc-parse/src/parse/parse.ts` | created | Exports `parse(markdown): Document` delegating to `buildDocument`; CLI entry point (`npx tsx src/parse/parse.ts <file.art>`) prints the record tree as JSON when run directly. |
-| `art-js/cli/poc-parse/src/parse/smoke-parse.ts` | deleted | Token-inspection spike superseded by the builder; findings live in `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md`. |
+| File                                            | Change  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `art-js/cli/poc-parse/src/parse/builder.ts`     | created | `buildDocument(markdown): Document` — construct-stack record builder. Runs `preprocess() → parse().document().write() → postprocess(doc.events)`, maintains an explicit section + field stack, hooks `atxHeading`/`atxHeadingText`/`strong`/`paragraph`/`codeFenced`/`codeIndented`/`codeText`/`link`/`autolink`/`data`/`lineEnding` enter/exit events, extracts `kind`/`name`/tags from headings, detects `**Field:**` spans, classifies everything else as `NaturalBlock`, and attaches `Tag`s to the nearest open `SectionBlock`. |
+| `art-js/cli/poc-parse/src/parse/parse.ts`       | created | Exports `parse(markdown): Document` delegating to `buildDocument`; CLI entry point (`npx tsx src/parse/parse.ts <file.art>`) prints the record tree as JSON when run directly.                                                                                                                                                                                                                                                                                                                                                       |
+| `art-js/cli/poc-parse/src/parse/smoke-parse.ts` | deleted | Token-inspection spike superseded by the builder; findings live in `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md`.                                                                                                                                                                                                                                                                                                                                                                                    |
 
 Commit `7d23a6e` — `poc-parse: add construct-stack record builder` (rebase of `9ba1657` onto `origin/main` after remote advanced; pushed with `--no-verify`).
 
@@ -90,15 +90,15 @@ Rules: lint deps are installed; replace "Do NOT run npm run lint / lint:fix" wit
 ```
 
 - `where`: Instruction Step 1, "Tags `(#identifier)` are detected via regex in text content".
-- `problem`: the only two tags in the corpus (`section-block.art` line 69) live inside a fenced code *example*, so a raw-text regex attaches `generator`/`wip` to the nearest open section (`Construct`) even though they are example content. The smoke findings counted those same two tags with the identical raw regex, so the behaviour matches the documented finding.
+- `problem`: the only two tags in the corpus (`section-block.art` line 69) live inside a fenced code _example_, so a raw-text regex attaches `generator`/`wip` to the nearest open section (`Construct`) even though they are example content. The smoke findings counted those same two tags with the identical raw regex, so the behaviour matches the documented finding.
 - `decision`: followed the instruction literally (regex over accumulated text at flush time, heading text at section creation). Flagged so the planner can decide whether fenced spans should be excluded from tag detection.
 - READY-TO-APPLY:
 
-```md
+````md
 Step 1 Tags: consider excluding fenced code spans from tag detection — the corpus' only tags are inside a ```md example block and currently surface on the enclosing section.
-```
+````
 
-- Minor: heading names keep raw inline markup (e.g. `` name: "Any Markdown is Valid `.art`" ``) since `atxHeadingText` is sliced verbatim. Acceptable for the POC; a later step can strip inline formatting from names.
+- Minor: heading names keep raw inline markup (e.g. ``name: "Any Markdown is Valid `.art`"``) since `atxHeadingText` is sliced verbatim. Acceptable for the POC; a later step can strip inline formatting from names.
 
 ### For the crew
 

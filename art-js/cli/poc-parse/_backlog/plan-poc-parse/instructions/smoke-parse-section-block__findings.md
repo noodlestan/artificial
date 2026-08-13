@@ -42,7 +42,7 @@ Tag patterns like `(#generator)` tokenize as inline text — no dedicated tag to
 
 ### Code Fences
 
-Code fences (```) tokenize correctly as `codeFenced` tokens. The fence info (language) is captured in `codeFencedSequence`.
+Code fences (```) tokenize correctly as `codeFenced`tokens. The fence info (language) is captured in`codeFencedSequence`.
 
 - Total code fences across corpus: 5
 - Token type: `codeFenced`, `codeFencedSequence`, `codeFencedText`
@@ -50,17 +50,17 @@ Code fences (```) tokenize correctly as `codeFenced` tokens. The fence info (lan
 
 ## Per-File Summary
 
-| File | Headings | Strong | Directives | Tags | Code Fences |
-|------|----------|--------|------------|------|-------------|
-| architecture/records/adr/_research.md | 8 | 9 | 0 | 0 | 0 |
-| architecture/records/adr/compiler.art | 10 | 33 | 0 | 0 | 0 |
-| architecture/records/adr/configuration.art | 2 | 5 | 0 | 0 | 0 |
-| architecture/records/adr/distribution.art | 5 | 20 | 0 | 0 | 0 |
-| architecture/records/adr/documentation.art | 3 | 7 | 0 | 0 | 0 |
-| architecture/records/adr/installation.art | 2 | 4 | 0 | 0 | 0 |
-| architecture/records/adr/language.art | 9 | 29 | 0 | 0 | 0 |
-| art-js/spec/grammar/constructs/structural/section-block.art | 2 | 7 | 3 | 2 | 5 |
-| **Total** | **41** | **114** | **3** | **2** | **5** |
+| File                                                        | Headings | Strong  | Directives | Tags  | Code Fences |
+| ----------------------------------------------------------- | -------- | ------- | ---------- | ----- | ----------- |
+| architecture/records/adr/\_research.md                      | 8        | 9       | 0          | 0     | 0           |
+| architecture/records/adr/compiler.art                       | 10       | 33      | 0          | 0     | 0           |
+| architecture/records/adr/configuration.art                  | 2        | 5       | 0          | 0     | 0           |
+| architecture/records/adr/distribution.art                   | 5        | 20      | 0          | 0     | 0           |
+| architecture/records/adr/documentation.art                  | 3        | 7       | 0          | 0     | 0           |
+| architecture/records/adr/installation.art                   | 2        | 4       | 0          | 0     | 0           |
+| architecture/records/adr/language.art                       | 9        | 29      | 0          | 0     | 0           |
+| art-js/spec/grammar/constructs/structural/section-block.art | 2        | 7       | 3          | 2     | 5           |
+| **Total**                                                   | **41**   | **114** | **3**      | **2** | **5**       |
 
 ## Surprises and Gaps
 

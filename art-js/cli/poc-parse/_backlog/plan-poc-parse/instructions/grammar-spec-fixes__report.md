@@ -12,13 +12,13 @@
 
 #### Files changed
 
-| File | Change |
-|------|--------|
-| `repos/artificial/art-js/spec/grammar/constructs/structural/field-block.art` | Fixed Description to reference termination rules; removed overly broad "MAY contain" rule; kept MUST NOT constraints |
-| `repos/artificial/art-js/spec/grammar/constructs/structural/section-block.art` | Clarified Schema with `kind?: string` (optional); Syntax now shows both `# Name` and `# Kind: Name` forms |
+| File                                                                           | Change                                                                                                                                                                      |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `repos/artificial/art-js/spec/grammar/constructs/structural/field-block.art`   | Fixed Description to reference termination rules; removed overly broad "MAY contain" rule; kept MUST NOT constraints                                                        |
+| `repos/artificial/art-js/spec/grammar/constructs/structural/section-block.art` | Clarified Schema with `kind?: string` (optional); Syntax now shows both `# Name` and `# Kind: Name` forms                                                                   |
 | `repos/artificial/art-js/spec/grammar/constructs/structural/natural-block.art` | Updated Purpose to "catch-all classification"; Description now references "Any Markdown is Valid `.art`"; added Schema with `value: string` and `children?: BlockContent[]` |
-| `repos/artificial/art-js/spec/grammar/constructs/expressions/tag.art` | Added prose detection rule: tags detected via regex, not in code blocks; tags attach to nearest enclosing SectionBlock |
-| `repos/artificial/architecture/records/adr/language.art` | Added new decision: "Parser Containment Model" (Adopted) summarising containment rules |
+| `repos/artificial/art-js/spec/grammar/constructs/expressions/tag.art`          | Added prose detection rule: tags detected via regex, not in code blocks; tags attach to nearest enclosing SectionBlock                                                      |
+| `repos/artificial/architecture/records/adr/language.art`                       | Added new decision: "Parser Containment Model" (Adopted) summarising containment rules                                                                                      |
 
 ## Blockers (if any)
 

@@ -45,6 +45,7 @@ Cross-check the construct-stack builder against the grammar WIP and fix gaps fou
 The builder currently fails to detect `**Canonical Name:**` as a FieldBlock. The pattern should match any `**{word chars including spaces}:**` sequence, not just single-word names.
 
 Update the strong-enter detection in `builder.ts`:
+
 - Match: `**` + one or more word/space chars + `:**` + optional space
 - Examples that must match: `**Purpose:**`, `**Canonical Name:**`, `**Package Dependency Set:**`
 - Examples that must NOT match: `**not a field**`, `**bold text**`
@@ -54,6 +55,7 @@ Update the strong-enter detection in `builder.ts`:
 **Problem:** When a FieldBlock contains structured content (e.g. a list under `**Dependencies:**`), the builder flattens it into a NaturalBlock with raw text. This loses the list semantics.
 
 **Current state:**
+
 ```typescript
 NaturalBlock.value: string  // raw markdown
 ```
@@ -65,17 +67,19 @@ NaturalBlock.value: string  // raw markdown
 ```typescript
 interface NaturalBlock extends RecordBase {
   construct: 'NaturalBlock';
-  value: string;                    // raw markdown (always present)
-  children?: BlockContent[];        // parsed sub-records (when content is structured)
+  value: string; // raw markdown (always present)
+  children?: BlockContent[]; // parsed sub-records (when content is structured)
 }
 ```
 
 When the builder encounters a list inside a FieldBlock's value:
+
 - The list items become child records (e.g. `ListItemBlock` or similar)
 - `.value` retains the raw markdown for lossless round-trip
 - `.children` provides structured access
 
 **Alternatively:** Introduce a dedicated `ListBlock` construct:
+
 ```typescript
 interface ListBlock extends RecordBase {
   construct: 'ListBlock';

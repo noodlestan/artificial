@@ -12,13 +12,13 @@
 
 #### Files changed
 
-| File | Description |
-|------|-------------|
-| `art-js/cli/poc-parse/package.json` | Added runtime dependencies `mdast-util-from-markdown` (^2.0.0) and `unist-util-visit` (^5.0.0) (Step 1) |
-| `art-js/cli/poc-parse/src/parse/factory.ts` (new) | Construct factory system: `VisitContext`, `ConstructFactory`, `sectionBlockFactory` / `fieldBlockFactory` / `tagFactory` / `naturalBlockFactory`, `getFactory` dispatch, `cleanPosition` (EC7), `rawSlice`/`stripStrong` helpers (Step 2) |
-| `art-js/cli/poc-parse/src/parse/builder.ts` | Rewritten as mdast-based builder: `buildDocument` visits mdast via `unist-util-visit`, maps nodes through factories, manages a section stack keyed on heading depth (EC8), preserves blank-line gaps as NaturalBlocks (EC5), attaches sections exactly once at close |
-| `art-js/cli/poc-parse/src/parse/types.ts` | `NaturalBlock.children?: BlockContent[]` for structured content (list items) (EC2) |
-| `art-js/cli/poc-parse/package-lock.json` | Lockfile updated by `npm install` |
+| File                                              | Description                                                                                                                                                                                                                                                          |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `art-js/cli/poc-parse/package.json`               | Added runtime dependencies `mdast-util-from-markdown` (^2.0.0) and `unist-util-visit` (^5.0.0) (Step 1)                                                                                                                                                              |
+| `art-js/cli/poc-parse/src/parse/factory.ts` (new) | Construct factory system: `VisitContext`, `ConstructFactory`, `sectionBlockFactory` / `fieldBlockFactory` / `tagFactory` / `naturalBlockFactory`, `getFactory` dispatch, `cleanPosition` (EC7), `rawSlice`/`stripStrong` helpers (Step 2)                            |
+| `art-js/cli/poc-parse/src/parse/builder.ts`       | Rewritten as mdast-based builder: `buildDocument` visits mdast via `unist-util-visit`, maps nodes through factories, manages a section stack keyed on heading depth (EC8), preserves blank-line gaps as NaturalBlocks (EC5), attaches sections exactly once at close |
+| `art-js/cli/poc-parse/src/parse/types.ts`         | `NaturalBlock.children?: BlockContent[]` for structured content (list items) (EC2)                                                                                                                                                                                   |
+| `art-js/cli/poc-parse/package-lock.json`          | Lockfile updated by `npm install`                                                                                                                                                                                                                                    |
 
 `src/parse/parse.ts` was not modified — the CLI entry point was preserved as-is (Step 4).
 
@@ -51,7 +51,7 @@ None.
 
 ### For the technical writers
 
-- **F4 (Clarification):** Blank-line gap placement follows the containment rule — a gap is attached to whatever record is open at that source position (a field value, section children, or the document), so the blank line before a new section heading lands inside the section being closed, and the blank between a heading and its first field lands inside that section. Trailing blank lines at EOF are dropped (only gaps *between* records are preserved). The `language.art` containment model is consistent with this, but it is worth stating explicitly next to EC5.
+- **F4 (Clarification):** Blank-line gap placement follows the containment rule — a gap is attached to whatever record is open at that source position (a field value, section children, or the document), so the blank line before a new section heading lands inside the section being closed, and the blank between a heading and its first field lands inside that section. Trailing blank lines at EOF are dropped (only gaps _between_ records are preserved). The `language.art` containment model is consistent with this, but it is worth stating explicitly next to EC5.
 
 ### For the crew
 

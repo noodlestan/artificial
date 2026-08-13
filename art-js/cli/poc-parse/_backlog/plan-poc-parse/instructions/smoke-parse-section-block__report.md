@@ -12,10 +12,10 @@
 
 #### Files changed
 
-| File | Description |
-|------|-------------|
-| `art-js/cli/poc-parse/src/parse/smoke-parse.ts` | Smoke-parse script: reads 8 target files, tokenizes through micromark, counts/inspects token types (headings, strong, directives, tags, code fences), writes findings |
-| `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md` | Findings report: tokenization summary, per-file counts, surprises/gaps, recommendation (micromark direct vs indirections) |
+| File                                                                          | Description                                                                                                                                                           |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `art-js/cli/poc-parse/src/parse/smoke-parse.ts`                               | Smoke-parse script: reads 8 target files, tokenizes through micromark, counts/inspects token types (headings, strong, directives, tags, code fences), writes findings |
+| `_backlog/plan-poc-parse/instructions/smoke-parse-section-block__findings.md` | Findings report: tokenization summary, per-file counts, surprises/gaps, recommendation (micromark direct vs indirections)                                             |
 
 ### Verification
 

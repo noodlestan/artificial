@@ -12,8 +12,8 @@
 
 #### Files changed
 
-| File | Description |
-| --- | --- |
+| File                                      | Description                                                                                                                                                                                                                                                                                                           |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `art-js/cli/poc-parse/src/parse/types.ts` | New file — core record schema types: `Point`, `Position`, `RecordBase`, `SectionBlock`, `FieldBlock`, `NaturalBlock`, `Tag`, `Document`, open registries (`BlockConstructMap`, `InlineConstructMap`, `ConstructMap`), and derived unions (`BlockContent`, `InlineContent`, `Construct`). Types only, no runtime code. |
 
 ### Verification

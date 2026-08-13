@@ -44,6 +44,7 @@ The FieldBlock spec (`field-block.art`) says the value "MAY contain procedure bl
 - A FieldBlock MUST NOT contain a nested FieldBlock.
 
 Update `repos/artificial/art-js/spec/grammar/constructs/structural/field-block.art`:
+
 - Fix the "Rules" section to match the containment decision.
 - Fix the "Description" to reference the termination rules.
 
@@ -52,6 +53,7 @@ Update `repos/artificial/art-js/spec/grammar/constructs/structural/field-block.a
 The SectionBlock spec (`section-block.art`) Schema block uses `kind?: <NaturalName>`. This is correct per the parser (SectionBlock has optional `kind`). But the Syntax block uses `### [<NaturalName (section-block.kind)>: ]<NaturalName (section-block.name)>` which is confusing.
 
 Update `repos/artificial/art-js/spec/grammar/constructs/structural/section-block.art`:
+
 - Clarify the Schema block: `kind?: string` (optional, present when heading has `Kind: Name` form).
 - Clarify the Syntax block to show both forms: `# Name` and `# Kind: Name`.
 
@@ -63,6 +65,7 @@ The NaturalBlock spec (`natural-block.art`) says it "represents content associat
 - Plain markdown is never invalid — it classifies as NaturalBlock.
 
 Update `repos/artificial/art-js/spec/grammar/constructs/structural/natural-block.art`:
+
 - Update the "Purpose" to state it's the catch-all classification.
 - Update the "Description" to reference "Any Markdown is Valid `.art`".
 - Add the `children?: BlockContent[]` field to the Schema (for structured content like lists inside FieldBlocks).
@@ -70,12 +73,14 @@ Update `repos/artificial/art-js/spec/grammar/constructs/structural/natural-block
 ### Step 4 — Reconcile Tag placement
 
 Tags `(#identifier)` can appear:
+
 - After a SectionBlock heading: `### Routine: List Tasks (#generator) (#wip)`
 - In prose content (detected by regex, not syntax)
 
 The Tag spec should clarify that tags in fenced code blocks are NOT classified as tags.
 
 Check `repos/artificial/art-js/spec/grammar/expressions/tag.art` and update if needed to reflect:
+
 - Tags are detected in prose, not in code blocks.
 - Tags attach to the nearest enclosing SectionBlock.
 

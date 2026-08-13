@@ -1,4 +1,4 @@
-# POC Parse Plan
+# Architecture Briefing: POC Parse
 
 Forward-looking work for the artificials parser POC. Decisions live in the ADRs (`architecture/records/adr/`); this file tracks the work ahead only.
 
@@ -10,9 +10,9 @@ Forward-looking work for the artificials parser POC. Decisions live in the ADRs 
 
 **mdast substrate.** Parsing builds on mdast — the AST layer of the unified ecosystem — using `mdast-util-from-markdown` to parse markdown into typed nodes, then a factory-based visitor to classify nodes into art records (`SectionBlock`, `FieldBlock`, `NaturalBlock`, `Tag`). The factory pattern separates detection (does this node qualify?) from construction (create the record) from visitation (should we recurse into children?). We own semantics at the mdast layer. See `architecture/records/adr/mdast-based.art`.
 
-## Work ahead
+## Milestones
 
-### POC Plan
+### POC Parse
 
 - `_backlog/plan-poc-parse/plan.md` - WORKING
 
