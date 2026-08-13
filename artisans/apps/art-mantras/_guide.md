@@ -39,6 +39,23 @@ Run per package modified:
 npm run serve # to start the development server
 ```
 
+## Deployment
+
+Build and deploy to AWS:
+
+```bash
+npm run build                                    # build dist/ artifacts
+aws s3 sync dist/ s3://art-mantras-noodlestan-org-prod --delete
+aws cloudfront create-invalidation --distribution-id E3MR81TGFNVD2W --paths "/*"
+```
+
+**Environments:**
+
+- **Production:** https://art-mantras.noodlestan.org (bucket: `art-mantras-noodlestan-org-prod`, distribution: `E3MR81TGFNVD2W`)
+- **Staging:** https://stage-art-mantras.noodlestan.org (bucket: `art-mantras-noodlestan-org-stage`, distribution: `EVVYS72BO8V4I`)
+
+**Infrastructure:** Managed in `$WORKSPACE/repos/terraform/domains/noodlestan/websites/art-mantras/`
+
 ## Records Management
 
 The workspace maintains ops records at `ops/records` detailing project configurations, namespaces, packages, dependencies, scaffolding and more.
