@@ -20,7 +20,7 @@
 
 - `%invokation` (see examples below)
 
-**Process:**
+**Procedure:**
 
 With the inputs, execute the following actions:
 

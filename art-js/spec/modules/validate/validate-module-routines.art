@@ -233,7 +233,7 @@ Example of a valid routine:
 
 - `%report` - The generated report.
 
-**Process:**
+**Procedure:**
 
 1. With the `%data`, generate the `%report`.
 ```
@@ -249,7 +249,7 @@ Example of an invalid routine with an undeclared variable:
 
 - `%report` - The generated report.
 
-**Process:**
+**Procedure:**
 
 1. With the `%data`, generate the `%report`.
 ```
