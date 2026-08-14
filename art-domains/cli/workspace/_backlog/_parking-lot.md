@@ -31,6 +31,7 @@ None current.
 - **Fix `--version` showing stale version** — `npm run workspace -- --version` shows `0.0.9` but package is at `0.0.14`. Investigate why version is not being read from package.json correctly.
 - **Implement checkout name resolution code fix** — `resolveCheckoutByName` is designed in `architecture/_pseudo.md` (commit `040b07e`) but `src/commands/repo/runRepo.ts` still calls `getCheckoutByName` directly; the `repo` command still doesn't accept checkout names.
 - **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
+- **Fix `pull-push-sync-command` instruction drift (plan `implement-pull-push-sync`)** — the commit-1 instruction `_backlog/4-next/plan-implement-pull-push-sync/instructions/pull-push-sync-command.md` references `src/private/scan/types.ts` for the `Checkout` type (actual: `src/private/store/createCheckout.ts`) and says "create" `scanWorkspaceState.ts` / `presentWorkspaceReport.ts` which already exist (landed in commit `51cad48`). The plan.md was corrected to READY; the instruction file must be updated so the commit-1 worker updates those files instead of creating them.
 
 ### PENDING
 

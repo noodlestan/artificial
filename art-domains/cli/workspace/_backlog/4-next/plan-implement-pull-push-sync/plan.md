@@ -2,7 +2,7 @@
 
 **ID:** `implement-pull-push-sync`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Template:** `plan`
 
@@ -51,9 +51,10 @@ The worker created 35 `it.todo()` tests but never implemented them. This is unac
 Add support for "is behind" detection and workspace root scanning:
 
 - Add `getBehindCount(dir, remoteBranch)` function to `src/private/git/`
-- Add `isBehind` field to `Checkout` type in `src/private/scan/types.ts`
+- Add `isBehind` field to `Checkout` type in `src/private/store/createCheckout.ts` (the `Checkout` interface lives there — NOT in `src/private/scan/types.ts`)
 - Add `getBehindCount` to `src/private/scan/scanCheckoutState.ts`
-- Create `src/private/scan/scanWorkspaceState.ts` for workspace root scanning
+- `src/private/scan/scanWorkspaceState.ts` ALREADY EXISTS (landed in commit `51cad48`) — commit 1 must UPDATE it to add `isBehind` detection, not create it
+- `src/private/present/presentWorkspaceReport.ts` ALREADY EXISTS (landed in commit `51cad48`) — commit 1 must UPDATE it as needed, not create it
 
 ### Test File Structure
 
@@ -109,9 +110,11 @@ If any of these fail, resolve the issue before proceeding with implementation.
 
 ## Iterations
 
-### `pull-push-sync-command` - `PLANNED`
+### `pull-push-sync-command` - `READY`
 
 **Commit Message:** `feat(workspace-cli): implement pull, push, sync commands`
+
+**Instructions File:** `_backlog/4-next/plan-implement-pull-push-sync/instructions/pull-push-sync-command.md`
 
 Implement `art-workspace pull`, `art-workspace push`, and `art-workspace sync` commands.
 
@@ -144,9 +147,11 @@ Implement `art-workspace pull`, `art-workspace push`, and `art-workspace sync` c
 
 **BDD:** `architecture/commands.md` → Pull, Push, Sync sections.
 
-### `sanity-enhancement` - `PLANNED`
+### `sanity-enhancement` - `READY`
 
 **Commit Message:** `feat(workspace-cli): enhance sanity with workspace status and is behind detection`
+
+**Instructions File:** `_backlog/4-next/plan-implement-pull-push-sync/instructions/sanity-enhancement.md`
 
 Enhance `art-workspace sanity` command with workspace status and "is behind" detection.
 
@@ -161,6 +166,8 @@ Enhance `art-workspace sanity` command with workspace status and "is behind" det
 - Scan workspace root state
 - Present Workspace Report before Checkout Report
 - Pull if behind in `sanity --auto` (before pushing)
+
+**Already landed in commit `51cad48`:** temporary workspace checkout, workspace root scan (`scanWorkspaceState`), Workspace Report presentation, and the `runSanity` wiring. This commit adds the remaining `--auto` pull behavior (`pullWorkspaceCheckout`) plus the BDD scenario tests. The "is behind" scan infrastructure itself comes from the `pull-push-sync-command` commit.
 
 **Edge cases:**
 
