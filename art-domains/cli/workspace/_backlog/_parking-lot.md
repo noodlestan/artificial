@@ -28,6 +28,7 @@ None current.
 
 ### ACTIONABLE
 
+- **Fix repo command issues** — path resolution fails for many packages, npm info noise, version display issues. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
 - **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
 
 ### PENDING
