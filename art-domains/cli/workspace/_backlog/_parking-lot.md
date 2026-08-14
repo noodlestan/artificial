@@ -24,9 +24,7 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ### PENDING FEATURES
 
-| feature                                     | description                                                                                                                                                                           | status |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| Workspace as first-class checkout in sanity | Treat workspace as a checkout for scanning (but store in `ctx.workspace` not `ctx.store`). Show "Workspace:" report before "Checkouts:". Update `createCommandContext.ts`. Unit test. | READY  |
+None current.
 
 ### ACTIONABLE
 

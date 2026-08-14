@@ -50,7 +50,7 @@ Complete the workspace CLI with remaining commands and infrastructure.
 
 **DONE:** `plan-fix-repo-command-graph-loading` — repo shows "unknown package" everywhere (commit `c5baa99`)
 
-**READY:** `plan-implement-sanity-workspace-report` — workspace as first-class checkout in sanity
+**DONE:** `plan-implement-sanity-workspace-report` — workspace as first-class checkout in sanity (commit `51cad48`)
 
 **Later:** `pull`, `push`, `sync` commands — see `_backlog/4-now/plan-implement-pull-push-sync/plan.md`.
 

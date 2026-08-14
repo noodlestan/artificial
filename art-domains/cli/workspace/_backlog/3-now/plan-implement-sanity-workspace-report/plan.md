@@ -2,7 +2,7 @@
 
 **ID:** `implement-sanity-workspace-report`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `plan`
 
@@ -26,7 +26,11 @@ Treat workspace as a first-class checkout in sanity command. Show "Workspace:" r
 
 ## Iterations
 
-### `implement-sanity-workspace-report` - `PLANNED`
+### `implement-sanity-workspace-report` - `DONE`
+
+**Commit:** `51cad48`
+**Report:** [`implement-sanity-workspace-report__report.md`](./instructions/implement-sanity-workspace-report__report.md)
+**Artefacts:** `src/private/scan/scanWorkspaceState.ts`, `src/private/present/presentWorkspaceReport.ts`, 8 new tests (160 total passing)
 
 **Commit Message:** `feat(workspace-cli): show workspace report before checkouts in sanity`
 
