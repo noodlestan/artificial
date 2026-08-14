@@ -20,7 +20,7 @@ The plan workflow (see `$WORKSPACE/.agents/domains/engineering/_guide.md`) runs 
 
 ## Goals
 
-Implement the `pull`, `push`, and `sync` commands for `@art-domains/workspace-cli`. These commands provide cross-repo synchronization capabilities. Also enhance `sanity` command with workspace status and "is behind" detection.
+Implement the `pull`, `push`, and `sync` commands for `@art-domains/workspace-cli`. These commands provide cross-repo synchronization capabilities. The `sanity` command enhancement (workspace status, "is behind" detection, `--auto` pull) is OUT OF SCOPE — it belongs to the `sanity-enhancement` commit in the plan.
 
 ## Mandatory Reading
 
@@ -42,8 +42,7 @@ You are going to perform a series of steps and check status after each one.
 3. Step 3. Define Contracts
 4. Step 4. Implement Core Functions
 5. Step 5. Implement pull, push, sync Commands
-6. Step 6. Enhance sanity Command
-7. Step 7. Wire Commands to CLI
+6. Step 6. Wire Commands to CLI
 
 Execute all the steps autonomously, one by one, including running the **Verification commands** plus any _Verification command_ found at the end of the current step.
 
@@ -98,8 +97,7 @@ npm run test
   - `src/private/scan/scanWorkspaceState.ts`
 - Implement functions in their respective files (in step 4)
 - Implement pull, push, sync command handlers (in step 5)
-- Enhance sanity command with workspace status (in step 6)
-- Wire commands to CLI entry point (in step 7)
+- Wire commands to CLI entry point (in step 6)
 
 ## Step Instructions
 
@@ -112,7 +110,7 @@ npm ci # to install dependencies.
 npm run ci # to verify build is green before starting
 ```
 
-### Step 1/7 — Enhance scan functions with isBehind support
+### Step 1/6 — Enhance scan functions with isBehind support
 
 **Goal:** Add support for "is behind" detection and workspace root scanning.
 
@@ -141,7 +139,7 @@ npm run ci # to verify build is green before starting
 
 - Execute `npm run test` in `$PROJECT` to verify scan functions work correctly
 
-### Step 2/7 — Create Test Scaffolds
+### Step 2/6 — Create Test Scaffolds
 
 **Goal:** Establish test files with pending tests for each BDD scenario.
 
@@ -176,7 +174,7 @@ npm run ci # to verify build is green before starting
 
 - Execute `npm run test` in `$PROJECT` to verify test scaffolds compile
 
-### Step 3/7 — Define Contracts
+### Step 3/6 — Define Contracts
 
 **Goal:** Define types and interfaces before implementation.
 
@@ -193,7 +191,7 @@ npm run ci # to verify build is green before starting
 
 - Execute `npm run lint` in `$PROJECT` to verify types compile
 
-### Step 4/7 — Implement Core Functions and Tests
+### Step 4/6 — Implement Core Functions and Tests
 
 **Goal:** Implement the core functions and their tests following the pseudo-code.
 
@@ -223,25 +221,30 @@ npm run ci # to verify build is green before starting
 
 - Execute `npm run test` in `$PROJECT` to verify core functions and tests pass
 
-### Step 5/7 — Implement pull, push, sync Commands and Tests
+### Step 5/6 — Implement pull, push, sync Commands and Tests
 
 **Goal:** Implement the command handlers and their tests.
 
 **Instructions:**
 
+- RULE: **Every executed operation is logged** — pull, push, and sync must each log their successes and failures to the Operations Report (following the `createPushSuccess` / `createPushFailure` factory patterns). No operation is done silently.
+
 1. Create `src/commands/pull/runPull.ts` following the pattern from `clone/runClone.ts`:
    - Scan all checkouts
    - For each checkout: if clean and behind, pull
+   - Log each pull success/failure to the Operations Report
    - Present Checkout Report + Operations Report
    - Implement tests in `src/commands/pull/runPull.test.ts` for all 4 BDD scenarios
 2. Create `src/commands/push/runPush.ts` following the pattern from `clone/runClone.ts`:
    - Scan all checkouts
    - For each checkout: if clean and ahead, try pull first if behind, then push
+   - Log each pull and push success/failure to the Operations Report
    - Present Checkout Report + Operations Report
    - Implement tests in `src/commands/push/runPush.test.ts` for all 5 BDD scenarios
 3. Create `src/commands/sync/runSync.ts` following the pattern from `clone/runClone.ts`:
    - Scan all checkouts
    - For each checkout: if clean, pull then push
+   - Log each pull and push success/failure to the Operations Report
    - Present Checkout Report + Operations Report
    - Implement tests in `src/commands/sync/runSync.test.ts` for all 4 BDD scenarios
 
@@ -251,23 +254,7 @@ npm run ci # to verify build is green before starting
 
 - Execute `npm run test` in `$PROJECT` to verify command handlers and tests pass
 
-### Step 6/7 — Enhance sanity Command
-
-**Goal:** Enhance sanity command with workspace status and pull-if-behind.
-
-**Instructions:**
-
-1. Update `src/commands/sanity/runSanity.ts`:
-   - Scan workspace root state using `scanWorkspaceState`
-   - Present Workspace Report before Checkout Report
-   - With `--auto`: pull if behind (before pushing) if clean
-2. Update sanity command to use new `isCleanCheckout` and `pullCheckout` functions
-
-**Extra Verification commands:**
-
-- Execute `npm run test` in `$PROJECT` to verify sanity command passes tests
-
-### Step 7/7 — Wire Commands to CLI
+### Step 6/6 — Wire Commands to CLI
 
 **Goal:** Register the pull, push, sync commands in the CLI entry point.
 
@@ -310,10 +297,9 @@ Verify that:
 - The `pull` command pulls clean checkouts that are behind
 - The `push` command pushes clean checkouts that are ahead (tries pull first if behind)
 - The `sync` command pulls then pushes clean checkouts
-- The `sanity` command shows workspace status before checkout status
-- The `sanity --auto` command pulls if behind (before pushing) if clean
 - Edge cases are handled correctly (dirty checkouts, no remote, detached HEAD, merge conflicts)
-- All commands are read-only (no operations logged for pull/push/sync, only sanity --auto logs operations)
+- Every executed operation is logged — pull, push, and sync log their successes and failures to the Operations Report; nothing is done silently
+- The `sanity` command is NOT modified — workspace status and `--auto` pull belong to the `sanity-enhancement` commit
 - All BDD scenarios from `architecture/commands.md` pass
 - **No `it.todo()` tests remain** — all tests must be implemented
 - **All test files follow one-function-per-file pattern**
