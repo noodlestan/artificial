@@ -4,6 +4,7 @@ import { presentCheckoutReport } from '../../private/present/presentCheckoutRepo
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
 import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
 import type { RepositoryRecord } from '../../private/records/types';
+import { scanAllCheckoutsStates } from '../../private/scan/scanAllCheckoutsStates';
 import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
 import type { Checkout } from '../../private/store/createCheckout';
 import { createCheckout } from '../../private/store/createCheckout';
@@ -51,7 +52,7 @@ export async function cloneSpecific(
 		await cloneIfMissing(ctx, existing);
 		processedCheckout = await scanCheckoutState(ctx, existing);
 	}
-
+	scanAllCheckoutsStates(ctx);
 	presentCheckoutReport(ctx, [processedCheckout]);
 	presentOperationsReport(ctx.log);
 }
