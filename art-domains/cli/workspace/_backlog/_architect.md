@@ -44,11 +44,9 @@ The Noodlestan ecosystem spans multiple independent repositories (`artificial`, 
 
 Complete the workspace CLI with remaining commands and infrastructure.
 
-**Now Fixing:** `plan-fix-repo-command-issues` — path resolution fails for many packages, npm info noise, version display issues, checkout name resolution. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
+**Now Fixing:** `plan-implement-pull-push-sync` — pull, push, sync commands. See `_backlog/4-next/plan-implement-pull-push-sync/plan.md`.
 
-**Later:** `pull`, `push`, `sync` commands — see `_backlog/4-now/plan-implement-pull-push-sync/plan.md`.
-
-**Even later:** `link`, `links`, `unlink`, `publish`.
+**Later:** `link`, `links`, `unlink`, `publish`.
 
 ## Follow-ups
 

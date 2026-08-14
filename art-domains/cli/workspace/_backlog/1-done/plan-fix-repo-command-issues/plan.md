@@ -65,7 +65,7 @@ This plan derives from a direct user request (bug fixes), not from task files. N
 - Updated test to verify "npm info failed" is NOT shown in output
 - Updated pseudo-code to match implementation
 
-## Feedbacke
+## Feedback
 
 ### investigate-checkout-name-resolution (delegatee)
 

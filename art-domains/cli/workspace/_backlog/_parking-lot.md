@@ -29,10 +29,12 @@ None current.
 ### ACTIONABLE
 
 - **Fix `--version` showing stale version** — `npm run workspace -- --version` shows `0.0.9` but package is at `0.0.14`. Investigate why version is not being read from package.json correctly.
-- **Fix repo command issues** — path resolution fails for many packages, npm info noise, version display issues. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
+- **Implement checkout name resolution code fix** — `resolveCheckoutByName` is designed in `architecture/_pseudo.md` (commit `040b07e`) but `src/commands/repo/runRepo.ts` still calls `getCheckoutByName` directly; the `repo` command still doesn't accept checkout names.
 - **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
 
 ### PENDING
+
+- **Release workspace-cli changes** — CHANGELOG + `package.json` version bump for `plan-fix-repo-command-issues` changes not yet released (plan archived to `_backlog/1-done/`). Run `archive plans` / `release plans` in backlog-manager mode.
 
 - **Formalize Publishing Workflow** — formalize the publish-then-symlink pattern into a `Workflow: Publishing` resource. Define agent modes, skills (`publishing-workflow`), and commands. Integration with plan files: when a plan reaches `DONE` status, the publishing workflow identifies what needs publishing. Feeds off `_backlog/1-done/`. Related to `$WORKSPACE/.agents/domains/changelogs/` — publishing triggers changelog generation.
 
