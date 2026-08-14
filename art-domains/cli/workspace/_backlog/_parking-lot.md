@@ -35,7 +35,7 @@ None current.
 
 ### PENDING
 
-- **Release workspace-cli changes** — CHANGELOG + `package.json` version bump for `plan-fix-repo-command-issues` changes not yet released (plan archived to `_backlog/1-done/`). Run `archive plans` / `release plans` in backlog-manager mode.
+- **Injectable Presentation** — Testing command usage of presentation layer requires setup mocking or assertion on presenters. Consider refactoring presentation to make it injectable. Configuration and the strategy pattern would go a long way here.
 
 - **Formalize Publishing Workflow** — formalize the publish-then-symlink pattern into a `Workflow: Publishing` resource. Define agent modes, skills (`publishing-workflow`), and commands. Integration with plan files: when a plan reaches `DONE` status, the publishing workflow identifies what needs publishing. Feeds off `_backlog/1-done/`. Related to `$WORKSPACE/.agents/domains/changelogs/` — publishing triggers changelog generation.
 

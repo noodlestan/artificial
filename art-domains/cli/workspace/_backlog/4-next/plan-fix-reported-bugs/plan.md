@@ -14,18 +14,15 @@ Fix bugs reported for `@art-domains/workspace-cli`. Source of work: bugs capture
 
 ## Bug Format
 
-Every bug entry MUST follow this shape (the first bug below is the example):
+Every bug entry MUST follow this shape (see the example in `plan__bugs.md`):
 
 1. **Scenario / Expected / Happened** — reproduce steps, expected behaviour, actual behaviour (with evidence when available).
 2. **Description** — the short bug description in one sentence.
 
-## Source Tasks
+## Sources of work
 
+- Plan attachment: `plan__bugs.md`
 - `_backlog/_parking-lot.md` → BUGS table.
-- Architect sessions capturing bugs from other sessions (long-running).
-- [Taken from Architect Briefing: Workspace CLI](_backlog/_architect.md) → Milestone 1.
-
-All Consolidated in the below "## Bugs Section".
 
 ## Mandatory Reading
 
@@ -34,18 +31,6 @@ All Consolidated in the below "## Bugs Section".
 - `architecture/_pseudo.md` → `### Command: clone` and `### Function: scanAllCheckoutsStates`.
 - `architecture/context-model.md` — `WorkspaceContext`, `CheckoutStore`, scanning.
 - `$WORKSPACE/.agents/domains/plans/definitions/index.md` — plan and instruction definitions.
-
-## Bugs
-
-### Bug: `clone` presents Checkout Report without scanning checkouts
-
-**Scenario:** On a workspace with recorded checkouts, run `npm run workspace clone artificial` (fresh workspace; checkouts recorded, not yet scanned).
-
-**Expected:** After cloning, the Checkout Report reflects the scanned git state of checkouts on disk — states populated for cloned checkouts, uncloned checkouts not presented as scanned.
-
-**Happened:** The Checkout Report listed all 9 recorded checkouts (Artificial, Conventions, No Comply, Projects, Purrception, Purrpose, Purrtrait, Terraform, Workspace Tooling) with blank `states` (`-`) — the report was presented straight from the store without any git scan.
-
-**Description:** `clone` presents the Checkout Report straight from the store without scanning checkouts, listing every recorded checkout with blank states instead of their actual git state.
 
 ## Setup
 
@@ -62,9 +47,19 @@ If any of these fail, resolve the issue before proceeding with implementation.
 
 ## Iterations
 
-### `fix-clone-scan-before-report` - `DRAFT`
+### `fix-clone-scan-before-report` - `COMMITTED`
+
+**Bug:** `clone` presents Checkout Report without scanning checkouts captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): scan checkouts before presenting clone report`
+
+**Commit:** `b185ec1` — `fix(workspace-cli): in clone specifi use case, scan checkouts (only the cloned checkout is hydrated) before presenting checkout report`
+
+**Feedback:**
+
+- Fix landed in `src/commands/clone/cloneSpecific.ts` — the `clone <repo>` path only. `cloneStatus.ts` already scans; `cloneAll.ts` (`clone --all`) still presents the Checkout Report without scanning — see Follow ups.
+- Commit message deviated from the blueprint (different wording, typo "specifi").
+- No test added — no mocks exist for presenters (see `plan__bugs.md` Test field and parking lot PENDING "Injectable Presentation").
 
 **Responsibility:** In `src/commands/clone/runClone.ts`, call `scanAllCheckoutsStates(ctx)` after hydration (and after cloning) so the Checkout Report reflects scanned git state — mirroring the `sanity` command flow. Applies to all three paths: `clone --all`, `clone <repo>`, and `clone` (status).
 
@@ -74,7 +69,7 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Extraneous directory under the checkouts path → surfaced in the Extraneous Report, not as a scanned checkout.
 - Scan failure → must not break the clone report; log/skip per existing scan behaviour.
 
-**Tests:** tests first, reproducing the bug (recorded-but-uncloned checkout, clean cloned checkout) and asserting states are populated; no `it.todo()` left at the end (lesson from `plan-implement-pull-push-sync`).
+**Tests:** tests first, reproducing the bug (recorded-but-uncloned checkout, clean cloned checkout) and asserting states are populated.
 
 **Pseudo:** `architecture/_pseudo.md` → `### Function: scanAllCheckoutsStates`.
 
@@ -103,10 +98,11 @@ All steps MUST pass. No `it.todo()` tests may remain.
 
 This DRAFT is a long-running bug-capture and fix plan. Two roles:
 
-**Capture (long-running session):** append bugs captured from other sessions under `## Bugs`, always in the **Bug Format** above (scenario/expected/happened + one-sentence description). Update the `_architect.md` → Milestone 1 bug list when the plan grows.
+**Capture (long-running session):** append bugs captured from other sessions to `plan__bugs.md`, always in the **Bug Format** declared there (scenario/expected/happened + one-sentence description). Update the `_architect.md` → Milestone 1 bug list when the plan grows.
 
 **Refine:** when bugs accumulate, refine this DRAFT into a READY plan (write-plan skill), one fix iteration per bug, generate implementation instructions, and hand off for delegation.
 
 ## Follow ups
 
+- Verify the `clone --all` path: `cloneAll.ts` still presents the Checkout Report without scanning — the fix landed only in `cloneSpecific.ts`.
 - Add bugs analysed but rejected for this plan back to `_backlog/_parking-lot.md`.
