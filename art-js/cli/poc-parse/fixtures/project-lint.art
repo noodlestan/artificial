@@ -1,0 +1,96 @@
+# Module
+
+## Package Dependency: ESLint
+
+**Canonical Name:** `eslint`
+
+**Purpose:** JavaScript linter.
+
+**Version:** `8.57.1`
+
+## Package Dependency: Prettier
+
+**Canonical Name:** `prettier`
+
+**Purpose:** Code formatter.
+
+**Version:** `3.8.4`
+
+## Package Dependency: ESLint Config Standard
+
+**Canonical Name:** `eslint-config-standard`
+
+**Purpose:** Standard ESLint config.
+
+**Version:** `17.1.0`
+
+## Package Dependency: ESLint Plugin Import
+
+**Canonical Name:** `eslint-plugin-import`
+
+**Purpose:** Import rules for ESLint.
+
+**Version:** `2.32.0`
+
+## Package Dependency: ESLint Plugin JSX A11y
+
+**Canonical Name:** `eslint-plugin-jsx-a11y`
+
+**Purpose:** Accessibility rules for JSX.
+
+**Version:** `6.10.2`
+
+## Package Dependency: ESLint Plugin MDX
+
+**Canonical Name:** `eslint-plugin-mdx`
+
+**Purpose:** MDX support for ESLint.
+
+**Version:** `3.8.1`
+
+## Package Dependency: ESLint Plugin Prettier
+
+**Canonical Name:** `eslint-plugin-prettier`
+
+**Purpose:** Run Prettier as ESLint rule.
+
+**Version:** `5.5.6`
+
+## Package Dependency: ESLint Plugin Solid
+
+**Canonical Name:** `eslint-plugin-solid`
+
+**Purpose:** SolidJS rules for ESLint.
+
+**Version:** `0.14.5`
+
+## Package Dependency: Noodlestan ESLint Config
+
+**Canonical Name:** `@noodlestan/eslint-config`
+
+**Purpose:** Shared ESLint configuration.
+
+**Version:** `0.0.7`
+
+## Package Dependency: TypeScript ESLint Plugin
+
+**Canonical Name:** `@typescript-eslint/eslint-plugin`
+
+**Purpose:** TypeScript rules for ESLint.
+
+**Version:** `8.11.0`
+
+## Package Dependency Set: Root Lint
+
+**Dependencies:**
+
+- Package Dependency: ESLint
+- Package Dependency: Prettier
+- Package Dependency: ESLint Config Standard
+- Package Dependency: ESLint Plugin Import
+- Package Dependency: ESLint Plugin JSX A11y
+- Package Dependency: ESLint Plugin MDX
+- Package Dependency: ESLint Plugin Prettier
+- Package Dependency: ESLint Plugin Solid
+- Package Dependency: Noodlestan ESLint Config
+- Package Dependency: TypeScript ESLint Plugin

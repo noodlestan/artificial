@@ -1,0 +1,85 @@
+# Module: Language
+
+**Purpose:** Decisions about the art language itself — what it is for, its scope, and its syntax/semantics model.
+
+## Decision: Language Spec First Scope
+
+**Status:** Adopted
+
+**Context:** The project had several candidate scopes (tasks domain, language spec, tooling). Work on all of them at once would spread effort before the core was proven; the tasks domain was only ever an example use case.
+
+**Decision:** The language spec (`art-js/spec/`) is the first scope and the first test case for the bundling pipeline. Work on any other domain is deferred until the spec and pipeline are proven.
+
+**Consequences:** A spec content package (`@art-js/artificials-spec`) is created before pipeline implementation.
+
+## Decision: Two Main Use Cases
+
+**Status:** Adopted
+
+**Context:** Art could be positioned in many ways; without a defined core, new candidates (drift-checks, etc.) keep expanding scope and diluting design.
+
+**Decision:** Art has two main use cases: (1) generating agent instructions, and (2) acting as a single source of truth for declarations that are both machine-readable and human/agent-readable. Everything else (context minimisation, fewer contradictions, automated SoT→instructions, portability) is a benefit of these two, not a separate use case.
+
+## Decision: Closed Syntax, Open Semantics
+
+**Status:** Adopted
+
+**Context:** The grammar needs an extensibility model without becoming an ouroboros (spec reading spec). Extensibility at the grammar layer would fragment parsing.
+
+**Decision:** Syntax is closed — implemented in TypeScript, no grammar plugins. Semantics are open and data-driven, extensible via `.art` modules. The core-in-`.art` stays as a testable spec.
+
+## Decision: Any Markdown is Valid `.art`
+
+**Status:** Adopted
+
+**Context:** Art sources and plain markdown coexist in the same tree; a hard file-type wall would make existing markdown invalid and block incremental adoption.
+
+**Decision:** Any markdown file is a valid `.art` file. Files not authored in art require more inference to read correctly, but are never invalid.
+
+## Decision: Construct Containment and the NaturalBlock Catch-all
+
+**Status:** Adopted
+
+**Context:** The grammar's containment model was underspecified: FieldBlock values terminated at the next FieldBlock, FieldInline, or InlineDeclaration but not at a SectionBlock, and "arbitrary content" rules allowed circular nesting (a FieldBlock containing a SectionBlock or a nested FieldBlock) that carries no semantic meaning. Plain Markdown content also lacked an explicit classification home.
+
+**Decision:** Containment is explicit. SectionBlocks MAY nest (heading level drives nesting). A FieldBlock value terminates at the next FieldBlock, FieldInline, InlineDeclaration, SectionBlock, or the end of the enclosing SectionBlock, and MUST NOT contain a SectionBlock or a nested FieldBlock. NaturalBlock is the catch-all classification: any content that does not match another construct is a NaturalBlock — realising "Any Markdown is Valid `.art`".
+
+**Consequences:** Termination signals become unambiguous for the construct-stack parser; classification is total (every token stream classifies into a record); per-position content unions in the record schema mirror the containment model. (construct-stack pattern: see `_research.md`)
+
+## Decision: Create an accessory Template Language
+
+**Status:** Proposal
+
+**Context:** Domain records and other artefacts are expressed as markdown files. Rendering them into per-consumer projections requires templates that carry both deterministic operations (iteration over data sets, field interpolation) and natural-language instructions agents can process; without a dedicated template language that logic leaks into hand-maintained code or duplicated outputs.
+
+**Decision:** Design `.tart` as a template engine with flat, inline directive syntax, so `.tart` sources stay readable and editable in any markdown-capable editor. Generators compile `.tart` templates into the markdown projections consumers read.
+
+## Decision: SectionBlock as the Resource Declaration Carrier
+
+**Status:** Proposal
+
+**Context:** The SectionBlock construct (`# Kind: Name` + tags + content) is what turns a markdown heading into a named, kinded resource, but the grammar spec described it only as "a named structural section" — opaque, and hiding the connection between the grammar and modules layers. Without an explicit statement of its role, the Closed Syntax, Open Semantics split reads as abstract: it is unclear which parts of a declaration the language fixes and which parts domains provide. The programming-language precedent makes the intended model obvious in hindsight: `class` is fixed syntax; the meaning of `class Task` comes from the program. Art needs the equivalent — a fixed construct form whose kinds are open.
+
+**Decision:** The SectionBlock is the resource declaration carrier: `# Kind: Name` declares a resource of that kind with that name. The construct's form (optional kind, name, tags, content) is fixed by the grammar — closed syntax. The meaning of each kind is provided by the structures, the domain declarations in `.art` — open semantics. The grammar and modules layers meet exactly here.
+
+**Consequences:** The parser captures declarations generically: it needs to know only that a resource of kind K named N is declared, never what K means. Domain semantics (fields, constraints, routines) attach to kinds through structures, keeping the core grammar frozen. The construct spec must state this purpose so the grammar-to-modules connection is explicit rather than implied.
+
+## Decision: Projection-Aligned Tags
+
+**Status:** Adopted
+
+**Context:** Tags target content per projection but had drifted (`#curator`, `#hoist`), so tag semantics and the projection vocabulary diverged.
+
+**Decision:** Tags are aligned to the four projections: `#author`, `#generator`, `#operator`, `#indexer`. Tags determine inclusion, exclusion, or transformation of content per projection.
+
+**Consequences:** The tag set is constrained by the projection taxonomy (see `distribution.art`).
+
+## Decision: Parser Containment Model
+
+**Status:** Adopted
+
+**Context:** The grammar spec files described containment loosely. The mdast-based parser implements explicit containment rules that need to be reflected in the spec.
+
+**Decision:** SectionBlocks nest by heading level. FieldBlock values terminate at the next FieldBlock, SectionBlock, or end of enclosing SectionBlock. NaturalBlock is the catch-all for any unclassified content. Tags are detected in prose via regex, not in code blocks.
+
+**Consequences:** The spec files now match the parser implementation. The containment model is unambiguous for both parsers and spec readers.

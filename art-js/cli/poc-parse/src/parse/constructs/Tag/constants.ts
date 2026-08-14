@@ -1,1 +1,1 @@
-export const TAG_PATTERN = /\(#([\w-]+)\)/;
+export const TAG_PATTERN = /\(#([\w-]+)\)/g;

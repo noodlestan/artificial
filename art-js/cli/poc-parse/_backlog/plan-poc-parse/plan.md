@@ -164,13 +164,17 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/split-factory-modules__report.md`
 
-### `apply-conventions-and-extend-test-coverage` - `PLANNED`
+### `apply-conventions-and-extend-test-coverage` - `COMMITTED`
 
-**Commit Message:** `refactor(poc-parse): apply conventions and extend test coverage`
+**Commit Message:** `poc-parse: apply conventions and extend test coverage`
 
 **Instructions File:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/apply-conventions-and-extend-test-coverage.md`
 
-**Scope:** Prepare POC source code for migration to parser package.
+**Evidence:** commit `738eb44`; artefacts — added real-world fixtures (`fixtures/parser.art`, `fixtures/configuration.art`, `fixtures/README.md`), extracted types to `src/parse/framework/types.ts`, extracted constants to per-construct `constants.ts` files, extracted helpers to `private/` directories (`FieldBlock/private/isFieldStrong.ts`, `SectionBlock/private/extractTags.ts`), created barrel `index.ts` files for each construct, created `src/parse/config.ts` with `ParserConfig` and `createDefaultConfig`, refactored `src/parse/index.ts` to re-export from barrels. `npm run lint` exit 0; `npm run ci` passes; all 5 fixtures produce deterministic output; tag detection verified across fixtures.
+
+**Report:** `repos/artificial/art-js/cli/poc-parse/_backlog/plan-poc-parse/instructions/apply-conventions-and-extend-test-coverage__report.md`
+
+**Feedback:** Instructions were clear and well-structured. One note: the instruction suggested moving `ParserConfig` to `types.ts`, but this would create circular dependencies since it references `ConstructPreProcessor`, `ConstructFactory`, and `ConstructHandler` from construct files. Placing it in `config.ts` was the correct resolution.
 
 ## Follow ups
 

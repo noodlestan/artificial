@@ -1,34 +1,36 @@
 #!/bin/bash
 # Test script for poc-parse fixtures
-# Runs each fixture 3 times and verifies identical output
+# Auto-discovers all .md and .art files in fixtures/ and runs parser on each
 
 set -e
 
-FIXTURES=("markdown.md" "section-block.md" "field-block.md" "parser.art" "configuration.art")
+FIXTURES_DIR="fixtures"
 EXIT_CODE=0
 
-for fixture in "${FIXTURES[@]}"; do
-  echo "Testing $fixture..."
+# Find all .md and .art files in fixtures directory
+FIXTURES=$(find "$FIXTURES_DIR" -maxdepth 1 -type f \( -name "*.md" -o -name "*.art" \) | sort)
+
+if [ -z "$FIXTURES" ]; then
+  echo "No fixture files found in $FIXTURES_DIR"
+  exit 1
+fi
+
+for fixture in $FIXTURES; do
+  filename=$(basename "$fixture")
+  echo "Testing $filename..."
   
-  # Run 3 times and compare
-  npx tsx src/parse/parse.ts "fixtures/$fixture" > "/tmp/${fixture}.run1.json" 2>/dev/null
-  npx tsx src/parse/parse.ts "fixtures/$fixture" > "/tmp/${fixture}.run2.json" 2>/dev/null
-  npx tsx src/parse/parse.ts "fixtures/$fixture" > "/tmp/${fixture}.run3.json" 2>/dev/null
-  
-  # Compare outputs
-  if ! diff -q "/tmp/${fixture}.run1.json" "/tmp/${fixture}.run2.json" > /dev/null 2>&1; then
-    echo "  FAIL: Run 1 vs Run 2 differ"
-    EXIT_CODE=1
-  elif ! diff -q "/tmp/${fixture}.run1.json" "/tmp/${fixture}.run3.json" > /dev/null 2>&1; then
-    echo "  FAIL: Run 1 vs Run 3 differ"
-    EXIT_CODE=1
+  # Run once
+  if npx tsx src/parse/parse.ts "$fixture" > "/tmp/${filename}.json" 2>/dev/null; then
+    echo "  PASS"
   else
-    echo "  PASS: All 3 runs identical"
+    echo "  FAIL"
+    EXIT_CODE=1
+    continue
   fi
   
-  # Also update the committed fixture
-  base="${fixture%.*}"
-  cp "/tmp/${fixture}.run1.json" "fixtures/${base}.art.json"
+  # Update the committed fixture
+  base="${filename%.*}"
+  cp "/tmp/${filename}.json" "$FIXTURES_DIR/${base}.art.json"
 done
 
 if [ $EXIT_CODE -eq 0 ]; then

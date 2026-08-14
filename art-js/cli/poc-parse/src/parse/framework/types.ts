@@ -15,6 +15,6 @@ export interface VisitContext {
 
 export interface ConstructFactory {
 	detect(node: MdastNode, context: VisitContext): boolean;
-	create(node: MdastNode, context: VisitContext): Construct;
+	create(node: MdastNode, context: VisitContext): Construct | Construct[];
 	shouldVisit: boolean;
 }

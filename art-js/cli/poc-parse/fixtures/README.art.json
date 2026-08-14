@@ -1,0 +1,350 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "SectionBlock",
+      "name": "Parser Fixtures",
+      "children": [
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
+        },
+        {
+          "construct": "NaturalBlock",
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Test fixtures for the poc-parse parser.",
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 1,
+                  "offset": 19
+                },
+                "end": {
+                  "line": 3,
+                  "column": 40,
+                  "offset": 58
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 19
+            },
+            "end": {
+              "line": 3,
+              "column": 40,
+              "offset": 58
+            }
+          },
+          "value": "Test fixtures for the poc-parse parser."
+        },
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Fixture Files",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "list",
+              "ordered": false,
+              "start": null,
+              "spread": false,
+              "children": [
+                {
+                  "construct": "NaturalBlock",
+                  "value": "`markdown.md` — Standard markdown syntax (paragraphs, lists, code, blockquotes, tables, tags in prose)",
+                  "position": {
+                    "start": {
+                      "line": 7,
+                      "column": 3,
+                      "offset": 80
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 105,
+                      "offset": 182
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "value": "`section-block.md` — SectionBlock constructs with tags",
+                  "position": {
+                    "start": {
+                      "line": 8,
+                      "column": 3,
+                      "offset": 185
+                    },
+                    "end": {
+                      "line": 8,
+                      "column": 57,
+                      "offset": 239
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "value": "`field-block.md` — FieldBlock constructs with various value types",
+                  "position": {
+                    "start": {
+                      "line": 9,
+                      "column": 3,
+                      "offset": 242
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 68,
+                      "offset": 307
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "value": "`parser.art` — Real-world ADR with multiple Decision sections and fields",
+                  "position": {
+                    "start": {
+                      "line": 10,
+                      "column": 3,
+                      "offset": 310
+                    },
+                    "end": {
+                      "line": 10,
+                      "column": 75,
+                      "offset": 382
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "value": "`configuration.art` — Smaller ADR example",
+                  "position": {
+                    "start": {
+                      "line": 11,
+                      "column": 3,
+                      "offset": 385
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 44,
+                      "offset": 426
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 7,
+                  "column": 1,
+                  "offset": 78
+                },
+                "end": {
+                  "line": 11,
+                  "column": 44,
+                  "offset": 426
+                }
+              },
+              "value": "- `markdown.md` — Standard markdown syntax (paragraphs, lists, code, blockquotes, tables, tags in prose)\n- `section-block.md` — SectionBlock constructs with tags\n- `field-block.md` — FieldBlock constructs with various value types\n- `parser.art` — Real-world ADR with multiple Decision sections and fields\n- `configuration.art` — Smaller ADR example"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            }
+          ],
+          "depth": 2,
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 1,
+              "offset": 60
+            },
+            "end": {
+              "line": 5,
+              "column": 17,
+              "offset": 76
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Generated Files",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "list",
+              "ordered": false,
+              "start": null,
+              "spread": false,
+              "children": [
+                {
+                  "construct": "NaturalBlock",
+                  "value": "`*.art.json` — Parser output for each fixture (auto-generated by test-fixtures.sh)",
+                  "position": {
+                    "start": {
+                      "line": 15,
+                      "column": 3,
+                      "offset": 450
+                    },
+                    "end": {
+                      "line": 15,
+                      "column": 85,
+                      "offset": 532
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 15,
+                  "column": 1,
+                  "offset": 448
+                },
+                "end": {
+                  "line": 15,
+                  "column": 85,
+                  "offset": 532
+                }
+              },
+              "value": "- `*.art.json` — Parser output for each fixture (auto-generated by test-fixtures.sh)"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            }
+          ],
+          "depth": 2,
+          "position": {
+            "start": {
+              "line": 13,
+              "column": 1,
+              "offset": 428
+            },
+            "end": {
+              "line": 13,
+              "column": 19,
+              "offset": 446
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Running Tests",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "code",
+              "lang": "bash",
+              "meta": null,
+              "value": "```bash\ncd art-js/cli/poc-parse\nnpm run ci\n# or directly:\nbash scripts/test-fixtures.sh\n```",
+              "position": {
+                "start": {
+                  "line": 19,
+                  "column": 1,
+                  "offset": 552
+                },
+                "end": {
+                  "line": 24,
+                  "column": 4,
+                  "offset": 643
+                }
+              }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The test script runs each fixture 3 times and verifies identical output (deterministic parsing).",
+                  "position": {
+                    "start": {
+                      "line": 26,
+                      "column": 1,
+                      "offset": 645
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 97,
+                      "offset": 741
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 26,
+                  "column": 1,
+                  "offset": 645
+                },
+                "end": {
+                  "line": 26,
+                  "column": 97,
+                  "offset": 741
+                }
+              },
+              "value": "The test script runs each fixture 3 times and verifies identical output (deterministic parsing)."
+            }
+          ],
+          "depth": 2,
+          "position": {
+            "start": {
+              "line": 17,
+              "column": 1,
+              "offset": 534
+            },
+            "end": {
+              "line": 17,
+              "column": 17,
+              "offset": 550
+            }
+          }
+        }
+      ],
+      "depth": 1,
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 18,
+          "offset": 17
+        }
+      }
+    }
+  ]
+}

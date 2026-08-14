@@ -15,7 +15,7 @@ import {
 import type { ConstructHandler, ParserConfig, VisitContext } from './index';
 
 interface HandleResult {
-	record: Construct;
+	records: Construct[];
 	handler: ConstructHandler | null;
 	shouldVisit: boolean;
 }
@@ -37,7 +37,7 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 				const record = preProcessor.preProcess(node, currentContext);
 				if (record) {
 					const handler = config.handlers.find(h => h.canHandle(record)) ?? null;
-					return { record, handler, shouldVisit: false };
+					return { records: [record], handler, shouldVisit: false };
 				}
 			}
 		}
@@ -50,10 +50,12 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 		const factory = getFactory(node, currentContext, config.factories);
 		if (!factory) return null;
 
-		const record = factory.create(node, currentContext);
-		const handler = config.handlers.find(h => h.canHandle(record)) ?? null;
+		const result = factory.create(node, currentContext);
+		const records = Array.isArray(result) ? result : [result];
+		const handler =
+			records.length > 0 ? (config.handlers.find(h => h.canHandle(records[0])) ?? null) : null;
 
-		return { record, handler, shouldVisit: factory.shouldVisit };
+		return { records, handler, shouldVisit: factory.shouldVisit };
 	}
 
 	function handleNaturalBlock(node: Node): typeof SKIP | undefined {
@@ -71,18 +73,20 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 
 		const preResult = tryPreProcessors(node);
 		if (preResult) {
-			const { record, handler } = preResult;
+			const { records, handler } = preResult;
 
-			if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
+			for (const record of records) {
+				if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
 
-			if (handler) {
-				currentContext = handler.handle(record, node, currentContext);
-			} else {
-				currentContext.push(record as BlockContent);
-			}
+				if (handler) {
+					currentContext = handler.handle(record, node, currentContext);
+				} else {
+					currentContext.push(record as BlockContent);
+				}
 
-			if (record.position) {
-				updateLastEnd(record.position.end);
+				if (record.position) {
+					updateLastEnd(record.position.end);
+				}
 			}
 
 			return SKIP;
@@ -90,18 +94,20 @@ export function buildDocument(markdown: string, config: ParserConfig): Document 
 
 		const factoryResult = maybeHandleFactory(node);
 		if (factoryResult) {
-			const { record, handler, shouldVisit } = factoryResult;
+			const { records, handler, shouldVisit } = factoryResult;
 
-			if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
+			for (const record of records) {
+				if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
 
-			if (handler) {
-				currentContext = handler.handle(record, node, currentContext);
-			} else {
-				currentContext.push(record as BlockContent);
-			}
+				if (handler) {
+					currentContext = handler.handle(record, node, currentContext);
+				} else {
+					currentContext.push(record as BlockContent);
+				}
 
-			if (record.position) {
-				updateLastEnd(record.position.end);
+				if (record.position) {
+					updateLastEnd(record.position.end);
+				}
 			}
 
 			return shouldVisit ? undefined : SKIP;

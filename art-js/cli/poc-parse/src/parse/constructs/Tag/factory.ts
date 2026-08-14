@@ -2,7 +2,6 @@ import type { Text } from 'mdast';
 
 import { cleanPosition } from '../../framework/cleanPosition';
 import type { ConstructFactory } from '../../framework/types';
-import type { Tag } from '../../types';
 
 import { TAG_PATTERN } from './constants';
 
@@ -12,13 +11,13 @@ export const tagFactory: ConstructFactory = {
 	},
 	create(node) {
 		const text = node as Text;
-		const match = text.value.match(TAG_PATTERN);
-		const tag: Tag = {
+		TAG_PATTERN.lastIndex = 0; // Reset before matchAll since test() advances it
+		const matches = [...text.value.matchAll(TAG_PATTERN)];
+		return matches.map(match => ({
 			construct: 'Tag',
-			name: match ? match[1] : '',
-		};
-		tag.position = cleanPosition(text.position);
-		return tag;
+			name: match[1],
+			position: cleanPosition(text.position),
+		}));
 	},
 	shouldVisit: false,
 };
