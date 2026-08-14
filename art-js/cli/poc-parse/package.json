@@ -29,7 +29,7 @@
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix",
     "build:clean": "rm -rf dist",
-    "test": "bash scripts/test-fixtures.sh",
+    "test": "npx tsx scripts/test-fixtures.ts",
     "ci": "npm run lint && npm run test"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 {
   "extends": "@noodlestan/tsconfig/cli/tsconfig.json",
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "scripts/**/*"],
   "exclude": ["**/*.spec.ts"]
 }
