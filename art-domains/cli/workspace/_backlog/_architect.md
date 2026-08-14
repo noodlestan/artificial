@@ -44,9 +44,18 @@ The Noodlestan ecosystem spans multiple independent repositories (`artificial`, 
 
 Complete the workspace CLI with remaining commands and infrastructure.
 
+**Fixing (top priority):** `plan-fix-reported-bugs` — bug fixes sourced from reported bugs (first bug: `clone` presents Checkout Report without scanning checkouts). See `_backlog/4-next/plan-fix-reported-bugs/plan.md`.
+
 **Now Fixing:** `plan-implement-pull-push-sync` — pull, push, sync commands. See `_backlog/4-next/plan-implement-pull-push-sync/plan.md`.
 
-**Later:** `link`, `links`, `unlink`, `publish`.
+**In Parallel (DRAFT plans ready for architect refinement):**
+
+- `plan-implement-link` — `link <location> <package> [<target>]`; see `_backlog/4-next/plan-implement-link/plan.md`.
+- `plan-implement-links` — `links`; see `_backlog/4-next/plan-implement-links/plan.md`.
+- `plan-implement-unlink` — `unlink <location> <package> [<target>]`; see `_backlog/4-next/plan-implement-unlink/plan.md`.
+- `plan-implement-publish` — `publish [--auto]`; depends on `pull`/`push` from `plan-implement-pull-push-sync`; see `_backlog/4-next/plan-implement-publish/plan.md`.
+
+Each DRAFT plan embeds a self-contained **Architect Prompt** — copy it to launch one architect per slice.
 
 ## Follow-ups
 
