@@ -15,11 +15,11 @@ Migrate poc-parse into proper packages, verify lossless roundtrip (parse `.art` 
 
 ## Phase Plans
 
-| Phase                   | Plan                               | Status      |
-| ----------------------- | ---------------------------------- | ----------- |
-| 1 — Bootstrap packages  | `plan-bootstrap-packages/plan.md`  | `PREPARING` |
-| 2 — Migrate and verify  | `plan-migrate-and-verify/plan.md`  | `PREPARING` |
-| 3 — Archive and publish | `plan-archive-and-publish/plan.md` | `PREPARING` |
+| Phase                   | Plan                                   | Status      |
+| ----------------------- | -------------------------------------- | ----------- |
+| 1 — Bootstrap packages  | `plan-bootstrap-packages/plan.md`      | `PREPARING` |
+| 2 — Migrate and verify  | `plan-migrate-and-verify/plan.md`      | `PREPARING` |
+| 3 — Archive and publish | `plan-archive-poc-and-publish/plan.md` | `PREPARING` |
 
 ## Packages
 

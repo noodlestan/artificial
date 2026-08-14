@@ -1,6 +1,6 @@
 # Plan: Archive and Publish
 
-**ID:** `archive-and-publish`
+**ID:** `archive-poc-and-publish`
 
 **Status:** `PLANNED`
 
@@ -37,7 +37,6 @@ For the delegator (execution mechanics):
 
 - Mark poc-parse as `private: true` in package.json
 - Add README noting it's archived
-- Keep for reference but remove from active workspace
 
 #### `publish-v0.1.0` - `PLANNED`
 
