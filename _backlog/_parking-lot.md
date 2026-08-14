@@ -4,7 +4,7 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 
 ## ACTIONABLE
 
-- **POC Parse** — most actionable item: `art-js/cli/poc-parse/` is the current focus. See `art-js/cli/poc-parse/_backlog/_parking-lot.md` for detailed steps.
+- None current — the POC Parse spike is archived (`_backlog/1-done/plan-poc-parse/`); its learnings are integrated into the MD Art Roundtrip milestone (`_backlog/4-next/milestone-md-art-roundtrip/milestone.md`).
 
 ## pending
 

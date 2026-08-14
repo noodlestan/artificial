@@ -2,7 +2,7 @@
 
 **ID:** `poc-parse`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 

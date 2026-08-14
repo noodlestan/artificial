@@ -16,13 +16,13 @@ Short termtracker is `_parking-lot.md` (no done items there).
 
 ### POC Parse
 
-- `art-js/cli/poc-parse/_guide.md` — POC spike of the artificials parser
+- `art-js/cli/poc-parse/_guide.md` — POC spike of the artificials parser (ARCHIVED: `_backlog/1-done/plan-poc-parse/plan.md`, with `_architect.md` and `_parking-lot.md` nested as attachments)
 
 ### MD Art Roundtrip
 
 Migrate poc-parse into proper packages (`primitives`, `parser`), verify lossless roundtrip (parse `.art` → serialize back → zero diffs), archive poc-parse, and publish v0.1.0. Each commit guarantees no source change breaks the roundtrip contract. Test harnesses: fixtures in `spec/`, automation to detect diffs in `.art.json` files.
 
-- Milestone: `_backlog/4-next/plan-md-art-roundtrip/milestone-md-art-roundtrip.md`
+- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md`
 
 ### Reactive core (deferred)
 
