@@ -6,11 +6,13 @@
 
 ## Summary
 
-Fix three issues with the `repo` command:
+Fix five issues with the `repo` command:
 
 1. Path resolution fails for many packages (shows "no package.json" when files exist)
 2. npm info noise (404 errors for unpublished packages)
 3. Version display shows "-" for packages that have package.json
+4. Checkout name resolution fails (repo command doesn't accept checkout names)
+5. npm info runs even when package.json is missing (should skip entirely)
 
 ## Issues
 
@@ -48,6 +50,37 @@ Fix three issues with the `repo` command:
 **Root Cause:** Likely related to Issue 1 - if the path is wrong, the package.json can't be read.
 
 **Solution:** Fix Issue 1 first, then verify if this persists.
+
+### Issue 4: Checkout Name Resolution (Critical)
+
+**Symptom:** The repo command fails when trying to specify a checkout by name:
+
+- `npm run workspace repo "Repository: No Comply"` → fails
+- `npm run workspace repo "No Comply"` → fails
+- `npm run workspace repo no-comply` → fails
+
+**Expected Behavior:** According to `architecture/commands.md` and `architecture/_pseudo.md`, the repo command should accept checkout names and resolve them correctly. The checkout record exists at `ops/records/checkouts/no-comply.art`.
+
+**Investigation Needed:**
+
+- Check how checkout names are resolved in `runRepo.ts`
+- Verify the name matching logic (case-insensitive, with/without "Repository:" prefix)
+- Check if the issue is in name parsing or checkout lookup
+- Review existing tests to understand expected behavior
+
+**Architect Action Required:**
+
+1. **Investigate first:** Look at the code and tests to understand current behavior
+2. **Update pseudo-code:** Create new pseudo functions in `architecture/_pseudo.md` to document the checkout resolution logic
+3. **Document the fix:** Add a new `### Function: resolveCheckoutByName` section to the pseudo-code
+
+### Issue 5: npm info Runs Without package.json (UX)
+
+**Symptom:** The command shows "no package.json; npm info failed" - it tries to run npm info even when package.json doesn't exist.
+
+**Root Cause:** The logic doesn't check for package.json existence before attempting npm info.
+
+**Solution:** If package.json is missing, skip npm info entirely. Don't show "npm info failed" - just show "no package.json".
 
 ## Proposed Solutions
 
@@ -87,18 +120,49 @@ Fix three issues with the `repo` command:
 2. Add a `--verbose` flag to show more debug information
 3. Add a `--skip-npm-info` flag for development
 
+### Solution 4: Fix Checkout Name Resolution
+
+**Files to investigate:**
+
+- `src/commands/repo/runRepo.ts` - main command logic
+- `src/private/store/createCheckoutStore.ts` - checkout lookup methods
+- `architecture/_pseudo.md` - needs new pseudo functions
+
+**Steps:**
+
+1. **Investigate current behavior:** Review code and tests to understand how checkout names should be resolved
+2. **Update pseudo-code:** Add new `### Function: resolveCheckoutByName` section to `architecture/_pseudo.md`
+3. **Implement fix:** Update `runRepo.ts` to correctly resolve checkout names (case-insensitive, handle "Repository:" prefix)
+4. **Add tests:** Ensure tests cover various name formats
+
+### Solution 5: Skip npm info when package.json is missing
+
+**File:** `src/commands/repo/runRepo.ts`
+
+**Steps:**
+
+1. Check if package.json exists before attempting npm info
+2. If package.json is missing, set state to "no package.json" and skip npm info
+3. Only run npm info if package.json exists and has a version field
+4. Update state messages to be clearer: "no package.json" instead of "no package.json; npm info failed"
+
 ## Implementation Order
 
-1. **Fix path resolution** (Issue 1) - This is blocking everything else
-2. **Skip npm info for unpublished packages** (Issue 2) - Improves UX
-3. **Better error messages** (Issue 3) - Helps with debugging
+1. **Fix checkout name resolution** (Issue 4) - This is a separate investigation task that requires pseudo-code updates
+2. **Fix path resolution** (Issue 1) - This is blocking everything else
+3. **Skip npm info when package.json is missing** (Issue 5) - Improves UX and reduces noise
+4. **Skip npm info for unpublished packages** (Issue 2) - Further reduces noise
+5. **Better error messages** (Issue 3) - Helps with debugging
 
 ## Success Criteria
 
+- Checkout names are resolved correctly (with/without "Repository:" prefix, case-insensitive)
 - All packages show correct version from package.json
 - No 404 errors for unpublished packages
+- No "npm info failed" when package.json is missing
 - Clear error messages when package.json is missing
 - Command runs faster (fewer npm info calls)
+- Pseudo-code updated with new checkout resolution function
 
 ## Follow-ups
 
