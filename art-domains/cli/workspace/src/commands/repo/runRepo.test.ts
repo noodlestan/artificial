@@ -244,6 +244,6 @@ describe('repo command', () => {
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('unknown');
-		expect(output).toContain('npm info failed');
+		expect(output).not.toContain('npm info failed');
 	});
 });

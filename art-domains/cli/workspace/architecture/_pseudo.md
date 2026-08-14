@@ -197,13 +197,19 @@ repo(checkoutNames)
         for pkg in ns.packages:
           pkgPath = join(checkout.path, project.path, ns.path, pkg.path)
           version = readPackageVersion(join(pkgPath, "package.json"))   // null if missing
+          if version is null:
+            altPath = join(checkout.path, project.path, pkg.path)       // try without namespace
+            version = readPackageVersion(join(altPath, "package.json"))
+            if version is not null: pkgPath = altPath
           states = []
           if version is null:
             states.push("no package.json")
             published = null
+          else if version === "0.0.0":
+            published = null                                            // skip npm info for unpublished marker
           else:
-            published = npmInfo(pkg.canonicalName)                      // try/catch -> null
-            if published is null: published = "unknown"; states.push("npm info failed")
+            published = npmInfo(pkg.canonicalName)                      // try/catch -> null, suppress stderr
+            if published is null: published = "unknown"                 // don't add to states
           packageStates.push({
             canonicalName: pkg.canonicalName, version, published,
             branch: checkout.record.branch, directory: pkgPath, states

@@ -63,8 +63,17 @@ export async function runRepo(
 					const pkg = graph.packages.get(pkgName);
 					if (!pkg) continue;
 
-					const pkgPath = join(checkout.path, project.path, ns.path, pkg.path);
-					const pkgJsonPath = join(pkgPath, 'package.json');
+					let pkgPath = join(checkout.path, project.path, ns.path, pkg.path);
+					let pkgJsonPath = join(pkgPath, 'package.json');
+
+					if (!existsSync(pkgJsonPath)) {
+						const altPath = join(checkout.path, project.path, pkg.path);
+						const altPkgJsonPath = join(altPath, 'package.json');
+						if (existsSync(altPkgJsonPath)) {
+							pkgPath = altPath;
+							pkgJsonPath = altPkgJsonPath;
+						}
+					}
 
 					let version: string | null = null;
 					const states: string[] = [];
@@ -81,16 +90,16 @@ export async function runRepo(
 					}
 
 					let publishedVersion: string | null = null;
-					if (version !== null) {
+					if (version !== null && version !== '0.0.0') {
 						try {
 							const output = execSync(`npm info ${pkg.canonicalName} version`, {
 								encoding: 'utf-8',
 								timeout: 10000,
+								stdio: ['pipe', 'pipe', 'ignore'],
 							});
 							publishedVersion = output.trim() || null;
 						} catch {
 							publishedVersion = 'unknown';
-							states.push('npm info failed');
 						}
 					}
 
