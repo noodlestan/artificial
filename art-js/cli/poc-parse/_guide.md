@@ -7,13 +7,7 @@ POC spike of the artificials parser: a self-contained, CLI-executable package.
 Agents SHOULD scan these files for relevant clarifications when faced with ambiguity or omissions that may result from missing definitions.
 
 - `_guide.md` — this file: project overview, layout, setup, verification.
-- `$ROOT/_backlog/1-done/plan-poc-parse/plan.md` — archived POC plan; its attachments `attachments/_architect.md` and `attachments/_parking-lot.md` hold the briefing and WIP tracker.
 - `_pseudo.md` — pseudo code for context-aware visiting.
-- `$WORKSPACE/.agents/domains/plans/definitions/index.md` — plan, implementation-instruction, delegation, and report definitions.
-- `$WORKSPACE/.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
-- `$WORKSPACE/.agents/domains/plans/structures/plan__structure.md` — plan record fields and statuses.
-- `$WORKSPACE/.agents/domains/plans/templates/` — plan, instruction, and report templates.
-- `$WORKSPACE/.agents/domains/engineering/_guide.md` — working agreements and agent modes.
 
 ## Repository Layout
 

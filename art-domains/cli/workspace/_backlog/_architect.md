@@ -2,7 +2,9 @@
 
 This file tracks the forward-looking plan: why, principles, NFRs, definitions, conventions, and follow-ups.
 
-## Recommended Reading
+## Recommend Reading
+
+Agents SHOULD scan these files for relevant clarifications when faced with ambiguity or omissions that may result from missing definitions.
 
 - `architecture/index.md` — How the workspace CLI is structured, how it works, and its use cases.
 - `architecture/config.md` — The configuration system.

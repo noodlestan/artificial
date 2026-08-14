@@ -10,11 +10,6 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 - `_wip.md` — the parking lot and progress tracker — open actions, questions and blockers (no dones!).
 - `_architect.md` — the architecture — Why, What, How, Follow-ups (no code).
 - `_pseudo.md` — the function declarations — name, params, responsibility, pseudo code — entry point first, grouped by layer.
-- `$WORKSPACE/.agents/domains/plans/definitions/index.md` — plan, implementation-instruction, delegation, and report definitions.
-- `$WORKSPACE/.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
-- `$WORKSPACE/.agents/domains/plans/structures/plan__structure.md` — plan record fields and statuses.
-- `$WORKSPACE/.agents/domains/plans/templates/` — plan, instruction, and report templates.
-- `$WORKSPACE/.agents/domains/engineering/_guide.md` — working agreements and agent modes.
 
 ## Repository Layout
 

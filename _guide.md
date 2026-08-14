@@ -23,12 +23,12 @@ artisans/           — (namespace) experiments
 
 ## Projects
 
-| Project | Guide | Backlog |
-|---------|-------|---------|
-| Artificials (root) | `_guide.md` | `_backlog/` |
-| POC Parse | `art-js/cli/poc-parse/_guide.md` | `_backlog/1-done/plan-poc-parse/` (archived) |
-| Art Mantras | `artisans/apps/art-mantras/_guide.md` | `artisans/apps/art-mantras/_backlog/` |
-| Workspace CLI | `art-domains/cli/workspace/_guide.md` | `art-domains/cli/workspace/_backlog/` |
+| Project            | Guide                                 | Backlog                                      |
+| ------------------ | ------------------------------------- | -------------------------------------------- |
+| Artificials (root) | `_guide.md`                           | `_backlog/`                                  |
+| POC Parse          | `art-js/cli/poc-parse/_guide.md`      | `_backlog/1-done/plan-poc-parse/` (archived) |
+| Art Mantras        | `artisans/apps/art-mantras/_guide.md` | `artisans/apps/art-mantras/_backlog/`        |
+| Workspace CLI      | `art-domains/cli/workspace/_guide.md` | `art-domains/cli/workspace/_backlog/`        |
 
 ## Setup
 
