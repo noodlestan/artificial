@@ -154,6 +154,50 @@ Fix five issues with the `repo` command:
 4. **Skip npm info for unpublished packages** (Issue 2) - Further reduces noise
 5. **Better error messages** (Issue 3) - Helps with debugging
 
+## Commits
+
+### Commit 1: Investigate Checkout Name Resolution
+
+**Status:** `PLANNED`
+
+**Instruction:** `./instructions/investigate-checkout-name-resolution.md`
+
+**Message:** `docs(workspace-cli): document checkout name resolution logic in pseudo-code`
+
+**Scope:** Investigation task — update architecture pseudo-code with `resolveCheckoutByName` function, document findings.
+
+**Issues Addressed:** Issue 4 (Checkout Name Resolution)
+
+---
+
+### Commit 2: Skip npm info Without package.json
+
+**Status:** `PLANNED`
+
+**Instruction:** `./instructions/skip-npm-info-without-package-json.md`
+
+**Message:** `fix(workspace-cli): skip npm info when package.json is missing`
+
+**Scope:** Fix the repo command to skip `npm info` entirely when `package.json` is missing. Show only "no package.json" instead of "no package.json; npm info failed".
+
+**Issues Addressed:** Issue 5 (npm info Without package.json)
+
+---
+
+### Commit 3: Fix Path Resolution and npm Info Noise
+
+**Status:** `PLANNED`
+
+**Instruction:** `./instructions/fix-path-resolution-and-npm-noise.md`
+
+**Message:** `fix(workspace-cli): resolve package paths correctly and reduce npm info noise`
+
+**Scope:** Fix path resolution for packages, reduce npm info noise (skip for unpublished packages, suppress 404 errors), and verify version display.
+
+**Issues Addressed:** Issues 1, 2, 3 (Path Resolution, npm Info Noise, Version Display)
+
+---
+
 ## Success Criteria
 
 - Checkout names are resolved correctly (with/without "Repository:" prefix, case-insensitive)

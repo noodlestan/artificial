@@ -9,6 +9,7 @@
 We are currently working on a major reorganization of records across all repositories. The goal is to move from centralized `ops/records/` directories to co-located `_records/` directories next to the resources they describe.
 
 **Example of the new pattern:**
+
 - `repos/artificial/ops/records/projects/artificial.art` → `repos/artificial/_records/project.art`
 - `repos/artificial/ops/records/namespaces/art-js.art` → `repos/artificial/art-js/_records/namespace.art`
 - `repos/artificial/ops/records/packages/artificials-parser.art` → `repos/artificial/art-js/libs/parser/_records/package.art`
@@ -16,11 +17,13 @@ We are currently working on a major reorganization of records across all reposit
 ## Problem
 
 The workspace CLI currently relies on hardcoded path conventions for discovering records:
+
 - Repository records: `ops/records/repositories/{repo}.art`
 - Checkout records: `ops/records/checkouts/{repo}.art`
 - Workspace record: `ops/records/workspace.art`
 
 These conventions are defined in:
+
 - `src/config/types.ts` (path constants)
 - `src/private/records/` (record loading logic)
 
@@ -35,6 +38,7 @@ As we migrate to co-located `_records/` directories, the workspace CLI needs to 
 ## Suggested Approach
 
 Implement a record discovery system that:
+
 - Scans for `.art` files across the workspace
 - Parses the file to extract the resource kind from the heading (e.g., `## Repository: Artificial`)
 - Builds an in-memory index of records by kind and name
