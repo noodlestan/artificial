@@ -52,7 +52,9 @@ Complete the workspace CLI with remaining commands and infrastructure.
 
 **DONE:** `plan-implement-sanity-workspace-report` — workspace as first-class checkout in sanity (commit `51cad48`)
 
-**DRAFT:** `plan-fix-repo-command-issues` — path resolution fails for many packages, npm info noise, version display issues. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
+**DRAFT:** `plan-fix-repo-command-issues` — path resolution fails for many packages, npm info noise, version display issues, checkout name resolution, npm info runs without package.json. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
+
+**DRAFT:** `plan-investigate-workspace-cli-bugs` — 11 bugs need investigation and fix instructions. See `_backlog/3-now/plan-investigate-workspace-cli-bugs/plan.md`.
 
 **Later:** `pull`, `push`, `sync` commands — see `_backlog/4-now/plan-implement-pull-push-sync/plan.md`.
 

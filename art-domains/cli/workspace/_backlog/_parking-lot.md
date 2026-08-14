@@ -28,7 +28,8 @@ None current.
 
 ### ACTIONABLE
 
-- **Fix repo command issues** — path resolution fails for many packages, npm info noise, version display issues. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
+- **Investigate workspace CLI bugs** — 11 bugs need investigation and fix instructions. See `_backlog/3-now/plan-investigate-workspace-cli-bugs/plan.md`.
+- **Fix repo command issues** — path resolution fails for many packages, npm info noise, version display issues, checkout name resolution, npm info runs without package.json. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
 - **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
 
 ### PENDING
