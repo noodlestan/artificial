@@ -28,7 +28,7 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 _backlog/           — parking lot, briefings, plans, instructions, reports
 architecture/       — architecture index, topic docs, and decision records (records/adr)
 src/                — the CLI source (commands, config, shared, private)
-ops/records         — workspace records the CLI reads, via the config ($WORKSPACE/ops/records)
+_records/           — workspace records the CLI reads, via the config ($WORKSPACE/_records)
 ```
 
 ## Setup

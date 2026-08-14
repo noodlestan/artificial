@@ -45,11 +45,19 @@ npm run ci # lint, build and test
 
 ## Deployment
 
-See `ops/records/deployment.art` for deployment commands, environments, and infrastructure details.
+See `_records/deployment.art` for deployment commands, environments, and infrastructure details.
 
 ## Records Management
 
-The workspace maintains ops records at `ops/records` detailing project configurations, namespaces, packages, dependencies, scaffolding and more.
+Records are co-located with the resources they describe in `_records/` directories:
+
+- **Project:** `_records/project.art`
+- **Package:** `{package-path}/_records/package.art`
+- **Deployment:** `{app-path}/_records/deployment.art`
+
+Examples:
+- `repos/artificial/_records/project.art`
+- `repos/artificial/artisans/apps/art-mantras/_records/deployment.art`
 
 ## References
 

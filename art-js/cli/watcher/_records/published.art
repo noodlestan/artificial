@@ -1,0 +1,16 @@
+## Published: Artificials Watcher
+
+**Canonical Name:** `@art-js/artificials-watcher`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`
+
+**Version:** `0.0.1`
+
+**Prerequisites:**
+
+- Build artifacts exist in `dist/`
+- All dependencies published
+
+**Publish Command:** `cd $WORKSPACE/repos/artificial/art-js/cli/watcher && npm publish --access public`

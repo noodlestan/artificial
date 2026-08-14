@@ -226,7 +226,7 @@ Feature: Sync checkouts
 
 List the repositories under active checkouts, their namespaces, and their packages. The infrastructure for this command is needed for `link` and `publish`. Works for one or more checkouts (all checkouts when none specified).
 
-Procedure: read the checkout's project records — project first, then namespaces, then packages (records live inside the checkout at `ops/records/{projects|namespaces|packages}`). For each package resolve `packagePath` = `{checkout.location}/{project-path}/{namespace-path}/{package-path}` and read its `package.json` (current version) and run `npm info` (last published version). Collect a `PackageStateRecord` (canonical name, version, published version, branch, directory, states) per package. For each checkout present its Checkout Report row (`repo | location | branch | states`) followed by the Package State Report for its packages.
+Procedure: read the checkout's project records — project first, then namespaces, then packages (records live inside the checkout at `_records/`). For each package resolve `packagePath` = `{checkout.location}/{project-path}/{namespace-path}/{package-path}` and read its `package.json` (current version) and run `npm info` (last published version). Collect a `PackageStateRecord` (canonical name, version, published version, branch, directory, states) per package. For each checkout present its Checkout Report row (`repo | location | branch | states`) followed by the Package State Report for its packages.
 
 **BDD:**
 
@@ -397,7 +397,7 @@ Feature: Branch across checkouts
 
 **Usage:** `link <location> <package> [<target>]`
 
-Symlink a source package from a repo checkout location into a target location (`node_modules`) for local development. The `<location>` and `<target>` params are both checkout locations and should resolve to existing checkouts. If `target` is omitted the link is created in root workspace `node_modules/`. Read the `location` repository's project records for project, namespaces, and packages (records are at `ops/records/{projects|namespaces|packages}`). Match package to input `<package>`. Resolve `packagePath` = `{location}/{project-path}/{namespace-path}/{package-path}`. Resolve `{target}/node_modules/{canonical-name}`. Check if is dir/file — remove it. Create symlink to `packagePath`.
+Symlink a source package from a repo checkout location into a target location (`node_modules`) for local development. The `<location>` and `<target>` params are both checkout locations and should resolve to existing checkouts. If `target` is omitted the link is created in root workspace `node_modules/`. Read the `location` repository's project records for project, namespaces, and packages (records are at `_records/`). Match package to input `<package>`. Resolve `packagePath` = `{location}/{project-path}/{namespace-path}/{package-path}`. Resolve `{target}/node_modules/{canonical-name}`. Check if is dir/file — remove it. Create symlink to `packagePath`.
 
 **BDD:**
 
@@ -459,7 +459,7 @@ Feature: Link a local package into a target checkout
 
 **Usage:** `links`
 
-Show symlink sources. Scan the workspace root `node_modules` and the `node_modules` of every known repository's projects (project records at `{checkout}/ops/records/projects`; resolve `{checkout-location}/{project-path}/node_modules`). For each entry that is a symlink — including scoped `@scope/pkg` subdirectories — collect a link (`package`, `location`). Present the Symlink Report.
+Show symlink sources. Scan the workspace root `node_modules` and the `node_modules` of every known repository's projects (project records at `{checkout}/_records/`; resolve `{checkout-location}/{project-path}/node_modules`). For each entry that is a symlink — including scoped `@scope/pkg` subdirectories — collect a link (`package`, `location`). Present the Symlink Report.
 
 **BDD:**
 

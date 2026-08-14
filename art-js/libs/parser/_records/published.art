@@ -1,0 +1,16 @@
+## Published: Artificials Parser
+
+**Canonical Name:** `@art-js/artificials-parser`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`
+
+**Version:** `0.0.1`
+
+**Prerequisites:**
+
+- Build artifacts exist in `dist/`
+- All dependencies published
+
+**Publish Command:** `cd $WORKSPACE/repos/artificial/art-js/libs/parser && npm publish --access public`

@@ -37,7 +37,7 @@ An ecosystem spans multiple independent repositories (`artificial`, `purrception
 
 The workspace owns:
 
-- **Records** — Workspace config and repository and checkouts records (source of truth). Example: `$WORKSPACE/ops/records/`
+- **Records** — Workspace config and repository and checkouts records (source of truth). Example: `$WORKSPACE/_records/`
 - **Config** — The `.art-workspace.mts` module at the workspace root, defines paths (records, templates, checkouts), importable by tools. See `architecture/config.md`.
 - **Context** — Agent instructions and reference material. Example: `$WORKSPACE/.agents/`, `$WORKSPACE/reference/`.
 - **Checkouts** — The cloned repositories under a checkout path, whose state is scanned from git and tracked in records. Examples: `repos/{checkout-name}`.

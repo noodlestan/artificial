@@ -1,0 +1,16 @@
+## Published: Art Domains Workspace CLI
+
+**Canonical Name:** `@art-domains/workspace-cli`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`
+
+**Version:** `0.0.13`
+
+**Prerequisites:**
+
+- Build artifacts exist in `dist/`
+- All dependencies published
+
+**Publish Command:** `cd $WORKSPACE/repos/artificial/art-domains/cli/workspace && npm publish --access public`

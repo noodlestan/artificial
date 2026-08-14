@@ -51,7 +51,19 @@ npm run test
 
 ## Records Management
 
-This repository maintains ops records at `ops/records` detailing project configurations, namespaces, packages, dependencies, scaffolding and more.
+Records are co-located with the resources they describe in `_records/` directories:
+
+- **Project:** `_records/project.art`
+- **Namespace:** `{namespace}/_records/namespace.art`
+- **Package:** `{package-path}/_records/package.art`
+- **Deployment:** `{app-path}/_records/deployment.art`
+- **Published:** `{package-path}/_records/published.art`
+
+Examples:
+- `repos/artificial/_records/project.art`
+- `repos/artificial/art-js/_records/namespace.art`
+- `repos/artificial/art-js/libs/parser/_records/package.art`
+- `repos/artificial/artisans/apps/art-mantras/_records/deployment.art`
 
 ## References
 

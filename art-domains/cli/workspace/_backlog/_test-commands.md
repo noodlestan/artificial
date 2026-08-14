@@ -87,7 +87,7 @@ npm run workspace -- clone purrception custom/purrception-test
 ls -la custom/purrception-test
 
 # Check if checkout record was created/updated
-cat ops/records/checkouts/purrception.art
+cat _records/checkouts/purrception.art
 
 # Run sanity to see both locations
 npm run workspace:sanity
@@ -100,13 +100,13 @@ rm -rf custom/purrception-test
 
 ```bash
 # Delete all checkout records
-rm -rf ops/records/checkouts/*.art
+rm -rf _records/checkouts/*.art
 
 # Clone all repos
 npm run workspace -- clone --all
 
 # Verify checkout records were recreated
-ls -la ops/records/checkouts/
+ls -la _records/checkouts/
 
 # Run sanity
 npm run workspace:sanity

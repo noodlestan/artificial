@@ -59,19 +59,19 @@ derived from those states; callers do not inspect raw git flags.
 
 Records are the source of truth (see `records/adr/cli.art` — "Records as Source of Truth").
 
-- **`RepositoryRecord`** — repository facts: name, remote, purpose, description, consumers. Persisted in `ops/records/repositories/{repo}.art`. Read-only facts; never mutated by commands.
-- **`CheckoutRecord`** — checkout state: name, location, branch, repository (repo name reference). Persisted in `ops/records/checkouts/{name}.art`. Workspace-local state, owned by the CLI commands (see `records/adr/cli.art` — "Checkouts as CLI-Managed Records — Structure: Checkout").
-- **`WorkspaceRecord`** — the workspace itself and its known repositories, in `ops/records/workspace.art`.
+- **`RepositoryRecord`** — repository facts: name, remote, purpose, description, consumers. Persisted in `_records/repositories/{repo}.art`. Read-only facts; never mutated by commands.
+- **`CheckoutRecord`** — checkout state: name, location, branch, repository (repo name reference). Persisted in `_records/checkouts/{name}.art`. Workspace-local state, owned by the CLI commands (see `records/adr/cli.art` — "Checkouts as CLI-Managed Records — Structure: Checkout").
+- **`WorkspaceRecord`** — the workspace itself and its known repositories, in `_records/workspace.art`.
 
 Repo identity is by name, case-insensitive; package names are interchangeable with repo names. The canonical form is the record heading (`## Repository: Artificial`).
 
 ## Project Records
 
-Three record kinds are read from _inside_ each checkout (the project's own `ops/records/`), by the `repo`, `link`, `links`, and `publish` commands. All are **read-only** — never mutated by commands.
+Three record kinds are read from _inside_ each checkout (the project's own `_records/`), by the `repo`, `link`, `links`, and `publish` commands. All are **read-only** — never mutated by commands.
 
-- **`ProjectRecord`** — a project hosted in a checkout: name, remote, canonical name, path, namespaces (by name), workspaces. Persisted at `ops/records/projects/{name}.art`.
-- **`ProjectNamespace`** — a namespace within a project: name, path, packages (by name). Persisted at `ops/records/namespaces/{name}.art`.
-- **`ProjectPackage`** — a package within a namespace: name, canonical name, path, version. Persisted at `ops/records/packages/{name}.art`.
+- **`ProjectRecord`** — a project hosted in a checkout: name, remote, canonical name, path, namespaces (by name), workspaces. Persisted at `_records/project.art`.
+- **`ProjectNamespace`** — a namespace within a project: name, path, packages (by name). Persisted at `{namespace}/_records/namespace.art`.
+- **`ProjectPackage`** — a package within a namespace: name, canonical name, path, version. Persisted at `{package-path}/_records/package.art`.
 
 Reading is hierarchical — **project first, then namespaces, then packages** — and the records are linked by name (`project.namespaces` → `namespace.name`, `namespace.packages` → `package.name`). A record missing a referenced name is skipped with a warning. This order matters: the project is the root (remote + canonical name), namespaces mediate between project and packages, and packages are the leaves (most numerous, resolved last when paths can be fully composed).
 
@@ -137,9 +137,9 @@ src/private/records/
 
 ```text
 loadProjectGraph(checkoutPath)
-  projects    = readProjectRecords(join(checkoutPath, "ops/records/projects"))
-  namespaces  = readNamespaceRecords(join(checkoutPath, "ops/records/namespaces"))
-  packages    = readPackageRecords(join(checkoutPath, "ops/records/packages"))
+  projects    = readProjectRecords(join(checkoutPath, "_records"))
+  namespaces  = readNamespaceRecords(join(checkoutPath, "{namespace}/_records"))
+  packages    = readPackageRecords(join(checkoutPath, "{package-path}/_records"))
   return consolidateProjectGraph(projects, namespaces, packages)
 ```
 

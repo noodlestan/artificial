@@ -281,7 +281,7 @@ link(location, package, target)
 
 ### Command: links
 
-**Responsibility:** Show symlink sources. Scan the workspace root `node_modules` and every known repository project's `node_modules` (project records at `{checkout}/ops/records/projects`). Collect symlinks — including scoped `@scope/pkg` subdirectories. Present the Symlink Report. Read-only: no operations are logged.
+**Responsibility:** Show symlink sources. Scan the workspace root `node_modules` and every known repository project's `node_modules` (project records at `{checkout}/_records/`). Collect symlinks — including scoped `@scope/pkg` subdirectories. Present the Symlink Report. Read-only: no operations are logged.
 
 **Pseudo:**
 
@@ -905,17 +905,17 @@ saveCheckoutRecord(config, name, record)
 
 ### Function: readProjectRecords(ctx, checkout)
 
-**Responsibility:** Read a checkout's project records — project first, then namespaces, then packages — and link them by name. Read-only; mirrors `loadRepositoryRecords`/`loadCheckoutRecords` but for the record kinds living inside the checkout at `ops/records/{projects|namespaces|packages}`.
+**Responsibility:** Read a checkout's project records — project first, then namespaces, then packages — and link them by name. Read-only; mirrors `loadRepositoryRecords`/`loadCheckoutRecords` but for the record kinds living inside the checkout at `_records/`.
 
 **Pseudo:**
 
 ```pseudo
 readProjectRecords(ctx, checkout)
-  recordsDir = join(checkout.path, "ops/records")
+  recordsDir = join(checkout.path, "_records")
 
-  projects   = parse each .art in join(recordsDir, "projects")    // ProjectRecord
-  namespaces = parse each .art in join(recordsDir, "namespaces")  // ProjectNamespace
-  packages   = parse each .art in join(recordsDir, "packages")    // ProjectPackage
+  projects   = parse each .art in recordsDir                      // ProjectRecord (at root)
+  namespaces = parse each .art in subdirs                         // ProjectNamespace (at {namespace}/_records/)
+  packages   = parse each .art in subdirs                         // PackageRecord (at {package-path}/_records/)
 
   for project in projects:
     project.namespaces = namespaces.filter(ns => project.namespaceNames.includes(ns.name))
