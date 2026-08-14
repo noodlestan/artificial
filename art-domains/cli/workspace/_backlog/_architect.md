@@ -44,17 +44,7 @@ The Noodlestan ecosystem spans multiple independent repositories (`artificial`, 
 
 Complete the workspace CLI with remaining commands and infrastructure.
 
-**Now Fixing:** `repo` command — list repositories, namespaces, and packages with version info. (commit `76cd4b4`, `c09e766`, `9227012`)
-
-**DONE:** `plan-fix-clone-command-report` — clone report shows checkout list twice / without scanning (commit `9eea8ab`)
-
-**DONE:** `plan-fix-repo-command-graph-loading` — repo shows "unknown package" everywhere (commit `c5baa99`)
-
-**DONE:** `plan-implement-sanity-workspace-report` — workspace as first-class checkout in sanity (commit `51cad48`)
-
-**DRAFT:** `plan-fix-repo-command-issues` — path resolution fails for many packages, npm info noise, version display issues, checkout name resolution, npm info runs without package.json. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
-
-**DRAFT:** `plan-investigate-workspace-cli-bugs` — 11 bugs need investigation and fix instructions. See `_backlog/3-now/plan-investigate-workspace-cli-bugs/plan.md`.
+**Now Fixing:** `plan-fix-repo-command-issues` — path resolution fails for many packages, npm info noise, version display issues, checkout name resolution. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
 
 **Later:** `pull`, `push`, `sync` commands — see `_backlog/4-now/plan-implement-pull-push-sync/plan.md`.
 
@@ -66,4 +56,4 @@ Complete the workspace CLI with remaining commands and infrastructure.
 - **Publishing workflow** — formalize the publish-then-symlink pattern into a Workflow resource with agent modes, skills, and commands.
 - **Prepare `@art-domains/workspace` domain** — after `@art-domains/workspace-cli` is established, prepare the domain package to host workspace structures and other resources, including a reference to the CLI companion package.
 - **Reverse edge resolution** — `purrpose → @no-comply/solid-primitives` is still using `file:` resolution. After no-comply packages are published to npm, rewire to npm version.
-- **`manifest-generator`** — auto-generate `.art-workspace.mts` from the records, replacing the manually-authored manifest (see `_backlog/3-now/plan-implement-command-repo/plan.md`).
+- **`manifest-generator`** — auto-generate `.art-workspace.mts` from the records, replacing the manually-authored manifest.

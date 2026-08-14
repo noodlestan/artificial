@@ -10,6 +10,7 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 | bug                                                      | repro                                                   | expected                                                | found                                                                                                               |
 | -------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------- | ------- |
+| `--version` shows wrong version                          | `npm run workspace -- --version`                        | should show `0.0.14` (current package version)          | shows `0.0.9` (stale version)                                                                                       |
 | `clone Foo` fails silently                               | `npm run workspace clone Foo`                           | log clone failure: `unknown repo "Foo"`                 | no output, no error                                                                                                 |
 | Synthetic repo log noise                                 | `npm run workspace sanity`                              | no console output before Checkout Report                | `checkout Purrtrait: no matching repository record, using synthetic repository`                                     |
 | Extraneous empty dir states                              | `repos/blah` (no .git)                                  | `unknown project; no git`                               | `unknown project; uncommitted files` — fix: early `.git` existence check in `scanCheckout` before git introspection |
@@ -18,7 +19,6 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 | Clone should refuse if target dir is extraneous          | `clone Purrtrait bug-fix` when `repos/bug-fix` exists   | error: directory already exists                         | creates checkout anyway                                                                                             |
 | Clone custom location wrong name/path                    | `clone Purrtrait bug-fix`                               | name `Purrtrait-bug-fix`, dir `repos/bug-fix/`          | name `Purrtrait`, dir `bug-fix` (at repo root, not under repos/)                                                    |
 | Extraneous items in Checkout Report                      | `npm run workspace sanity`                              | Extraneous checkouts only in Extraneous Report          | extraneous items appear in Checkout Report too — filter them out                                                    |
-| Workspace not first in Checkout Report                   | `npm run workspace sanity`                              | `WORKSPACE` row appears first                           | `WORKSPACE` appears sorted by name — create workspace checkout before loading records                               |
 | Clone refuses extraneous dir but no failure logged       | `clone Purrtrait bug-fix` when `repos/bug-fix` exists   | log clone failure operation                             | refuses silently, no operation in report                                                                            |
 | Extraneous with file (no .git) shows "uncommitted files" | `repos/blah` with a `foo` file                          | `unknown project; no git`                               | `unknown project; uncommitted files` — `.git` check should come before git introspection                            |
 
@@ -28,8 +28,8 @@ None current.
 
 ### ACTIONABLE
 
-- **Investigate workspace CLI bugs** — 11 bugs need investigation and fix instructions. See `_backlog/3-now/plan-investigate-workspace-cli-bugs/plan.md`.
-- **Fix repo command issues** — path resolution fails for many packages, npm info noise, version display issues, checkout name resolution, npm info runs without package.json. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
+- **Fix `--version` showing stale version** — `npm run workspace -- --version` shows `0.0.9` but package is at `0.0.14`. Investigate why version is not being read from package.json correctly.
+- **Fix repo command issues** — path resolution fails for many packages, npm info noise, version display issues. See `_backlog/3-now/plan-fix-repo-command-issues/plan.md`.
 - **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
 
 ### PENDING

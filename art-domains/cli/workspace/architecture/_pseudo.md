@@ -178,7 +178,7 @@ repo(checkoutNames)
   else:
     targets = []
     for name in checkoutNames:
-      checkout = ctx.store.getCheckoutByName(name)
+      checkout = resolveCheckoutByName(ctx.store, name)
       if not checkout:
         warn "unknown checkout: {name}"
         continue
@@ -208,6 +208,32 @@ repo(checkoutNames)
 
     presentCheckoutReport(ctx)
     presentPackageStateReport(checkout, packageStates)
+```
+
+### Function: resolveCheckoutByName(store, input)
+
+**Responsibility:** Resolve a checkout by name, handling multiple input formats (exact name, "Repository:" prefix, slug format, location). Returns the matching checkout or null.
+
+**Pseudo:**
+
+```pseudo
+resolveCheckoutByName(store, input)
+  checkout = store.getCheckoutByName(input)
+  if checkout: return checkout
+
+  normalized = input.replace(/^Repository:\s*/i, '').trim()
+  if normalized !== input:
+    checkout = store.getCheckoutByName(normalized)
+    if checkout: return checkout
+
+  slug = normalized.toLowerCase().replace(/\s+/g, '-')
+  checkout = store.getCheckoutByName(slug)
+  if checkout: return checkout
+
+  checkout = store.getCheckoutForLocation(slug)
+  if checkout: return checkout
+
+  return null
 ```
 
 ### Command: link <location> <package> [<target>]
