@@ -81,15 +81,17 @@ export async function runRepo(
 					}
 
 					let publishedVersion: string | null = null;
-					try {
-						const output = execSync(`npm info ${pkg.canonicalName} version`, {
-							encoding: 'utf-8',
-							timeout: 10000,
-						});
-						publishedVersion = output.trim() || null;
-					} catch {
-						publishedVersion = 'unknown';
-						states.push('npm info failed');
+					if (version !== null) {
+						try {
+							const output = execSync(`npm info ${pkg.canonicalName} version`, {
+								encoding: 'utf-8',
+								timeout: 10000,
+							});
+							publishedVersion = output.trim() || null;
+						} catch {
+							publishedVersion = 'unknown';
+							states.push('npm info failed');
+						}
 					}
 
 					packageStates.push({

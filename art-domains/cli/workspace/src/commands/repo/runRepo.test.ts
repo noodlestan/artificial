@@ -198,11 +198,15 @@ describe('repo command', () => {
 		});
 
 		vi.mocked(execSync).mockReturnValue('1.0.0\n');
+		vi.mocked(execSync).mockClear();
 
 		await runRepo(ctx, { checkoutNames: ['Artificial'] });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('no package.json');
+		expect(output).not.toContain('npm info failed');
+
+		expect(execSync).not.toHaveBeenCalled();
 	});
 
 	it('npm info fails', async () => {

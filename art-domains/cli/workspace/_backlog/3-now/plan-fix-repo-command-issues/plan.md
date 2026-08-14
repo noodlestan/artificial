@@ -2,7 +2,7 @@
 
 **ID:** `fix-repo-command-issues`
 
-**Status:** `DRAFT`
+**Status:** `WORKING`
 
 ## Summary
 
@@ -158,9 +158,18 @@ Fix five issues with the `repo` command:
 
 ### Commit 1: Investigate Checkout Name Resolution
 
-**Status:** `PLANNED`
+**Status:** `DONE`
 
 **Instruction:** `./instructions/investigate-checkout-name-resolution.md`
+
+**Report:** `./instructions/investigate-checkout-name-resolution__report.md`
+
+**Commit:** `040b07e`
+
+**Evidence:**
+
+- `architecture/_pseudo.md` — added `resolveCheckoutByName` function
+- `instructions/investigate-checkout-name-resolution__findings.md` — investigation findings
 
 **Message:** `docs(workspace-cli): document checkout name resolution logic in pseudo-code`
 
@@ -172,7 +181,7 @@ Fix five issues with the `repo` command:
 
 ### Commit 2: Skip npm info Without package.json
 
-**Status:** `PLANNED`
+**Status:** `WORKING`
 
 **Instruction:** `./instructions/skip-npm-info-without-package-json.md`
 
