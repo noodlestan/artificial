@@ -1,6 +1,6 @@
 # Implementation Instructions
 
-**Plan:** `boostrap-packages`
+**Plan:** `bootstrap-packages`
 
 **commit.Id:** `bootstrap-primitives`
 
@@ -244,7 +244,7 @@ The primitives package exports all core types. poc-parse can import from it. Lin
 2. Gather the evidence of changes made and outcomes achieved, or the blocker error details.
 3. If your prompt included a `DIRECTIVE FEEDBACK:`:
    1. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your feedback.
-4. Render the report file to `repos/artificial/art-js/_backlog/plan-md-art-roundtrip/instructions/bootstrap-primitives__report.md` — reports are co-located with their instruction file (`plan-{id}/instructions/{id}__report.md`, per `files/index.md`).
+4. Render the report file to `repos/artificial/_backlog/4-next/plan-bootstrap-packages/instructions/bootstrap-primitives__report.md` — reports are co-located with their instruction file (`plan-{id}/instructions/{id}__report.md`, per `files/index.md`).
 5. Generate the response and send it back to the delegator.
 6. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `bootstrap-primitives`, types migrated, CI passes, thumbs up). The full trail lives in the report file; never repeat it in chat.
 

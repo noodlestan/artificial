@@ -37,7 +37,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `art-js: migrate all parser code to packages`
 
-**Instructions File:** `_backlog/4-next/plan-md-art-roundtrip/instructions/migrate-parser-code.md`
+**Instructions File:** `_backlog/4-next/plan-migrate-and-verify/instructions/migrate-parser-code.md`
 
 **Scope:**
 
@@ -51,7 +51,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `art-js: verify MD Art roundtrip`
 
-**Instructions File:** `_backlog/4-next/plan-md-art-roundtrip/instructions/roundtrip-verification.md`
+**Instructions File:** `_backlog/4-next/plan-migrate-and-verify/instructions/roundtrip-verification.md`
 
 **Scope:**
 

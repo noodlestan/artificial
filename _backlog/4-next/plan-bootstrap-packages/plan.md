@@ -46,7 +46,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `art-js: bootstrap primitives package with core types`
 
-**Instructions File:** `_backlog/4-next/plan-md-art-roundtrip/instructions/bootstrap-primitives.md`
+**Instructions File:** `_backlog/4-next/plan-bootstrap-packages/instructions/bootstrap-primitives.md`
 
 **Scope:**
 
@@ -59,7 +59,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 **Commit Message:** `art-js: bootstrap parser package with migrated parser`
 
-**Instructions File:** `_backlog/4-next/plan-md-art-roundtrip/instructions/bootstrap-parser.md`
+**Instructions File:** `_backlog/4-next/plan-bootstrap-packages/instructions/bootstrap-parser.md`
 
 **Scope:**
 
