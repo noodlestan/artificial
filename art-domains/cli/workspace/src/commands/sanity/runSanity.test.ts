@@ -3,7 +3,7 @@ import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { commitFile } from '../../test/commitFile';
 import { createCommandContext } from '../../test/createCommandContext';
@@ -263,5 +263,31 @@ describe('sanity command', () => {
 		expect(extraenous.length).toEqual(1);
 		expect(extraenous[0].exists).toEqual(true);
 		expect(extraenous[0].extraneous).toEqual(true);
+	});
+
+	it('presents workspace report before checkout report', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+
+		const repoDir = join(tempDir, ctx.config.clone.path, 'test');
+		await initWorkingRepo(repoDir, bareDir);
+
+		writeRepoRecord(tempDir, 'Test', 'git@example.com:test.git');
+		writeCheckoutRecord(tempDir, 'Test', 'Test', 'test');
+
+		const calls: string[] = [];
+		vi.spyOn(console, 'info').mockImplementation((msg: string) => {
+			if (msg === 'Workspace:' || msg === 'Checkouts:') {
+				calls.push(msg);
+			}
+		});
+
+		await runSanity(ctx, { auto: false });
+
+		expect(calls[0]).toEqual('Workspace:');
+		expect(calls[1]).toEqual('Checkouts:');
+
+		vi.restoreAllMocks();
 	});
 });
