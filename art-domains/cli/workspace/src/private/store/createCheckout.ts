@@ -16,6 +16,7 @@ export interface Checkout {
 	dirty: boolean;
 	hasRemote: boolean;
 	unpushed: number;
+	isBehind: boolean;
 	issues: string[];
 	extraneous: boolean;
 }
@@ -44,6 +45,7 @@ export function createCheckout(
 		dirty: false,
 		hasRemote: false,
 		unpushed: 0,
+		isBehind: false,
 		issues: [],
 		extraneous: false,
 	};

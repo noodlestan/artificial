@@ -104,6 +104,43 @@ describe('scanWorkspaceState', () => {
 		expect(workspace.issues).toContain('1 commit ahead');
 	});
 
+	it('detects when workspace is behind', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+
+		const git = simpleGit(tempDir);
+		await git.init();
+		await git.addConfig('user.email', 'test@example.com');
+		await git.addConfig('user.name', 'Test');
+		await git.addRemote('origin', bareDir);
+
+		const bareGit = simpleGit(bareDir);
+		await bareGit.init(true);
+
+		writeFileSync(join(tempDir, 'README.md'), '# Test');
+		await git.add('.');
+		await git.commit('initial');
+		await git.push('origin', 'main', ['--set-upstream']);
+
+		const otherDir = makeTempDir(tempDirs);
+		await simpleGit(otherDir).clone(bareDir, otherDir);
+		const otherGit = simpleGit(otherDir);
+		await otherGit.addConfig('user.email', 'test@example.com');
+		await otherGit.addConfig('user.name', 'Test');
+		writeFileSync(join(otherDir, 'origin.txt'), 'origin');
+		await otherGit.add('.');
+		await otherGit.commit('origin change');
+		await otherGit.push('origin', 'main');
+
+		await git.fetch('origin', 'main');
+
+		const ctx = createCommandContext(tempDir);
+		const workspace = await scanWorkspaceState(ctx);
+
+		expect(workspace.isBehind).toBe(true);
+		expect(workspace.issues).toContain('1 commit behind');
+	});
+
 	it('detects no remote', async () => {
 		const tempDir = makeTempDir(tempDirs);
 

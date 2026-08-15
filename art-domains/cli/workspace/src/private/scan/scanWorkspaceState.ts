@@ -1,4 +1,5 @@
 import type { WorkspaceContext } from '../context/createWorkspaceContext';
+import { getBehindCount } from '../git/getBehindCount';
 import { getCurrentBranch } from '../git/getCurrentBranch';
 import { getRemoteBranch } from '../git/getRemoteBranch';
 import { getUnpushedCount } from '../git/getUnpushedCount';
@@ -18,6 +19,8 @@ export async function scanWorkspaceState(ctx: WorkspaceContext): Promise<Checkou
 	let hasRemoteVal = false;
 	let remoteBranch: string | null = null;
 	let unpushed = 0;
+	let isBehind = false;
+	let behindCount = 0;
 
 	try {
 		branch = await getCurrentBranch(workspacePath);
@@ -27,8 +30,13 @@ export async function scanWorkspaceState(ctx: WorkspaceContext): Promise<Checkou
 		hasRemoteVal = await hasRemote(workspacePath);
 
 		if (hasRemoteVal && branch !== '-' && branch !== 'HEAD') {
-			remoteBranch = await getRemoteBranch(workspacePath);
-			unpushed = await getUnpushedCount(workspacePath, remoteBranch);
+			const trackingBranch = await getRemoteBranch(workspacePath);
+			remoteBranch = trackingBranch;
+			unpushed = await getUnpushedCount(workspacePath, trackingBranch);
+			if (trackingBranch) {
+				behindCount = await getBehindCount(workspacePath, trackingBranch);
+			}
+			isBehind = behindCount > 0;
 		}
 	} catch {
 		issues.push('git error');
@@ -49,6 +57,9 @@ export async function scanWorkspaceState(ctx: WorkspaceContext): Promise<Checkou
 	if (unpushed > 0) {
 		issues.push(`${unpushed} commit${unpushed !== 1 ? 's' : ''} ahead`);
 	}
+	if (isBehind) {
+		issues.push(`${behindCount} commit${behindCount !== 1 ? 's' : ''} behind`);
+	}
 
 	const workspace: Checkout = {
 		repo: undefined,
@@ -66,6 +77,7 @@ export async function scanWorkspaceState(ctx: WorkspaceContext): Promise<Checkou
 		dirty,
 		hasRemote: hasRemoteVal,
 		unpushed,
+		isBehind,
 		issues,
 		extraneous: false,
 	};

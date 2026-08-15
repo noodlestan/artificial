@@ -23,6 +23,7 @@ describe('presentPackageStateReport', () => {
 			dirty: false,
 			hasRemote: true,
 			unpushed: 0,
+			isBehind: false,
 			issues: [],
 			extraneous: false,
 		};

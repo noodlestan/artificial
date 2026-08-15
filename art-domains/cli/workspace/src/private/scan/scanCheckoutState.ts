@@ -1,6 +1,7 @@
 import { access } from 'node:fs/promises';
 
 import type { WorkspaceContext } from '../context/createWorkspaceContext';
+import { getBehindCount } from '../git/getBehindCount';
 import { getCurrentBranch } from '../git/getCurrentBranch';
 import { getRemoteBranch } from '../git/getRemoteBranch';
 import { getUnpushedCount } from '../git/getUnpushedCount';
@@ -37,6 +38,8 @@ export async function scanCheckoutState(
 	let hasRemoteVal = false;
 	let remoteBranch: string | null = null;
 	let unpushed = 0;
+	let isBehind = false;
+	let behindCount = 0;
 
 	try {
 		branch = await getCurrentBranch(checkout.path);
@@ -48,8 +51,13 @@ export async function scanCheckoutState(
 		hasRemoteVal = await hasRemote(checkout.path);
 
 		if (hasRemoteVal && branch !== '-' && branch !== 'HEAD') {
-			remoteBranch = await getRemoteBranch(checkout.path);
-			unpushed = await getUnpushedCount(checkout.path, remoteBranch);
+			const trackingBranch = await getRemoteBranch(checkout.path);
+			remoteBranch = trackingBranch;
+			unpushed = await getUnpushedCount(checkout.path, trackingBranch);
+			if (trackingBranch) {
+				behindCount = await getBehindCount(checkout.path, trackingBranch);
+			}
+			isBehind = behindCount > 0;
 		}
 	} catch {
 		issues.push('git error');
@@ -76,6 +84,9 @@ export async function scanCheckoutState(
 	if (unpushed > 0) {
 		issues.push(`${unpushed} commit${unpushed !== 1 ? 's' : ''} ahead`);
 	}
+	if (isBehind) {
+		issues.push(`${behindCount} commit${behindCount !== 1 ? 's' : ''} behind`);
+	}
 
 	const updated: Checkout = {
 		...checkout,
@@ -90,6 +101,7 @@ export async function scanCheckoutState(
 		dirty,
 		hasRemote: hasRemoteVal,
 		unpushed,
+		isBehind,
 		issues,
 	};
 

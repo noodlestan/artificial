@@ -31,6 +31,7 @@ describe('presentWorkspaceReport', () => {
 			dirty: false,
 			hasRemote: true,
 			unpushed: 0,
+			isBehind: false,
 			issues: [],
 			extraneous: false,
 		};
@@ -59,6 +60,7 @@ describe('presentWorkspaceReport', () => {
 			dirty: true,
 			hasRemote: true,
 			unpushed: 1,
+			isBehind: false,
 			issues: ['uncommitted files', '1 commit ahead'],
 			extraneous: false,
 		};
@@ -67,6 +69,33 @@ describe('presentWorkspaceReport', () => {
 		presentWorkspaceReport(ctx);
 
 		expect(spy).toHaveBeenCalledWith(expect.stringContaining('uncommitted files; 1 commit ahead'));
+	});
+
+	it('renders the behind issue in the states column', () => {
+		const spy = vi.spyOn(console, 'info').mockImplementation(() => {});
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createCommandContext(tempDir);
+
+		const workspace: Checkout = {
+			repo: undefined,
+			record: { name: 'Workspace', location: '.', branch: 'main', repository: undefined },
+			path: tempDir,
+			exists: true,
+			remoteBranch: 'origin/main',
+			detached: false,
+			conflicts: false,
+			dirty: false,
+			hasRemote: true,
+			unpushed: 0,
+			isBehind: true,
+			issues: ['1 commit behind'],
+			extraneous: false,
+		};
+		ctx.workspace = workspace;
+
+		presentWorkspaceReport(ctx);
+
+		expect(spy).toHaveBeenCalledWith(expect.stringContaining('1 commit behind'));
 	});
 
 	it('returns early when workspace is undefined', () => {

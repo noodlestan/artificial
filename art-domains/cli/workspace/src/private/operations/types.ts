@@ -30,6 +30,11 @@ export interface PushSuccess extends OperationSuccess {
 	branch: string;
 }
 
+export interface PullSuccess extends OperationSuccess {
+	operation: 'pull';
+	branch: string;
+}
+
 export interface PublishSuccess extends OperationSuccess {
 	operation: 'publish';
 	package: string;
@@ -55,6 +60,11 @@ export interface UnlinkSuccess extends OperationSuccess {
 
 export interface PushFailure extends OperationFailure {
 	operation: 'push';
+	branch: string;
+}
+
+export interface PullFailure extends OperationFailure {
+	operation: 'pull';
 	branch: string;
 }
 
@@ -91,6 +101,8 @@ export type Operation =
 	| CloneFailure
 	| PushSuccess
 	| PushFailure
+	| PullSuccess
+	| PullFailure
 	| PublishSuccess
 	| PublishFailure
 	| BranchSuccess

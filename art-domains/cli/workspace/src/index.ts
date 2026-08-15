@@ -6,8 +6,11 @@ import { runBranch } from './commands/branch/runBranch';
 import { runClone } from './commands/clone/runClone';
 import { runLink } from './commands/link/runLink';
 import { runPublish } from './commands/publish/runPublish';
+import { runPull } from './commands/pull/runPull';
+import { runPush } from './commands/push/runPush';
 import { runRepo } from './commands/repo/runRepo';
 import { runSanity } from './commands/sanity/runSanity';
+import { runSync } from './commands/sync/runSync';
 import { runUnlink } from './commands/unlink/runUnlink';
 import { loadWorkspaceConfig } from './config/loadWorkspaceConfig';
 import { createWorkspaceContext } from './private/context/createWorkspaceContext';
@@ -70,6 +73,42 @@ program
 		const log = createOperationsLog();
 		const ctx = createWorkspaceContext(config, store, log);
 		await runBranch(ctx, { branch, checkoutLocations });
+	});
+
+program
+	.command('pull')
+	.description('Pull clean checkouts that are behind')
+	.action(async () => {
+		const root = process.cwd();
+		const config = await loadWorkspaceConfig(root);
+		const store = createCheckoutStore();
+		const log = createOperationsLog();
+		const ctx = createWorkspaceContext(config, store, log);
+		await runPull(ctx);
+	});
+
+program
+	.command('push')
+	.description('Push clean checkouts that are ahead')
+	.action(async () => {
+		const root = process.cwd();
+		const config = await loadWorkspaceConfig(root);
+		const store = createCheckoutStore();
+		const log = createOperationsLog();
+		const ctx = createWorkspaceContext(config, store, log);
+		await runPush(ctx);
+	});
+
+program
+	.command('sync')
+	.description('Pull and push clean checkouts')
+	.action(async () => {
+		const root = process.cwd();
+		const config = await loadWorkspaceConfig(root);
+		const store = createCheckoutStore();
+		const log = createOperationsLog();
+		const ctx = createWorkspaceContext(config, store, log);
+		await runSync(ctx);
 	});
 
 program
