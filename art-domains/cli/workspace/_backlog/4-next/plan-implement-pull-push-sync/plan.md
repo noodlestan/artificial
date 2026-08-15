@@ -2,7 +2,7 @@
 
 **ID:** `implement-pull-push-sync`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Template:** `plan`
 
@@ -110,11 +110,24 @@ If any of these fail, resolve the issue before proceeding with implementation.
 
 ## Iterations
 
-### `pull-push-sync-command` - `READY`
+### `pull-push-sync-command` - `DONE`
 
 **Commit Message:** `feat(workspace-cli): implement pull, push, sync commands`
 
 **Instructions File:** `_backlog/4-next/plan-implement-pull-push-sync/instructions/pull-push-sync-command.md`
+
+**Commit:** `ef8a2cf` (`feat(workspace-cli): implement pull, push, sync commands`), pushed to `origin/main`.
+
+**Report:** `_backlog/4-next/plan-implement-pull-push-sync/instructions/pull-push-sync-command__report.md`
+
+**Evidence:**
+
+- `src/commands/pull/runPull.ts`, `src/commands/push/runPush.ts`, `src/commands/sync/runSync.ts` — pull, push, sync handlers with BDD scenario tests
+- `src/private/git/getBehindCount.ts`, `src/private/git/pullCheckout.ts`, `src/private/scan/isCleanCheckout.ts` — core helper functions
+- `isBehind` on `Checkout` + behind detection in `scanCheckoutState` / `scanWorkspaceState`
+- `src/private/operations/createPullSuccess.ts` / `createPullFailure.ts` and pull operation factories
+- `src/index.ts` — registered `pull`, `push`, `sync` commands
+- Verification: package + monorepo `npm run ci` green (186/186 tests, no `it.todo()` remaining)
 
 Implement `art-workspace pull`, `art-workspace push`, and `art-workspace sync` commands.
 
@@ -200,6 +213,17 @@ npm run ci # lint, build and test
 ```
 
 All steps MUST pass. If any step fails, fix the issue before considering the task complete.
+
+## Feedback
+
+### From `pull-push-sync-command` (worker, commit `ef8a2cf`)
+
+- **Step 3 "Define contracts" conflicts with live ESLint** — stubs with empty bodies / unused params fail `npm run lint` (`@typescript-eslint/no-unused-vars`). Merging the stub step into implementation (steps 3+4) resolves it; step order is fine, but the step-3 verification (lint green) can only pass with full bodies.
+- **`push`/`sync` test setups need divergence** — `push` "tries pull first if behind" needs a diverged (ahead AND behind) setup, and `sync` "clean checkouts" needs divergence so a push operation is actually logged. Explicit `git fetch` is required because behind detection reads local remote-tracking refs.
+- **`simple-git` blocks `git config` writes** by default (block-unsafe-operations plugin); test setups must not call `addConfig('core.editor', ...)`.
+- **Crew note** — `rg` is not installed in this environment; use `grep`. `npm run test` in the package dir is the fastest signal; the monorepo `npm run ci` is the final gate.
+
+**Planner reflection:** `pull-push-sync-command` is DONE (`ef8a2cf`). `sanity-enhancement` remains READY — apply the ESLint step + divergence feedback when refining that instruction.
 
 ## Follow ups
 

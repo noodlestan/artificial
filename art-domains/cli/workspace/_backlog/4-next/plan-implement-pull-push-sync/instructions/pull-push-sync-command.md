@@ -77,24 +77,24 @@ npm run test
 ## Changes
 
 - Add `getBehindCount(dir, remoteBranch)` function in `src/private/git/getBehindCount.ts` (in step 1)
-- Add `isBehind` field to `Checkout` type in `src/private/scan/types.ts` (in step 1)
+- Add `isBehind` field to `Checkout` type in `src/private/store/createCheckout.ts` (in step 1) — the `Checkout` interface lives there, NOT in `src/private/scan/types.ts`
+- Update all `Checkout` construction sites for the new required `isBehind` field (`createCheckout`, `scanCheckoutState`, `scanWorkspaceState`, and any test helpers that build `Checkout` objects) (in step 1)
 - Update `scanCheckoutState` to detect "is behind" state (in step 1)
-- Create `src/private/scan/scanWorkspaceState.ts` for workspace root scanning (in step 1)
+- Update `src/private/scan/scanWorkspaceState.ts` to add "is behind" detection — the file ALREADY EXISTS (landed in commit `51cad48`) and is consumed by `sanity`; do NOT create it (in step 1)
 - Create test files following one-function-per-file pattern (in step 2):
   - `src/commands/pull/runPull.test.ts` — 4 tests from BDD scenarios
   - `src/commands/push/runPush.test.ts` — 5 tests from BDD scenarios
   - `src/commands/sync/runSync.test.ts` — 4 tests from BDD scenarios
-  - `src/private/scan/scanWorkspaceState.test.ts` — workspace state tests
-  - `src/private/present/presentWorkspaceReport.test.ts` — report tests
   - `src/private/git/getBehindCount.test.ts` — behind count tests
   - `src/private/scan/isCleanCheckout.test.ts` — clean checkout tests
   - `src/private/git/pullCheckout.test.ts` — pull checkout tests
+- Extend existing test files (in step 2):
+  - `src/private/scan/scanWorkspaceState.test.ts` — add isBehind tests (file exists since commit `51cad48`)
+  - `src/private/present/presentWorkspaceReport.test.ts` — assert the behind issue renders in the Workspace Report (file exists since commit `51cad48`)
 - Define function signatures in separate files (in step 3):
   - `src/private/scan/isCleanCheckout.ts`
   - `src/private/git/pullCheckout.ts`
-  - `src/private/present/presentWorkspaceReport.ts`
   - `src/private/git/getBehindCount.ts`
-  - `src/private/scan/scanWorkspaceState.ts`
 - Implement functions in their respective files (in step 4)
 - Implement pull, push, sync command handlers (in step 5)
 - Wire commands to CLI entry point (in step 6)
@@ -119,21 +119,22 @@ npm run ci # to verify build is green before starting
 1. Add `getBehindCount(dir: string, remoteBranch: string): number` function in `src/private/git/getBehindCount.ts`:
    - Use `git rev-list --count {branch}..origin/{branch}` to get behind count
    - Return 0 if command fails or no remote
-2. Add `isBehind` field to `Checkout` type in `src/private/scan/types.ts`:
+2. Add `isBehind` field to `Checkout` type in `src/private/store/createCheckout.ts`:
    ```typescript
    interface Checkout {
      // ... existing fields
      isBehind: boolean;
    }
    ```
+   - RULE: `isBehind` is a required field — update every `Checkout` construction site in this step: `createCheckout`, `scanCheckoutState`, `scanWorkspaceState`, and any test helpers that build `Checkout` objects. The `Checkout` type does NOT live in `src/private/scan/types.ts`.
 3. Update `scanCheckoutState` in `src/private/scan/scanCheckoutState.ts`:
    - After getting `unpushed`, also get `isBehind` using `getBehindCount`
    - Add "is behind" issue when `isBehind` is true
-4. Create `src/private/scan/scanWorkspaceState.ts`:
-   - Implement `scanWorkspaceState(ctx)` function
-   - Create temporary workspace checkout (not persisted, not merged into store)
-   - Scan workspace root state
-   - Return workspace checkout with updated state
+4. Update `src/private/scan/scanWorkspaceState.ts` (ALREADY EXISTS since commit `51cad48` — do NOT create it):
+   - Add `isBehind` detection using `getBehindCount` alongside the existing `unpushed` handling
+   - Add the behind issue (e.g. `1 commit behind`) when `isBehind` is true
+   - Keep the temporary workspace checkout behaviour (not persisted, not merged into store)
+   - RULE: `scanWorkspaceState` is consumed by the landed `sanity` command — keep `runSanity` green after this update; the step verification (full test suite) covers it.
 
 **Extra Verification commands:**
 
@@ -162,8 +163,8 @@ npm run ci # to verify build is green before starting
    - "sync skips dirty checkouts"
    - "sync skips checkouts not cloned"
    - "sync works on up to date checkouts"
-5. Create `src/private/scan/scanWorkspaceState.test.ts` with tests for workspace state scanning
-6. Create `src/private/present/presentWorkspaceReport.test.ts` with tests for presenting the Workspace Report
+5. Extend `src/private/scan/scanWorkspaceState.test.ts` with isBehind tests (file exists since commit `51cad48`)
+6. Extend `src/private/present/presentWorkspaceReport.test.ts` to assert the behind issue renders in the Workspace Report (file exists since commit `51cad48`)
 7. Create `src/private/git/getBehindCount.test.ts` with tests for behind count detection
 8. Create `src/private/scan/isCleanCheckout.test.ts` with tests for clean checkout check
 9. Create `src/private/git/pullCheckout.test.ts` with tests for pull checkout function
@@ -183,9 +184,7 @@ npm run ci # to verify build is green before starting
 1. Define function signatures for helper functions:
    - `isCleanCheckout(checkout: Checkout): boolean` in `src/private/scan/isCleanCheckout.ts`
    - `pullCheckout(ctx: WorkspaceContext, checkout: Checkout): void` in `src/private/git/pullCheckout.ts`
-   - `presentWorkspaceReport(workspace: Checkout): void` in `src/private/present/presentWorkspaceReport.ts`
 2. Define `getBehindCount` function signature in `src/private/git/getBehindCount.ts`
-3. Define `scanWorkspaceState` function signature in `src/private/scan/scanWorkspaceState.ts`
 
 **Extra Verification commands:**
 
@@ -205,15 +204,12 @@ npm run ci # to verify build is green before starting
    - Update checkout state (clear isBehind issue)
    - Log pull success/failure
    - Implement tests in `src/private/git/pullCheckout.test.ts`
-3. Implement `scanWorkspaceState(ctx: WorkspaceContext): Checkout` in `src/private/scan/scanWorkspaceState.ts`:
-   - Create temporary workspace checkout
-   - Scan workspace root state
-   - Return workspace checkout with updated state
-   - Implement tests in `src/private/scan/scanWorkspaceState.test.ts`
-4. Implement `presentWorkspaceReport(workspace: Checkout): void` in `src/private/present/presentWorkspaceReport.ts`:
-   - Present table with 1 row for workspace root
-   - Follow existing report presentation patterns
-   - Implement tests in `src/private/present/presentWorkspaceReport.test.ts`
+3. Update `scanWorkspaceState` in `src/private/scan/scanWorkspaceState.ts`:
+   - Add `isBehind` detection using `getBehindCount` alongside the existing `unpushed` handling
+   - Add the behind issue (e.g. `1 commit behind`) when `isBehind` is true
+   - Keep the temporary workspace checkout behaviour (not persisted, not merged into store)
+   - Extend tests in `src/private/scan/scanWorkspaceState.test.ts`
+4. Extend `src/private/present/presentWorkspaceReport.test.ts` to assert the behind issue renders in the Workspace Report — the presenter already renders issues generically, so no code change is expected
 
 **CRITICAL:** You MUST implement the actual tests, not just scaffold them. Verify no `it.todo()` tests remain.
 
