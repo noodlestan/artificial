@@ -10,6 +10,7 @@ import { scanExtraneousCheckouts } from '../../private/scan/scanExtraneousChecko
 import { scanWorkspaceState } from '../../private/scan/scanWorkspaceState';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 
+import { pullWorkspaceCheckout } from './private/pullWorkspaceCheckout';
 import { pushCleanCheckouts } from './private/pushCleanCheckouts';
 
 export async function runSanity(ctx: WorkspaceContext, options: { auto: boolean }): Promise<void> {
@@ -24,6 +25,7 @@ export async function runSanity(ctx: WorkspaceContext, options: { auto: boolean 
 	await scanExtraneousCheckouts(ctx);
 
 	if (options.auto) {
+		await pullWorkspaceCheckout(ctx);
 		await pushCleanCheckouts(ctx);
 	}
 

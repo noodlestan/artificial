@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
@@ -20,6 +20,22 @@ const tempDirs: string[] = [];
 afterEach(() => {
 	removeTempDirs(tempDirs);
 });
+
+async function makeWorkspaceRootBehind(tempDir: string, bareDir: string): Promise<void> {
+	await initWorkingRepo(tempDir, bareDir);
+	const git = simpleGit(tempDir);
+	await git.push('origin', 'main', ['--set-upstream']);
+
+	const advDir = makeTempDir(tempDirs);
+	await git.clone(bareDir, advDir);
+	const advGit = simpleGit(advDir);
+	await advGit.addConfig('user.email', 'test@example.com');
+	await advGit.addConfig('user.name', 'Test');
+	await commitFile(advDir, 'origin-advance.txt');
+	await advGit.push('origin', 'main');
+
+	await git.fetch('origin', 'main');
+}
 
 describe('sanity command', () => {
 	it('reports "not cloned" for a missing checkout', async () => {
@@ -289,5 +305,84 @@ describe('sanity command', () => {
 		expect(calls[1]).toEqual('Checkouts:');
 
 		vi.restoreAllMocks();
+	});
+
+	it('detects the workspace root is behind origin', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+		await makeWorkspaceRootBehind(tempDir, bareDir);
+
+		await runSanity(ctx, { auto: false });
+
+		expect(ctx.workspace).toBeDefined();
+		expect(ctx.workspace?.isBehind).toEqual(true);
+		expect(ctx.workspace?.issues).toContain('1 commit behind');
+	});
+
+	it('pulls the workspace root with --auto when behind and clean', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+		await makeWorkspaceRootBehind(tempDir, bareDir);
+
+		await runSanity(ctx, { auto: true });
+
+		expect(ctx.workspace).toBeDefined();
+		expect(ctx.workspace?.isBehind).toEqual(false);
+		expect(existsSync(join(tempDir, 'origin-advance.txt'))).toEqual(true);
+		const ops = ctx.log.all();
+		expect(ops).toHaveLength(1);
+		expect(ops[0].operation).toEqual('pull');
+		expect(ops[0].outcome).toEqual('success');
+	});
+
+	it('does not pull the workspace root with --auto when dirty', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+		await makeWorkspaceRootBehind(tempDir, bareDir);
+		writeFileSync(join(tempDir, 'dirty.txt'), 'dirty');
+
+		await runSanity(ctx, { auto: true });
+
+		expect(ctx.workspace).toBeDefined();
+		expect(ctx.workspace?.issues).toContain('uncommitted files');
+		expect(ctx.workspace?.issues).toContain('1 commit behind');
+		expect(ctx.log.all()).toHaveLength(0);
+	});
+
+	it('logs failure and continues with other operations when the workspace pull fails', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = await createCommandContext(tempDir);
+		await makeWorkspaceRootBehind(tempDir, bareDir);
+
+		const checkoutBare = makeTempDir(tempDirs);
+		const repoDir = join(tempDir, ctx.config.clone.path, 'autopush');
+		await initWorkingRepo(repoDir, checkoutBare);
+		await commitFile(repoDir, 'file.txt');
+		const git = simpleGit(repoDir);
+		await git.push('origin', 'main', ['--set-upstream']);
+		await commitFile(repoDir, 'file2.txt');
+
+		writeRepoRecord(tempDir, 'AutoPush', 'git@example.com:autopush.git');
+		writeCheckoutRecord(tempDir, 'AutoPush', 'AutoPush', 'autopush');
+
+		writeFileSync(join(tempDir, '.gitignore'), 'repos/\n');
+		const rootGit = simpleGit(tempDir);
+		await rootGit.add(['.gitignore', 'ops/']);
+		await rootGit.commit('workspace records');
+
+		await simpleGit(tempDir).remote(['set-url', 'origin', join(tempDir, 'missing-origin')]);
+
+		await runSanity(ctx, { auto: true });
+
+		const ops = ctx.log.all();
+		expect(ops).toHaveLength(2);
+		expect(ops[0].operation).toEqual('pull');
+		expect(ops[0].outcome).toEqual('failure');
+		expect(ops[1].operation).toEqual('push');
+		expect(ops[1].outcome).toEqual('success');
 	});
 });
