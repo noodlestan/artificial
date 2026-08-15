@@ -10,7 +10,7 @@ These are self-contained instructions for the art-mantras step 7 delegation.
 
 ## Working Agreements
 
-Work from the `repos/artificial` checkout root. Repository-relative paths in this instruction begin at that root. Modify only the application file named below; do not modify the architecture, pseudo, WIP, guide, module, plan, or report files. Commit successful work with `git commit --no-verify`.
+Work from the `repos/artificial` checkout root. Repository-relative paths in this instruction begin at that root. Modify only the application file named below; do not modify the architecture, pseudo, WIP, guide, module, plan, or report files. Commit successful work with `git commit`.Using `--no-verify` to bypass pre-commit hooks is forbidden.
 
 ## Goals
 

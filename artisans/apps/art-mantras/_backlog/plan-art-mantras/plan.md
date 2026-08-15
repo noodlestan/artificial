@@ -184,10 +184,6 @@ For the delegatee (shared context; per-step context is in each instruction file)
 - Phase 2 — render the saved `mantras[]` list (a mantras component; possibly browsing/reloading a saved mantra). Out of scope for the race (only the one current random mantra exists in phase 1). From `_architect.md` → Follow-ups.
 - `_module.md` next-move routines (break down responsibilities, tighten plan, abstract, commit) remain the planner's contract between race steps.
 
-- Commit convention — all commits use `git commit --no-verify` to skip the pre-commit CI hooks (lefthook `clean` + `extract`); also documented in the module `_module.md` next-move routines.
-
-- ~~Report/delegation file location drift — the delegator wrote the serve-hello-world report to `instructions/serve-hello-world__report.md` following `files/index.md`'s `Location:` line, while the naming pattern says `plan-{id}/delegations/`. Reconcile `files/index.md` before the delegation-file use case lands.~~ — RESOLVED 2026-08-08: `files/index.md` naming patterns reconciled to `plan-{id}/instructions/` (co-located, matching its `Location:` line); `execute-plan/SKILL.md` delegation-file link rule updated to match.
-
 ## Feedback
 
 - (delegator, 2026-08-09) — delegated `bind-promote` verbatim to worker `Anscombe`; blocked during mandatory reading.

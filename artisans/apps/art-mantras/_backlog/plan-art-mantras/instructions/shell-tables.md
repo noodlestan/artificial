@@ -51,7 +51,6 @@ Implement the art-mantras race step 4 — **markup: convert the static shell to 
 - RULE: If a command reports errors, attempt to fix them.
 - RULE: If the errors persist, inspect the cause before continuing.
 - RULE: If still unable to fix it, STOP and report back following the "## How to Report Back" section.
-- RULE: If you commit, use `git commit --no-verify` — pre-commit hooks run the full CI pipeline (lefthook `clean` + `extract`); this repo commits with `--no-verify`.
 
 ## Workflow
 

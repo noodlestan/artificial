@@ -2,7 +2,7 @@
 
 **ID:** `archive-poc-and-publish`
 
-**Status:** `PLANNED`
+**Status:** `PREPARING`
 
 **Milestone:** `md-art-roundtrip`
 

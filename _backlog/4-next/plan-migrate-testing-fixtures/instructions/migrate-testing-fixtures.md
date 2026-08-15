@@ -60,7 +60,6 @@ npm ci # to install dependencies.
 - RULE: If a command reports errors, attempt to fix them.
 - RULE: If the errors persist, inspect the cause before continuing.
 - RULE: If still unable to fix it, STOP and report back following the "## How to Report Back" section.
-- RULE: If you commit, use `git commit --no-verify` — pre-commit hooks run the full CI pipeline (lefthook `clean` + `extract`); this repo commits with `--no-verify`.
 
 ## Workflow
 
@@ -127,7 +126,12 @@ npm run test
 3. Adjust `FIXTURES_DIR`:
 
    ```typescript
-   const FIXTURES_DIR = path.join(path.dirname(new URL(import.meta.url).pathname), '..', 'test', 'fixtures');
+   const FIXTURES_DIR = path.join(
+     path.dirname(new URL(import.meta.url).pathname),
+     '..',
+     'test',
+     'fixtures',
+   );
    ```
 
 4. Leave everything else verbatim — the `getFixtures` filter (`*.md` / `*.art`, excluding `*.art.json`), the `parseFixture` try/catch, the per-fixture `PASS`/`FAIL` line (`padEnd(30)`), the results block, and `process.exit(exitCode)`.
@@ -169,7 +173,6 @@ npm run build
 
 - Stage all changes in `repos/artificial/art-js/libs/parser/` (fixtures, scripts, package.json) + the regenerated root `package-lock.json`.
 - Commit with message: `art-js: migrate testing fixtures to parser package`.
-- Use `git commit --no-verify`.
 
 ## How to Report Back to the Delegator
 

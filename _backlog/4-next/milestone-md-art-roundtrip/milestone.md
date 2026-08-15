@@ -2,7 +2,7 @@
 
 **ID:** `md-art-roundtrip`
 
-**Status:** `PLANNED`
+**Status:** `PREPARING`
 
 ## Summary
 
@@ -24,10 +24,11 @@ Singularize the accidental `@art-js/artificials-*` plural package names (phase 0
 | 4 — Implement constructs       | `plan-implement-constructs/plan.md`         | `PREPARING` |
 | 5 — Implement serializer       | `plan-implement-serializer/plan.md`         | `PREPARING` |
 | 6 — Migrate tests to pipeline  | `plan-migrate-tests-pipeline/plan.md`       | `PREPARING` |
-| 7 — Create knowledge resources | `plan-create-knowledge-resources/plan.md`   | `PLANNED`  |
+| 7 — Create knowledge resources | `plan-create-knowledge-resources/plan.md`   | `PREPARING` |
 | 8 — Implement gaps             | `plan-implement-gaps/plan.md`               | `PREPARING` |
-| 10 — Archive and publish       | `plan-archive-poc-and-publish/plan.md`      | `PLANNED`  |
-| 11 — Integrate knowledge       | `plan-integrate-knowledge/plan.md`          | `PLANNED`  |
+| 9 — Refactoring and Test Coverage | `plan-refactoring-and-test-coverage/plan.md` | `PREPARING` |
+| 10 — Archive and publish       | `plan-archive-poc-and-publish/plan.md`      | `PREPARING` |
+| 11 — Integrate knowledge       | `plan-integrate-knowledge/plan.md`          | `PREPARING` |
 
 ## Packages
 

@@ -60,7 +60,6 @@ This is a types-only package for now but will later host utils such as assertion
 - RULE: If a command reports errors, attempt to fix them.
 - RULE: If the errors persist, inspect the cause before continuing.
 - RULE: If still unable to fix it, STOP and report back following the "## How to Report Back" section.
-- RULE: If you commit, use `git commit --no-verify` — pre-commit hooks run the full CI pipeline (lefthook `clean` + `extract`); this repo commits with `--no-verify`.
 
 ## Workflow
 
@@ -297,7 +296,6 @@ npm run build
 
 - Stage all changes in `art-js/libs/primitives/` and `art-js/libs/parser/`.
 - Commit with message: `art-js: bootstrap primitives and parser libs`.
-- Use `git commit --no-verify`.
 
 ## How to Report Back to the Delegator
 

@@ -64,7 +64,6 @@ The rename is driven by exact patterns, applied to the **live tree** only. The f
 - RULE: If a command reports errors, attempt to fix them.
 - RULE: If the errors persist, inspect the cause before continuing.
 - RULE: If still unable to fix it, STOP and report back following the "## How to Report Back" section.
-- RULE: If you commit, use `git commit --no-verify` — pre-commit hooks run the full CI pipeline (lefthook `clean` + `extract` + `ci`); this repo commits with `--no-verify`.
 
 ## Workflow
 
@@ -202,7 +201,6 @@ npm run lint # must pass
 
 - Stage all changes (renamed/modified files + regenerated `package-lock.json`).
 - Commit with message: `refactor: singularize artificial package names`.
-- Use `git commit --no-verify`.
 
 ## How to Report Back to the Delegator
 
