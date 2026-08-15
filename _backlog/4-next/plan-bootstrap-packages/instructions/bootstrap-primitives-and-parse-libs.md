@@ -20,7 +20,7 @@ The plan workflow (see `repos/artificial/_guide.md` → Planning Workflow → Wo
 
 ## Goals
 
-Bootstrap `@art-js/artificials-primitives` with the core types migrated from the POC parser, and bootstrap `@art-js/artificials-parser` consuming primitives from its entry point — one commit, two packages.
+Bootstrap `@art-js/artificial-primitives` with the core types migrated from the POC parser, and bootstrap `@art-js/artificial-parser` consuming primitives from its entry point — one commit, two packages.
 
 ## Mandatory Reading
 
@@ -47,14 +47,14 @@ npm ci # to install dependencies.
 This is a types-only package for now but will later host utils such as assertions.
 
 1. Create the type files in `art-js/libs/primitives/src/` (`point.ts`, `record.ts`, `constructs.ts`, `registry.ts`, `index.ts`).
-2. Bootstrap `@art-js/artificials-parser` consuming `@art-js/artificials-primitives` from its entry point: import a simple type, declare a const of that type, `console.info(value)`; add the primitives dependency to `art-js/libs/parser/package.json`.
+2. Bootstrap `@art-js/artificial-parser` consuming `@art-js/artificial-primitives` from its entry point: import a simple type, declare a const of that type, `console.info(value)`; add the primitives dependency to `art-js/libs/parser/package.json`.
 3. Verify lint and build pass in both packages.
 
 ## Rules
 
 - Only modify: `repos/artificial/art-js/libs/primitives/src/**`, `repos/artificial/art-js/libs/parser/src/**`, `repos/artificial/art-js/libs/parser/package.json`.
 - RULE: Do NOT modify `repos/artificial/art-js/libs/primitives/package.json` — keep the vite build and its devDependencies as-is.
-- RULE: Do NOT modify `repos/artificial/art-js/cli/poc-parse/**` — POC Parse is a read-only migration source; it cannot be used to test, cannot be modified, and is superseded by `@art-js/artificials-parser`.
+- RULE: Do NOT modify `repos/artificial/art-js/cli/poc-parse/**` — POC Parse is a read-only migration source; it cannot be used to test, cannot be modified, and is superseded by `@art-js/artificial-parser`.
 - NEVER modify `repos/artificial/_guide.md`, `repos/artificial/_backlog/**`, `.agents/domains/plans/**`, or any `repos/artificial/architecture/records/**` file.
 - RULE: This is a types-only package for now but will later host utils such as assertions.
 - RULE: If a command reports errors, attempt to fix them.
@@ -241,7 +241,7 @@ export type {
 Update `repos/artificial/art-js/libs/parser/src/index.ts` — replace the `// placeholder` with a primitives consumption smoke:
 
 ```typescript
-import type { Point } from '@art-js/artificials-primitives';
+import type { Point } from '@art-js/artificial-primitives';
 
 /** Origin point — smoke value proving the parser→primitives dependency resolves. */
 const origin: Point = { line: 1, column: 1, offset: 0 };
@@ -255,7 +255,7 @@ Update `repos/artificial/art-js/libs/parser/package.json` — add the primitives
 
 ```json
 "dependencies": {
-  "@art-js/artificials-primitives": "*"
+  "@art-js/artificial-primitives": "*"
 }
 ```
 

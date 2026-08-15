@@ -31,7 +31,7 @@ For the delegator (execution mechanics):
 
 **Commit Message:** `art-js: archive poc-parse package`
 
-**Instructions File:** `_backlog/4-next/plan-archive-and-publish/instructions/archive-poc-parse.md`
+**Instructions File:** `_backlog/4-next/plan-archive-poc-and-publish/instructions/archive-poc-parse.md`
 
 **Scope:**
 
@@ -42,7 +42,7 @@ For the delegator (execution mechanics):
 
 **Commit Message:** `art-js: publish v0.1.0`
 
-**Instructions File:** `_backlog/4-next/plan-archive-and-publish/instructions/publish-v0.1.0.md`
+**Instructions File:** `_backlog/4-next/plan-archive-poc-and-publish/instructions/publish-v0.1.0.md`
 
 **Scope:**
 

@@ -10,11 +10,20 @@
 
 ## Summary
 
-Bootstrap `@art-js/artificials-primitives` (types only) and `@art-js/artificials-parser` in a single commit: migrate the core types into primitives and prove the parser package consumes primitives from its entry point. POC Parse — which stood in lieu of the parser lib — is superseded by `@art-js/artificials-parser` and archived in phase 3. Executed within the Artificial repository (`repos/artificial`) as phase 1 of the MD Art Roundtrip milestone.
+Bootstrap `@art-js/artificial-primitives` (types only) and `@art-js/artificial-parser` in a single commit: migrate the core types into primitives and prove the parser package consumes primitives from its entry point. POC Parse — which stood in lieu of the parser lib — is superseded by `@art-js/artificial-parser` and archived in phase 3. Executed within the Artificial repository (`repos/artificial`) as phase 1 of the MD Art Roundtrip milestone.
 
 ## Scope
 
 This section describes the working scope, where the plan is executed and what it modifies, including the scope resources involved or modified by the plan: workspace paths, repositories, packages, and deployments.
+
+### Out of Scope
+
+- Out of scope: parser code migration and POC-snapshot verification, addressed by the parser migration in phase 3 (`plan-migrate-and-verify`).
+- Out of scope: fixture suite migration, addressed by the fixture copy in phase 2 (`plan-migrate-testing-fixtures`).
+- Out of scope: constructs and serializer packages, addressed by the factory extraction in phase 4 (`plan-implement-constructs`) and the serializer bootstrap in phase 5 (`plan-implement-serializer`).
+- Out of scope: roundtrip verification and pipeline tests, addressed by the two-way fixture tests in phase 5 and the pipeline suite in phase 6 (`plan-migrate-tests-pipeline`).
+- Out of scope: roundtrip gap refinements (whitespace gaps preserved), addressed reactively in phase 8 (`plan-implement-gaps`).
+- Out of scope: archive and publish, addressed in phase 10 (`plan-archive-poc-and-publish`).
 
 ### Workspace
 
@@ -26,9 +35,9 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Packages
 
-- Package: Artificials Primitives – Canonical `@art-js/artificials-primitives` (public @0.0.1); described by `ops/records/packages/artificials-primitives.art`; located at `art-js/libs/primitives/`.
-- Package: Artificials Parser – Canonical `@art-js/artificials-parser` (public @0.0.1); described by `ops/records/packages/artificials-parser.art`; located at `art-js/libs/parser/` (consumes primitives from its entry point in this plan).
-- Package: Artificials POC Parse – Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificials-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
+- Package: Artificial Primitives – Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `ops/records/packages/artificial-primitives.art`; located at `art-js/libs/primitives/`.
+- Package: Artificial Parser – Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (consumes primitives from its entry point in this plan).
+- Package: Artificial POC Parse – Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
 
 ### Deployments
 
@@ -53,7 +62,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 ### Knowledge
 
 - Pseudo: `art-js/cli/poc-parse/_pseudo.md` – parser architecture (source of truth): context-aware visiting, factories, handlers.
-- Architecture: `architecture/index.md` – artificials ecosystem overview.
+- Architecture: `architecture/index.md` – artificial ecosystem overview.
 - ADR: `architecture/records/adr/parser.art` – mdast-based substrate research behind the parser.
 - ADR: `architecture/records/adr/language.art` – language and parser containment model decisions.
 
@@ -99,14 +108,13 @@ npm run test
 
 - Migrate types from `poc-parse/src/parse/types.ts` to `art-js/libs/primitives/src/`
 - Create entry point `src/index.ts` re-exporting all types
-- Bootstrap `@art-js/artificials-parser` consuming `@art-js/artificials-primitives` from its entry point: import a simple type, declare a const of that type, `console.info(value)`; add the primitives dependency to `art-js/libs/parser/package.json`
+- Bootstrap `@art-js/artificial-parser` consuming `@art-js/artificial-primitives` from its entry point: import a simple type, declare a const of that type, `console.info(value)`; add the primitives dependency to `art-js/libs/parser/package.json`
 - Keep the vite build in both packages; do not modify poc-parse
 - Verify: `npm run lint`, `npm run build` in both packages
 
 ## Follow ups
 
-- Phase 2 (`migrate-and-verify`) and phase 3 (`archive-and-publish`) of the MD Art Roundtrip milestone.
-- Milestone open questions: remove `createNestedContext` injection from handler factories during migration; decide on pure-whitespace gap `NaturalBlock`s for the lossless roundtrip; decide whether the dead `fieldBlockFactory` export is kept.
+None.
 
 ## Feedback
 
