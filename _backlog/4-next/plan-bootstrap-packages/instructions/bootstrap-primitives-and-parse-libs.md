@@ -47,12 +47,12 @@ npm ci # to install dependencies.
 This is a types-only package for now but will later host utils such as assertions.
 
 1. Create the type files in `art-js/libs/primitives/src/` (`point.ts`, `record.ts`, `constructs.ts`, `registry.ts`, `index.ts`).
-2. Bootstrap `@art-js/artificial-parser` consuming `@art-js/artificial-primitives` from its entry point: import a simple type, declare a const of that type, `console.info(value)`; add the primitives dependency to `art-js/libs/parser/package.json`.
+2. Bootstrap `@art-js/artificial-parser` consuming `@art-js/artificial-primitives` from its entry point: import a simple type, declare a const of that type, `console.info(value)` (allow-listed by the root `no-console` rule — `allow: ['info', 'warn', 'error']`; no disable comment needed); add the primitives dependency to `art-js/libs/parser/package.json`; regenerate the lockfile via `npm install` at the repository root.
 3. Verify lint and build pass in both packages.
 
 ## Rules
 
-- Only modify: `repos/artificial/art-js/libs/primitives/src/**`, `repos/artificial/art-js/libs/parser/src/**`, `repos/artificial/art-js/libs/parser/package.json`.
+- Only modify: `repos/artificial/art-js/libs/primitives/src/**`, `repos/artificial/art-js/libs/parser/src/**`, `repos/artificial/art-js/libs/parser/package.json`, `repos/artificial/package-lock.json` (regenerated via `npm install`, never hand-edited).
 - RULE: Do NOT modify `repos/artificial/art-js/libs/primitives/package.json` — keep the vite build and its devDependencies as-is.
 - RULE: Do NOT modify `repos/artificial/art-js/cli/poc-parse/**` — POC Parse is a read-only migration source; it cannot be used to test, cannot be modified, and is superseded by `@art-js/artificial-parser`.
 - NEVER modify `repos/artificial/_guide.md`, `repos/artificial/_backlog/**`, `.agents/domains/plans/**`, or any `repos/artificial/architecture/records/**` file.
@@ -77,7 +77,7 @@ Execute all the steps autonomously, one by one, including running the prescribed
 ## Step Verification
 
 - After Step 1: `npm run lint` in `art-js/libs/primitives/` passes.
-- After Step 2: `npm run build` in `art-js/libs/parser/` passes.
+- After Step 2: `npm install` at the repository root exits 0 (lockfile regenerated); `npm run build` in `art-js/libs/parser/` passes.
 - After Step 3: full verification below.
 
 ## Verification
@@ -249,7 +249,7 @@ const origin: Point = { line: 1, column: 1, offset: 0 };
 console.info(origin);
 ```
 
-Note: the `console.info` is intended smoke output — keep it. If the linter flags it, note it in your feedback (do not remove it silently).
+Note: the `console.info` is intended smoke output — keep it. It is allow-listed by the root `no-console` rule (`allow: ['info', 'warn', 'error']`), so no `eslint-disable` comment is needed; do not add one.
 
 Update `repos/artificial/art-js/libs/parser/package.json` — add the primitives dependency (keep everything else, including the vite build):
 
@@ -258,6 +258,8 @@ Update `repos/artificial/art-js/libs/parser/package.json` — add the primitives
   "@art-js/artificial-primitives": "*"
 }
 ```
+
+Then run `npm install` from `repos/artificial/` (the repository root) to register the workspace link and regenerate `package-lock.json` — confirm exit 0. Do NOT hand-edit the lockfile.
 
 ### Step 3 of 3 — Verify
 
@@ -271,7 +273,7 @@ Update `repos/artificial/art-js/libs/parser/package.json` — add the primitives
 
 **Sanity check**
 
-The primitives package exports all core types. The parser package imports a primitives type from its entry point, declares a const of that type, and `console.info`s it. Lint and build pass in both packages. POC Parse is untouched.
+The primitives package exports all core types. The parser package imports a primitives type from its entry point, declares a const of that type, and `console.info`s it (allow-listed by `no-console`). The `@art-js/artificial-primitives` workspace dependency is wired and the lockfile regenerated. Lint and build pass in both packages. POC Parse is untouched.
 
 **Verification:**
 

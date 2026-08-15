@@ -128,7 +128,7 @@ npm run test
 
 ## Follow ups
 
-None.
+- **Note for the planner (left during phases 0–2 refinement):** (1) the `migrate-parser-code` scope line "Move fixtures to parser package test directory" is now covered by phase 2 (`plan-migrate-testing-fixtures`) — drop or reword it when this plan is refined. (2) `verify-parser-against-snapshots` must swap the fixture runner's import from `../../../cli/poc-parse/src/parse/parse` (wired in phase 2, since the parser package had no parse export yet) to `@art-js/artificial-parser` once the parse API lands in this phase.
 
 ## Feedback
 

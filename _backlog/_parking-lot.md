@@ -17,6 +17,7 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 - **Spec routines reference** — from `art-js/spec/routines/_wip.md`: Reference section (Processing Input, Invoking Commands/Routines/Templates, General Statement Rules, Rules for Formatting Statements).
 - **TagReference** — WIP in `expressions/tag.art`: backticked `#<identifier>` reference for use in instructions.
 - **Bootstrap verification** — the consistency check (`ValueType: Primitive` self-description, `art-js/spec/README.md` Phase 6) is not implemented.
+- **Spec package record** — `@art-js/artificial-spec` has no record in `ops/records/packages/` (phase 0 renames only its `package.json` name and references). Decide whether to create `ops/records/packages/artificial-spec.art` or `art-js/spec/_records/package.art`.
 
 ## BLOCKER
 
@@ -33,3 +34,5 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 - **Artificial tasks domain package** — `@artificial/tasks`: `src/*.art` records + precompiled projections + `skills/` + `agents/`; first real domain packaged with the pipeline.
 - **Developer dependencies field** — add `dependencies` to Structure: Project and Structure: Package; create Dependency + Dependency Group types.
 - **Primitive spec cleanup** — legacy `#### Art: Inline/Block`, `#### Generation`, `#### Interpretation` sections in `primitives/*.art` (pre-projection era).
+- **Workspace-tooling dependency record** — `ops/records/dependencies/cli-dev.art` references `@artificials/build`; possibly stale/legacy — review in the workspace-tooling package (message filed at `_backlog/_message-workspace-tooling-architect.md`).
+- **Word-only "Artificials"** — prose mentions in `_guide.md` ("Artificials (root)") and `reference/index.md` ("Artificials Reference") were deliberately left untouched by phase 0: its rename patterns target package names, records, and `artificials-` strings only.
