@@ -50,6 +50,8 @@ None current.
 
 - **Update CLI README** — match format of other CLI READMEs in the ecosystem, preserving command summary.
 
+- **Add `--force` flag to pull/push/sync commands** — follow-up from `plan-implement-pull-push-sync`: allow forcing pull/push/sync on dirty checkouts (currently they skip dirty checkouts).
+
 ### BLOCKER
 
 - None current.

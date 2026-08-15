@@ -73,7 +73,7 @@ Implement `art-workspace publish [--auto]` end-to-end, tests first.
 
 **Pseudo:** `architecture/_pseudo.md` → `### Command: publish` and auxiliary `shouldPushCheckout` / `pushCheckout`.
 
-**Dependency note:** this slice consumes `pushCheckout` and `shouldPushCheckout` produced by `plan-implement-pull-push-sync` (currently `WORKING`). If that plan lands first, reuse its functions; otherwise scaffold them per `architecture/_pseudo.md`.
+**Dependency note:** this slice consumes `pushCheckout` and `shouldPushCheckout` landed in `plan-implement-pull-push-sync` (commit `ef8a2cf`). Reuse those functions — do not scaffold them.
 
 ## Final Verification
 
@@ -108,7 +108,7 @@ You are working on `art-domains/cli/workspace/_backlog/4-next/plan-implement-pub
 
 Goal: implement the `art-workspace publish [--auto]` command for `@art-domains/workspace-cli`, replacing the stub at `src/commands/publish/runPublish.ts`. It pushes clean unpushed repos and publishes unpublished packages to npm.
 
-Context: this slice depends on `shouldPushCheckout`/`pushCheckout` from `plan-implement-pull-push-sync` (check if they landed; otherwise scaffold per `architecture/_pseudo.md`) and reuses `readProjectRecords` from the `repo` command.
+Context: this slice depends on `shouldPushCheckout`/`pushCheckout` landed in `plan-implement-pull-push-sync` (commit `ef8a2cf`) and reuses `readProjectRecords` from the `repo` command.
 
 Use the **write-plan** skill to refine this DRAFT into a READY plan:
 1. Compose scope and context: workspace `ops-workspace` (managed by `@art-domains/workspace-cli`); repository `artificial` at `$WORKSPACE/repos/artificial/art-domains/cli/workspace`; package `@art-domains/workspace-cli`.
