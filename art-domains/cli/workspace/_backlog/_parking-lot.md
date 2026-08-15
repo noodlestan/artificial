@@ -34,8 +34,6 @@ None current.
 
 ### PENDING
 
-- **Refine `sanity-enhancement` instruction (plan `implement-pull-push-sync`) with worker feedback** — from commit `ef8a2cf`: merge the "define contracts" stub step into implementation (ESLint `no-unused-vars` on empty stubs); add divergent setups + explicit `git fetch` for the pull/`--auto` test scenarios; avoid `simple-git` `addConfig` (block-unsafe-operations plugin).
-
 - **Injectable Presentation** — Testing command usage of presentation layer requires setup mocking or assertion on presenters. Consider refactoring presentation to make it injectable. Configuration and the strategy pattern would go a long way here.
 
 - **Formalize Publishing Workflow** — formalize the publish-then-symlink pattern into a `Workflow: Publishing` resource. Define agent modes, skills (`publishing-workflow`), and commands. Integration with plan files: when a plan reaches `DONE` status, the publishing workflow identifies what needs publishing. Feeds off `_backlog/1-done/`. Related to `$WORKSPACE/.agents/domains/changelogs/` — publishing triggers changelog generation.

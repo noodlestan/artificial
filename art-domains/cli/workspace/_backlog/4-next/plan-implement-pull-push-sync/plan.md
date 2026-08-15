@@ -2,7 +2,7 @@
 
 **ID:** `implement-pull-push-sync`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `plan`
 
@@ -160,11 +160,22 @@ Implement `art-workspace pull`, `art-workspace push`, and `art-workspace sync` c
 
 **BDD:** `architecture/commands.md` → Pull, Push, Sync sections.
 
-### `sanity-enhancement` - `READY`
+### `sanity-enhancement` - `DONE`
 
 **Commit Message:** `feat(workspace-cli): enhance sanity with workspace status and is behind detection`
 
 **Instructions File:** `_backlog/4-next/plan-implement-pull-push-sync/instructions/sanity-enhancement.md`
+
+**Commit:** `51cd680` (`feat(workspace-cli): enhance sanity with workspace status and is behind detection`), pushed to `origin/main`.
+
+**Report:** `_backlog/4-next/plan-implement-pull-push-sync/instructions/sanity-enhancement__report.md`
+
+**Evidence:**
+
+- `src/commands/sanity/private/pullWorkspaceCheckout.ts` — pull workspace root when clean and behind; logs success/failure; updates `ctx.workspace` only (temporary checkout, never merged into store)
+- `runSanity --auto` — calls `pullWorkspaceCheckout` before `pushCleanCheckouts`
+- Tests: `pullWorkspaceCheckout.test.ts` (5), `runSanity.test.ts` BDD scenarios (4) — 195/195 green, no `it.todo()`
+- `pull`, `push`, `sync` commands untouched (belong to the previous commit)
 
 Enhance `art-workspace sanity` command with workspace status and "is behind" detection.
 
@@ -224,6 +235,15 @@ All steps MUST pass. If any step fails, fix the issue before considering the tas
 - **Crew note** — `rg` is not installed in this environment; use `grep`. `npm run test` in the package dir is the fastest signal; the monorepo `npm run ci` is the final gate.
 
 **Planner reflection:** `pull-push-sync-command` is DONE (`ef8a2cf`). `sanity-enhancement` remains READY — apply the ESLint step + divergence feedback when refining that instruction.
+
+### From `sanity-enhancement` (worker, commit `51cd680`)
+
+- **Test setups need an explicit `git fetch`** after advancing origin — behind detection reads the local remote-tracking ref (`origin/main`), so without a fetch `isBehind` stays `false` and the behind state is never detected.
+- **Workspace-root test setup must stay clean** — `writeRepoRecord`/`writeCheckoutRecord` and a nested checkout under `repos/` make the root dirty, which skips the pull before it can fail; commit the records plus a `.gitignore` for `repos/` so the pull is attempted.
+- **ESLint rejects non-null assertions** (`@typescript-eslint/no-non-null-assertion`) — use `expect(...).toBeDefined()` + optional chaining instead of `ctx.workspace!.isBehind`. Same divergence as on `pull-push-sync-command`.
+- **`git status` treats untracked nested git repos as dirt** — any test placing a checkout inside a workspace-root repo must neutralize the untracked paths (gitignore + commit, or `.git/info/exclude`).
+
+**Planner reflection:** `sanity-enhancement` is DONE (`51cd680`). All iterations of this plan are complete — marking the plan DONE.
 
 ## Follow ups
 
