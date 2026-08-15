@@ -6,11 +6,11 @@
 
 **Milestone:** `md-art-roundtrip`
 
-**Phase:** 3
+**Phase:** 10
 
 ## Summary
 
-Archive poc-parse. Publish `@art-js/artificials-primitives` and `@art-js/artificials-parser` v0.1.0.
+Archive poc-parse. Publish `@art-js/artificial-primitives` and `@art-js/artificial-parser` v0.0.1.
 
 ## Source Tasks
 
@@ -38,15 +38,15 @@ For the delegator (execution mechanics):
 - Mark poc-parse as `private: true` in package.json
 - Add README noting it's archived
 
-#### `publish-v0.1.0` - `PLANNED`
+#### `publish-v0.0.1` - `PLANNED`
 
-**Commit Message:** `art-js: publish v0.1.0`
+**Commit Message:** `art-js: publish v0.0.1`
 
-**Instructions File:** `_backlog/4-next/plan-archive-poc-and-publish/instructions/publish-v0.1.0.md`
+**Instructions File:** `_backlog/4-next/plan-archive-poc-and-publish/instructions/publish-v0.0.1.md`
 
 **Scope:**
 
 - Ensure all packages have correct `publishConfig`
-- Version bump to `0.1.0`
+- Version bump to `0.0.1`
 - Run `npm publish` for primitives and parser
 - Verify: packages installable from npm

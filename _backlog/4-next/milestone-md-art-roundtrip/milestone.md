@@ -15,11 +15,19 @@ Singularize the accidental `@art-js/artificials-*` plural package names (phase 0
 
 ## Phase Plans
 
-| Phase                   | Plan                                   | Status      |
-| ----------------------- | -------------------------------------- | ----------- |
-| 1 — Bootstrap packages  | `plan-bootstrap-packages/plan.md`      | `PREPARING` |
-| 2 — Migrate and verify  | `plan-migrate-and-verify/plan.md`      | `PREPARING` |
-| 3 — Archive and publish | `plan-archive-poc-and-publish/plan.md` | `PREPARING` |
+| Phase                          | Plan                                        | Status      |
+| ------------------------------ | ------------------------------------------- | ----------- |
+| 0 — Rename packages            | `plan-rename-packages/plan.md`              | `PREPARING` |
+| 1 — Bootstrap packages         | `plan-bootstrap-packages/plan.md`           | `PREPARING` |
+| 2 — Migrate testing fixtures   | `plan-migrate-testing-fixtures/plan.md`     | `PREPARING` |
+| 3 — Migrate and verify         | `plan-migrate-and-verify/plan.md`           | `PREPARING` |
+| 4 — Implement constructs       | `plan-implement-constructs/plan.md`         | `PREPARING` |
+| 5 — Implement serializer       | `plan-implement-serializer/plan.md`         | `PREPARING` |
+| 6 — Migrate tests to pipeline  | `plan-migrate-tests-pipeline/plan.md`       | `PREPARING` |
+| 7 — Create knowledge resources | `plan-create-knowledge-resources/plan.md`   | `PLANNED`  |
+| 8 — Implement gaps             | `plan-implement-gaps/plan.md`               | `PREPARING` |
+| 10 — Archive and publish       | `plan-archive-poc-and-publish/plan.md`      | `PLANNED`  |
+| 11 — Integrate knowledge       | `plan-integrate-knowledge/plan.md`          | `PLANNED`  |
 
 ## Packages
 
