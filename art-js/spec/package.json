@@ -1,5 +1,5 @@
 {
-  "name": "@art-js/artificials-spec",
+  "name": "@art-js/artificial-spec",
   "version": "0.0.1",
   "description": "The artificial language specification, written in art. Content package consumed by the parser, validator, and bundler packages.",
   "author": "Noodlestan Collective",

@@ -1,4 +1,4 @@
-# Artificials Language Server
+# Artificial Language Server
 
 > Language server (WIP).
 

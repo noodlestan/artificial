@@ -1,14 +1,14 @@
 # Module
 
-## Package: Artificials Program
+## Package: Artificial Primitives
 
-**Purpose:** Program execution engine for Art modules.
+**Purpose:** Core primitives for the Art language.
 
-**Description:** Executes parsed Art modules and manages program state.
+**Description:** Foundational types and utilities for Art modules.
 
-**Path:** `libs/program/`
+**Path:** `libs/primitives/`
 
-**Canonical Name:** `@art-js/artificials-program`
+**Canonical Name:** `@art-js/artificial-primitives`
 
 **Version:** `0.0.1`
 
@@ -16,12 +16,14 @@
 
 **Dependencies:**
 
+- Peer:
+
 - Dev:
   - Package Dependency Set: Solid Lib Development
 
 **Scripts:**
 
-- Package Script Set: Artificials Lib Build
+- Package Script Set: Artificial Lib Build
 - Package Script Set: Common Scripts
 
 **Scaffolders:**

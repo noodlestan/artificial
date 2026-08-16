@@ -1,14 +1,14 @@
 # Module
 
-## Package: Artificials Primitives
+## Package: Artificial Bundler
 
-**Purpose:** Core primitives for the Art language.
+**Purpose:** Bundler for Art modules.
 
-**Description:** Foundational types and utilities for Art modules.
+**Description:** Bundles Art modules for distribution.
 
-**Path:** `libs/primitives/`
+**Path:** `libs/bundler/`
 
-**Canonical Name:** `@art-js/artificials-primitives`
+**Canonical Name:** `@art-js/artificial-bundler`
 
 **Version:** `0.0.1`
 
@@ -16,14 +16,12 @@
 
 **Dependencies:**
 
-- Peer:
-
 - Dev:
   - Package Dependency Set: Solid Lib Development
 
 **Scripts:**
 
-- Package Script Set: Artificials Lib Build
+- Package Script Set: Artificial Lib Build
 - Package Script Set: Common Scripts
 
 **Scaffolders:**

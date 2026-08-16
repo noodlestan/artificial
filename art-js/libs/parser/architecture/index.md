@@ -89,4 +89,4 @@ Section tracking uses a `WeakMap<VisitContext, SectionBlock>` — not a context 
 
 - `mdast-util-from-markdown` — parses markdown → mdast
 - `unist-util-visit` — traverses the tree
-- `@art-js/artificials-primitives` — core types
+- `@art-js/artificial-primitives` — core types

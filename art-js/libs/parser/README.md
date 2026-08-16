@@ -1,4 +1,4 @@
-# artificials-parser
+# artificial-parser
 
 > Parses Art modules (.art) and markdown files (.md).
 

@@ -1,4 +1,4 @@
-# artificials-primitives
+# artificial-primitives
 
 > Core primitives for the Art language.
 

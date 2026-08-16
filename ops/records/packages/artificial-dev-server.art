@@ -1,14 +1,14 @@
 # Module
 
-## Package: Artificials Language Server
+## Package: Artificial Dev Server
 
-**Purpose:** Language server for Art modules.
+**Purpose:** Development server for Art modules.
 
-**Description:** Provides IDE support for Art module development.
+**Description:** Local development server for testing Art modules.
 
-**Path:** `cli/language-server/`
+**Path:** `cli/dev-server/`
 
-**Canonical Name:** `@art-js/artificials-language-server`
+**Canonical Name:** `@art-js/artificial-dev-server`
 
 **Version:** `0.0.1`
 
@@ -26,7 +26,7 @@
 
 **Scaffolders:**
 
-- Scaffolder Skeleton: Lib Package
+- Scaffolder Skeleton: CLI Package
 - Scaffolder Skeleton: Package Common
 
 **PackageFile:** package.json

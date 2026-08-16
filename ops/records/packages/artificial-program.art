@@ -1,14 +1,14 @@
 # Module
 
-## Package: Artificials Bundler
+## Package: Artificial Program
 
-**Purpose:** Bundler for Art modules.
+**Purpose:** Program execution engine for Art modules.
 
-**Description:** Bundles Art modules for distribution.
+**Description:** Executes parsed Art modules and manages program state.
 
-**Path:** `libs/bundler/`
+**Path:** `libs/program/`
 
-**Canonical Name:** `@art-js/artificials-bundler`
+**Canonical Name:** `@art-js/artificial-program`
 
 **Version:** `0.0.1`
 
@@ -21,7 +21,7 @@
 
 **Scripts:**
 
-- Package Script Set: Artificials Lib Build
+- Package Script Set: Artificial Lib Build
 - Package Script Set: Common Scripts
 
 **Scaffolders:**

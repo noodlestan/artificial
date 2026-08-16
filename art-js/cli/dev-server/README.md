@@ -1,4 +1,4 @@
-# Artificials Dev Server
+# Artificial Dev Server
 
 > Development server for Art modules.
 

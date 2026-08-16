@@ -1,14 +1,14 @@
 # Module
 
-## Package: Artificials Tools
+## Package: Artificial Bin
 
-**Purpose:** Agent Tools for working with Art.
+**Purpose:** CLI for developing and building Art modules.
 
-**Description:** Deterministic operations for agents to work with art and context files..
+**Description:** Provides an entry point to bundler, program, validator, parser, and watcher.
 
-**Path:** `cli/tools/`
+**Path:** `cli/bin/`
 
-**Canonical Name:** `@art-js/artificials-tools`
+**Canonical Name:** `@art-js/artificial-bin`
 
 **Version:** `0.0.1`
 
@@ -26,7 +26,7 @@
 
 **Scaffolders:**
 
-- Scaffolder Skeleton: Lib Package
+- Scaffolder Skeleton: CLI Package
 - Scaffolder Skeleton: Package Common
 
 **PackageFile:** package.json

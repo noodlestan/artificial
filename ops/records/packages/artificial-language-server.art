@@ -1,14 +1,14 @@
 # Module
 
-## Package: Artificials Bin
+## Package: Artificial Language Server
 
-**Purpose:** CLI for developing and building Art modules.
+**Purpose:** Language server for Art modules.
 
-**Description:** Provides an entry point to bundler, program, validator, parser, and watcher.
+**Description:** Provides IDE support for Art module development.
 
-**Path:** `cli/bin/`
+**Path:** `cli/language-server/`
 
-**Canonical Name:** `@art-js/artificials-bin`
+**Canonical Name:** `@art-js/artificial-language-server`
 
 **Version:** `0.0.1`
 
@@ -26,7 +26,7 @@
 
 **Scaffolders:**
 
-- Scaffolder Skeleton: CLI Package
+- Scaffolder Skeleton: Lib Package
 - Scaffolder Skeleton: Package Common
 
 **PackageFile:** package.json

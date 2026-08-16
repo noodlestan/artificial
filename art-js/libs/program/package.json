@@ -1,5 +1,5 @@
 {
-  "name": "@art-js/artificials-program",
+  "name": "@art-js/artificial-program",
   "version": "0.0.1",
   "description": "Executes parsed Art modules and manages program state.",
   "author": "Noodlestan Collective",

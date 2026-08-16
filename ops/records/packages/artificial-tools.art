@@ -1,14 +1,14 @@
 # Module
 
-## Package: Artificials Dev Server
+## Package: Artificial Tools
 
-**Purpose:** Development server for Art modules.
+**Purpose:** Agent Tools for working with Art.
 
-**Description:** Local development server for testing Art modules.
+**Description:** Deterministic operations for agents to work with art and context files..
 
-**Path:** `cli/dev-server/`
+**Path:** `cli/tools/`
 
-**Canonical Name:** `@art-js/artificials-dev-server`
+**Canonical Name:** `@art-js/artificial-tools`
 
 **Version:** `0.0.1`
 
@@ -26,7 +26,7 @@
 
 **Scaffolders:**
 
-- Scaffolder Skeleton: CLI Package
+- Scaffolder Skeleton: Lib Package
 - Scaffolder Skeleton: Package Common
 
 **PackageFile:** package.json

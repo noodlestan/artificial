@@ -1,4 +1,4 @@
-# Artificials Bundler
+# Artificial Bundler
 
 > Bundler for Art modules.
 

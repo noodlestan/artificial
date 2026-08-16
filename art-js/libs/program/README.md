@@ -1,4 +1,4 @@
-# artificials-program
+# artificial-program
 
 > Program execution engine for Art modules.
 

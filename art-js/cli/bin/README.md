@@ -1,4 +1,4 @@
-# Artificials Bin
+# Artificial Bin
 
 > Static entry point to parser, validator, compiler, bundler, watcher.
 

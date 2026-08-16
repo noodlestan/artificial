@@ -1,4 +1,4 @@
-# artificials-validator
+# artificial-validator
 
 > Validates parsed modules.
 

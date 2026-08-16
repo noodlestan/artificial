@@ -1,4 +1,4 @@
-# Artificials Tools
+# Artificial Tools
 
 > Agent entry points.
 

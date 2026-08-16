@@ -1,5 +1,5 @@
 {
-  "name": "@art-js/artificials-parser",
+  "name": "@art-js/artificial-parser",
   "version": "0.0.1",
   "description": "Parses context files and art modules into structured representations.",
   "author": "Noodlestan Collective",

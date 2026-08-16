@@ -1,6 +1,6 @@
 # Module
 
-## Package: Artificials Poc Parse
+## Package: Artificial Poc Parse
 
 **Purpose:** POC spike of the artificials parser: a self-contained, CLI-executable package at `cli/poc-parse/`.
 

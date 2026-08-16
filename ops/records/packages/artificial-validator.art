@@ -1,6 +1,6 @@
 # Module
 
-## Package: Artificials Validator
+## Package: Artificial Validator
 
 **Purpose:** Validates parsed modules.
 
@@ -8,7 +8,7 @@
 
 **Path:** `libs/validator/`
 
-**Canonical Name:** `@art-js/artificials-validator`
+**Canonical Name:** `@art-js/artificial-validator`
 
 **Version:** `0.0.1`
 
@@ -21,7 +21,7 @@
 
 **Scripts:**
 
-- Package Script Set: Artificials Lib Build
+- Package Script Set: Artificial Lib Build
 - Package Script Set: Common Scripts
 
 **Scaffolders:**

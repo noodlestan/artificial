@@ -10,15 +10,15 @@
 
 **Packages:**
 
-- Package: Artificials Bin
-- Package: Artificials Bundler
-- Package: Artificials Dev Server
-- Package: Artificials Language Server
-- Package: Artificials Parser
-- Package: Artificials Primitives
-- Package: Artificials Program
-- Package: Artificials Tools
-- Package: Artificials Validator
+- Package: Artificial Bin
+- Package: Artificial Bundler
+- Package: Artificial Dev Server
+- Package: Artificial Language Server
+- Package: Artificial Parser
+- Package: Artificial Primitives
+- Package: Artificial Program
+- Package: Artificial Tools
+- Package: Artificial Validator
 - Package: Artificials Watcher
 
 **Scaffolders:**
