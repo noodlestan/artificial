@@ -4,7 +4,7 @@
 
 **Status:** `DRAFT`
 
-**Template:** `plan`
+**Template:** `.agents/domains/plans/templates/plan__template.md`
 
 **Skill:** `write-plan`
 

@@ -4,7 +4,7 @@
 
 **Status:** `DRAFT`
 
-**Template:** `plan`
+**Template:** `.agents/domains/plans/templates/plan__template.md`
 
 **Skill:** `write-plan`
 
@@ -98,9 +98,9 @@ All steps MUST pass. No `it.todo()` tests may remain.
 
 This DRAFT is a long-running bug-capture and fix plan. Two roles:
 
-**Capture (long-running session):** append bugs captured from other sessions to `plan__bugs.md`, always in the **Bug Format** declared there (scenario/expected/happened + one-sentence description). Update the `_architect.md` → Milestone 1 bug list when the plan grows.
+**Capture (long-running session):** append bugs captured from other sessions to `plan__bugs.md`, always in the **Bug Format** declared there.
 
-**Refine:** when bugs accumulate, refine this DRAFT into a READY plan (write-plan skill), one fix iteration per bug, generate implementation instructions, and hand off for delegation.
+**Refine:** when bugs accumulate, sugest refining this DRAFT into a READY plan (write-plan skill), one fix iteration per bug with its own instructions file.
 
 ## Follow ups
 
