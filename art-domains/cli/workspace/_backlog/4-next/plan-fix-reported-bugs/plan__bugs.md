@@ -24,6 +24,40 @@ Fixed bugs stay at the bottom of the file and get two more fields:
 
 ## Bugs
 
+### Bug: Checkout report fails to detect wrong remote
+
+**Description:** When a checkout directory is a clone of a different repository than the one recorded, `repo`/`sanity` commands present the Checkout Report as if the checkout were fine, instead of surfacing a "wrong remote" state.
+
+**Scenario:** On a workspace where a checkout is a clone of a different remote than its record (current workspace case: `repos/purrpose` actual remote is `git@github.com:noodlestan/conventions.git` while the record declares `git@github.com:noodlestan/purrpose.git`), run `npm run workspace sanity` (or `repo`).
+
+**Expected:** The Checkout Report marks the checkout `wrong remote` — a missing remote/record mismatch check, not a silent scan.
+
+**Happened:** The checkout is scanned and presented as a normal checkout, as if nothing were wrong.
+
+### Bug: `clone --all` presents Checkout Report without scanning
+
+**Description:** `clone --all` presents the Checkout Report without scanning checkouts, so states are blank — the same defect already fixed in the `clone <repo>` path.
+
+**Scenario:** Run `npm run workspace clone --all` on a workspace with recorded checkouts.
+
+**Expected:** The Checkout Report reflects the scanned git state after cloning (mirroring the `sanity` flow).
+
+**Happened:** The Checkout Report is presented straight from the store with blank `states` — no scan performed.
+
+**Root Cause:** `art-domains/cli/workspace/src/commands/clone/cloneAll.ts` calls `presentCheckoutReport(ctx)` without running `scanAllCheckoutsStates` first (the fix landed only in `cloneSpecific.ts`).
+
+### Bug: `cloneIfMissing` ignores the record branch
+
+**Description:** When cloning a missing checkout for an existing record, `cloneIfMissing` clones the default branch instead of the branch recorded, and overwrites the record's branch to `main`.
+
+**Scenario:** `rm -rf repos/terraform`, then (with the `terraform` checkout record on a non-main branch) run `npm run workspace clone terraform`.
+
+**Expected:** The clone checks out the branch from the record, and the record's branch is preserved.
+
+**Happened:** The clone lands on `main` (default), and the record is rewritten with `branch: main`.
+
+**Root Cause:** `art-domains/cli/workspace/src/commands/clone/private/cloneIfMissing.ts` runs `git.clone(remote, path)` (default branch), then `saveCheckoutRecord(..., branch: actualBranch || 'main')` — the record branch is never read.
+
 ### Bug: `clone Foo` fails silently
 
 **Description:** `clone` with an unknown repo name fails silently — no output, no error, and no failure operation in the report.
