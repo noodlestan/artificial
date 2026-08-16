@@ -1,20 +1,22 @@
-import type { WorkspaceContext } from '../context/createWorkspaceContext';
+import type { WorkspaceConfig } from '../../config/types';
 import { RepositoryCheckoutRecord } from '../records/types';
 
 import { createCheckout } from './createCheckout';
+import type { CheckoutStore } from './createCheckoutStore';
 
 export function hydrateStoreFromRecords(
-	ctx: WorkspaceContext,
+	config: WorkspaceConfig,
+	store: CheckoutStore,
 	records: RepositoryCheckoutRecord[],
 ): void {
 	for (const record of records) {
 		const checkout = createCheckout(
-			ctx.config,
+			config,
 			record.checkout.location,
 			record.repo,
 			record.checkout.branch,
 			record.checkout.name,
 		);
-		ctx.store.addCheckout(checkout);
+		store.addCheckout(checkout);
 	}
 }

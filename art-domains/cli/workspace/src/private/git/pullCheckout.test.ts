@@ -22,7 +22,7 @@ afterEach(() => {
 });
 
 describe('pullCheckout', () => {
-	it('pulls a behind checkout and clears the behind state', async () => {
+	it('pulls a behind checkout and returns the updated state', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		const bareDir = makeTempDir(tempDirs);
@@ -49,22 +49,15 @@ describe('pullCheckout', () => {
 		const scanned = await scanCheckoutState(checkout);
 		expect(scanned.isBehind).toBe(true);
 
-		await pullCheckout(ctx, scanned);
+		const result = await pullCheckout(scanned);
 
-		const after = ctx.store.getCheckoutForLocation('behind');
-		expect(after).toBeDefined();
-		expect(after?.isBehind).toBe(false);
-		expect(after?.issues.some(i => i.includes('behind'))).toBe(false);
-
-		const ops = ctx.log.all();
-		expect(ops).toHaveLength(1);
-		expect(ops[0].operation).toBe('pull');
-		expect(ops[0].outcome).toBe('success');
-
+		expect(result.success).toBe(true);
+		expect(result.checkout.isBehind).toBe(false);
+		expect(result.checkout.issues.some(i => i.includes('behind'))).toBe(false);
 		expect(existsSync(join(repoDir, 'origin.txt'))).toBe(true);
 	});
 
-	it('logs a failure when the pull fails', async () => {
+	it('returns failure when the pull fails', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'nopull');
@@ -78,16 +71,9 @@ describe('pullCheckout', () => {
 		checkout.exists = true;
 		checkout.issues = ['1 commit behind'];
 
-		await pullCheckout(ctx, checkout);
+		const result = await pullCheckout(checkout);
 
-		const ops = ctx.log.all();
-		expect(ops).toHaveLength(1);
-		expect(ops[0].operation).toBe('pull');
-		expect(ops[0].outcome).toBe('failure');
-		expect(ops[0].message()).toBeTruthy();
-
-		const after = ctx.store.getCheckoutForLocation('nopull');
-		expect(after).toBeDefined();
-		expect(after?.issues).toContain(ops[0].message());
+		expect(result.success).toBe(false);
+		expect(result.error).toBeTruthy();
 	});
 });

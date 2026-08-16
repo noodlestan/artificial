@@ -1,6 +1,6 @@
 import simpleGit from 'simple-git';
 
-import { hasLocalBranch } from '../../../private/git/hasLocalBranch';
+import { hasLocalBranch } from './hasLocalBranch';
 
 export async function createOrSwitchBranch(
 	dir: string,

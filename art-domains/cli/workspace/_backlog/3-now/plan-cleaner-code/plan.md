@@ -79,7 +79,7 @@ Commits execute strictly in sequence — the three DRAFT commits form a dependen
 
 **Instructions:** none — executed during a pairing session; no instruction file created.
 
-### `decouple-private-from-ctx` - `DRAFT`
+### `decouple-private-from-ctx` - `READY`
 
 **Commit Message:** `refactor(workspace-cli): decouple private layer from WorkspaceContext`
 
@@ -89,7 +89,7 @@ Move orchestration (store writes, ops logging, error handling) up to the command
 
 **Instructions File:** `instructions/decouple-private-from-ctx.md`
 
-### `decouple-checkout-scan` - `DRAFT`
+### `decouple-checkout-scan` - `READY`
 
 **Commit Message:** `refactor(workspace-cli): decouple checkout scan state from stored Checkout`
 
@@ -99,7 +99,7 @@ Separate scanned git state from the persisted `Checkout`; the store only holds i
 
 **Instructions File:** `instructions/decouple-checkout-scan.md`
 
-### `decouple-checkout-scan-states` - `DRAFT`
+### `decouple-checkout-scan-states` - `READY`
 
 **Commit Message:** `refactor(workspace-cli): model CheckoutScan as operation guards over states`
 

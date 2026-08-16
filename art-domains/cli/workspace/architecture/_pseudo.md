@@ -29,7 +29,7 @@ Every command starts by loading records into the store:
 hydrate(ctx)
   repos = loadRepositoryRecords(ctx.config)
   records = loadCheckoutRecords(ctx.config, repos)
-  hydrateStoreFromRecords(ctx, records)
+  hydrateStoreFromRecords(ctx.config, ctx.store, records)
 ```
 
 ## Operation Logs
@@ -71,7 +71,7 @@ clone(options)                            // { all, repoName, checkoutInput }
   else if options.repoName: cloneSpecific(ctx, repos, options.repoName, options.checkoutInput)
   else: cloneStatus(ctx)
 
-  presentCheckoutReport(ctx)
+  presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
   presentOperationsReport(ctx.log)
 
 cloneAll(ctx, repos)
@@ -111,13 +111,11 @@ cloneSpecific(ctx, repos, repoName, checkoutInput)
     saveCheckoutRecord(ctx.config, checkout.record.name, checkout.record)
 
   cloneIfMissing(ctx, checkout)
-  scanCheckoutState(ctx, checkout)
+  scanCheckoutState(checkout)
 
 cloneStatus(ctx)
-  scanAllCheckoutsStates(ctx)
-  scanExtraneousCheckouts(ctx)
-  presentCheckoutReport(ctx)
-  presentExtraneousReport(ctx.store)
+  scanAllCheckoutsStates(ctx.store)
+  presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
 ```
 
 ### Command: branch <branch> [<checkout-location...>]
@@ -141,7 +139,7 @@ branch(branch, checkoutLocations)
       ctx.log.log(createBranchFailure(branch, "not cloned", checkout))
       continue
 
-    checkout = scanCheckoutState(ctx, checkout)
+    checkout = scanCheckoutState(checkout)
     if not checkout.exists:
       ctx.log.log(createBranchFailure(branch, "checkout not cloned", checkout))
       continue
@@ -152,13 +150,13 @@ branch(branch, checkoutLocations)
 
       updated = { ...checkout, record: { ...checkout.record, branch } }
       ctx.store.updateCheckout(updated)
-      scanned = scanCheckoutState(ctx, updated)
+      scanned = scanCheckoutState(updated)
       saveCheckoutRecord(ctx.config, scanned.record.name, scanned.record)
     catch error:
       ctx.log.log(createBranchFailure(branch, error, checkout))
       continue
 
-  presentCheckoutReport(ctx)
+  presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
   presentOperationsReport(ctx.log)
 ```
 
@@ -215,7 +213,7 @@ repo(checkoutNames)
             branch: checkout.record.branch, directory: pkgPath, states
           })
 
-    presentCheckoutReport(ctx)
+    presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
     presentPackageStateReport(checkout, packageStates)
 ```
 
@@ -366,13 +364,13 @@ unlink(location, package, target)
 pull()
   ctx = createWorkspaceContext(config, store, log)
   hydrate(ctx)
-  scanAllCheckoutsStates(ctx)
+  scanAllCheckoutsStates(ctx.store)
 
   for checkout in ctx.store.getAllCheckouts():
     if isCleanCheckout(checkout) and checkout.isBehind:
-      pullCheckout(ctx, checkout)
+      doPullCheckout(ctx, checkout)
 
-  presentCheckoutReport(ctx)
+  presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
   presentOperationsReport(ctx.log)
 ```
 
@@ -386,15 +384,15 @@ pull()
 push()
   ctx = createWorkspaceContext(config, store, log)
   hydrate(ctx)
-  scanAllCheckoutsStates(ctx)
+  scanAllCheckoutsStates(ctx.store)
 
   for checkout in ctx.store.getAllCheckouts():
     if isCleanCheckout(checkout) and checkout.unpushed > 0:
       if checkout.isBehind:
-        pullCheckout(ctx, checkout)
+        doPullCheckout(ctx, checkout)
       pushCheckout(ctx, checkout)
 
-  presentCheckoutReport(ctx)
+  presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
   presentOperationsReport(ctx.log)
 ```
 
@@ -408,14 +406,14 @@ push()
 sync()
   ctx = createWorkspaceContext(config, store, log)
   hydrate(ctx)
-  scanAllCheckoutsStates(ctx)
+  scanAllCheckoutsStates(ctx.store)
 
   for checkout in ctx.store.getAllCheckouts():
     if isCleanCheckout(checkout):
-      pullCheckout(ctx, checkout)
+      doPullCheckout(ctx, checkout)
       pushCheckout(ctx, checkout)
 
-  presentCheckoutReport(ctx)
+  presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
   presentOperationsReport(ctx.log)
 ```
 
@@ -429,7 +427,7 @@ sync()
 publish(auto)
   ctx = createWorkspaceContext(config, store, log)
   hydrate(ctx)
-  scanAllCheckoutsStates(ctx)
+  scanAllCheckoutsStates(ctx.store)
 
   for checkout in ctx.store.getAllCheckouts():
     // Push if clean, has remote, unpushed > 0
@@ -449,7 +447,7 @@ publish(auto)
             npm publish --access public in dir
             ctx.log.log(createPublishSuccess(checkout, pkg.canonicalName, pkgJson.version))
 
-  presentCheckoutReport(ctx)
+  presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
   presentOperationsReport(ctx.log)
 ```
 
@@ -484,44 +482,6 @@ createWorkspaceCheckout(config)
   }
 ```
 
-### Function: scanWorkspaceState(ctx)
-
-**Responsibility:** Scan workspace root state without persisting to store. Returns the workspace checkout with updated state.
-
-```pseudo
-scanWorkspaceState(ctx)
-  workspace = createWorkspaceCheckout(ctx.config)
-
-  // Git layer
-  try:
-    workspace.branch = getCurrentBranch(workspace.path)
-    workspace.detached = isDetachedHead(workspace.path)
-    workspace.conflicts = hasMergeConflicts(workspace.path)
-    workspace.dirty = isDirty(workspace.path)
-    workspace.hasRemote = hasRemote(workspace.path)
-
-    hasBranch = workspace.branch !== "-" and workspace.branch !== "HEAD"
-    if workspace.hasRemote and hasBranch:
-      workspace.remoteBranch = getRemoteBranch(workspace.path)
-      workspace.unpushed = getUnpushedCount(workspace.path, workspace.remoteBranch)
-      workspace.isBehind = getBehindCount(workspace.path, workspace.remoteBranch) > 0
-  catch:
-    workspace.issues.push("git error")
-
-  // Issue layer
-  if workspace.detached: workspace.issues.push("detached HEAD")
-  if workspace.conflicts: workspace.issues.push("merge conflicts")
-  if not workspace.hasRemote: workspace.issues.push("no remote")
-  if workspace.dirty: workspace.issues.push("uncommitted files")
-  if workspace.unpushed > 0:
-    workspace.issues.push(workspace.unpushed === 1 ? "1 commit ahead" : "N commits ahead")
-  if workspace.isBehind:
-    behindCount = getBehindCount(workspace.path, workspace.remoteBranch)
-    workspace.issues.push(behindCount === 1 ? "1 commit behind" : "N commits behind")
-
-  return workspace
-```
-
 ### Function: isCleanCheckout(checkout)
 
 **Responsibility:** Whether a checkout is clean (no uncommitted changes, no conflicts, not detached).
@@ -536,23 +496,19 @@ isCleanCheckout(checkout)
   return true
 ```
 
-### Function: pullCheckout(ctx, checkout)
+### Function: pullCheckout(checkout)
 
-**Responsibility:** Pull a checkout's branch from origin and clear the "behind" issue on success.
+**Responsibility:** Pull a checkout's branch from origin. Returns a `PullResult` with the updated checkout and success/error status.
 
 ```pseudo
-pullCheckout(ctx, checkout)
+pullCheckout(checkout)
   git = simpleGit(checkout.path)
   try:
     git.pull("origin", checkout.record.branch)
     updated = { ...checkout, isBehind: false, issues: checkout.issues.filter(i => not /\d+ commit behind/.test(i)) }
-    ctx.store.updateCheckout(updated)
-    ctx.log.log(createPullSuccess(checkout, checkout.record.branch))
+    return { checkout: updated, success: true }
   catch error:
-    op = createPullFailure(checkout, checkout.record.branch, error)
-    updated = { ...checkout, issues: [...checkout.issues, op.message()] }
-    ctx.store.updateCheckout(updated)
-    ctx.log.log(op)
+    return { checkout, success: false, error }
 ```
 
 ### Function: createCheckout(config, target, repo?, branch?, name?)
@@ -585,30 +541,30 @@ createCheckoutLocation(repo, target?)
   return safePath(target ? repo.name + " " + target : repo.name)
 ```
 
-### Function: hydrateStoreFromRecords(ctx, records)
+### Function: hydrateStoreFromRecords(config, store, records)
 
 **Responsibility:** Turn persisted checkout records into checkout instances and add them to the store. Called by every command after loading records.
 
 ```pseudo
-hydrateStoreFromRecords(ctx, records)
+hydrateStoreFromRecords(config, store, records)
   for record in records:
-    checkout = createCheckout(ctx.config, record.checkout.location, record.repo, record.checkout.branch, record.checkout.name)
-    ctx.store.addCheckout(checkout)
+    checkout = createCheckout(config, record.checkout.location, record.repo, record.checkout.branch, record.checkout.name)
+    store.addCheckout(checkout)
 ```
 
-### Function: scanCheckoutState(ctx, checkout)
+### Function: scanCheckoutState(checkout)
 
-**Responsibility:** Read git state from filesystem, create a new checkout instance with updated state, and set it in the store. Returns the new checkout.
+**Responsibility:** Read git state from filesystem, create a new checkout instance with updated state. Returns the new checkout.
 
 **Pseudo:**
 
 ```pseudo
-scanCheckoutState(ctx, checkout)
+scanCheckoutState(checkout)
   updated = { ...checkout }
 
   // FS layer
   if not dirExists(checkout.path):
-    return ctx.store.updateCheckout({ ...updated, exists: false, issues: ["not cloned"] })
+    return { ...updated, exists: false, issues: ["not cloned"] }
 
   updated.exists = true
 
@@ -642,40 +598,43 @@ scanCheckoutState(ctx, checkout)
     behindCount = getBehindCount(checkout.path, updated.remoteBranch)
     updated.issues.push(behindCount === 1 ? "1 commit behind" : "N commits behind")
 
-  return ctx.store.updateCheckout(updated)
+  return updated
 ```
 
-### Function: scanAllCheckoutsStates(ctx)
+### Function: scanAllCheckoutsStates(store)
 
-**Responsibility:** Scan all checkouts in the store.
+**Responsibility:** Scan all checkouts in the store (store capability).
 
 **Pseudo:**
 
 ```pseudo
-scanAllCheckoutsStates(ctx)
-  for checkout in ctx.store.getAllCheckouts():
-    scanCheckoutState(ctx, checkout)
+scanAllCheckoutsStates(store)
+  for checkout in store.getAllCheckouts():
+    updated = scanCheckoutState(checkout)
+    store.updateCheckout(updated)
 ```
 
-### Function: scanExtraneousCheckouts(ctx)
+### Function: scanExtraneousCheckouts(config)
 
-**Responsibility:** Scan for extraneous (non-record based) checkouts under config.clone.path. Unreadable checkouts path is silently ignored.
+**Responsibility:** Scan for extraneous (non-record based) checkouts under config.clone.path. Returns the extraneous checkouts. Unreadable checkouts path is silently ignored.
 
 **Pseudo:**
 
 ```pseudo
-scanExtraneousCheckouts(ctx)
-  checkoutsPath = join(ctx.config.root.path, ctx.config.clone.path)
-  recordedLocations = ctx.store.getAllCheckouts().map(c => c.record.location)
+scanExtraneousCheckouts(config)
+  checkoutsPath = join(config.root.path, config.clone.path)
+  result = []
 
   try:
     for entry in listDirectories(checkoutsPath) where isDirectory:
       location = relative(checkoutsPath, entry)
-      if location not in recordedLocations:
-        checkout = ctx.store.markExtraneous(ctx.config, location)
-        scanCheckoutState(ctx, checkout)
+      checkout = { repo: undefined, record: { name: location, location, branch: "" }, path: join(checkoutsPath, location), extraneous: true, ... }
+      scanned = scanCheckoutState(checkout)
+      result.push(scanned)
   catch:
     // checkouts path doesn't exist or can't be read
+
+  return result
 ```
 
 ### Function: shouldPushCheckout(checkout)
@@ -777,7 +736,7 @@ createOrSwitchBranch(dir, branch)
 
 ```pseudo
 cloneIfMissing(ctx, checkout)
-  scanned = scanCheckoutState(ctx, checkout)
+  scanned = scanCheckoutState(checkout)
   if scanned.exists: return scanned
   if not scanned.repo: return null
 
@@ -787,7 +746,7 @@ cloneIfMissing(ctx, checkout)
     ctx.log.log(createCloneFailure(scanned, error))
     return null
 
-  rescan = scanCheckoutState(ctx, scanned)
+  rescan = scanCheckoutState(scanned)
   ctx.log.log(createCloneSuccess(rescan))
 
   actualBranch = getCurrentBranch(scanned.path)
@@ -808,6 +767,7 @@ cloneIfMissing(ctx, checkout)
 
 ```pseudo
 presentWorkspaceReport(workspace)
+  if workspace is undefined: return
   print "Workspace:"
   print table (repo, location, branch, states)
     // repo = "-"
@@ -816,20 +776,20 @@ presentWorkspaceReport(workspace)
   print ""                                       // empty line after the table
 ```
 
-### Function: presentCheckoutReport(ctx)
+### Function: presentCheckoutReport(config, checkouts)
 
 **Responsibility:** Present the Checkout Report ordered by repo name; checkouts without a remote last.
 
 **Pseudo:**
 
 ```pseudo
-presentCheckoutReport(ctx)
-  checkouts = ctx.store.getAllCheckouts()
-  checkouts.sort(no remote last, then by repo name)
+presentCheckoutReport(config, checkouts)
+  items = [...checkouts]
+  items.sort(no remote last, then by repo name)
   print "Checkouts:"
   print table (repo, location, branch, states)
     // repo = checkout.repo?.name or "-"
-    // location = join(ctx.config.clone.path, checkout.record.location)
+    // location = join(config.clone.path, checkout.record.location)
     // states = checkout.issues.join("; ") or "-"
   print ""                                       // empty line after the table
 ```
@@ -853,15 +813,14 @@ presentOperationsReport(log)
   print ""
 ```
 
-### Function: presentExtraneousReport(store)
+### Function: presentExtraneousReport(extraneous)
 
 **Responsibility:** Present the Extraneous Report. Omitted when none found.
 
 **Pseudo:**
 
 ```pseudo
-presentExtraneousReport(store)
-  extraneous = store.getExtraneous()
+presentExtraneousReport(extraneous)
   if extraneous is empty:
     return
 

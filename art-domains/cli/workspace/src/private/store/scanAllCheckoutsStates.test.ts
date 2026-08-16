@@ -17,7 +17,7 @@ describe('scanAllCheckoutsStates', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 
-		await scanAllCheckoutsStates(ctx);
+		await scanAllCheckoutsStates(ctx.store);
 
 		expect(ctx.store.getAllCheckouts()).toHaveLength(0);
 	});

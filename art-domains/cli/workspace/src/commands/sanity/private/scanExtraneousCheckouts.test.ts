@@ -3,9 +3,9 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { createCommandContext } from '../../test/createCommandContext';
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
+import { makeConfig } from '../../../test/makeConfig';
+import { makeTempDir } from '../../../test/makeTempDir';
+import { removeTempDirs } from '../../../test/removeTempDirs';
 
 import { scanExtraneousCheckouts } from './scanExtraneousCheckouts';
 
@@ -18,11 +18,11 @@ afterEach(() => {
 describe('scanExtraneousCheckouts', () => {
 	it('empty checkouts dir returns no extraneous entries', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
-		mkdirSync(join(tempDir, ctx.config.clone.path), { recursive: true });
+		const config = makeConfig(tempDir);
+		mkdirSync(join(tempDir, config.clone.path), { recursive: true });
 
-		await scanExtraneousCheckouts(ctx);
+		const extraneous = await scanExtraneousCheckouts(config);
 
-		expect(ctx.store.getExtraneous()).toHaveLength(0);
+		expect(extraneous).toHaveLength(0);
 	});
 });

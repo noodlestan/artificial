@@ -1,28 +1,24 @@
 import simpleGit from 'simple-git';
 
-import type { WorkspaceContext } from '../context/createWorkspaceContext';
-import { createPullFailure } from '../operations/createPullFailure';
-import { createPullSuccess } from '../operations/createPullSuccess';
 import type { Checkout } from '../store/createCheckout';
 
-export async function pullCheckout(ctx: WorkspaceContext, checkout: Checkout): Promise<void> {
+export interface PullResult {
+	checkout: Checkout;
+	success: boolean;
+	error?: unknown;
+}
+
+export async function pullCheckout(checkout: Checkout): Promise<PullResult> {
 	const git = simpleGit(checkout.path);
 	try {
 		await git.pull('origin', checkout.record.branch);
-		const updated = {
+		const updated: Checkout = {
 			...checkout,
 			isBehind: false,
 			issues: checkout.issues.filter(i => !/\d+ commit behind/.test(i)),
 		};
-		ctx.store.updateCheckout(updated);
-		ctx.log.log(createPullSuccess(checkout, checkout.record.branch));
+		return { checkout: updated, success: true };
 	} catch (error) {
-		const op = createPullFailure(checkout, checkout.record.branch, error);
-		const updated = {
-			...checkout,
-			issues: [...checkout.issues, op.message()],
-		};
-		ctx.store.updateCheckout(updated);
-		ctx.log.log(op);
+		return { checkout, success: false, error };
 	}
 }

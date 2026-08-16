@@ -1,9 +1,10 @@
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { createCommandContext } from '../../test/createCommandContext';
+import { makeConfig } from '../../test/makeConfig';
 import { makeTempDir } from '../../test/makeTempDir';
 import { removeTempDirs } from '../../test/removeTempDirs';
 
+import { createCheckoutStore } from './createCheckoutStore';
 import { hydrateStoreFromRecords } from './hydrateStoreFromRecords';
 
 const tempDirs: string[] = [];
@@ -15,7 +16,8 @@ afterEach(() => {
 describe('hydrateStoreFromRecords', () => {
 	it('populates the store with a checkout per record', () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const config = makeConfig(tempDir);
+		const store = createCheckoutStore();
 		const records = [
 			{
 				repo: { name: 'Alpha', remote: 'git@example.com:alpha.git' },
@@ -27,11 +29,11 @@ describe('hydrateStoreFromRecords', () => {
 			},
 		];
 
-		hydrateStoreFromRecords(ctx, records);
+		hydrateStoreFromRecords(config, store, records);
 
-		expect(ctx.store.getAllCheckouts()).toHaveLength(2);
-		expect(ctx.store.getCheckoutForLocation('alpha')).toBeDefined();
-		expect(ctx.store.getCheckoutForLocation('beta')).toBeDefined();
-		expect(ctx.store.getCheckoutForLocation('beta')?.record.branch).toBe('develop');
+		expect(store.getAllCheckouts()).toHaveLength(2);
+		expect(store.getCheckoutForLocation('alpha')).toBeDefined();
+		expect(store.getCheckoutForLocation('beta')).toBeDefined();
+		expect(store.getCheckoutForLocation('beta')?.record.branch).toBe('develop');
 	});
 });

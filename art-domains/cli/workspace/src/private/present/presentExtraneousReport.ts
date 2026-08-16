@@ -1,9 +1,8 @@
-import type { CheckoutStore } from '../store/createCheckoutStore';
+import type { Checkout } from '../store/createCheckout';
 
 import { formatTable } from './formatTable';
 
-export function presentExtraneousReport(store: CheckoutStore): void {
-	const extraneous = store.getExtraneous();
+export function presentExtraneousReport(extraneous: Checkout[]): void {
 	if (extraneous.length === 0) {
 		return;
 	}

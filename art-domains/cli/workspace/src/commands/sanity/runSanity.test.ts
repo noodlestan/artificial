@@ -268,17 +268,15 @@ describe('sanity command', () => {
 		await initWorkingRepo(repoDir, bareDir);
 		await commitFile(repoDir, 'file.txt');
 
+		const spy = vi.spyOn(console, 'info').mockImplementation(() => {});
+
 		await runSanity(ctx, { auto: false });
 
-		const checkouts = ctx.store.getAllCheckouts();
-		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].extraneous).toEqual(true);
+		const output = spy.mock.calls.map(c => c[0]).join('\n');
+		expect(output).toContain('Untracked:');
+		expect(output).toContain('orphan');
 
-		const extraenous = ctx.store.getExtraneous();
-		expect(extraenous.length).toEqual(1);
-		expect(extraenous[0].exists).toEqual(true);
-		expect(extraenous[0].extraneous).toEqual(true);
+		vi.restoreAllMocks();
 	});
 
 	it('presents workspace report before checkout report', async () => {

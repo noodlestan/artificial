@@ -65,7 +65,7 @@ describe('cloneSpecific', () => {
 		writeCheckoutRecord(tempDir, 'Two', 'Two', 'one custom');
 
 		const repos = loadRepositoryRecords(ctx.config);
-		hydrateStoreFromRecords(ctx, loadCheckoutRecords(ctx.config, repos));
+		hydrateStoreFromRecords(ctx.config, ctx.store, loadCheckoutRecords(ctx.config, repos));
 		await cloneSpecific(ctx, repos, 'One', 'custom');
 
 		const ops = ctx.log.all();

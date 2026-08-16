@@ -1,20 +1,15 @@
-import type { WorkspaceContext } from '../context/createWorkspaceContext';
+import type { Checkout } from '../store/createCheckout';
 
 import { formatTable } from './formatTable';
 
-export function presentWorkspaceReport(ctx: WorkspaceContext): void {
-	if (!ctx.workspace) {
+export function presentWorkspaceReport(workspace?: Checkout): void {
+	if (!workspace) {
 		return;
 	}
 
 	const headers = ['repo', 'location', 'branch', 'states'];
 	const rows = [
-		[
-			ctx.workspace.repo?.name || '-',
-			'.',
-			ctx.workspace.record.branch,
-			ctx.workspace.issues.join('; ') || '-',
-		],
+		[workspace.repo?.name || '-', '.', workspace.record.branch, workspace.issues.join('; ') || '-'],
 	];
 
 	console.info('Workspace:');

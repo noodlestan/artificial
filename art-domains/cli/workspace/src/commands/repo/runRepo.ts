@@ -9,8 +9,8 @@ import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckout
 import { loadProjectGraph } from '../../private/records/projectGraph/loadProjectGraph';
 import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
 import type { PackageStateRecord } from '../../private/records/types';
-import { scanAllCheckoutsStates } from '../../private/scan/scanAllCheckoutsStates';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
+import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 
 export async function runRepo(
 	ctx: WorkspaceContext,
@@ -18,8 +18,8 @@ export async function runRepo(
 ): Promise<void> {
 	const repos = loadRepositoryRecords(ctx.config);
 	const records = loadCheckoutRecords(ctx.config, repos);
-	hydrateStoreFromRecords(ctx, records);
-	await scanAllCheckoutsStates(ctx);
+	hydrateStoreFromRecords(ctx.config, ctx.store, records);
+	await scanAllCheckoutsStates(ctx.store);
 
 	const { checkoutNames } = options;
 
@@ -117,7 +117,7 @@ export async function runRepo(
 		allPackageStates.set(checkout.record.name, packageStates);
 	}
 
-	presentCheckoutReport(ctx);
+	presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts());
 	for (const checkout of targets) {
 		const packageStates = allPackageStates.get(checkout.record.name) ?? [];
 		presentPackageStateReport(checkout, packageStates);

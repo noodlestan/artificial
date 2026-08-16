@@ -19,7 +19,7 @@ export async function runClone(
 ): Promise<WorkspaceContext> {
 	const repos = loadRepositoryRecords(ctx.config);
 	const records = loadCheckoutRecords(ctx.config, repos);
-	hydrateStoreFromRecords(ctx, records);
+	hydrateStoreFromRecords(ctx.config, ctx.store, records);
 
 	if (all) {
 		await cloneAll(ctx, repos);

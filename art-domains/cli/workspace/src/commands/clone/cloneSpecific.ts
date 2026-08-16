@@ -4,9 +4,9 @@ import { presentCheckoutReport } from '../../private/present/presentCheckoutRepo
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
 import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
 import type { RepositoryRecord } from '../../private/records/types';
-import { scanAllCheckoutsStates } from '../../private/scan/scanAllCheckoutsStates';
 import { createCheckout } from '../../private/store/createCheckout';
 import { createCheckoutLocation } from '../../private/store/createCheckoutLocation';
+import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 
 import { cloneIfMissing } from './private/cloneIfMissing';
 
@@ -47,7 +47,7 @@ export async function cloneSpecific(
 		await cloneIfMissing(ctx, existing);
 	}
 
-	await scanAllCheckoutsStates(ctx);
-	presentCheckoutReport(ctx);
+	await scanAllCheckoutsStates(ctx.store);
+	presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts());
 	presentOperationsReport(ctx.log);
 }

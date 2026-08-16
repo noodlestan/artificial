@@ -1,4 +1,5 @@
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
+import { createOrSwitchBranch } from '../../private/git/createOrSwitchBranch';
 import { createBranchFailure } from '../../private/operations/createBranchFailure';
 import { createBranchSuccess } from '../../private/operations/createBranchSuccess';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
@@ -6,11 +7,9 @@ import { presentOperationsReport } from '../../private/present/presentOperations
 import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
 import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
 import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
-import { scanAllCheckoutsStates } from '../../private/scan/scanAllCheckoutsStates';
 import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
-
-import { createOrSwitchBranch } from './private/createOrSwitchBranch';
+import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 
 export async function runBranch(
 	ctx: WorkspaceContext,
@@ -18,7 +17,7 @@ export async function runBranch(
 ): Promise<void> {
 	const repos = loadRepositoryRecords(ctx.config);
 	const records = loadCheckoutRecords(ctx.config, repos);
-	hydrateStoreFromRecords(ctx, records);
+	hydrateStoreFromRecords(ctx.config, ctx.store, records);
 
 	const { branch, checkoutLocations } = options;
 	const checkouts = ctx.store.getAllCheckouts();
@@ -58,7 +57,7 @@ export async function runBranch(
 		}
 	}
 
-	await scanAllCheckoutsStates(ctx);
-	presentCheckoutReport(ctx);
+	await scanAllCheckoutsStates(ctx.store);
+	presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts());
 	presentOperationsReport(ctx.log);
 }

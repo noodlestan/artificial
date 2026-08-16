@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { createCommandContext } from '../../test/createCommandContext';
+import { makeConfig } from '../../test/makeConfig';
 import { makeTempDir } from '../../test/makeTempDir';
 import { removeTempDirs } from '../../test/removeTempDirs';
 
@@ -17,9 +17,9 @@ describe('presentCheckoutReport', () => {
 	it('calls console.info with Checkouts:', () => {
 		const spy = vi.spyOn(console, 'info').mockImplementation(() => {});
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const config = makeConfig(tempDir);
 
-		presentCheckoutReport(ctx);
+		presentCheckoutReport(config, []);
 
 		expect(spy).toHaveBeenCalledWith('Checkouts:');
 	});

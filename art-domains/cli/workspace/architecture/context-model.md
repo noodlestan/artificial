@@ -28,8 +28,9 @@ In-memory state of all known checkouts. Created per command invocation and hydra
 | `getAllCheckouts()`                | all checkouts                                                        |
 | `markExtraneous(config, location)` | mark/create a checkout at a location as extraneous (never persisted) |
 | `getExtraneous()`                  | checkouts marked extraneous                                          |
+| `scanAllCheckoutsStates()`         | scan every checkout in the store                                     |
 
-The store is populated by `hydrateStoreFromRecords(ctx, records)` (see Scanning below), called by every command after loading records. Records are persisted by the commands themselves via `saveCheckoutRecord` — the store is in-memory only (see Syncing).
+The store is populated by `hydrateStoreFromRecords(config, store, records)` (see Scanning below), called by every command after loading records. Records are persisted by the commands themselves via `saveCheckoutRecord` — the store is in-memory only (see Syncing).
 
 ## Checkout
 
@@ -147,13 +148,11 @@ loadProjectGraph(checkoutPath)
 
 ## Scanning
 
-- **`scanCheckoutState(ctx, checkout)`** — read git state from the filesystem, create a new checkout instance with updated state, and set it in the store (no direct mutation). Returns the new checkout.
-- **`scanAllCheckoutsStates(ctx)`** — scan every checkout in the store.
-- **`scanExtraneousCheckouts(ctx)`** — scan directories under the clone path that have no matching checkout record and mark them extraneous.
-- **`scanWorkspaceState(ctx)`** — scan workspace root state (temporary checkout, not persisted, not merged into store). Returns the workspace checkout with updated state.
-- **`hydrateStoreFromRecords(ctx, records)`** — create a checkout instance per `RepositoryCheckoutRecord` (`createCheckout(config, record.checkout.location, record.repo, record.checkout.branch, record.checkout.name)`) and add it to the store.
+- **`scanCheckoutState(checkout)`** — read git state from the filesystem, create a new checkout instance with updated state. Returns the new checkout.
+- **`scanAllCheckoutsStates(store)`** — scan every checkout in the store (store capability).
+- **`hydrateStoreFromRecords(config, store, records)`** — create a checkout instance per `RepositoryCheckoutRecord` (`createCheckout(config, record.checkout.location, record.repo, record.checkout.branch, record.checkout.name)`) and add it to the store.
 - **`isCleanCheckout(checkout)`** — whether a checkout is clean (no uncommitted changes, no conflicts, not detached).
-- **`pullCheckout(ctx, checkout)`** — pull a checkout's branch from origin and clear the "behind" issue on success.
+- **`pullCheckout(checkout)`** — pull a checkout's branch from origin. Returns a `PullResult` with the updated checkout and success/error status.
 
 Git state is read through small git-introspection helpers (branch, remote branch, unpushed count, behind count, merge conflicts, remote presence, detached head, dirty).
 
