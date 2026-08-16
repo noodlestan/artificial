@@ -12,7 +12,7 @@ export async function cloneIfMissing(
 	ctx: WorkspaceContext,
 	checkout: Checkout,
 ): Promise<Checkout | null> {
-	const scanned = await scanCheckoutState(ctx, checkout);
+	const scanned = await scanCheckoutState(checkout);
 	if (scanned.exists) {
 		return scanned;
 	}
@@ -29,7 +29,7 @@ export async function cloneIfMissing(
 		return null;
 	}
 
-	const rescan = await scanCheckoutState(ctx, scanned);
+	const rescan = await scanCheckoutState(scanned);
 	ctx.log.log(createCloneSuccess(rescan));
 
 	const actualBranch = await getCurrentBranch(scanned.path);

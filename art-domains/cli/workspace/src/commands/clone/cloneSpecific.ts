@@ -5,8 +5,6 @@ import { presentOperationsReport } from '../../private/present/presentOperations
 import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
 import type { RepositoryRecord } from '../../private/records/types';
 import { scanAllCheckoutsStates } from '../../private/scan/scanAllCheckoutsStates';
-import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
-import type { Checkout } from '../../private/store/createCheckout';
 import { createCheckout } from '../../private/store/createCheckout';
 import { createCheckoutLocation } from '../../private/store/createCheckoutLocation';
 
@@ -37,8 +35,6 @@ export async function cloneSpecific(
 		return;
 	}
 
-	let processedCheckout: Checkout;
-
 	if (!existing) {
 		const checkoutName = checkoutInput ? `${repo.name} @ ${checkoutInput}` : repo.name;
 		const created = createCheckout(ctx.config, location, repo, 'main', checkoutName);
@@ -47,12 +43,11 @@ export async function cloneSpecific(
 		await saveCheckoutRecord(ctx.config, created.record.name, created.record);
 
 		await cloneIfMissing(ctx, created);
-		processedCheckout = await scanCheckoutState(ctx, created);
 	} else {
 		await cloneIfMissing(ctx, existing);
-		processedCheckout = await scanCheckoutState(ctx, existing);
 	}
-	scanAllCheckoutsStates(ctx);
-	presentCheckoutReport(ctx, [processedCheckout]);
+
+	await scanAllCheckoutsStates(ctx);
+	presentCheckoutReport(ctx);
 	presentOperationsReport(ctx.log);
 }

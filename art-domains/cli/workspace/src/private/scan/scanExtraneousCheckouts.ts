@@ -20,7 +20,8 @@ export async function scanExtraneousCheckouts(ctx: WorkspaceContext): Promise<vo
 
 			if (!recordedLocations.includes(location)) {
 				const checkout = ctx.store.markExtraneous(ctx.config, location);
-				await scanCheckoutState(ctx, checkout);
+				const scanned = await scanCheckoutState(checkout);
+				ctx.store.updateCheckout(scanned);
 			}
 		}
 	} catch {

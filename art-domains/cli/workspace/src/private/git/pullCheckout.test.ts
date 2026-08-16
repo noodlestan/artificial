@@ -46,7 +46,7 @@ describe('pullCheckout', () => {
 			name: 'Behind',
 			remote: 'git@example.com:behind.git',
 		});
-		const scanned = await scanCheckoutState(ctx, checkout);
+		const scanned = await scanCheckoutState(checkout);
 		expect(scanned.isBehind).toBe(true);
 
 		await pullCheckout(ctx, scanned);
