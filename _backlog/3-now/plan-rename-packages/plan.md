@@ -118,7 +118,7 @@ npm run lint # must pass
 
 **Commit Message:** `refactor: singularize artificial package names`
 
-**Instructions File:** `_backlog/4-next/plan-rename-packages/instructions/rename-packages.md`
+**Instructions File:** `_backlog/3-now/plan-rename-packages/instructions/rename-packages.md`
 
 **Scope:**
 

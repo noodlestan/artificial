@@ -102,7 +102,7 @@ npm run test
 
 **Commit Message:** `art-js: bootstrap primitives and parser libs`
 
-**Instructions File:** `_backlog/4-next/plan-bootstrap-packages/instructions/bootstrap-primitives-and-parse-libs.md`
+**Instructions File:** `_backlog/3-now/plan-bootstrap-packages/instructions/bootstrap-primitives-and-parse-libs.md`
 
 **Scope:**
 

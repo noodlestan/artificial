@@ -25,7 +25,7 @@ Migrate the poc-parse fixture testing mechanism into `@art-js/artificial-parser`
 ## Mandatory Reading
 
 - `repos/artificial/_guide.md` — general info about the project; repo layout, setup, verification, working agreements, workflows.
-- `repos/artificial/_backlog/4-next/plan-migrate-testing-fixtures/plan.md` — this plan; the commit is `migrate-testing-fixtures`.
+- `repos/artificial/_backlog/3-now/plan-migrate-testing-fixtures/plan.md` — this plan; the commit is `migrate-testing-fixtures`.
 - `repos/artificial/art-js/cli/poc-parse/scripts/test-fixtures.ts` — the runner to port (source of truth; port verbatim except the two adjustments in Step 2).
 - `repos/artificial/art-js/cli/poc-parse/package.json` — POC `"test": "npx tsx scripts/test-fixtures.ts"` mechanism reference.
 - `repos/artificial/art-js/libs/parser/package.json` — target package; `"test"` script to wire, devDependencies to extend.
@@ -180,7 +180,7 @@ npm run build
 2. Gather the evidence of changes made and outcomes achieved, or the blocker error details.
 3. If your prompt included a `DIRECTIVE FEEDBACK:`:
    1. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your feedback.
-4. Render the report file to `repos/artificial/_backlog/4-next/plan-migrate-testing-fixtures/instructions/migrate-testing-fixtures__report.md` — reports are co-located with their instruction file (`plan-{id}/instructions/{id}__report.md`, per `files/index.md`).
+4. Render the report file to `repos/artificial/_backlog/3-now/plan-migrate-testing-fixtures/instructions/migrate-testing-fixtures__report.md` — reports are co-located with their instruction file (`plan-{id}/instructions/{id}__report.md`, per `files/index.md`).
 5. Generate the response and send it back to the delegator.
 6. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `migrate-testing-fixtures`, fixtures + runner + test script, 16 fixtures PASS, thumbs up). The full trail lives in the report file; never repeat it in chat.
 

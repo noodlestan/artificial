@@ -17,9 +17,9 @@ Singularize the accidental `@art-js/artificials-*` plural package names (phase 0
 
 | Phase                          | Plan                                        | Status      |
 | ------------------------------ | ------------------------------------------- | ----------- |
-| 0 — Rename packages            | `plan-rename-packages/plan.md`              | `READY`     |
-| 1 — Bootstrap packages         | `plan-bootstrap-packages/plan.md`           | `READY`     |
-| 2 — Migrate testing fixtures   | `plan-migrate-testing-fixtures/plan.md`     | `READY`     |
+| 0 — Rename packages            | `_backlog/3-now/plan-rename-packages/plan.md`            | `READY`     |
+| 1 — Bootstrap packages         | `_backlog/3-now/plan-bootstrap-packages/plan.md`         | `READY`     |
+| 2 — Migrate testing fixtures   | `_backlog/3-now/plan-migrate-testing-fixtures/plan.md`   | `READY`     |
 | 3 — Migrate and verify         | `plan-migrate-and-verify/plan.md`           | `PREPARING` |
 | 4 — Implement constructs       | `plan-implement-constructs/plan.md`         | `PREPARING` |
 | 5 — Implement serializer       | `plan-implement-serializer/plan.md`         | `PREPARING` |

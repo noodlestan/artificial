@@ -25,7 +25,7 @@ Singularize the accidental plural in the `@art-js/artificials-*` package names t
 ## Mandatory Reading
 
 - `repos/artificial/_guide.md` — general info about the project; repo layout, setup, verification, working agreements, workflows.
-- `repos/artificial/_backlog/4-next/plan-rename-packages/plan.md` — this plan; the commit is `rename-packages`.
+- `repos/artificial/_backlog/3-now/plan-rename-packages/plan.md` — this plan; the commit is `rename-packages`.
 - `repos/artificial/ops/records/packages/` — the package records to rename (format reference: `artificials-parser.art`).
 - `repos/artificial/ops/records/namespaces/art-js.art` — the namespace record listing package references to singularize.
 - `repos/artificial/ops/records/scripts/artificials-lib-build.art` — the script-set record to rename (referenced from lib package records).
@@ -206,7 +206,7 @@ npm run lint # must pass
 
 1. Summarise the current context, asking: are you reporting completion or a BLOCKER?
 2. Gather the evidence of changes made and outcomes achieved, or the blocker error details.
-3. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your report and write it next to this instruction file: `repos/artificial/_backlog/4-next/plan-rename-packages/instructions/rename-packages__report.md`. No separate delegation record is created.
+3. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your report and write it next to this instruction file: `repos/artificial/_backlog/3-now/plan-rename-packages/instructions/rename-packages__report.md`. No separate delegation record is created.
 4. If your prompt included a `DIRECTIVE FEEDBACK:` include the feedback sections in the rendered report.
 5. Generate the response and send it back to the delegator.
 6. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `rename-packages`, singularized `@art-js/artificial-*` across the live tree, lint green, thumbs up). The full trail lives in the report file; never repeat it in chat.

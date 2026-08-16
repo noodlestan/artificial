@@ -131,7 +131,7 @@ npm run test
 
 **Commit Message:** `art-js: migrate testing fixtures to parser package`
 
-**Instructions File:** `_backlog/4-next/plan-migrate-testing-fixtures/instructions/migrate-testing-fixtures.md`
+**Instructions File:** `_backlog/3-now/plan-migrate-testing-fixtures/instructions/migrate-testing-fixtures.md`
 
 **Scope:**
 
