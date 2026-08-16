@@ -19,7 +19,7 @@ describe('scanCheckoutState', () => {
 		const ctx = createCommandContext(tempDir);
 		const checkout = createCheckout(ctx.config, 'nope');
 
-		const result = await scanCheckoutState(ctx, checkout);
+		const result = await scanCheckoutState(checkout);
 
 		expect(result.exists).toBe(false);
 		expect(result.issues).toContain('not cloned');

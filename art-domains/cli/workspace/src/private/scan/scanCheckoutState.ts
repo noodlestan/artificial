@@ -1,6 +1,5 @@
 import { access } from 'node:fs/promises';
 
-import type { WorkspaceContext } from '../context/createWorkspaceContext';
 import { getBehindCount } from '../git/getBehindCount';
 import { getCurrentBranch } from '../git/getCurrentBranch';
 import { getRemoteBranch } from '../git/getRemoteBranch';
@@ -11,10 +10,7 @@ import { isDetachedHead } from '../git/isDetachedHead';
 import { isDirty } from '../git/isDirty';
 import type { Checkout } from '../store/createCheckout';
 
-export async function scanCheckoutState(
-	ctx: WorkspaceContext,
-	checkout: Checkout,
-): Promise<Checkout> {
+export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
 	let dirExists = false;
 	try {
 		await access(checkout.path);
@@ -25,7 +21,6 @@ export async function scanCheckoutState(
 
 	if (!dirExists) {
 		const updated = { ...checkout, exists: false, issues: ['not cloned'] };
-		ctx.store.updateCheckout(updated);
 		return updated;
 	}
 
@@ -105,6 +100,5 @@ export async function scanCheckoutState(
 		issues,
 	};
 
-	ctx.store.updateCheckout(updated);
 	return updated;
 }

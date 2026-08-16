@@ -6,6 +6,7 @@ import { presentOperationsReport } from '../../private/present/presentOperations
 import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
 import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
 import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
+import { scanAllCheckoutsStates } from '../../private/scan/scanAllCheckoutsStates';
 import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 
@@ -26,36 +27,38 @@ export async function runBranch(
 		checkoutLocations.length > 0 ? checkoutLocations : checkouts.map(c => c.record.location);
 
 	for (const location of locations) {
-		let checkout = ctx.store.getCheckoutForLocation(location);
+		const checkout = ctx.store.getCheckoutForLocation(location);
 		if (!checkout) {
 			ctx.log.log(createBranchFailure(branch, 'not cloned', checkout));
 			continue;
 		}
 
-		checkout = await scanCheckoutState(ctx, checkout);
-		if (!checkout.exists) {
-			ctx.log.log(createBranchFailure(branch, 'checkout not cloned', checkout));
+		const scanned = await scanCheckoutState(checkout);
+		ctx.store.updateCheckout(scanned);
+
+		if (!scanned.exists) {
+			ctx.log.log(createBranchFailure(branch, 'checkout not cloned', scanned));
 			continue;
 		}
 
 		try {
-			const outcome = await createOrSwitchBranch(checkout.path, branch);
+			const outcome = await createOrSwitchBranch(scanned.path, branch);
 			if (outcome === 'created') {
-				ctx.log.log(createBranchSuccess(checkout, branch, `created ${branch}`));
+				ctx.log.log(createBranchSuccess(scanned, branch, `created ${branch}`));
 			} else {
-				ctx.log.log(createBranchSuccess(checkout, branch, `switched to ${branch}`));
+				ctx.log.log(createBranchSuccess(scanned, branch, `switched to ${branch}`));
 			}
 
-			const updated = { ...checkout, record: { ...checkout.record, branch } };
+			const updated = { ...scanned, record: { ...scanned.record, branch } };
 			ctx.store.updateCheckout(updated);
-			const scanned = await scanCheckoutState(ctx, updated);
-			await saveCheckoutRecord(ctx.config, scanned.record.name, scanned.record);
+			await saveCheckoutRecord(ctx.config, updated.record.name, updated.record);
 		} catch (error) {
-			ctx.log.log(createBranchFailure(branch, error, checkout));
+			ctx.log.log(createBranchFailure(branch, error, scanned));
 			continue;
 		}
 	}
 
+	await scanAllCheckoutsStates(ctx);
 	presentCheckoutReport(ctx);
 	presentOperationsReport(ctx.log);
 }

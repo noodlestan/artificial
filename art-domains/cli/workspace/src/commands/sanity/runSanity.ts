@@ -22,12 +22,12 @@ export async function runSanity(ctx: WorkspaceContext, options: { auto: boolean 
 	ctx.workspace = workspace;
 
 	await scanAllCheckoutsStates(ctx);
-	await scanExtraneousCheckouts(ctx);
-
 	if (options.auto) {
 		await pullWorkspaceCheckout(ctx);
 		await pushCleanCheckouts(ctx);
 	}
+
+	await scanExtraneousCheckouts(ctx);
 
 	presentWorkspaceReport(ctx);
 	presentCheckoutReport(ctx);
