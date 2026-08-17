@@ -30,7 +30,9 @@
     "test": "npx tsx scripts/test-fixtures.ts"
   },
   "dependencies": {
-    "@art-js/artificial-primitives": "*"
+    "@art-js/artificial-primitives": "*",
+    "mdast-util-from-markdown": "^2.0.0",
+    "unist-util-visit": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.3",

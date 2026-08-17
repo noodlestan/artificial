@@ -32,10 +32,8 @@ function parseFixture(filePath: string): {
 	const startTime = getTimeMs();
 
 	try {
-		// const content = fs.readFileSync(filePath, 'utf-8'); // phase 3: read the file and pass content to parse
-
-		const document = parse(); // entry-point parse stub — returns undefined until phase 3
-
+		const content = fs.readFileSync(filePath, 'utf-8');
+		const document = parse(content);
 		const endTime = getTimeMs();
 		return { success: true, document, durationMs: endTime - startTime };
 	} catch (error) {
@@ -59,6 +57,18 @@ async function main(): Promise<void> {
 
 		const status = result.success ? 'PASS' : 'FAIL';
 		console.info(`${fixture.padEnd(30)} ${status} (${result.durationMs}ms)`);
+
+		// Save parsed document as JSON next to the fixture, normalising the extension to ".art.json"
+		if (result.document !== undefined) {
+			try {
+				const parsedPath = path.parse(filePath);
+				// parsedPath.name is the file name without extension (e.g. "section-block")
+				const outPath = path.join(parsedPath.dir, parsedPath.name + '.art.json');
+				fs.writeFileSync(outPath, JSON.stringify(result.document, null, 2) + '\n', 'utf-8');
+			} catch (err) {
+				console.error(`  Failed to write JSON output: ${(err as Error).message}`);
+			}
+		}
 
 		if (!result.success) {
 			console.error(`  Error: ${result.error}`);
