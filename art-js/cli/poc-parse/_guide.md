@@ -43,4 +43,4 @@ The project maintains an architecture reference at `../../../architecture/index.
 
 This project plans its work with the plan workflow defined in `$WORKSPACE/.agents/domains/plans/`.
 
-This project's backlog has been archived; the completed plan lives at `$ROOT/_backlog/1-done/plan-poc-parse/plan.md` (with `_architect.md` and `_parking-lot.md` nested as attachments). Forward-looking work for the artificials parser now lives in the root `_backlog/` (`_architect.md`, `_parking-lot.md`) and the MD Art Roundtrip milestone at `$ROOT/_backlog/4-next/milestone-md-art-roundtrip/milestone.md`.
+This project's backlog has been archived; the completed plan lives at `$ROOT/_backlog/1-done/plan-poc-parse/plan.md` (with `_architect.md` and `_parking-lot.md` nested as attachments). Forward-looking work for the artificials parser now lives in the root `_backlog/` (`_architect.md`, `_parking-lot.md`) and the MD Art Roundtrip milestone at `$ROOT/_backlog/3-now/milestone-md-art-roundtrip/milestone.md`.

@@ -42,4 +42,3 @@ Follow ups / Notes:
 - If future fixtures are added that reuse basenames across different extensions, ensure their `.art.json` snapshots use distinct names to avoid collisions.
 
 
-

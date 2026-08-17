@@ -2,7 +2,7 @@
 
 **ID:** `migrate-and-verify`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -44,7 +44,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 3; package table; Decisions section (eliminate `createNestedContext`, drop `fieldBlockFactory`, preserve whitespace gaps, two-way snapshot diffing in phase 5).
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 3; package table; Decisions section (eliminate `createNestedContext`, drop `fieldBlockFactory`, preserve whitespace gaps, two-way snapshot diffing in phase 5).
 - Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
 - Parking Lot: `_backlog/_parking-lot.md` – pending items relevant to migration and verification.
 - Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback; source code at `art-js/cli/poc-parse/src/parse/`.
@@ -113,7 +113,7 @@ npm run test
 
 **Commit Id:** `9c688285`
 
-**Report:** `_backlog/3-now/plan-migrate-and-verify/instructions/migrate-parser-code__report.md`
+**Report:** `_backlog/1-done/plan-migrate-and-verify/instructions/migrate-parser-code__report.md`
 
 **Summary:**
 
@@ -129,7 +129,7 @@ npm run test
 
 **Commit Id:** `02f708a`
 
-**Report:** `_backlog/3-now/plan-migrate-and-verify/instructions/verify-parser-against-snapshots__report.md`
+**Report:** `_backlog/1-done/plan-migrate-and-verify/instructions/verify-parser-against-snapshots__report.md`
 
 **Summary:**
 
@@ -143,11 +143,11 @@ No follow-ups yet.
 
 ## Feedback
 
-- migrate-parser-code: `COMMITTED` — report: `_backlog/3-now/plan-migrate-and-verify/migrate-parser-code__report.md`
-- verify-parser-against-snapshots: `COMMITTED` — report: `_backlog/3-now/plan-migrate-and-verify/instructions/verify-parser-against-snapshots__report.md`
+- migrate-parser-code: `COMMITTED` — report: `_backlog/1-done/plan-migrate-and-verify/instructions/migrate-parser-code__report.md`
+- verify-parser-against-snapshots: `COMMITTED` — report: `_backlog/1-done/plan-migrate-and-verify/instructions/verify-parser-against-snapshots__report.md`
 
 Planner reflection:
 
 - Migration completed and verified in the parser package; tests for migrated fixtures passed.
-- Snapshot verification completed after fixing stale snapshots and fixture collisions; no remaining blockers.
+- Snapshot verification completed after fixing stale snapshots and removing one duplicate fixture; 15 committed fixtures remain and no blockers remain.
 - Follow-ups noted in the reports where applicable.

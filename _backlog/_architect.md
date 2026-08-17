@@ -22,7 +22,7 @@ Short termtracker is `_parking-lot.md` (no done items there).
 
 Migrate poc-parse into proper packages (`primitives`, `parser`), verify lossless roundtrip (parse `.art` → serialize back → zero diffs), archive poc-parse, and publish v0.0.1. Each commit guarantees no source change breaks the roundtrip contract. Test harnesses: fixtures in `spec/`, automation to detect diffs in `.art.json` files.
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md`
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md`
 
 ### Reactive core (deferred)
 

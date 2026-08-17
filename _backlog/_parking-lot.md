@@ -4,7 +4,7 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 
 ## ACTIONABLE
 
-- None current — the POC Parse spike is archived (`_backlog/1-done/plan-poc-parse/`); its learnings are integrated into the MD Art Roundtrip milestone (`_backlog/4-next/milestone-md-art-roundtrip/milestone.md`).
+- None current — the POC Parse spike is archived (`_backlog/1-done/plan-poc-parse/`); its learnings are integrated into the MD Art Roundtrip milestone (`_backlog/3-now/milestone-md-art-roundtrip/milestone.md`).
 
 ## pending
 

@@ -20,7 +20,7 @@ Singularize the accidental `@art-js/artificials-*` plural package names (phase 0
 | 0 — Rename packages            | `_backlog/1-done/plan-rename-packages/plan.md`            | `DONE`     |
 | 1 — Bootstrap packages         | `_backlog/1-done/plan-bootstrap-packages/plan.md`         | `DONE`     |
 | 2 — Migrate testing fixtures   | `_backlog/1-done/plan-migrate-testing-fixtures/plan.md`   | `DONE`     |
-| 3 — Migrate and verify         | `_backlog/3-now/plan-migrate-and-verify/plan.md`           | `READY` |
+| 3 — Migrate and verify         | `_backlog/1-done/plan-migrate-and-verify/plan.md`         | `DONE` |
 | 4 — Implement constructs       | `plan-implement-constructs/plan.md`         | `PREPARING` |
 | 5 — Implement serializer       | `plan-implement-serializer/plan.md`         | `PREPARING` |
 | 6 — Migrate tests to pipeline  | `plan-migrate-tests-pipeline/plan.md`       | `PREPARING` |
@@ -29,6 +29,8 @@ Singularize the accidental `@art-js/artificials-*` plural package names (phase 0
 | 9 — Refactoring and Test Coverage | `plan-refactoring-and-test-coverage/plan.md` | `PREPARING` |
 | 10 — Archive and publish       | `plan-archive-poc-and-publish/plan.md`      | `PREPARING` |
 | 11 — Integrate knowledge       | `plan-integrate-knowledge/plan.md`          | `PREPARING` |
+
+**Next step:** Phase 4 — refine and execute `plan-implement-constructs`: scaffold `@art-js/artificial-constructs`, extract the parser-owned factories, rewire parser imports, and keep the parser fixture snapshots passing.
 
 ## Packages
 
