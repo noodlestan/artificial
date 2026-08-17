@@ -51,13 +51,12 @@ describe('pullCheckout', () => {
 
 		const result = await pullCheckout(scanned);
 
-		expect(result.success).toBe(true);
-		expect(result.checkout.isBehind).toBe(false);
-		expect(result.checkout.issues.some(i => i.includes('behind'))).toBe(false);
+		expect(result.isBehind).toBe(false);
+		expect(result.issues.some(i => i.includes('behind'))).toBe(false);
 		expect(existsSync(join(repoDir, 'origin.txt'))).toBe(true);
 	});
 
-	it('returns failure when the pull fails', async () => {
+	it('throws when the pull fails', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'nopull');
@@ -71,9 +70,6 @@ describe('pullCheckout', () => {
 		checkout.exists = true;
 		checkout.issues = ['1 commit behind'];
 
-		const result = await pullCheckout(checkout);
-
-		expect(result.success).toBe(false);
-		expect(result.error).toBeTruthy();
+		await expect(pullCheckout(checkout)).rejects.toBeTruthy();
 	});
 });

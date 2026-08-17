@@ -6,6 +6,7 @@ import { presentWorkspaceReport } from '../../private/present/presentWorkspaceRe
 import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
 import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
 import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
+import { createCheckout } from '../../private/store/createCheckout';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 
@@ -19,19 +20,8 @@ export async function runSanity(ctx: WorkspaceContext, options: { auto: boolean 
 	hydrateStoreFromRecords(ctx.config, ctx.store, records);
 
 	const workspaceCheckout = {
-		repo: undefined,
-		record: { name: 'Workspace', location: '.', branch: 'main', repository: undefined },
+		...createCheckout(ctx.config, '.', undefined, 'main', 'Workspace'),
 		path: ctx.config.root.path,
-		exists: true,
-		remoteBranch: null,
-		detached: false,
-		conflicts: false,
-		dirty: false,
-		hasRemote: false,
-		unpushed: 0,
-		isBehind: false,
-		issues: [],
-		extraneous: false,
 	};
 	const workspace = await scanCheckoutState(workspaceCheckout);
 	ctx.workspace = workspace;

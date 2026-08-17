@@ -5,15 +5,15 @@ import { createPullSuccess } from '../../private/operations/createPullSuccess';
 import type { Checkout } from '../../private/store/createCheckout';
 
 export async function doPullCheckout(ctx: WorkspaceContext, checkout: Checkout): Promise<void> {
-	const result = await pullCheckout(checkout);
-	ctx.store.updateCheckout(result.checkout);
-	if (result.success) {
+	try {
+		const updated = await pullCheckout(checkout);
+		ctx.store.updateCheckout(updated);
 		ctx.log.log(createPullSuccess(checkout, checkout.record.branch));
-	} else {
-		const op = createPullFailure(checkout, checkout.record.branch, result.error);
+	} catch (error) {
+		const op = createPullFailure(checkout, checkout.record.branch, error);
 		const updated: Checkout = {
-			...result.checkout,
-			issues: [...result.checkout.issues, op.message()],
+			...checkout,
+			issues: [...checkout.issues, op.message()],
 		};
 		ctx.store.updateCheckout(updated);
 		ctx.log.log(op);
