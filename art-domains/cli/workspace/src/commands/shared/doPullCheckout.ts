@@ -13,7 +13,7 @@ export async function doPullCheckout(ctx: WorkspaceContext, checkout: Checkout):
 		const op = createPullFailure(checkout, checkout.record.branch, error);
 		const updated: Checkout = {
 			...checkout,
-			issues: [...checkout.issues, op.message()],
+			scan: checkout.scan && { ...checkout.scan, issues: [...checkout.scan.issues, op.message()] },
 		};
 		ctx.store.updateCheckout(updated);
 		ctx.log.log(op);

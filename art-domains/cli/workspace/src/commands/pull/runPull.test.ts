@@ -42,8 +42,8 @@ describe('pull command', () => {
 		await runPull(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Behind');
-		expect(checkout?.isBehind).toBe(false);
-		expect(checkout?.issues).toEqual([]);
+		expect(checkout?.scan?.isBehind).toBe(false);
+		expect(checkout?.scan?.issues).toEqual([]);
 
 		const ops = ctx.log.all();
 		expect(ops).toHaveLength(1);
@@ -70,7 +70,7 @@ describe('pull command', () => {
 		await runPull(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Dirty');
-		expect(checkout?.issues).toEqual(['uncommitted files', '1 commit behind']);
+		expect(checkout?.scan?.issues).toEqual(['uncommitted files', '1 commit behind']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
@@ -87,7 +87,7 @@ describe('pull command', () => {
 		await runPull(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Current');
-		expect(checkout?.isBehind).toBe(false);
+		expect(checkout?.scan?.isBehind).toBe(false);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
@@ -101,8 +101,8 @@ describe('pull command', () => {
 		await runPull(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Missing');
-		expect(checkout?.exists).toBe(false);
-		expect(checkout?.issues).toEqual(['not cloned']);
+		expect(checkout?.scan?.exists).toBe(false);
+		expect(checkout?.scan?.issues).toEqual(['not cloned']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 });

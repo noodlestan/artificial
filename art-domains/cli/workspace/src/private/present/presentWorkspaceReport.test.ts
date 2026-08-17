@@ -13,16 +13,18 @@ function makeWorkspaceCheckout(path: string, overrides?: Partial<Checkout>): Che
 		repo: undefined,
 		record: { name: 'Workspace', location: '.', branch: 'main', repository: undefined },
 		path,
-		exists: true,
-		remoteBranch: null,
-		detached: false,
-		conflicts: false,
-		dirty: false,
-		hasRemote: true,
-		unpushed: 0,
-		isBehind: false,
-		issues: [],
-		extraneous: false,
+		scan: {
+			exists: true,
+			branch: 'main',
+			remoteBranch: null,
+			detached: false,
+			conflicts: false,
+			dirty: false,
+			hasRemote: true,
+			unpushed: 0,
+			isBehind: false,
+			issues: [],
+		},
 		...overrides,
 	};
 }
@@ -43,9 +45,18 @@ describe('presentWorkspaceReport', () => {
 
 		presentWorkspaceReport(
 			makeWorkspaceCheckout('/tmp', {
-				dirty: true,
-				unpushed: 1,
-				issues: ['uncommitted files', '1 commit ahead'],
+				scan: {
+					exists: true,
+					branch: 'main',
+					remoteBranch: null,
+					detached: false,
+					conflicts: false,
+					dirty: true,
+					hasRemote: true,
+					unpushed: 1,
+					isBehind: false,
+					issues: ['uncommitted files', '1 commit ahead'],
+				},
 			}),
 		);
 
@@ -56,7 +67,20 @@ describe('presentWorkspaceReport', () => {
 		const spy = vi.spyOn(console, 'info').mockImplementation(() => {});
 
 		presentWorkspaceReport(
-			makeWorkspaceCheckout('/tmp', { isBehind: true, issues: ['1 commit behind'] }),
+			makeWorkspaceCheckout('/tmp', {
+				scan: {
+					exists: true,
+					branch: 'main',
+					remoteBranch: null,
+					detached: false,
+					conflicts: false,
+					dirty: false,
+					hasRemote: true,
+					unpushed: 0,
+					isBehind: true,
+					issues: ['1 commit behind'],
+				},
+			}),
 		);
 
 		expect(spy).toHaveBeenCalledWith(expect.stringContaining('1 commit behind'));

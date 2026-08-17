@@ -18,39 +18,41 @@ interface WorkspaceContext {
 
 In-memory state of all known checkouts. Created per command invocation and hydrated from disk records. Keyed by checkout location.
 
-| member                             | semantics                                                            |
-| ---------------------------------- | -------------------------------------------------------------------- |
-| `addCheckout(checkout)`            | add a checkout; logs an error on duplicate location                  |
-| `getCheckoutForLocation(location)` | exact location lookup                                                |
-| `getCheckoutOfRepo(name)`          | first checkout whose repo name matches (case-insensitive)            |
-| `getCheckoutByName(name)`          | first checkout whose record name matches (case-insensitive)          |
-| `updateCheckout(checkout)`         | replace a checkout in the store by location                          |
-| `getAllCheckouts()`                | all checkouts                                                        |
-| `markExtraneous(config, location)` | mark/create a checkout at a location as extraneous (never persisted) |
-| `getExtraneous()`                  | checkouts marked extraneous                                          |
-| `scanAllCheckoutsStates()`         | scan every checkout in the store                                     |
+| member                             | semantics                                                   |
+| ---------------------------------- | ----------------------------------------------------------- |
+| `addCheckout(checkout)`            | add a checkout; logs an error on duplicate location         |
+| `getCheckoutForLocation(location)` | exact location lookup                                       |
+| `getCheckoutOfRepo(name)`          | first checkout whose repo name matches (case-insensitive)   |
+| `getCheckoutByName(name)`          | first checkout whose record name matches (case-insensitive) |
+| `updateCheckout(checkout)`         | replace a checkout in the store by location                 |
+| `getAllCheckouts()`                | all checkouts                                               |
+| `scanAllCheckoutsStates()`         | scan every checkout in the store                            |
 
 The store is populated by `hydrateStoreFromRecords(config, store, records)` (see Scanning below), called by every command after loading records. Records are persisted by the commands themselves via `saveCheckoutRecord` — the store is in-memory only (see Syncing).
 
 ## Checkout
 
-Individual repo checkout state. State fields are populated by `scanCheckoutState` reading git from the filesystem; `repo` and `record` come from the store.
+Individual repo checkout identity. `repo`, `record`, and `path` come from the store; optional computed state is populated by `scanCheckoutState`.
 
 ```typescript
 interface Checkout {
   repo?: RepositoryRecord; // undefined = no matching repository record
   record: CheckoutRecord; // name, location, branch, repository
   path: string; // absolute dir = join(config.root.path, config.clone.path, record.location)
+  scan?: CheckoutScan;
+}
+
+interface CheckoutScan {
   exists: boolean;
-  remoteBranch: string | null; // null = no tracking branch (new/untracked)
-  detached: boolean; // detached HEAD
-  conflicts: boolean; // merge conflicts
-  dirty: boolean; // uncommitted files
+  branch: string | null; // observed current branch
   hasRemote: boolean;
-  unpushed: number; // 0 = nothing to push, >0 = commits ahead of remoteBranch
-  isBehind: boolean; // true = local branch is behind remote
-  issues: string[]; // human-readable states, e.g. "uncommitted files"
-  extraneous: boolean; // directory with no matching record
+  remoteBranch: string | null;
+  detached: boolean;
+  conflicts: boolean;
+  dirty: boolean;
+  unpushed: number;
+  isBehind: boolean;
+  issues: string[];
 }
 ```
 
@@ -148,8 +150,9 @@ loadProjectGraph(checkoutPath)
 
 ## Scanning
 
-- **`scanCheckoutState(checkout)`** — read git state from the filesystem, create a new checkout instance with updated state. Returns the new checkout.
+- **`scanCheckoutState(checkout)`** — read git state from the filesystem and return a new checkout with an optional `scan` field. Records are not mutated.
 - **`scanAllCheckoutsStates(store)`** — scan every checkout in the store (store capability).
+- **`scanExtraneousCheckouts(config)`** — create and scan directory-only checkouts for locations without records; these are returned to sanity and never added to the store.
 - **`hydrateStoreFromRecords(config, store, records)`** — create a checkout instance per `RepositoryCheckoutRecord` (`createCheckout(config, record.checkout.location, record.repo, record.checkout.branch, record.checkout.name)`) and add it to the store.
 - **`isCleanCheckout(checkout)`** — whether a checkout is clean (no uncommitted changes, no conflicts, not detached).
 - **`pullCheckout(checkout)`** — pull a checkout's branch from origin. Returns a `PullResult` with the updated checkout and success/error status.

@@ -22,22 +22,22 @@ describe('isCleanCheckout', () => {
 		expect(isCleanCheckout(checkout)).toBe(false);
 	});
 
-	it('returns false when the checkout is extraneous', () => {
-		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
-		const checkout = createCheckout(ctx.config, 'clean');
-		checkout.exists = true;
-		checkout.extraneous = true;
-
-		expect(isCleanCheckout(checkout)).toBe(false);
-	});
-
 	it('returns false when the checkout is dirty', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		const checkout = createCheckout(ctx.config, 'clean');
-		checkout.exists = true;
-		checkout.dirty = true;
+		checkout.scan = {
+			exists: true,
+			branch: 'main',
+			hasRemote: true,
+			remoteBranch: null,
+			detached: false,
+			conflicts: false,
+			dirty: true,
+			unpushed: 0,
+			isBehind: false,
+			issues: [],
+		};
 
 		expect(isCleanCheckout(checkout)).toBe(false);
 	});
@@ -46,8 +46,18 @@ describe('isCleanCheckout', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		const checkout = createCheckout(ctx.config, 'clean');
-		checkout.exists = true;
-		checkout.conflicts = true;
+		checkout.scan = {
+			exists: true,
+			branch: 'main',
+			hasRemote: true,
+			remoteBranch: null,
+			detached: false,
+			conflicts: true,
+			dirty: false,
+			unpushed: 0,
+			isBehind: false,
+			issues: [],
+		};
 
 		expect(isCleanCheckout(checkout)).toBe(false);
 	});
@@ -56,8 +66,18 @@ describe('isCleanCheckout', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		const checkout = createCheckout(ctx.config, 'clean');
-		checkout.exists = true;
-		checkout.detached = true;
+		checkout.scan = {
+			exists: true,
+			branch: 'main',
+			hasRemote: true,
+			remoteBranch: null,
+			detached: true,
+			conflicts: false,
+			dirty: false,
+			unpushed: 0,
+			isBehind: false,
+			issues: [],
+		};
 
 		expect(isCleanCheckout(checkout)).toBe(false);
 	});
@@ -66,7 +86,18 @@ describe('isCleanCheckout', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createCommandContext(tempDir);
 		const checkout = createCheckout(ctx.config, 'clean');
-		checkout.exists = true;
+		checkout.scan = {
+			exists: true,
+			branch: 'main',
+			hasRemote: true,
+			remoteBranch: null,
+			detached: false,
+			conflicts: false,
+			dirty: false,
+			unpushed: 0,
+			isBehind: false,
+			issues: [],
+		};
 
 		expect(isCleanCheckout(checkout)).toBe(true);
 	});

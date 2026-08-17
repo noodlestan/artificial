@@ -19,8 +19,8 @@ main
 Detailed definitions live in `architecture/context-model.md`. Symbols relevant to the use cases below:
 
 - **WorkspaceContext** — single object passed to all routines: `config`, `store`, `log`
-- **CheckoutStore** — in-memory checkout state: `addCheckout`, `getCheckoutForLocation`, `getCheckoutOfRepo`, `getCheckoutByName`, `updateCheckout`, `getAllCheckouts`, `markExtraneous(config, location)`, `getExtraneous`
-- **Checkout** — per-repo state: `repo?`, `record` (name/location/branch/repository), `path`, `exists`, `remoteBranch`, `detached`, `conflicts`, `dirty`, `hasRemote`, `unpushed`, `issues`, `extraneous`
+- **CheckoutStore** — in-memory checkout identity: `addCheckout`, `getCheckoutForLocation`, `getCheckoutOfRepo`, `getCheckoutByName`, `updateCheckout`, `getAllCheckouts`
+- **Checkout** — per-repo identity: `repo?`, `record` (name/location/branch/repository), `path`, and optional computed `scan` state
 - **Records** — `WorkspaceRecord`, `RepositoryRecord`, `CheckoutRecord` (structure files in `.agents/domains/workspace/structures/`)
 
 Every command starts by loading records into the store:
@@ -554,19 +554,18 @@ hydrateStoreFromRecords(config, store, records)
 
 ### Function: scanCheckoutState(checkout)
 
-**Responsibility:** Read git state from filesystem, create a new checkout instance with updated state. Returns the new checkout.
+**Responsibility:** Read git state from the filesystem and return a new checkout with computed state in `scan`; never mutate `repo`, `record`, or `path`.
 
 **Pseudo:**
 
 ```pseudo
 scanCheckoutState(checkout)
-  updated = { ...checkout }
 
   // FS layer
   if not dirExists(checkout.path):
-    return { ...updated, exists: false, issues: ["not cloned"] }
+    return { ...checkout, scan: createCheckoutNoClonedScan() }
 
-  updated.exists = true
+  scan.exists = true
 
   // Git layer
   try:
@@ -598,7 +597,7 @@ scanCheckoutState(checkout)
     behindCount = getBehindCount(checkout.path, updated.remoteBranch)
     updated.issues.push(behindCount === 1 ? "1 commit behind" : "N commits behind")
 
-  return updated
+  return { ...checkout, scan }
 ```
 
 ### Function: scanAllCheckoutsStates(store)
@@ -628,7 +627,7 @@ scanExtraneousCheckouts(config)
   try:
     for entry in listDirectories(checkoutsPath) where isDirectory:
       location = relative(checkoutsPath, entry)
-      checkout = { repo: undefined, record: { name: location, location, branch: "" }, path: join(checkoutsPath, location), extraneous: true, ... }
+      checkout = createExtraneousCheckout(config, location)
       scanned = scanCheckoutState(checkout)
       result.push(scanned)
   catch:
@@ -645,10 +644,9 @@ scanExtraneousCheckouts(config)
 
 ```pseudo
 shouldPushCheckout(checkout)
-  if not checkout.exists: return false
-  if checkout.extraneous: return false
-  if checkout.issues.some(doesIssueBlockPush): return false
-  if checkout.unpushed === 0: return false
+  if not checkout.scan?.exists: return false
+  if checkout.scan.issues.some(doesIssueBlockPush): return false
+  if checkout.scan.unpushed === 0: return false
   return true
 ```
 
@@ -772,7 +770,7 @@ presentWorkspaceReport(workspace)
   print table (repo, location, branch, states)
     // repo = "-"
     // location = workspace.record.location
-    // states = workspace.issues.join("; ") or "-"
+    // states = workspace.scan?.issues.join("; ") or "-"
   print ""                                       // empty line after the table
 ```
 
@@ -790,7 +788,7 @@ presentCheckoutReport(config, checkouts)
   print table (repo, location, branch, states)
     // repo = checkout.repo?.name or "-"
     // location = join(config.clone.path, checkout.record.location)
-    // states = checkout.issues.join("; ") or "-"
+    // states = checkout.scan?.issues.join("; ") or "-"
   print ""                                       // empty line after the table
 ```
 
@@ -827,7 +825,7 @@ presentExtraneousReport(extraneous)
   print "Untracked:"
   print table (directory, branch, states)
     // directory = record.location, branch = record.branch
-    // states = issues.join("; ") or "clean"
+    // states = scan?.issues.join("; ") or "clean"
   print ""
 ```
 

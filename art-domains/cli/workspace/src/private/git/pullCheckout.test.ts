@@ -47,12 +47,12 @@ describe('pullCheckout', () => {
 			remote: 'git@example.com:behind.git',
 		});
 		const scanned = await scanCheckoutState(checkout);
-		expect(scanned.isBehind).toBe(true);
+		expect(scanned.scan?.isBehind).toBe(true);
 
 		const result = await pullCheckout(scanned);
 
-		expect(result.isBehind).toBe(false);
-		expect(result.issues.some(i => i.includes('behind'))).toBe(false);
+		expect(result.scan?.isBehind).toBe(false);
+		expect(result.scan?.issues.some(i => i.includes('behind'))).toBe(false);
 		expect(existsSync(join(repoDir, 'origin.txt'))).toBe(true);
 	});
 
@@ -67,8 +67,18 @@ describe('pullCheckout', () => {
 			name: 'NoPull',
 			remote: 'git@example.com:nopull.git',
 		});
-		checkout.exists = true;
-		checkout.issues = ['1 commit behind'];
+		checkout.scan = {
+			exists: true,
+			branch: 'main',
+			remoteBranch: null,
+			detached: false,
+			conflicts: false,
+			dirty: false,
+			hasRemote: true,
+			unpushed: 0,
+			isBehind: true,
+			issues: ['1 commit behind'],
+		};
 
 		await expect(pullCheckout(checkout)).rejects.toBeTruthy();
 	});

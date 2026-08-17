@@ -24,16 +24,18 @@ function makeWorkspaceCheckout(path: string, overrides?: Partial<Checkout>): Che
 		repo: undefined,
 		record: { name: 'Workspace', location: '.', branch: 'main', repository: undefined },
 		path,
-		exists: true,
-		remoteBranch: 'origin/main',
-		detached: false,
-		conflicts: false,
-		dirty: false,
-		hasRemote: true,
-		unpushed: 0,
-		isBehind: true,
-		issues: ['1 commit behind'],
-		extraneous: false,
+		scan: {
+			exists: true,
+			branch: 'main',
+			remoteBranch: 'origin/main',
+			detached: false,
+			conflicts: false,
+			dirty: false,
+			hasRemote: true,
+			unpushed: 0,
+			isBehind: true,
+			issues: ['1 commit behind'],
+		},
 		...overrides,
 	};
 }
@@ -59,8 +61,8 @@ describe('pullWorkspaceCheckout', () => {
 		await pullWorkspaceCheckout(ctx);
 
 		expect(ctx.workspace).toBeDefined();
-		expect(ctx.workspace?.isBehind).toEqual(false);
-		expect(ctx.workspace?.issues).not.toContain('1 commit behind');
+		expect(ctx.workspace?.scan?.isBehind).toEqual(false);
+		expect(ctx.workspace?.scan?.issues).not.toContain('1 commit behind');
 		expect(existsSync(join(tempDir, 'origin-advance.txt'))).toEqual(true);
 		const ops = ctx.log.all();
 		expect(ops).toHaveLength(1);
@@ -70,7 +72,23 @@ describe('pullWorkspaceCheckout', () => {
 
 	it('skips when the workspace is up to date', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir, makeWorkspaceCheckout(tempDir, { isBehind: false }));
+		const ctx = createCommandContext(
+			tempDir,
+			makeWorkspaceCheckout(tempDir, {
+				scan: {
+					exists: true,
+					branch: 'main',
+					remoteBranch: 'origin/main',
+					detached: false,
+					conflicts: false,
+					dirty: false,
+					hasRemote: true,
+					unpushed: 0,
+					isBehind: false,
+					issues: [],
+				},
+			}),
+		);
 
 		await pullWorkspaceCheckout(ctx);
 
@@ -79,7 +97,23 @@ describe('pullWorkspaceCheckout', () => {
 
 	it('skips when the workspace is dirty', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir, makeWorkspaceCheckout(tempDir, { dirty: true }));
+		const ctx = createCommandContext(
+			tempDir,
+			makeWorkspaceCheckout(tempDir, {
+				scan: {
+					exists: true,
+					branch: 'main',
+					remoteBranch: 'origin/main',
+					detached: false,
+					conflicts: false,
+					dirty: true,
+					hasRemote: true,
+					unpushed: 0,
+					isBehind: true,
+					issues: ['1 commit behind'],
+				},
+			}),
+		);
 
 		await pullWorkspaceCheckout(ctx);
 

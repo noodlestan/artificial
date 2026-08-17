@@ -1,25 +1,12 @@
 import path, { join } from 'node:path';
 
 import { WorkspaceConfig } from '../../config';
-import { CheckoutRecord, RepositoryRecord } from '../records/types';
+import { RepositoryRecord } from '../records/types';
 
 import { safePath } from './safePath';
+import type { Checkout } from './types';
 
-export interface Checkout {
-	repo?: RepositoryRecord;
-	record: CheckoutRecord;
-	path: string;
-	exists: boolean;
-	remoteBranch: string | null;
-	detached: boolean;
-	conflicts: boolean;
-	dirty: boolean;
-	hasRemote: boolean;
-	unpushed: number;
-	isBehind: boolean;
-	issues: string[];
-	extraneous: boolean;
-}
+export type { Checkout } from './types';
 
 export function createCheckout(
 	config: WorkspaceConfig,
@@ -38,15 +25,5 @@ export function createCheckout(
 		repo: r,
 		record: { name: n, location: l, branch: b, repository: r?.name },
 		path: path.join(basePath, l),
-		exists: false,
-		remoteBranch: null,
-		detached: false,
-		conflicts: false,
-		dirty: false,
-		hasRemote: false,
-		unpushed: 0,
-		isBehind: false,
-		issues: [],
-		extraneous: false,
 	};
 }

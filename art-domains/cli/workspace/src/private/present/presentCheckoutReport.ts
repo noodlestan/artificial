@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 
 import type { WorkspaceConfig } from '../../config/types';
-import type { Checkout } from '../store/createCheckout';
+import type { Checkout } from '../store/types';
 
 import { formatTable } from './formatTable';
 
@@ -17,8 +17,8 @@ export function presentCheckoutReport(config: WorkspaceConfig, checkouts: Checko
 	const rows = items.map(c => [
 		c.repo?.name || '-',
 		join(config.clone.path, c.record.location),
-		c.record.branch,
-		c.issues.join('; ') || '-',
+		c.scan?.branch || c.record.branch,
+		c.scan?.issues.join('; ') || '-',
 	]);
 
 	console.info('Checkouts:');

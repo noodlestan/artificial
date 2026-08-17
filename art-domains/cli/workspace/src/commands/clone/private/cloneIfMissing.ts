@@ -13,7 +13,7 @@ export async function cloneIfMissing(
 	checkout: Checkout,
 ): Promise<Checkout | null> {
 	const scanned = await scanCheckoutState(checkout);
-	if (scanned.exists) {
+	if (scanned.scan?.exists) {
 		return scanned;
 	}
 

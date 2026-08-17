@@ -51,9 +51,9 @@ describe('sync command', () => {
 		expect(ops[1].outcome).toBe('success');
 
 		const checkout = ctx.store.getCheckoutOfRepo('SyncMe');
-		expect(checkout?.unpushed).toBe(0);
-		expect(checkout?.isBehind).toBe(false);
-		expect(checkout?.issues).toEqual([]);
+		expect(checkout?.scan?.unpushed).toBe(0);
+		expect(checkout?.scan?.isBehind).toBe(false);
+		expect(checkout?.scan?.issues).toEqual([]);
 
 		const verifyDir = makeTempDir(tempDirs);
 		await simpleGit(verifyDir).clone(bareDir, verifyDir);
@@ -77,7 +77,7 @@ describe('sync command', () => {
 		await runSync(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('DirtySync');
-		expect(checkout?.issues).toEqual(['uncommitted files', '1 commit behind']);
+		expect(checkout?.scan?.issues).toEqual(['uncommitted files', '1 commit behind']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
@@ -91,8 +91,8 @@ describe('sync command', () => {
 		await runSync(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Missing');
-		expect(checkout?.exists).toBe(false);
-		expect(checkout?.issues).toEqual(['not cloned']);
+		expect(checkout?.scan?.exists).toBe(false);
+		expect(checkout?.scan?.issues).toEqual(['not cloned']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
@@ -114,8 +114,8 @@ describe('sync command', () => {
 		expect(ops[0].outcome).toBe('success');
 
 		const checkout = ctx.store.getCheckoutOfRepo('Current');
-		expect(checkout?.unpushed).toBe(0);
-		expect(checkout?.isBehind).toBe(false);
-		expect(checkout?.issues).toEqual([]);
+		expect(checkout?.scan?.unpushed).toBe(0);
+		expect(checkout?.scan?.isBehind).toBe(false);
+		expect(checkout?.scan?.issues).toEqual([]);
 	});
 });

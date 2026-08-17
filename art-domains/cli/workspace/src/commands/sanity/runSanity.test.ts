@@ -49,8 +49,8 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(false);
-		expect(checkouts[0].issues).toEqual(['not cloned']);
+		expect(checkouts[0].scan?.exists).toEqual(false);
+		expect(checkouts[0].scan?.issues).toEqual(['not cloned']);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});
@@ -73,8 +73,8 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].issues).toEqual([]);
+		expect(checkouts[0].scan?.exists).toEqual(true);
+		expect(checkouts[0].scan?.issues).toEqual([]);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});
@@ -95,8 +95,8 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].issues).toEqual(['uncommitted files']);
+		expect(checkouts[0].scan?.exists).toEqual(true);
+		expect(checkouts[0].scan?.issues).toEqual(['uncommitted files']);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});
@@ -117,8 +117,8 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].issues).toEqual(['1 commit ahead']);
+		expect(checkouts[0].scan?.exists).toEqual(true);
+		expect(checkouts[0].scan?.issues).toEqual(['1 commit ahead']);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});
@@ -142,8 +142,8 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].issues).toEqual([]);
+		expect(checkouts[0].scan?.exists).toEqual(true);
+		expect(checkouts[0].scan?.issues).toEqual([]);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(1);
 		expect(ops[0].operation).toEqual('push');
@@ -167,8 +167,8 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].issues).toEqual(['uncommitted files', '1 commit ahead']);
+		expect(checkouts[0].scan?.exists).toEqual(true);
+		expect(checkouts[0].scan?.issues).toEqual(['uncommitted files', '1 commit ahead']);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});
@@ -193,8 +193,8 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].issues).toEqual(['detached HEAD']);
+		expect(checkouts[0].scan?.exists).toEqual(true);
+		expect(checkouts[0].scan?.issues).toEqual(['detached HEAD']);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});
@@ -233,8 +233,12 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].issues).toEqual(['merge conflicts', 'uncommitted files', '1 commit ahead']);
+		expect(checkouts[0].scan?.exists).toEqual(true);
+		expect(checkouts[0].scan?.issues).toEqual([
+			'merge conflicts',
+			'uncommitted files',
+			'1 commit ahead',
+		]);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});
@@ -253,8 +257,8 @@ describe('sanity command', () => {
 
 		const checkouts = ctx.store.getAllCheckouts();
 		expect(checkouts.length).toEqual(1);
-		expect(checkouts[0].exists).toEqual(true);
-		expect(checkouts[0].issues).toEqual(['unknown project']);
+		expect(checkouts[0].scan?.exists).toEqual(true);
+		expect(checkouts[0].scan?.issues).toEqual(['unknown project']);
 		const ops = ctx.log.all();
 		expect(ops.length).toEqual(0);
 	});
@@ -314,8 +318,8 @@ describe('sanity command', () => {
 		await runSanity(ctx, { auto: false });
 
 		expect(ctx.workspace).toBeDefined();
-		expect(ctx.workspace?.isBehind).toEqual(true);
-		expect(ctx.workspace?.issues).toContain('1 commit behind');
+		expect(ctx.workspace?.scan?.isBehind).toEqual(true);
+		expect(ctx.workspace?.scan?.issues).toContain('1 commit behind');
 	});
 
 	it('pulls the workspace root with --auto when behind and clean', async () => {
@@ -327,7 +331,7 @@ describe('sanity command', () => {
 		await runSanity(ctx, { auto: true });
 
 		expect(ctx.workspace).toBeDefined();
-		expect(ctx.workspace?.isBehind).toEqual(false);
+		expect(ctx.workspace?.scan?.isBehind).toEqual(false);
 		expect(existsSync(join(tempDir, 'origin-advance.txt'))).toEqual(true);
 		const ops = ctx.log.all();
 		expect(ops).toHaveLength(1);
@@ -345,8 +349,8 @@ describe('sanity command', () => {
 		await runSanity(ctx, { auto: true });
 
 		expect(ctx.workspace).toBeDefined();
-		expect(ctx.workspace?.issues).toContain('uncommitted files');
-		expect(ctx.workspace?.issues).toContain('1 commit behind');
+		expect(ctx.workspace?.scan?.issues).toContain('uncommitted files');
+		expect(ctx.workspace?.scan?.issues).toContain('1 commit behind');
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 

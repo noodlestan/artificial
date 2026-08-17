@@ -42,8 +42,8 @@ describe('push command', () => {
 		await runPush(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Ahead');
-		expect(checkout?.unpushed).toBe(0);
-		expect(checkout?.issues).toEqual([]);
+		expect(checkout?.scan?.unpushed).toBe(0);
+		expect(checkout?.scan?.issues).toEqual([]);
 
 		const ops = ctx.log.all();
 		expect(ops).toHaveLength(1);
@@ -79,9 +79,9 @@ describe('push command', () => {
 		expect(ops[1].outcome).toBe('success');
 
 		const checkout = ctx.store.getCheckoutOfRepo('Diverged');
-		expect(checkout?.unpushed).toBe(0);
-		expect(checkout?.isBehind).toBe(false);
-		expect(checkout?.issues).toEqual([]);
+		expect(checkout?.scan?.unpushed).toBe(0);
+		expect(checkout?.scan?.isBehind).toBe(false);
+		expect(checkout?.scan?.issues).toEqual([]);
 
 		const verifyDir = makeTempDir(tempDirs);
 		await simpleGit(verifyDir).clone(bareDir, verifyDir);
@@ -104,7 +104,7 @@ describe('push command', () => {
 		await runPush(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('DirtyPush');
-		expect(checkout?.issues).toEqual(['uncommitted files', '1 commit ahead']);
+		expect(checkout?.scan?.issues).toEqual(['uncommitted files', '1 commit ahead']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
@@ -121,7 +121,7 @@ describe('push command', () => {
 		await runPush(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Current');
-		expect(checkout?.unpushed).toBe(0);
+		expect(checkout?.scan?.unpushed).toBe(0);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
@@ -135,8 +135,8 @@ describe('push command', () => {
 		await runPush(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Missing');
-		expect(checkout?.exists).toBe(false);
-		expect(checkout?.issues).toEqual(['not cloned']);
+		expect(checkout?.scan?.exists).toBe(false);
+		expect(checkout?.scan?.issues).toEqual(['not cloned']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 });

@@ -17,8 +17,8 @@ export async function runPush(ctx: WorkspaceContext): Promise<void> {
 	await scanAllCheckoutsStates(ctx.store);
 
 	for (const checkout of ctx.store.getAllCheckouts()) {
-		if (isCleanCheckout(checkout) && checkout.unpushed > 0) {
-			if (checkout.isBehind) {
+		if (isCleanCheckout(checkout) && (checkout.scan?.unpushed ?? 0) > 0) {
+			if (checkout.scan?.isBehind) {
 				await doPullCheckout(ctx, checkout);
 			}
 			const current = ctx.store.getCheckoutForLocation(checkout.record.location) ?? checkout;

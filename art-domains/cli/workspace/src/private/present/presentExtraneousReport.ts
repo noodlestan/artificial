@@ -1,4 +1,4 @@
-import type { Checkout } from '../store/createCheckout';
+import type { Checkout } from '../store/types';
 
 import { formatTable } from './formatTable';
 
@@ -10,8 +10,8 @@ export function presentExtraneousReport(extraneous: Checkout[]): void {
 	const headers = ['directory', 'branch', 'states'];
 	const rows = extraneous.map(c => [
 		c.record.location,
-		c.record.branch,
-		c.issues.join('; ') || 'clean',
+		c.scan?.branch || c.record.branch,
+		c.scan?.issues.join('; ') || 'clean',
 	]);
 
 	console.info('Untracked:');

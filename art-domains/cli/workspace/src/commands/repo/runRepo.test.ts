@@ -109,7 +109,7 @@ describe('repo command', () => {
 		await runRepo(ctx, { checkoutNames: ['Purrception'] });
 
 		const checkout = ctx.store.getCheckoutByName('Purrception');
-		expect(checkout?.issues).toContain('no project records');
+		expect(checkout?.scan?.issues).toContain('no project records');
 	});
 
 	it('unknown checkout warns and skips', async () => {

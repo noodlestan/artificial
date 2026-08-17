@@ -35,7 +35,7 @@ export async function runBranch(
 		const scanned = await scanCheckoutState(checkout);
 		ctx.store.updateCheckout(scanned);
 
-		if (!scanned.exists) {
+		if (!scanned.scan?.exists) {
 			ctx.log.log(createBranchFailure(branch, 'checkout not cloned', scanned));
 			continue;
 		}

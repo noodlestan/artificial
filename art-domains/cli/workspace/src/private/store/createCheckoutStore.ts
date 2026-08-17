@@ -1,6 +1,4 @@
-import { WorkspaceConfig } from '../../config';
-
-import { type Checkout, createCheckout } from './createCheckout';
+import type { Checkout } from './types';
 
 export interface CheckoutStore {
 	addCheckout: (checkout: Checkout) => void;
@@ -9,8 +7,6 @@ export interface CheckoutStore {
 	getCheckoutByName: (name: string) => Checkout | undefined;
 	updateCheckout: (checkout: Checkout) => void;
 	getAllCheckouts: () => Checkout[];
-	markExtraneous: (config: WorkspaceConfig, location: string) => Checkout;
-	getExtraneous: () => Checkout[];
 }
 
 export function createCheckoutStore(): CheckoutStore {
@@ -53,18 +49,6 @@ export function createCheckoutStore(): CheckoutStore {
 
 		getAllCheckouts(): Checkout[] {
 			return Array.from(checkouts.values());
-		},
-
-		markExtraneous(config: WorkspaceConfig, location: string): Checkout {
-			const original = checkouts.get(location);
-			const checkout: Checkout = original ? { ...original } : createCheckout(config, location);
-			checkout.extraneous = true;
-			checkouts.set(checkout.record.location, checkout);
-			return checkout;
-		},
-
-		getExtraneous(): Checkout[] {
-			return Array.from(checkouts.values()).filter(c => c.extraneous);
 		},
 	};
 }

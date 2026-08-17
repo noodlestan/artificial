@@ -20,7 +20,7 @@ export async function runSync(ctx: WorkspaceContext): Promise<void> {
 		if (isCleanCheckout(checkout)) {
 			await doPullCheckout(ctx, checkout);
 			const current = ctx.store.getCheckoutForLocation(checkout.record.location) ?? checkout;
-			if (current.unpushed > 0) {
+			if ((current.scan?.unpushed ?? 0) > 0) {
 				await pushCheckout(ctx, current);
 			}
 		}

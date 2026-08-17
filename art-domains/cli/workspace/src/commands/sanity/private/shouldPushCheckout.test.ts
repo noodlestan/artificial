@@ -21,9 +21,18 @@ describe('shouldPushCheckout', () => {
 			name: 'MyRepo',
 			remote: 'git@example.com:my-repo.git',
 		});
-		checkout.exists = true;
-		checkout.unpushed = 3;
-		checkout.issues = ['merge conflicts'];
+		checkout.scan = {
+			exists: true,
+			branch: 'main',
+			remoteBranch: null,
+			detached: false,
+			conflicts: true,
+			dirty: false,
+			hasRemote: true,
+			unpushed: 3,
+			isBehind: false,
+			issues: ['merge conflicts'],
+		};
 
 		expect(shouldPushCheckout(checkout)).toBe(false);
 	});
@@ -35,8 +44,18 @@ describe('shouldPushCheckout', () => {
 			name: 'MyRepo',
 			remote: 'git@example.com:my-repo.git',
 		});
-		checkout.exists = true;
-		checkout.unpushed = 2;
+		checkout.scan = {
+			exists: true,
+			branch: 'main',
+			remoteBranch: null,
+			detached: false,
+			conflicts: false,
+			dirty: false,
+			hasRemote: true,
+			unpushed: 2,
+			isBehind: false,
+			issues: [],
+		};
 
 		expect(shouldPushCheckout(checkout)).toBe(true);
 	});

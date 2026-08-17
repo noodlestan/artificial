@@ -48,7 +48,13 @@ export async function runRepo(
 		}
 
 		if (graph.projects.length === 0) {
-			const updated = { ...checkout, issues: [...checkout.issues, 'no project records'] };
+			const updated = {
+				...checkout,
+				scan: checkout.scan && {
+					...checkout.scan,
+					issues: [...checkout.scan.issues, 'no project records'],
+				},
+			};
 			ctx.store.updateCheckout(updated);
 			continue;
 		}

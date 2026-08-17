@@ -2,8 +2,9 @@ import { readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
 import type { WorkspaceConfig } from '../../../config/types';
+import { createExtraneousCheckout } from '../../../private/scan/private/createExtraneousCheckout';
 import { scanCheckoutState } from '../../../private/scan/scanCheckoutState';
-import type { Checkout } from '../../../private/store/createCheckout';
+import type { Checkout } from '../../../private/store/types';
 
 export async function scanExtraneousCheckouts(config: WorkspaceConfig): Promise<Checkout[]> {
 	const checkoutsPath = join(config.root.path, config.clone.path);
@@ -18,21 +19,7 @@ export async function scanExtraneousCheckouts(config: WorkspaceConfig): Promise<
 			const dir = join(checkoutsPath, entry.name);
 			const location = relative(checkoutsPath, dir);
 
-			const checkout: Checkout = {
-				repo: undefined,
-				record: { name: location, location, branch: '', repository: undefined },
-				path: dir,
-				exists: true,
-				remoteBranch: null,
-				detached: false,
-				conflicts: false,
-				dirty: false,
-				hasRemote: false,
-				unpushed: 0,
-				isBehind: false,
-				issues: [],
-				extraneous: true,
-			};
+			const checkout = { ...createExtraneousCheckout(config, location), path: dir };
 			const scanned = await scanCheckoutState(checkout);
 			result.push(scanned);
 		}

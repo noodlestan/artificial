@@ -16,16 +16,18 @@ describe('presentPackageStateReport', () => {
 		checkout = {
 			record: { name: 'Artificial', location: 'artificial', branch: 'main' },
 			path: '/tmp/artificial',
-			exists: true,
-			remoteBranch: 'main',
-			detached: false,
-			conflicts: false,
-			dirty: false,
-			hasRemote: true,
-			unpushed: 0,
-			isBehind: false,
-			issues: [],
-			extraneous: false,
+			scan: {
+				exists: true,
+				branch: 'main',
+				remoteBranch: 'main',
+				detached: false,
+				conflicts: false,
+				dirty: false,
+				hasRemote: true,
+				unpushed: 0,
+				isBehind: false,
+				issues: [],
+			},
 		};
 	});
 

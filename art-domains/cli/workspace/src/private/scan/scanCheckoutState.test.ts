@@ -21,7 +21,7 @@ describe('scanCheckoutState', () => {
 
 		const result = await scanCheckoutState(checkout);
 
-		expect(result.exists).toBe(false);
-		expect(result.issues).toContain('not cloned');
+		expect(result.scan?.exists).toBe(false);
+		expect(result.scan?.issues).toContain('not cloned');
 	});
 });

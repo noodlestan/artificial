@@ -30,7 +30,18 @@ describe('pushCheckout', () => {
 			name: 'MyRepo',
 			remote: 'git@example.com:my-repo.git',
 		});
-		checkout.exists = true;
+		checkout.scan = {
+			exists: true,
+			branch: 'main',
+			remoteBranch: null,
+			detached: false,
+			conflicts: false,
+			dirty: false,
+			hasRemote: false,
+			unpushed: 0,
+			isBehind: false,
+			issues: [],
+		};
 
 		await pushCheckout(ctx, checkout);
 

@@ -8,7 +8,9 @@ import { hasMergeConflicts } from '../git/hasMergeConflicts';
 import { hasRemote } from '../git/hasRemote';
 import { isDetachedHead } from '../git/isDetachedHead';
 import { isDirty } from '../git/isDirty';
-import type { Checkout } from '../store/createCheckout';
+import type { Checkout } from '../store/types';
+
+import type { CheckoutScan } from './types';
 
 export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
 	let dirExists = false;
@@ -20,12 +22,23 @@ export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
 	}
 
 	if (!dirExists) {
-		const updated = { ...checkout, exists: false, issues: ['not cloned'] };
-		return updated;
+		const scan: CheckoutScan = {
+			exists: false,
+			branch: null,
+			hasRemote: false,
+			remoteBranch: null,
+			detached: false,
+			conflicts: false,
+			dirty: false,
+			unpushed: 0,
+			isBehind: false,
+			issues: ['not cloned'],
+		};
+		return { ...checkout, scan };
 	}
 
 	const issues: string[] = [];
-	let branch = checkout.record.branch;
+	let branch: string | null = null;
 	let isDifferentBranch = false;
 	let detached = false;
 	let conflicts = false;
@@ -83,13 +96,9 @@ export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
 		issues.push(`${behindCount} commit${behindCount !== 1 ? 's' : ''} behind`);
 	}
 
-	const updated: Checkout = {
-		...checkout,
-		record: {
-			...checkout.record,
-			branch,
-		},
+	const scan: CheckoutScan = {
 		exists: true,
+		branch,
 		remoteBranch,
 		detached,
 		conflicts,
@@ -100,5 +109,5 @@ export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
 		issues,
 	};
 
-	return updated;
+	return { ...checkout, scan };
 }

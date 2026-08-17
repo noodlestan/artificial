@@ -16,7 +16,7 @@ export async function runPull(ctx: WorkspaceContext): Promise<void> {
 	await scanAllCheckoutsStates(ctx.store);
 
 	for (const checkout of ctx.store.getAllCheckouts()) {
-		if (isCleanCheckout(checkout) && checkout.isBehind) {
+		if (isCleanCheckout(checkout) && checkout.scan?.isBehind) {
 			await doPullCheckout(ctx, checkout);
 		}
 	}
