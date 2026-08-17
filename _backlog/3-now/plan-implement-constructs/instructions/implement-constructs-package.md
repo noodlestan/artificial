@@ -1,10 +1,10 @@
-# Instructions: `build(md-art-roundtrip): implement constructs package with migrated factories`
+# Instructions: `build(md-art-roundtrip): implement constructs package with parser factory bundling`
 
 **Plan:** `implement-constructs`
 
 **Commit.id:** `implement-constructs-package`
 
-**Commit.message:** `build(md-art-roundtrip): implement constructs package with migrated factories`
+**Commit.message:** `build(md-art-roundtrip): implement constructs package with parser factory bundling`
 
 ::switch `agent-worker` — switch to the agent-worker agent mode to execute this instruction. Your mode must be `worker` before you start changing files.
 
@@ -22,7 +22,7 @@ The plan workflow (see the entry point guide → Planning Workflow → Working T
 
 ## Goals
 
-Create `@art-js/artificial-constructs` and migrate the parser-owned construct factories into it while preserving parser orchestration and the existing fixture snapshots. The constructs package depends on primitives; the parser depends on constructs.
+Create `@art-js/artificial-constructs` and migrate the parser-owned construct factories into it while preserving parser orchestration and the existing fixture snapshots. Each construct bundles its preprocessor, handler, and creator into a single `ConstructParserFactory`. The constructs package depends on primitives; the parser depends on constructs.
 
 ## Mandatory Reading
 
@@ -98,25 +98,142 @@ The parser fixture suite (md/art → art.json compared with POC snapshots) must 
 
 Read the mandatory sources and inspect the primitives and parser package layouts. Identify every factory export, parser import, test, package manifest, and workspace record affected by the extraction. Add or update focused tests for the constructs package boundary before implementation. Verify the parser fixture baseline before changing behavior.
 
-### Step 2 / 5 — Scaffold the constructs package
+### Step 2 / 5 — Scaffold the constructs package — completed in pairing session
 
-Create `art-js/libs/constructs/` with package metadata, TypeScript/Vite configuration, source entry points, and tests matching the established primitives package conventions. Export the constructs public API and depend only on `@art-js/artificial-primitives`.
+#### Package metadata
 
-### Step 3 / 5 — Migrate factories
+- Package name: `@art-js/artificial-constructs`.
+- Public entry point: `art-js/libs/constructs/src/index.ts`.
+- Runtime dependency: `@art-js/artificial-primitives` only.
+- Package remains publishable and uses the existing repository metadata.
 
-Move the block, field, section, and `NaturalBlock`/text fallthrough factories into constructs. Preserve names, types, constructors, and behavior. Keep parser handlers, visitors, context wiring, and `buildDocument` in the parser package.
+#### Package configuration
 
-### Step 4 / 5 — Rewire parser and records
+- Added `art-js/libs/constructs/.npmignore`.
+- Added `art-js/libs/constructs/.prettierignore`.
+- Added `art-js/libs/constructs/README.md`.
+- Added `art-js/libs/constructs/vitest.config.ts`.
+- Updated `tsconfig.json` to include the package `scripts/` directory.
+- Retained the primitives-aligned Vite, TypeScript, lint, build, and test setup.
 
-Update parser imports and exports to use constructs. Add the constructs dependency to parser, register `ops/records/packages/artificial-constructs.art`, and remove obsolete factory source from parser. Do not modify the POC package.
+#### Source layout established for the next step
 
-### Step 5 / 5 — Validate the package boundary
+- `src/constructs/` owns construct factories and construct-specific helpers.
+- `src/framework/` owns shared factory contracts, MDAST typing, source slicing, and position utilities.
+- `src/index.ts` owns the constructs package public exports.
 
-Run lint, build, and tests for constructs and parser. Confirm parser fixture snapshots are unchanged, package dependencies are directional (`constructs → primitives`, `parser → constructs`), and no parser factory imports or duplicate implementations remain.
+### Step 3 / 5 — Migrate factories — completed in pairing session
+
+#### Constructs package: `art-js/libs/constructs/src/constructs/`
+
+- `src/constructs/FieldBlock/` — field constants, strong-field detection, paragraph construction, and `createFieldBlockCreator`.
+- `src/constructs/NaturalBlock/` — natural-block construction and `createNaturalBlockCreator`, preserving raw whitespace gaps and source positions.
+- `src/constructs/SectionBlock/` — section matching, heading tag extraction, and `createSectionBlockCreator`.
+- `src/constructs/Tag/` — tag matching and `createTagCreator`.
+
+#### Constructs package: `art-js/libs/constructs/src/helpers/`
+
+- `cleanPosition.ts` — normalises MDAST positions for construct records.
+- `rawSlice.ts` — reads source text for factories that need exact Markdown content.
+- `index.ts` — exports the shared helper API.
+
+#### Constructs package: `art-js/libs/constructs/src/constructs/types.ts`
+
+- `ConstructCreator` — factory contract (detect + create + shouldVisit).
+- `ConstructPreProcessor` — pre-processing contract (canPreProcess + preProcess).
+- `ConstructHandler` — handler contract (canHandle + handle).
+- `ConstructParser` — bundle of optional preProcessor + handler + creator.
+- `ConstructParserFactory` — function `() => ConstructParser`.
+
+#### Parser factory bundling
+
+Each construct exposes a single `create*Parser` factory (e.g. `createFieldBlockParser`) that returns a `ConstructParser` object bundling:
+- `preProcessor` — optional construct-specific preprocessor.
+- `handler` — optional construct-specific handler.
+- `factory` — the construct creator (detect + create).
+
+Example:
+```ts
+export const createFieldBlockParser: ConstructParserFactory = () => ({
+  preProcessor: createFieldBlockPreProcessor(),
+  handler: createFieldBlockHandler(),
+  factory: createFieldBlockCreator(),
+});
+```
+
+#### Private directory pattern
+
+Each construct directory uses a `private/` subdirectory for internal files:
+- `private/` — creators, handlers, preprocessors, constants, helpers, concrete types.
+- Root — only `index.ts` (exports parser factory) and `create*Parser.ts` (parser factory).
+
+#### Public API
+
+- `src/index.ts` exports the four parser factories:
+  - `createFieldBlockParser`
+  - `createNaturalBlockParser`
+  - `createSectionBlockParser`
+  - `createTagParser`
+- Also exports: `ConstructCreator`, `ConstructHandler`, `ConstructParser`, `ConstructParserFactory`, `ConstructPreProcessor`, `BlockContent`, `Construct`, `ArtDocument`, `cleanPosition`, `rawSlice`.
+
+#### Parser package boundary: `art-js/libs/parser/src/`
+
+- Removed migrated factory implementations from `src/constructs/`.
+- Moved parser-specific handlers to `src/handlers/`.
+- Kept visitor traversal, context creation, gap flushing, and `buildDocument` in parser.
+- Factories produce construct records; handlers route records into nested `VisitContext` objects.
+- Preserved factory names, types, constructors, and parser-facing behavior.
+- `Tag` detection remains limited to visited MDAST text nodes; fenced code blocks are not treated as prose.
+
+### Step 4 / 5 — Rewire parser and records — completed in pairing session
+
+#### Parser config shape
+
+```ts
+interface ParserConfig {
+  defaultConstruct: ConstructParserFactory;
+  constructs: ConstructParserFactory[];
+}
+```
+
+The parser instantiates constructs at build time:
+```ts
+const defaultConstruct = config.defaultConstruct();
+const constructs = [defaultConstruct, ...config.constructs.map(create => create())];
+```
+
+#### Parser changes
+
+- `src/config/types.ts` — `ParserConfig` uses `ConstructParserFactory`.
+- `src/config/createDefaultConfig.ts` — wires `createNaturalBlockParser` as default, others as `constructs`.
+- `src/private/getFactory.ts` — iterates constructs, delegates to `construct.factory.detect`.
+- `src/builder.ts` — orchestrates preprocessors, handlers, and factories from construct bundles.
+- `src/private/flushGap.ts` — uses `BlockContent` for gap blocks.
+- Removed obsolete handler/framework/factory source from parser.
+
+### Step 5 / 5 — Validate the package boundary — in progress
+
+#### Completed checks
+
+- Constructs lint/build checks pass.
+- Parser lint/build checks pass after import rewiring.
+- Migrated factory implementations were removed from parser.
+
+#### Fixture update
+
+- Regenerated `art-js/libs/parser/test/fixtures/markdown.md.json`.
+- Removed the obsolete `Tag` record from `Tags in Code (should NOT be detected)`.
+- Prose tags remain expected parser output.
+
+#### Remaining checks
+
+- Rerun constructs and parser test commands.
+- Confirm `constructs → primitives` and `parser → constructs` dependency direction.
+- Confirm no parser factory imports or duplicate factory implementations remain.
 
 ## Final Verification
 
-**Sanity check:** `@art-js/artificial-constructs` builds and tests independently; all migrated factories are exported from constructs; parser orchestration remains in parser; the POC package is unchanged; and parser fixture snapshots still pass without updates.
+**Sanity check:** `@art-js/artificial-constructs` builds and tests independently; each construct exports only its parser factory; internal files live in `private/` subdirectories; parser orchestration uses the new `ConstructParserFactory` config shape; the POC package is unchanged; and parser fixture snapshots still pass without updates.
 
 **Verification:**
 

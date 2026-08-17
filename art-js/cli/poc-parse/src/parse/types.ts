@@ -12,7 +12,7 @@ export interface Position {
 }
 
 /** Base interface implemented by every construct record. */
-export interface RecordBase {
+export interface ConstructBase {
 	/** Discriminator — the construct class (e.g. 'SectionBlock'). */
 	construct: string;
 	/** Source position, carried from the token stream. */
@@ -20,7 +20,7 @@ export interface RecordBase {
 }
 
 /** SectionBlock — a resource declaration `# Kind: Name` plus its content. */
-export interface SectionBlock extends RecordBase {
+export interface SectionBlock extends ConstructBase {
 	construct: 'SectionBlock';
 	/** Declared resource kind (e.g. 'Routine'); absent for kindless headings. */
 	kind?: string;
@@ -35,7 +35,7 @@ export interface SectionBlock extends RecordBase {
 }
 
 /** FieldBlock — a named property `**Name:**` within a SectionBlock. */
-export interface FieldBlock extends RecordBase {
+export interface FieldBlock extends ConstructBase {
 	construct: 'FieldBlock';
 	name: string;
 	/** Block-level value: everything until the next terminator. */
@@ -43,7 +43,7 @@ export interface FieldBlock extends RecordBase {
 }
 
 /** NaturalBlock — the catch-all: plain markdown not classified as art. */
-export interface NaturalBlock extends RecordBase {
+export interface NaturalBlock extends ConstructBase {
 	construct: 'NaturalBlock';
 	/** Raw markdown content (always present, lossless round-trip). */
 	value: string;
@@ -60,14 +60,14 @@ export interface NaturalBlock extends RecordBase {
 }
 
 /** Tag — a projection tag `(#identifier)`. */
-export interface Tag extends RecordBase {
+export interface Tag extends ConstructBase {
 	construct: 'Tag';
 	/** Kebab-case tag name, without `#` or parentheses. */
 	name: string;
 }
 
 /** Document — the parse result for one source file. */
-export interface Document extends RecordBase {
+export interface Document extends ConstructBase {
 	construct: 'Document';
 	children: BlockContent[];
 }
