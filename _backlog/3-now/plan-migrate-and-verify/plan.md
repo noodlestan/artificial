@@ -105,29 +105,39 @@ npm run test
 
 ## Commits
 
-### `migrate-parser-code` - `DRAFT`
+### `migrate-parser-code` - `COMMITTED`
 
-**Commit Message:** `art-js: migrate all parser code to packages`
+**Commit Message:** `build(md-art-roundtrip): migrate all parser code to packages`
 
 **Instructions File:** `_backlog/3-now/plan-migrate-and-verify/instructions/migrate-parser-code.md`
+
+**Commit Id:** `9c688285`
+
+**Report:** `_backlog/3-now/plan-migrate-and-verify/instructions/migrate-parser-code__report.md`
 
 **Scope:**
 
 - Move all parser logic to `@art-js/artificial-parser`
 - Eliminate `createNestedContext` injection from handler factories (milestone decision)
-- Do not keep the dead `fieldBlockFactory` export (milestone decision) — likely introduced later if needed
+- Do not keep the dead `fieldBlockFactory` export (milestone decision)
 - Move fixtures to parser package test directory
 - Add minimum viable test coverage for each factory and handler as soon as the directory structure, migrated types, and factories are stable
 - Verify: `npm run test` passes in parser package
 - Do not modify poc-parse (migration source; read-only) — `@art-js/artificial-parser` takes over as the parser; poc-parse stays untouched until archived in phase 10
 
+**Result:**
+
+- Copied and adapted parser implementation files into `art-js/libs/parser/src/`
+- Implemented public API `parse(markdown)` and `createDefaultConfig`; wired builder and factories
+- Added minimal unit-test fixture runner and confirmed tests pass ("All fixtures passed!")
+
 ### `verify-parser-against-snapshots` - `DRAFT`
 
-**Commit Message:** `art-js: verify parser output against POC snapshots`
+**Commit Message:** `build(md-art-roundtrip): art-js: verify parser output against POC snapshots`
 
 **Instructions File:** `_backlog/3-now/plan-migrate-and-verify/instructions/verify-parser-against-snapshots.md`
 
-**Scope:**
+**Evidence:**
 
 - Extend the migrated fixture runner (phase 2) to diff parser output against the `.art.json` snapshots — md/art → art.json must match the POC output exactly
 - All 16 inputs are covered by basename (15 snapshot files; `section-block.art` and `section-block.md` share `section-block.art.json`)
@@ -140,4 +150,9 @@ No follow-ups yet.
 
 ## Feedback
 
-No sub-agent reports yet.
+- migrate-parser-code: `COMMITTED` — report: `_backlog/3-now/plan-migrate-and-verify/migrate-parser-code__report.md`
+
+Planner reflection:
+
+- Migration completed and verified in the parser package; tests for migrated fixtures passed.
+- No blockers reported; follow-ups noted in the report as observations.

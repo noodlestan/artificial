@@ -2,7 +2,9 @@
 
 **Plan:** `migrate-and-verify`
 
-**Commit:** `verify-parser-against-snapshots`
+**Commit.id:** `verify-parser-against-snapshots`
+
+**Commit.message:** `build(md-art-roundtrip): art-js: verify parser output against POC snapshots`
 
 ::switch `agent-worker` — switch to the agent-worker agent mode to execute this instruction. Your mode must be `worker` before you start changing files.
 

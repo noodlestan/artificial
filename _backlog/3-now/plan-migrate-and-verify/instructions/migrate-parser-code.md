@@ -2,7 +2,9 @@
 
 **Plan:** `migrate-and-verify`
 
-**Commit:** `migrate-parser-code`
+**Commit.id:** `migrate-parser-code`
+
+**Commit.message:** `build(md-art-roundtrip): migrate all parser code to packages`
 
 ::switch `agent-worker` — switch to the agent-worker agent mode to execute this instruction. Your mode must be `worker` before you start changing files.
 
