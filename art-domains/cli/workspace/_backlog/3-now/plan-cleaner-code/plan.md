@@ -79,15 +79,17 @@ Commits execute strictly in sequence — the three DRAFT commits form a dependen
 
 **Instructions:** none — executed during a pairing session; no instruction file created.
 
-### `decouple-private-from-ctx` - `READY`
+### `decouple-private-from-ctx` - `COMMITTED`
 
 **Commit Message:** `refactor(workspace-cli): decouple private layer from WorkspaceContext`
 
-**Depends on:** — (first in sequence).
+**Commit:** `3682f28`
 
-Move orchestration (store writes, ops logging, error handling) up to the command layer; narrow every `private/` function to explicit minimal inputs; tests pass unchanged. Resolved: `runSanity` sends the extraneous list to `presentExtraneousReport(extraneous)` (new param) — no store add, no re-run of `scanAllCheckoutsStates`.
+**Changes:** Move orchestration (store writes, ops logging, error handling) up to the command layer; narrow every `private/` function to explicit minimal inputs; tests pass unchanged. Resolved: `runSanity` sends the extraneous list to `presentExtraneousReport(extraneous)` (new param) — no store add, no re-run of `scanAllCheckoutsStates`.
 
 **Instructions File:** `instructions/decouple-private-from-ctx.md`
+
+**Report File:** `instructions/decouple-private-from-ctx__report.md`
 
 ### `decouple-checkout-scan` - `READY`
 

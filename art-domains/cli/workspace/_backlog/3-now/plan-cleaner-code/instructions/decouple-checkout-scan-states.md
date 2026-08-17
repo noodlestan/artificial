@@ -2,7 +2,9 @@
 
 **Plan:** `plan-cleaner-code`
 
-**Commit:** `decouple-checkout-scan-states`
+**Commit.id:** `decouple-checkout-scan-states`
+
+**Commit.message:** `refactor(workspace-cli): model CheckoutScan as operation guards over states`
 
 ::switch `agent-worker` — switch to the agent-worker agent mode to execute this instruction. Your mode must be `worker` before you start changing files.
 
@@ -80,6 +82,23 @@ Run after each step from `$PROJECT`:
 npm run lint
 npm run build
 npm run test
+```
+
+## Verification
+
+Run from `$PROJECT` package directory:
+
+```bash
+npm run lint:fix # to fix formatting issues automatically
+npm run lint # to report other issues (prettier, eslint, tsc --noEmit)
+npm run build
+npm run test
+```
+
+Runs on pre-commit hook from the repository root:
+
+```bash
+npm run ci # lint, build and test at repository level
 ```
 
 ## Steps
