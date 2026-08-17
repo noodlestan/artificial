@@ -1,0 +1,46 @@
+# Module: Parser
+
+## Decision: mdast-Based Parse Strategy
+
+**Status:** Adopted
+
+**Context:** The parse POC explored two substrate strategies: (1) build directly on micromark token events, or (2) build on mdast, the AST layer of the unified ecosystem. The micromark approach was implemented and revealed that tokens are too low-level — manual span reconstruction, complex stack logic, and flattened structured content made the builder a monolith.
+
+mdast sits between micromark (syntax) and remark (pipeline). It provides a tree of typed nodes (`heading`, `strong`, `list`, `paragraph`, etc.) with children, positions, and inline content already reconstructed. This is exactly the layer where art's construct classification belongs.
+
+**Decision:** Parse markdown to mdast using `mdast-util-from-markdown`, then visit each node with `unist-util-visit` and map it to art records using a layered architecture:
+
+1. **Pre-processors** — detect and transform nodes before factory detection
+2. **Factories** — detect and create records
+3. **Handlers** — process records after creation
+4. **Injection** — all components injected via `ParserConfig`
+
+Unmatched nodes fall back to `NaturalBlock`.
+
+**Consequences:**
+
+- mdast handles token reconstruction — strong spans are complete, nesting is resolved, inline formatting is preserved.
+- The layered architecture cleanly separates concerns.
+- `VisitContext` is a pure container — no construct-specific logic.
+- NaturalBlock can have structured content (`.children`) when inside a FieldBlock with lists.
+- Position objects are clean — mdast positions don't carry internal micromark fields.
+- Section nesting is driven by heading level — mdast headings are flat siblings, level determines parent/child relationships.
+- Dependencies: `mdast-util-from-markdown` (parses markdown → mdast), `unist-util-visit` (traverses the tree).
+
+**Rejected alternative:** Micromark-first — direct token events with an explicit stack. Superseded because tokens are the wrong abstraction boundary for record building.
+
+**Research basis:**
+
+- `_research.md` best practice #1: "Two layers, always — micromark owns syntax, we own semantics." mdast is the semantics layer.
+- Surveyed projects: mdx-js/mdx, remarkjs/remark, mdast-util-from-markdown.
+- `language.art` construct containment rules inform factory detection patterns.
+
+## Decision: Kind-Agnostic Parser
+
+**Status:** Adopted
+
+**Context:** Every SectionBlock arrives as `# Kind: Name`. If the parser enumerated known kinds it would have to grow with the language.
+
+**Decision:** The parser is kind-agnostic: `kind` is an open string, captured but never enumerated or interpreted at parse time. Any `# Kind: Name` heading becomes a generic SectionBlock record; kind semantics are resolved downstream.
+
+**Consequences:** Parse never rejects and never special-cases; the core schema stays frozen; per-kind typed records are an extract concern; the schema exposes kinds as an open registry for domain augmentations.

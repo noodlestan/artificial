@@ -1,0 +1,2049 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "SectionBlock",
+      "name": "Module",
+      "children": [
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "ESLint",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 5,
+                      "column": 20,
+                      "offset": 60
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 21,
+                      "offset": 61
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`eslint`",
+                  "position": {
+                    "start": {
+                      "line": 5,
+                      "column": 21,
+                      "offset": 61
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 29,
+                      "offset": 69
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 1,
+                  "offset": 41
+                },
+                "end": {
+                  "line": 5,
+                  "column": 29,
+                  "offset": 69
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " JavaScript linter.",
+                  "position": {
+                    "start": {
+                      "line": 7,
+                      "column": 13,
+                      "offset": 83
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 32,
+                      "offset": 102
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 7,
+                  "column": 1,
+                  "offset": 71
+                },
+                "end": {
+                  "line": 7,
+                  "column": 32,
+                  "offset": 102
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 9,
+                      "column": 13,
+                      "offset": 116
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 14,
+                      "offset": 117
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`8.57.1`",
+                  "position": {
+                    "start": {
+                      "line": 9,
+                      "column": 14,
+                      "offset": 117
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 22,
+                      "offset": 125
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 9,
+                  "column": 1,
+                  "offset": 104
+                },
+                "end": {
+                  "line": 9,
+                  "column": 22,
+                  "offset": 125
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 10
+            },
+            "end": {
+              "line": 3,
+              "column": 30,
+              "offset": 39
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Prettier",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 13,
+                      "column": 20,
+                      "offset": 179
+                    },
+                    "end": {
+                      "line": 13,
+                      "column": 21,
+                      "offset": 180
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`prettier`",
+                  "position": {
+                    "start": {
+                      "line": 13,
+                      "column": 21,
+                      "offset": 180
+                    },
+                    "end": {
+                      "line": 13,
+                      "column": 31,
+                      "offset": 190
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 13,
+                  "column": 1,
+                  "offset": 160
+                },
+                "end": {
+                  "line": 13,
+                  "column": 31,
+                  "offset": 190
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Code formatter.",
+                  "position": {
+                    "start": {
+                      "line": 15,
+                      "column": 13,
+                      "offset": 204
+                    },
+                    "end": {
+                      "line": 15,
+                      "column": 29,
+                      "offset": 220
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 15,
+                  "column": 1,
+                  "offset": 192
+                },
+                "end": {
+                  "line": 15,
+                  "column": 29,
+                  "offset": 220
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 17,
+                      "column": 13,
+                      "offset": 234
+                    },
+                    "end": {
+                      "line": 17,
+                      "column": 14,
+                      "offset": 235
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`3.8.4`",
+                  "position": {
+                    "start": {
+                      "line": 17,
+                      "column": 14,
+                      "offset": 235
+                    },
+                    "end": {
+                      "line": 17,
+                      "column": 21,
+                      "offset": 242
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 17,
+                  "column": 1,
+                  "offset": 222
+                },
+                "end": {
+                  "line": 17,
+                  "column": 21,
+                  "offset": 242
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 11,
+              "column": 1,
+              "offset": 127
+            },
+            "end": {
+              "line": 11,
+              "column": 32,
+              "offset": 158
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "ESLint Config Standard",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 21,
+                      "column": 20,
+                      "offset": 310
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 21,
+                      "offset": 311
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`eslint-config-standard`",
+                  "position": {
+                    "start": {
+                      "line": 21,
+                      "column": 21,
+                      "offset": 311
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 45,
+                      "offset": 335
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 1,
+                  "offset": 291
+                },
+                "end": {
+                  "line": 21,
+                  "column": 45,
+                  "offset": 335
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Standard ESLint config.",
+                  "position": {
+                    "start": {
+                      "line": 23,
+                      "column": 13,
+                      "offset": 349
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 37,
+                      "offset": 373
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 23,
+                  "column": 1,
+                  "offset": 337
+                },
+                "end": {
+                  "line": 23,
+                  "column": 37,
+                  "offset": 373
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 25,
+                      "column": 13,
+                      "offset": 387
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 14,
+                      "offset": 388
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`17.1.0`",
+                  "position": {
+                    "start": {
+                      "line": 25,
+                      "column": 14,
+                      "offset": 388
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 22,
+                      "offset": 396
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 1,
+                  "offset": 375
+                },
+                "end": {
+                  "line": 25,
+                  "column": 22,
+                  "offset": 396
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 19,
+              "column": 1,
+              "offset": 244
+            },
+            "end": {
+              "line": 19,
+              "column": 46,
+              "offset": 289
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "ESLint Plugin Import",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 29,
+                      "column": 20,
+                      "offset": 462
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 21,
+                      "offset": 463
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`eslint-plugin-import`",
+                  "position": {
+                    "start": {
+                      "line": 29,
+                      "column": 21,
+                      "offset": 463
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 43,
+                      "offset": 485
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 29,
+                  "column": 1,
+                  "offset": 443
+                },
+                "end": {
+                  "line": 29,
+                  "column": 43,
+                  "offset": 485
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Import rules for ESLint.",
+                  "position": {
+                    "start": {
+                      "line": 31,
+                      "column": 13,
+                      "offset": 499
+                    },
+                    "end": {
+                      "line": 31,
+                      "column": 38,
+                      "offset": 524
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 31,
+                  "column": 1,
+                  "offset": 487
+                },
+                "end": {
+                  "line": 31,
+                  "column": 38,
+                  "offset": 524
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 33,
+                      "column": 13,
+                      "offset": 538
+                    },
+                    "end": {
+                      "line": 33,
+                      "column": 14,
+                      "offset": 539
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`2.32.0`",
+                  "position": {
+                    "start": {
+                      "line": 33,
+                      "column": 14,
+                      "offset": 539
+                    },
+                    "end": {
+                      "line": 33,
+                      "column": 22,
+                      "offset": 547
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 33,
+                  "column": 1,
+                  "offset": 526
+                },
+                "end": {
+                  "line": 33,
+                  "column": 22,
+                  "offset": 547
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 27,
+              "column": 1,
+              "offset": 398
+            },
+            "end": {
+              "line": 27,
+              "column": 44,
+              "offset": 441
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "ESLint Plugin JSX A11y",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 37,
+                      "column": 20,
+                      "offset": 615
+                    },
+                    "end": {
+                      "line": 37,
+                      "column": 21,
+                      "offset": 616
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`eslint-plugin-jsx-a11y`",
+                  "position": {
+                    "start": {
+                      "line": 37,
+                      "column": 21,
+                      "offset": 616
+                    },
+                    "end": {
+                      "line": 37,
+                      "column": 45,
+                      "offset": 640
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 37,
+                  "column": 1,
+                  "offset": 596
+                },
+                "end": {
+                  "line": 37,
+                  "column": 45,
+                  "offset": 640
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Accessibility rules for JSX.",
+                  "position": {
+                    "start": {
+                      "line": 39,
+                      "column": 13,
+                      "offset": 654
+                    },
+                    "end": {
+                      "line": 39,
+                      "column": 42,
+                      "offset": 683
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 39,
+                  "column": 1,
+                  "offset": 642
+                },
+                "end": {
+                  "line": 39,
+                  "column": 42,
+                  "offset": 683
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 41,
+                      "column": 13,
+                      "offset": 697
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 14,
+                      "offset": 698
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`6.10.2`",
+                  "position": {
+                    "start": {
+                      "line": 41,
+                      "column": 14,
+                      "offset": 698
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 22,
+                      "offset": 706
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 41,
+                  "column": 1,
+                  "offset": 685
+                },
+                "end": {
+                  "line": 41,
+                  "column": 22,
+                  "offset": 706
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 35,
+              "column": 1,
+              "offset": 549
+            },
+            "end": {
+              "line": 35,
+              "column": 46,
+              "offset": 594
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "ESLint Plugin MDX",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 45,
+                      "column": 20,
+                      "offset": 769
+                    },
+                    "end": {
+                      "line": 45,
+                      "column": 21,
+                      "offset": 770
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`eslint-plugin-mdx`",
+                  "position": {
+                    "start": {
+                      "line": 45,
+                      "column": 21,
+                      "offset": 770
+                    },
+                    "end": {
+                      "line": 45,
+                      "column": 40,
+                      "offset": 789
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 45,
+                  "column": 1,
+                  "offset": 750
+                },
+                "end": {
+                  "line": 45,
+                  "column": 40,
+                  "offset": 789
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " MDX support for ESLint.",
+                  "position": {
+                    "start": {
+                      "line": 47,
+                      "column": 13,
+                      "offset": 803
+                    },
+                    "end": {
+                      "line": 47,
+                      "column": 37,
+                      "offset": 827
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 47,
+                  "column": 1,
+                  "offset": 791
+                },
+                "end": {
+                  "line": 47,
+                  "column": 37,
+                  "offset": 827
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 49,
+                      "column": 13,
+                      "offset": 841
+                    },
+                    "end": {
+                      "line": 49,
+                      "column": 14,
+                      "offset": 842
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`3.8.1`",
+                  "position": {
+                    "start": {
+                      "line": 49,
+                      "column": 14,
+                      "offset": 842
+                    },
+                    "end": {
+                      "line": 49,
+                      "column": 21,
+                      "offset": 849
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 49,
+                  "column": 1,
+                  "offset": 829
+                },
+                "end": {
+                  "line": 49,
+                  "column": 21,
+                  "offset": 849
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 43,
+              "column": 1,
+              "offset": 708
+            },
+            "end": {
+              "line": 43,
+              "column": 41,
+              "offset": 748
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "ESLint Plugin Prettier",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 53,
+                      "column": 20,
+                      "offset": 917
+                    },
+                    "end": {
+                      "line": 53,
+                      "column": 21,
+                      "offset": 918
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`eslint-plugin-prettier`",
+                  "position": {
+                    "start": {
+                      "line": 53,
+                      "column": 21,
+                      "offset": 918
+                    },
+                    "end": {
+                      "line": 53,
+                      "column": 45,
+                      "offset": 942
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 53,
+                  "column": 1,
+                  "offset": 898
+                },
+                "end": {
+                  "line": 53,
+                  "column": 45,
+                  "offset": 942
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Run Prettier as ESLint rule.",
+                  "position": {
+                    "start": {
+                      "line": 55,
+                      "column": 13,
+                      "offset": 956
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 42,
+                      "offset": 985
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 55,
+                  "column": 1,
+                  "offset": 944
+                },
+                "end": {
+                  "line": 55,
+                  "column": 42,
+                  "offset": 985
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 57,
+                      "column": 13,
+                      "offset": 999
+                    },
+                    "end": {
+                      "line": 57,
+                      "column": 14,
+                      "offset": 1000
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`5.5.6`",
+                  "position": {
+                    "start": {
+                      "line": 57,
+                      "column": 14,
+                      "offset": 1000
+                    },
+                    "end": {
+                      "line": 57,
+                      "column": 21,
+                      "offset": 1007
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 57,
+                  "column": 1,
+                  "offset": 987
+                },
+                "end": {
+                  "line": 57,
+                  "column": 21,
+                  "offset": 1007
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 51,
+              "column": 1,
+              "offset": 851
+            },
+            "end": {
+              "line": 51,
+              "column": 46,
+              "offset": 896
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "ESLint Plugin Solid",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 20,
+                      "offset": 1072
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 21,
+                      "offset": 1073
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`eslint-plugin-solid`",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 21,
+                      "offset": 1073
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 42,
+                      "offset": 1094
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 61,
+                  "column": 1,
+                  "offset": 1053
+                },
+                "end": {
+                  "line": 61,
+                  "column": 42,
+                  "offset": 1094
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " SolidJS rules for ESLint.",
+                  "position": {
+                    "start": {
+                      "line": 63,
+                      "column": 13,
+                      "offset": 1108
+                    },
+                    "end": {
+                      "line": 63,
+                      "column": 39,
+                      "offset": 1134
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 63,
+                  "column": 1,
+                  "offset": 1096
+                },
+                "end": {
+                  "line": 63,
+                  "column": 39,
+                  "offset": 1134
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 65,
+                      "column": 13,
+                      "offset": 1148
+                    },
+                    "end": {
+                      "line": 65,
+                      "column": 14,
+                      "offset": 1149
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`0.14.5`",
+                  "position": {
+                    "start": {
+                      "line": 65,
+                      "column": 14,
+                      "offset": 1149
+                    },
+                    "end": {
+                      "line": 65,
+                      "column": 22,
+                      "offset": 1157
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 65,
+                  "column": 1,
+                  "offset": 1136
+                },
+                "end": {
+                  "line": 65,
+                  "column": 22,
+                  "offset": 1157
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 59,
+              "column": 1,
+              "offset": 1009
+            },
+            "end": {
+              "line": 59,
+              "column": 43,
+              "offset": 1051
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Noodlestan ESLint Config",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 69,
+                      "column": 20,
+                      "offset": 1227
+                    },
+                    "end": {
+                      "line": 69,
+                      "column": 21,
+                      "offset": 1228
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`@noodlestan/eslint-config`",
+                  "position": {
+                    "start": {
+                      "line": 69,
+                      "column": 21,
+                      "offset": 1228
+                    },
+                    "end": {
+                      "line": 69,
+                      "column": 48,
+                      "offset": 1255
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 69,
+                  "column": 1,
+                  "offset": 1208
+                },
+                "end": {
+                  "line": 69,
+                  "column": 48,
+                  "offset": 1255
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Shared ESLint configuration.",
+                  "position": {
+                    "start": {
+                      "line": 71,
+                      "column": 13,
+                      "offset": 1269
+                    },
+                    "end": {
+                      "line": 71,
+                      "column": 42,
+                      "offset": 1298
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 71,
+                  "column": 1,
+                  "offset": 1257
+                },
+                "end": {
+                  "line": 71,
+                  "column": 42,
+                  "offset": 1298
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 13,
+                      "offset": 1312
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 14,
+                      "offset": 1313
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`0.0.7`",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 14,
+                      "offset": 1313
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 21,
+                      "offset": 1320
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 73,
+                  "column": 1,
+                  "offset": 1300
+                },
+                "end": {
+                  "line": 73,
+                  "column": 21,
+                  "offset": 1320
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 67,
+              "column": 1,
+              "offset": 1159
+            },
+            "end": {
+              "line": 67,
+              "column": 48,
+              "offset": 1206
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "TypeScript ESLint Plugin",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 77,
+                      "column": 20,
+                      "offset": 1390
+                    },
+                    "end": {
+                      "line": 77,
+                      "column": 21,
+                      "offset": 1391
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`@typescript-eslint/eslint-plugin`",
+                  "position": {
+                    "start": {
+                      "line": 77,
+                      "column": 21,
+                      "offset": 1391
+                    },
+                    "end": {
+                      "line": 77,
+                      "column": 55,
+                      "offset": 1425
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 77,
+                  "column": 1,
+                  "offset": 1371
+                },
+                "end": {
+                  "line": 77,
+                  "column": 55,
+                  "offset": 1425
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " TypeScript rules for ESLint.",
+                  "position": {
+                    "start": {
+                      "line": 79,
+                      "column": 13,
+                      "offset": 1439
+                    },
+                    "end": {
+                      "line": 79,
+                      "column": 42,
+                      "offset": 1468
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 79,
+                  "column": 1,
+                  "offset": 1427
+                },
+                "end": {
+                  "line": 79,
+                  "column": 42,
+                  "offset": 1468
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 81,
+                      "column": 13,
+                      "offset": 1482
+                    },
+                    "end": {
+                      "line": 81,
+                      "column": 14,
+                      "offset": 1483
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`8.11.0`",
+                  "position": {
+                    "start": {
+                      "line": 81,
+                      "column": 14,
+                      "offset": 1483
+                    },
+                    "end": {
+                      "line": 81,
+                      "column": 22,
+                      "offset": 1491
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 81,
+                  "column": 1,
+                  "offset": 1470
+                },
+                "end": {
+                  "line": 81,
+                  "column": 22,
+                  "offset": 1491
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency",
+          "position": {
+            "start": {
+              "line": 75,
+              "column": 1,
+              "offset": 1322
+            },
+            "end": {
+              "line": 75,
+              "column": 48,
+              "offset": 1369
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Root Lint",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Dependencies",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "list",
+                  "ordered": false,
+                  "start": null,
+                  "spread": false,
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: ESLint",
+                      "position": {
+                        "start": {
+                          "line": 87,
+                          "column": 3,
+                          "offset": 1552
+                        },
+                        "end": {
+                          "line": 87,
+                          "column": 29,
+                          "offset": 1578
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: Prettier",
+                      "position": {
+                        "start": {
+                          "line": 88,
+                          "column": 3,
+                          "offset": 1581
+                        },
+                        "end": {
+                          "line": 88,
+                          "column": 31,
+                          "offset": 1609
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: ESLint Config Standard",
+                      "position": {
+                        "start": {
+                          "line": 89,
+                          "column": 3,
+                          "offset": 1612
+                        },
+                        "end": {
+                          "line": 89,
+                          "column": 45,
+                          "offset": 1654
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: ESLint Plugin Import",
+                      "position": {
+                        "start": {
+                          "line": 90,
+                          "column": 3,
+                          "offset": 1657
+                        },
+                        "end": {
+                          "line": 90,
+                          "column": 43,
+                          "offset": 1697
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: ESLint Plugin JSX A11y",
+                      "position": {
+                        "start": {
+                          "line": 91,
+                          "column": 3,
+                          "offset": 1700
+                        },
+                        "end": {
+                          "line": 91,
+                          "column": 45,
+                          "offset": 1742
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: ESLint Plugin MDX",
+                      "position": {
+                        "start": {
+                          "line": 92,
+                          "column": 3,
+                          "offset": 1745
+                        },
+                        "end": {
+                          "line": 92,
+                          "column": 40,
+                          "offset": 1782
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: ESLint Plugin Prettier",
+                      "position": {
+                        "start": {
+                          "line": 93,
+                          "column": 3,
+                          "offset": 1785
+                        },
+                        "end": {
+                          "line": 93,
+                          "column": 45,
+                          "offset": 1827
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: ESLint Plugin Solid",
+                      "position": {
+                        "start": {
+                          "line": 94,
+                          "column": 3,
+                          "offset": 1830
+                        },
+                        "end": {
+                          "line": 94,
+                          "column": 42,
+                          "offset": 1869
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: Noodlestan ESLint Config",
+                      "position": {
+                        "start": {
+                          "line": 95,
+                          "column": 3,
+                          "offset": 1872
+                        },
+                        "end": {
+                          "line": 95,
+                          "column": 47,
+                          "offset": 1916
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency: TypeScript ESLint Plugin",
+                      "position": {
+                        "start": {
+                          "line": 96,
+                          "column": 3,
+                          "offset": 1919
+                        },
+                        "end": {
+                          "line": 96,
+                          "column": 47,
+                          "offset": 1963
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 87,
+                      "column": 1,
+                      "offset": 1550
+                    },
+                    "end": {
+                      "line": 96,
+                      "column": 47,
+                      "offset": 1963
+                    }
+                  },
+                  "value": "- Package Dependency: ESLint\n- Package Dependency: Prettier\n- Package Dependency: ESLint Config Standard\n- Package Dependency: ESLint Plugin Import\n- Package Dependency: ESLint Plugin JSX A11y\n- Package Dependency: ESLint Plugin MDX\n- Package Dependency: ESLint Plugin Prettier\n- Package Dependency: ESLint Plugin Solid\n- Package Dependency: Noodlestan ESLint Config\n- Package Dependency: TypeScript ESLint Plugin"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 85,
+                  "column": 1,
+                  "offset": 1531
+                },
+                "end": {
+                  "line": 85,
+                  "column": 18,
+                  "offset": 1548
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package Dependency Set",
+          "position": {
+            "start": {
+              "line": 83,
+              "column": 1,
+              "offset": 1493
+            },
+            "end": {
+              "line": 83,
+              "column": 37,
+              "offset": 1529
+            }
+          }
+        }
+      ],
+      "depth": 1,
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 9,
+          "offset": 8
+        }
+      }
+    }
+  ]
+}

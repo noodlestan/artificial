@@ -1,0 +1,437 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "SectionBlock",
+      "name": "Field Block Fixtures",
+      "children": [
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Artificial",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Purpose",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Generate and manage agent instructions.",
+                  "position": {
+                    "start": {
+                      "line": 5,
+                      "column": 13,
+                      "offset": 60
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 53,
+                      "offset": 100
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 1,
+                  "offset": 48
+                },
+                "end": {
+                  "line": 5,
+                  "column": 53,
+                  "offset": 100
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Canonical Name",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 7,
+                      "column": 20,
+                      "offset": 121
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 21,
+                      "offset": 122
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`@noodlestan/artificial`",
+                  "position": {
+                    "start": {
+                      "line": 7,
+                      "column": 21,
+                      "offset": 122
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 45,
+                      "offset": 146
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 7,
+                  "column": 1,
+                  "offset": 102
+                },
+                "end": {
+                  "line": 7,
+                  "column": 45,
+                  "offset": 146
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Version",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " ",
+                  "position": {
+                    "start": {
+                      "line": 9,
+                      "column": 13,
+                      "offset": 160
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 14,
+                      "offset": 161
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`0.0.1`",
+                  "position": {
+                    "start": {
+                      "line": 9,
+                      "column": 14,
+                      "offset": 161
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 21,
+                      "offset": 168
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 9,
+                  "column": 1,
+                  "offset": 148
+                },
+                "end": {
+                  "line": 9,
+                  "column": 21,
+                  "offset": 168
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Dependencies",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "list",
+                  "ordered": false,
+                  "start": null,
+                  "spread": false,
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency Set: Build Tools",
+                      "position": {
+                        "start": {
+                          "line": 13,
+                          "column": 3,
+                          "offset": 191
+                        },
+                        "end": {
+                          "line": 13,
+                          "column": 38,
+                          "offset": 226
+                        }
+                      }
+                    },
+                    {
+                      "construct": "NaturalBlock",
+                      "value": "Package Dependency Set: Project Tools",
+                      "position": {
+                        "start": {
+                          "line": 14,
+                          "column": 3,
+                          "offset": 229
+                        },
+                        "end": {
+                          "line": 14,
+                          "column": 40,
+                          "offset": 266
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 13,
+                      "column": 1,
+                      "offset": 189
+                    },
+                    "end": {
+                      "line": 14,
+                      "column": 40,
+                      "offset": 266
+                    }
+                  },
+                  "value": "- Package Dependency Set: Build Tools\n- Package Dependency Set: Project Tools"
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 11,
+                  "column": 1,
+                  "offset": 170
+                },
+                "end": {
+                  "line": 11,
+                  "column": 18,
+                  "offset": 187
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Scripts",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "code",
+                  "lang": null,
+                  "meta": null,
+                  "value": "```\nnpm run build\nnpm run test\n```",
+                  "position": {
+                    "start": {
+                      "line": 18,
+                      "column": 1,
+                      "offset": 282
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 4,
+                      "offset": 316
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 16,
+                  "column": 1,
+                  "offset": 268
+                },
+                "end": {
+                  "line": 16,
+                  "column": 13,
+                  "offset": 280
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package",
+          "position": {
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 24
+            },
+            "end": {
+              "line": 3,
+              "column": 23,
+              "offset": 46
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Conventions",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Private",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " true",
+                  "position": {
+                    "start": {
+                      "line": 25,
+                      "column": 13,
+                      "offset": 355
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 18,
+                      "offset": 360
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 1,
+                  "offset": 343
+                },
+                "end": {
+                  "line": 25,
+                  "column": 18,
+                  "offset": 360
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Description",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " A private documentation and reference package containing convention documents and their inventory.",
+                  "position": {
+                    "start": {
+                      "line": 27,
+                      "column": 17,
+                      "offset": 378
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 116,
+                      "offset": 477
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 27,
+                  "column": 1,
+                  "offset": 362
+                },
+                "end": {
+                  "line": 27,
+                  "column": 116,
+                  "offset": 477
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Package",
+          "position": {
+            "start": {
+              "line": 23,
+              "column": 1,
+              "offset": 318
+            },
+            "end": {
+              "line": 23,
+              "column": 24,
+              "offset": 341
+            }
+          }
+        }
+      ],
+      "depth": 1,
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 23,
+          "offset": 22
+        }
+      }
+    }
+  ]
+}

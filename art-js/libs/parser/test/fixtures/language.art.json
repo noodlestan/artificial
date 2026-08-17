@@ -1,0 +1,2318 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "SectionBlock",
+      "name": "Language",
+      "children": [
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
+        },
+        {
+          "construct": "FieldBlock",
+          "name": "Purpose",
+          "value": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": " Decisions about the art language itself — what it is for, its scope, and its syntax/semantics model.",
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 13,
+                  "offset": 32
+                },
+                "end": {
+                  "line": 3,
+                  "column": 114,
+                  "offset": 133
+                }
+              }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 20
+            },
+            "end": {
+              "line": 3,
+              "column": 114,
+              "offset": 133
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Language Spec First Scope",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Adopted",
+                  "position": {
+                    "start": {
+                      "line": 7,
+                      "column": 12,
+                      "offset": 186
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 20,
+                      "offset": 194
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 7,
+                  "column": 1,
+                  "offset": 175
+                },
+                "end": {
+                  "line": 7,
+                  "column": 20,
+                  "offset": 194
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The project had several candidate scopes (tasks domain, language spec, tooling). Work on all of them at once would spread effort before the core was proven; the tasks domain was only ever an example use case.",
+                  "position": {
+                    "start": {
+                      "line": 9,
+                      "column": 13,
+                      "offset": 208
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 222,
+                      "offset": 417
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 9,
+                  "column": 1,
+                  "offset": 196
+                },
+                "end": {
+                  "line": 9,
+                  "column": 222,
+                  "offset": 417
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The language spec (",
+                  "position": {
+                    "start": {
+                      "line": 11,
+                      "column": 14,
+                      "offset": 432
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 34,
+                      "offset": 452
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`art-js/spec/`",
+                  "position": {
+                    "start": {
+                      "line": 11,
+                      "column": 34,
+                      "offset": 452
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 48,
+                      "offset": 466
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ") is the first scope and the first test case for the bundling pipeline. Work on any other domain is deferred until the spec and pipeline are proven.",
+                  "position": {
+                    "start": {
+                      "line": 11,
+                      "column": 48,
+                      "offset": 466
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 196,
+                      "offset": 614
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 11,
+                  "column": 1,
+                  "offset": 419
+                },
+                "end": {
+                  "line": 11,
+                  "column": 196,
+                  "offset": 614
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Consequences",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " A spec content package (",
+                  "position": {
+                    "start": {
+                      "line": 13,
+                      "column": 18,
+                      "offset": 633
+                    },
+                    "end": {
+                      "line": 13,
+                      "column": 43,
+                      "offset": 658
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`@art-js/artificials-spec`",
+                  "position": {
+                    "start": {
+                      "line": 13,
+                      "column": 43,
+                      "offset": 658
+                    },
+                    "end": {
+                      "line": 13,
+                      "column": 69,
+                      "offset": 684
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ") is created before pipeline implementation.",
+                  "position": {
+                    "start": {
+                      "line": 13,
+                      "column": 69,
+                      "offset": 684
+                    },
+                    "end": {
+                      "line": 13,
+                      "column": 113,
+                      "offset": 728
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 13,
+                  "column": 1,
+                  "offset": 616
+                },
+                "end": {
+                  "line": 13,
+                  "column": 113,
+                  "offset": 728
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 1,
+              "offset": 135
+            },
+            "end": {
+              "line": 5,
+              "column": 39,
+              "offset": 173
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Two Main Use Cases",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Adopted",
+                  "position": {
+                    "start": {
+                      "line": 17,
+                      "column": 12,
+                      "offset": 774
+                    },
+                    "end": {
+                      "line": 17,
+                      "column": 20,
+                      "offset": 782
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 17,
+                  "column": 1,
+                  "offset": 763
+                },
+                "end": {
+                  "line": 17,
+                  "column": 20,
+                  "offset": 782
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Art could be positioned in many ways; without a defined core, new candidates (drift-checks, etc.) keep expanding scope and diluting design.",
+                  "position": {
+                    "start": {
+                      "line": 19,
+                      "column": 13,
+                      "offset": 796
+                    },
+                    "end": {
+                      "line": 19,
+                      "column": 153,
+                      "offset": 936
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 19,
+                  "column": 1,
+                  "offset": 784
+                },
+                "end": {
+                  "line": 19,
+                  "column": 153,
+                  "offset": 936
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Art has two main use cases: (1) generating agent instructions, and (2) acting as a single source of truth for declarations that are both machine-readable and human/agent-readable. Everything else (context minimisation, fewer contradictions, automated SoT→instructions, portability) is a benefit of these two, not a separate use case.",
+                  "position": {
+                    "start": {
+                      "line": 21,
+                      "column": 14,
+                      "offset": 951
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 348,
+                      "offset": 1285
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 1,
+                  "offset": 938
+                },
+                "end": {
+                  "line": 21,
+                  "column": 348,
+                  "offset": 1285
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 15,
+              "column": 1,
+              "offset": 730
+            },
+            "end": {
+              "line": 15,
+              "column": 32,
+              "offset": 761
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Closed Syntax, Open Semantics",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Adopted",
+                  "position": {
+                    "start": {
+                      "line": 25,
+                      "column": 12,
+                      "offset": 1342
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 20,
+                      "offset": 1350
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 1,
+                  "offset": 1331
+                },
+                "end": {
+                  "line": 25,
+                  "column": 20,
+                  "offset": 1350
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The grammar needs an extensibility model without becoming an ouroboros (spec reading spec). Extensibility at the grammar layer would fragment parsing.",
+                  "position": {
+                    "start": {
+                      "line": 27,
+                      "column": 13,
+                      "offset": 1364
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 164,
+                      "offset": 1515
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 27,
+                  "column": 1,
+                  "offset": 1352
+                },
+                "end": {
+                  "line": 27,
+                  "column": 164,
+                  "offset": 1515
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Syntax is closed — implemented in TypeScript, no grammar plugins. Semantics are open and data-driven, extensible via ",
+                  "position": {
+                    "start": {
+                      "line": 29,
+                      "column": 14,
+                      "offset": 1530
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 132,
+                      "offset": 1648
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`.art`",
+                  "position": {
+                    "start": {
+                      "line": 29,
+                      "column": 132,
+                      "offset": 1648
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 138,
+                      "offset": 1654
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " modules. The core-in-",
+                  "position": {
+                    "start": {
+                      "line": 29,
+                      "column": 138,
+                      "offset": 1654
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 160,
+                      "offset": 1676
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`.art`",
+                  "position": {
+                    "start": {
+                      "line": 29,
+                      "column": 160,
+                      "offset": 1676
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 166,
+                      "offset": 1682
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " stays as a testable spec.",
+                  "position": {
+                    "start": {
+                      "line": 29,
+                      "column": 166,
+                      "offset": 1682
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 192,
+                      "offset": 1708
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 29,
+                  "column": 1,
+                  "offset": 1517
+                },
+                "end": {
+                  "line": 29,
+                  "column": 192,
+                  "offset": 1708
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 23,
+              "column": 1,
+              "offset": 1287
+            },
+            "end": {
+              "line": 23,
+              "column": 43,
+              "offset": 1329
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Any Markdown is Valid `.art`",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Adopted",
+                  "position": {
+                    "start": {
+                      "line": 33,
+                      "column": 12,
+                      "offset": 1764
+                    },
+                    "end": {
+                      "line": 33,
+                      "column": 20,
+                      "offset": 1772
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 33,
+                  "column": 1,
+                  "offset": 1753
+                },
+                "end": {
+                  "line": 33,
+                  "column": 20,
+                  "offset": 1772
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Art sources and plain markdown coexist in the same tree; a hard file-type wall would make existing markdown invalid and block incremental adoption.",
+                  "position": {
+                    "start": {
+                      "line": 35,
+                      "column": 13,
+                      "offset": 1786
+                    },
+                    "end": {
+                      "line": 35,
+                      "column": 161,
+                      "offset": 1934
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 35,
+                  "column": 1,
+                  "offset": 1774
+                },
+                "end": {
+                  "line": 35,
+                  "column": 161,
+                  "offset": 1934
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Any markdown file is a valid ",
+                  "position": {
+                    "start": {
+                      "line": 37,
+                      "column": 14,
+                      "offset": 1949
+                    },
+                    "end": {
+                      "line": 37,
+                      "column": 44,
+                      "offset": 1979
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`.art`",
+                  "position": {
+                    "start": {
+                      "line": 37,
+                      "column": 44,
+                      "offset": 1979
+                    },
+                    "end": {
+                      "line": 37,
+                      "column": 50,
+                      "offset": 1985
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " file. Files not authored in art require more inference to read correctly, but are never invalid.",
+                  "position": {
+                    "start": {
+                      "line": 37,
+                      "column": 50,
+                      "offset": 1985
+                    },
+                    "end": {
+                      "line": 37,
+                      "column": 147,
+                      "offset": 2082
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 37,
+                  "column": 1,
+                  "offset": 1936
+                },
+                "end": {
+                  "line": 37,
+                  "column": 147,
+                  "offset": 2082
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 31,
+              "column": 1,
+              "offset": 1710
+            },
+            "end": {
+              "line": 31,
+              "column": 42,
+              "offset": 1751
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Construct Containment and the NaturalBlock Catch-all",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Adopted",
+                  "position": {
+                    "start": {
+                      "line": 41,
+                      "column": 12,
+                      "offset": 2162
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 20,
+                      "offset": 2170
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 41,
+                  "column": 1,
+                  "offset": 2151
+                },
+                "end": {
+                  "line": 41,
+                  "column": 20,
+                  "offset": 2170
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The grammar's containment model was underspecified: FieldBlock values terminated at the next FieldBlock, FieldInline, or InlineDeclaration but not at a SectionBlock, and \"arbitrary content\" rules allowed circular nesting (a FieldBlock containing a SectionBlock or a nested FieldBlock) that carries no semantic meaning. Plain Markdown content also lacked an explicit classification home.",
+                  "position": {
+                    "start": {
+                      "line": 43,
+                      "column": 13,
+                      "offset": 2184
+                    },
+                    "end": {
+                      "line": 43,
+                      "column": 400,
+                      "offset": 2571
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 43,
+                  "column": 1,
+                  "offset": 2172
+                },
+                "end": {
+                  "line": 43,
+                  "column": 400,
+                  "offset": 2571
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Containment is explicit. SectionBlocks MAY nest (heading level drives nesting). A FieldBlock value terminates at the next FieldBlock, FieldInline, InlineDeclaration, SectionBlock, or the end of the enclosing SectionBlock, and MUST NOT contain a SectionBlock or a nested FieldBlock. NaturalBlock is the catch-all classification: any content that does not match another construct is a NaturalBlock — realising \"Any Markdown is Valid ",
+                  "position": {
+                    "start": {
+                      "line": 45,
+                      "column": 14,
+                      "offset": 2586
+                    },
+                    "end": {
+                      "line": 45,
+                      "column": 446,
+                      "offset": 3018
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`.art`",
+                  "position": {
+                    "start": {
+                      "line": 45,
+                      "column": 446,
+                      "offset": 3018
+                    },
+                    "end": {
+                      "line": 45,
+                      "column": 452,
+                      "offset": 3024
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\".",
+                  "position": {
+                    "start": {
+                      "line": 45,
+                      "column": 452,
+                      "offset": 3024
+                    },
+                    "end": {
+                      "line": 45,
+                      "column": 454,
+                      "offset": 3026
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 45,
+                  "column": 1,
+                  "offset": 2573
+                },
+                "end": {
+                  "line": 45,
+                  "column": 454,
+                  "offset": 3026
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Consequences",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Termination signals become unambiguous for the construct-stack parser; classification is total (every token stream classifies into a record); per-position content unions in the record schema mirror the containment model. (construct-stack pattern: see ",
+                  "position": {
+                    "start": {
+                      "line": 47,
+                      "column": 18,
+                      "offset": 3045
+                    },
+                    "end": {
+                      "line": 47,
+                      "column": 270,
+                      "offset": 3297
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`_research.md`",
+                  "position": {
+                    "start": {
+                      "line": 47,
+                      "column": 270,
+                      "offset": 3297
+                    },
+                    "end": {
+                      "line": 47,
+                      "column": 284,
+                      "offset": 3311
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ")",
+                  "position": {
+                    "start": {
+                      "line": 47,
+                      "column": 284,
+                      "offset": 3311
+                    },
+                    "end": {
+                      "line": 47,
+                      "column": 285,
+                      "offset": 3312
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 47,
+                  "column": 1,
+                  "offset": 3028
+                },
+                "end": {
+                  "line": 47,
+                  "column": 285,
+                  "offset": 3312
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 39,
+              "column": 1,
+              "offset": 2084
+            },
+            "end": {
+              "line": 39,
+              "column": 66,
+              "offset": 2149
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Create an accessory Template Language",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Proposal",
+                  "position": {
+                    "start": {
+                      "line": 51,
+                      "column": 12,
+                      "offset": 3377
+                    },
+                    "end": {
+                      "line": 51,
+                      "column": 21,
+                      "offset": 3386
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 51,
+                  "column": 1,
+                  "offset": 3366
+                },
+                "end": {
+                  "line": 51,
+                  "column": 21,
+                  "offset": 3386
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Domain records and other artefacts are expressed as markdown files. Rendering them into per-consumer projections requires templates that carry both deterministic operations (iteration over data sets, field interpolation) and natural-language instructions agents can process; without a dedicated template language that logic leaks into hand-maintained code or duplicated outputs.",
+                  "position": {
+                    "start": {
+                      "line": 53,
+                      "column": 13,
+                      "offset": 3400
+                    },
+                    "end": {
+                      "line": 53,
+                      "column": 392,
+                      "offset": 3779
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 53,
+                  "column": 1,
+                  "offset": 3388
+                },
+                "end": {
+                  "line": 53,
+                  "column": 392,
+                  "offset": 3779
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Design ",
+                  "position": {
+                    "start": {
+                      "line": 55,
+                      "column": 14,
+                      "offset": 3794
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 22,
+                      "offset": 3802
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`.tart`",
+                  "position": {
+                    "start": {
+                      "line": 55,
+                      "column": 22,
+                      "offset": 3802
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 29,
+                      "offset": 3809
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " as a template engine with flat, inline directive syntax, so ",
+                  "position": {
+                    "start": {
+                      "line": 55,
+                      "column": 29,
+                      "offset": 3809
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 90,
+                      "offset": 3870
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`.tart`",
+                  "position": {
+                    "start": {
+                      "line": 55,
+                      "column": 90,
+                      "offset": 3870
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 97,
+                      "offset": 3877
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " sources stay readable and editable in any markdown-capable editor. Generators compile ",
+                  "position": {
+                    "start": {
+                      "line": 55,
+                      "column": 97,
+                      "offset": 3877
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 184,
+                      "offset": 3964
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`.tart`",
+                  "position": {
+                    "start": {
+                      "line": 55,
+                      "column": 184,
+                      "offset": 3964
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 191,
+                      "offset": 3971
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " templates into the markdown projections consumers read.",
+                  "position": {
+                    "start": {
+                      "line": 55,
+                      "column": 191,
+                      "offset": 3971
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 247,
+                      "offset": 4027
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 55,
+                  "column": 1,
+                  "offset": 3781
+                },
+                "end": {
+                  "line": 55,
+                  "column": 247,
+                  "offset": 4027
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 49,
+              "column": 1,
+              "offset": 3314
+            },
+            "end": {
+              "line": 49,
+              "column": 51,
+              "offset": 3364
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "SectionBlock as the Resource Declaration Carrier",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Proposal",
+                  "position": {
+                    "start": {
+                      "line": 59,
+                      "column": 12,
+                      "offset": 4103
+                    },
+                    "end": {
+                      "line": 59,
+                      "column": 21,
+                      "offset": 4112
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 59,
+                  "column": 1,
+                  "offset": 4092
+                },
+                "end": {
+                  "line": 59,
+                  "column": 21,
+                  "offset": 4112
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The SectionBlock construct (",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 13,
+                      "offset": 4126
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 42,
+                      "offset": 4155
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`# Kind: Name`",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 42,
+                      "offset": 4155
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 56,
+                      "offset": 4169
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " + tags + content) is what turns a markdown heading into a named, kinded resource, but the grammar spec described it only as \"a named structural section\" — opaque, and hiding the connection between the grammar and modules layers. Without an explicit statement of its role, the Closed Syntax, Open Semantics split reads as abstract: it is unclear which parts of a declaration the language fixes and which parts domains provide. The programming-language precedent makes the intended model obvious in hindsight: ",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 56,
+                      "offset": 4169
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 565,
+                      "offset": 4678
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`class`",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 565,
+                      "offset": 4678
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 572,
+                      "offset": 4685
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " is fixed syntax; the meaning of ",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 572,
+                      "offset": 4685
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 605,
+                      "offset": 4718
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`class Task`",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 605,
+                      "offset": 4718
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 617,
+                      "offset": 4730
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " comes from the program. Art needs the equivalent — a fixed construct form whose kinds are open.",
+                  "position": {
+                    "start": {
+                      "line": 61,
+                      "column": 617,
+                      "offset": 4730
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 713,
+                      "offset": 4826
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 61,
+                  "column": 1,
+                  "offset": 4114
+                },
+                "end": {
+                  "line": 61,
+                  "column": 713,
+                  "offset": 4826
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The SectionBlock is the resource declaration carrier: ",
+                  "position": {
+                    "start": {
+                      "line": 63,
+                      "column": 14,
+                      "offset": 4841
+                    },
+                    "end": {
+                      "line": 63,
+                      "column": 69,
+                      "offset": 4896
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`# Kind: Name`",
+                  "position": {
+                    "start": {
+                      "line": 63,
+                      "column": 69,
+                      "offset": 4896
+                    },
+                    "end": {
+                      "line": 63,
+                      "column": 83,
+                      "offset": 4910
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " declares a resource of that kind with that name. The construct's form (optional kind, name, tags, content) is fixed by the grammar — closed syntax. The meaning of each kind is provided by the structures, the domain declarations in ",
+                  "position": {
+                    "start": {
+                      "line": 63,
+                      "column": 83,
+                      "offset": 4910
+                    },
+                    "end": {
+                      "line": 63,
+                      "column": 315,
+                      "offset": 5142
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`.art`",
+                  "position": {
+                    "start": {
+                      "line": 63,
+                      "column": 315,
+                      "offset": 5142
+                    },
+                    "end": {
+                      "line": 63,
+                      "column": 321,
+                      "offset": 5148
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " — open semantics. The grammar and modules layers meet exactly here.",
+                  "position": {
+                    "start": {
+                      "line": 63,
+                      "column": 321,
+                      "offset": 5148
+                    },
+                    "end": {
+                      "line": 63,
+                      "column": 389,
+                      "offset": 5216
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 63,
+                  "column": 1,
+                  "offset": 4828
+                },
+                "end": {
+                  "line": 63,
+                  "column": 389,
+                  "offset": 5216
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Consequences",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The parser captures declarations generically: it needs to know only that a resource of kind K named N is declared, never what K means. Domain semantics (fields, constraints, routines) attach to kinds through structures, keeping the core grammar frozen. The construct spec must state this purpose so the grammar-to-modules connection is explicit rather than implied.",
+                  "position": {
+                    "start": {
+                      "line": 65,
+                      "column": 18,
+                      "offset": 5235
+                    },
+                    "end": {
+                      "line": 65,
+                      "column": 384,
+                      "offset": 5601
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 65,
+                  "column": 1,
+                  "offset": 5218
+                },
+                "end": {
+                  "line": 65,
+                  "column": 384,
+                  "offset": 5601
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 57,
+              "column": 1,
+              "offset": 4029
+            },
+            "end": {
+              "line": 57,
+              "column": 62,
+              "offset": 4090
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Projection-Aligned Tags",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Adopted",
+                  "position": {
+                    "start": {
+                      "line": 69,
+                      "column": 12,
+                      "offset": 5652
+                    },
+                    "end": {
+                      "line": 69,
+                      "column": 20,
+                      "offset": 5660
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 69,
+                  "column": 1,
+                  "offset": 5641
+                },
+                "end": {
+                  "line": 69,
+                  "column": 20,
+                  "offset": 5660
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Tags target content per projection but had drifted (",
+                  "position": {
+                    "start": {
+                      "line": 71,
+                      "column": 13,
+                      "offset": 5674
+                    },
+                    "end": {
+                      "line": 71,
+                      "column": 66,
+                      "offset": 5727
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`#curator`",
+                  "position": {
+                    "start": {
+                      "line": 71,
+                      "column": 66,
+                      "offset": 5727
+                    },
+                    "end": {
+                      "line": 71,
+                      "column": 76,
+                      "offset": 5737
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ", ",
+                  "position": {
+                    "start": {
+                      "line": 71,
+                      "column": 76,
+                      "offset": 5737
+                    },
+                    "end": {
+                      "line": 71,
+                      "column": 78,
+                      "offset": 5739
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`#hoist`",
+                  "position": {
+                    "start": {
+                      "line": 71,
+                      "column": 78,
+                      "offset": 5739
+                    },
+                    "end": {
+                      "line": 71,
+                      "column": 86,
+                      "offset": 5747
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "), so tag semantics and the projection vocabulary diverged.",
+                  "position": {
+                    "start": {
+                      "line": 71,
+                      "column": 86,
+                      "offset": 5747
+                    },
+                    "end": {
+                      "line": 71,
+                      "column": 145,
+                      "offset": 5806
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 71,
+                  "column": 1,
+                  "offset": 5662
+                },
+                "end": {
+                  "line": 71,
+                  "column": 145,
+                  "offset": 5806
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Tags are aligned to the four projections: ",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 14,
+                      "offset": 5821
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 57,
+                      "offset": 5864
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`#author`",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 57,
+                      "offset": 5864
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 66,
+                      "offset": 5873
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ", ",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 66,
+                      "offset": 5873
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 68,
+                      "offset": 5875
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`#generator`",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 68,
+                      "offset": 5875
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 80,
+                      "offset": 5887
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ", ",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 80,
+                      "offset": 5887
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 82,
+                      "offset": 5889
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`#operator`",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 82,
+                      "offset": 5889
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 93,
+                      "offset": 5900
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ", ",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 93,
+                      "offset": 5900
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 95,
+                      "offset": 5902
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`#indexer`",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 95,
+                      "offset": 5902
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 105,
+                      "offset": 5912
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ". Tags determine inclusion, exclusion, or transformation of content per projection.",
+                  "position": {
+                    "start": {
+                      "line": 73,
+                      "column": 105,
+                      "offset": 5912
+                    },
+                    "end": {
+                      "line": 73,
+                      "column": 188,
+                      "offset": 5995
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 73,
+                  "column": 1,
+                  "offset": 5808
+                },
+                "end": {
+                  "line": 73,
+                  "column": 188,
+                  "offset": 5995
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Consequences",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The tag set is constrained by the projection taxonomy (see ",
+                  "position": {
+                    "start": {
+                      "line": 75,
+                      "column": 18,
+                      "offset": 6014
+                    },
+                    "end": {
+                      "line": 75,
+                      "column": 78,
+                      "offset": 6074
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "inlineCode",
+                  "value": "`distribution.art`",
+                  "position": {
+                    "start": {
+                      "line": 75,
+                      "column": 78,
+                      "offset": 6074
+                    },
+                    "end": {
+                      "line": 75,
+                      "column": 96,
+                      "offset": 6092
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": ").",
+                  "position": {
+                    "start": {
+                      "line": 75,
+                      "column": 96,
+                      "offset": 6092
+                    },
+                    "end": {
+                      "line": 75,
+                      "column": 98,
+                      "offset": 6094
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 75,
+                  "column": 1,
+                  "offset": 5997
+                },
+                "end": {
+                  "line": 75,
+                  "column": 98,
+                  "offset": 6094
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 67,
+              "column": 1,
+              "offset": 5603
+            },
+            "end": {
+              "line": 67,
+              "column": 37,
+              "offset": 5639
+            }
+          }
+        },
+        {
+          "construct": "SectionBlock",
+          "name": "Parser Containment Model",
+          "children": [
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Status",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " Adopted",
+                  "position": {
+                    "start": {
+                      "line": 79,
+                      "column": 12,
+                      "offset": 6146
+                    },
+                    "end": {
+                      "line": 79,
+                      "column": 20,
+                      "offset": 6154
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 79,
+                  "column": 1,
+                  "offset": 6135
+                },
+                "end": {
+                  "line": 79,
+                  "column": 20,
+                  "offset": 6154
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Context",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The grammar spec files described containment loosely. The mdast-based parser implements explicit containment rules that need to be reflected in the spec.",
+                  "position": {
+                    "start": {
+                      "line": 81,
+                      "column": 13,
+                      "offset": 6168
+                    },
+                    "end": {
+                      "line": 81,
+                      "column": 167,
+                      "offset": 6322
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 81,
+                  "column": 1,
+                  "offset": 6156
+                },
+                "end": {
+                  "line": 81,
+                  "column": 167,
+                  "offset": 6322
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Decision",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " SectionBlocks nest by heading level. FieldBlock values terminate at the next FieldBlock, SectionBlock, or end of enclosing SectionBlock. NaturalBlock is the catch-all for any unclassified content. Tags are detected in prose via regex, not in code blocks.",
+                  "position": {
+                    "start": {
+                      "line": 83,
+                      "column": 14,
+                      "offset": 6337
+                    },
+                    "end": {
+                      "line": 83,
+                      "column": 269,
+                      "offset": 6592
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 83,
+                  "column": 1,
+                  "offset": 6324
+                },
+                "end": {
+                  "line": 83,
+                  "column": 269,
+                  "offset": 6592
+                }
+              }
+            },
+            {
+              "construct": "FieldBlock",
+              "name": "Consequences",
+              "value": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": " The spec files now match the parser implementation. The containment model is unambiguous for both parsers and spec readers.",
+                  "position": {
+                    "start": {
+                      "line": 85,
+                      "column": 18,
+                      "offset": 6611
+                    },
+                    "end": {
+                      "line": 85,
+                      "column": 142,
+                      "offset": 6735
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 85,
+                  "column": 1,
+                  "offset": 6594
+                },
+                "end": {
+                  "line": 85,
+                  "column": 142,
+                  "offset": 6735
+                }
+              }
+            }
+          ],
+          "depth": 2,
+          "kind": "Decision",
+          "position": {
+            "start": {
+              "line": 77,
+              "column": 1,
+              "offset": 6096
+            },
+            "end": {
+              "line": 77,
+              "column": 38,
+              "offset": 6133
+            }
+          }
+        }
+      ],
+      "depth": 1,
+      "kind": "Module",
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 19,
+          "offset": 18
+        }
+      }
+    }
+  ]
+}

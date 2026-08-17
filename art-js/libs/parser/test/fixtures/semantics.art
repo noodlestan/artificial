@@ -1,0 +1,165 @@
+# Module
+
+<!-- WIP add Validate field to constructs (extra rules, oriented for validation) -->
+
+**Purpose:** Define the meaning and interpretation rules of artificial instructions, enabling the generation of instructions that express intent clearly and their consistent interpretation with minimal ambiguity.
+
+**Description:** Semantics define how artificial language constructs communicate intent through explicit notation, conventions, and interpretation rules. They guide how instructions are generated and interpreted but do not define how an artificial system performs internal reasoning, reference resolution, execution, or data management.
+
+## Declares
+
+### Semantics
+
+#### Semantics: Interpretation and Resolution
+
+**Important:** Resolution mechanisms are entirely artificial and therefore outside the scope of this language.
+
+The language defines constructs, notation, and interpretation rules for expressing intent. It does not define how an artificial system resolves symbols, aliases, scope, dependencies, state, context propagation, persistence, execution planning, or other internal mechanisms required to process instructions.
+
+The terms "input identification" and "output identification" describe how instructions express references and relationships, not how an artificial system internally resolves or manages them.
+
+#### Semantics: Routine Invocation
+
+**Purpose:** Allow reusable capabilities to be invoked consistently using natural language.
+
+**Description:** Defines the conventions for invoking Commands, Processes, and Templates using identified inputs and outcomes.
+
+**Syntax:**
+
+A routine invocation combines an optional contextualisation, a routine invocation, optional additional context, and an optional identified outcome.
+
+```art
+[<Contextualise>,] execute the **<Routine>** [, with <Context>] [to <Outcome>]
+```
+
+**Rules:**
+
+- A routine invocation SHOULD identify required inputs when they are not already unambiguous from context.
+- Additional context MAY be supplied using a trailing `with <ContextValue>` clause.
+- An `<Outcome>` SHOULD be identified when the generated result is referenced subsequently.
+- Routine names SHOULD match their corresponding declaration names.
+
+**Examples:**
+
+Simple invocation:
+
+```md
+Execute the **Process: Render Resources**.
+```
+
+Invocation with contextualised input:
+
+```md
+With the `%filtered-feedback`, execute the **Process: Consolidate Feedback**.
+```
+
+Invocation with aliased input:
+
+```md
+With the matching feedback items as `%items`, execute the **Process: Consolidate Feedback**.
+```
+
+Invocation with ContextValue containing multitple input:
+
+```md
+With `%items`, `%filter`, and `%scope`, Execute the **Process: Search Feedback**.
+```
+
+Invocation with transformed input:
+
+```md
+With the `%filtered-feedback` grouped by target, execute the **Process: Consolidate Feedback**.
+```
+
+Invocation with additional context:
+
+```md
+With the `%filtered-feedback`, execute the **Process: Generate Report**, with the current `%target` to generate a report.
+```
+
+Invocation with generic outcome:
+
+```md
+With the `%filtered-feedback`, execute the **Process: Generate Report** to generte generate a report.
+```
+
+Invocation with identified outcome:
+
+```md
+With the `%filtered-feedback`, execute the **Process: Consolidate Feedback** to generate the `%grouped-feedback`.
+```
+
+Invocation with aliased outcome:
+
+```md
+With the `%filtered-feedback`, execute the **Process: Consolidate Feedback** to generate the `%feedback-table` as `%feedback`.
+```
+
+### Semantics: Procedure Inputs
+
+**Purpose:** Define how procedure inputs are identified within a procedure block.
+
+**Description:** Procedure inputs are identified by contextualising values before executing a procedure block. The ContextSymbol names the value used by the procedure instructions.
+
+**Syntax:**
+
+```art
+With <Contextualise>, execute the following procedure:
+
+<Procedure Block>
+```
+
+**Rules:**
+
+- Procedure inputs MUST be identified using Contextualise when referenced by name within the procedure block.
+- The ContextSymbol used for an input SHOULD match the intended meaning of the input within the procedure.
+- A SymbolAlias SHOULD be used when the input value requires a name different from its existing Symbol.
+
+**Syntax:**
+
+```art
+With <Contextualise>, execute the following procedure:
+
+<Procedure Block>
+```
+
+**Example:**
+
+```md
+With the input `%item`, execute the following workflow:
+
+1. Validate the item.
+2. Classify the item according to its type.
+```
+
+### Semantics: Procedure Outputs
+
+**Purpose:** Define how procedure results are identified and named.
+
+**Description:** Procedure outputs are identified using the Return statement. A returned value may use an existing ContextSymbol when the output already has an appropriate name or define a new ContextSymbol using an alias.
+
+**Syntax:**
+
+```art
+Return <ContextValue>
+```
+
+**Rules:**
+
+- A procedure SHOULD return values using an existing ContextSymbol when the ContextSymbol already represents the intended output.
+- A procedure MUST define an alias when the returned value does not have an appropriate existing ContextSymbol.
+- Returned Symbols SHOULD communicate the intended meaning of the output.
+
+**Examples:**
+
+Example of using an existing output Symbol:
+
+```md
+Return the generated `%table-of-contents`.
+```
+
+Example of defining of using ContextAlias to match the procedure output symbol.
+
+```
+Return the first row of the table as `%top-priority`.
+```

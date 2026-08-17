@@ -1,0 +1,13 @@
+# Module: Configuration
+
+**Purpose:** Decisions about how the project declares itself to tooling.
+
+## Decision: Config as Source of Truth
+
+**Status:** Adopted
+
+**Context:** Init, update, and build tooling all need to know what a project contains and how outputs are targeted. If each tool inferred this independently, their views of the project would drift apart and commands would behave differently from the same inputs.
+
+**Decision:** `.artificials.config.mts` is the single source of truth for namespaces, packages, domains, and projection targets. `art init` writes it; `art update` reads it.
+
+**Consequences:** Every command is driven from this one file; the planned `art update` consolidation depends on it.
