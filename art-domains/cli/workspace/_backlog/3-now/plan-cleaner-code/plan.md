@@ -91,7 +91,7 @@ Commits execute strictly in sequence — the three DRAFT commits form a dependen
 
 **Report File:** `instructions/decouple-private-from-ctx__report.md`
 
-### `decouple-checkout-scan` - `READY`
+### `decouple-checkout-scan` - `COMMITTED`
 
 **Commit Message:** `refactor(workspace-cli): decouple checkout scan state from stored Checkout`
 
@@ -99,7 +99,13 @@ Commits execute strictly in sequence — the three DRAFT commits form a dependen
 
 Separate scanned git state from the persisted `Checkout`; the store only holds identity (`repo`, `record`, `path`) and the scan is an optional computed `CheckoutScan` field. Resolved: no `extraneous` flag — extraneous are created, scanned, and presented only in sanity; `markExtraneous`/`getExtraneous` removed from the store.
 
+**Commit:** `aa37f7d`
+
 **Instructions File:** `instructions/decouple-checkout-scan.md`
+
+**Report File:** `instructions/decouple-checkout-scan__report.md`
+
+**Evidence:** Identity-only `Checkout`, separated `CheckoutScan`, scan-only extraneous workflow, migrated consumers/tests, and updated architecture docs; `git show --check` passed and the worker reported all required lint, build, test, and repository CI checks passing (60 files, 186 tests).
 
 ### `decouple-checkout-scan-states` - `READY`
 
@@ -117,4 +123,5 @@ Replace flat scan flags with a state-machine `CheckoutScan` (`should(op)` / `can
 
 ## Feedback
 
-None yet.
+- Delegatee: all required setup, package checks, and repository CI passed; no blockers reported.
+- Planner: commit `aa37f7d` is validated and the report is now recorded; the dependent `decouple-checkout-scan-states` commit remains ready for delegation.
