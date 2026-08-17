@@ -46,7 +46,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 6; Decisions (two-way diffing established in phase 5); whitespace gaps preserved until the gaps phase.
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 6; Decisions (two-way diffing established in phase 5); whitespace gaps preserved until the gaps phase.
 - Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
 - Parking Lot: `_backlog/_parking-lot.md` – pending items relevant to pipeline testing.
 - Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback.
@@ -102,7 +102,7 @@ npm run test
 
 ### `migrate-tests-pipeline` - `DRAFT`
 
-**Commit Message:** `art-js: migrate tests to pipeline suite`
+**Commit Message:** `build(md-art-roundtrip): migrate tests to pipeline suite`
 
 **Instructions File:** `_backlog/4-next/plan-migrate-tests-pipeline/instructions/migrate-tests-pipeline.md`
 
@@ -115,7 +115,7 @@ npm run test
 
 ### `roundtrip-smoke-fixture` - `DRAFT`
 
-**Commit Message:** `art-js: add roundtrip smoke fixture`
+**Commit Message:** `build(md-art-roundtrip): add roundtrip smoke fixture`
 
 **Instructions File:** `_backlog/4-next/plan-migrate-tests-pipeline/instructions/roundtrip-smoke-fixture.md`
 

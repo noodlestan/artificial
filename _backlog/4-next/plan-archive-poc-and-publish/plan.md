@@ -29,7 +29,7 @@ For the delegator (execution mechanics):
 
 #### `archive-poc-parse` - `PLANNED`
 
-**Commit Message:** `art-js: archive poc-parse package`
+**Commit Message:** `build(md-art-roundtrip): archive poc-parse package`
 
 **Instructions File:** `_backlog/4-next/plan-archive-poc-and-publish/instructions/archive-poc-parse.md`
 
@@ -40,7 +40,7 @@ For the delegator (execution mechanics):
 
 #### `publish-v0.0.1` - `PLANNED`
 
-**Commit Message:** `art-js: publish v0.0.1`
+**Commit Message:** `build(md-art-roundtrip): publish v0.0.1`
 
 **Instructions File:** `_backlog/4-next/plan-archive-poc-and-publish/instructions/publish-v0.0.1.md`
 

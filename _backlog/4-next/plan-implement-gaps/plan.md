@@ -46,7 +46,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 8; Decisions (preserve whitespace gaps; JSON-affecting logic changes only after the verified migration).
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 8; Decisions (preserve whitespace gaps; JSON-affecting logic changes only after the verified migration).
 - Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
 - Parking Lot: `_backlog/_parking-lot.md` – pending items relevant to roundtrip gaps.
 - Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback; the gap findings.
@@ -103,7 +103,7 @@ npm run test
 
 ### `roundtrip-text-fixture` - `DRAFT`
 
-**Commit Message:** `art-js: close roundtrip gaps for text content`
+**Commit Message:** `build(md-art-roundtrip): close roundtrip gaps for text content`
 
 **Instructions File:** `_backlog/4-next/plan-implement-gaps/instructions/roundtrip-text-fixture.md`
 
@@ -115,7 +115,7 @@ npm run test
 
 ### `roundtrip-lists-fixture` - `DRAFT`
 
-**Commit Message:** `art-js: close roundtrip gaps for lists`
+**Commit Message:** `build(md-art-roundtrip): close roundtrip gaps for lists`
 
 **Instructions File:** `_backlog/4-next/plan-implement-gaps/instructions/roundtrip-lists-fixture.md`
 
@@ -127,7 +127,7 @@ npm run test
 
 ### `roundtrip-sections-fixture` - `DRAFT`
 
-**Commit Message:** `art-js: close roundtrip gaps for sections`
+**Commit Message:** `build(md-art-roundtrip): close roundtrip gaps for sections`
 
 **Instructions File:** `_backlog/4-next/plan-implement-gaps/instructions/roundtrip-sections-fixture.md`
 
@@ -139,7 +139,7 @@ npm run test
 
 ### `roundtrip-formatting-fixture` - `DRAFT`
 
-**Commit Message:** `art-js: close roundtrip gaps for formatting`
+**Commit Message:** `build(md-art-roundtrip): close roundtrip gaps for formatting`
 
 **Instructions File:** `_backlog/4-next/plan-implement-gaps/instructions/roundtrip-formatting-fixture.md`
 

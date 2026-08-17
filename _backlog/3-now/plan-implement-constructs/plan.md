@@ -2,7 +2,7 @@
 
 **ID:** `implement-constructs`
 
-**Status:** `PREPARING`
+**Status:** `READY`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -46,7 +46,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 4; package table (constructs added); Decisions section (preserve whitespace gaps; JSON-affecting logic frozen until after phase 3).
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 4; package table (constructs added); Decisions section (preserve whitespace gaps; JSON-affecting logic frozen until after phase 3).
 - Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence; POC split design (primitives / parser / serializer boundaries).
 - Parking Lot: `_backlog/_parking-lot.md` – pending items relevant to constructs.
 - Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback.
@@ -97,11 +97,11 @@ The parser fixture suite (md/art → art.json vs POC snapshots) must still pass 
 
 ## Commits
 
-### `implement-constructs-package` - `DRAFT`
+### `implement-constructs-package` - `READY`
 
-**Commit Message:** `art-js: implement constructs package with migrated factories`
+**Commit Message:** `build(md-art-roundtrip): implement constructs package with migrated factories`
 
-**Instructions File:** `_backlog/4-next/plan-implement-constructs/instructions/implement-constructs-package.md`
+**Instructions File:** `_backlog/3-now/plan-implement-constructs/instructions/implement-constructs-package.md`
 
 **Scope:**
 

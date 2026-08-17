@@ -15,34 +15,46 @@ Singularize the accidental `@art-js/artificials-*` plural package names (phase 0
 
 ## Phase Plans
 
-| Phase                          | Plan                                        | Status      |
-| ------------------------------ | ------------------------------------------- | ----------- |
-| 0 — Rename packages            | `_backlog/1-done/plan-rename-packages/plan.md`            | `DONE`     |
-| 1 — Bootstrap packages         | `_backlog/1-done/plan-bootstrap-packages/plan.md`         | `DONE`     |
-| 2 — Migrate testing fixtures   | `_backlog/1-done/plan-migrate-testing-fixtures/plan.md`   | `DONE`     |
-| 3 — Migrate and verify         | `_backlog/1-done/plan-migrate-and-verify/plan.md`         | `DONE` |
-| 4 — Implement constructs       | `plan-implement-constructs/plan.md`         | `PREPARING` |
-| 5 — Implement serializer       | `plan-implement-serializer/plan.md`         | `PREPARING` |
-| 6 — Migrate tests to pipeline  | `plan-migrate-tests-pipeline/plan.md`       | `PREPARING` |
-| 7 — Create knowledge resources | `plan-create-knowledge-resources/plan.md`   | `PREPARING` |
-| 8 — Implement gaps             | `plan-implement-gaps/plan.md`               | `PREPARING` |
-| 9 — Refactoring and Test Coverage | `plan-refactoring-and-test-coverage/plan.md` | `PREPARING` |
-| 10 — Archive and publish       | `plan-archive-poc-and-publish/plan.md`      | `PREPARING` |
-| 11 — Integrate knowledge       | `plan-integrate-knowledge/plan.md`          | `PREPARING` |
+| Phase                             | Plan                                                    | Status      |
+| --------------------------------- | ------------------------------------------------------- | ----------- |
+| 0 — Rename packages               | `_backlog/1-done/plan-rename-packages/plan.md`          | `DONE`      |
+| 1 — Bootstrap packages            | `_backlog/1-done/plan-bootstrap-packages/plan.md`       | `DONE`      |
+| 2 — Migrate testing fixtures      | `_backlog/1-done/plan-migrate-testing-fixtures/plan.md` | `DONE`      |
+| 3 — Migrate and verify            | `_backlog/1-done/plan-migrate-and-verify/plan.md`       | `DONE`      |
+| 4 — Implement constructs          | `_backlog/3-now/plan-implement-constructs/plan.md`      | `READY`     |
+| 5 — Implement serializer          | `plan-implement-serializer/plan.md`                     | `PREPARING` |
+| 6 — Migrate tests to pipeline     | `plan-migrate-tests-pipeline/plan.md`                   | `PREPARING` |
+| 7 — Create knowledge resources    | `plan-create-knowledge-resources/plan.md`               | `PREPARING` |
+| 8 — Implement gaps                | `plan-implement-gaps/plan.md`                           | `PREPARING` |
+| 9 — Refactoring and Test Coverage | `plan-refactoring-and-test-coverage/plan.md`            | `PREPARING` |
+| 10 — Archive and publish          | `plan-archive-poc-and-publish/plan.md`                  | `PREPARING` |
+| 11 — Integrate knowledge          | `plan-integrate-knowledge/plan.md`                      | `PREPARING` |
 
 **Next step:** Phase 4 — refine and execute `plan-implement-constructs`: scaffold `@art-js/artificial-constructs`, extract the parser-owned factories, rewire parser imports, and keep the parser fixture snapshots passing.
 
+## Commit Conventions
+
+All the plans generated from this milestone uses the following commit convention: `{type}(md-art-rountrip): {message}`. Where types are one of `plan`, `build`, `refactor`, `integrate`, `publish`.
+
+Examples:
+
+```
+plan(md-art-roundtrip): plan `migrate-and-verify` ready for building
+build(md-art-roundtrip): verify parser output against POC snapshots
+integrate(md-art-roundtrip): complete parser migration and advance milestone
+```
+
 ## Packages
 
-| Package                          | Path                      | Purpose                                                                             | Dependencies                     |
-| -------------------------------- | ------------------------- | ----------------------------------------------------------------------------------- | -------------------------------- |
-| `@art-js/artificial-primitives` | `art-js/libs/primitives/` | Core types: `Point`, `Position`, `RecordBase`, construct interfaces, `ConstructMap` | None                             |
-| `@art-js/artificial-parser`     | `art-js/libs/parser/`     | Parser: `buildDocument`, factories, handlers, context                               | `@art-js/artificial-primitives` |
-| `@art-js/artificial-serializer` | `art-js/libs/serializer/` | Serializer: artast → mdast → md — bootstrapped in phase 5 (implement serializer); required for the roundtrip; finding from archived POC briefing | `@art-js/artificial-primitives`, `@art-js/artificial-constructs` |
-| `@art-js/artificial-constructs` | `art-js/libs/constructs/` | Construct factories (blocks, fields, sections, `NaturalBlock`) migrated from the parser; consumed by parser and serializer | `@art-js/artificial-primitives` |
-| `@art-js/artificial-spec`       | `art-js/spec/`            | Grammar specs (`.art` files) — already exists                                       | `@art-js/artificial-primitives` |
-| `@art-js/pipeline-test-cli`     | `art-js/cli/pipeline-tests/` | Test harness CLI exercising the parser + serializer pipeline; `scripts/roundtrip.ts` + `fixtures/roundtrip/` | `@art-js/artificial-parser`, `@art-js/artificial-serializer` |
-| `@art-js/poc-parse`              | `art-js/cli/poc-parse/`   | CLI entry point — will be archived after migration                                  | `@art-js/artificial-parser`     |
+| Package                         | Path                         | Purpose                                                                                                                                          | Dependencies                                                     |
+| ------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| `@art-js/artificial-primitives` | `art-js/libs/primitives/`    | Core types: `Point`, `Position`, `RecordBase`, construct interfaces, `ConstructMap`                                                              | None                                                             |
+| `@art-js/artificial-parser`     | `art-js/libs/parser/`        | Parser: `buildDocument`, factories, handlers, context                                                                                            | `@art-js/artificial-primitives`                                  |
+| `@art-js/artificial-serializer` | `art-js/libs/serializer/`    | Serializer: artast → mdast → md — bootstrapped in phase 5 (implement serializer); required for the roundtrip; finding from archived POC briefing | `@art-js/artificial-primitives`, `@art-js/artificial-constructs` |
+| `@art-js/artificial-constructs` | `art-js/libs/constructs/`    | Construct factories (blocks, fields, sections, `NaturalBlock`) migrated from the parser; consumed by parser and serializer                       | `@art-js/artificial-primitives`                                  |
+| `@art-js/artificial-spec`       | `art-js/spec/`               | Grammar specs (`.art` files) — already exists                                                                                                    | `@art-js/artificial-primitives`                                  |
+| `@art-js/pipeline-test-cli`     | `art-js/cli/pipeline-tests/` | Test harness CLI exercising the parser + serializer pipeline; `scripts/roundtrip.ts` + `fixtures/roundtrip/`                                     | `@art-js/artificial-parser`, `@art-js/artificial-serializer`     |
+| `@art-js/poc-parse`             | `art-js/cli/poc-parse/`      | CLI entry point — will be archived after migration                                                                                               | `@art-js/artificial-parser`                                      |
 
 ## Findings (from archived POC plan)
 

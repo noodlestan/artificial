@@ -47,7 +47,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 5; package table (serializer + constructs); Decisions (two-way fixture diffing: `source.md → art.json` and `art.json → parsed.md`, diffing `source.md` vs `parsed.md`, counted as overhead); roundtrip fixture strategy (`ops/records/packages/art-mantras.art` stored as fixture in `@art-js/artificial-spec`).
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 5; package table (serializer + constructs); Decisions (two-way fixture diffing: `source.md → art.json` and `art.json → parsed.md`, diffing `source.md` vs `parsed.md`, counted as overhead); roundtrip fixture strategy (`ops/records/packages/art-mantras.art` stored as fixture in `@art-js/artificial-spec`).
 - Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence; POC split design (the serializer is the missing module).
 - Parking Lot: `_backlog/_parking-lot.md` – pending items relevant to serialization.
 - Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback.
@@ -100,7 +100,7 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 
 ### `bootstrap-serializer-lib` - `DRAFT`
 
-**Commit Message:** `art-js: bootstrap serializer lib`
+**Commit Message:** `build(md-art-roundtrip): bootstrap serializer lib`
 
 **Instructions File:** `_backlog/4-next/plan-implement-serializer/instructions/bootstrap-serializer-lib.md`
 
@@ -115,7 +115,7 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 
 ### `two-way-fixture-tests` - `DRAFT`
 
-**Commit Message:** `art-js: extend fixture tests to roundtrip both directions`
+**Commit Message:** `build(md-art-roundtrip): extend fixture tests to roundtrip both directions`
 
 **Instructions File:** `_backlog/4-next/plan-implement-serializer/instructions/two-way-fixture-tests.md`
 
