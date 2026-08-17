@@ -10,7 +10,7 @@
 
 ## Summary
 
-Migrate the poc-parse fixture testing mechanism into `@art-js/artificial-parser`: copy the 16 fixture inputs (8 `.art` + 8 `.md`) and the 15 expected `.art.json` snapshots from the read-only POC package, port the fixture runner (`scripts/test-fixtures.ts`), and wire the `test` script in the parser package so fixture tests run in the migrated codebase. Executed within the Artificial repository (`repos/artificial`) as phase 2 of the MD Art Roundtrip milestone; prerequisite for phase 3 (`migrate-and-verify`) so the migrated parser is verified against the fixture suite before any refinement. NOTE: until phase 3 lands the parse API, the ported runner imports `parse` from the POC source by relative path — phase 3's `verify-parser-against-snapshots` swaps that import to `@art-js/artificial-parser`.
+Migrate the poc-parse fixture testing mechanism into `@art-js/artificial-parser`: copy the 16 fixture inputs (8 `.art` + 8 `.md`) and the 15 expected `.art.json` snapshots from the read-only POC package, create the fixture runner (`scripts/test-fixtures.ts`), and wire the `test` script in the parser package so fixture tests run in the migrated codebase. The runner is **self-contained** — it imports nothing from `poc-parse`; it imports `parse` from the parser's own entry point (`../src/index.ts`, which phase 1 bootstrapped with a `parse(): void { return undefined }` stub) and calls `parse()` until phase 3. NOTE: because `parse()` returns `undefined` and never throws, all fixtures pass vacuously — the harness is wired but nothing is genuinely parsed until phase 3. Executed within the Artificial repository (`repos/artificial`) as phase 2 of the MD Art Roundtrip milestone; prerequisite for phase 3 (`migrate-and-verify`) so the migrated parser is verified against the fixture suite before any refinement. NOTE: phase 3 (`verify-parser-against-snapshots`) reads the file and replaces the stub call with the real `parse(content)`. The runner already imports `parse` from the entry point (`../src/index.ts`), so phase 3 only fills in the call.
 
 ## Scope
 
@@ -58,11 +58,11 @@ This section describes the context feeding (and being affected by) the plan, inc
 ### Knowledge
 
 - Mechanism (POC): `art-js/cli/poc-parse/package.json` – `"test": "npx tsx scripts/test-fixtures.ts"`.
-- Runner (POC): `art-js/cli/poc-parse/scripts/test-fixtures.ts` – reads every `.md`/`.art` file in `fixtures/` (excluding `.art.json`), calls `parse(content)`, prints per-fixture `PASS`/`FAIL` with timing, exits non-zero on any failure. NOTE: the runner asserts parse success only — the `.art.json` snapshots are currently not diffed.
-- Runner import (resolved): the parser package has NO `parse` export until phase 3 — the ported runner imports `parse` from the POC source via the relative path `../../../cli/poc-parse/src/parse/parse` (resolved from `art-js/libs/parser/scripts/`). Phase 3 (`verify-parser-against-snapshots`) swaps this import to `@art-js/artificial-parser`.
+- Runner (POC): `art-js/cli/poc-parse/scripts/test-fixtures.ts` – reads every `.md`/`.art` file in `fixtures/` (excluding `.art.json`), calls `parse(content)`, prints per-fixture `PASS`/`FAIL` with timing, exits non-zero on any failure. Structural reference for the output format only — the parser runner is **self-contained** (no `poc-parse` import). NOTE: the runner asserts parse success only — the `.art.json` snapshots are currently not diffed.
+- Runner parse (resolved): phase 1 bootstraps the parser entry point to export `parse(): void { return undefined }` — the runner is **self-contained** (imports nothing from `poc-parse`) and imports `parse` from its own entry point (`../src/index.ts`), calling `const document = parse()`. Because the stub returns `undefined` and never throws, all fixtures pass vacuously. Phase 3 (`verify-parser-against-snapshots`) reads the file and replaces the call with `const document = parse(content)`, and removes the `filePath` `eslint-disable` once the param is used.
 - Fixture data (POC): `art-js/cli/poc-parse/fixtures/` – 31 files: 16 inputs (8 `.art` + 8 `.md`) and 15 expected `.art.json` snapshots. Every input maps to a snapshot by basename (`section-block.art` and `section-block.md` share `section-block.art.json`).
 - Runtime: `tsx ^4.8.1` and `@types/node ^25.9.3` (matching the root workspace ranges; both already resolved in the root lockfile) are added to the parser devDependencies. The parser `tsconfig.json` already includes `scripts/` and `types: ["vite/client", "node"]`, so the runner is typechecked.
-- Lint: the root `no-console` rule allow-lists `info|warn|error` — the runner logs via `console.info` / `console.error` only, so no `eslint-disable` comment is needed (the POC runner carries none).
+- Lint: the root `no-console` rule allow-lists `info|warn|error` — the runner logs via `console.info` / `console.error` only, so no `eslint-disable` comment is needed for `console`. The single `// eslint-disable-next-line @typescript-eslint/no-unused-vars` above `parseFixture` handles the unused `filePath` parameter (unused while parse is stubbed).
 - Milestone strategy: the roundtrip art fixture for the serializer phase lives in `@art-js/artificial-spec`; this plan only migrates the parser fixture suite.
 
 ## Mandatory Reading
@@ -127,16 +127,18 @@ npm run test
 
 ## Commits
 
-### `migrate-testing-fixtures` - `PLANNED`
+### `migrate-testing-fixtures` - `COMMITTED`
 
-**Commit Message:** `art-js: migrate testing fixtures to parser package`
+**Commit Message:** `build(md-art-roundtrip): migrate testing fixtures to parser package`
+
+**Commit:** `6ecfbc1`
 
 **Instructions File:** `_backlog/3-now/plan-migrate-testing-fixtures/instructions/migrate-testing-fixtures.md`
 
 **Scope:**
 
 - Copy the 16 fixture inputs and 15 expected `.art.json` snapshots from `poc-parse/fixtures/` (read-only source) to `art-js/libs/parser/test/fixtures/` — copy, never move or modify the source
-- Port `scripts/test-fixtures.ts` from poc-parse into the parser package as `scripts/test-fixtures.ts`, keeping the output format identical; the runner imports `parse` from the POC source via `../../../cli/poc-parse/src/parse/parse` (the parser package has no parse export until phase 3 — phase 3's `verify-parser-against-snapshots` swaps the import to `@art-js/artificial-parser`) and points `FIXTURES_DIR` at `../test/fixtures` (the parser suite lives under `test/`, unlike the POC)
+- Create the fixture runner `scripts/test-fixtures.ts` in the parser package (self-contained — imports nothing from poc-parse; imports `parse` from its own entry point `../src/index.ts` and calls `parse()`; single `eslint-disable` for the unused `filePath` param), keeping the output format identical to the POC; `FIXTURES_DIR` points at `../test/fixtures` (the parser suite lives under `test/`, unlike the POC)
 - Wire `"test": "npx tsx scripts/test-fixtures.ts"` in `art-js/libs/parser/package.json`; add `tsx ^4.8.1` and `@types/node ^25.9.3` to parser devDependencies; regenerate the lockfile via `npm install` at the repository root
 - Do not modify poc-parse (migration source; read-only)
 - Verify: `npm run test` in the parser package prints the 16-fixture PASS output above; `npm run lint` and `npm run build` pass
@@ -145,15 +147,15 @@ npm run test
 **CHANGELOG:**
 
 - Copy 16 fixture inputs + 15 `.art.json` snapshots from poc-parse to `art-js/libs/parser/test/fixtures/`
-- Port fixture runner to `art-js/libs/parser/scripts/test-fixtures.ts` (imports parse from poc-parse until phase 3)
+- Create self-contained fixture runner at `art-js/libs/parser/scripts/test-fixtures.ts` (no poc-parse import; imports `parse` from the parser entry point and calls `parse()` — stub returns `undefined` until phase 3)
 - Wire `"test": "npx tsx scripts/test-fixtures.ts"` + add `tsx` / `@types/node` devDeps; regenerate lockfile
 ```
 
 ## Follow ups
 
-- Phase 3 (`migrate-and-verify`) must swap the runner import from `../../../cli/poc-parse/src/parse/parse` to `@art-js/artificial-parser` — noted in the phase 3 plan and in this plan's instruction DIRECTIVE FEEDBACK.
+- Phase 3 (`migrate-and-verify`) must replace the runner's `parse()` entry-point stub call with a real one: read the file (`fs.readFileSync(filePath, 'utf-8')`) and call `const document = parse(content)`, and remove the `eslint-disable` for `filePath` (the param becomes used) — noted in the phase 3 plan and in this plan's instruction DIRECTIVE FEEDBACK.
 - Snapshot diffing (`.art.json` comparison) is out of scope here — revisit with the migrated parser in phase 3 and the serializer in phase 5.
 
 ## Feedback
 
-No sub-agent reports yet.
+Nothing relevant.

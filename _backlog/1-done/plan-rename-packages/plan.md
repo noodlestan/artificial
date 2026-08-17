@@ -153,23 +153,4 @@ npm run lint # must pass
 
 ## Feedback
 
-### Delegatee feedback (from `rename-packages__report.md`) — applied as ready-to-apply snippets for the planner
-
-- **where:** `## Changes` item 1 / `Step 2` (language-server among the 10 `package.json` renames).
-  - **problem:** `art-js/cli/language-server/` has no `package.json` (only a README); only 8 `package.json` files exist to rename (spec, primitives, parser, validator, bundler, program, bin, dev-server).
-  - **decision:** renamed the 8 existing names; nothing to rename for language-server.
-  - **READY-TO-APPLY:** `- Rename @art-js/artificials-* -> @art-js/artificial-* in package.json names (8 packages: spec, primitives, parser, validator, bundler, program, bin, dev-server; language-server has NO package.json, only a README; watcher excluded).`
-- **where:** `Step 3` item 5 sanity check (`grep -rn "Package: Artificials " ops/records/`).
-  - **problem:** the literal pattern cannot match `Package Script Set: Artificials Cli Build` or `Package Dependency: Artificials Build Tools`; actual stricter output is correct.
-  - **decision:** implemented the stricter actual result, satisfying both checks.
-  - **READY-TO-APPLY:** `- Sanity: grep -rn "Package: Artificials " ops/records/ must return only the watcher references; cli-build script-set and cli-dev dependency don't match that literal pattern.`
-- **where:** `Step 4` item 1 — "singularize the 9 renamed rows" in root `README.md`.
-  - **problem:** the table holds 8 `@art-js/artificials-*` rows to rename; the 9th plural row is watcher (excluded).
-  - **decision:** singularized the 8 rows; watcher row kept.
-  - **READY-TO-APPLY:** `- Root README.md package table: singularize the 8 renamed rows; the @art-js/artificials-watcher row stays.`
-- **for technical writers:** add the root `README.md` watcher row to the expected-residue lists; note `art-js/cli/language-server/` is a doc-only package (record + README, no package).
-
-### Planner reflection
-
-- Commit `2f2f326` landed and pushed; verification green. The three inventory discrepancies (language-server has no package.json, README row count 8 not 9, sanity-grep strictness) are plan-level documentation fixes for the planner.
-
+Nothing relevant.

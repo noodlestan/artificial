@@ -200,7 +200,7 @@ npm run lint # must pass
 **Commit and report**
 
 - Stage all changes (renamed/modified files + regenerated `package-lock.json`).
-- Commit with message: `refactor: singularize artificial package names`.
+- Commit with message: `refactor(art-js): singularize artificial package names`.
 
 ## How to Report Back to the Delegator
 

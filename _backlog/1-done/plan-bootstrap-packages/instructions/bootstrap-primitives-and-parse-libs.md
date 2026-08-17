@@ -246,9 +246,13 @@ import type { Point } from '@art-js/artificial-primitives';
 const origin: Point = { line: 1, column: 1, offset: 0 };
 
 console.info(origin);
+
+export function parse(): void {
+  return undefined;
+}
 ```
 
-Note: the `console.info` is intended smoke output — keep it. It is allow-listed by the root `no-console` rule (`allow: ['info', 'warn', 'error']`), so no `eslint-disable` comment is needed; do not add one.
+Note: the `console.info` is intended smoke output — keep it. It is allow-listed by the root `no-console` rule (`allow: ['info', 'warn', 'error']`), so no `eslint-disable` comment is needed; do not add one. The `export function parse(): void { return undefined }` is an intentional stub — the entry-point contract that phase 2's fixture runner imports and calls; phase 3 fills in the real implementation. Keep it.
 
 Update `repos/artificial/art-js/libs/parser/package.json` — add the primitives dependency (keep everything else, including the vite build):
 
@@ -272,7 +276,7 @@ Then run `npm install` from `repos/artificial/` (the repository root) to registe
 
 **Sanity check**
 
-The primitives package exports all core types. The parser package imports a primitives type from its entry point, declares a const of that type, and `console.info`s it (allow-listed by `no-console`). The `@art-js/artificial-primitives` workspace dependency is wired and the lockfile regenerated. Lint and build pass in both packages. POC Parse is untouched.
+The primitives package exports all core types. The parser package imports a primitives type from its entry point, declares a const of that type, `console.info`s it (allow-listed by `no-console`), and exports the `parse(): void { return undefined }` stub — the entry-point contract that phase 2's fixture runner (`plan-migrate-testing-fixtures`) imports and calls. The `@art-js/artificial-primitives` workspace dependency is wired and the lockfile regenerated. Lint and build pass in both packages. POC Parse is untouched.
 
 **Verification:**
 
@@ -295,7 +299,7 @@ npm run build
 **Commit and report**
 
 - Stage all changes in `art-js/libs/primitives/` and `art-js/libs/parser/`.
-- Commit with message: `art-js: bootstrap primitives and parser libs`.
+- Commit with message: `build(md-art-roundtrip): bootstrap primitives and parser libs`.
 
 ## How to Report Back to the Delegator
 

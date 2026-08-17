@@ -10,7 +10,7 @@
 
 ## Summary
 
-Bootstrap `@art-js/artificial-primitives` (types only) and `@art-js/artificial-parser` in a single commit: migrate the core types into primitives and prove the parser package consumes primitives from its entry point. POC Parse — which stood in lieu of the parser lib — is superseded in phase 3 and archived in phase 10. Executed within the Artificial repository (`repos/artificial`) as phase 1 of the MD Art Roundtrip milestone.
+Bootstrap `@art-js/artificial-primitives` (types only) and `@art-js/artificial-parser` in a single commit: migrate the core types into primitives and prove the parser package consumes primitives from its entry point and export a `parse(): void { return undefined }` stub — the entry-point contract that phase 2's fixture runner (`plan-migrate-testing-fixtures`) imports and calls. POC Parse — which stood in lieu of the parser lib — is superseded in phase 3 and archived in phase 10. Executed within the Artificial repository (`repos/artificial`) as phase 1 of the MD Art Roundtrip milestone.
 
 ## Scope
 
@@ -98,9 +98,11 @@ npm run test
 
 ## Commits
 
-### `bootstrap-primitives-and-parse-libs` - `PLANNED`
+### `bootstrap-primitives-and-parse-libs` - `COMMITTED`
 
-**Commit Message:** `art-js: bootstrap primitives and parser libs`
+**Commit Message:** `build(md-art-roundtrip): bootstrap primitives and parser libs`
+
+**Commit:** `d050b02`
 
 **Instructions File:** `_backlog/3-now/plan-bootstrap-packages/instructions/bootstrap-primitives-and-parse-libs.md`
 
@@ -108,7 +110,7 @@ npm run test
 
 - Migrate types from `poc-parse/src/parse/types.ts` to `art-js/libs/primitives/src/`
 - Create entry point `src/index.ts` re-exporting all types
-- Bootstrap `@art-js/artificial-parser` consuming `@art-js/artificial-primitives` from its entry point: import a simple type, declare a const of that type, `console.info(value)` (allow-listed by the root `no-console` rule — `allow: ['info', 'warn', 'error']`; no disable comment needed); add the primitives dependency `"@art-js/artificial-primitives": "*"` to `art-js/libs/parser/package.json` and regenerate the lockfile via `npm install` at the repository root
+- Bootstrap `@art-js/artificial-parser` consuming `@art-js/artificial-primitives` from its entry point: import a simple type, declare a const of that type, `console.info(value)` (allow-listed by the root `no-console` rule — `allow: ['info', 'warn', 'error']`; no disable comment needed), and export a `parse(): void { return undefined }` stub (phase 2's runner imports it); add the primitives dependency `"@art-js/artificial-primitives": "*"` to `art-js/libs/parser/package.json` and regenerate the lockfile via `npm install` at the repository root
 - Keep the vite build in both packages; do not modify poc-parse
 - Verify: `npm run lint`, `npm run build` in both packages
 
@@ -116,7 +118,7 @@ npm run test
 **CHANGELOG:**
 
 - Migrate POC parse types into `@art-js/artificial-primitives` (src/index.ts entry point)
-- Bootstrap `@art-js/artificial-parser` consuming `@art-js/artificial-primitives` (smoke console.info)
+- Bootstrap `@art-js/artificial-parser` consuming `@art-js/artificial-primitives` (smoke console.info) and exporting the `parse(): void { return undefined }` stub
 - Wire `@art-js/artificial-primitives` workspace dependency + regenerate lockfile
 ```
 
@@ -126,4 +128,4 @@ None.
 
 ## Feedback
 
-No sub-agent reports yet.
+Nothing relevant.
