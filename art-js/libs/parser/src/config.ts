@@ -1,6 +1,8 @@
+import { sectionBlockFactory } from '@art-js/artificial-constructs';
+
 import { createFieldBlockHandler, createFieldDetectionPreProcessor } from './constructs/FieldBlock';
 import type { ConstructPreProcessor } from './constructs/FieldBlock';
-import { createSectionBlockHandler, sectionBlockFactory } from './constructs/SectionBlock';
+import { createSectionBlockHandler } from './constructs/SectionBlock';
 import type { ConstructHandler } from './constructs/SectionBlock';
 import { createTagRoutingHandler, tagFactory } from './constructs/Tag';
 import type { ConstructFactory } from './framework/types';

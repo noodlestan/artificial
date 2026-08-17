@@ -18,6 +18,8 @@
 
 - Dev:
   - Package Dependency Set: Solid Lib Development
+- Runtime:
+  - `@art-js/artificial-constructs`
 
 **Scripts:**
 

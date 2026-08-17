@@ -1,7 +1,7 @@
 {
-  "name": "@art-js/artificial-parser",
+  "name": "@art-js/artificial-constructs",
   "version": "0.0.1",
-  "description": "Parses context files and art modules into structured representations.",
+  "description": "Construct factories for Art parser records.",
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,
@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/noodlestan/no-comply.git",
-    "directory": "libs/parser/"
+    "directory": "libs/constructs/"
   },
   "type": "module",
   "sideEffects": false,
@@ -27,18 +27,15 @@
     "lint:fix": "prettier . -c --write && eslint . --fix",
     "build:clean": "rm -rf dist",
     "ci": "npm run lint && npm run build && npm run test",
-    "test": "npx tsx scripts/run-snapshot-check.ts"
+    "test": "echo none yet"
   },
   "dependencies": {
-    "@art-js/artificial-primitives": "*",
-    "@art-js/artificial-constructs": "*",
-    "mdast-util-from-markdown": "^2.0.0",
-    "unist-util-visit": "^4.0.0"
+    "@art-js/artificial-primitives": "*"
   },
   "devDependencies": {
     "@types/node": "^25.9.3",
+    "mdast-util-from-markdown": "^2.0.0",
     "solid-js": "1.9.13",
-    "tsx": "^4.8.1",
     "vite": "8.0.16",
     "vite-plugin-solid": "2.11.12",
     "vite-plugin-solid-svg": "0.8.1",

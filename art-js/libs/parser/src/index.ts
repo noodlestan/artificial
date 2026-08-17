@@ -1,13 +1,15 @@
-import { buildDocument } from './builder';
-import { createDefaultConfig } from './config';
 import {
 	createFieldBlockFromParagraph,
-	createFieldBlockHandler,
-	createFieldDetectionPreProcessor,
+	createNaturalBlock,
 	fieldBlockFactory,
-} from './constructs/FieldBlock';
-import { createNaturalBlock, naturalBlockFactory } from './constructs/NaturalBlock';
-import { createSectionBlockHandler, sectionBlockFactory } from './constructs/SectionBlock';
+	naturalBlockFactory,
+	sectionBlockFactory,
+} from '@art-js/artificial-constructs';
+
+import { buildDocument } from './builder';
+import { createDefaultConfig } from './config';
+import { createFieldBlockHandler, createFieldDetectionPreProcessor } from './constructs/FieldBlock';
+import { createSectionBlockHandler } from './constructs/SectionBlock';
 import { createTagRoutingHandler, tagFactory } from './constructs/Tag';
 import { cleanPosition } from './framework/cleanPosition';
 import { createDocumentContext } from './framework/createDocumentContext';

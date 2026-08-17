@@ -1,0 +1,32 @@
+# Module
+
+## Package: Artificial Constructs
+
+**Purpose:** Construct factories for Art parser records.
+
+**Description:** Creates block and inline construct records from markdown AST nodes.
+
+**Path:** `libs/constructs/`
+
+**Canonical Name:** `@art-js/artificial-constructs`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Runtime:
+  - `@art-js/artificial-primitives`
+
+**Scripts:**
+
+- Package Script Set: Artificial Lib Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Lib Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json

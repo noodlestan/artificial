@@ -1,9 +1,8 @@
+import { createFieldBlockFromParagraph, isFieldStrong } from '@art-js/artificial-constructs';
 import type { Paragraph } from 'mdast';
 
 import type { MdastNode, VisitContext } from '../../framework/types';
 import type { Construct } from '../../types';
-
-import { createFieldBlockFromParagraph, isFieldStrong } from './factory';
 
 export interface ConstructPreProcessor {
 	canPreProcess(node: MdastNode, context: VisitContext): boolean;
