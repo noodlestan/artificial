@@ -27,7 +27,7 @@
     "lint:fix": "prettier . -c --write && eslint . --fix",
     "build:clean": "rm -rf dist",
     "ci": "npm run lint && npm run build && npm run test",
-    "test": "npx tsx scripts/test-fixtures.ts"
+    "test": "npx tsx scripts/run-snapshot-check.ts"
   },
   "dependencies": {
     "@art-js/artificial-primitives": "*",
