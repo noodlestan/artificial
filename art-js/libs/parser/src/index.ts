@@ -4,3 +4,7 @@ import type { Point } from '@art-js/artificial-primitives';
 const origin: Point = { line: 1, column: 1, offset: 0 };
 
 console.info(origin);
+
+export function parse(): void {
+	return undefined;
+}
