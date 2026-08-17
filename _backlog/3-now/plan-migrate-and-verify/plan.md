@@ -2,7 +2,7 @@
 
 **ID:** `migrate-and-verify`
 
-**Status:** `PREPARING`
+**Status:** `READY`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -23,10 +23,6 @@ This section describes the working scope, where the plan is executed and what it
 - Out of scope: pipeline test suite and roundtrip fixtures, addressed in phase 6 (`plan-migrate-tests-pipeline`).
 - Out of scope: roundtrip gap refinements (whitespace gaps preserved), addressed reactively in phase 8 (`plan-implement-gaps`).
 - Out of scope: archive and publish, addressed in phase 10 (`plan-archive-poc-and-publish`).
-
-### Workspace
-
-**Workspace:** Running on $WORKSPACE = `project-parser-architect`; managed by `@art-domains/workspace-cli`; explained in `$WORKSPACE/\_guide.md`.
 
 ### Project Repositories
 
@@ -74,9 +70,21 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 ## Execution Context
 
-Execution occurs in `$WORKSPACE/repos/artificial` on branch `main`; working directory is `$PROJECT/art-js/libs/parser`.
+**Workspace:** Running on `$WORKSPACE = CWD` managed by `@art-domains/workspace-cli`; explained in `$WORKSPACE/\_guide.md`.
+
+If a git workspace tree was created, it is likely that the workspace CLI is not installed AND that the checkout(s) of the repository or repositories where work is performed do not exist yet.
 
 ## Setup
+
+Execute in `$WORKSPACE`, to clone and branch the repo:
+
+```bash
+npm install # installs workspace cli
+npm run workspace clone artificial # creates checkout at repos/artificial
+npm run branch migrate-and-verify artificial # branches it to migrate-and-verify
+```
+
+And check `repos/artificial` exists and is on branch `migrate-and-verify`.
 
 Run from `repos/artificial` repository directory:
 
@@ -101,7 +109,7 @@ npm run test
 
 **Commit Message:** `art-js: migrate all parser code to packages`
 
-**Instructions File:** `_backlog/4-next/plan-migrate-and-verify/instructions/migrate-parser-code.md`
+**Instructions File:** `_backlog/3-now/plan-migrate-and-verify/instructions/migrate-parser-code.md`
 
 **Scope:**
 
@@ -117,7 +125,7 @@ npm run test
 
 **Commit Message:** `art-js: verify parser output against POC snapshots`
 
-**Instructions File:** `_backlog/4-next/plan-migrate-and-verify/instructions/verify-parser-against-snapshots.md`
+**Instructions File:** `_backlog/3-now/plan-migrate-and-verify/instructions/verify-parser-against-snapshots.md`
 
 **Scope:**
 
@@ -128,7 +136,7 @@ npm run test
 
 ## Follow ups
 
-- **Note for the planner (left during phases 0–2 refinement):** (1) the `migrate-parser-code` scope line "Move fixtures to parser package test directory" is now covered by phase 2 (`plan-migrate-testing-fixtures`) — drop or reword it when this plan is refined. (2) `verify-parser-against-snapshots` must swap the fixture runner's import from `../../../cli/poc-parse/src/parse/parse` (wired in phase 2, since the parser package had no parse export yet) to `@art-js/artificial-parser` once the parse API lands in this phase.
+No follow-ups yet.
 
 ## Feedback
 
