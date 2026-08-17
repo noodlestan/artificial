@@ -28,7 +28,7 @@ Create `@art-js/artificial-constructs` and migrate the parser-owned construct fa
 
 - `art-js/cli/poc-parse/_pseudo.md` — parser architecture and the factory/handler partition.
 - `art-js/libs/parser/src/` — migrated parser source, factories to extract, and call sites to rewire.
-- `repos/artificial/_guide.md` — repository setup and package verification commands.
+- `repos/artificial-art-js-build/_guide.md` — repository setup and package verification commands.
 - `architecture/index.md` — Artificial ecosystem architecture.
 - `architecture/records/adr/parser.art` — parser substrate decisions.
 
@@ -37,7 +37,7 @@ Create `@art-js/artificial-constructs` and migrate the parser-owned construct fa
 
 ## Setup
 
-Run from `repos/artificial` repository directory:
+Run from `repos/artificial-art-js-build` repository directory:
 
 ```bash
 npm ci # to install dependencies.

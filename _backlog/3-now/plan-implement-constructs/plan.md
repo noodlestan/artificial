@@ -10,7 +10,7 @@
 
 ## Summary
 
-Move the construct factories (blocks, fields, sections, and the `NaturalBlock`/text fallthrough) out of `@art-js/artificial-parser` into a new `@art-js/artificial-constructs` package: constructs depends on primitives, is a dependency of the parser, and will be a dependency of the serializer. Executed within the Artificial repository (`repos/artificial`) as phase 4 of the MD Art Roundtrip milestone, after the parser is verified against the POC snapshots (phase 3). The parser keeps its orchestration (context-aware visiting, handlers wiring, `buildDocument`); the factories it owns migrate.
+Move the construct factories (blocks, fields, sections, and the `NaturalBlock`/text fallthrough) out of `@art-js/artificial-parser` into a new `@art-js/artificial-constructs` package: constructs depends on primitives, is a dependency of the parser, and will be a dependency of the serializer. Executed within the Artificial repository (`repos/artificial-art-js-build`) as phase 4 of the MD Art Roundtrip milestone, after the parser is verified against the POC snapshots (phase 3). The parser keeps its orchestration (context-aware visiting, handlers wiring, `buildDocument`); the factories it owns migrate.
 
 ## Scope
 
@@ -27,7 +27,7 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial – Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial – Checked out at `repos/artificial-art-js-build` branch `main`; described by `ops/records/projects/artificial.art`.
 
 ### Packages
 
@@ -53,8 +53,8 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Guides
 
-- `repos/artificial/_guide.md` – repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
-- `repos/artificial/art-js/cli/poc-parse/_guide.md` – nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
+- `repos/artificial-art-js-build/_guide.md` – repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
+- `repos/artificial-art-js-build/art-js/cli/poc-parse/_guide.md` – nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
 
 ### Knowledge
 
@@ -72,7 +72,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 ## Execution Context
 
-Execution occurs in `$WORKSPACE/repos/artificial` on branch `main`; working directories are `$PROJECT/art-js/libs/constructs` and `$PROJECT/art-js/libs/parser`.
+Execution occurs in `$WORKSPACE/artificial-art-js-build` on branch `main`; working directories are `$PROJECT/art-js/libs/constructs` and `$PROJECT/art-js/libs/parser`.
 
 ## Setup
 
