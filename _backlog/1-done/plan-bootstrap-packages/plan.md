@@ -49,7 +49,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 1 of the MD Art Roundtrip milestone, its package targets, and dependencies.
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 1 of the MD Art Roundtrip milestone, its package targets, and dependencies.
 - Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
 - Parking Lot: `_backlog/_parking-lot.md` – pending items and open questions relevant to primitives/parser migration.
 - Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback; source code to migrate at `art-js/cli/poc-parse/src/parse/`.

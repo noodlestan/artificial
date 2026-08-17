@@ -58,7 +58,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 0; every phase below depends on the singularized names.
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 0; every phase below depends on the singularized names.
 - Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
 - Parking Lot: `_backlog/_parking-lot.md` – pending items; the workspace-tooling message is filed alongside.
 - Message: `_backlog/_message-workspace-tooling-architect.md` – files the excluded workspace-tooling rename (`artificials-build` / `artificials-watch`).

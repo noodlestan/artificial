@@ -27,7 +27,7 @@ These are your instructions. They include a section at the end on how to report 
 ## Mandatory Reading
 
 - ::READ `plan.md` — the plan being executed.
-- ::READ `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` — milestone context and decisions.
+- ::READ `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — milestone context and decisions.
 - ::READ `_backlog/1-done/plan-poc-parse/plan.md` — archived POC plan and snapshot references.
 - ::READ `art-js/cli/poc-parse/fixtures/` — archived fixture inputs and snapshots (read-only source).
 

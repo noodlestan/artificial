@@ -29,7 +29,7 @@ These are your instructions. They include a section at the end on how to report 
 ## Mandatory Reading
 
 - ::READ `plan.md` — the plan being executed (do not rely on chat context).
-- ::READ `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` — milestone context and decisions.
+- ::READ `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — milestone context and decisions.
 - ::READ `art-js/cli/poc-parse/_pseudo.md` — parser architecture (source of truth).
 - ::READ `art-js/cli/poc-parse/src/parse/` — POC implementation to migrate (read-only).
 - ::READ `repos/artificial/_guide.md` — repository guide with setup and verification commands.

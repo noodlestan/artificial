@@ -97,11 +97,11 @@ The parser fixture suite (md/art → art.json vs POC snapshots) must still pass 
 
 ## Commits
 
-### `implement-constructs-package` - `READY`
+### `implement-constructs-package` - `PLANNED`
 
 **Commit Message:** `build(md-art-roundtrip): implement constructs package with migrated factories`
 
-**Instructions File:** `_backlog/3-now/plan-implement-constructs/instructions/implement-constructs-package.md`
+**Instructions File:** `_backlog/3-next/plan-implement-constructs/instructions/implement-constructs-package.md`
 
 **Scope:**
 
@@ -112,6 +112,12 @@ The parser fixture suite (md/art → art.json vs POC snapshots) must still pass 
 - Register package record `ops/records/packages/artificial-constructs.art`
 - Verify: `npm run lint`, `npm run build`, `npm run test` in constructs and parser; parser fixture suite unchanged
 - Do not modify poc-parse (migration source; read-only)
+
+**CHANGELOG:**
+
+- Add `@art-js/artificial-constructs` with the migrated construct factories.
+- Rewire `@art-js/artificial-parser` to consume constructs while retaining parser orchestration.
+- Register the constructs package record and preserve parser snapshot output.
 
 ## Follow ups
 

@@ -45,7 +45,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/4-next/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 2 of the MD Art Roundtrip milestone; successor is phase 3 (`migrate-and-verify`).
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 2 of the MD Art Roundtrip milestone; successor is phase 3 (`migrate-and-verify`).
 - Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
 - Parking Lot: `_backlog/_parking-lot.md` – pending items and open questions relevant to fixture testing.
 - Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback.
