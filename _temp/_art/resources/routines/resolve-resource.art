@@ -6,11 +6,11 @@
 
 **Inputs:**
 
-- `%resource` – Type: MaybeResource.
+- `%resource` — Type: MaybeResource.
 
 **Outputs:**
 
-- `%resource` – Type: Resource.
+- `%resource` — Type: Resource.
 
 **Procedure:**
 

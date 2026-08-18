@@ -29,23 +29,23 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial – Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial — Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
 
 ### Packages
 
 All `@art-js/artificials-*` package names are renamed to `@art-js/artificial-*` in this plan (10 packages; the watcher package is excluded):
 
-- Package: Artificial Primitives – Canonical `@art-js/artificial-primitives` (renamed from `@art-js/artificials-primitives`; public @0.0.1); described by `ops/records/packages/artificial-primitives.art` (record renamed from `artificials-primitives.art` in this plan); located at `art-js/libs/primitives/`.
-- Package: Artificial Parser – Canonical `@art-js/artificial-parser` (renamed from `@art-js/artificials-parser`; public @0.0.1); described by `ops/records/packages/artificial-parser.art` (record renamed from `artificials-parser.art` in this plan); located at `art-js/libs/parser/`.
-- Package: Artificial Spec – Canonical `@art-js/artificial-spec` (renamed from `@art-js/artificials-spec`); located at `art-js/spec/`. NOTE: no package record exists for spec in `ops/records/packages/` — only the `package.json` name and its references are renamed; the missing record is a follow-up.
-- Package: Artificial Validator – Canonical `@art-js/artificial-validator` (renamed from `@art-js/artificials-validator`); described by `ops/records/packages/artificial-validator.art` (renamed in this plan); located at `art-js/libs/validator/`.
-- Package: Artificial Bundler – Canonical `@art-js/artificial-bundler` (renamed from `@art-js/artificials-bundler`); described by `ops/records/packages/artificial-bundler.art` (renamed in this plan); located at `art-js/libs/bundler/`.
-- Package: Artificial Program – Canonical `@art-js/artificial-program` (renamed from `@art-js/artificials-program`); described by `ops/records/packages/artificial-program.art` (renamed in this plan); located at `art-js/libs/program/`.
-- Package: Artificial Bin – Canonical `@art-js/artificial-bin` (renamed from `@art-js/artificials-bin`); described by `ops/records/packages/artificial-bin.art` (renamed in this plan); located at `art-js/cli/bin/`.
-- Package: Artificial Dev Server – Canonical `@art-js/artificial-dev-server` (renamed from `@art-js/artificials-dev-server`); described by `ops/records/packages/artificial-dev-server.art` (renamed in this plan); located at `art-js/cli/dev-server/`.
-- Package: Artificial Language Server – Canonical `@art-js/artificial-language-server` (renamed from `@art-js/artificials-language-server`); described by `ops/records/packages/artificial-language-server.art` (renamed in this plan); located at `art-js/cli/language-server/`.
-- Package: Artificial Tools – no `package.json` yet (only README + record); record `ops/records/packages/artificial-tools.art` renamed from `artificials-tools.art` in this plan, canonical `@art-js/artificial-tools` (renamed from `@art-js/artificials-tools`).
-- Package: Artificial POC Parse – Canonical `@art-js/poc-parse` (name unchanged); described by `ops/records/packages/artificial-poc-parse.art` (record renamed from `artificials-poc-parse.art` in this plan); located at `art-js/cli/poc-parse/` (migration source; read-only).
+- Package: Artificial Primitives — Canonical `@art-js/artificial-primitives` (renamed from `@art-js/artificials-primitives`; public @0.0.1); described by `ops/records/packages/artificial-primitives.art` (record renamed from `artificials-primitives.art` in this plan); located at `art-js/libs/primitives/`.
+- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (renamed from `@art-js/artificials-parser`; public @0.0.1); described by `ops/records/packages/artificial-parser.art` (record renamed from `artificials-parser.art` in this plan); located at `art-js/libs/parser/`.
+- Package: Artificial Spec — Canonical `@art-js/artificial-spec` (renamed from `@art-js/artificials-spec`); located at `art-js/spec/`. NOTE: no package record exists for spec in `ops/records/packages/` — only the `package.json` name and its references are renamed; the missing record is a follow-up.
+- Package: Artificial Validator — Canonical `@art-js/artificial-validator` (renamed from `@art-js/artificials-validator`); described by `ops/records/packages/artificial-validator.art` (renamed in this plan); located at `art-js/libs/validator/`.
+- Package: Artificial Bundler — Canonical `@art-js/artificial-bundler` (renamed from `@art-js/artificials-bundler`); described by `ops/records/packages/artificial-bundler.art` (renamed in this plan); located at `art-js/libs/bundler/`.
+- Package: Artificial Program — Canonical `@art-js/artificial-program` (renamed from `@art-js/artificials-program`); described by `ops/records/packages/artificial-program.art` (renamed in this plan); located at `art-js/libs/program/`.
+- Package: Artificial Bin — Canonical `@art-js/artificial-bin` (renamed from `@art-js/artificials-bin`); described by `ops/records/packages/artificial-bin.art` (renamed in this plan); located at `art-js/cli/bin/`.
+- Package: Artificial Dev Server — Canonical `@art-js/artificial-dev-server` (renamed from `@art-js/artificials-dev-server`); described by `ops/records/packages/artificial-dev-server.art` (renamed in this plan); located at `art-js/cli/dev-server/`.
+- Package: Artificial Language Server — Canonical `@art-js/artificial-language-server` (renamed from `@art-js/artificials-language-server`); described by `ops/records/packages/artificial-language-server.art` (renamed in this plan); located at `art-js/cli/language-server/`.
+- Package: Artificial Tools — no `package.json` yet (only README + record); record `ops/records/packages/artificial-tools.art` renamed from `artificials-tools.art` in this plan, canonical `@art-js/artificial-tools` (renamed from `@art-js/artificials-tools`).
+- Package: Artificial POC Parse — Canonical `@art-js/poc-parse` (name unchanged); described by `ops/records/packages/artificial-poc-parse.art` (record renamed from `artificials-poc-parse.art` in this plan); located at `art-js/cli/poc-parse/` (migration source; read-only).
 - Excluded: `@art-js/artificials-watcher` (package, record, and references stay as-is — workspace-tooling territory).
 
 ### Deployments
@@ -58,15 +58,15 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 0; every phase below depends on the singularized names.
-- Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
-- Parking Lot: `_backlog/_parking-lot.md` – pending items; the workspace-tooling message is filed alongside.
-- Message: `_backlog/_message-workspace-tooling-architect.md` – files the excluded workspace-tooling rename (`artificials-build` / `artificials-watch`).
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — defines this plan as phase 0; every phase below depends on the singularized names.
+- Briefing: `_backlog/_architect.md` — approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
+- Parking Lot: `_backlog/_parking-lot.md` — pending items; the workspace-tooling message is filed alongside.
+- Message: `_backlog/_message-workspace-tooling-architect.md` — files the excluded workspace-tooling rename (`artificials-build` / `artificials-watch`).
 
 ### Guides
 
-- `repos/artificial/_guide.md` – repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
-- `repos/artificial/art-js/cli/poc-parse/_guide.md` – nested guide for the POC package (migration source).
+- `repos/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
+- `repos/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source).
 
 ### Knowledge
 
@@ -78,10 +78,10 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 For the delegatee (shared context; per-step context is in each instruction file):
 
-- `ops/records/packages/` – the package records to rename.
-- `ops/records/namespaces/art-js.art` – the namespace record listing package references to singularize.
-- `ops/records/scripts/artificials-lib-build.art` – the script-set record to rename (references from lib package records).
-- `art-js/**/package.json` + root `package.json` – package names to update.
+- `ops/records/packages/` — the package records to rename.
+- `ops/records/namespaces/art-js.art` — the namespace record listing package references to singularize.
+- `ops/records/scripts/artificials-lib-build.art` — the script-set record to rename (references from lib package records).
+- `art-js/**/package.json` + root `package.json` — package names to update.
 
 ## Execution Context
 

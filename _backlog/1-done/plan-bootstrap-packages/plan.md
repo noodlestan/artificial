@@ -31,13 +31,13 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial – Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial — Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
 
 ### Packages
 
-- Package: Artificial Primitives – Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `ops/records/packages/artificial-primitives.art`; located at `art-js/libs/primitives/`.
-- Package: Artificial Parser – Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (consumes primitives from its entry point in this plan).
-- Package: Artificial POC Parse – Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
+- Package: Artificial Primitives — Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `ops/records/packages/artificial-primitives.art`; located at `art-js/libs/primitives/`.
+- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (consumes primitives from its entry point in this plan).
+- Package: Artificial POC Parse — Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
 
 ### Deployments
 
@@ -49,29 +49,29 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 1 of the MD Art Roundtrip milestone, its package targets, and dependencies.
-- Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
-- Parking Lot: `_backlog/_parking-lot.md` – pending items and open questions relevant to primitives/parser migration.
-- Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback; source code to migrate at `art-js/cli/poc-parse/src/parse/`.
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — defines this plan as phase 1 of the MD Art Roundtrip milestone, its package targets, and dependencies.
+- Briefing: `_backlog/_architect.md` — approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
+- Parking Lot: `_backlog/_parking-lot.md` — pending items and open questions relevant to primitives/parser migration.
+- Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` — POC current state, learnings, and feedback; source code to migrate at `art-js/cli/poc-parse/src/parse/`.
 
 ### Guides
 
-- `repos/artificial/_guide.md` – repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
-- `repos/artificial/art-js/cli/poc-parse/_guide.md` – nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
+- `repos/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
+- `repos/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
 
 ### Knowledge
 
-- Pseudo: `art-js/cli/poc-parse/_pseudo.md` – parser architecture (source of truth): context-aware visiting, factories, handlers.
-- Architecture: `architecture/index.md` – artificial ecosystem overview.
-- ADR: `architecture/records/adr/parser.art` – mdast-based substrate research behind the parser.
-- ADR: `architecture/records/adr/language.art` – language and parser containment model decisions.
+- Pseudo: `art-js/cli/poc-parse/_pseudo.md` — parser architecture (source of truth): context-aware visiting, factories, handlers.
+- Architecture: `architecture/index.md` — artificial ecosystem overview.
+- ADR: `architecture/records/adr/parser.art` — mdast-based substrate research behind the parser.
+- ADR: `architecture/records/adr/language.art` — language and parser containment model decisions.
 
 ## Mandatory Reading
 
 For the delegatee (shared context; per-step context is in each instruction file):
 
-- `art-js/cli/poc-parse/_pseudo.md` – parser architecture (source of truth).
-- `art-js/cli/poc-parse/src/parse/` – current POC implementation to migrate.
+- `art-js/cli/poc-parse/_pseudo.md` — parser architecture (source of truth).
+- `art-js/cli/poc-parse/src/parse/` — current POC implementation to migrate.
 
 ## Execution Context
 

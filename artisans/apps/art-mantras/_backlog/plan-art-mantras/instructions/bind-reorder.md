@@ -35,8 +35,8 @@ Implement race step 7 — **use case: reorder (^ / v)**. A strong word's up/down
 Modify `artisans/apps/art-mantras/src/app.js` only:
 
 - Extend `createStore(data)` with `moveUp(slotId, index)` and `moveDown(slotId, index)`.
-- `moveUp` swaps `strong[index]` with `strong[index - 1]` only when `index > 0`.
-- `moveDown` swaps `strong[index]` with `strong[index + 1]` only when `index < strong.length - 1`.
+- `moveUp` swaps `strong[index]` with `strong[index — 1]` only when `index > 0`.
+- `moveDown` swaps `strong[index]` with `strong[index + 1]` only when `index < strong.length — 1`.
 - Return both methods from the store API.
 - In `apply(ui, store, output, onNextShuffle)`, wire `ui.strongs.moveUp` and `ui.strongs.moveDown` to the corresponding store method, then re-render only `ui.renderStrongs(store.serialize().slots)`.
 - Preserve the existing shuffle and promote handlers exactly; leave ban, banned, save, and download intents inert.
@@ -67,10 +67,10 @@ Implement the pseudo contract:
 
 ```pseudo
 moveUp(slotId, index)
-  if index > 0: swap strong[index], strong[index - 1]
+  if index > 0: swap strong[index], strong[index — 1]
 
 moveDown(slotId, index)
-  if index < strong.length - 1: swap strong[index], strong[index + 1]
+  if index < strong.length — 1: swap strong[index], strong[index + 1]
 ```
 
 Resolve the slot by `slotId`, mutate only its `strong[]`, and expose both methods from `createStore`.

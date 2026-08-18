@@ -37,7 +37,7 @@ Example[ of <NaturalExpression>]: [<Tags>]
 Example of illustrating the preceding VocabularyDeclaration without `of <NaturalExpression>`.
 
 ````md
-**Formatter Function:** – A formatter is a function that serialises data for presentation.
+**Formatter Function:** — A formatter is a function that serialises data for presentation.
 
 Example:
 
@@ -53,8 +53,8 @@ Example of illustrating a ContextValue using `of <NaturalExpression>`.
 ````md
 **Inputs:**
 
-- `%table-of-contents` – The table of contents extracted from the documentation source.
-- `%search-terms` – The terms used to filter relevant entries.
+- `%table-of-contents` — The table of contents extracted from the documentation source.
+- `%search-terms` — The terms used to filter relevant entries.
 
 Example of `%table-of-contents`:
 

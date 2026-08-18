@@ -7,13 +7,13 @@
 ## Namespaces
 
 ::TEMPLATE for each `%namespace` in `%project.namespaces`
-- [{{%namespace.name}}](./{{%namespace.path}}README.md) – {{%namespace.description}}
+- [{{%namespace.name}}](./{{%namespace.path}}README.md) — {{%namespace.description}}
 ::END
 
 ## Scripts
 
 ::TEMPLATE for each `%script` in `%project.scripts`
-- **$** `npm run {{%script.name}}` – {{%script.purpose}}
+- **$** `npm run {{%script.name}}` — {{%script.purpose}}
 ::END
 
 ## {{%project.license.long}}

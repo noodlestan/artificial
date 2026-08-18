@@ -17,7 +17,7 @@ Serve with the built-in node http server — no build, no dependencies.
 ### Scripts
 
 ::TEMPLATE for each `%script` in `%package.scripts`
-- **$** `npm run {{%script.name}}` – {{%script.purpose}}
+- **$** `npm run {{%script.name}}` — {{%script.purpose}}
 ::END
 
 ## {{%project.license.short}}

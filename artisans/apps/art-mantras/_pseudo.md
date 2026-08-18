@@ -139,7 +139,7 @@ pickFromStrong(slot, weights)
 
 ```pseudo
 pickFromPool(slot)
-  candidates = pool - strong - banned
+  candidates = pool — strong — banned
   if candidates empty:
     if strong empty:
       return { word: random(pool), source: "pool" }    // last resort: any word ever suggested
@@ -197,7 +197,7 @@ promoteToStrong(slotId, word)
 
 ```pseudo
 moveUp(slotId, index)
-  if index > 0: swap strong[index], strong[index - 1]
+  if index > 0: swap strong[index], strong[index — 1]
 ```
 
 ### Function: moveDown(slotId, index)
@@ -206,7 +206,7 @@ moveUp(slotId, index)
 
 ```pseudo
 moveDown(slotId, index)
-  if index < strong.length - 1: swap strong[index], strong[index + 1]
+  if index < strong.length — 1: swap strong[index], strong[index + 1]
 ```
 
 ### Function: banWord(slotId, index)

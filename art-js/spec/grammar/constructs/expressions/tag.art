@@ -64,13 +64,13 @@ Example of a tagged SectionBlock:
 Example of tagged Vocabulary:
 
 ```md
-**Convention Adoption** – An observation of the state of adoption of a convention. (#operator)
+**Convention Adoption** — An observation of the state of adoption of a convention. (#operator)
 ```
 
 Example of Vocabulary defining tag values:
 
 ```md
-**(#wip)** – Classifies items as work in progress.
+**(#wip)** — Classifies items as work in progress.
 ```
 
 <!-- WIP add TagReference , that enclosed in backticks and without the parenthesis. Syntax: art block: <TagReference> = `#<identifier>` Purpose: reference tags in instructions. Examples: example of referencing a tag in a filter operation md block:  "1. With each `%construct` tagged with `#generator`, ... -->

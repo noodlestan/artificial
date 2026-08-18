@@ -65,7 +65,7 @@ This project plans its work with the plan workflow defined in `$WORKSPACE/.agent
 
 Each project manages its own backlog in a local `_backlog/` directory with a `_guide.md` entry point containing layout, references, verification, and workflows.
 
-The short-term focus is captured in `_wip.md` – actionable items, pending questions, blockers, and follow-ups (no done items).
+The short-term focus is captured in `_wip.md` — actionable items, pending questions, blockers, and follow-ups (no done items).
 
 The requirements, use cases, and principles are captured in `_architect.md`, along with approach to work sequence, iterations, and milestones.
 

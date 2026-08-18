@@ -14,7 +14,7 @@ Seed the art-js knowledge resources: the `art-js/architecture/` directory (layer
 
 ## Source Tasks
 
-- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 7 of the MD Art Roundtrip milestone; the "Documentation to produce" section lists the architecture docs to seed.
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — defines this plan as phase 7 of the MD Art Roundtrip milestone; the "Documentation to produce" section lists the architecture docs to seed.
 
 ## Commits
 

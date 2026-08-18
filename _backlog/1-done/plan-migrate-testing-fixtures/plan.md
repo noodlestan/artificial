@@ -28,12 +28,12 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial – Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial — Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
 
 ### Packages
 
-- Package: Artificial Parser – Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (receives the fixtures, the fixture runner, and the wired `test` script in this plan; currently `"test": "echo none yet"`).
-- Package: Artificial POC Parse – Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only — fixtures and runner are copied, never modified).
+- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (receives the fixtures, the fixture runner, and the wired `test` script in this plan; currently `"test": "echo none yet"`).
+- Package: Artificial POC Parse — Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only — fixtures and runner are copied, never modified).
 
 ### Deployments
 
@@ -45,22 +45,22 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 2 of the MD Art Roundtrip milestone; successor is phase 3 (`migrate-and-verify`).
-- Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
-- Parking Lot: `_backlog/_parking-lot.md` – pending items and open questions relevant to fixture testing.
-- Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback.
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — defines this plan as phase 2 of the MD Art Roundtrip milestone; successor is phase 3 (`migrate-and-verify`).
+- Briefing: `_backlog/_architect.md` — approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
+- Parking Lot: `_backlog/_parking-lot.md` — pending items and open questions relevant to fixture testing.
+- Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` — POC current state, learnings, and feedback.
 
 ### Guides
 
-- `repos/artificial/_guide.md` – repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
-- `repos/artificial/art-js/cli/poc-parse/_guide.md` – nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
+- `repos/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
+- `repos/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
 
 ### Knowledge
 
-- Mechanism (POC): `art-js/cli/poc-parse/package.json` – `"test": "npx tsx scripts/test-fixtures.ts"`.
-- Runner (POC): `art-js/cli/poc-parse/scripts/test-fixtures.ts` – reads every `.md`/`.art` file in `fixtures/` (excluding `.art.json`), calls `parse(content)`, prints per-fixture `PASS`/`FAIL` with timing, exits non-zero on any failure. Structural reference for the output format only — the parser runner is **self-contained** (no `poc-parse` import). NOTE: the runner asserts parse success only — the `.art.json` snapshots are currently not diffed.
+- Mechanism (POC): `art-js/cli/poc-parse/package.json` — `"test": "npx tsx scripts/test-fixtures.ts"`.
+- Runner (POC): `art-js/cli/poc-parse/scripts/test-fixtures.ts` — reads every `.md`/`.art` file in `fixtures/` (excluding `.art.json`), calls `parse(content)`, prints per-fixture `PASS`/`FAIL` with timing, exits non-zero on any failure. Structural reference for the output format only — the parser runner is **self-contained** (no `poc-parse` import). NOTE: the runner asserts parse success only — the `.art.json` snapshots are currently not diffed.
 - Runner parse (resolved): phase 1 bootstraps the parser entry point to export `parse(): void { return undefined }` — the runner is **self-contained** (imports nothing from `poc-parse`) and imports `parse` from its own entry point (`../src/index.ts`), calling `const document = parse()`. Because the stub returns `undefined` and never throws, all fixtures pass vacuously. Phase 3 (`verify-parser-against-snapshots`) reads the file and replaces the call with `const document = parse(content)`, and removes the `filePath` `eslint-disable` once the param is used.
-- Fixture data (POC): `art-js/cli/poc-parse/fixtures/` – 31 files: 16 inputs (8 `.art` + 8 `.md`) and 15 expected `.art.json` snapshots. Every input maps to a snapshot by basename (`section-block.art` and `section-block.md` share `section-block.art.json`).
+- Fixture data (POC): `art-js/cli/poc-parse/fixtures/` — 31 files: 16 inputs (8 `.art` + 8 `.md`) and 15 expected `.art.json` snapshots. Every input maps to a snapshot by basename (`section-block.art` and `section-block.md` share `section-block.art.json`).
 - Runtime: `tsx ^4.8.1` and `@types/node ^25.9.3` (matching the root workspace ranges; both already resolved in the root lockfile) are added to the parser devDependencies. The parser `tsconfig.json` already includes `scripts/` and `types: ["vite/client", "node"]`, so the runner is typechecked.
 - Lint: the root `no-console` rule allow-lists `info|warn|error` — the runner logs via `console.info` / `console.error` only, so no `eslint-disable` comment is needed for `console`. The single `// eslint-disable-next-line @typescript-eslint/no-unused-vars` above `parseFixture` handles the unused `filePath` parameter (unused while parse is stubbed).
 - Milestone strategy: the roundtrip art fixture for the serializer phase lives in `@art-js/artificial-spec`; this plan only migrates the parser fixture suite.
@@ -69,9 +69,9 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 For the delegatee (shared context; per-step context is in each instruction file):
 
-- `art-js/cli/poc-parse/scripts/test-fixtures.ts` – the runner to port (source of truth).
-- `art-js/cli/poc-parse/fixtures/` – the fixture inputs and snapshots to copy.
-- `art-js/libs/parser/package.json` – target package; `"test"` script to wire.
+- `art-js/cli/poc-parse/scripts/test-fixtures.ts` — the runner to port (source of truth).
+- `art-js/cli/poc-parse/fixtures/` — the fixture inputs and snapshots to copy.
+- `art-js/libs/parser/package.json` — target package; `"test"` script to wire.
 
 ## Execution Context
 

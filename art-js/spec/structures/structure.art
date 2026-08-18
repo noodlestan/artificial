@@ -32,5 +32,5 @@
 **Shape:**
 
 - `composes?` - Another Structure
-- `primitive` – PrimitiveName
-- `shape` – One of WIP (primitive types)
+- `primitive` — PrimitiveName
+- `shape` — One of WIP (primitive types)

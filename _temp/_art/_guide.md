@@ -69,9 +69,9 @@ All Structures extend `Structure: Structure` which extends `Structure: Base`.
 
 Fields are inherited from Base
 
-- `id` – inferrable from heading
-- `name` – inferrable from heading
-- `kind` – inferrable from heading
+- `id` — inferrable from heading
+- `name` — inferrable from heading
+- `kind` — inferrable from heading
 - `purpose`
 - `description`
 - `status`
@@ -79,9 +79,9 @@ Fields are inherited from Base
 
 Fields are inherited from Structure
 
-- `composes` – Another Structure
-- `primitive` – PrimitiveName
-- `shape` – One of WIP (primitive types)
+- `composes` — Another Structure
+- `primitive` — PrimitiveName
+- `shape` — One of WIP (primitive types)
 
 ## Declaring Records
 

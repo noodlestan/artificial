@@ -61,7 +61,7 @@ npm run ci # lint, build and test
 
 This project plans its work with the plan workflow defined in `$WORKSPACE/.agents/domains/plans/index.md`.
 
-The short-term focus is captured in `_backlog/_parking-lot.md` – actionable items, pending questions, blockers, and follow-ups (no done items).
+The short-term focus is captured in `_backlog/_parking-lot.md` — actionable items, pending questions, blockers, and follow-ups (no done items).
 
 The requirements, use cases, and principles are captured in `_backlog/_architect.md`, along with the forward-looking plan.
 

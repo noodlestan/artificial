@@ -47,6 +47,6 @@ FieldBlock {
 ```md
 **Inputs:**
 
-- `%task` – The task to modify.
-- `%specification` – The specification to integrate into the task.
+- `%task` — The task to modify.
+- `%specification` — The specification to integrate into the task.
 ```

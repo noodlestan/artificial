@@ -10,6 +10,6 @@ Examples of domains: plans, tasks, references, workspaces, changelogs.
 
 ### CLI
 
-- [Workspace CLI](./cli/workspace/README.md) – CLI for workspace orchestration (clone, branch, link, sanity, publish).
+- [Workspace CLI](./cli/workspace/README.md) — CLI for workspace orchestration (clone, branch, link, sanity, publish).
 
 ## Copyright (c) 2026 Noodlestan. Published under a MIT license.

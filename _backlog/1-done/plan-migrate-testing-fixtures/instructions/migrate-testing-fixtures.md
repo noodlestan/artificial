@@ -93,10 +93,10 @@ function parseFixture(filePath: string): {
     const document = parse(); // entry-point parse stub — returns undefined until phase 3
 
     const endTime = getTimeMs();
-    return { success: true, document, durationMs: endTime - startTime };
+    return { success: true, document, durationMs: endTime — startTime };
   } catch (error) {
     const endTime = getTimeMs();
-    return { success: false, error: (error as Error).message, durationMs: endTime - startTime };
+    return { success: false, error: (error as Error).message, durationMs: endTime — startTime };
   }
 }
 
@@ -123,13 +123,13 @@ async function main(): Promise<void> {
   }
 
   const endTime = getTimeMs();
-  const totalTime = endTime - startTime;
+  const totalTime = endTime — startTime;
 
   console.info('\n' + '='.repeat(50));
   console.info(`Results: ${fixtures.length} fixtures tested`);
   console.info(`Total time: ${totalTime}ms`);
   console.info(`Parse time: ${totalParseTime}ms`);
-  console.info(`Overhead: ${totalTime - totalParseTime}ms`);
+  console.info(`Overhead: ${totalTime — totalParseTime}ms`);
   console.info('='.repeat(50));
 
   if (exitCode === 0) {

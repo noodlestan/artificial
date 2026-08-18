@@ -8,10 +8,10 @@
 
 **Shape:**
 
-- `kind:` – The resource kind.
-- `name:` – The resource name.
-- `filename:` – The file where the resource is declared.
-- `...` – All declaration fields from the resource record.
+- `kind:` — The resource kind.
+- `name:` — The resource name.
+- `filename:` — The file where the resource is declared.
+- `...` — All declaration fields from the resource record.
 
 **Representation:**
 

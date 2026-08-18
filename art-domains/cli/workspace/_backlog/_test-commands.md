@@ -176,7 +176,7 @@ git add .
 git commit -m "initial"
 cd ../..
 
-# Run sanity - should detect extraneous checkout
+# Run sanity — should detect extraneous checkout
 npm run workspace:sanity
 
 # Clean up

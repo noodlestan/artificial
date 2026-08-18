@@ -17,10 +17,10 @@ Every bug entry MUST follow this shape (the first bug below is the example):
 
 Fixed bugs stay at the bottom of the file and get two more fields:
 
-- `Root Cause` – Example: "Checkouts not scanned before presenting.".
-- `Test` – Examples: "Added assertion to test X", "Not Tested because no mocks exist".
-- `Follow Ups` – Example: "Update BDD and Pseudo to include the tested edge case".
-- `Commit.id` – Example: "fix-clone-scan-before-report".
+- `Root Cause` — Example: "Checkouts not scanned before presenting.".
+- `Test` — Examples: "Added assertion to test X", "Not Tested because no mocks exist".
+- `Follow Ups` — Example: "Update BDD and Pseudo to include the tested edge case".
+- `Commit.id` — Example: "fix-clone-scan-before-report".
 
 ## Bugs
 

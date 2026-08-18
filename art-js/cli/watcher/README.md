@@ -16,15 +16,15 @@ This CLI is packaged for use in Node.js environments. The entry point is built u
 
 ### Scripts
 
-- **$** `npm run dev` – Watch mode for development
-- **$** `npm run build` – Build the CLI package
-- **$** `npm run build:types:esm` – Generate ESM type definitions
-- **$** `npm run build:types:cjs` – Generate CJS type definitions
-- **$** `npm run lint` – Check formatting, lint, and type check
-- **$** `npm run lint:fix` – Fix formatting and lint issues
-- **$** `npm run build:clean` – Remove build artifacts
-- **$** `npm run ci` – Run CI pipeline
-- **$** `npm run test` – Run tests
+- **$** `npm run dev` — Watch mode for development
+- **$** `npm run build` — Build the CLI package
+- **$** `npm run build:types:esm` — Generate ESM type definitions
+- **$** `npm run build:types:cjs` — Generate CJS type definitions
+- **$** `npm run lint` — Check formatting, lint, and type check
+- **$** `npm run lint:fix` — Fix formatting and lint issues
+- **$** `npm run build:clean` — Remove build artifacts
+- **$** `npm run ci` — Run CI pipeline
+- **$** `npm run test` — Run tests
 
 ## Copyright (c) 2026 [Noodlestan](https://noodlestan.org/).
 

@@ -16,6 +16,6 @@ Serve with the built-in node http server — no build, no dependencies.
 
 ### Scripts
 
-- **$** `npm run serve` – Basic http server for the micro app
+- **$** `npm run serve` — Basic http server for the micro app
 
 ## Copyright (c) 2026 Noodlestan. Published under a MIT license.

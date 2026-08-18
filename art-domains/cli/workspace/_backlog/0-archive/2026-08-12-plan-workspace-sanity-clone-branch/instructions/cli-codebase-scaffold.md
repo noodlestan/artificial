@@ -189,7 +189,7 @@ art-domains/cli/workspace/
 ```typescript
 #!/usr/bin/env node
 
-console.log('art-workspace CLI - placeholder');
+console.log('art-workspace CLI — placeholder');
 ```
 
 **package.json**:

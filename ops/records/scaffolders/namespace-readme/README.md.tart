@@ -12,17 +12,17 @@
 ### Libraries
 
 ::TEMPLATE for each `%package` in `%libs`
-- [{{%package.name}}](./{{%package.path}}README.md) – {{%package.description}}
+- [{{%package.name}}](./{{%package.path}}README.md) — {{%package.description}}
 ::END
 
 ### CLI
 
 ::TEMPLATE for each `%package` in `%clis`
-- [{{%package.name}}](./{{%package.path}}README.md) – {{%package.description}}
+- [{{%package.name}}](./{{%package.path}}README.md) — {{%package.description}}
 ::END
 
 ### Scripts
 
 ::TEMPLATE for each `%script` in `%namespace.scripts`
-- **$** `npm run {{%script.name}}` – {{%script.purpose}}
+- **$** `npm run {{%script.name}}` — {{%script.purpose}}
 ::END

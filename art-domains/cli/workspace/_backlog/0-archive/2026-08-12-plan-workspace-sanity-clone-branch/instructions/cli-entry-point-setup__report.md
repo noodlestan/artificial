@@ -15,7 +15,7 @@ Table of changes anchored on the Instruction Goals:
 | Instruction Goal                                                                              | Result                                                                                                                                                                                     |
 | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Setup the CLI entry point with commander                                                      | `src/index.ts` created with `#!/usr/bin/env node` shebang, `Command` import, and `program` instance with name `art-workspace`, description `Workspace orchestration CLI`, version `0.0.1`. |
-| Configure command routing structure for all 5 commands (clone, branch, link, sanity, publish) | Each command registered with a description and a placeholder action printing its `<command> command - TODO` message.                                                                       |
+| Configure command routing structure for all 5 commands (clone, branch, link, sanity, publish) | Each command registered with a description and a placeholder action printing its `<command> command — TODO` message.                                                                       |
 | Establish the basic CLI skeleton                                                              | `program.parse()` at the end; package.json `bin` → `./dist/index.js`, build script preserves the shebang and produces a runnable ESM bundle; `npm install` + `npm run build` succeed.      |
 
 #### Files changed
@@ -30,7 +30,7 @@ Table of changes anchored on the Instruction Goals:
 - `npm run build` succeeds; `dist/index.js` exists, executable, single `#!` shebang on line 1.
 - `node dist/index.js --help` lists all 5 commands (clone, branch, link, sanity, publish).
 - `node dist/index.js --version` → `0.0.1`.
-- `node dist/index.js clone|branch|link|sanity|publish` → each prints its `<command> command - TODO`.
+- `node dist/index.js clone|branch|link|sanity|publish` → each prints its `<command> command — TODO`.
 - `tsc --noEmit` clean (strict mode per `ops/_adr/cli.art`).
 - Pushed to `origin/main` as `a55d27e..d6a1a19`.
 

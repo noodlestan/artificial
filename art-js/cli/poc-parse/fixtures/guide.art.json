@@ -1183,7 +1183,7 @@
                 },
                 {
                   "type": "text",
-                  "value": " – actionable items, pending questions, blockers, and follow-ups (no done items).",
+                  "value": " — actionable items, pending questions, blockers, and follow-ups (no done items).",
                   "position": {
                     "start": {
                       "line": 73,
@@ -1210,7 +1210,7 @@
                   "offset": 2863
                 }
               },
-              "value": "The short-term focus is captured in `_wip.md` – actionable items, pending questions, blockers, and follow-ups (no done items)."
+              "value": "The short-term focus is captured in `_wip.md` — actionable items, pending questions, blockers, and follow-ups (no done items)."
             },
             {
               "construct": "NaturalBlock",

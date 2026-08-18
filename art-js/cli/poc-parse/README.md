@@ -16,11 +16,11 @@ This CLI is packaged for use in Node.js environments.
 
 ### Scripts
 
-- **$** `npm run dev` – Run the POC CLI entry (`node --experimental-strip-types src/index.ts`)
-- **$** `npm run lint` – Check formatting, lint, and type check
-- **$** `npm run lint:fix` – Fix formatting and lint issues
-- **$** `npm run build:clean` – Remove build artifacts
-- **$** `npm run test` – Run tests
+- **$** `npm run dev` — Run the POC CLI entry (`node --experimental-strip-types src/index.ts`)
+- **$** `npm run lint` — Check formatting, lint, and type check
+- **$** `npm run lint:fix` — Fix formatting and lint issues
+- **$** `npm run build:clean` — Remove build artifacts
+- **$** `npm run test` — Run tests
 
 ## MIT License
 

@@ -27,5 +27,5 @@ Use one art file `ops/records/packages/art-mantras.art` to parse and serialize b
 ### Split POC into packages
 
 - libs/primitives for types, type assertions
-- libs/parser - md => mdast => artast
-- libs/serializer - artast => mdast => md
+- libs/parser — md => mdast => artast
+- libs/serializer — artast => mdast => md

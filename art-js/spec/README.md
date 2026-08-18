@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This module defines the artificial language used to describe and generate context resources. It provides the foundational vocabulary, syntax, and semantics for declaring structured context value types – think: data primitives and "classes".
+This module defines the artificial language used to describe and generate context resources. It provides the foundational vocabulary, syntax, and semantics for declaring structured context value types — think: data primitives and "classes".
 
 ## Architecture
 

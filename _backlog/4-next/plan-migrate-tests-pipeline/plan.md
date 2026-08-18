@@ -27,14 +27,14 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial – Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial — Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
 
 ### Packages
 
-- Package: Artificial Parser – Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (pipeline test dependency).
-- Package: Artificial Serializer – Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `ops/records/packages/artificial-serializer.art`; located at `art-js/libs/serializer/` (pipeline test dependency).
-- Package: Pipeline Test CLI – Canonical `@art-js/pipeline-test-cli`; located at `art-js/cli/pipeline-tests/` (test harness CLI; not published; depends on parser + serializer).
-- Package: Artificial POC Parse – Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
+- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (pipeline test dependency).
+- Package: Artificial Serializer — Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `ops/records/packages/artificial-serializer.art`; located at `art-js/libs/serializer/` (pipeline test dependency).
+- Package: Pipeline Test CLI — Canonical `@art-js/pipeline-test-cli`; located at `art-js/cli/pipeline-tests/` (test harness CLI; not published; depends on parser + serializer).
+- Package: Artificial POC Parse — Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
 
 ### Deployments
 
@@ -46,28 +46,28 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 6; Decisions (two-way diffing established in phase 5); whitespace gaps preserved until the gaps phase.
-- Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
-- Parking Lot: `_backlog/_parking-lot.md` – pending items relevant to pipeline testing.
-- Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback.
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — defines this plan as phase 6; Decisions (two-way diffing established in phase 5); whitespace gaps preserved until the gaps phase.
+- Briefing: `_backlog/_architect.md` — approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
+- Parking Lot: `_backlog/_parking-lot.md` — pending items relevant to pipeline testing.
+- Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` — POC current state, learnings, and feedback.
 
 ### Guides
 
-- `repos/artificial/_guide.md` – repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
-- `repos/artificial/art-js/cli/poc-parse/_guide.md` – nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
+- `repos/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
+- `repos/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
 
 ### Knowledge
 
-- Fixture suite: `art-js/libs/parser/test/fixtures/` – existing fixture inputs, snapshots, and the two-way runner (phases 2 and 5); the pipeline suite builds on it.
-- Pseudo: `art-js/cli/poc-parse/_pseudo.md` – parser architecture (source of truth).
-- Architecture: `architecture/index.md` – artificial ecosystem overview.
+- Fixture suite: `art-js/libs/parser/test/fixtures/` — existing fixture inputs, snapshots, and the two-way runner (phases 2 and 5); the pipeline suite builds on it.
+- Pseudo: `art-js/cli/poc-parse/_pseudo.md` — parser architecture (source of truth).
+- Architecture: `architecture/index.md` — artificial ecosystem overview.
 
 ## Mandatory Reading
 
 For the delegatee (shared context; per-step context is in each instruction file):
 
-- `art-js/libs/parser/test/` – the migrated fixture suite and runner to relocate/extend.
-- `art-js/libs/serializer/src/` – the serializer API used by the roundtrip script.
+- `art-js/libs/parser/test/` — the migrated fixture suite and runner to relocate/extend.
+- `art-js/libs/serializer/src/` — the serializer API used by the roundtrip script.
 
 ## Execution Context
 

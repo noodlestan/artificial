@@ -16,7 +16,7 @@ The goal was met: a workspace root `package.json` now exists with `@art-domains/
 | --------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Install `@art-domains/workspace-cli@0.0.1` in workspace root                      | DONE   | `package.json` created with the CLI as the single devDependency; `npm install` succeeded (9 packages added, 0 vulnerabilities); `node_modules/@art-domains/workspace-cli` present |
 | Expose CLI via npm scripts (`workspace`, `workspace:sanity`, `workspace:publish`) | DONE   | `scripts` block added to `package.json`; confirmed by reading the manifest                                                                                                        |
-| Verify CLI accessible via `npm run`                                               | DONE   | `npm run workspace -- --help` exit 0; `npm run workspace -- --version` → `0.0.1`; `npm run workspace:sanity` → `sanity command - TODO` (exit 0)                                   |
+| Verify CLI accessible via `npm run`                                               | DONE   | `npm run workspace -- --help` exit 0; `npm run workspace -- --version` → `0.0.1`; `npm run workspace:sanity` → `sanity command — TODO` (exit 0)                                   |
 
 #### Files changed
 

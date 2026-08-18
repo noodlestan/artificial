@@ -22,31 +22,31 @@ Running on `$WORKSPACE`, managed by `@art-domains/workspace-cli`; the repository
 
 ### Project Repository
 
-- Repository: Artificial – checked out at `$WORKSPACE/repos/artificial-main`; described by `$PROJECT/ops/records/projects/artificial.art`.
+- Repository: Artificial — checked out at `$WORKSPACE/repos/artificial-main`; described by `$PROJECT/ops/records/projects/artificial.art`.
 
 ### Package
 
-- Package: Workspace CLI – canonical `@art-domains/workspace-cli`; described by `$PROJECT/ops/records/packages/domains-workspace-cli.art`; located at `$PROJECT/art-domains/cli/workspace/`.
+- Package: Workspace CLI — canonical `@art-domains/workspace-cli`; described by `$PROJECT/ops/records/packages/domains-workspace-cli.art`; located at `$PROJECT/art-domains/cli/workspace/`.
 
 ## Context
 
 ### Sources
 
-- Maintainer note: `$PROJECT/art-domains/cli/workspace/_backlog/_note_from_workspace_architect.md` – requires dynamic `.art` discovery, record-kind filtering, migration compatibility, and prioritisation.
-- Workspace parking lot: `$PROJECT/art-domains/cli/workspace/_backlog/_parking-lot.md` – identifies the Workspace CLI as active work and records testing and delivery expectations.
-- Workspace architect briefing: `$PROJECT/art-domains/cli/workspace/_backlog/_architect.md` – establishes records as the source of truth and the imperative, rehydratable command model.
+- Maintainer note: `$PROJECT/art-domains/cli/workspace/_backlog/_note_from_workspace_architect.md` — requires dynamic `.art` discovery, record-kind filtering, migration compatibility, and prioritisation.
+- Workspace parking lot: `$PROJECT/art-domains/cli/workspace/_backlog/_parking-lot.md` — identifies the Workspace CLI as active work and records testing and delivery expectations.
+- Workspace architect briefing: `$PROJECT/art-domains/cli/workspace/_backlog/_architect.md` — establishes records as the source of truth and the imperative, rehydratable command model.
 
 ### Guides
 
-- `$PROJECT/_guide.md` – repository setup and package verification commands.
-- `$PROJECT/art-domains/cli/workspace/_guide.md` – package setup, verification, architecture references, and planning workflow.
+- `$PROJECT/_guide.md` — repository setup and package verification commands.
+- `$PROJECT/art-domains/cli/workspace/_guide.md` — package setup, verification, architecture references, and planning workflow.
 
 ### Knowledge
 
-- `$PROJECT/art-domains/cli/workspace/architecture/config.md` – current manifest shape and runtime configuration loading.
-- `$PROJECT/art-domains/cli/workspace/architecture/context-model.md` – record kinds, checkout hydration, and project-graph responsibilities.
-- `$PROJECT/art-domains/cli/workspace/architecture/_pseudo.md` – current loader and `repo` command contracts to update.
-- `$PROJECT/art-domains/cli/workspace/src/private/records/` – current readers/loaders and their test fixtures.
+- `$PROJECT/art-domains/cli/workspace/architecture/config.md` — current manifest shape and runtime configuration loading.
+- `$PROJECT/art-domains/cli/workspace/architecture/context-model.md` — record kinds, checkout hydration, and project-graph responsibilities.
+- `$PROJECT/art-domains/cli/workspace/architecture/_pseudo.md` — current loader and `repo` command contracts to update.
+- `$PROJECT/art-domains/cli/workspace/src/private/records/` — current readers/loaders and their test fixtures.
 
 ## Decisions and Assumptions
 
@@ -64,16 +64,16 @@ Running on `$WORKSPACE`, managed by `@art-domains/workspace-cli`; the repository
 
 ## Required Skills
 
-- `write-plan` – planning and instruction generation.
-- `render-template` – rendering plan and implementation-instruction files.
+- `write-plan` — planning and instruction generation.
+- `render-template` — rendering plan and implementation-instruction files.
 
 ## Mandatory Reading
 
-- `$PROJECT/art-domains/cli/workspace/_backlog/_note_from_workspace_architect.md` – source requirements.
-- `$PROJECT/art-domains/cli/workspace/architecture/config.md` – configuration contract.
-- `$PROJECT/art-domains/cli/workspace/architecture/context-model.md` – record and checkout model.
-- `$PROJECT/art-domains/cli/workspace/architecture/_pseudo.md` – loader and command contracts.
-- `$WORKSPACE/.agents/domains/plans/definitions/index.md` – plan and implementation-instruction definitions.
+- `$PROJECT/art-domains/cli/workspace/_backlog/_note_from_workspace_architect.md` — source requirements.
+- `$PROJECT/art-domains/cli/workspace/architecture/config.md` — configuration contract.
+- `$PROJECT/art-domains/cli/workspace/architecture/context-model.md` — record and checkout model.
+- `$PROJECT/art-domains/cli/workspace/architecture/_pseudo.md` — loader and command contracts.
+- `$WORKSPACE/.agents/domains/plans/definitions/index.md` — plan and implementation-instruction definitions.
 
 ## Execution Context
 

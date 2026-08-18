@@ -14,7 +14,7 @@ Refactoring and test coverage across the migrated `@art-js/artificial-*` package
 
 ## Source Tasks
 
-- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 9 of the MD Art Roundtrip milestone, between gap closure (phase 8) and archive and publish (phase 10).
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — defines this plan as phase 9 of the MD Art Roundtrip milestone, between gap closure (phase 8) and archive and publish (phase 10).
 
 ## Commits
 

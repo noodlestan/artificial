@@ -26,15 +26,15 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial – Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial — Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
 
 ### Packages
 
-- Package: Artificial Parser – Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (refined as gaps close).
-- Package: Artificial Serializer – Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `ops/records/packages/artificial-serializer.art`; located at `art-js/libs/serializer/` (refined as gaps close).
-- Package: Artificial Constructs – Canonical `@art-js/artificial-constructs` (public @0.0.1); described by `ops/records/packages/artificial-constructs.art`; located at `art-js/libs/constructs/` (refined as gaps close).
-- Package: Artificial Primitives – Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `ops/records/packages/artificial-primitives.art`; located at `art-js/libs/primitives/` (refined as gaps close).
-- Package: Artificial POC Parse – Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
+- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (refined as gaps close).
+- Package: Artificial Serializer — Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `ops/records/packages/artificial-serializer.art`; located at `art-js/libs/serializer/` (refined as gaps close).
+- Package: Artificial Constructs — Canonical `@art-js/artificial-constructs` (public @0.0.1); described by `ops/records/packages/artificial-constructs.art`; located at `art-js/libs/constructs/` (refined as gaps close).
+- Package: Artificial Primitives — Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `ops/records/packages/artificial-primitives.art`; located at `art-js/libs/primitives/` (refined as gaps close).
+- Package: Artificial POC Parse — Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
 
 ### Deployments
 
@@ -46,29 +46,29 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Sources
 
-- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 8; Decisions (preserve whitespace gaps; JSON-affecting logic changes only after the verified migration).
-- Briefing: `_backlog/_architect.md` – approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
-- Parking Lot: `_backlog/_parking-lot.md` – pending items relevant to roundtrip gaps.
-- Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` – POC current state, learnings, and feedback; the gap findings.
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — defines this plan as phase 8; Decisions (preserve whitespace gaps; JSON-affecting logic changes only after the verified migration).
+- Briefing: `_backlog/_architect.md` — approach (POC-first, schema-first in TS, mdast substrate) and milestone sequence.
+- Parking Lot: `_backlog/_parking-lot.md` — pending items relevant to roundtrip gaps.
+- Plan (archived): `_backlog/1-done/plan-poc-parse/plan.md` — POC current state, learnings, and feedback; the gap findings.
 
 ### Guides
 
-- `repos/artificial/_guide.md` – repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
-- `repos/artificial/art-js/cli/poc-parse/_guide.md` – nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
+- `repos/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
+- `repos/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
 
 ### Knowledge
 
-- Pipeline suite: `art-js/cli/pipeline-tests/` – the two-way fixture tests and `fixtures/roundtrip/` (phase 6); the gap list starts from its results.
-- Pseudo: `art-js/cli/poc-parse/_pseudo.md` – parser architecture (source of truth).
-- Architecture: `architecture/index.md` – artificial ecosystem overview.
-- ADR: `architecture/records/adr/parser.art`, `architecture/records/adr/language.art` – substrate and containment decisions.
+- Pipeline suite: `art-js/cli/pipeline-tests/` — the two-way fixture tests and `fixtures/roundtrip/` (phase 6); the gap list starts from its results.
+- Pseudo: `art-js/cli/poc-parse/_pseudo.md` — parser architecture (source of truth).
+- Architecture: `architecture/index.md` — artificial ecosystem overview.
+- ADR: `architecture/records/adr/parser.art`, `architecture/records/adr/language.art` — substrate and containment decisions.
 
 ## Mandatory Reading
 
 For the delegatee (shared context; per-step context is in each instruction file):
 
-- `art-js/cli/pipeline-tests/fixtures/roundtrip/` – the current roundtrip fixture set and its surfaced gaps.
-- `art-js/cli/poc-parse/_pseudo.md` – parser architecture (source of truth).
+- `art-js/cli/pipeline-tests/fixtures/roundtrip/` — the current roundtrip fixture set and its surfaced gaps.
+- `art-js/cli/poc-parse/_pseudo.md` — parser architecture (source of truth).
 
 ## Execution Context
 

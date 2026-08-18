@@ -8,8 +8,8 @@
 
 **Shape:**
 
-- `kind:` – NaturalName - The resource kind.
-- `name:` – NaturalName - The resource name.
+- `kind:` — NaturalName — The resource kind.
+- `name:` — NaturalName — The resource name.
 
 **Example:** "Project: Artificials"
 

@@ -16,13 +16,13 @@ This library is packaged for use in bundlers such as Vite and Astro. The main en
 
 ### Scripts
 
-- **$** `npm run dev` – Watch mode for development
-- **$** `npm run build` – Build the library
-- **$** `npm run lint` – Check formatting, lint, and type check
-- **$** `npm run lint:fix` – Fix formatting and lint issues
-- **$** `npm run build:clean` – Remove build artifacts
-- **$** `npm run ci` – Run CI pipeline
-- **$** `npm run test` – Run tests
+- **$** `npm run dev` — Watch mode for development
+- **$** `npm run build` — Build the library
+- **$** `npm run lint` — Check formatting, lint, and type check
+- **$** `npm run lint:fix` — Fix formatting and lint issues
+- **$** `npm run build:clean` — Remove build artifacts
+- **$** `npm run ci` — Run CI pipeline
+- **$** `npm run test` — Run tests
 
 ## Copyright (c) 2026 [Noodlestan](https://noodlestan.org/).
 

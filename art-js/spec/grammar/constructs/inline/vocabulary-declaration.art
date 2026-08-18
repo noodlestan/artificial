@@ -30,7 +30,7 @@ VocabularyDeclaration {
 
 ```art
 <VocabularyDeclaration> =
-    **<NaturalName (term)>** – <NaturalExpression (definition)>. <ExampleInline:Suffix>.
+    **<NaturalName (term)>** — <NaturalExpression (definition)>. <ExampleInline:Suffix>.
 ```
 
 **Example:**
@@ -38,7 +38,7 @@ VocabularyDeclaration {
 Given the following VocabularyDeclaration:
 
 ```md
-**Interaction Mode** – Provides reusable behavioural triggers and rules that influence how the agent performs operations. Example: "Interaction Mode: No Nonsense".
+**Interaction Mode** — Provides reusable behavioural triggers and rules that influence how the agent performs operations. Example: "Interaction Mode: No Nonsense".
 ```
 
 The identified vocabulary contains:

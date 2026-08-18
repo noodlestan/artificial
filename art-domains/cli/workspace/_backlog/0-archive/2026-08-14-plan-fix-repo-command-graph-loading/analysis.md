@@ -44,7 +44,7 @@ The lookup fails because the map has `Art Mantras` as the key, not `- Package: A
 This causes:
 
 1. Packages are skipped in the iteration
-2. `consolidateProjectGraph` generates "unknown package: - Package: Art Mantras" warnings
+2. `consolidateProjectGraph` generates "unknown package: — Package: Art Mantras" warnings
 3. No package states are collected
 
 ### Bug 2: Test Helper Writes Wrong Format

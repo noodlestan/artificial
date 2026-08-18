@@ -2,9 +2,9 @@
 
 ## Definitions
 
-**Artificial Operation** – Represents an atomic action that an AI Agent can perform.
+**Artificial Operation** — Represents an atomic action that an AI Agent can perform.
 
-**Artificial Workflow** – Represents a linear or iterative sequence of Operations that an AI Agent performs sequentially to achieve an outcome.
+**Artificial Workflow** — Represents a linear or iterative sequence of Operations that an AI Agent performs sequentially to achieve an outcome.
 
 ## Artificial Operations
 

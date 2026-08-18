@@ -14,7 +14,7 @@ After publish (phase 10), integrate the knowledge and learnings from milestone e
 
 ## Source Tasks
 
-- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` – defines this plan as phase 11 of the MD Art Roundtrip milestone, after archive and publish (phase 10).
+- Milestone: `_backlog/3-now/milestone-md-art-roundtrip/milestone.md` — defines this plan as phase 11 of the MD Art Roundtrip milestone, after archive and publish (phase 10).
 
 ## Commits
 
