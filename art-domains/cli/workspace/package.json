@@ -1,6 +1,6 @@
 {
   "name": "@art-domains/workspace-cli",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Workspace orchestration CLI",
   "author": "Noodlestan Collective",
   "license": "MIT",

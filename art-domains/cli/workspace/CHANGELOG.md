@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## 0.0.15
+
+### Added
+
+- **Pull command:** Pull from origin for all clean checkouts with `art-workspace pull`.
+- **Push command:** Push to origin for all clean checkouts with `art-workspace push`.
+- **Sync command:** Pull then push for all clean checkouts with `art-workspace sync`.
+- **Workspace status:** Show workspace root status before checkout status in sanity report.
+- **Is behind detection:** Detect and display behind state for checkouts.
+- **Auto-pull in sanity:** `art-workspace sanity --auto` pulls if behind before pushing.
+
+### Fixed
+
+- **Clone command:** Scan checkouts before presenting checkout report in clone use case.
+- **Repo command:** Resolve package paths correctly with fallback logic for inconsistent namespace paths.
+- **Repo command:** Skip npm info when package.json is missing or has no version.
+- **Repo command:** Suppress stderr in npm info calls to avoid 404 error noise.
+- **Repo command:** Resolve checkout names with 4-step resolution (exact match → strip prefix → slug format → location fallback).
+
+### Changed
+
+- **Refactor:** Decouple checkout scan state from stored Checkout type.
+- **Refactor:** Model CheckoutScan as operation guards over states.
+- **Refactor:** Decouple private layer from WorkspaceContext.
+- **Refactor:** Move checkout store updates to scan call sites.
+
 ## 0.0.14
 
 ### Added
@@ -20,7 +46,7 @@
 
 ### Fixed
 
-- **Clone:** Allow multiple checkouts of same repo at different locations.
+- **Clone command:** Allow multiple checkouts of same repo at different locations.
 
 ## 0.0.12
 
