@@ -24,6 +24,7 @@ export function createCheckoutScan(states: CheckoutState[]): CheckoutScan {
 		}
 		if (!state('no-conflicts').clear) result.push('merge conflicts');
 		if (!remote.hasRemote) result.push('no remote');
+		if (remote.hasRemote && state('wrong-remote').wrong) result.push('wrong remote');
 		if (!state('committed').clean) result.push('uncommitted files');
 		if (sync.ahead > 0) result.push(`${sync.ahead} commit${sync.ahead === 1 ? '' : 's'} ahead`);
 		if (sync.behind > 0) {

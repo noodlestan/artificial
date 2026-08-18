@@ -66,7 +66,7 @@ describe('sanity command', () => {
 		const git = simpleGit(repoDir);
 		await git.push('origin', 'main', ['--set-upstream']);
 
-		writeRepoMockRecord(tempDir, 'Green', 'git@example.com:green.git');
+		writeRepoMockRecord(tempDir, 'Green', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Green', 'Green', 'green');
 
 		await runSanity(ctx, { auto: false });
@@ -88,7 +88,7 @@ describe('sanity command', () => {
 		await initWorkingRepoTest(repoDir, bareDir);
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeRepoMockRecord(tempDir, 'Dirty', 'git@example.com:dirty.git');
+		writeRepoMockRecord(tempDir, 'Dirty', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Dirty', 'Dirty', 'dirty');
 
 		await runSanity(ctx, { auto: false });
@@ -110,7 +110,7 @@ describe('sanity command', () => {
 		await initWorkingRepoTest(repoDir, bareDir);
 		await commitFileTest(repoDir, 'file.txt');
 
-		writeRepoMockRecord(tempDir, 'Unpushed', 'git@example.com:unpushed.git');
+		writeRepoMockRecord(tempDir, 'Unpushed', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Unpushed', 'Unpushed', 'unpushed');
 
 		await runSanity(ctx, { auto: false });
@@ -135,7 +135,7 @@ describe('sanity command', () => {
 		await git.push('origin', 'main', ['--set-upstream']);
 		await commitFileTest(repoDir, 'file2.txt');
 
-		writeRepoMockRecord(tempDir, 'AutoPush', 'git@example.com:autopush.git');
+		writeRepoMockRecord(tempDir, 'AutoPush', bareDir);
 		writeCheckoutMockRecord(tempDir, 'AutoPush', 'AutoPush', 'autopush');
 
 		await runSanity(ctx, { auto: true });
@@ -160,7 +160,7 @@ describe('sanity command', () => {
 		await commitFileTest(repoDir, 'file.txt');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeRepoMockRecord(tempDir, 'DirtyNoAuto', 'git@example.com:dirtynoauto.git');
+		writeRepoMockRecord(tempDir, 'DirtyNoAuto', bareDir);
 		writeCheckoutMockRecord(tempDir, 'DirtyNoAuto', 'DirtyNoAuto', 'dirtynoauto');
 
 		await runSanity(ctx, { auto: true });
@@ -186,7 +186,7 @@ describe('sanity command', () => {
 		const headSha = await git.revparse(['HEAD']);
 		await git.checkout(headSha.trim());
 
-		writeRepoMockRecord(tempDir, 'Detached', 'git@example.com:detached.git');
+		writeRepoMockRecord(tempDir, 'Detached', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Detached', 'Detached', 'detached');
 
 		await runSanity(ctx, { auto: false });
@@ -226,7 +226,7 @@ describe('sanity command', () => {
 			// empty
 		}
 
-		writeRepoMockRecord(tempDir, 'Conflict', 'git@example.com:conflict.git');
+		writeRepoMockRecord(tempDir, 'Conflict', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Conflict', 'Conflict', 'conflict');
 
 		await runSanity(ctx, { auto: false });

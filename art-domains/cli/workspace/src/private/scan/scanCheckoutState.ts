@@ -3,6 +3,7 @@ import { access } from 'node:fs/promises';
 import { getBehindCount } from '../git/getBehindCount';
 import { getCurrentBranch } from '../git/getCurrentBranch';
 import { getRemoteBranch } from '../git/getRemoteBranch';
+import { getRemoteUrl } from '../git/getRemoteUrl';
 import { getUnpushedCount } from '../git/getUnpushedCount';
 import { hasMergeConflicts } from '../git/hasMergeConflicts';
 import { hasRemote } from '../git/hasRemote';
@@ -20,6 +21,7 @@ import {
 	createRemoteState,
 	createRepoState,
 	createSyncState,
+	createWrongRemoteState,
 } from './types';
 
 export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
@@ -37,6 +39,7 @@ export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
 	let detached = false;
 	let ahead = 0;
 	let behind = 0;
+	let wrongRemote = false;
 	try {
 		branch = await getCurrentBranch(checkout.path);
 		remote = await hasRemote(checkout.path);
@@ -47,6 +50,12 @@ export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
 			remoteBranch = await getRemoteBranch(checkout.path);
 			ahead = await getUnpushedCount(checkout.path, remoteBranch);
 			behind = remoteBranch ? await getBehindCount(checkout.path, remoteBranch) : 0;
+		}
+		if (remote && checkout.repo?.remote) {
+			const actualUrl = await getRemoteUrl(checkout.path);
+			if (actualUrl && actualUrl !== checkout.repo.remote) {
+				wrongRemote = true;
+			}
 		}
 	} catch {
 		// The derived states still provide a useful report when git inspection fails.
@@ -61,6 +70,7 @@ export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
 		createCommittedState(!dirty),
 		createNoConflictsState(!conflicts),
 		createNoDetachedState(!detached),
+		createWrongRemoteState(wrongRemote),
 	]);
 	return { ...checkout, scan };
 }

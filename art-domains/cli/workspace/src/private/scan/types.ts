@@ -39,6 +39,11 @@ export interface CheckoutStateNoDetached {
 	attached: boolean;
 }
 
+export interface CheckoutStateWrongRemote {
+	type: 'wrong-remote';
+	wrong: boolean;
+}
+
 export type CheckoutState =
 	| CheckoutStateRepo
 	| CheckoutStateExists
@@ -46,7 +51,8 @@ export type CheckoutState =
 	| CheckoutStateSync
 	| CheckoutStateCommitted
 	| CheckoutStateNoConflicts
-	| CheckoutStateNoDetached;
+	| CheckoutStateNoDetached
+	| CheckoutStateWrongRemote;
 
 export type CheckoutStateType = CheckoutState['type'];
 export type CheckoutStateOf<T extends CheckoutStateType> = Extract<CheckoutState, { type: T }>;
@@ -66,5 +72,6 @@ export { createNoDetachedState } from './states/createNoDetachedState';
 export { createRemoteState } from './states/createRemoteState';
 export { createRepoState } from './states/createRepoState';
 export { createSyncState } from './states/createSyncState';
+export { createWrongRemoteState } from './states/createWrongRemoteState';
 export { createCheckoutNoClonedScan } from './private/createCheckoutNoClonedScan';
 export { createCheckoutScan } from './private/createCheckoutScan';

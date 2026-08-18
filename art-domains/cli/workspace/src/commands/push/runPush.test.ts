@@ -36,7 +36,7 @@ describe('push command', () => {
 		await initWorkingRepoTest(repoDir, bareDir);
 		await commitFileTest(repoDir, 'ahead.txt');
 
-		writeRepoMockRecord(tempDir, 'Ahead', 'git@example.com:ahead.git');
+		writeRepoMockRecord(tempDir, 'Ahead', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Ahead', 'Ahead', 'ahead');
 
 		await runPush(ctx);
@@ -66,7 +66,7 @@ describe('push command', () => {
 		await makeOriginAheadTest(bareDir, tempDirs);
 		await simpleGit(repoDir).fetch('origin', 'main');
 
-		writeRepoMockRecord(tempDir, 'Diverged', 'git@example.com:diverged.git');
+		writeRepoMockRecord(tempDir, 'Diverged', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Diverged', 'Diverged', 'diverged');
 
 		await runPush(ctx);
@@ -98,7 +98,7 @@ describe('push command', () => {
 		await commitFileTest(repoDir, 'ahead.txt');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeRepoMockRecord(tempDir, 'DirtyPush', 'git@example.com:dirtypush.git');
+		writeRepoMockRecord(tempDir, 'DirtyPush', bareDir);
 		writeCheckoutMockRecord(tempDir, 'DirtyPush', 'DirtyPush', 'dirtypush');
 
 		await runPush(ctx);

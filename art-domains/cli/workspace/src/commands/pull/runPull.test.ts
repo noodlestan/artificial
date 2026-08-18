@@ -36,7 +36,7 @@ describe('pull command', () => {
 		await makeOriginAheadTest(bareDir, tempDirs);
 		await simpleGit(repoDir).fetch('origin', 'main');
 
-		writeRepoMockRecord(tempDir, 'Behind', 'git@example.com:behind.git');
+		writeRepoMockRecord(tempDir, 'Behind', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Behind', 'Behind', 'behind');
 
 		await runPull(ctx);
@@ -64,7 +64,7 @@ describe('pull command', () => {
 		await simpleGit(repoDir).fetch('origin', 'main');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeRepoMockRecord(tempDir, 'Dirty', 'git@example.com:dirty.git');
+		writeRepoMockRecord(tempDir, 'Dirty', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Dirty', 'Dirty', 'dirty');
 
 		await runPull(ctx);

@@ -10,6 +10,7 @@ import {
 	createRemoteState,
 	createRepoState,
 	createSyncState,
+	createWrongRemoteState,
 } from '../scan/types';
 
 import { presentWorkspaceReport } from './presentWorkspaceReport';
@@ -42,6 +43,7 @@ describe('presentWorkspaceReport', () => {
 					createCommittedState(false),
 					createNoConflictsState(true),
 					createNoDetachedState(true),
+					createWrongRemoteState(false),
 				]),
 			}),
 		);
@@ -62,6 +64,7 @@ describe('presentWorkspaceReport', () => {
 					createCommittedState(true),
 					createNoConflictsState(true),
 					createNoDetachedState(true),
+					createWrongRemoteState(false),
 				]),
 			}),
 		);

@@ -7,6 +7,7 @@ import {
 	createRemoteState,
 	createRepoState,
 	createSyncState,
+	createWrongRemoteState,
 } from '../../../private/scan/types';
 import type { Checkout } from '../../../private/store/createCheckout';
 
@@ -23,6 +24,7 @@ export function makeWorkspaceCheckoutMock(path: string, overrides?: Partial<Chec
 			createCommittedState(true),
 			createNoConflictsState(true),
 			createNoDetachedState(true),
+			createWrongRemoteState(false),
 		]),
 		...overrides,
 	};

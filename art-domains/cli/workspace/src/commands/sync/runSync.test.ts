@@ -38,7 +38,7 @@ describe('sync command', () => {
 		await makeOriginAheadTest(bareDir, tempDirs);
 		await simpleGit(repoDir).fetch('origin', 'main');
 
-		writeRepoMockRecord(tempDir, 'SyncMe', 'git@example.com:syncme.git');
+		writeRepoMockRecord(tempDir, 'SyncMe', bareDir);
 		writeCheckoutMockRecord(tempDir, 'SyncMe', 'SyncMe', 'syncme');
 
 		await runSync(ctx);
@@ -70,7 +70,7 @@ describe('sync command', () => {
 		await simpleGit(repoDir).fetch('origin', 'main');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeRepoMockRecord(tempDir, 'DirtySync', 'git@example.com:dirtysync.git');
+		writeRepoMockRecord(tempDir, 'DirtySync', bareDir);
 		writeCheckoutMockRecord(tempDir, 'DirtySync', 'DirtySync', 'dirtysync');
 
 		await runSync(ctx);
@@ -102,7 +102,7 @@ describe('sync command', () => {
 		const repoDir = join(tempDir, ctx.config.clone.path, 'current');
 		await initWorkingRepoTest(repoDir, bareDir);
 
-		writeRepoMockRecord(tempDir, 'Current', 'git@example.com:current.git');
+		writeRepoMockRecord(tempDir, 'Current', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Current', 'Current', 'current');
 
 		await runSync(ctx);

@@ -3,13 +3,18 @@ import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
 
-export async function initWorkingRepoTest(dir: string, bareDir: string): Promise<void> {
+export async function initWorkingRepoTest(
+	dir: string,
+	bareDir: string,
+	opts?: { remoteUrl?: string },
+): Promise<void> {
 	mkdirSync(dir, { recursive: true });
 	const git = simpleGit(dir);
 	await git.init();
 	await git.addConfig('user.email', 'test@example.com');
 	await git.addConfig('user.name', 'Test');
-	await git.addRemote('origin', bareDir);
+	const remoteUrl = opts?.remoteUrl ?? bareDir;
+	await git.addRemote('origin', remoteUrl);
 	writeFileSync(join(dir, 'README.md'), '# Test');
 
 	const bareGit = simpleGit(bareDir);

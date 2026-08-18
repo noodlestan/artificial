@@ -4,8 +4,10 @@ import { afterEach, describe, expect, it } from 'vitest';
 
 import { createMockCommandContext } from '../../test/helpers/context/createMockCommandContext';
 import { initGitRepoTest } from '../../test/helpers/git/initGitRepoTest';
+import { initWorkingRepoTest } from '../../test/helpers/git/initWorkingRepoTest';
 import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
 import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
+import type { RepositoryRecord } from '../records/types';
 import { createCheckout } from '../store/createCheckout';
 
 import { scanCheckoutState } from './scanCheckoutState';
@@ -65,5 +67,39 @@ describe('scanCheckoutState', () => {
 		const result = await scanCheckoutState(checkout);
 
 		expect(result.scan?.issues()).toContain('wrong branch');
+	});
+
+	it('record remote matching actual remote does not produce wrong-remote issue', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = createMockCommandContext(tempDir);
+		const checkoutDir = join(tempDir, ctx.config.clone.path, 'myrepo');
+		await initWorkingRepoTest(checkoutDir, bareDir);
+
+		const repo: RepositoryRecord = {
+			name: 'MyRepo',
+			remote: bareDir,
+		};
+		const checkout = createCheckout(ctx.config, 'myrepo', repo, 'main');
+		const result = await scanCheckoutState(checkout);
+
+		expect(result.scan?.issues()).not.toContain('wrong remote');
+	});
+
+	it('record remote mismatching actual remote produces wrong-remote issue', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const bareDir = makeTempDir(tempDirs);
+		const ctx = createMockCommandContext(tempDir);
+		const checkoutDir = join(tempDir, ctx.config.clone.path, 'myrepo');
+		await initWorkingRepoTest(checkoutDir, bareDir);
+
+		const repo: RepositoryRecord = {
+			name: 'MyRepo',
+			remote: 'git@github.com:noodlestan/foo.git',
+		};
+		const checkout = createCheckout(ctx.config, 'myrepo', repo, 'main');
+		const result = await scanCheckoutState(checkout);
+
+		expect(result.scan?.issues()).toContain('wrong remote');
 	});
 });
