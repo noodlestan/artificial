@@ -21,9 +21,9 @@ Complete the workspace CLI with remaining commands and infrastructure. This mile
 | 2 — Refactor conventions              | `_backlog/0-archive/2026-08-13-plan-refactor-conventions/plan.md`              | `ARCHIVED`  |
 | 3 — Implement command repo            | `_backlog/0-archive/2026-08-14-plan-implement-command-repo/plan.md`            | `ARCHIVED`  |
 | 4 — Implement sanity workspace report | `_backlog/0-archive/2026-08-14-plan-implement-sanity-workspace-report/plan.md` | `ARCHIVED`  |
-| 5 — Fix repo command issues           | `_backlog/1-done/plan-fix-repo-command-issues/plan.md`                         | `DONE`      |
-| 6 — Implement pull/push/sync          | `_backlog/1-done/plan-implement-pull-push-sync/plan.md`                        | `DONE`      |
-| 7 — Cleaner code                      | `_backlog/1-done/plan-cleaner-code/plan.md`                                    | `DONE`      |
+| 5 — Fix repo command issues           | `_backlog/0-archive/2026-08-18-plan-fix-repo-command-issues/plan.md`           | `ARCHIVED`  |
+| 6 — Implement pull/push/sync          | `_backlog/0-archive/2026-08-18-plan-implement-pull-push-sync/plan.md`          | `ARCHIVED`  |
+| 7 — Cleaner code                      | `_backlog/0-archive/2026-08-18-plan-cleaner-code/plan.md`                      | `ARCHIVED`  |
 | 8 — Discover records dynamically      | `_backlog/4-next/plan-discover-records/plan.md`                                | `DRAFT`     |
 | 9 — Fix reported bugs                 | `_backlog/4-next/plan-fix-reported-bugs/plan.md`                               | `DRAFT`     |
 | 10 — Implement link                   | `_backlog/4-next/plan-implement-link/plan.md`                                  | `DRAFT`     |

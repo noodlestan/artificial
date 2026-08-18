@@ -48,7 +48,7 @@ Complete the workspace CLI with remaining commands and infrastructure.
 
 **Fixing (top priority):** `plan-fix-reported-bugs` — bug fixes sourced from reported bugs (first bug: `clone` presents Checkout Report without scanning checkouts). See `_backlog/4-next/plan-fix-reported-bugs/plan.md`.
 
-**Done:** `plan-implement-pull-push-sync` — pull, push, sync commands (commits `ef8a2cf`, `51cd680`). See `_backlog/1-done/plan-implement-pull-push-sync/plan.md`. Provides the `pull`/`push` capabilities that unblock `publish`.
+**Archived:** `plan-implement-pull-push-sync` (pull, push, sync), `plan-fix-repo-command-issues` (repo fixes), `plan-cleaner-code` (decouple private layer). See `_backlog/0-archive/2026-08-18-*`.
 
 **In Parallel (DRAFT plans ready for architect refinement):**
 

@@ -86,6 +86,26 @@ Fixed bugs stay at the bottom of the file and get two more fields:
 
 **Happened:** Refuses silently — no operation in the report.
 
+### Bug: Sanity flags known checkouts as extraneous
+
+**Description:** `sanity` marks newly cloned checkouts as extraneous because `scanExtraneousCheckouts` scans all directories under `repos/` without cross-referencing the checkout store for known locations.
+
+**Scenario:** Clone a checkout (`npm run workspace clone conventions alternative`), then run `npm run workspace sanity`.
+
+**Expected:** The freshly cloned checkout appears in the Checkout Report as a normal checkout, not in the Untracked/Extraneous report.
+
+**Happened:** The checkout appears in both the Checkout Report and the Untracked report — `scanExtraneousCheckouts` treats every directory under `repos/` as extraneous regardless of whether it has a store record.
+
+### Bug: Extraneous checkouts show "wrong branch"
+
+**Description:** Extraneous checkouts always trigger a "wrong branch" issue because `scanCheckoutState` compares the actual branch against an empty string (`record.branch` is `''` for extraneous entries), which always differs.
+
+**Scenario:** Any extraneous directory under `repos/` that is a git repo (e.g. a manual clone or leftover directory).
+
+**Expected:** Extraneous checkouts show `unknown project` without a false `wrong branch` — there is no expected branch to compare against.
+
+**Happened:** Extraneous checkouts show both `unknown project` and `wrong branch` because `branch !== checkout.record.branch` evaluates to `true` when `record.branch` is `''`.
+
 ### Bug: `clone` presents Checkout Report without scanning checkouts (FIXED by `decouple-checkout-scan-states`)
 
 **Description:** When invoking Clone command in with a checkout parameter and clone succeeds, it presents the Checkout Report straight from the store without scanning checkouts for state first, listing every recorded checkout with blank states instead of actual scanned states.
