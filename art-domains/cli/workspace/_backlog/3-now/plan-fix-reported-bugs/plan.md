@@ -2,7 +2,7 @@
 
 **ID:** `fix-reported-bugs`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -79,6 +79,8 @@ If any of these fail, resolve the issue before proceeding with implementation.
 
 **Commit Message:** `fix(workspace-cli): skip known checkouts in extraneous scan`
 
+**Instructions File:** `plan-fix-reported-bugs/instructions/fix-sanity-extraneous-known-checkouts.md`
+
 **Responsibility:** In `src/commands/sanity/private/scanExtraneousCheckouts.ts`, accept the `CheckoutStore` (or a set of known locations) as a second parameter. Before adding a directory to the extraneous list, check `store.getCheckoutForLocation(location)` — skip directories that already have a store record. Update `runSanity.ts` to pass `ctx.store` to the call.
 
 **Files:**
@@ -101,6 +103,8 @@ If any of these fail, resolve the issue before proceeding with implementation.
 
 **Commit Message:** `fix(workspace-cli): skip wrong-branch check when expected branch is empty`
 
+**Instructions File:** `plan-fix-reported-bugs/instructions/fix-scan-checkout-state-wrong-branch-for-extraneous.md`
+
 **Responsibility:** In `src/private/scan/scanCheckoutState.ts`, guard the "wrong branch" check (line 67) so it only fires when `checkout.record.branch` is non-empty. When the record branch is empty (extraneous or unrecorded checkout), there is no expected branch to compare against.
 
 **Files:**
@@ -115,6 +119,144 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Record branch is `''`, actual branch is `main` → no `wrong branch` (fix).
 - Record branch is `main`, actual branch is `develop` → still `wrong branch` (correct).
 - Record branch is `main`, actual branch is `main` → no `wrong branch` (correct).
+
+### `fix-clone-wrong-remote` - `READY`
+
+**Bug:** Checkout report fails to detect wrong remote — captured in `plan__bugs.md`.
+
+**Commit Message:** `fix(workspace-cli): detect wrong remote in checkout scan`
+
+**Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-wrong-remote.md`
+
+**Responsibility:** In `src/private/scan/scanCheckoutState.ts`, after reading git state, compare the checkout's actual remote URL against the record's repository remote. When they differ, add a `wrong remote` issue to the checkout's issues list.
+
+**Files:**
+
+- `src/private/scan/scanCheckoutState.ts` — add remote comparison against record
+- `src/private/scan/scanCheckoutState.test.ts` — add test: checkout with mismatched remote shows "wrong remote"
+
+**Tests:** Add a test that constructs a Checkout with a repository record pointing to one remote, while the actual git remote differs, and asserts `wrong remote` appears in issues.
+
+**Edge cases:**
+
+- Checkout remote matches record → no `wrong remote` issue.
+- Checkout remote differs from record → `wrong remote` issue surfaced.
+- Checkout has no remote → `no remote` issue surfaced (existing behaviour).
+
+### `fix-clone-ignores-record-branch` - `READY`
+
+**Bug:** `cloneIfMissing` ignores the record branch — captured in `plan__bugs.md`.
+
+**Commit Message:** `fix(workspace-cli): use recorded branch when cloning missing checkout`
+
+**Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-ignores-record-branch.md`
+
+**Responsibility:** In `src/commands/clone/private/cloneIfMissing.ts`, after cloning, check out the branch from `checkout.record.branch` instead of relying on the default branch. After the checkout, update the record with the actual branch on disk (preserving the record's branch when it matches, or reflecting the actual branch when it differs).
+
+**Files:**
+
+- `src/commands/clone/private/cloneIfMissing.ts` — checkout recorded branch after clone
+- `src/commands/clone/private/cloneIfMissing.test.ts` — add test: clone respects record branch
+
+**Tests:** Add a test that clones a missing checkout where the record has a non-main branch, and asserts the cloned checkout lands on the recorded branch.
+
+**Edge cases:**
+
+- Record branch exists on remote → clone checks out that branch.
+- Record branch does not exist on remote → clone lands on default branch, record updated.
+- Record branch is `main` → existing behaviour preserved.
+
+### `fix-clone-refuses-second-checkout` - `READY`
+
+**Bug:** Clone refuses second checkout of same repo — captured in `plan__bugs.md`.
+
+**Commit Message:** `fix(workspace-cli): allow second checkout of same repo at different location`
+
+**Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-refuses-second-checkout.md`
+
+**Responsibility:** In `src/commands/clone/cloneSpecific.ts`, when a checkout for the same repo already exists at a different location, allow the clone to proceed instead of refusing. Remove the guard that blocks clone when `ctx.store.getCheckoutOfRepo(repo.name)` returns an existing checkout at a different location. Keep the guard that blocks clone when the target location is already used by a different repo.
+
+**Files:**
+
+- `src/commands/clone/cloneSpecific.ts` — remove the "already exists at different location" guard
+- `src/commands/clone/cloneSpecific.test.ts` — add test: clone to new location when checkout exists elsewhere
+
+**Tests:** Add a test where repo X already has a checkout at `repos/x`, then clone X to location `foo`, and assert the new checkout is created at `repos/foo` with name `X @ foo`.
+
+**Edge cases:**
+
+- Repo has checkout at location A, clone to location B → creates `X @ B` at `repos/B`.
+- Repo has checkout at location A, clone to location A → idempotent (no-op, existing behaviour).
+- Target location used by different repo → still refused (existing behaviour).
+
+### `fix-clone-should-refuse-extraneous-dir` - `READY`
+
+**Bug:** Clone should refuse if target dir is extraneous — captured in `plan__bugs.md`.
+
+**Commit Message:** `fix(workspace-cli): refuse clone when target directory already exists`
+
+**Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-should-refuse-extraneous-dir.md`
+
+**Responsibility:** In `src/commands/clone/cloneSpecific.ts`, before creating a new checkout, check if the target directory already exists on disk. If it does, log a clone failure and refuse the operation. This prevents clone from overwriting an existing directory that may contain untracked work.
+
+**Files:**
+
+- `src/commands/clone/cloneSpecific.ts` — add directory existence check before checkout creation
+- `src/commands/clone/cloneSpecific.test.ts` — add test: clone refuses when target dir exists
+
+**Tests:** Add a test where a target directory exists (as an extraneous directory or manual clone), then clone a repo to that location, and assert a clone failure is logged with a message about the directory already existing.
+
+**Edge cases:**
+
+- Target dir exists and is extraneous → refuse clone, log failure.
+- Target dir exists and is a valid checkout for same repo → idempotent (no-op, existing behaviour).
+- Target dir does not exist → proceed with clone (existing behaviour).
+
+### `fix-clone-custom-location-wrong-name` - `READY`
+
+**Bug:** Clone custom location produces wrong name/path — captured in `plan__bugs.md`.
+
+**Commit Message:** `fix(workspace-cli): use correct name and path for custom location clone`
+
+**Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-custom-location-wrong-name.md`
+
+**Responsibility:** In `src/commands/clone/cloneSpecific.ts`, when cloning with a custom location, ensure the checkout name is `{repo} @ {location}` and the directory resolves to `repos/{location}` (via `safePath`). The current code uses the repo name as the checkout name and places the directory at the repo root instead of under the checkouts path.
+
+**Files:**
+
+- `src/commands/clone/cloneSpecific.ts` — fix checkout name and path computation for custom locations
+- `src/commands/clone/cloneSpecific.test.ts` — add test: custom location produces correct name and path
+
+**Tests:** Add a test that clones repo `Foo` to location `bar`, and asserts the checkout name is `Foo @ bar` and the directory is `repos/bar`.
+
+**Edge cases:**
+
+- Default location (no second arg) → name is repo name, path is `repos/{repo}` (existing behaviour).
+- Custom location → name is `{repo} @ {location}`, path is `repos/{location}`.
+- Location with spaces → `safePath` normalises correctly.
+
+### `fix-clone-refuses-extraneous-no-failure-logged` - `READY`
+
+**Bug:** Clone refuses extraneous dir but no failure logged — captured in `plan__bugs.md`.
+
+**Commit Message:** `fix(workspace-cli): log failure when clone refuses extraneous directory`
+
+**Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-refuses-extraneous-no-failure-logged.md`
+
+**Responsibility:** In `src/commands/clone/cloneSpecific.ts`, when the clone operation refuses because the target directory already exists, ensure a clone failure operation is logged to the operations log so the Operations Report reflects the refusal. Currently the refusal is silent — no operation is recorded.
+
+**Files:**
+
+- `src/commands/clone/cloneSpecific.ts` — log failure operation on directory-exists refusal
+- `src/commands/clone/cloneSpecific.test.ts` — add test: clone logs failure when refusing extraneous dir
+
+**Tests:** Add a test where a target directory exists, clone is attempted, and assert a clone failure operation is logged with an appropriate message.
+
+**Edge cases:**
+
+- Target dir exists → log clone failure, refuse operation.
+- Target dir does not exist → proceed, log clone success (existing behaviour).
+- Target dir exists but is the same checkout (idempotent) → no failure logged (existing behaviour).
 
 ## Final Verification
 
@@ -136,14 +278,6 @@ npm run ci # lint, build and test
 ```
 
 All steps MUST pass. No `it.todo()` tests may remain.
-
-## Architect Prompt
-
-This DRAFT is a long-running bug-capture and fix plan. Two roles:
-
-**Capture (long-running session):** append bugs captured from other sessions to `plan__bugs.md`, always in the **Bug Format** declared there.
-
-**Refine:** when bugs accumulate, sugest refining this DRAFT into a READY plan (write-plan skill), one fix iteration per bug with its own instructions file.
 
 ## Follow ups
 
