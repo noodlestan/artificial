@@ -103,11 +103,17 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Directory exists on disk and is in the store → not flagged (fix).
 - Store has a record but directory does not exist → not scanned (correct — scan only reads directories).
 
-### `fix-scan-checkout-state-wrong-branch-for-extraneous` - `READY`
+### `fix-scan-checkout-state-wrong-branch-for-extraneous` - `COMMITTED`
 
 **Bug:** Extraneous checkouts show "wrong branch" — captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): skip wrong-branch check when expected branch is empty`
+
+**Commit:** `6750885` — `fix(workspace-cli): skip wrong-branch check when expected branch is empty`
+
+**Feedback:**
+
+- Worker executed successfully. All tests passed.
 
 **Instructions File:** `plan-fix-reported-bugs/instructions/fix-scan-checkout-state-wrong-branch-for-extraneous.md`
 
