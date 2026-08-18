@@ -4,9 +4,13 @@ import { join, relative } from 'node:path';
 import type { WorkspaceConfig } from '../../../config/types';
 import { createExtraneousCheckout } from '../../../private/scan/private/createExtraneousCheckout';
 import { scanCheckoutState } from '../../../private/scan/scanCheckoutState';
+import type { CheckoutStore } from '../../../private/store/createCheckoutStore';
 import type { Checkout } from '../../../private/store/types';
 
-export async function scanExtraneousCheckouts(config: WorkspaceConfig): Promise<Checkout[]> {
+export async function scanExtraneousCheckouts(
+	config: WorkspaceConfig,
+	store: CheckoutStore,
+): Promise<Checkout[]> {
 	const checkoutsPath = join(config.root.path, config.clone.path);
 	const result: Checkout[] = [];
 
@@ -18,6 +22,12 @@ export async function scanExtraneousCheckouts(config: WorkspaceConfig): Promise<
 			}
 			const dir = join(checkoutsPath, entry.name);
 			const location = relative(checkoutsPath, dir);
+
+			// Skip known checkouts already in the store
+			const known = store.getCheckoutForLocation(location);
+			if (known) {
+				continue;
+			}
 
 			const checkout = { ...createExtraneousCheckout(config, location), path: dir };
 			const scanned = await scanCheckoutState(checkout);

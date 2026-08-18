@@ -32,7 +32,7 @@ export async function runSanity(ctx: WorkspaceContext, options: { auto: boolean 
 		await pushCleanCheckouts(ctx);
 	}
 
-	const extraneous = await scanExtraneousCheckouts(ctx.config);
+	const extraneous = await scanExtraneousCheckouts(ctx.config, ctx.store);
 
 	presentWorkspaceReport(ctx.workspace);
 	presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts());
