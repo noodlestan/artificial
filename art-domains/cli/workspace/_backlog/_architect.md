@@ -46,7 +46,7 @@ The Noodlestan ecosystem spans multiple independent repositories (`artificial`, 
 
 Complete the workspace CLI with remaining commands and infrastructure.
 
-**Fixing (top priority):** `plan-fix-reported-bugs` — bug fixes sourced from reported bugs (first bug: `clone` presents Checkout Report without scanning checkouts). See `_backlog/4-next/plan-fix-reported-bugs/plan.md`.
+**Fixing (top priority):** `plan-fix-reported-bugs` — bug fixes sourced from reported bugs (first bug: `clone` presents Checkout Report without scanning checkouts). See `_backlog/3-now/plan-fix-reported-bugs/plan.md`.
 
 **Archived:** `plan-implement-pull-push-sync` (pull, push, sync), `plan-fix-repo-command-issues` (repo fixes), `plan-cleaner-code` (decouple private layer). See `_backlog/0-archive/2026-08-18-*`.
 
