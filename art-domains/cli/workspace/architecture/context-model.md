@@ -43,17 +43,16 @@ interface Checkout {
 }
 
 interface CheckoutScan {
-  exists: boolean;
-  branch: string | null; // observed current branch
-  hasRemote: boolean;
-  remoteBranch: string | null;
-  detached: boolean;
-  conflicts: boolean;
-  dirty: boolean;
-  unpushed: number;
-  isBehind: boolean;
-  issues: string[];
+	 states: CheckoutState[];
+	 state(type): CheckoutState;
+	 should(op: 'clone' | 'push' | 'pull' | 'branch'): boolean;
+	 can(op: 'clone' | 'push' | 'pull' | 'branch'): boolean;
+	 issues(): string[];
 }
+
+`CheckoutState` is a discriminated union of `repo`, `exists`, `remote`, `sync`,
+`committed`, `no-conflicts`, and `no-detached`. Guards and `issues()` are
+derived from those states; callers do not inspect raw git flags.
 ```
 
 ## Records
@@ -154,7 +153,6 @@ loadProjectGraph(checkoutPath)
 - **`scanAllCheckoutsStates(store)`** — scan every checkout in the store (store capability).
 - **`scanExtraneousCheckouts(config)`** — create and scan directory-only checkouts for locations without records; these are returned to sanity and never added to the store.
 - **`hydrateStoreFromRecords(config, store, records)`** — create a checkout instance per `RepositoryCheckoutRecord` (`createCheckout(config, record.checkout.location, record.repo, record.checkout.branch, record.checkout.name)`) and add it to the store.
-- **`isCleanCheckout(checkout)`** — whether a checkout is clean (no uncommitted changes, no conflicts, not detached).
 - **`pullCheckout(checkout)`** — pull a checkout's branch from origin. Returns a `PullResult` with the updated checkout and success/error status.
 
 Git state is read through small git-introspection helpers (branch, remote branch, unpushed count, behind count, merge conflicts, remote presence, detached head, dirty).

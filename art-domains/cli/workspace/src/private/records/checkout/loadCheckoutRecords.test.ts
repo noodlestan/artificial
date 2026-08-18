@@ -4,15 +4,19 @@ import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { WorkspaceConfig } from '../../../config';
-import { makeTempDir } from '../../../test/makeTempDir';
-import { removeTempDirs } from '../../../test/removeTempDirs';
-import { writeCheckoutRecord } from '../../../test/writeCheckoutRecord';
+import { writeCheckoutMockRecord } from '../../../test/helpers/records/writeCheckoutMockRecord';
+import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
 
 import { loadCheckoutRecords } from './loadCheckoutRecords';
 
 const tempDirs: string[] = [];
 
-function makeConfig(rootPath: string, checkoutPath: string, templatePath: string): WorkspaceConfig {
+function makeMockConfig(
+	rootPath: string,
+	checkoutPath: string,
+	templatePath: string,
+): WorkspaceConfig {
 	return {
 		clone: { path: 'repos' },
 		root: { path: rootPath },
@@ -35,10 +39,10 @@ describe('loadCheckouts', () => {
 		const repoA = { name: 'A', remote: 'git@example.com:a.git' };
 		const repoB = { name: 'B', remote: 'git@example.com:b.git' };
 		const repos = [repoA, repoB];
-		writeCheckoutRecord(tempDir, 'A', 'A', 'a', 'dev');
-		writeCheckoutRecord(tempDir, 'B', 'B', 'b', 'main');
+		writeCheckoutMockRecord(tempDir, 'A', 'A', 'a', 'dev');
+		writeCheckoutMockRecord(tempDir, 'B', 'B', 'b', 'main');
 
-		const config = makeConfig(tempDir, 'ops/records/checkouts', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir, 'ops/records/checkouts', 'checkout.art.njk');
 		const checkouts = loadCheckoutRecords(config, repos);
 
 		expect(checkouts).toHaveLength(2);
@@ -53,10 +57,10 @@ describe('loadCheckouts', () => {
 		const repoA = { name: 'A', remote: 'git@example.com:a.git' };
 		const repoB = { name: 'B', remote: 'git@example.com:b.git' };
 		const repos = [repoA, repoB];
-		writeCheckoutRecord(tempDir, 'A', 'A', 'a');
-		writeCheckoutRecord(tempDir, 'Unknown', 'Unknown', 'unknown');
+		writeCheckoutMockRecord(tempDir, 'A', 'A', 'a');
+		writeCheckoutMockRecord(tempDir, 'Unknown', 'Unknown', 'unknown');
 
-		const config = makeConfig(tempDir, 'ops/records/checkouts', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir, 'ops/records/checkouts', 'checkout.art.njk');
 		const checkouts = loadCheckoutRecords(config, repos);
 
 		expect(checkouts).toHaveLength(2);
@@ -75,7 +79,7 @@ describe('loadCheckouts', () => {
 		writeFileSync(join(dir, 'unnamed.art'), '# Module\n\n## Checkout: \n');
 
 		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-		const config = makeConfig(tempDir, 'ops/records/checkouts', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir, 'ops/records/checkouts', 'checkout.art.njk');
 		const checkouts = loadCheckoutRecords(config, []);
 
 		expect(checkouts).toEqual([]);
@@ -86,7 +90,7 @@ describe('loadCheckouts', () => {
 		const tempDir = makeTempDir(tempDirs);
 		mkdirSync(join(tempDir, 'ops/records/checkouts'), { recursive: true });
 
-		const config = makeConfig(tempDir, 'ops/records/checkouts', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir, 'ops/records/checkouts', 'checkout.art.njk');
 		const checkouts = loadCheckoutRecords(config, []);
 
 		expect(checkouts).toEqual([]);

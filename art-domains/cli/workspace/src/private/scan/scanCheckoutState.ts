@@ -10,104 +10,57 @@ import { isDetachedHead } from '../git/isDetachedHead';
 import { isDirty } from '../git/isDirty';
 import type { Checkout } from '../store/types';
 
-import type { CheckoutScan } from './types';
+import {
+	createCheckoutNoClonedScan,
+	createCheckoutScan,
+	createCommittedState,
+	createExistsState,
+	createNoConflictsState,
+	createNoDetachedState,
+	createRemoteState,
+	createRepoState,
+	createSyncState,
+} from './types';
 
 export async function scanCheckoutState(checkout: Checkout): Promise<Checkout> {
-	let dirExists = false;
 	try {
 		await access(checkout.path);
-		dirExists = true;
 	} catch {
-		dirExists = false;
+		return { ...checkout, scan: createCheckoutNoClonedScan(Boolean(checkout.repo)) };
 	}
 
-	if (!dirExists) {
-		const scan: CheckoutScan = {
-			exists: false,
-			branch: null,
-			hasRemote: false,
-			remoteBranch: null,
-			detached: false,
-			conflicts: false,
-			dirty: false,
-			unpushed: 0,
-			isBehind: false,
-			issues: ['not cloned'],
-		};
-		return { ...checkout, scan };
-	}
-
-	const issues: string[] = [];
 	let branch: string | null = null;
-	let isDifferentBranch = false;
-	let detached = false;
-	let conflicts = false;
-	let dirty = false;
-	let hasRemoteVal = false;
 	let remoteBranch: string | null = null;
-	let unpushed = 0;
-	let isBehind = false;
-	let behindCount = 0;
-
+	let remote = false;
+	let dirty = false;
+	let conflicts = false;
+	let detached = false;
+	let ahead = 0;
+	let behind = 0;
 	try {
 		branch = await getCurrentBranch(checkout.path);
-		isDifferentBranch = branch !== checkout.record.branch;
-
+		remote = await hasRemote(checkout.path);
 		detached = await isDetachedHead(checkout.path);
 		conflicts = await hasMergeConflicts(checkout.path);
 		dirty = await isDirty(checkout.path);
-		hasRemoteVal = await hasRemote(checkout.path);
-
-		if (hasRemoteVal && branch !== '-' && branch !== 'HEAD') {
-			const trackingBranch = await getRemoteBranch(checkout.path);
-			remoteBranch = trackingBranch;
-			unpushed = await getUnpushedCount(checkout.path, trackingBranch);
-			if (trackingBranch) {
-				behindCount = await getBehindCount(checkout.path, trackingBranch);
-			}
-			isBehind = behindCount > 0;
+		if (remote && branch !== '-' && branch !== 'HEAD') {
+			remoteBranch = await getRemoteBranch(checkout.path);
+			ahead = await getUnpushedCount(checkout.path, remoteBranch);
+			behind = remoteBranch ? await getBehindCount(checkout.path, remoteBranch) : 0;
 		}
 	} catch {
-		issues.push('git error');
+		// The derived states still provide a useful report when git inspection fails.
 	}
 
-	if (!checkout.repo) {
-		issues.unshift('unknown project');
-	}
-	if (detached) {
-		issues.push('detached HEAD');
-	}
-	if (!detached && isDifferentBranch) {
-		issues.push('wrong branch');
-	}
-	if (conflicts) {
-		issues.push('merge conflicts');
-	}
-	if (!hasRemoteVal) {
-		issues.push('no remote');
-	}
-	if (dirty) {
-		issues.push('uncommitted files');
-	}
-	if (unpushed > 0) {
-		issues.push(`${unpushed} commit${unpushed !== 1 ? 's' : ''} ahead`);
-	}
-	if (isBehind) {
-		issues.push(`${behindCount} commit${behindCount !== 1 ? 's' : ''} behind`);
-	}
-
-	const scan: CheckoutScan = {
-		exists: true,
-		branch,
-		remoteBranch,
-		detached,
-		conflicts,
-		dirty,
-		hasRemote: hasRemoteVal,
-		unpushed,
-		isBehind,
-		issues,
-	};
-
+	const remoteState = createRemoteState(branch, checkout.record.branch, remote);
+	const scan = createCheckoutScan([
+		createRepoState(Boolean(checkout.repo)),
+		createExistsState(true),
+		remoteState,
+		createSyncState(ahead - behind, ahead, behind),
+		createCommittedState(!dirty),
+		createNoConflictsState(!conflicts),
+		createNoDetachedState(!detached),
+	]);
 	return { ...checkout, scan };
 }

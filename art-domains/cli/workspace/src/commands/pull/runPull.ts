@@ -1,12 +1,11 @@
+import { doPullCheckout } from '../../private/commands/checkouts/doPullCheckout';
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
 import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
 import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
-import { isCleanCheckout } from '../../private/scan/isCleanCheckout';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
-import { doPullCheckout } from '../shared/doPullCheckout';
 
 export async function runPull(ctx: WorkspaceContext): Promise<void> {
 	const repos = loadRepositoryRecords(ctx.config);
@@ -16,7 +15,7 @@ export async function runPull(ctx: WorkspaceContext): Promise<void> {
 	await scanAllCheckoutsStates(ctx.store);
 
 	for (const checkout of ctx.store.getAllCheckouts()) {
-		if (isCleanCheckout(checkout) && checkout.scan?.isBehind) {
+		if (checkout.scan?.can?.('pull') && checkout.scan.should?.('pull')) {
 			await doPullCheckout(ctx, checkout);
 		}
 	}

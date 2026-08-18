@@ -4,14 +4,14 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { commitFile } from '../../test/commitFile';
-import { createCommandContext } from '../../test/createCommandContext';
-import { initWorkingRepo } from '../../test/initWorkingRepo';
-import { makeOriginAhead } from '../../test/makeOriginAhead';
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
-import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
-import { writeRepoRecord } from '../../test/writeRepoRecord';
+import { createMockCommandContext } from '../../test/helpers/context/createMockCommandContext';
+import { commitFileTest } from '../../test/helpers/git/commitFileTest';
+import { initWorkingRepoTest } from '../../test/helpers/git/initWorkingRepoTest';
+import { makeOriginAheadTest } from '../../test/helpers/git/makeOriginAheadTest';
+import { writeCheckoutMockRecord } from '../../test/helpers/records/writeCheckoutMockRecord';
+import { writeRepoMockRecord } from '../../test/helpers/records/writeRepoMockRecord';
+import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
 
 import { runSync } from './runSync';
 
@@ -30,16 +30,16 @@ afterEach(() => {
 describe('sync command', () => {
 	it('syncs clean checkouts', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = makeTempDir(tempDirs);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'syncme');
-		await initWorkingRepo(repoDir, bareDir);
-		await commitFile(repoDir, 'ahead.txt');
-		await makeOriginAhead(bareDir, tempDirs);
+		await initWorkingRepoTest(repoDir, bareDir);
+		await commitFileTest(repoDir, 'ahead.txt');
+		await makeOriginAheadTest(bareDir, tempDirs);
 		await simpleGit(repoDir).fetch('origin', 'main');
 
-		writeRepoRecord(tempDir, 'SyncMe', 'git@example.com:syncme.git');
-		writeCheckoutRecord(tempDir, 'SyncMe', 'SyncMe', 'syncme');
+		writeRepoMockRecord(tempDir, 'SyncMe', 'git@example.com:syncme.git');
+		writeCheckoutMockRecord(tempDir, 'SyncMe', 'SyncMe', 'syncme');
 
 		await runSync(ctx);
 
@@ -51,9 +51,8 @@ describe('sync command', () => {
 		expect(ops[1].outcome).toBe('success');
 
 		const checkout = ctx.store.getCheckoutOfRepo('SyncMe');
-		expect(checkout?.scan?.unpushed).toBe(0);
-		expect(checkout?.scan?.isBehind).toBe(false);
-		expect(checkout?.scan?.issues).toEqual([]);
+		expect(checkout?.scan?.state('sync').delta).toBe(0);
+		expect(checkout?.scan?.issues()).toEqual([]);
 
 		const verifyDir = makeTempDir(tempDirs);
 		await simpleGit(verifyDir).clone(bareDir, verifyDir);
@@ -63,59 +62,56 @@ describe('sync command', () => {
 
 	it('skips dirty checkouts', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = makeTempDir(tempDirs);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'dirtysync');
-		await initWorkingRepo(repoDir, bareDir);
-		await makeOriginAhead(bareDir, tempDirs);
+		await initWorkingRepoTest(repoDir, bareDir);
+		await makeOriginAheadTest(bareDir, tempDirs);
 		await simpleGit(repoDir).fetch('origin', 'main');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeRepoRecord(tempDir, 'DirtySync', 'git@example.com:dirtysync.git');
-		writeCheckoutRecord(tempDir, 'DirtySync', 'DirtySync', 'dirtysync');
+		writeRepoMockRecord(tempDir, 'DirtySync', 'git@example.com:dirtysync.git');
+		writeCheckoutMockRecord(tempDir, 'DirtySync', 'DirtySync', 'dirtysync');
 
 		await runSync(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('DirtySync');
-		expect(checkout?.scan?.issues).toEqual(['uncommitted files', '1 commit behind']);
+		expect(checkout?.scan?.issues()).toEqual(['uncommitted files', '1 commit behind']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
 	it('skips checkouts not cloned', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 
-		writeRepoRecord(tempDir, 'Missing', 'git@example.com:missing.git');
-		writeCheckoutRecord(tempDir, 'Missing', 'Missing', 'missing');
+		writeRepoMockRecord(tempDir, 'Missing', 'git@example.com:missing.git');
+		writeCheckoutMockRecord(tempDir, 'Missing', 'Missing', 'missing');
 
 		await runSync(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Missing');
-		expect(checkout?.scan?.exists).toBe(false);
-		expect(checkout?.scan?.issues).toEqual(['not cloned']);
+		expect(checkout?.scan?.state('exists').exists).toBe(false);
+		expect(checkout?.scan?.issues()).toEqual(['not cloned']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
 	it('works on up to date checkouts', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = makeTempDir(tempDirs);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'current');
-		await initWorkingRepo(repoDir, bareDir);
+		await initWorkingRepoTest(repoDir, bareDir);
 
-		writeRepoRecord(tempDir, 'Current', 'git@example.com:current.git');
-		writeCheckoutRecord(tempDir, 'Current', 'Current', 'current');
+		writeRepoMockRecord(tempDir, 'Current', 'git@example.com:current.git');
+		writeCheckoutMockRecord(tempDir, 'Current', 'Current', 'current');
 
 		await runSync(ctx);
 
 		const ops = ctx.log.all();
-		expect(ops).toHaveLength(1);
-		expect(ops[0].operation).toBe('pull');
-		expect(ops[0].outcome).toBe('success');
+		expect(ops).toHaveLength(0);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Current');
-		expect(checkout?.scan?.unpushed).toBe(0);
-		expect(checkout?.scan?.isBehind).toBe(false);
-		expect(checkout?.scan?.issues).toEqual([]);
+		expect(checkout?.scan?.state('sync').delta).toBe(0);
+		expect(checkout?.scan?.issues()).toEqual([]);
 	});
 });

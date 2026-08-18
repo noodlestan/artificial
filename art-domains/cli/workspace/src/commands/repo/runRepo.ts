@@ -5,12 +5,20 @@ import { join } from 'node:path';
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentPackageStateReport } from '../../private/present/presentPackageStateReport';
+import { presentRepositoryState } from '../../private/present/presentRepositoryState';
 import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
 import { loadProjectGraph } from '../../private/records/projectGraph/loadProjectGraph';
 import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
-import type { PackageStateRecord } from '../../private/records/types';
+import type { PackageStateRecord, ProjectGraph } from '../../private/records/types';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
+
+export interface CheckoutRepositoryState {
+	target: import('../../private/store/types').Checkout;
+	branch: string | null;
+	issues: string[];
+	graph: ProjectGraph;
+}
 
 export async function runRepo(
 	ctx: WorkspaceContext,
@@ -39,23 +47,24 @@ export async function runRepo(
 	}
 
 	const allPackageStates = new Map<string, PackageStateRecord[]>();
+	const repositoryStates: CheckoutRepositoryState[] = [];
 
 	for (const checkout of targets) {
 		const graph = loadProjectGraph(checkout.path);
+		const repositoryState: CheckoutRepositoryState = {
+			target: checkout,
+			branch: checkout.scan?.state('remote').branch ?? checkout.record.branch,
+			issues: [],
+			graph,
+		};
+		repositoryStates.push(repositoryState);
 
 		for (const w of graph.warnings) {
 			console.warn(w);
 		}
 
 		if (graph.projects.length === 0) {
-			const updated = {
-				...checkout,
-				scan: checkout.scan && {
-					...checkout.scan,
-					issues: [...checkout.scan.issues, 'no project records'],
-				},
-			};
-			ctx.store.updateCheckout(updated);
+			repositoryState.issues.push('no project records');
 			continue;
 		}
 
@@ -124,6 +133,7 @@ export async function runRepo(
 	}
 
 	presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts());
+	for (const state of repositoryStates) presentRepositoryState(state);
 	for (const checkout of targets) {
 		const packageStates = allPackageStates.get(checkout.record.name) ?? [];
 		presentPackageStateReport(checkout, packageStates);

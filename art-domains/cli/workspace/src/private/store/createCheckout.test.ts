@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { makeConfig } from '../../test/makeConfig';
+import { makeMockConfig } from '../../test/helpers/context/makeMockConfig';
 
 import { createCheckout } from './createCheckout';
 
 describe('createCheckout', () => {
 	it('factory defaults', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const checkout = createCheckout(config, 'target');
 
 		expect(checkout.path).toBe('repos/target');
@@ -18,7 +18,7 @@ describe('createCheckout', () => {
 	});
 
 	it('creates a checkout based on repo', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:foo-bar.git' };
 		const checkout = createCheckout(config, 'fix-test', repo);
 
@@ -31,7 +31,7 @@ describe('createCheckout', () => {
 	});
 
 	it('creates a checkout with a branch', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:foo-bar.git' };
 		const checkout = createCheckout(config, 'fix-test', repo, 'branch-name');
 
@@ -42,7 +42,7 @@ describe('createCheckout', () => {
 	});
 
 	it('creates a checkout based on repo, target, and custom name', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:foo-bar.git' };
 		const checkout = createCheckout(config, 'fix-test', repo, undefined, 'Checkout Name');
 

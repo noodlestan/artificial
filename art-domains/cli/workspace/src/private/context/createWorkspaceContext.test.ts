@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { makeConfig } from '../../test/makeConfig';
+import { makeMockConfig } from '../../test/helpers/context/makeMockConfig';
 import { createOperationsLog } from '../log/createOperationsLog';
 import { createCheckoutStore } from '../store/createCheckoutStore';
 
@@ -8,7 +8,7 @@ import { createWorkspaceContext } from './createWorkspaceContext';
 
 describe('createWorkspaceContext', () => {
 	it('creates context with config, root, store, and log', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const store = createCheckoutStore();
 		const log = createOperationsLog();
 

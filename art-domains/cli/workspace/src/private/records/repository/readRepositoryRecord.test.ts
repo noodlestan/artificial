@@ -3,9 +3,9 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { makeTempDir } from '../../../test/makeTempDir';
-import { removeTempDirs } from '../../../test/removeTempDirs';
-import { writeRepoRecord } from '../../../test/writeRepoRecord';
+import { writeRepoMockRecord } from '../../../test/helpers/records/writeRepoMockRecord';
+import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
 
 import { readRepositoryRecord } from './readRepositoryRecord';
 
@@ -21,7 +21,7 @@ describe('readRepositoryRecord', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'ops/records/repositories', 'artificial.art');
 
-		writeRepoRecord(tempDir, 'Artificial', `git@github.com:noodlestan/artificial.git`);
+		writeRepoMockRecord(tempDir, 'Artificial', `git@github.com:noodlestan/artificial.git`);
 
 		const record = readRepositoryRecord(file);
 

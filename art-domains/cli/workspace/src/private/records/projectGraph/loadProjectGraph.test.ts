@@ -3,13 +3,13 @@ import { join } from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { makeTempDir } from '../../../test/makeTempDir';
-import { removeTempDirs } from '../../../test/removeTempDirs';
 import {
-	writeNamespaceRecord,
-	writePackageRecord,
-	writeProjectRecord,
-} from '../../../test/writeProjectRecord';
+	writeNamespaceMockRecord,
+	writePackageMockRecord,
+	writeProjectMockRecord,
+} from '../../../test/helpers/records/writeProjectMockRecord';
+import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
 import { readNamespaceRecord } from '../namespace/readNamespaceRecord';
 import { readNamespaceRecords } from '../namespace/readNamespaceRecords';
 import { readPackageRecord } from '../package/readPackageRecord';
@@ -34,7 +34,7 @@ afterEach(() => {
 describe('readProjectRecord', () => {
 	it('parses a valid project record', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writeProjectRecord(tempDir, 'Artificial', {
+		writeProjectMockRecord(tempDir, 'Artificial', {
 			remote: 'git@example.com:artificial.git',
 			path: 'artisans',
 			namespaces: ['Art Domains', 'Art Tools'],
@@ -68,8 +68,8 @@ describe('readProjectRecord', () => {
 describe('readProjectRecords', () => {
 	it('reads multiple project records from a directory', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writeProjectRecord(tempDir, 'Project A', { path: '.' });
-		writeProjectRecord(tempDir, 'Project B', { path: 'b' });
+		writeProjectMockRecord(tempDir, 'Project A', { path: '.' });
+		writeProjectMockRecord(tempDir, 'Project B', { path: 'b' });
 
 		const records = readProjectRecords(join(tempDir, 'ops/records'));
 		expect(records).toHaveLength(2);
@@ -83,7 +83,7 @@ describe('readProjectRecords', () => {
 
 	it('filters out invalid records', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writeProjectRecord(tempDir, 'Good', { path: '.' });
+		writeProjectMockRecord(tempDir, 'Good', { path: '.' });
 
 		const badDir = join(tempDir, 'ops/records/projects');
 		mkdirSync(badDir, { recursive: true });
@@ -98,7 +98,7 @@ describe('readProjectRecords', () => {
 describe('readNamespaceRecord', () => {
 	it('parses a valid namespace record', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writeNamespaceRecord(tempDir, 'Art Domains', {
+		writeNamespaceMockRecord(tempDir, 'Art Domains', {
 			path: 'artisans',
 			packages: ['Art Mantras', 'Art Tools'],
 		});
@@ -131,8 +131,8 @@ describe('readNamespaceRecord', () => {
 describe('readNamespaceRecords', () => {
 	it('reads multiple namespace records from a directory', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writeNamespaceRecord(tempDir, 'NS A', { path: 'a' });
-		writeNamespaceRecord(tempDir, 'NS B', { path: 'b' });
+		writeNamespaceMockRecord(tempDir, 'NS A', { path: 'a' });
+		writeNamespaceMockRecord(tempDir, 'NS B', { path: 'b' });
 
 		const records = readNamespaceRecords(join(tempDir, 'ops/records'));
 		expect(records).toHaveLength(2);
@@ -146,7 +146,7 @@ describe('readNamespaceRecords', () => {
 
 	it('filters out invalid records', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writeNamespaceRecord(tempDir, 'Good', { path: '.' });
+		writeNamespaceMockRecord(tempDir, 'Good', { path: '.' });
 
 		const badDir = join(tempDir, 'ops/records/namespaces');
 		mkdirSync(badDir, { recursive: true });
@@ -161,7 +161,7 @@ describe('readNamespaceRecords', () => {
 describe('readPackageRecord', () => {
 	it('parses a valid package record', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writePackageRecord(tempDir, 'Art Mantras', {
+		writePackageMockRecord(tempDir, 'Art Mantras', {
 			canonicalName: '@artisans/art-mantras',
 			path: 'apps/art-mantras',
 		});
@@ -194,8 +194,8 @@ describe('readPackageRecord', () => {
 describe('readPackageRecords', () => {
 	it('reads multiple package records from a directory', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writePackageRecord(tempDir, 'Pkg A', { path: 'a' });
-		writePackageRecord(tempDir, 'Pkg B', { path: 'b' });
+		writePackageMockRecord(tempDir, 'Pkg A', { path: 'a' });
+		writePackageMockRecord(tempDir, 'Pkg B', { path: 'b' });
 
 		const records = readPackageRecords(join(tempDir, 'ops/records'));
 		expect(records).toHaveLength(2);
@@ -209,7 +209,7 @@ describe('readPackageRecords', () => {
 
 	it('filters out invalid records', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writePackageRecord(tempDir, 'Good', { path: '.' });
+		writePackageMockRecord(tempDir, 'Good', { path: '.' });
 
 		const badDir = join(tempDir, 'ops/records/packages');
 		mkdirSync(badDir, { recursive: true });
@@ -297,15 +297,15 @@ describe('consolidateProjectGraph', () => {
 describe('loadProjectGraph', () => {
 	it('loads a complete project graph', () => {
 		const tempDir = makeTempDir(tempDirs);
-		writeProjectRecord(tempDir, 'Artificial', {
+		writeProjectMockRecord(tempDir, 'Artificial', {
 			path: '.',
 			namespaces: ['Art Domains'],
 		});
-		writeNamespaceRecord(tempDir, 'Art Domains', {
+		writeNamespaceMockRecord(tempDir, 'Art Domains', {
 			path: 'artisans',
 			packages: ['Art Mantras'],
 		});
-		writePackageRecord(tempDir, 'Art Mantras', {
+		writePackageMockRecord(tempDir, 'Art Mantras', {
 			canonicalName: '@artisans/art-mantras',
 			path: 'apps/art-mantras',
 		});

@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import { makeConfig } from '../../test/makeConfig';
+import { makeMockConfig } from '../../test/helpers/context/makeMockConfig';
 
 import { createCheckout } from './createCheckout';
 import { createCheckoutStore } from './createCheckoutStore';
 
 describe('createCheckoutStore', () => {
 	it('addCheckout stores the provided checkout', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const store = createCheckoutStore();
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:test.git' };
 		const c = createCheckout(config, 'fix-test', repo);
@@ -22,7 +22,7 @@ describe('createCheckoutStore', () => {
 	});
 
 	it('addCheckout rejects duplicate checkouts', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const store = createCheckoutStore();
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:test.git' };
 		const c1 = createCheckout(config, 'fix-test', repo, undefined, 'one');
@@ -39,7 +39,7 @@ describe('createCheckoutStore', () => {
 	});
 
 	it('getCheckoutByName', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const store = createCheckoutStore();
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:test.git' };
 
@@ -52,7 +52,7 @@ describe('createCheckoutStore', () => {
 	});
 
 	it('getCheckoutForLocation', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const store = createCheckoutStore();
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:test.git' };
 
@@ -65,7 +65,7 @@ describe('createCheckoutStore', () => {
 	});
 
 	it('getCheckoutOfRepo is case-insensitive', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const store = createCheckoutStore();
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:test.git' };
 
@@ -77,7 +77,7 @@ describe('createCheckoutStore', () => {
 	});
 
 	it('updateCheckout replaces existing checkout', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const store = createCheckoutStore();
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:test.git' };
 		const c = createCheckout(config, 'fix-test', repo);
@@ -91,7 +91,7 @@ describe('createCheckoutStore', () => {
 	});
 
 	it('updateCheckout replaces by location', () => {
-		const config = makeConfig('.');
+		const config = makeMockConfig('.');
 		const store = createCheckoutStore();
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:test.git' };
 		const c1 = createCheckout(config, 'fix-test', repo, undefined, 'one');

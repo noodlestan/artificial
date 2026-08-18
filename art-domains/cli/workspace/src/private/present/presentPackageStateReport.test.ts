@@ -1,5 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import {
+	createCheckoutScan,
+	createCommittedState,
+	createExistsState,
+	createNoConflictsState,
+	createNoDetachedState,
+	createRemoteState,
+	createRepoState,
+	createSyncState,
+} from '../../private/scan/types';
 import type { Checkout } from '../../private/store/createCheckout';
 
 import { presentPackageStateReport } from './presentPackageStateReport';
@@ -16,18 +26,15 @@ describe('presentPackageStateReport', () => {
 		checkout = {
 			record: { name: 'Artificial', location: 'artificial', branch: 'main' },
 			path: '/tmp/artificial',
-			scan: {
-				exists: true,
-				branch: 'main',
-				remoteBranch: 'main',
-				detached: false,
-				conflicts: false,
-				dirty: false,
-				hasRemote: true,
-				unpushed: 0,
-				isBehind: false,
-				issues: [],
-			},
+			scan: createCheckoutScan([
+				createRepoState(true),
+				createExistsState(true),
+				createRemoteState('main', 'main', true),
+				createSyncState(0),
+				createCommittedState(true),
+				createNoConflictsState(true),
+				createNoDetachedState(true),
+			]),
 		};
 	});
 

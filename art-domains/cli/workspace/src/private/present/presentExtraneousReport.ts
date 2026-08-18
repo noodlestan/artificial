@@ -10,8 +10,8 @@ export function presentExtraneousReport(extraneous: Checkout[]): void {
 	const headers = ['directory', 'branch', 'states'];
 	const rows = extraneous.map(c => [
 		c.record.location,
-		c.scan?.branch || c.record.branch,
-		c.scan?.issues.join('; ') || 'clean',
+		c.scan?.state('remote').branch || c.record.branch,
+		c.scan?.issues().join('; ') || 'clean',
 	]);
 
 	console.info('Untracked:');

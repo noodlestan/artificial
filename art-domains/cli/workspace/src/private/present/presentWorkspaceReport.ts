@@ -12,8 +12,8 @@ export function presentWorkspaceReport(workspace?: Checkout): void {
 		[
 			workspace.repo?.name || '-',
 			'.',
-			workspace.scan?.branch || workspace.record.branch,
-			workspace.scan?.issues.join('; ') || '-',
+			workspace.scan?.state('remote').branch || workspace.record.branch,
+			workspace.scan?.issues().join('; ') || '-',
 		],
 	];
 

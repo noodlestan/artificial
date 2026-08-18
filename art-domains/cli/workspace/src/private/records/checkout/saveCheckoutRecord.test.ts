@@ -3,9 +3,9 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { makeConfig } from '../../../test/makeConfig';
-import { makeTempDir } from '../../../test/makeTempDir';
-import { removeTempDirs } from '../../../test/removeTempDirs';
+import { makeMockConfig } from '../../../test/helpers/context/makeMockConfig';
+import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
 
 import { saveCheckoutRecord } from './saveCheckoutRecord';
 
@@ -18,7 +18,7 @@ afterEach(() => {
 describe('saveCheckoutRecord', () => {
 	it('saved record contains expected markers', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig(tempDir);
+		const config = makeMockConfig(tempDir);
 		const file = join(tempDir, 'test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
@@ -32,7 +32,7 @@ describe('saveCheckoutRecord', () => {
 
 	it('renders from the template file when config and root are provided', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig(tempDir);
+		const config = makeMockConfig(tempDir);
 		const file = join(tempDir, 'ops/records/checkouts/test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
@@ -45,7 +45,7 @@ describe('saveCheckoutRecord', () => {
 
 	it('falls back to hardcoded template when template file is missing', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig(tempDir);
+		const config = makeMockConfig(tempDir);
 		const file = join(tempDir, 'ops/records/checkouts/test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 

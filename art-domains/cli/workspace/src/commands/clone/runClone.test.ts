@@ -4,13 +4,13 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createCommandContext } from '../../test/createCommandContext';
-import { initBareRepo } from '../../test/initBareRepo';
-import { initWorkingRepo } from '../../test/initWorkingRepo';
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
-import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
-import { writeRepoRecord } from '../../test/writeRepoRecord';
+import { createMockCommandContext } from '../../test/helpers/context/createMockCommandContext';
+import { initBareRepoTest } from '../../test/helpers/git/initBareRepoTest';
+import { initWorkingRepoTest } from '../../test/helpers/git/initWorkingRepoTest';
+import { writeCheckoutMockRecord } from '../../test/helpers/records/writeCheckoutMockRecord';
+import { writeRepoMockRecord } from '../../test/helpers/records/writeRepoMockRecord';
+import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
 
 import { runClone } from './runClone';
 
@@ -30,12 +30,12 @@ afterEach(() => {
 describe('clone command', () => {
 	it('clones a missing repo and creates the checkout record', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 
 		const bareDir = join(tempDir, 'bare/artificial');
-		await initBareRepo(bareDir);
+		await initBareRepoTest(bareDir);
 
-		writeRepoRecord(tempDir, 'Artificial', bareDir);
+		writeRepoMockRecord(tempDir, 'Artificial', bareDir);
 
 		await runClone(ctx, { repoName: 'Artificial' });
 
@@ -51,15 +51,15 @@ describe('clone command', () => {
 
 	it('reports issues for a dirty checkout', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/artificial');
-		await initBareRepo(bareDir);
+		await initBareRepoTest(bareDir);
 		const workingDir = join(tempDir, 'repos/artificial');
-		await initWorkingRepo(workingDir, bareDir);
+		await initWorkingRepoTest(workingDir, bareDir);
 		writeFileSync(join(workingDir, 'dirty.txt'), 'dirty');
 
-		writeRepoRecord(tempDir, 'Artificial', bareDir);
-		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeRepoMockRecord(tempDir, 'Artificial', bareDir);
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
 		await runClone(ctx, { repoName: 'Artificial' });
 
@@ -69,16 +69,16 @@ describe('clone command', () => {
 
 	it('reports current branch even if different from checkout record', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/artificial');
-		await initBareRepo(bareDir);
+		await initBareRepoTest(bareDir);
 		const workingDir = join(tempDir, 'repos/artificial');
-		await initWorkingRepo(workingDir, bareDir);
+		await initWorkingRepoTest(workingDir, bareDir);
 		const git = simpleGit(workingDir);
 		await git.checkoutLocalBranch('feature');
 
-		writeRepoRecord(tempDir, 'Artificial', bareDir);
-		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeRepoMockRecord(tempDir, 'Artificial', bareDir);
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
 		await runClone(ctx, { repoName: 'Artificial' });
 
@@ -88,7 +88,7 @@ describe('clone command', () => {
 
 	it('errors for an unknown repo name', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 
 		await runClone(ctx, { repoName: 'Unknown' });
 
@@ -100,14 +100,14 @@ describe('clone command', () => {
 
 	it('clones all repos when --all is passed', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir1 = join(tempDir, 'bare/repo1');
-		await initBareRepo(bareDir1);
+		await initBareRepoTest(bareDir1);
 		const bareDir2 = join(tempDir, 'bare/repo2');
-		await initBareRepo(bareDir2);
+		await initBareRepoTest(bareDir2);
 
-		writeRepoRecord(tempDir, 'Repo A', bareDir1);
-		writeRepoRecord(tempDir, 'Repo B', bareDir2);
+		writeRepoMockRecord(tempDir, 'Repo A', bareDir1);
+		writeRepoMockRecord(tempDir, 'Repo B', bareDir2);
 
 		await runClone(ctx, { all: true });
 
@@ -119,11 +119,11 @@ describe('clone command', () => {
 
 	it('resolves default location and branch when no checkout override exists', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/my-repo');
-		await initBareRepo(bareDir);
+		await initBareRepoTest(bareDir);
 
-		writeRepoRecord(tempDir, 'My Repo', bareDir);
+		writeRepoMockRecord(tempDir, 'My Repo', bareDir);
 
 		await runClone(ctx, { repoName: 'My Repo' });
 
@@ -133,11 +133,11 @@ describe('clone command', () => {
 
 	it('uses target location when specified', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/artificial');
-		await initBareRepo(bareDir);
+		await initBareRepoTest(bareDir);
 
-		writeRepoRecord(tempDir, 'Artificial', bareDir);
+		writeRepoMockRecord(tempDir, 'Artificial', bareDir);
 
 		await runClone(ctx, { repoName: 'Artificial', checkoutInput: 'custom' });
 
@@ -147,11 +147,11 @@ describe('clone command', () => {
 
 	it('creates checkout named Artificial-foo when cloning Artificial to foo', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/artificial');
-		await initBareRepo(bareDir);
+		await initBareRepoTest(bareDir);
 
-		writeRepoRecord(tempDir, 'Artificial', bareDir);
+		writeRepoMockRecord(tempDir, 'Artificial', bareDir);
 
 		await runClone(ctx, { repoName: 'Artificial', checkoutInput: 'foo' });
 
@@ -167,11 +167,11 @@ describe('clone command', () => {
 
 	it('is idempotent when cloning an existing checkout', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/artificial');
-		await initBareRepo(bareDir);
+		await initBareRepoTest(bareDir);
 
-		writeRepoRecord(tempDir, 'Artificial', bareDir);
+		writeRepoMockRecord(tempDir, 'Artificial', bareDir);
 
 		await runClone(ctx, { repoName: 'Artificial' });
 		await runClone(ctx, { repoName: 'Artificial' });
@@ -182,11 +182,11 @@ describe('clone command', () => {
 
 	it('allows multiple checkouts of the same repo with different locations', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/artificial');
-		await initBareRepo(bareDir);
+		await initBareRepoTest(bareDir);
 
-		writeRepoRecord(tempDir, 'Artificial', bareDir);
+		writeRepoMockRecord(tempDir, 'Artificial', bareDir);
 
 		await runClone(ctx, { repoName: 'Artificial' });
 		await runClone(ctx, { repoName: 'Artificial', checkoutInput: 'custom' });

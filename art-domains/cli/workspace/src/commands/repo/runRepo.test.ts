@@ -4,17 +4,17 @@ import { join } from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createCommandContext } from '../../test/createCommandContext';
-import { initGitRepo } from '../../test/initGitRepo';
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
-import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
+import { createMockCommandContext } from '../../test/helpers/context/createMockCommandContext';
+import { initGitRepoTest } from '../../test/helpers/git/initGitRepoTest';
+import { writeCheckoutMockRecord } from '../../test/helpers/records/writeCheckoutMockRecord';
 import {
-	writeNamespaceRecord,
-	writePackageRecord,
-	writeProjectRecord,
-} from '../../test/writeProjectRecord';
-import { writeRepoRecord } from '../../test/writeRepoRecord';
+	writeNamespaceMockRecord,
+	writePackageMockRecord,
+	writeProjectMockRecord,
+} from '../../test/helpers/records/writeProjectMockRecord';
+import { writeRepoMockRecord } from '../../test/helpers/records/writeRepoMockRecord';
+import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
 
 import { runRepo } from './runRepo';
 
@@ -38,23 +38,23 @@ afterEach(() => {
 describe('repo command', () => {
 	it("lists a single checkout's packages", async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial');
-		await initGitRepo(checkoutDir);
+		await initGitRepoTest(checkoutDir);
 
-		writeRepoRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
-		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
-		writeProjectRecord(checkoutDir, 'Artificial', {
+		writeProjectMockRecord(checkoutDir, 'Artificial', {
 			remote: 'git@example.com:artificial.git',
 			path: '.',
 			namespaces: ['Art Domains'],
 		});
-		writeNamespaceRecord(checkoutDir, 'Art Domains', {
+		writeNamespaceMockRecord(checkoutDir, 'Art Domains', {
 			path: 'artisans',
 			packages: ['Art Mantras'],
 		});
-		writePackageRecord(checkoutDir, 'Art Mantras', {
+		writePackageMockRecord(checkoutDir, 'Art Mantras', {
 			canonicalName: '@artisans/art-mantras',
 			path: 'apps/art-mantras',
 		});
@@ -75,19 +75,19 @@ describe('repo command', () => {
 
 	it('defaults to all checkouts when none specified', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const dir1 = join(tempDir, ctx.config.clone.path, 'artificial');
 		const dir2 = join(tempDir, ctx.config.clone.path, 'purrception');
-		await initGitRepo(dir1);
-		await initGitRepo(dir2);
+		await initGitRepoTest(dir1);
+		await initGitRepoTest(dir2);
 
-		writeRepoRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
-		writeRepoRecord(tempDir, 'Purrception', 'git@example.com:purrception.git');
-		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
-		writeCheckoutRecord(tempDir, 'Purrception', 'Purrception', 'purrception');
+		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
+		writeRepoMockRecord(tempDir, 'Purrception', 'git@example.com:purrception.git');
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeCheckoutMockRecord(tempDir, 'Purrception', 'Purrception', 'purrception');
 
 		for (const dir of [dir1, dir2]) {
-			writeProjectRecord(dir, 'Project', { path: '.', namespaces: [] });
+			writeProjectMockRecord(dir, 'Project', { path: '.', namespaces: [] });
 		}
 
 		await runRepo(ctx, { checkoutNames: [] });
@@ -99,22 +99,22 @@ describe('repo command', () => {
 
 	it('checkout has no project records', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const checkoutDir = join(tempDir, ctx.config.clone.path, 'purrception');
-		await initGitRepo(checkoutDir);
+		await initGitRepoTest(checkoutDir);
 
-		writeRepoRecord(tempDir, 'Purrception', 'git@example.com:purrception.git');
-		writeCheckoutRecord(tempDir, 'Purrception', 'Purrception', 'purrception');
+		writeRepoMockRecord(tempDir, 'Purrception', 'git@example.com:purrception.git');
+		writeCheckoutMockRecord(tempDir, 'Purrception', 'Purrception', 'purrception');
 
 		await runRepo(ctx, { checkoutNames: ['Purrception'] });
 
-		const checkout = ctx.store.getCheckoutByName('Purrception');
-		expect(checkout?.scan?.issues).toContain('no project records');
+		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
+		expect(output).toContain('States: no project records');
 	});
 
 	it('unknown checkout warns and skips', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 
 		await runRepo(ctx, { checkoutNames: ['Unknown'] });
 
@@ -126,14 +126,14 @@ describe('repo command', () => {
 
 	it('project references a missing namespace', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial');
-		await initGitRepo(checkoutDir);
+		await initGitRepoTest(checkoutDir);
 
-		writeRepoRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
-		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
-		writeProjectRecord(checkoutDir, 'Artificial', {
+		writeProjectMockRecord(checkoutDir, 'Artificial', {
 			remote: 'git@example.com:artificial.git',
 			path: '.',
 			namespaces: ['Missing'],
@@ -149,19 +149,19 @@ describe('repo command', () => {
 
 	it('namespace references a missing package', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial');
-		await initGitRepo(checkoutDir);
+		await initGitRepoTest(checkoutDir);
 
-		writeRepoRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
-		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
-		writeProjectRecord(checkoutDir, 'Artificial', {
+		writeProjectMockRecord(checkoutDir, 'Artificial', {
 			remote: 'git@example.com:artificial.git',
 			path: '.',
 			namespaces: ['Art Domains'],
 		});
-		writeNamespaceRecord(checkoutDir, 'Art Domains', {
+		writeNamespaceMockRecord(checkoutDir, 'Art Domains', {
 			path: 'artisans',
 			packages: ['Missing'],
 		});
@@ -176,23 +176,23 @@ describe('repo command', () => {
 
 	it('package path has no package.json', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial');
-		await initGitRepo(checkoutDir);
+		await initGitRepoTest(checkoutDir);
 
-		writeRepoRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
-		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
-		writeProjectRecord(checkoutDir, 'Artificial', {
+		writeProjectMockRecord(checkoutDir, 'Artificial', {
 			remote: 'git@example.com:artificial.git',
 			path: '.',
 			namespaces: ['Art Domains'],
 		});
-		writeNamespaceRecord(checkoutDir, 'Art Domains', {
+		writeNamespaceMockRecord(checkoutDir, 'Art Domains', {
 			path: 'artisans',
 			packages: ['Art Mantras'],
 		});
-		writePackageRecord(checkoutDir, 'Art Mantras', {
+		writePackageMockRecord(checkoutDir, 'Art Mantras', {
 			canonicalName: '@artisans/art-mantras',
 			path: 'apps/art-mantras',
 		});
@@ -211,23 +211,23 @@ describe('repo command', () => {
 
 	it('npm info fails', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial');
-		await initGitRepo(checkoutDir);
+		await initGitRepoTest(checkoutDir);
 
-		writeRepoRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
-		writeCheckoutRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
 
-		writeProjectRecord(checkoutDir, 'Artificial', {
+		writeProjectMockRecord(checkoutDir, 'Artificial', {
 			remote: 'git@example.com:artificial.git',
 			path: '.',
 			namespaces: ['Art Domains'],
 		});
-		writeNamespaceRecord(checkoutDir, 'Art Domains', {
+		writeNamespaceMockRecord(checkoutDir, 'Art Domains', {
 			path: 'artisans',
 			packages: ['Art Mantras'],
 		});
-		writePackageRecord(checkoutDir, 'Art Mantras', {
+		writePackageMockRecord(checkoutDir, 'Art Mantras', {
 			canonicalName: '@artisans/art-mantras',
 			path: 'apps/art-mantras',
 		});

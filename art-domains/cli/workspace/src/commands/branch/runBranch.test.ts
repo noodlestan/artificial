@@ -3,13 +3,13 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { commitFile } from '../../test/commitFile';
-import { createCommandContext } from '../../test/createCommandContext';
-import { initGitRepo } from '../../test/initGitRepo';
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
-import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
-import { writeRepoRecord } from '../../test/writeRepoRecord';
+import { createMockCommandContext } from '../../test/helpers/context/createMockCommandContext';
+import { commitFileTest } from '../../test/helpers/git/commitFileTest';
+import { initGitRepoTest } from '../../test/helpers/git/initGitRepoTest';
+import { writeCheckoutMockRecord } from '../../test/helpers/records/writeCheckoutMockRecord';
+import { writeRepoMockRecord } from '../../test/helpers/records/writeRepoMockRecord';
+import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
 
 import { runBranch } from './runBranch';
 
@@ -28,12 +28,12 @@ afterEach(() => {
 describe('branch command', () => {
 	it('creates and checks out a new branch in a single specified checkout', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'one');
-		await initGitRepo(repoDir);
+		await initGitRepoTest(repoDir);
 
-		writeRepoRecord(tempDir, 'One', 'git@example.com:one.git');
-		writeCheckoutRecord(tempDir, 'One', 'One', 'one');
+		writeRepoMockRecord(tempDir, 'One', 'git@example.com:one.git');
+		writeCheckoutMockRecord(tempDir, 'One', 'One', 'one');
 
 		await runBranch(ctx, { branch: 'feat/x', checkoutLocations: ['one'] });
 
@@ -50,14 +50,14 @@ describe('branch command', () => {
 
 	it('branches all checkouts when none are specified', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
-		await initGitRepo(join(tempDir, ctx.config.clone.path, 'alpha'));
-		await initGitRepo(join(tempDir, ctx.config.clone.path, 'beta'));
+		const ctx = createMockCommandContext(tempDir);
+		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'alpha'));
+		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'beta'));
 
-		writeRepoRecord(tempDir, 'Alpha', 'git@example.com:alpha.git');
-		writeRepoRecord(tempDir, 'Beta', 'git@example.com:beta.git');
-		writeCheckoutRecord(tempDir, 'Alpha', 'Alpha', 'alpha');
-		writeCheckoutRecord(tempDir, 'Beta', 'Beta', 'beta');
+		writeRepoMockRecord(tempDir, 'Alpha', 'git@example.com:alpha.git');
+		writeRepoMockRecord(tempDir, 'Beta', 'git@example.com:beta.git');
+		writeCheckoutMockRecord(tempDir, 'Alpha', 'Alpha', 'alpha');
+		writeCheckoutMockRecord(tempDir, 'Beta', 'Beta', 'beta');
 
 		await runBranch(ctx, { branch: 'feat/x', checkoutLocations: [] });
 
@@ -70,11 +70,11 @@ describe('branch command', () => {
 
 	it('warns and skips a checkout that is not cloned yet', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
-		await initGitRepo(join(tempDir, ctx.config.clone.path, 'repos/one'));
+		const ctx = createMockCommandContext(tempDir);
+		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'repos/one'));
 
-		writeRepoRecord(tempDir, 'One', 'git@example.com:one.git');
-		writeCheckoutRecord(tempDir, 'One', 'One', 'one');
+		writeRepoMockRecord(tempDir, 'One', 'git@example.com:one.git');
+		writeCheckoutMockRecord(tempDir, 'One', 'One', 'one');
 
 		await runBranch(ctx, { branch: 'feat/x', checkoutLocations: ['Nope'] });
 
@@ -85,13 +85,13 @@ describe('branch command', () => {
 
 	it('logs a failure and continues when a checkout is not cloned', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
-		await initGitRepo(join(tempDir, ctx.config.clone.path, 'repos/good'));
+		const ctx = createMockCommandContext(tempDir);
+		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'repos/good'));
 
-		writeRepoRecord(tempDir, 'Good', 'git@example.com:good.git');
-		writeRepoRecord(tempDir, 'Missing', 'git@example.com:missing.git');
-		writeCheckoutRecord(tempDir, 'Good', 'Good', 'good');
-		writeCheckoutRecord(tempDir, 'Missing', 'Missing', 'missing');
+		writeRepoMockRecord(tempDir, 'Good', 'git@example.com:good.git');
+		writeRepoMockRecord(tempDir, 'Missing', 'git@example.com:missing.git');
+		writeCheckoutMockRecord(tempDir, 'Good', 'Good', 'good');
+		writeCheckoutMockRecord(tempDir, 'Missing', 'Missing', 'missing');
 
 		await runBranch(ctx, { branch: 'feat/x', checkoutLocations: ['Missing', 'Good'] });
 
@@ -106,10 +106,10 @@ describe('branch command', () => {
 
 	it('branches a checkout with no matching repository', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
-		await initGitRepo(join(tempDir, ctx.config.clone.path, 'conv'));
+		const ctx = createMockCommandContext(tempDir);
+		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'conv'));
 
-		writeCheckoutRecord(tempDir, 'Conv', 'Conv', 'conv');
+		writeCheckoutMockRecord(tempDir, 'Conv', 'Conv', 'conv');
 
 		await runBranch(ctx, { branch: 'feat/x', checkoutLocations: ['conv'] });
 
@@ -124,16 +124,16 @@ describe('branch command', () => {
 
 	it('switches to an existing branch', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'one');
-		await initGitRepo(repoDir);
+		await initGitRepoTest(repoDir);
 		const git = simpleGit(repoDir);
-		await commitFile(repoDir, 'file.txt');
+		await commitFileTest(repoDir, 'file.txt');
 		await git.checkoutLocalBranch('feat/x');
 		await git.checkoutLocalBranch('feat/y');
 
-		writeRepoRecord(tempDir, 'One', 'git@example.com:one.git');
-		writeCheckoutRecord(tempDir, 'One', 'One', 'one');
+		writeRepoMockRecord(tempDir, 'One', 'git@example.com:one.git');
+		writeCheckoutMockRecord(tempDir, 'One', 'One', 'one');
 
 		await runBranch(ctx, { branch: 'feat/x', checkoutLocations: ['one'] });
 

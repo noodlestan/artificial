@@ -1,3 +1,4 @@
+import { pullWorkspaceCheckout } from '../../private/commands/workspaces/pullWorkspaceCheckout';
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentExtraneousReport } from '../../private/present/presentExtraneousReport';
@@ -10,7 +11,6 @@ import { createCheckout } from '../../private/store/createCheckout';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 
-import { pullWorkspaceCheckout } from './private/pullWorkspaceCheckout';
 import { pushCleanCheckouts } from './private/pushCleanCheckouts';
 import { scanExtraneousCheckouts } from './private/scanExtraneousCheckouts';
 

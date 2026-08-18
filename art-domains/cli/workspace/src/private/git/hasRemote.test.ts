@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { initGitRepo } from '../../test/initGitRepo';
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
+import { initGitRepoTest } from '../../test/helpers/git/initGitRepoTest';
+import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
 
 import { hasRemote } from './hasRemote';
 
@@ -15,7 +15,7 @@ afterEach(() => {
 describe('hasRemote', () => {
 	it('returns false for repo with no remote', async () => {
 		const dir = makeTempDir(tempDirs);
-		await initGitRepo(dir);
+		await initGitRepoTest(dir);
 
 		const remote = await hasRemote(dir);
 

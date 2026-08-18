@@ -367,7 +367,7 @@ pull()
   scanAllCheckoutsStates(ctx.store)
 
   for checkout in ctx.store.getAllCheckouts():
-    if isCleanCheckout(checkout) and checkout.isBehind:
+    if checkout.scan.can('pull') and checkout.scan.should('pull'):
       doPullCheckout(ctx, checkout)
 
   presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
@@ -387,8 +387,8 @@ push()
   scanAllCheckoutsStates(ctx.store)
 
   for checkout in ctx.store.getAllCheckouts():
-    if isCleanCheckout(checkout) and checkout.unpushed > 0:
-      if checkout.isBehind:
+    if checkout.scan.can('push') and checkout.scan.should('push'):
+      if checkout.scan.should('pull'):
         doPullCheckout(ctx, checkout)
       pushCheckout(ctx, checkout)
 
@@ -409,9 +409,9 @@ sync()
   scanAllCheckoutsStates(ctx.store)
 
   for checkout in ctx.store.getAllCheckouts():
-    if isCleanCheckout(checkout):
-      doPullCheckout(ctx, checkout)
-      pushCheckout(ctx, checkout)
+    if checkout.scan.can('pull'):
+      if checkout.scan.should('pull'): doPullCheckout(ctx, checkout)
+      if checkout.scan.can('push') and checkout.scan.should('push'): pushCheckout(ctx, checkout)
 
   presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
   presentOperationsReport(ctx.log)
@@ -482,18 +482,19 @@ createWorkspaceCheckout(config)
   }
 ```
 
-### Function: isCleanCheckout(checkout)
+### Function: CheckoutScan guards
 
 **Responsibility:** Whether a checkout is clean (no uncommitted changes, no conflicts, not detached).
 
 ```pseudo
-isCleanCheckout(checkout)
-  if not checkout.exists: return false
-  if checkout.extraneous: return false
-  if checkout.dirty: return false
-  if checkout.conflicts: return false
-  if checkout.detached: return false
-  return true
+checkout.scan.can(op)
+  return operation is permitted by the composed checkout states
+
+checkout.scan.should(op)
+  return operation has work to do (behind for pull, ahead for push, missing for clone)
+
+checkout.scan.issues()
+  return issue strings derived from the composed checkout states
 ```
 
 ### Function: pullCheckout(checkout)

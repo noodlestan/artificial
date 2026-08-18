@@ -4,10 +4,10 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { commitFile } from '../../test/commitFile';
-import { initGitRepo } from '../../test/initGitRepo';
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
+import { commitFileTest } from '../../test/helpers/git/commitFileTest';
+import { initGitRepoTest } from '../../test/helpers/git/initGitRepoTest';
+import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
 
 import { getUnpushedCount } from './getUnpushedCount';
 
@@ -20,8 +20,8 @@ afterEach(() => {
 describe('getUnpushedCount', () => {
 	it('returns the count of local commits for a branch with no remote counterpart', async () => {
 		const dir = makeTempDir(tempDirs);
-		await initGitRepo(dir);
-		await commitFile(dir, 'file.txt');
+		await initGitRepoTest(dir);
+		await commitFileTest(dir, 'file.txt');
 
 		const count = await getUnpushedCount(dir, null);
 
@@ -30,8 +30,8 @@ describe('getUnpushedCount', () => {
 
 	it('returns commits ahead of the remote branch', async () => {
 		const dir = makeTempDir(tempDirs);
-		await initGitRepo(dir);
-		await commitFile(dir, 'file.txt');
+		await initGitRepoTest(dir);
+		await commitFileTest(dir, 'file.txt');
 		const bareDir = makeTempDir(tempDirs);
 		const bareGit = simpleGit(bareDir);
 		await bareGit.init(true);

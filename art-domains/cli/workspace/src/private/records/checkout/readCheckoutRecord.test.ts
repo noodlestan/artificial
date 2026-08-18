@@ -3,9 +3,9 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { makeConfig } from '../../../test/makeConfig';
-import { makeTempDir } from '../../../test/makeTempDir';
-import { removeTempDirs } from '../../../test/removeTempDirs';
+import { makeMockConfig } from '../../../test/helpers/context/makeMockConfig';
+import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
 
 import { readCheckoutRecord } from './readCheckoutRecord';
 import { saveCheckoutRecord } from './saveCheckoutRecord';
@@ -20,7 +20,7 @@ afterEach(() => {
 describe('readCheckoutRecord', () => {
 	it('saves and reads a checkout record round-trip', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig(tempDir);
+		const config = makeMockConfig(tempDir);
 		const file = join(tempDir, 'test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 

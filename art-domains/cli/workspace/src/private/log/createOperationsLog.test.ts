@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import { makeConfig } from '../../test/makeConfig';
-import { createCloneSuccess } from '../operations/createCloneSuccess';
+import { makeMockConfig } from '../../test/helpers/context/makeMockConfig';
+import { createCloneSuccess } from '../commands/operations/createCloneSuccess';
 import { createCheckout } from '../store/createCheckout';
 
 import { createOperationsLog } from './createOperationsLog';
 
 function makeCheckout(name: string) {
-	const config = makeConfig('.');
+	const config = makeMockConfig('.');
 	const repo = { name, remote: `git@example.com:${name}.git` };
 	return createCheckout(config, repo.name, repo, 'main');
 }

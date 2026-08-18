@@ -1,5 +1,7 @@
 import type { Checkout } from '../store/createCheckout';
 
+export type CheckoutOp = 'clone' | 'push' | 'pull' | 'branch';
+
 export type OperationOutcome = 'success' | 'failure';
 
 export interface OperationBase {

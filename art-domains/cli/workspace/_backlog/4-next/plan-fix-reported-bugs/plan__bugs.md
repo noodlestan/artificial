@@ -34,18 +34,6 @@ Fixed bugs stay at the bottom of the file and get two more fields:
 
 **Happened:** The checkout is scanned and presented as a normal checkout, as if nothing were wrong.
 
-### Bug: `clone --all` presents Checkout Report without scanning
-
-**Description:** `clone --all` presents the Checkout Report without scanning checkouts, so states are blank — the same defect already fixed in the `clone <repo>` path.
-
-**Scenario:** Run `npm run workspace clone --all` on a workspace with recorded checkouts.
-
-**Expected:** The Checkout Report reflects the scanned git state after cloning (mirroring the `sanity` flow).
-
-**Happened:** The Checkout Report is presented straight from the store with blank `states` — no scan performed.
-
-**Root Cause:** `art-domains/cli/workspace/src/commands/clone/cloneAll.ts` calls `presentCheckoutReport(ctx)` without running `scanAllCheckoutsStates` first (the fix landed only in `cloneSpecific.ts`).
-
 ### Bug: `cloneIfMissing` ignores the record branch
 
 **Description:** When cloning a missing checkout for an existing record, `cloneIfMissing` clones the default branch instead of the branch recorded, and overwrites the record's branch to `main`.
@@ -57,16 +45,6 @@ Fixed bugs stay at the bottom of the file and get two more fields:
 **Happened:** The clone lands on `main` (default), and the record is rewritten with `branch: main`.
 
 **Root Cause:** `art-domains/cli/workspace/src/commands/clone/private/cloneIfMissing.ts` runs `git.clone(remote, path)` (default branch), then `saveCheckoutRecord(..., branch: actualBranch || 'main')` — the record branch is never read.
-
-### Bug: `clone Foo` fails silently
-
-**Description:** `clone` with an unknown repo name fails silently — no output, no error, and no failure operation in the report.
-
-**Scenario:** On a workspace, run `npm run workspace clone Foo` with a repo name that is not in the manifest.
-
-**Expected:** Log a clone failure operation: `unknown repo "Foo"`.
-
-**Happened:** No output and no error — the command exits silently.
 
 ### Bug: Clone refuses second checkout of same repo
 
@@ -108,7 +86,7 @@ Fixed bugs stay at the bottom of the file and get two more fields:
 
 **Happened:** Refuses silently — no operation in the report.
 
-### Bug: `clone` presents Checkout Report without scanning checkouts (FIXED)
+### Bug: `clone` presents Checkout Report without scanning checkouts (FIXED by `decouple-checkout-scan-states`)
 
 **Description:** When invoking Clone command in with a checkout parameter and clone succeeds, it presents the Checkout Report straight from the store without scanning checkouts for state first, listing every recorded checkout with blank states instead of actual scanned states.
 
@@ -125,6 +103,41 @@ Fixed bugs stay at the bottom of the file and get two more fields:
 **Follow Ups:**
 
 - Requires setup mocking or assertion on presenters. Consider refactoring presentation to make it injectable. Configuration and the strategy pattern would go a long way here.
-- `clone --all` path: `cloneAll.ts` still presents the Checkout Report without scanning — verify and fix if reproducible.
 
 **Commit.id:** fix-clone-scan-before-report
+
+### Bug: `clone --all` presents Checkout Report without scanning (FIXED by `decouple-checkout-scan-states`)
+
+**Description:** `clone --all` presented the Checkout Report without scanning checkouts, so states were blank.
+
+**Scenario:** Run `npm run workspace clone --all` on a workspace with recorded checkouts.
+
+**Expected:** The Checkout Report reflects the scanned git state after cloning.
+
+**Happened:** The Checkout Report was presented straight from the store with blank `states`.
+
+**Root Cause:** `cloneAll` did not scan the hydrated store before presenting the report.
+
+**Test:** Covered by the package test suite; package verification passes.
+
+**Follow Ups:** Add a dedicated presenter assertion if presentation injection is introduced.
+
+**Commit.id:** `decouple-checkout-scan-states`
+
+### Bug: `clone Foo` fails silently (FIXED by `decouple-checkout-scan-states`)
+
+**Description:** `clone` with an unknown repo name failed silently without a failure operation.
+
+**Scenario:** Run `npm run workspace clone Foo` with a repo name that is not in the manifest.
+
+**Expected:** Log a clone failure operation containing `unknown repo "Foo"`.
+
+**Happened:** No output or failure operation was produced.
+
+**Root Cause:** `cloneSpecific` did not create or present a clone failure for an unknown repository.
+
+**Test:** `src/commands/clone/cloneSpecific.test.ts` asserts the failure operation; package verification passes.
+
+**Follow Ups:** None.
+
+**Commit.id:** `decouple-checkout-scan-states`

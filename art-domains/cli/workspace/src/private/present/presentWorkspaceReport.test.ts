@@ -1,6 +1,16 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import type { Checkout } from '../store/createCheckout';
+import { makeWorkspaceCheckoutMock } from '../../test/helpers/checkout/makeWorkspaceCheckoutMock';
+import {
+	createCheckoutScan,
+	createCommittedState,
+	createExistsState,
+	createNoConflictsState,
+	createNoDetachedState,
+	createRemoteState,
+	createRepoState,
+	createSyncState,
+} from '../scan/types';
 
 import { presentWorkspaceReport } from './presentWorkspaceReport';
 
@@ -8,32 +18,11 @@ afterEach(() => {
 	vi.restoreAllMocks();
 });
 
-function makeWorkspaceCheckout(path: string, overrides?: Partial<Checkout>): Checkout {
-	return {
-		repo: undefined,
-		record: { name: 'Workspace', location: '.', branch: 'main', repository: undefined },
-		path,
-		scan: {
-			exists: true,
-			branch: 'main',
-			remoteBranch: null,
-			detached: false,
-			conflicts: false,
-			dirty: false,
-			hasRemote: true,
-			unpushed: 0,
-			isBehind: false,
-			issues: [],
-		},
-		...overrides,
-	};
-}
-
 describe('presentWorkspaceReport', () => {
 	it('prints Workspace: header and table', () => {
 		const spy = vi.spyOn(console, 'info').mockImplementation(() => {});
 
-		presentWorkspaceReport(makeWorkspaceCheckout('/tmp'));
+		presentWorkspaceReport(makeWorkspaceCheckoutMock('/tmp'));
 
 		expect(spy).toHaveBeenCalledWith('Workspace:');
 		expect(spy).toHaveBeenCalledWith(expect.stringContaining('repo'));
@@ -44,19 +33,16 @@ describe('presentWorkspaceReport', () => {
 		const spy = vi.spyOn(console, 'info').mockImplementation(() => {});
 
 		presentWorkspaceReport(
-			makeWorkspaceCheckout('/tmp', {
-				scan: {
-					exists: true,
-					branch: 'main',
-					remoteBranch: null,
-					detached: false,
-					conflicts: false,
-					dirty: true,
-					hasRemote: true,
-					unpushed: 1,
-					isBehind: false,
-					issues: ['uncommitted files', '1 commit ahead'],
-				},
+			makeWorkspaceCheckoutMock('/tmp', {
+				scan: createCheckoutScan([
+					createRepoState(false),
+					createExistsState(true),
+					createRemoteState('main', 'main', true),
+					createSyncState(1, 1, 0),
+					createCommittedState(false),
+					createNoConflictsState(true),
+					createNoDetachedState(true),
+				]),
 			}),
 		);
 
@@ -67,19 +53,16 @@ describe('presentWorkspaceReport', () => {
 		const spy = vi.spyOn(console, 'info').mockImplementation(() => {});
 
 		presentWorkspaceReport(
-			makeWorkspaceCheckout('/tmp', {
-				scan: {
-					exists: true,
-					branch: 'main',
-					remoteBranch: null,
-					detached: false,
-					conflicts: false,
-					dirty: false,
-					hasRemote: true,
-					unpushed: 0,
-					isBehind: true,
-					issues: ['1 commit behind'],
-				},
+			makeWorkspaceCheckoutMock('/tmp', {
+				scan: createCheckoutScan([
+					createRepoState(false),
+					createExistsState(true),
+					createRemoteState('main', 'main', true),
+					createSyncState(-1, 0, 1),
+					createCommittedState(true),
+					createNoConflictsState(true),
+					createNoDetachedState(true),
+				]),
 			}),
 		);
 

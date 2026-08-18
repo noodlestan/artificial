@@ -4,14 +4,14 @@ import { join } from 'node:path';
 import simpleGit from 'simple-git';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { commitFile } from '../../test/commitFile';
-import { createCommandContext } from '../../test/createCommandContext';
-import { initWorkingRepo } from '../../test/initWorkingRepo';
-import { makeOriginAhead } from '../../test/makeOriginAhead';
-import { makeTempDir } from '../../test/makeTempDir';
-import { removeTempDirs } from '../../test/removeTempDirs';
-import { writeCheckoutRecord } from '../../test/writeCheckoutRecord';
-import { writeRepoRecord } from '../../test/writeRepoRecord';
+import { createMockCommandContext } from '../../test/helpers/context/createMockCommandContext';
+import { commitFileTest } from '../../test/helpers/git/commitFileTest';
+import { initWorkingRepoTest } from '../../test/helpers/git/initWorkingRepoTest';
+import { makeOriginAheadTest } from '../../test/helpers/git/makeOriginAheadTest';
+import { writeCheckoutMockRecord } from '../../test/helpers/records/writeCheckoutMockRecord';
+import { writeRepoMockRecord } from '../../test/helpers/records/writeRepoMockRecord';
+import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
 
 import { runPush } from './runPush';
 
@@ -30,20 +30,20 @@ afterEach(() => {
 describe('push command', () => {
 	it('pushes clean checkouts that are ahead', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = makeTempDir(tempDirs);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'ahead');
-		await initWorkingRepo(repoDir, bareDir);
-		await commitFile(repoDir, 'ahead.txt');
+		await initWorkingRepoTest(repoDir, bareDir);
+		await commitFileTest(repoDir, 'ahead.txt');
 
-		writeRepoRecord(tempDir, 'Ahead', 'git@example.com:ahead.git');
-		writeCheckoutRecord(tempDir, 'Ahead', 'Ahead', 'ahead');
+		writeRepoMockRecord(tempDir, 'Ahead', 'git@example.com:ahead.git');
+		writeCheckoutMockRecord(tempDir, 'Ahead', 'Ahead', 'ahead');
 
 		await runPush(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Ahead');
-		expect(checkout?.scan?.unpushed).toBe(0);
-		expect(checkout?.scan?.issues).toEqual([]);
+		expect(checkout?.scan?.state('sync').delta).toBe(0);
+		expect(checkout?.scan?.issues()).toEqual([]);
 
 		const ops = ctx.log.all();
 		expect(ops).toHaveLength(1);
@@ -58,16 +58,16 @@ describe('push command', () => {
 
 	it('tries pull first if behind', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = makeTempDir(tempDirs);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'diverged');
-		await initWorkingRepo(repoDir, bareDir);
-		await commitFile(repoDir, 'ahead.txt');
-		await makeOriginAhead(bareDir, tempDirs);
+		await initWorkingRepoTest(repoDir, bareDir);
+		await commitFileTest(repoDir, 'ahead.txt');
+		await makeOriginAheadTest(bareDir, tempDirs);
 		await simpleGit(repoDir).fetch('origin', 'main');
 
-		writeRepoRecord(tempDir, 'Diverged', 'git@example.com:diverged.git');
-		writeCheckoutRecord(tempDir, 'Diverged', 'Diverged', 'diverged');
+		writeRepoMockRecord(tempDir, 'Diverged', 'git@example.com:diverged.git');
+		writeCheckoutMockRecord(tempDir, 'Diverged', 'Diverged', 'diverged');
 
 		await runPush(ctx);
 
@@ -79,9 +79,9 @@ describe('push command', () => {
 		expect(ops[1].outcome).toBe('success');
 
 		const checkout = ctx.store.getCheckoutOfRepo('Diverged');
-		expect(checkout?.scan?.unpushed).toBe(0);
-		expect(checkout?.scan?.isBehind).toBe(false);
-		expect(checkout?.scan?.issues).toEqual([]);
+		expect(checkout?.scan?.state('sync').delta).toBe(0);
+		expect(checkout?.scan?.state('sync').delta).not.toBeLessThan(0);
+		expect(checkout?.scan?.issues()).toEqual([]);
 
 		const verifyDir = makeTempDir(tempDirs);
 		await simpleGit(verifyDir).clone(bareDir, verifyDir);
@@ -91,52 +91,52 @@ describe('push command', () => {
 
 	it('skips dirty checkouts', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = makeTempDir(tempDirs);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'dirtypush');
-		await initWorkingRepo(repoDir, bareDir);
-		await commitFile(repoDir, 'ahead.txt');
+		await initWorkingRepoTest(repoDir, bareDir);
+		await commitFileTest(repoDir, 'ahead.txt');
 		writeFileSync(join(repoDir, 'dirty.txt'), 'dirty');
 
-		writeRepoRecord(tempDir, 'DirtyPush', 'git@example.com:dirtypush.git');
-		writeCheckoutRecord(tempDir, 'DirtyPush', 'DirtyPush', 'dirtypush');
+		writeRepoMockRecord(tempDir, 'DirtyPush', 'git@example.com:dirtypush.git');
+		writeCheckoutMockRecord(tempDir, 'DirtyPush', 'DirtyPush', 'dirtypush');
 
 		await runPush(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('DirtyPush');
-		expect(checkout?.scan?.issues).toEqual(['uncommitted files', '1 commit ahead']);
+		expect(checkout?.scan?.issues()).toEqual(['uncommitted files', '1 commit ahead']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
 	it('skips checkouts already up to date', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 		const bareDir = makeTempDir(tempDirs);
 		const repoDir = join(tempDir, ctx.config.clone.path, 'current');
-		await initWorkingRepo(repoDir, bareDir);
+		await initWorkingRepoTest(repoDir, bareDir);
 
-		writeRepoRecord(tempDir, 'Current', 'git@example.com:current.git');
-		writeCheckoutRecord(tempDir, 'Current', 'Current', 'current');
+		writeRepoMockRecord(tempDir, 'Current', 'git@example.com:current.git');
+		writeCheckoutMockRecord(tempDir, 'Current', 'Current', 'current');
 
 		await runPush(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Current');
-		expect(checkout?.scan?.unpushed).toBe(0);
+		expect(checkout?.scan?.state('sync').delta).toBe(0);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 
 	it('skips checkouts not cloned', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const ctx = createCommandContext(tempDir);
+		const ctx = createMockCommandContext(tempDir);
 
-		writeRepoRecord(tempDir, 'Missing', 'git@example.com:missing.git');
-		writeCheckoutRecord(tempDir, 'Missing', 'Missing', 'missing');
+		writeRepoMockRecord(tempDir, 'Missing', 'git@example.com:missing.git');
+		writeCheckoutMockRecord(tempDir, 'Missing', 'Missing', 'missing');
 
 		await runPush(ctx);
 
 		const checkout = ctx.store.getCheckoutOfRepo('Missing');
-		expect(checkout?.scan?.exists).toBe(false);
-		expect(checkout?.scan?.issues).toEqual(['not cloned']);
+		expect(checkout?.scan?.state('exists').exists).toBe(false);
+		expect(checkout?.scan?.issues()).toEqual(['not cloned']);
 		expect(ctx.log.all()).toHaveLength(0);
 	});
 });

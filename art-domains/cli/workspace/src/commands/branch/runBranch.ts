@@ -1,11 +1,9 @@
+import { doBranchCheckout } from '../../private/commands/checkouts/doBranchCheckout';
+import { createBranchFailure } from '../../private/commands/operations/createBranchFailure';
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
-import { createOrSwitchBranch } from '../../private/git/createOrSwitchBranch';
-import { createBranchFailure } from '../../private/operations/createBranchFailure';
-import { createBranchSuccess } from '../../private/operations/createBranchSuccess';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
 import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
-import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
 import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
 import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
@@ -35,26 +33,12 @@ export async function runBranch(
 		const scanned = await scanCheckoutState(checkout);
 		ctx.store.updateCheckout(scanned);
 
-		if (!scanned.scan?.exists) {
+		if (!scanned.scan?.can?.('branch')) {
 			ctx.log.log(createBranchFailure(branch, 'checkout not cloned', scanned));
 			continue;
 		}
 
-		try {
-			const outcome = await createOrSwitchBranch(scanned.path, branch);
-			if (outcome === 'created') {
-				ctx.log.log(createBranchSuccess(scanned, branch, `created ${branch}`));
-			} else {
-				ctx.log.log(createBranchSuccess(scanned, branch, `switched to ${branch}`));
-			}
-
-			const updated = { ...scanned, record: { ...scanned.record, branch } };
-			ctx.store.updateCheckout(updated);
-			await saveCheckoutRecord(ctx.config, updated.record.name, updated.record);
-		} catch (error) {
-			ctx.log.log(createBranchFailure(branch, error, scanned));
-			continue;
-		}
+		await doBranchCheckout(ctx, scanned, branch);
 	}
 
 	await scanAllCheckoutsStates(ctx.store);

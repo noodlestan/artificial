@@ -1,10 +1,5 @@
-import simpleGit from 'simple-git';
-
+import { doClone } from '../../../private/commands/doClone';
 import type { WorkspaceContext } from '../../../private/context/createWorkspaceContext';
-import { getCurrentBranch } from '../../../private/git/getCurrentBranch';
-import { createCloneFailure } from '../../../private/operations/createCloneFailure';
-import { createCloneSuccess } from '../../../private/operations/createCloneSuccess';
-import { saveCheckoutRecord } from '../../../private/records/checkout/saveCheckoutRecord';
 import { scanCheckoutState } from '../../../private/scan/scanCheckoutState';
 import type { Checkout } from '../../../private/store/createCheckout';
 
@@ -13,7 +8,7 @@ export async function cloneIfMissing(
 	checkout: Checkout,
 ): Promise<Checkout | null> {
 	const scanned = await scanCheckoutState(checkout);
-	if (scanned.scan?.exists) {
+	if (!scanned.scan?.should?.('clone')) {
 		return scanned;
 	}
 
@@ -21,24 +16,5 @@ export async function cloneIfMissing(
 		return null;
 	}
 
-	try {
-		const git = simpleGit('');
-		await git.clone(scanned.repo.remote, scanned.path);
-	} catch (error) {
-		ctx.log.log(createCloneFailure(scanned, error));
-		return null;
-	}
-
-	const rescan = await scanCheckoutState(scanned);
-	ctx.log.log(createCloneSuccess(rescan));
-
-	const actualBranch = await getCurrentBranch(scanned.path);
-	await saveCheckoutRecord(ctx.config, rescan.record.name, {
-		name: rescan.record.name,
-		repository: rescan.repo?.name,
-		location: rescan.record.location,
-		branch: actualBranch || 'main',
-	});
-
-	return rescan;
+	return doClone(ctx, scanned);
 }

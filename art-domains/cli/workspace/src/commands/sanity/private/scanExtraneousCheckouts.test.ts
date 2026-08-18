@@ -3,9 +3,9 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { makeConfig } from '../../../test/makeConfig';
-import { makeTempDir } from '../../../test/makeTempDir';
-import { removeTempDirs } from '../../../test/removeTempDirs';
+import { makeMockConfig } from '../../../test/helpers/context/makeMockConfig';
+import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
 
 import { scanExtraneousCheckouts } from './scanExtraneousCheckouts';
 
@@ -18,7 +18,7 @@ afterEach(() => {
 describe('scanExtraneousCheckouts', () => {
 	it('empty checkouts dir returns no extraneous entries', async () => {
 		const tempDir = makeTempDir(tempDirs);
-		const config = makeConfig(tempDir);
+		const config = makeMockConfig(tempDir);
 		mkdirSync(join(tempDir, config.clone.path), { recursive: true });
 
 		const extraneous = await scanExtraneousCheckouts(config);

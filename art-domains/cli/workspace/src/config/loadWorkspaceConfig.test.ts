@@ -3,8 +3,8 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { makeTempDir } from '../test/makeTempDir';
-import { removeTempDirs } from '../test/removeTempDirs';
+import { makeTempDir } from '../test/helpers/tempDirs/makeTempDir';
+import { removeTempDirs } from '../test/helpers/tempDirs/removeTempDirs';
 
 import { loadWorkspaceConfig } from './index';
 
