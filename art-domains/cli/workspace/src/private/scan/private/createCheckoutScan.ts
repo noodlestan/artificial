@@ -15,7 +15,11 @@ export function createCheckoutScan(states: CheckoutState[]): CheckoutScan {
 		if (!repo.known) result.push('unknown project');
 		if (!exists.exists) return [...result, 'not cloned'];
 		if (!state('no-detached').attached) result.push('detached HEAD');
-		if (remote.branch !== remote.expectedBranch && state('no-detached').attached) {
+		if (
+			remote.expectedBranch !== '' &&
+			remote.branch !== remote.expectedBranch &&
+			state('no-detached').attached
+		) {
 			result.push('wrong branch');
 		}
 		if (!state('no-conflicts').clear) result.push('merge conflicts');
