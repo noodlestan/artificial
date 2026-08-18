@@ -107,7 +107,7 @@ Separate scanned git state from the persisted `Checkout`; the store only holds i
 
 **Evidence:** Identity-only `Checkout`, separated `CheckoutScan`, scan-only extraneous workflow, migrated consumers/tests, and updated architecture docs; `git show --check` passed and the worker reported all required lint, build, test, and repository CI checks passing (60 files, 186 tests).
 
-### `decouple-checkout-scan-states` - `READY`
+### `decouple-checkout-scan-states` - `COMMITTED`
 
 **Commit Message:** `refactor(workspace-cli): model CheckoutScan as operation guards over states`
 
@@ -115,7 +115,11 @@ Separate scanned git state from the persisted `Checkout`; the store only holds i
 
 Replace flat scan flags with a state-machine `CheckoutScan` (`should(op)` / `can(op)` guards, derived `issues()`, typed `state(type)` accessor); callers gate on guards; `isCleanCheckout` removed. Resolved: op flows re-scan what they mutate on success; `runRepo` presents `CheckoutRepositoryState` (`{target, issues, graph}`) via new `presentRepositoryState`; presenters read the observed branch from the state.
 
+**Commit:** `8b9b2aa`
+
 **Instructions File:** `instructions/decouple-checkout-scan-states.md`
+
+**Report File:** `instructions/decouple-checkout-scan-states__report.md`
 
 ## Follow ups
 
