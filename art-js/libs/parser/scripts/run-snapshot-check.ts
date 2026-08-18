@@ -3,6 +3,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 import { parse } from '@art-js/artificial-parser';
+import { serialize } from '@art-js/artificial-serializer';
 
 const THIS_DIR = path.dirname(new URL(import.meta.url).pathname);
 
@@ -67,6 +68,24 @@ function readFileUtf8(p: string) {
 	return fs.readFileSync(p, 'utf-8');
 }
 
+function diffLines(
+	a: string,
+	b: string,
+): Array<{ line: number; expected: string; actual: string }> {
+	const aLines = a.split('\n');
+	const bLines = b.split('\n');
+	const diffs: Array<{ line: number; expected: string; actual: string }> = [];
+	const maxLen = Math.max(aLines.length, bLines.length);
+	for (let i = 0; i < maxLen; i++) {
+		const al = aLines[i] ?? '';
+		const bl = bLines[i] ?? '';
+		if (al !== bl) {
+			diffs.push({ line: i + 1, expected: al, actual: bl });
+		}
+	}
+	return diffs;
+}
+
 function run(): number {
 	const fixturesDir = validateFixturesDir();
 	console.info(`Using fixtures directory: ${fixturesDir}`);
@@ -107,6 +126,63 @@ function run(): number {
 		} else {
 			console.info(`PASS ${path.basename(input)} -> ${path.basename(snapshot)}`);
 		}
+	}
+
+	// --- return direction: art.json → parsed.md ---
+	let roundtripOverhead = 0;
+	for (const { input, snapshot } of pairs) {
+		const baseName = path.basename(input);
+		let artDocument: unknown;
+		try {
+			artDocument = readSnapshot(snapshot);
+		} catch (err) {
+			console.error(`ROUNDTRIP FAIL ${baseName} — cannot read snapshot: ${(err as Error).message}`);
+			failed += 1;
+			continue;
+		}
+
+		let parsed: string;
+		try {
+			parsed = serialize(artDocument as any);
+		} catch (err) {
+			console.error(`ROUNDTRIP FAIL ${baseName} — serializer threw: ${(err as Error).message}`);
+			failed += 1;
+			continue;
+		}
+
+		if (!parsed || parsed.length === 0) {
+			console.error(`ROUNDTRIP FAIL ${baseName} — serializer returned empty output`);
+			failed += 1;
+			continue;
+		}
+
+		const source = readFileUtf8(input);
+		const diffs = diffLines(source, parsed);
+		if (diffs.length === 0) {
+			console.info(`LOSSLESS ROUNDTRIP ${baseName}`);
+		} else {
+			roundtripOverhead += diffs.length;
+			console.warn(`ROUNDTRIP DIFF ${baseName}: ${diffs.length} line(s) differ`);
+			for (const d of diffs) {
+				console.warn(
+					`  L${d.line}: expected ${JSON.stringify(d.expected)} actual ${JSON.stringify(d.actual)}`,
+				);
+			}
+		}
+
+		if (process.argv.includes('--write')) {
+			const parsedPath = snapshot
+				.replace('.art.json', '.parsed.md')
+				.replace('.md.json', '.parsed.md');
+			fs.writeFileSync(parsedPath, parsed, 'utf-8');
+			console.info(`  wrote ${parsedPath}`);
+		}
+	}
+
+	if (roundtripOverhead > 0) {
+		console.warn(`\nRoundtrip overhead: ${roundtripOverhead} total line(s) differ across fixtures`);
+	} else {
+		console.info('\nAll roundtrips lossless');
 	}
 
 	if (failed === 0) {
