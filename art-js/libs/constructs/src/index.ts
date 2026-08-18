@@ -8,9 +8,16 @@ export type {
 	ConstructParser,
 	ConstructParserFactory,
 	ConstructPreProcessor,
+	ConstructToMdast,
+	ConstructToMdastFactory,
 } from './constructs/types';
 export { cleanPosition, rawSlice } from './helpers';
 export { createFieldBlockParser } from './constructs/FieldBlock';
+export { createFieldBlockToMdast } from './constructs/FieldBlock';
 export { createNaturalBlockParser } from './constructs/NaturalBlock';
+export { createNaturalBlockToMdast } from './constructs/NaturalBlock';
 export { createSectionBlockParser } from './constructs/SectionBlock';
+export { createSectionBlockToMdast } from './constructs/SectionBlock';
 export { createTagParser } from './constructs/Tag';
+export { createTagToMdast } from './constructs/Tag';
+export { createDocumentToMdast } from './constructs/Document/createDocumentToMdast';

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { MdastNode, VisitContext } from '@art-js/artificial-primitives';
+import type { Node } from 'mdast';
 
 import type { Construct } from '../registry';
 
@@ -27,3 +28,10 @@ export interface ConstructParser {
 }
 
 export type ConstructParserFactory = () => ConstructParser;
+
+export interface ConstructToMdast {
+	construct: string;
+	toMdast(node: Construct, children: Node[]): Node;
+}
+
+export type ConstructToMdastFactory = () => ConstructToMdast;

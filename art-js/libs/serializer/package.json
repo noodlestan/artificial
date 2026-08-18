@@ -1,7 +1,7 @@
 {
-  "name": "@art-js/artificial-constructs",
+  "name": "@art-js/artificial-serializer",
   "version": "0.0.1",
-  "description": "Construct factories for Art parser records.",
+  "description": "Serializes Art documents back to markdown.",
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,
@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/noodlestan/no-comply.git",
-    "directory": "libs/constructs/"
+    "directory": "libs/serializer/"
   },
   "type": "module",
   "sideEffects": false,
@@ -27,18 +27,18 @@
     "lint:fix": "prettier . -c --write && eslint . --fix",
     "build:clean": "rm -rf dist",
     "ci": "npm run lint && npm run build && npm run test",
-    "test": "echo none yet"
+    "test": "vitest run"
   },
   "dependencies": {
     "@art-js/artificial-primitives": "*",
-    "mdast-util-from-markdown": "^2.0.0"
+    "@art-js/artificial-constructs": "*",
+    "mdast-util-to-markdown": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^25.9.3",
-    "solid-js": "1.9.13",
     "vite": "8.0.16",
     "vite-plugin-solid": "2.11.12",
     "vite-plugin-solid-svg": "0.8.1",
-    "vite-plugin-top-level-await": "1.6.0"
+    "vite-plugin-top-level-await": "1.6.0",
+    "solid-js": "1.9.13"
   }
 }

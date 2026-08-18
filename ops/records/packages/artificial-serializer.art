@@ -1,0 +1,33 @@
+# Module
+
+## Package: Artificial Serializer
+
+**Purpose:** Serializes Art documents back to markdown.
+
+**Description:** Serializes Art documents back to markdown.
+
+**Path:** `libs/serializer/`
+
+**Canonical Name:** `@art-js/artificial-serializer`
+
+**Version:** `0.0.1`
+
+**Language:** Typescript
+
+**Dependencies:**
+
+- Runtime:
+  - `@art-js/artificial-primitives`
+  - `@art-js/artificial-constructs`
+
+**Scripts:**
+
+- Package Script Set: Artificial Lib Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Lib Package
+- Scaffolder Skeleton: Package Common
+
+**PackageFile:** package.json
