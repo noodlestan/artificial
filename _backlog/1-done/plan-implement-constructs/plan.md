@@ -2,7 +2,7 @@
 
 **ID:** `implement-constructs`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -97,11 +97,15 @@ The parser fixture suite (md/art → art.json vs POC snapshots) must still pass 
 
 ## Commits
 
-### `implement-constructs-package` - `PLANNED`
+### `implement-constructs-package` - `COMMITTED`
 
 **Commit Message:** `build(md-art-roundtrip): implement constructs package with migrated factories`
 
-**Instructions File:** `_backlog/3-next/plan-implement-constructs/instructions/implement-constructs-package.md`
+**Commit Id:** `cd51c4014aec70d85478644b1716c46c7fd663dd`
+
+**Instructions File:** `_backlog/1-done/plan-implement-constructs/instructions/implement-constructs-package.md`
+
+**Report:** `_backlog/1-done/plan-implement-constructs/instructions/implement-constructs-package__report.md`
 
 **Scope:**
 
@@ -125,4 +129,10 @@ None.
 
 ## Feedback
 
-No sub-agent reports yet.
+- implement-constructs-package: `COMMITTED` — report: `_backlog/1-done/plan-implement-constructs/instructions/implement-constructs-package__report.md`
+
+Planner reflection:
+
+- Constructs package scaffolded and all four construct factories migrated with the private directory pattern.
+- Parser rewired to use `ConstructParserFactory` config shape; fixture snapshots verified unchanged.
+- Follow-ups noted in the report where applicable.
