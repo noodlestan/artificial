@@ -73,11 +73,17 @@ If any of these fail, resolve the issue before proceeding with implementation.
 
 **Pseudo:** `architecture/_pseudo.md` → `### Function: scanAllCheckoutsStates`.
 
-### `fix-sanity-extraneous-known-checkouts` - `READY`
+### `fix-sanity-extraneous-known-checkouts` - `COMMITTED`
 
 **Bug:** `sanity` flags known checkouts as extraneous — captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): skip known checkouts in extraneous scan`
+
+**Commit:** `8556c7a` — `fix(workspace-cli): skip known checkouts in extraneous scan`
+
+**Feedback:**
+
+- Worker executed all 3 steps: added store parameter to `scanExtraneousCheckouts`, updated `runSanity` call, added test.
 
 **Instructions File:** `plan-fix-reported-bugs/instructions/fix-sanity-extraneous-known-checkouts.md`
 
