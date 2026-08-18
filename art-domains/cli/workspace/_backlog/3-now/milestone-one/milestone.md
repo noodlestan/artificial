@@ -14,25 +14,25 @@ Complete the workspace CLI with remaining commands and infrastructure. This mile
 
 ## Phase Plans
 
-| Phase | Plan | Status |
-| ----- | ---- | ------ |
-| 0 — Workspace split | `_backlog/0-archive/2026-08-10-plan-workspace-split/plan.md` | `ARCHIVED` |
-| 1 — Workspace sanity clone branch | `_backlog/0-archive/2026-08-12-plan-workspace-sanity-clone-branch/plan.md` | `ARCHIVED` |
-| 2 — Refactor conventions | `_backlog/0-archive/2026-08-13-plan-refactor-conventions/plan.md` | `ARCHIVED` |
-| 3 — Implement command repo | `_backlog/0-archive/2026-08-14-plan-implement-command-repo/plan.md` | `ARCHIVED` |
-| 4 — Implement sanity workspace report | `_backlog/0-archive/2026-08-14-plan-implement-sanity-workspace-report/plan.md` | `ARCHIVED` |
-| 5 — Fix repo command issues | `_backlog/1-done/plan-fix-repo-command-issues/plan.md` | `DONE` |
-| 6 — Implement pull/push/sync | `_backlog/1-done/plan-implement-pull-push-sync/plan.md` | `DONE` |
-| 7 — Cleaner code | `_backlog/3-now/plan-cleaner-code/plan.md` | `ACTIVE` |
-| 8 — Discover records dynamically | `_backlog/4-next/plan-discover-records/plan.md` | `DRAFT` |
-| 9 — Fix reported bugs | `_backlog/4-next/plan-fix-reported-bugs/plan.md` | `DRAFT` |
-| 10 — Implement link | `_backlog/4-next/plan-implement-link/plan.md` | `DRAFT` |
-| 11 — Implement links | `_backlog/4-next/plan-implement-links/plan.md` | `DRAFT` |
-| 12 — Implement publish | `_backlog/4-next/plan-implement-publish/plan.md` | `DRAFT` |
-| 13 — Implement unlink | `_backlog/4-next/plan-implement-unlink/plan.md` | `DRAFT` |
-| 14 — Update knowledge resources | `_backlog/4-next/update-knowledge-resources/plan.md` | `PREPARING` |
+| Phase                                 | Plan                                                                           | Status      |
+| ------------------------------------- | ------------------------------------------------------------------------------ | ----------- |
+| 0 — Workspace split                   | `_backlog/0-archive/2026-08-10-plan-workspace-split/plan.md`                   | `ARCHIVED`  |
+| 1 — Workspace sanity clone branch     | `_backlog/0-archive/2026-08-12-plan-workspace-sanity-clone-branch/plan.md`     | `ARCHIVED`  |
+| 2 — Refactor conventions              | `_backlog/0-archive/2026-08-13-plan-refactor-conventions/plan.md`              | `ARCHIVED`  |
+| 3 — Implement command repo            | `_backlog/0-archive/2026-08-14-plan-implement-command-repo/plan.md`            | `ARCHIVED`  |
+| 4 — Implement sanity workspace report | `_backlog/0-archive/2026-08-14-plan-implement-sanity-workspace-report/plan.md` | `ARCHIVED`  |
+| 5 — Fix repo command issues           | `_backlog/1-done/plan-fix-repo-command-issues/plan.md`                         | `DONE`      |
+| 6 — Implement pull/push/sync          | `_backlog/1-done/plan-implement-pull-push-sync/plan.md`                        | `DONE`      |
+| 7 — Cleaner code                      | `_backlog/1-done/plan-cleaner-code/plan.md`                                    | `DONE`      |
+| 8 — Discover records dynamically      | `_backlog/4-next/plan-discover-records/plan.md`                                | `DRAFT`     |
+| 9 — Fix reported bugs                 | `_backlog/4-next/plan-fix-reported-bugs/plan.md`                               | `DRAFT`     |
+| 10 — Implement link                   | `_backlog/4-next/plan-implement-link/plan.md`                                  | `DRAFT`     |
+| 11 — Implement links                  | `_backlog/4-next/plan-implement-links/plan.md`                                 | `DRAFT`     |
+| 12 — Implement publish                | `_backlog/4-next/plan-implement-publish/plan.md`                               | `DRAFT`     |
+| 13 — Implement unlink                 | `_backlog/4-next/plan-implement-unlink/plan.md`                                | `DRAFT`     |
+| 14 — Update knowledge resources       | `_backlog/4-next/update-knowledge-resources/plan.md`                           | `PREPARING` |
 
-**Next step:** Phase 7 — execute `plan-cleaner-code`.
+**Next step:** Phase 8 — execute `plan-discover-records`.
 
 ## Follow-ups
 
