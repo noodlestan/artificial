@@ -14,12 +14,12 @@ Fixed checkout name and path computation for custom location clones. The `create
 
 #### Files changed
 
-| File | Change |
-| --- | --- |
-| `src/private/store/createCheckout.ts` | Fixed default name: `r?.name + ' @' + target` → `r?.name + ' @ ' + target` |
-| `src/private/store/createCheckout.test.ts` | Updated 2 test expectations to use `'Foo Bar @ fix-test'` (with space) |
-| `src/private/store/createCheckoutStore.test.ts` | Updated 2 test expectations to use `'Foo Bar @ fix-test'` (with space) |
-| `src/commands/clone/cloneSpecific.test.ts` | Added 2 new tests: custom location clone uses correct name `Foo @ bar` at path `repos/foo-bar`; default location clone uses repo name `Foo` at path `repos/foo` |
+| File                                            | Change                                                                                                                                                          |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/private/store/createCheckout.ts`           | Fixed default name: `r?.name + ' @' + target` → `r?.name + ' @ ' + target`                                                                                      |
+| `src/private/store/createCheckout.test.ts`      | Updated 2 test expectations to use `'Foo Bar @ fix-test'` (with space)                                                                                          |
+| `src/private/store/createCheckoutStore.test.ts` | Updated 2 test expectations to use `'Foo Bar @ fix-test'` (with space)                                                                                          |
+| `src/commands/clone/cloneSpecific.test.ts`      | Added 2 new tests: custom location clone uses correct name `Foo @ bar` at path `repos/foo-bar`; default location clone uses repo name `Foo` at path `repos/foo` |
 
 ### Verification
 

@@ -8,19 +8,19 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ### BUGS
 
-| bug                                                      | repro                                                   | expected                                                | found                                                                                                               |
+| bug | repro | expected | found |
 | -------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------- | ------- |
-| `--version` shows wrong version                          | `npm run workspace -- --version`                        | should show `0.0.14` (current package version)          | shows `0.0.9` (stale version)                                                                                       |
-| `clone Foo` fails silently                               | `npm run workspace clone Foo`                           | log clone failure: `unknown repo "Foo"`                 | no output, no error                                                                                                 |
-| Synthetic repo log noise                                 | `npm run workspace sanity`                              | no console output before Checkout Report                | `checkout Purrtrait: no matching repository record, using synthetic repository`                                     |
-| Extraneous empty dir states                              | `repos/blah` (no .git)                                  | `unknown project; no git`                               | `unknown project; uncommitted files` — fix: early `.git` existence check in `scanCheckout` before git introspection |
-| Operations Report missing outcome markers                | `npm run workspace clone --all`                         | `🟢` / `🔴` column zero in Operations Report            | no outcome markers — just `repo                                                                                     | operation | detail` |
-| Clone refuses second checkout of same repo               | `clone Purrtrait bug-fix` when `repos/purrtrait` exists | create checkout `Purrtrait-bug-fix` at `repos/bug-fix/` | error: `Purrtrait already exists at repos/purrtrait`                                                                |
-| Clone should refuse if target dir is extraneous          | `clone Purrtrait bug-fix` when `repos/bug-fix` exists   | error: directory already exists                         | creates checkout anyway                                                                                             |
-| Clone custom location wrong name/path                    | `clone Purrtrait bug-fix`                               | name `Purrtrait-bug-fix`, dir `repos/bug-fix/`          | name `Purrtrait`, dir `bug-fix` (at repo root, not under repos/)                                                    |
-| Extraneous items in Checkout Report                      | `npm run workspace sanity`                              | Extraneous checkouts only in Extraneous Report          | extraneous items appear in Checkout Report too — filter them out                                                    |
-| Clone refuses extraneous dir but no failure logged       | `clone Purrtrait bug-fix` when `repos/bug-fix` exists   | log clone failure operation                             | refuses silently, no operation in report                                                                            |
-| Extraneous with file (no .git) shows "uncommitted files" | `repos/blah` with a `foo` file                          | `unknown project; no git`                               | `unknown project; uncommitted files` — `.git` check should come before git introspection                            |
+| `--version` shows wrong version | `npm run workspace -- --version` | should show `0.0.14` (current package version) | shows `0.0.9` (stale version) |
+| `clone Foo` fails silently | `npm run workspace clone Foo` | log clone failure: `unknown repo "Foo"` | no output, no error |
+| Synthetic repo log noise | `npm run workspace sanity` | no console output before Checkout Report | `checkout Purrtrait: no matching repository record, using synthetic repository` |
+| Extraneous empty dir states | `repos/blah` (no .git) | `unknown project; no git` | `unknown project; uncommitted files` — fix: early `.git` existence check in `scanCheckout` before git introspection |
+| Operations Report missing outcome markers | `npm run workspace clone --all` | `🟢` / `🔴` column zero in Operations Report | no outcome markers — just `repo                                                                                     | operation | detail` |
+| Clone refuses second checkout of same repo | `clone Purrtrait bug-fix` when `repos/purrtrait` exists | create checkout `Purrtrait-bug-fix` at `repos/bug-fix/` | error: `Purrtrait already exists at repos/purrtrait` |
+| Clone should refuse if target dir is extraneous | `clone Purrtrait bug-fix` when `repos/bug-fix` exists | error: directory already exists | creates checkout anyway |
+| Clone custom location wrong name/path | `clone Purrtrait bug-fix` | name `Purrtrait-bug-fix`, dir `repos/bug-fix/` | name `Purrtrait`, dir `bug-fix` (at repo root, not under repos/) |
+| Extraneous items in Checkout Report | `npm run workspace sanity` | Extraneous checkouts only in Extraneous Report | extraneous items appear in Checkout Report too — filter them out |
+| Clone refuses extraneous dir but no failure logged | `clone Purrtrait bug-fix` when `repos/bug-fix` exists | log clone failure operation | refuses silently, no operation in report |
+| Extraneous with file (no .git) shows "uncommitted files" | `repos/blah` with a `foo` file | `unknown project; no git` | `unknown project; uncommitted files` — `.git` check should come before git introspection |
 
 ### PENDING FEATURES
 

@@ -12,11 +12,11 @@
 
 #### Files changed
 
-| File | Change |
-| ---- | ------ |
-| `src/commands/clone/cloneSpecific.ts` | Added directory existence check in `cloneSpecific` before creating a new checkout. When the target directory already exists on disk, logs a clone failure with message `directory already exists at {targetDir}` and returns without creating the checkout. |
-| `src/commands/clone/cloneSpecific.test.ts` | Added test case `logs failure when target directory already exists on disk` — creates a target directory, calls `cloneSpecific`, asserts a failure is logged with the directory-exists message. |
-| `src/commands/clone/private/cloneIfMissing.test.ts` | Fixed pre-existing eslint errors (non-null assertions) that blocked `npm run ci`. |
+| File                                                | Change                                                                                                                                                                                                                                                      |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/commands/clone/cloneSpecific.ts`               | Added directory existence check in `cloneSpecific` before creating a new checkout. When the target directory already exists on disk, logs a clone failure with message `directory already exists at {targetDir}` and returns without creating the checkout. |
+| `src/commands/clone/cloneSpecific.test.ts`          | Added test case `logs failure when target directory already exists on disk` — creates a target directory, calls `cloneSpecific`, asserts a failure is logged with the directory-exists message.                                                             |
+| `src/commands/clone/private/cloneIfMissing.test.ts` | Fixed pre-existing eslint errors (non-null assertions) that blocked `npm run ci`.                                                                                                                                                                           |
 
 ### Verification
 

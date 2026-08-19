@@ -277,11 +277,17 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Custom location → name is `{repo} @ {location}`, path is `repos/{location}`.
 - Location with spaces → `safePath` normalises correctly.
 
-### `fix-clone-refuses-extraneous-no-failure-logged` - `READY`
+### `fix-clone-refuses-extraneous-no-failure-logged` - `COMMITTED`
 
 **Bug:** Clone refuses extraneous dir but no failure logged — captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): log failure when clone refuses extraneous directory`
+
+**Commit:** `7e69306` — already implemented in prior commit (refuse extraneous dir)
+
+**Feedback:**
+
+- Worker found this fix was already implemented in commit `7e69306` (`fix-clone-should-refuse-extraneous-dir`). No new code changes needed.
 
 **Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-refuses-extraneous-no-failure-logged.md`
 
