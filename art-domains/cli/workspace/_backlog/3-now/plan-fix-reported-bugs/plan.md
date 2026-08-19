@@ -132,11 +132,17 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Record branch is `main`, actual branch is `develop` → still `wrong branch` (correct).
 - Record branch is `main`, actual branch is `main` → no `wrong branch` (correct).
 
-### `fix-clone-wrong-remote` - `READY`
+### `fix-clone-wrong-remote` - `COMMITTED`
 
 **Bug:** Checkout report fails to detect wrong remote — captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): detect wrong remote in checkout scan`
+
+**Commit:** `6d665a6` — `fix(workspace-cli): detect wrong remote in checkout scan`
+
+**Feedback:**
+
+- Worker executed successfully. Added `getRemoteUrl` helper, `wrong remote` state type, and 2 tests.
 
 **Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-wrong-remote.md`
 
