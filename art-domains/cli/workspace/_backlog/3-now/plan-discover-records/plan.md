@@ -146,6 +146,8 @@ The implementation must also run the workspace CLI tests against both legacy `op
 
 **Instructions File:** `plan-discover-records/instructions/discover-record-files.md`
 
+**Commit ID:** `d9ab329`
+
 **Report:** `plan-discover-records/instructions/discover-record-files__report.md`
 
 **Scope:**
@@ -184,4 +186,6 @@ The implementation must also run the workspace CLI tests against both legacy `op
 ## Feedback
 
 - **preserve-checkout-filenames (aebefee):** Worker completed all changes. Data-first `saveCheckoutRecord(config, data, filename?)` signature applied. `RepositoryCheckoutRecord` and `Checkout` carry `filename` through hydration. `makeCheckoutFilename` extracted. Architecture docs updated. 63 test files, 208 tests, 12 CI tasks all passing.
-- **discover-record-files:** Worker completed all changes. Config reshaped to top-level `checkouts.*` and `records.pattern`. `findRecordFiles` added with gitignore-aware glob discovery. `loadRepositoryRecords` and `loadCheckoutRecords` now async. 8 new tests for `findRecordFiles`. 55 test files pass, 9 fail (all outside instruction scope — `loadProjectGraph` mock paths and slug collisions in command tests). Lint, build pass.
+- **discover-record-files (d9ab329):** Worker completed all changes. Config reshaped to top-level `checkouts.*` and `records.pattern`. `findRecordFiles` added with gitignore-aware glob discovery. `loadRepositoryRecords` and `loadCheckoutRecords` now async. 8 new tests for `findRecordFiles`. 55 test files pass, 9 fail (all outside instruction scope — `loadProjectGraph` mock paths and slug collisions in command tests). Lint, build pass.
+  - **Delegatee feedback:** 9 test files (44 tests) fail due to mock repo+checkout records sharing the same slug name in `_records/`, causing filename collisions. Root cause: `writeRepoMockRecord` and `writeCheckoutMockRecord` both write to `_records/{slug}.art`; when tests use the same name for both, the checkout record overwrites the repo record. Fix belongs in `load-colocated-records` commit.
+  - **Planner reflection:** The slug collision is an expected consequence of co-locating both record kinds in `_records/`. The next commit must resolve this by using distinct mock names or separate mock directories. The worker correctly identified and documented the root cause.

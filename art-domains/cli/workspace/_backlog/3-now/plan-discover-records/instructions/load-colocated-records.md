@@ -28,6 +28,26 @@ The plan workflow runs on three working agreements:
 
 Complete the migration from fixed project-record directories to dynamic, kind-filtered loading, so `repo` can read both legacy centralized records and co-located `_records` records in every checkout.
 
+## Pre-existing Test Failures (from `discover-record-files` commit)
+
+**9 test files, 44 tests are currently failing.** These failures were introduced by the preceding commit and MUST be fixed as part of this instruction. They are NOT pre-existing baseline failures.
+
+| Test file                  | Failures | Root cause                                                                                                    |
+| -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| `loadProjectGraph.test.ts` | 10       | Mock writers now write to `_records/` but `loadProjectGraph` still reads `ops/records/` — this commit's scope |
+| `runClone.test.ts`         | 4        | Mock repo + checkout records collide when sharing same slug name in `_records/`                               |
+| `cloneSpecific.test.ts`    | 1        | Same slug collision: repo `Foo` and checkout `Foo` both write to `_records/foo.art`                           |
+| `runSanity.test.ts`        | 1        | Cascading from same collision; checkout overwrites repo in `_records/`                                        |
+| `runBranch.test.ts`        | 4        | Cascading from same collision; `getCheckoutOfRepo` returns undefined                                          |
+| `runPush.test.ts`          | 4        | Cascading from same collision                                                                                 |
+| `runPull.test.ts`          | 4        | Cascading from same collision                                                                                 |
+| `runSync.test.ts`          | 4        | Cascading from same collision                                                                                 |
+| `runRepo.test.ts`          | 2        | Cascading from same collision                                                                                 |
+
+**Root cause:** `writeRepoMockRecord` and `writeCheckoutMockRecord` both write to `_records/{slug}.art`. When tests create both a repo and checkout record with the same name (e.g., `Foo`), the checkout record overwrites the repo record, so `loadRepositoryRecords` finds no matching repo records and all downstream command tests fail.
+
+**Fix strategy:** Use distinct mock names for repo and checkout records in every test that creates both. For example, use `Foo-repo` and `Foo-checkout` as mock names, or prefix checkout names. This is the minimal fix — it does NOT require separate directories.
+
 ## Mandatory Reading
 
 - `$PROJECT/art-domains/cli/workspace/_backlog/_note_from_workspace_architect.md`
@@ -49,7 +69,31 @@ npm ci
 npm run ci
 ```
 
-Record baseline failures before changing code.
+Record baseline failures before changing code. **Expect 9 failing test files (44 tests) as documented above — these are this commit's responsibility to fix.**
+
+### Test-driven approach
+
+Fix the mock name collision FIRST, before implementing the loader changes. Use focused test runs to drive and validate each step:
+
+```bash
+# Fix the slug collision — run only affected tests to validate the fix:
+npx vitest run src/commands/clone/runClone.test.ts
+npx vitest run src/commands/clone/cloneSpecific.test.ts
+npx vitest run src/commands/sanity/runSanity.test.ts
+npx vitest run src/commands/branch/runBranch.test.ts
+npx vitest run src/commands/push/runPush.test.ts
+npx vitest run src/commands/pull/runPull.test.ts
+npx vitest run src/commands/sync/runSync.test.ts
+npx vitest run src/commands/repo/runRepo.test.ts
+
+# Then fix loadProjectGraph — run only the graph test:
+npx vitest run src/private/records/projectGraph/loadProjectGraph.test.ts
+
+# After all fixes pass, run the full suite:
+npm run test
+```
+
+Run focused tests after each change to validate incrementally. Do NOT wait until the end to discover regressions.
 
 ## Architecture Doc Changes
 
@@ -82,6 +126,7 @@ Update these architecture files BEFORE making source code changes. Config-relate
 
 ## Changes
 
+0. **Fix mock name collision first.** Update `src/test/helpers/records/writeRepoMockRecord.ts` and `src/test/helpers/records/writeCheckoutMockRecord.ts` (and any callers that pass the same name to both) to use distinct names. The simplest approach: suffix checkout mock names with `-checkout` or use a different base name. Run the 8 affected command test files to confirm the collision is resolved before proceeding.
 1. Rename the plural collection modules and APIs — all become async, returning a Promise:
    - `readProjectRecords` → `loadProjectRecords(config, checkoutPath): Promise<ProjectRecord[]>`.
    - `readNamespaceRecords` → `loadNamespaceRecords(config, checkoutPath): Promise<NamespaceRecord[]>`.
@@ -105,7 +150,17 @@ The following test files are likely affected by this commit. Update existing tes
 
 ### Existing tests to update
 
-- `$PACKAGE/src/private/records/projectGraph/loadProjectGraph.test.ts` — currently calls `loadProjectGraph(tempDir)` synchronously. Make async: `const graph = await loadProjectGraph(config, tempDir)`. Add tests for co-located `_records/` layout. Add tests for ignored `.art` files.
+- `$PACKAGE/src/test/helpers/records/writeRepoMockRecord.ts` — update mock names to be distinct from checkout mock names (if not already done in step 0).
+- `$PACKAGE/src/test/helpers/records/writeCheckoutMockRecord.ts` — update mock names to be distinct from repo mock names (if not already done in step 0).
+- `$PACKAGE/src/commands/clone/runClone.test.ts` — verify passes after mock name fix; add co-located `_records/` test if missing.
+- `$PACKAGE/src/commands/clone/cloneSpecific.test.ts` — verify passes after mock name fix.
+- `$PACKAGE/src/commands/sanity/runSanity.test.ts` — verify passes after mock name fix.
+- `$PACKAGE/src/commands/branch/runBranch.test.ts` — verify passes after mock name fix.
+- `$PACKAGE/src/commands/push/runPush.test.ts` — verify passes after mock name fix.
+- `$PACKAGE/src/commands/pull/runPull.test.ts` — verify passes after mock name fix.
+- `$PACKAGE/src/commands/sync/runSync.test.ts` — verify passes after mock name fix.
+- `$PACKAGE/src/commands/repo/runRepo.test.ts` — verify passes after mock name fix.
+- `$PACKAGE/src/private/records/projectGraph/loadProjectGraph.test.ts` — currently calls `loadProjectGraph(tempDir)` synchronously. Make async: `const graph = await loadProjectGraph(config, tempDir)`. Add tests for co-located `_records/` layout. Add tests for ignored `.art` files. Run this file in isolation after each change to validate incrementally.
 - `$PACKAGE/src/commands/repo/runRepo.ts` callers — update any tests that call `loadProjectGraph` to await it.
 - `$PACKAGE/src/private/records/project/readProjectRecords.ts` callers — update imports to new `loadProjectRecords` name.
 - `$PACKAGE/src/private/records/namespace/readNamespaceRecords.ts` callers — update imports to new `loadNamespaceRecords` name.
@@ -135,7 +190,20 @@ npm run ci
 
 ## Final Verification
 
-Run the focused graph and repository command tests, then the full package suite. Confirm `loadProjectGraph` has no hardcoded `ops/records` path and all collection loaders obtain files exclusively through `findRecordFiles`.
+Run the focused graph and repository command tests first:
+
+```bash
+npx vitest run src/private/records/projectGraph/loadProjectGraph.test.ts
+npx vitest run src/commands/clone/runClone.test.ts
+npx vitest run src/commands/repo/runRepo.test.ts
+```
+
+Then run the full package suite. Confirm:
+
+- All 9 previously-failing test files now pass (0 failures from the slug collision).
+- `loadProjectGraph` has no hardcoded `ops/records` path.
+- All collection loaders obtain files exclusively through `findRecordFiles`.
+- No test file still references the old `_records/{slug}.art` collision pattern.
 
 ## How to Report Back
 
