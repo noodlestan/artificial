@@ -8,6 +8,14 @@
 
 ::switch `agent-worker` — switch to the agent-worker agent mode to execute this instruction. Your mode must be `worker` before you start changing files.
 
+## Path Variables
+
+| Variable     | Resolved Path                        | Purpose                                                   |
+| ------------ | ------------------------------------ | --------------------------------------------------------- |
+| `$WORKSPACE` | Current workspace root               | workspace managed by `@art-domains/workspace-cli`         |
+| `$PROJECT`   | Provided with prompt                 | Checkout of Artificial monorepo (setup, changes, commits) |
+| `$PACKAGE`   | `$PROJECT/art-domains/cli/workspace` | `@art-domains/workspace-cli` package                      |
+
 ## Working Agreements
 
 The plan workflow runs on three working agreements:
@@ -41,6 +49,35 @@ npm run ci
 
 Record baseline failures before changing code.
 
+## Architecture Doc Changes
+
+Update these architecture files BEFORE making source code changes. Config-related docs only — do NOT update `architecture/context-model.md` or `architecture/_pseudo.md` in this commit (those are claimed by the next commit).
+
+### `architecture/config.md`
+
+- Replace the `WorkspaceConfig` interface block with the new shape:
+  ```typescript
+  interface WorkspaceConfig {
+    root: { path: string };
+    clone: { path: string };
+    checkouts: { path: string; template: string };
+    records: { pattern: string };
+  }
+  ```
+- Replace the `PartialWorkspaceConfig` with the new shape (matching top-level `checkouts` and `records`).
+- Update the "Authoring Config" example to use `checkouts: { path: '_records/', template: '...' }` and `records: { pattern: '*.art' }`.
+- Update the "Source of Truth" section to reference `_records/` and co-located records.
+- Add a note that `records.repositories` and `records.checkouts` have been restructured: checkout persistence moved to top-level `checkouts`, repository records are now discovered dynamically.
+
+### `$PROJECT/art-domains/cli/workspace/_guide.md`
+
+- Update the records/config sections to reflect the new configuration shape and defaults (`checkouts.path`, `checkouts.template`, `records.pattern`).
+
+### Do NOT update
+
+- `architecture/context-model.md` — claimed by `load-colocated-records` commit.
+- `architecture/_pseudo.md` — claimed by `load-colocated-records` commit.
+
 ## Changes
 
 1. Change the configuration contract:
@@ -56,24 +93,38 @@ Record baseline failures before changing code.
    - Exclude directories and skip `.git` internals.
    - Filter candidates through `git check-ignore --no-index --stdin` from the search root so ignored tracked and untracked candidates are excluded. If the search root is not a Git worktree, return the glob matches without Git filtering.
    - Return stable, deterministic absolute paths. Missing paths return an empty array.
-3. Refactor `loadRepositoryRecords(config)` and `loadCheckoutRecords(config, repos)`:
-   - Call `findRecordFiles(config.root.path, config.records.pattern)`.
+3. Refactor `loadRepositoryRecords(config)` and make `loadCheckoutRecords` async:
+   - `loadRepositoryRecords` becomes async: `loadRepositoryRecords(config): Promise<RepositoryRecord[]>`.
+   - `loadCheckoutRecords` becomes async: `loadCheckoutRecords(config, repos): Promise<RepositoryCheckoutRecord[]>`.
+   - Both call `findRecordFiles(config.root.path, config.records.pattern)`.
    - Pass every candidate to the appropriate singular reader.
    - Filter `null` values; checkout loading must continue resolving `record.repository` against the loaded repository records.
+   - Update all callers of both loaders to `await` the result.
 4. Change `readRepositoryRecord` and `readCheckoutRecord` to return `null` when their kind heading is absent. Keep their valid field parsing and existing defaults for missing optional/required fields after a valid kind heading.
 5. Update `makeCheckoutFilename` and the existing checkout persistence tests to read `config.checkouts.template` and write to `config.checkouts.path`; preserve explicit filename behavior from the preceding iteration and use filename generation only for new records.
 
 ## Tests
 
-- `findRecordFiles`: recursive default pattern, custom pattern, missing path, `.gitignore` exclusion, and deterministic output.
-- Config: default pattern, top-level checkout settings, explicit manifest loading, and partial config behavior.
-- Readers: `null` for wrong-kind content/missing kind heading; valid repository and checkout records still parse.
-- Loaders: mixed `.art` files are filtered by kind; repository and checkout records load from nested co-located locations; ignored `.art` files are skipped.
-- Checkout persistence: updated config shape still loads the template, writes generated records under `_records/`, and preserves explicit filenames.
+The following test files are likely affected by this commit. Update existing tests and add new ones as noted.
 
-## Verification
+### Existing tests to update
 
-From `$PROJECT/art-domains/cli/workspace/`:
+- `$PACKAGE/src/config/defineConfig.test.ts` — update config shape assertions to new `checkouts.*` + `records.pattern` structure.
+- `$PACKAGE/src/config/loadWorkspaceConfig.test.ts` — update config loading tests for new shape.
+- `$PACKAGE/src/test/makeConfig.ts` — change to use `checkouts: { path: '_records/', template: '...' }` and `records: { pattern: '*.art' }`.
+- `$PACKAGE/src/private/records/checkout/loadCheckoutRecords.test.ts` — update `makeMockConfig` to use new config shape; make test async (add `await`); update fixture paths from `ops/records/checkouts` to `_records/`.
+- `$PACKAGE/src/test/writeCheckoutRecord.ts` — update fixture paths.
+- `$PACKAGE/src/test/writeRepoRecord.ts` — update fixture paths.
+- `$PACKAGE/src/test/writeProjectRecord.ts` — update fixture paths for namespace/package writers.
+- All callers of `loadRepositoryRecords` and `loadCheckoutRecords` — add `await`.
+
+### New tests to create
+
+- `$PACKAGE/src/private/records/shared/findRecordFiles.test.ts` — test recursive default pattern (`*.art`), custom pattern, missing path (returns `[]`), `.gitignore` exclusion, deterministic output ordering.
+
+### Verification
+
+From `$PACKAGE/`:
 
 ```bash
 npm run lint:fix
@@ -94,4 +145,4 @@ Confirm no source still reads `config.records.repositories` or `config.records.c
 
 ## How to Report Back
 
-Render `$PROJECT/art-domains/cli/workspace/_backlog/4-next/plan-discover-records/instructions/discover-record-files__report.md` with the report template. Include changed files, test evidence, baseline failures, and any ambiguity about the final checkout configuration shape.
+Render `$PACKAGE/_backlog/3-now/plan-discover-records/instructions/discover-record-files__report.md` with the report template. Include changed files, architecture doc updates, test evidence, baseline failures, and any ambiguity about the final checkout configuration shape.

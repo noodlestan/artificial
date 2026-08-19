@@ -15,17 +15,16 @@ Update the workspace CLI architecture knowledge resources to reflect implemented
 ## Source Tasks
 
 - Milestone: `_backlog/3-now/milestone-one/milestone.md` — defines this plan as part of the Complete Workspace CLI milestone.
-- Architect briefing: `_backlog/_architect.md` — establishes records as the source of truth and the imperative command model.
 
 ## Files to Update
 
 ### 1. `architecture/index.md`
 
-**Current state:** References a stale plan (`_backlog/3-now/plan-workspace-cli/plan.md`). Lists `pull`, `push`, `sync`, `link`, `unlink`, `publish` as commands without distinguishing implemented from planned.
+**Current state:** References a stale plan (`plan-workspace-cli/plan.md`). Lists `pull`, `push`, `sync`, `link`, `unlink`, `publish` as commands without distinguishing implemented from planned.
 
 **Update strategy:**
 
-- Replace the stale plan reference with the current milestone reference (`_backlog/3-now/milestone-one/milestone.md`).
+- Replace the stale plan reference with the current milestone reference (`milestone-one/milestone.md`).
 - Update the "CLI Execution Model" section to reflect that `pull`, `push`, and `sync` are now implemented alongside `clone`, `branch`, `repo`, and `sanity`.
 - Clarify that `link`, `unlink`, and `publish` remain designed/draft.
 - Review the "Data Model" section against `context-model.md` updates — ensure consistency on `CheckoutStore` semantics and record-mutation pattern.
@@ -48,7 +47,7 @@ Update the workspace CLI architecture knowledge resources to reflect implemented
 
 **Evidence to consult:**
 
-- `$PROJECT/art-domains/cli/workspace/_backlog/4-next/plan-discover-records/plan.md` — "Decisions and Assumptions" section defines the new config shape.
+- `$PROJECT/art-domains/cli/workspace/_backlog/3-now/plan-discover-records/plan.md` — "Decisions and Assumptions" section defines the new config shape.
 - `$PROJECT/art-domains/cli/workspace/src/config/` — actual `WorkspaceConfig` type and `defineConfig` to verify current vs planned state.
 
 ### 3. `architecture/context-model.md`
@@ -70,7 +69,7 @@ Update the workspace CLI architecture knowledge resources to reflect implemented
 - `$PROJECT/art-domains/cli/workspace/src/private/records/` — actual directory structure.
 - `$PROJECT/art-domains/cli/workspace/src/private/records/checkout/saveCheckoutRecord.ts` — current signature.
 - `$PROJECT/art-domains/cli/workspace/src/private/store/createCheckout.ts` — `Checkout` interface.
-- `$PROJECT/art-domains/cli/workspace/_backlog/4-next/plan-discover-records/plan.md` — planned changes to records layer.
+- `$PROJECT/art-domains/cli/workspace/_backlog/3-now/plan-discover-records/plan.md` — planned changes to records layer.
 
 ### 4. `architecture/commands.md`
 

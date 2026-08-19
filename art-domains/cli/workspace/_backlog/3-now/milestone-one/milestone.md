@@ -24,8 +24,8 @@ Complete the workspace CLI with remaining commands and infrastructure. This mile
 | 5 — Fix repo command issues           | `_backlog/0-archive/2026-08-18-plan-fix-repo-command-issues/plan.md`           | `ARCHIVED`  |
 | 6 — Implement pull/push/sync          | `_backlog/0-archive/2026-08-18-plan-implement-pull-push-sync/plan.md`          | `ARCHIVED`  |
 | 7 — Cleaner code                      | `_backlog/0-archive/2026-08-18-plan-cleaner-code/plan.md`                      | `ARCHIVED`  |
-| 8 — Discover records dynamically      | `_backlog/4-next/plan-discover-records/plan.md`                                | `DRAFT`     |
-| 9 — Fix reported bugs                 | `_backlog/0-archive/2026-08-19-plan-fix-reported-bugs/plan.md`                 | `DONE`      |
+| 8 — Discover records dynamically      | `_backlog/3-now/plan-discover-records/plan.md`                                 | `READY`     |
+| 9 — Fix reported bugs                 | `_backlog/0-archive/2026-08-19-plan-fix-reported-bugs/plan.md`                 | `ARCHIVED`  |
 | 10 — Implement link                   | `_backlog/4-next/plan-implement-link/plan.md`                                  | `DRAFT`     |
 | 11 — Implement links                  | `_backlog/4-next/plan-implement-links/plan.md`                                 | `DRAFT`     |
 | 12 — Implement publish                | `_backlog/4-next/plan-implement-publish/plan.md`                               | `DRAFT`     |
