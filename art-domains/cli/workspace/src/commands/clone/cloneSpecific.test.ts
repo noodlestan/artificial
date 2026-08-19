@@ -44,13 +44,13 @@ describe('cloneSpecific', () => {
 		await initBareRepoTest(bareDir);
 		writeRepoMockRecord(tempDir, 'One', bareDir);
 
-		const repos = loadRepositoryRecords(ctx.config);
+		const repos = await loadRepositoryRecords(ctx.config);
 		await cloneSpecific(ctx, repos, 'One');
 
 		const repoDir = join(tempDir, ctx.config.clone.path, 'one');
 		expect(() => simpleGit(repoDir).status()).not.toThrow();
 
-		const recordFile = join(tempDir, 'ops/records/checkouts/one.art');
+		const recordFile = join(tempDir, '_records/one.art');
 		expect(existsSync(recordFile)).toBe(true);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: One');
@@ -66,15 +66,15 @@ describe('cloneSpecific', () => {
 		writeRepoMockRecord(tempDir, 'Foo', bareDir);
 		writeCheckoutMockRecord(tempDir, 'Foo', 'Foo', 'foo');
 
-		const repos = loadRepositoryRecords(ctx.config);
-		hydrateStoreFromRecords(ctx.config, ctx.store, loadCheckoutRecords(ctx.config, repos));
+		const repos = await loadRepositoryRecords(ctx.config);
+		hydrateStoreFromRecords(ctx.config, ctx.store, await loadCheckoutRecords(ctx.config, repos));
 		await cloneSpecific(ctx, repos, 'Foo', 'bar');
 
 		const ops = ctx.log.all();
 		const cloneOps = ops.filter(op => op.operation === 'clone');
 		expect(cloneOps.some(op => op.outcome === 'success')).toBe(true);
 
-		const recordFile = join(tempDir, 'ops/records/checkouts/foo-@-bar.art');
+		const recordFile = join(tempDir, '_records/foo-@-bar.art');
 		expect(existsSync(recordFile)).toBe(true);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: Foo @ bar');
@@ -89,7 +89,7 @@ describe('cloneSpecific', () => {
 		await initBareRepoTest(bareDir);
 		writeRepoMockRecord(tempDir, 'Foo', bareDir);
 
-		const repos = loadRepositoryRecords(ctx.config);
+		const repos = await loadRepositoryRecords(ctx.config);
 		await cloneSpecific(ctx, repos, 'Foo', 'bar');
 
 		const checkouts = ctx.store.getAllCheckouts();
@@ -108,7 +108,7 @@ describe('cloneSpecific', () => {
 		await initBareRepoTest(bareDir);
 		writeRepoMockRecord(tempDir, 'Foo', bareDir);
 
-		const repos = loadRepositoryRecords(ctx.config);
+		const repos = await loadRepositoryRecords(ctx.config);
 		await cloneSpecific(ctx, repos, 'Foo');
 
 		const checkouts = ctx.store.getAllCheckouts();
@@ -126,8 +126,8 @@ describe('cloneSpecific', () => {
 		writeRepoMockRecord(tempDir, 'Two', 'git@example.com:two.git');
 		writeCheckoutMockRecord(tempDir, 'Two', 'Two', 'one custom');
 
-		const repos = loadRepositoryRecords(ctx.config);
-		hydrateStoreFromRecords(ctx.config, ctx.store, loadCheckoutRecords(ctx.config, repos));
+		const repos = await loadRepositoryRecords(ctx.config);
+		hydrateStoreFromRecords(ctx.config, ctx.store, await loadCheckoutRecords(ctx.config, repos));
 		await cloneSpecific(ctx, repos, 'One', 'custom');
 
 		const ops = ctx.log.all();
@@ -144,7 +144,7 @@ describe('cloneSpecific', () => {
 		const targetDir = join(tempDir, ctx.config.clone.path, 'one');
 		mkdirSync(targetDir, { recursive: true });
 
-		const repos = loadRepositoryRecords(ctx.config);
+		const repos = await loadRepositoryRecords(ctx.config);
 		await cloneSpecific(ctx, repos, 'One');
 
 		const ops = ctx.log.all();

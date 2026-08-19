@@ -23,7 +23,7 @@ export async function saveCheckoutRecord(
 	filename?: string,
 ): Promise<string> {
 	let template = HARDCODED_TEMPLATE;
-	const templatePath = join(config.root.path, config.records.checkouts.template);
+	const templatePath = join(config.root.path, config.checkouts.template);
 	if (existsSync(templatePath)) {
 		template = readFileSync(templatePath, 'utf-8');
 	}

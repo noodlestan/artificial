@@ -3,9 +3,10 @@ import type { PartialWorkspaceConfig, WorkspaceConfig } from './types';
 export function defineConfig(config: PartialWorkspaceConfig): WorkspaceConfig {
 	const clonePath = config.clone?.path || 'repos';
 	const rootPath = config.root?.path || process.cwd();
-	const repositoriesPath = config.records?.repositories?.path || 'repos';
-	const checkoutsPath = config.records?.checkouts?.path || '<missing';
-	const checkoutTemplatePath = config.records?.checkouts?.template || '<missing';
+	const checkoutsPath = config.checkouts?.path || '_records/';
+	const checkoutTemplatePath =
+		config.checkouts?.template || '.agents/domains/workspace/templates/checkout.art.njk';
+	const recordsPattern = config.records?.pattern || '*.art';
 
 	return {
 		clone: {
@@ -14,14 +15,12 @@ export function defineConfig(config: PartialWorkspaceConfig): WorkspaceConfig {
 		root: {
 			path: rootPath,
 		},
+		checkouts: {
+			path: checkoutsPath,
+			template: checkoutTemplatePath,
+		},
 		records: {
-			repositories: {
-				path: repositoriesPath,
-			},
-			checkouts: {
-				path: checkoutsPath,
-				template: checkoutTemplatePath,
-			},
+			pattern: recordsPattern,
 		},
 	};
 }

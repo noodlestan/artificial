@@ -2,27 +2,22 @@ import { existsSync, readFileSync } from 'node:fs';
 
 import type { CheckoutRecord } from '../types';
 
-export function readCheckoutRecord(file: string): CheckoutRecord {
-	const defaults: CheckoutRecord = {
-		name: '',
-		location: '',
-		branch: 'main',
-	};
-
+export function readCheckoutRecord(file: string): CheckoutRecord | null {
 	if (!existsSync(file)) {
-		return defaults;
+		return null;
 	}
 
 	const content = readFileSync(file, 'utf-8');
 
 	const nameMatch = content.match(/## Checkout:\s*(.+)/);
+	if (!nameMatch) {
+		return null;
+	}
+
 	const repositoryMatch = content.match(/\*\*Repository:\*\*\s*(.+)/);
 	const locationMatch = content.match(/\*\*Location:\*\*\s*`([^`]+)`/);
 	const branchMatch = content.match(/\*\*Branch:\*\*\s*`([^`]+)`/);
 
-	if (!nameMatch) {
-		console.warn(`checkout record ${file}: missing name, using default`);
-	}
 	if (!locationMatch) {
 		console.warn(`checkout record ${file}: missing location, using default`);
 	}
@@ -31,9 +26,9 @@ export function readCheckoutRecord(file: string): CheckoutRecord {
 	}
 
 	return {
-		name: nameMatch?.[1]?.trim() ?? defaults.name,
+		name: nameMatch[1]?.trim() ?? '',
 		repository: repositoryMatch?.[1]?.trim(),
-		location: locationMatch?.[1]?.trim() ?? defaults.location,
-		branch: branchMatch?.[1]?.trim() ?? defaults.branch,
+		location: locationMatch?.[1]?.trim() ?? '',
+		branch: branchMatch?.[1]?.trim() ?? 'main',
 	};
 }

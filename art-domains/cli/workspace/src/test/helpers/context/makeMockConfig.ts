@@ -7,10 +7,8 @@ export function makeMockConfig(
 	return {
 		clone: { path: 'repos' },
 		root: { path: rootPath },
-		records: {
-			repositories: { path: 'ops/records/repositories' },
-			checkouts: { path: 'ops/records/checkouts', template: 'checkout.art.njk' },
-		},
+		checkouts: { path: '_records/', template: 'checkout.art.njk' },
+		records: { pattern: '*.art' },
 		...overrides,
 	};
 }

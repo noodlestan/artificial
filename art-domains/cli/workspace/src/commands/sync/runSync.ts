@@ -9,8 +9,8 @@ import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRec
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 
 export async function runSync(ctx: WorkspaceContext): Promise<void> {
-	const repos = loadRepositoryRecords(ctx.config);
-	const records = loadCheckoutRecords(ctx.config, repos);
+	const repos = await loadRepositoryRecords(ctx.config);
+	const records = await loadCheckoutRecords(ctx.config, repos);
 	hydrateStoreFromRecords(ctx.config, ctx.store, records);
 
 	await scanAllCheckoutsStates(ctx.store);

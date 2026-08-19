@@ -11,7 +11,7 @@ export function writeProjectMockRecord(
 		namespaces?: string[];
 	},
 ): void {
-	const dir = join(tempDir, 'ops/records/projects');
+	const dir = join(tempDir, '_records');
 	mkdirSync(dir, { recursive: true });
 	const remote = options?.remote ?? 'git@example.com:test.git';
 	const canonicalName = options?.canonicalName ?? '@test/' + name.toLowerCase();
@@ -45,7 +45,7 @@ export function writeNamespaceMockRecord(
 		packages?: string[];
 	},
 ): void {
-	const dir = join(tempDir, 'ops/records/namespaces');
+	const dir = join(tempDir, '_records');
 	mkdirSync(dir, { recursive: true });
 	const nsPath = options?.path ?? '.';
 	const packages = options?.packages ?? [];
@@ -67,7 +67,7 @@ export function writePackageMockRecord(
 		path?: string;
 	},
 ): void {
-	const dir = join(tempDir, 'ops/records/packages');
+	const dir = join(tempDir, '_records');
 	mkdirSync(dir, { recursive: true });
 	const canonicalName = options?.canonicalName ?? '@test/' + name.toLowerCase();
 	const pkgPath = options?.path ?? name.toLowerCase();

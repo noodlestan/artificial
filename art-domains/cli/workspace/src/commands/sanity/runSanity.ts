@@ -15,8 +15,8 @@ import { pushCleanCheckouts } from './private/pushCleanCheckouts';
 import { scanExtraneousCheckouts } from './private/scanExtraneousCheckouts';
 
 export async function runSanity(ctx: WorkspaceContext, options: { auto: boolean }): Promise<void> {
-	const repos = loadRepositoryRecords(ctx.config);
-	const records = loadCheckoutRecords(ctx.config, repos);
+	const repos = await loadRepositoryRecords(ctx.config);
+	const records = await loadCheckoutRecords(ctx.config, repos);
 	hydrateStoreFromRecords(ctx.config, ctx.store, records);
 
 	const workspaceCheckout = {

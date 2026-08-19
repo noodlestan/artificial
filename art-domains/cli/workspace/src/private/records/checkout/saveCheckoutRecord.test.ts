@@ -33,7 +33,7 @@ describe('saveCheckoutRecord', () => {
 	it('renders from the template file when config and root are provided', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const config = makeMockConfig(tempDir);
-		const file = join(tempDir, 'ops/records/checkouts/test.art');
+		const file = join(tempDir, '_records/test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
 		const saved = await saveCheckoutRecord(config, data, file);
@@ -46,7 +46,7 @@ describe('saveCheckoutRecord', () => {
 	it('falls back to hardcoded template when template file is missing', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const config = makeMockConfig(tempDir);
-		const file = join(tempDir, 'ops/records/checkouts/test.art');
+		const file = join(tempDir, '_records/test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
 		const saved = await saveCheckoutRecord(config, data, file);
@@ -64,7 +64,7 @@ describe('saveCheckoutRecord', () => {
 		const saved = await saveCheckoutRecord(config, data);
 		const content = readFileSync(saved, 'utf-8');
 
-		expect(saved).toBe(join(tempDir, 'ops/records/checkouts/my-checkout.art'));
+		expect(saved).toBe(join(tempDir, '_records/my-checkout.art'));
 		expect(content).toContain('## Checkout: My Checkout');
 	});
 });

@@ -13,8 +13,8 @@ export async function runBranch(
 	ctx: WorkspaceContext,
 	options: { branch: string; checkoutLocations: string[] },
 ): Promise<void> {
-	const repos = loadRepositoryRecords(ctx.config);
-	const records = loadCheckoutRecords(ctx.config, repos);
+	const repos = await loadRepositoryRecords(ctx.config);
+	const records = await loadCheckoutRecords(ctx.config, repos);
 	hydrateStoreFromRecords(ctx.config, ctx.store, records);
 
 	const { branch, checkoutLocations } = options;

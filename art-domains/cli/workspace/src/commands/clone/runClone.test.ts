@@ -42,7 +42,7 @@ describe('clone command', () => {
 		const repoDir = join(tempDir, ctx.config.clone.path, 'artificial');
 		expect(() => simpleGit(repoDir).status()).not.toThrow();
 
-		const recordFile = join(tempDir, 'ops/records/checkouts/artificial.art');
+		const recordFile = join(tempDir, '_records/artificial.art');
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: Artificial');
 		expect(content).toContain('**Location:** `artificial`');
@@ -158,7 +158,7 @@ describe('clone command', () => {
 		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial-foo');
 		expect(existsSync(checkoutDir)).toBe(true);
 
-		const recordFile = join(tempDir, 'ops/records/checkouts/artificial-@-foo.art');
+		const recordFile = join(tempDir, '_records/artificial-@-foo.art');
 		expect(existsSync(recordFile)).toBe(true);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: Artificial');

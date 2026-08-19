@@ -2,7 +2,7 @@
 
 **ID:** `discover-records`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -119,11 +119,15 @@ The implementation must also run the workspace CLI tests against both legacy `op
 
 ## Commits
 
-### `preserve-checkout-filenames` - `PLANNED`
+### `preserve-checkout-filenames` - `COMMITTED`
 
 **Commit Message:** `refactor(workspace-cli): preserve checkout record filenames`
 
 **Instructions File:** `plan-discover-records/instructions/preserve-checkout-filenames.md`
+
+**Commit ID:** `aebefee`
+
+**Report:** `plan-discover-records/instructions/preserve-checkout-filenames__report.md`
 
 **Scope:**
 
@@ -136,11 +140,13 @@ The implementation must also run the workspace CLI tests against both legacy `op
 - Add tests for filename preservation, generated filenames, and all updated call sites.
 - Update `architecture/context-model.md` and `architecture/_pseudo.md` to reflect new signatures.
 
-### `discover-record-files` - `PLANNED`
+### `discover-record-files` - `COMMITTED`
 
 **Commit Message:** `feat(workspace-cli): add configurable record discovery`
 
 **Instructions File:** `plan-discover-records/instructions/discover-record-files.md`
+
+**Report:** `plan-discover-records/instructions/discover-record-files__report.md`
 
 **Scope:**
 
@@ -177,4 +183,5 @@ The implementation must also run the workspace CLI tests against both legacy `op
 
 ## Feedback
 
-No implementation feedback yet.
+- **preserve-checkout-filenames (aebefee):** Worker completed all changes. Data-first `saveCheckoutRecord(config, data, filename?)` signature applied. `RepositoryCheckoutRecord` and `Checkout` carry `filename` through hydration. `makeCheckoutFilename` extracted. Architecture docs updated. 63 test files, 208 tests, 12 CI tasks all passing.
+- **discover-record-files:** Worker completed all changes. Config reshaped to top-level `checkouts.*` and `records.pattern`. `findRecordFiles` added with gitignore-aware glob discovery. `loadRepositoryRecords` and `loadCheckoutRecords` now async. 8 new tests for `findRecordFiles`. 55 test files pass, 9 fail (all outside instruction scope — `loadProjectGraph` mock paths and slug collisions in command tests). Lint, build pass.

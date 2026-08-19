@@ -8,7 +8,7 @@ export function writeCheckoutMockRecord(
 	location: string,
 	branch = 'main',
 ): void {
-	const dir = join(tempDir, 'ops/records/checkouts');
+	const dir = join(tempDir, '_records');
 	mkdirSync(dir, { recursive: true });
 	writeFileSync(
 		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),

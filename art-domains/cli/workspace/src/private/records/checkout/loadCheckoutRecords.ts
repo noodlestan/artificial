@@ -1,23 +1,21 @@
-import { existsSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
-
 import { WorkspaceConfig } from '../../../config';
+import { findRecordFiles } from '../shared/findRecordFiles';
 import { RepositoryCheckoutRecord, RepositoryRecord } from '../types';
 
 import { readCheckoutRecord } from './readCheckoutRecord';
-export function loadCheckoutRecords(
+
+export async function loadCheckoutRecords(
 	config: WorkspaceConfig,
 	repos: RepositoryRecord[],
-): RepositoryCheckoutRecord[] {
-	const dir = join(config.root.path, config.records.checkouts.path);
-	if (!existsSync(dir)) {
-		return [];
-	}
-	const files = readdirSync(dir).filter(f => f.endsWith('.art'));
+): Promise<RepositoryCheckoutRecord[]> {
+	const searchPath = config.root.path;
+	const candidates = findRecordFiles(searchPath, config.records.pattern);
 	const checkouts: RepositoryCheckoutRecord[] = [];
-	for (const file of files) {
-		const filePath = join(dir, file);
+	for (const filePath of candidates) {
 		const record = readCheckoutRecord(filePath);
+		if (!record) {
+			continue;
+		}
 		if (!record.name) {
 			console.warn('checkout record with empty name, skipped');
 			continue;

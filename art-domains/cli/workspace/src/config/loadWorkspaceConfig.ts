@@ -9,16 +9,13 @@ import type { WorkspaceConfig } from './types';
 const MANIFEST_FILE = '.art-workspace.mts';
 const TEMP_FILE = '.art-workspace-bundle.mjs';
 
-const DEFAULT_CONFIG = {
+const DEFAULT_CONFIG: Pick<WorkspaceConfig, 'clone' | 'checkouts' | 'records'> = {
 	clone: { path: 'repos' },
-	root: {},
-	records: {
-		repositories: { path: 'ops/records/repositories' },
-		checkouts: {
-			path: 'ops/records/checkouts',
-			template: '.agents/domains/workspace/templates/checkout.art.njk',
-		},
+	checkouts: {
+		path: '_records/',
+		template: '.agents/domains/workspace/templates/checkout.art.njk',
 	},
+	records: { pattern: '*.art' },
 };
 
 function formatError(error: unknown): string {
@@ -30,8 +27,7 @@ export async function loadWorkspaceConfig(rootPath: string): Promise<WorkspaceCo
 
 	if (!existsSync(manifestPath)) {
 		console.warn(`${MANIFEST_FILE} not found at ${rootPath}; Using default config.`);
-		const root = { ...DEFAULT_CONFIG.root, path: rootPath };
-		return { ...DEFAULT_CONFIG, root };
+		return { ...DEFAULT_CONFIG, root: { path: rootPath } };
 	}
 
 	let output;

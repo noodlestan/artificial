@@ -51,9 +51,9 @@ describe('cloneIfMissing', () => {
 		await workGit.push('origin', 'feature-branch');
 
 		writeRepoMockRecord(tempDir, 'FeatureRepo', bareDir);
-		const repos = await import('../../../private/records/repository/loadRepositoryRecords').then(
-			m => m.loadRepositoryRecords(ctx.config),
-		);
+		const { loadRepositoryRecords } =
+			await import('../../../private/records/repository/loadRepositoryRecords');
+		const repos = await loadRepositoryRecords(ctx.config);
 		const repo = repos.find(r => r.name === 'FeatureRepo');
 		expect(repo).toBeDefined();
 
@@ -71,7 +71,7 @@ describe('cloneIfMissing', () => {
 		expect(branch).toBe('feature-branch');
 
 		const recordFileName = `${checkout.record.name.toLowerCase().replace(/\s+/g, '-')}.art`;
-		const recordFile = join(tempDir, 'ops/records/checkouts', recordFileName);
+		const recordFile = join(tempDir, '_records', recordFileName);
 		expect(existsSync(recordFile)).toBe(true);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('feature-branch');
@@ -94,9 +94,9 @@ describe('cloneIfMissing', () => {
 		await workGit.push('origin', 'main');
 
 		writeRepoMockRecord(tempDir, 'FallbackRepo', bareDir);
-		const repos = await import('../../../private/records/repository/loadRepositoryRecords').then(
-			m => m.loadRepositoryRecords(ctx.config),
-		);
+		const { loadRepositoryRecords } =
+			await import('../../../private/records/repository/loadRepositoryRecords');
+		const repos = await loadRepositoryRecords(ctx.config);
 		const repo = repos.find(r => r.name === 'FallbackRepo');
 		expect(repo).toBeDefined();
 
@@ -114,7 +114,7 @@ describe('cloneIfMissing', () => {
 		expect(branch).toBe('main');
 
 		const recordFileName = `${checkout.record.name.toLowerCase().replace(/\s+/g, '-')}.art`;
-		const recordFile = join(tempDir, 'ops/records/checkouts', recordFileName);
+		const recordFile = join(tempDir, '_records', recordFileName);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('main');
 	});

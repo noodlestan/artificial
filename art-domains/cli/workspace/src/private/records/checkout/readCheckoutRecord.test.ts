@@ -30,13 +30,23 @@ describe('readCheckoutRecord', () => {
 		expect(read).toEqual(data);
 	});
 
-	it('returns defaults for a missing file', () => {
+	it('returns null for a missing file', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'missing.art');
 
 		const read = readCheckoutRecord(file);
 
-		expect(read).toEqual({ name: '', location: '', branch: 'main' });
+		expect(read).toBeNull();
+	});
+
+	it('returns null when kind heading is absent', () => {
+		const tempDir = makeTempDir(tempDirs);
+		const file = join(tempDir, 'noheading.art');
+		writeFileSync(file, '# Module\n\n**Location:** `repos/test`\n\n**Branch:** `main`\n');
+
+		const read = readCheckoutRecord(file);
+
+		expect(read).toBeNull();
 	});
 
 	it('warns and uses defaults for malformed lines', () => {
@@ -48,6 +58,8 @@ describe('readCheckoutRecord', () => {
 
 		const read = readCheckoutRecord(file);
 
+		expect(read).not.toBeNull();
+		if (!read) return;
 		expect(read.name).toBe('Test');
 		expect(read.location).toBe('repos/test');
 		expect(read.branch).toBe('main');
