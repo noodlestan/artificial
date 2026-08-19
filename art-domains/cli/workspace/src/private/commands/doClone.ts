@@ -12,9 +12,20 @@ import { createCloneSuccess } from './operations/createCloneSuccess';
 export async function doClone(ctx: WorkspaceContext, checkout: Checkout): Promise<Checkout | null> {
 	if (!checkout.repo) return null;
 
+	const recordedBranch = checkout.record.branch;
+
 	try {
 		const git = simpleGit('');
 		await git.clone(checkout.repo.remote, checkout.path);
+
+		if (recordedBranch) {
+			try {
+				const repoGit = simpleGit(checkout.path);
+				await repoGit.checkout(recordedBranch);
+			} catch {
+				// recorded branch not on remote — stay on default branch
+			}
+		}
 
 		const rescan = await scanCheckoutState(checkout);
 		ctx.store.updateCheckout(rescan);
@@ -25,7 +36,7 @@ export async function doClone(ctx: WorkspaceContext, checkout: Checkout): Promis
 			name: rescan.record.name,
 			repository: rescan.repo?.name,
 			location: rescan.record.location,
-			branch: actualBranch || 'main',
+			branch: actualBranch || recordedBranch || 'main',
 		});
 
 		return rescan;
