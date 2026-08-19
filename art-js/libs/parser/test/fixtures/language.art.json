@@ -3,7 +3,21 @@
   "children": [
     {
       "construct": "SectionBlock",
+      "kind": "Module",
       "name": "Language",
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 19,
+          "line": 1,
+          "offset": 18
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
       "children": [
         {
           "construct": "NaturalBlock",
@@ -19,15 +33,15 @@
               "type": "text",
               "value": " Decisions about the art language itself — what it is for, its scope, and its syntax/semantics model.",
               "position": {
-                "start": {
-                  "line": 3,
-                  "column": 13,
-                  "offset": 32
-                },
                 "end": {
-                  "line": 3,
                   "column": 114,
+                  "line": 3,
                   "offset": 133
+                },
+                "start": {
+                  "column": 13,
+                  "line": 3,
+                  "offset": 32
                 }
               }
             },
@@ -38,21 +52,35 @@
             }
           ],
           "position": {
-            "start": {
-              "line": 3,
-              "column": 1,
-              "offset": 20
-            },
             "end": {
-              "line": 3,
               "column": 114,
+              "line": 3,
               "offset": 133
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 20
             }
           }
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Language Spec First Scope",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 39,
+              "line": 5,
+              "offset": 173
+            },
+            "start": {
+              "column": 1,
+              "line": 5,
+              "offset": 135
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -68,15 +96,15 @@
                   "type": "text",
                   "value": " Adopted",
                   "position": {
-                    "start": {
-                      "line": 7,
-                      "column": 12,
-                      "offset": 186
-                    },
                     "end": {
-                      "line": 7,
                       "column": 20,
+                      "line": 7,
                       "offset": 194
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 7,
+                      "offset": 186
                     }
                   }
                 },
@@ -87,15 +115,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 7,
-                  "column": 1,
-                  "offset": 175
-                },
                 "end": {
-                  "line": 7,
                   "column": 20,
+                  "line": 7,
                   "offset": 194
+                },
+                "start": {
+                  "column": 1,
+                  "line": 7,
+                  "offset": 175
                 }
               }
             },
@@ -108,15 +136,15 @@
                   "type": "text",
                   "value": " The project had several candidate scopes (tasks domain, language spec, tooling). Work on all of them at once would spread effort before the core was proven; the tasks domain was only ever an example use case.",
                   "position": {
-                    "start": {
-                      "line": 9,
-                      "column": 13,
-                      "offset": 208
-                    },
                     "end": {
-                      "line": 9,
                       "column": 222,
+                      "line": 9,
                       "offset": 417
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 9,
+                      "offset": 208
                     }
                   }
                 },
@@ -127,15 +155,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 9,
-                  "column": 1,
-                  "offset": 196
-                },
                 "end": {
-                  "line": 9,
                   "column": 222,
+                  "line": 9,
                   "offset": 417
+                },
+                "start": {
+                  "column": 1,
+                  "line": 9,
+                  "offset": 196
                 }
               }
             },
@@ -148,15 +176,15 @@
                   "type": "text",
                   "value": " The language spec (",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 14,
-                      "offset": 432
-                    },
                     "end": {
-                      "line": 11,
                       "column": 34,
+                      "line": 11,
                       "offset": 452
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 11,
+                      "offset": 432
                     }
                   }
                 },
@@ -165,15 +193,15 @@
                   "type": "inlineCode",
                   "value": "`art-js/spec/`",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 34,
-                      "offset": 452
-                    },
                     "end": {
-                      "line": 11,
                       "column": 48,
+                      "line": 11,
                       "offset": 466
+                    },
+                    "start": {
+                      "column": 34,
+                      "line": 11,
+                      "offset": 452
                     }
                   }
                 },
@@ -182,15 +210,15 @@
                   "type": "text",
                   "value": ") is the first scope and the first test case for the bundling pipeline. Work on any other domain is deferred until the spec and pipeline are proven.",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 48,
-                      "offset": 466
-                    },
                     "end": {
-                      "line": 11,
                       "column": 196,
+                      "line": 11,
                       "offset": 614
+                    },
+                    "start": {
+                      "column": 48,
+                      "line": 11,
+                      "offset": 466
                     }
                   }
                 },
@@ -201,15 +229,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 11,
-                  "column": 1,
-                  "offset": 419
-                },
                 "end": {
-                  "line": 11,
                   "column": 196,
+                  "line": 11,
                   "offset": 614
+                },
+                "start": {
+                  "column": 1,
+                  "line": 11,
+                  "offset": 419
                 }
               }
             },
@@ -222,15 +250,15 @@
                   "type": "text",
                   "value": " A spec content package (",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 18,
-                      "offset": 633
-                    },
                     "end": {
-                      "line": 13,
                       "column": 43,
+                      "line": 13,
                       "offset": 658
+                    },
+                    "start": {
+                      "column": 18,
+                      "line": 13,
+                      "offset": 633
                     }
                   }
                 },
@@ -239,15 +267,15 @@
                   "type": "inlineCode",
                   "value": "`@art-js/artificials-spec`",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 43,
-                      "offset": 658
-                    },
                     "end": {
-                      "line": 13,
                       "column": 69,
+                      "line": 13,
                       "offset": 684
+                    },
+                    "start": {
+                      "column": 43,
+                      "line": 13,
+                      "offset": 658
                     }
                   }
                 },
@@ -256,15 +284,15 @@
                   "type": "text",
                   "value": ") is created before pipeline implementation.",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 69,
-                      "offset": 684
-                    },
                     "end": {
-                      "line": 13,
                       "column": 113,
+                      "line": 13,
                       "offset": 728
+                    },
+                    "start": {
+                      "column": 69,
+                      "line": 13,
+                      "offset": 684
                     }
                   }
                 },
@@ -275,37 +303,37 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 13,
-                  "column": 1,
-                  "offset": 616
-                },
                 "end": {
-                  "line": 13,
                   "column": 113,
+                  "line": 13,
                   "offset": 728
+                },
+                "start": {
+                  "column": 1,
+                  "line": 13,
+                  "offset": 616
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 5,
-              "column": 1,
-              "offset": 135
-            },
-            "end": {
-              "line": 5,
-              "column": 39,
-              "offset": 173
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Two Main Use Cases",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 32,
+              "line": 15,
+              "offset": 761
+            },
+            "start": {
+              "column": 1,
+              "line": 15,
+              "offset": 730
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -321,15 +349,15 @@
                   "type": "text",
                   "value": " Adopted",
                   "position": {
-                    "start": {
-                      "line": 17,
-                      "column": 12,
-                      "offset": 774
-                    },
                     "end": {
-                      "line": 17,
                       "column": 20,
+                      "line": 17,
                       "offset": 782
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 17,
+                      "offset": 774
                     }
                   }
                 },
@@ -340,15 +368,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 17,
-                  "column": 1,
-                  "offset": 763
-                },
                 "end": {
-                  "line": 17,
                   "column": 20,
+                  "line": 17,
                   "offset": 782
+                },
+                "start": {
+                  "column": 1,
+                  "line": 17,
+                  "offset": 763
                 }
               }
             },
@@ -361,15 +389,15 @@
                   "type": "text",
                   "value": " Art could be positioned in many ways; without a defined core, new candidates (drift-checks, etc.) keep expanding scope and diluting design.",
                   "position": {
-                    "start": {
-                      "line": 19,
-                      "column": 13,
-                      "offset": 796
-                    },
                     "end": {
-                      "line": 19,
                       "column": 153,
+                      "line": 19,
                       "offset": 936
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 19,
+                      "offset": 796
                     }
                   }
                 },
@@ -380,15 +408,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 19,
-                  "column": 1,
-                  "offset": 784
-                },
                 "end": {
-                  "line": 19,
                   "column": 153,
+                  "line": 19,
                   "offset": 936
+                },
+                "start": {
+                  "column": 1,
+                  "line": 19,
+                  "offset": 784
                 }
               }
             },
@@ -401,15 +429,15 @@
                   "type": "text",
                   "value": " Art has two main use cases: (1) generating agent instructions, and (2) acting as a single source of truth for declarations that are both machine-readable and human/agent-readable. Everything else (context minimisation, fewer contradictions, automated SoT→instructions, portability) is a benefit of these two, not a separate use case.",
                   "position": {
-                    "start": {
-                      "line": 21,
-                      "column": 14,
-                      "offset": 951
-                    },
                     "end": {
-                      "line": 21,
                       "column": 348,
+                      "line": 21,
                       "offset": 1285
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 21,
+                      "offset": 951
                     }
                   }
                 },
@@ -420,37 +448,37 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 21,
-                  "column": 1,
-                  "offset": 938
-                },
                 "end": {
-                  "line": 21,
                   "column": 348,
+                  "line": 21,
                   "offset": 1285
+                },
+                "start": {
+                  "column": 1,
+                  "line": 21,
+                  "offset": 938
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 15,
-              "column": 1,
-              "offset": 730
-            },
-            "end": {
-              "line": 15,
-              "column": 32,
-              "offset": 761
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Closed Syntax, Open Semantics",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 43,
+              "line": 23,
+              "offset": 1329
+            },
+            "start": {
+              "column": 1,
+              "line": 23,
+              "offset": 1287
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -466,15 +494,15 @@
                   "type": "text",
                   "value": " Adopted",
                   "position": {
-                    "start": {
-                      "line": 25,
-                      "column": 12,
-                      "offset": 1342
-                    },
                     "end": {
-                      "line": 25,
                       "column": 20,
+                      "line": 25,
                       "offset": 1350
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 25,
+                      "offset": 1342
                     }
                   }
                 },
@@ -485,15 +513,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 25,
-                  "column": 1,
-                  "offset": 1331
-                },
                 "end": {
-                  "line": 25,
                   "column": 20,
+                  "line": 25,
                   "offset": 1350
+                },
+                "start": {
+                  "column": 1,
+                  "line": 25,
+                  "offset": 1331
                 }
               }
             },
@@ -506,15 +534,15 @@
                   "type": "text",
                   "value": " The grammar needs an extensibility model without becoming an ouroboros (spec reading spec). Extensibility at the grammar layer would fragment parsing.",
                   "position": {
-                    "start": {
-                      "line": 27,
-                      "column": 13,
-                      "offset": 1364
-                    },
                     "end": {
-                      "line": 27,
                       "column": 164,
+                      "line": 27,
                       "offset": 1515
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 27,
+                      "offset": 1364
                     }
                   }
                 },
@@ -525,15 +553,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 27,
-                  "column": 1,
-                  "offset": 1352
-                },
                 "end": {
-                  "line": 27,
                   "column": 164,
+                  "line": 27,
                   "offset": 1515
+                },
+                "start": {
+                  "column": 1,
+                  "line": 27,
+                  "offset": 1352
                 }
               }
             },
@@ -546,15 +574,15 @@
                   "type": "text",
                   "value": " Syntax is closed — implemented in TypeScript, no grammar plugins. Semantics are open and data-driven, extensible via ",
                   "position": {
-                    "start": {
-                      "line": 29,
-                      "column": 14,
-                      "offset": 1530
-                    },
                     "end": {
-                      "line": 29,
                       "column": 132,
+                      "line": 29,
                       "offset": 1648
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 29,
+                      "offset": 1530
                     }
                   }
                 },
@@ -563,15 +591,15 @@
                   "type": "inlineCode",
                   "value": "`.art`",
                   "position": {
-                    "start": {
-                      "line": 29,
-                      "column": 132,
-                      "offset": 1648
-                    },
                     "end": {
-                      "line": 29,
                       "column": 138,
+                      "line": 29,
                       "offset": 1654
+                    },
+                    "start": {
+                      "column": 132,
+                      "line": 29,
+                      "offset": 1648
                     }
                   }
                 },
@@ -580,15 +608,15 @@
                   "type": "text",
                   "value": " modules. The core-in-",
                   "position": {
-                    "start": {
-                      "line": 29,
-                      "column": 138,
-                      "offset": 1654
-                    },
                     "end": {
-                      "line": 29,
                       "column": 160,
+                      "line": 29,
                       "offset": 1676
+                    },
+                    "start": {
+                      "column": 138,
+                      "line": 29,
+                      "offset": 1654
                     }
                   }
                 },
@@ -597,15 +625,15 @@
                   "type": "inlineCode",
                   "value": "`.art`",
                   "position": {
-                    "start": {
-                      "line": 29,
-                      "column": 160,
-                      "offset": 1676
-                    },
                     "end": {
-                      "line": 29,
                       "column": 166,
+                      "line": 29,
                       "offset": 1682
+                    },
+                    "start": {
+                      "column": 160,
+                      "line": 29,
+                      "offset": 1676
                     }
                   }
                 },
@@ -614,15 +642,15 @@
                   "type": "text",
                   "value": " stays as a testable spec.",
                   "position": {
-                    "start": {
-                      "line": 29,
-                      "column": 166,
-                      "offset": 1682
-                    },
                     "end": {
-                      "line": 29,
                       "column": 192,
+                      "line": 29,
                       "offset": 1708
+                    },
+                    "start": {
+                      "column": 166,
+                      "line": 29,
+                      "offset": 1682
                     }
                   }
                 },
@@ -633,37 +661,37 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 29,
-                  "column": 1,
-                  "offset": 1517
-                },
                 "end": {
-                  "line": 29,
                   "column": 192,
+                  "line": 29,
                   "offset": 1708
+                },
+                "start": {
+                  "column": 1,
+                  "line": 29,
+                  "offset": 1517
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 23,
-              "column": 1,
-              "offset": 1287
-            },
-            "end": {
-              "line": 23,
-              "column": 43,
-              "offset": 1329
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Any Markdown is Valid `.art`",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 42,
+              "line": 31,
+              "offset": 1751
+            },
+            "start": {
+              "column": 1,
+              "line": 31,
+              "offset": 1710
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -679,15 +707,15 @@
                   "type": "text",
                   "value": " Adopted",
                   "position": {
-                    "start": {
-                      "line": 33,
-                      "column": 12,
-                      "offset": 1764
-                    },
                     "end": {
-                      "line": 33,
                       "column": 20,
+                      "line": 33,
                       "offset": 1772
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 33,
+                      "offset": 1764
                     }
                   }
                 },
@@ -698,15 +726,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 33,
-                  "column": 1,
-                  "offset": 1753
-                },
                 "end": {
-                  "line": 33,
                   "column": 20,
+                  "line": 33,
                   "offset": 1772
+                },
+                "start": {
+                  "column": 1,
+                  "line": 33,
+                  "offset": 1753
                 }
               }
             },
@@ -719,15 +747,15 @@
                   "type": "text",
                   "value": " Art sources and plain markdown coexist in the same tree; a hard file-type wall would make existing markdown invalid and block incremental adoption.",
                   "position": {
-                    "start": {
-                      "line": 35,
-                      "column": 13,
-                      "offset": 1786
-                    },
                     "end": {
-                      "line": 35,
                       "column": 161,
+                      "line": 35,
                       "offset": 1934
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 35,
+                      "offset": 1786
                     }
                   }
                 },
@@ -738,15 +766,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 35,
-                  "column": 1,
-                  "offset": 1774
-                },
                 "end": {
-                  "line": 35,
                   "column": 161,
+                  "line": 35,
                   "offset": 1934
+                },
+                "start": {
+                  "column": 1,
+                  "line": 35,
+                  "offset": 1774
                 }
               }
             },
@@ -759,15 +787,15 @@
                   "type": "text",
                   "value": " Any markdown file is a valid ",
                   "position": {
-                    "start": {
-                      "line": 37,
-                      "column": 14,
-                      "offset": 1949
-                    },
                     "end": {
-                      "line": 37,
                       "column": 44,
+                      "line": 37,
                       "offset": 1979
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 37,
+                      "offset": 1949
                     }
                   }
                 },
@@ -776,15 +804,15 @@
                   "type": "inlineCode",
                   "value": "`.art`",
                   "position": {
-                    "start": {
-                      "line": 37,
-                      "column": 44,
-                      "offset": 1979
-                    },
                     "end": {
-                      "line": 37,
                       "column": 50,
+                      "line": 37,
                       "offset": 1985
+                    },
+                    "start": {
+                      "column": 44,
+                      "line": 37,
+                      "offset": 1979
                     }
                   }
                 },
@@ -793,15 +821,15 @@
                   "type": "text",
                   "value": " file. Files not authored in art require more inference to read correctly, but are never invalid.",
                   "position": {
-                    "start": {
-                      "line": 37,
-                      "column": 50,
-                      "offset": 1985
-                    },
                     "end": {
-                      "line": 37,
                       "column": 147,
+                      "line": 37,
                       "offset": 2082
+                    },
+                    "start": {
+                      "column": 50,
+                      "line": 37,
+                      "offset": 1985
                     }
                   }
                 },
@@ -812,37 +840,37 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 37,
-                  "column": 1,
-                  "offset": 1936
-                },
                 "end": {
-                  "line": 37,
                   "column": 147,
+                  "line": 37,
                   "offset": 2082
+                },
+                "start": {
+                  "column": 1,
+                  "line": 37,
+                  "offset": 1936
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 31,
-              "column": 1,
-              "offset": 1710
-            },
-            "end": {
-              "line": 31,
-              "column": 42,
-              "offset": 1751
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Construct Containment and the NaturalBlock Catch-all",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 66,
+              "line": 39,
+              "offset": 2149
+            },
+            "start": {
+              "column": 1,
+              "line": 39,
+              "offset": 2084
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -858,15 +886,15 @@
                   "type": "text",
                   "value": " Adopted",
                   "position": {
-                    "start": {
-                      "line": 41,
-                      "column": 12,
-                      "offset": 2162
-                    },
                     "end": {
-                      "line": 41,
                       "column": 20,
+                      "line": 41,
                       "offset": 2170
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 41,
+                      "offset": 2162
                     }
                   }
                 },
@@ -877,15 +905,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 41,
-                  "column": 1,
-                  "offset": 2151
-                },
                 "end": {
-                  "line": 41,
                   "column": 20,
+                  "line": 41,
                   "offset": 2170
+                },
+                "start": {
+                  "column": 1,
+                  "line": 41,
+                  "offset": 2151
                 }
               }
             },
@@ -898,15 +926,15 @@
                   "type": "text",
                   "value": " The grammar's containment model was underspecified: FieldBlock values terminated at the next FieldBlock, FieldInline, or InlineDeclaration but not at a SectionBlock, and \"arbitrary content\" rules allowed circular nesting (a FieldBlock containing a SectionBlock or a nested FieldBlock) that carries no semantic meaning. Plain Markdown content also lacked an explicit classification home.",
                   "position": {
-                    "start": {
-                      "line": 43,
-                      "column": 13,
-                      "offset": 2184
-                    },
                     "end": {
-                      "line": 43,
                       "column": 400,
+                      "line": 43,
                       "offset": 2571
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 43,
+                      "offset": 2184
                     }
                   }
                 },
@@ -917,15 +945,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 43,
-                  "column": 1,
-                  "offset": 2172
-                },
                 "end": {
-                  "line": 43,
                   "column": 400,
+                  "line": 43,
                   "offset": 2571
+                },
+                "start": {
+                  "column": 1,
+                  "line": 43,
+                  "offset": 2172
                 }
               }
             },
@@ -938,15 +966,15 @@
                   "type": "text",
                   "value": " Containment is explicit. SectionBlocks MAY nest (heading level drives nesting). A FieldBlock value terminates at the next FieldBlock, FieldInline, InlineDeclaration, SectionBlock, or the end of the enclosing SectionBlock, and MUST NOT contain a SectionBlock or a nested FieldBlock. NaturalBlock is the catch-all classification: any content that does not match another construct is a NaturalBlock — realising \"Any Markdown is Valid ",
                   "position": {
-                    "start": {
-                      "line": 45,
-                      "column": 14,
-                      "offset": 2586
-                    },
                     "end": {
-                      "line": 45,
                       "column": 446,
+                      "line": 45,
                       "offset": 3018
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 45,
+                      "offset": 2586
                     }
                   }
                 },
@@ -955,15 +983,15 @@
                   "type": "inlineCode",
                   "value": "`.art`",
                   "position": {
-                    "start": {
-                      "line": 45,
-                      "column": 446,
-                      "offset": 3018
-                    },
                     "end": {
-                      "line": 45,
                       "column": 452,
+                      "line": 45,
                       "offset": 3024
+                    },
+                    "start": {
+                      "column": 446,
+                      "line": 45,
+                      "offset": 3018
                     }
                   }
                 },
@@ -972,15 +1000,15 @@
                   "type": "text",
                   "value": "\".",
                   "position": {
-                    "start": {
-                      "line": 45,
-                      "column": 452,
-                      "offset": 3024
-                    },
                     "end": {
-                      "line": 45,
                       "column": 454,
+                      "line": 45,
                       "offset": 3026
+                    },
+                    "start": {
+                      "column": 452,
+                      "line": 45,
+                      "offset": 3024
                     }
                   }
                 },
@@ -991,15 +1019,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 45,
-                  "column": 1,
-                  "offset": 2573
-                },
                 "end": {
-                  "line": 45,
                   "column": 454,
+                  "line": 45,
                   "offset": 3026
+                },
+                "start": {
+                  "column": 1,
+                  "line": 45,
+                  "offset": 2573
                 }
               }
             },
@@ -1012,15 +1040,15 @@
                   "type": "text",
                   "value": " Termination signals become unambiguous for the construct-stack parser; classification is total (every token stream classifies into a record); per-position content unions in the record schema mirror the containment model. (construct-stack pattern: see ",
                   "position": {
-                    "start": {
-                      "line": 47,
-                      "column": 18,
-                      "offset": 3045
-                    },
                     "end": {
-                      "line": 47,
                       "column": 270,
+                      "line": 47,
                       "offset": 3297
+                    },
+                    "start": {
+                      "column": 18,
+                      "line": 47,
+                      "offset": 3045
                     }
                   }
                 },
@@ -1029,15 +1057,15 @@
                   "type": "inlineCode",
                   "value": "`_research.md`",
                   "position": {
-                    "start": {
-                      "line": 47,
-                      "column": 270,
-                      "offset": 3297
-                    },
                     "end": {
-                      "line": 47,
                       "column": 284,
+                      "line": 47,
                       "offset": 3311
+                    },
+                    "start": {
+                      "column": 270,
+                      "line": 47,
+                      "offset": 3297
                     }
                   }
                 },
@@ -1046,15 +1074,15 @@
                   "type": "text",
                   "value": ")",
                   "position": {
-                    "start": {
-                      "line": 47,
-                      "column": 284,
-                      "offset": 3311
-                    },
                     "end": {
-                      "line": 47,
                       "column": 285,
+                      "line": 47,
                       "offset": 3312
+                    },
+                    "start": {
+                      "column": 284,
+                      "line": 47,
+                      "offset": 3311
                     }
                   }
                 },
@@ -1065,37 +1093,37 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 47,
-                  "column": 1,
-                  "offset": 3028
-                },
                 "end": {
-                  "line": 47,
                   "column": 285,
+                  "line": 47,
                   "offset": 3312
+                },
+                "start": {
+                  "column": 1,
+                  "line": 47,
+                  "offset": 3028
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 39,
-              "column": 1,
-              "offset": 2084
-            },
-            "end": {
-              "line": 39,
-              "column": 66,
-              "offset": 2149
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Create an accessory Template Language",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 51,
+              "line": 49,
+              "offset": 3364
+            },
+            "start": {
+              "column": 1,
+              "line": 49,
+              "offset": 3314
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -1111,15 +1139,15 @@
                   "type": "text",
                   "value": " Proposal",
                   "position": {
-                    "start": {
-                      "line": 51,
-                      "column": 12,
-                      "offset": 3377
-                    },
                     "end": {
-                      "line": 51,
                       "column": 21,
+                      "line": 51,
                       "offset": 3386
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 51,
+                      "offset": 3377
                     }
                   }
                 },
@@ -1130,15 +1158,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 51,
-                  "column": 1,
-                  "offset": 3366
-                },
                 "end": {
-                  "line": 51,
                   "column": 21,
+                  "line": 51,
                   "offset": 3386
+                },
+                "start": {
+                  "column": 1,
+                  "line": 51,
+                  "offset": 3366
                 }
               }
             },
@@ -1151,15 +1179,15 @@
                   "type": "text",
                   "value": " Domain records and other artefacts are expressed as markdown files. Rendering them into per-consumer projections requires templates that carry both deterministic operations (iteration over data sets, field interpolation) and natural-language instructions agents can process; without a dedicated template language that logic leaks into hand-maintained code or duplicated outputs.",
                   "position": {
-                    "start": {
-                      "line": 53,
-                      "column": 13,
-                      "offset": 3400
-                    },
                     "end": {
-                      "line": 53,
                       "column": 392,
+                      "line": 53,
                       "offset": 3779
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 53,
+                      "offset": 3400
                     }
                   }
                 },
@@ -1170,15 +1198,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 53,
-                  "column": 1,
-                  "offset": 3388
-                },
                 "end": {
-                  "line": 53,
                   "column": 392,
+                  "line": 53,
                   "offset": 3779
+                },
+                "start": {
+                  "column": 1,
+                  "line": 53,
+                  "offset": 3388
                 }
               }
             },
@@ -1191,15 +1219,15 @@
                   "type": "text",
                   "value": " Design ",
                   "position": {
-                    "start": {
-                      "line": 55,
-                      "column": 14,
-                      "offset": 3794
-                    },
                     "end": {
-                      "line": 55,
                       "column": 22,
+                      "line": 55,
                       "offset": 3802
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 55,
+                      "offset": 3794
                     }
                   }
                 },
@@ -1208,15 +1236,15 @@
                   "type": "inlineCode",
                   "value": "`.tart`",
                   "position": {
-                    "start": {
-                      "line": 55,
-                      "column": 22,
-                      "offset": 3802
-                    },
                     "end": {
-                      "line": 55,
                       "column": 29,
+                      "line": 55,
                       "offset": 3809
+                    },
+                    "start": {
+                      "column": 22,
+                      "line": 55,
+                      "offset": 3802
                     }
                   }
                 },
@@ -1225,15 +1253,15 @@
                   "type": "text",
                   "value": " as a template engine with flat, inline directive syntax, so ",
                   "position": {
-                    "start": {
-                      "line": 55,
-                      "column": 29,
-                      "offset": 3809
-                    },
                     "end": {
-                      "line": 55,
                       "column": 90,
+                      "line": 55,
                       "offset": 3870
+                    },
+                    "start": {
+                      "column": 29,
+                      "line": 55,
+                      "offset": 3809
                     }
                   }
                 },
@@ -1242,15 +1270,15 @@
                   "type": "inlineCode",
                   "value": "`.tart`",
                   "position": {
-                    "start": {
-                      "line": 55,
-                      "column": 90,
-                      "offset": 3870
-                    },
                     "end": {
-                      "line": 55,
                       "column": 97,
+                      "line": 55,
                       "offset": 3877
+                    },
+                    "start": {
+                      "column": 90,
+                      "line": 55,
+                      "offset": 3870
                     }
                   }
                 },
@@ -1259,15 +1287,15 @@
                   "type": "text",
                   "value": " sources stay readable and editable in any markdown-capable editor. Generators compile ",
                   "position": {
-                    "start": {
-                      "line": 55,
-                      "column": 97,
-                      "offset": 3877
-                    },
                     "end": {
-                      "line": 55,
                       "column": 184,
+                      "line": 55,
                       "offset": 3964
+                    },
+                    "start": {
+                      "column": 97,
+                      "line": 55,
+                      "offset": 3877
                     }
                   }
                 },
@@ -1276,15 +1304,15 @@
                   "type": "inlineCode",
                   "value": "`.tart`",
                   "position": {
-                    "start": {
-                      "line": 55,
-                      "column": 184,
-                      "offset": 3964
-                    },
                     "end": {
-                      "line": 55,
                       "column": 191,
+                      "line": 55,
                       "offset": 3971
+                    },
+                    "start": {
+                      "column": 184,
+                      "line": 55,
+                      "offset": 3964
                     }
                   }
                 },
@@ -1293,15 +1321,15 @@
                   "type": "text",
                   "value": " templates into the markdown projections consumers read.",
                   "position": {
-                    "start": {
-                      "line": 55,
-                      "column": 191,
-                      "offset": 3971
-                    },
                     "end": {
-                      "line": 55,
                       "column": 247,
+                      "line": 55,
                       "offset": 4027
+                    },
+                    "start": {
+                      "column": 191,
+                      "line": 55,
+                      "offset": 3971
                     }
                   }
                 },
@@ -1312,37 +1340,37 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 55,
-                  "column": 1,
-                  "offset": 3781
-                },
                 "end": {
-                  "line": 55,
                   "column": 247,
+                  "line": 55,
                   "offset": 4027
+                },
+                "start": {
+                  "column": 1,
+                  "line": 55,
+                  "offset": 3781
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 49,
-              "column": 1,
-              "offset": 3314
-            },
-            "end": {
-              "line": 49,
-              "column": 51,
-              "offset": 3364
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "SectionBlock as the Resource Declaration Carrier",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 62,
+              "line": 57,
+              "offset": 4090
+            },
+            "start": {
+              "column": 1,
+              "line": 57,
+              "offset": 4029
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -1358,15 +1386,15 @@
                   "type": "text",
                   "value": " Proposal",
                   "position": {
-                    "start": {
-                      "line": 59,
-                      "column": 12,
-                      "offset": 4103
-                    },
                     "end": {
-                      "line": 59,
                       "column": 21,
+                      "line": 59,
                       "offset": 4112
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 59,
+                      "offset": 4103
                     }
                   }
                 },
@@ -1377,15 +1405,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 59,
-                  "column": 1,
-                  "offset": 4092
-                },
                 "end": {
-                  "line": 59,
                   "column": 21,
+                  "line": 59,
                   "offset": 4112
+                },
+                "start": {
+                  "column": 1,
+                  "line": 59,
+                  "offset": 4092
                 }
               }
             },
@@ -1398,15 +1426,15 @@
                   "type": "text",
                   "value": " The SectionBlock construct (",
                   "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 13,
-                      "offset": 4126
-                    },
                     "end": {
-                      "line": 61,
                       "column": 42,
+                      "line": 61,
                       "offset": 4155
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 61,
+                      "offset": 4126
                     }
                   }
                 },
@@ -1415,15 +1443,15 @@
                   "type": "inlineCode",
                   "value": "`# Kind: Name`",
                   "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 42,
-                      "offset": 4155
-                    },
                     "end": {
-                      "line": 61,
                       "column": 56,
+                      "line": 61,
                       "offset": 4169
+                    },
+                    "start": {
+                      "column": 42,
+                      "line": 61,
+                      "offset": 4155
                     }
                   }
                 },
@@ -1432,15 +1460,15 @@
                   "type": "text",
                   "value": " + tags + content) is what turns a markdown heading into a named, kinded resource, but the grammar spec described it only as \"a named structural section\" — opaque, and hiding the connection between the grammar and modules layers. Without an explicit statement of its role, the Closed Syntax, Open Semantics split reads as abstract: it is unclear which parts of a declaration the language fixes and which parts domains provide. The programming-language precedent makes the intended model obvious in hindsight: ",
                   "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 56,
-                      "offset": 4169
-                    },
                     "end": {
-                      "line": 61,
                       "column": 565,
+                      "line": 61,
                       "offset": 4678
+                    },
+                    "start": {
+                      "column": 56,
+                      "line": 61,
+                      "offset": 4169
                     }
                   }
                 },
@@ -1449,15 +1477,15 @@
                   "type": "inlineCode",
                   "value": "`class`",
                   "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 565,
-                      "offset": 4678
-                    },
                     "end": {
-                      "line": 61,
                       "column": 572,
+                      "line": 61,
                       "offset": 4685
+                    },
+                    "start": {
+                      "column": 565,
+                      "line": 61,
+                      "offset": 4678
                     }
                   }
                 },
@@ -1466,15 +1494,15 @@
                   "type": "text",
                   "value": " is fixed syntax; the meaning of ",
                   "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 572,
-                      "offset": 4685
-                    },
                     "end": {
-                      "line": 61,
                       "column": 605,
+                      "line": 61,
                       "offset": 4718
+                    },
+                    "start": {
+                      "column": 572,
+                      "line": 61,
+                      "offset": 4685
                     }
                   }
                 },
@@ -1483,15 +1511,15 @@
                   "type": "inlineCode",
                   "value": "`class Task`",
                   "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 605,
-                      "offset": 4718
-                    },
                     "end": {
-                      "line": 61,
                       "column": 617,
+                      "line": 61,
                       "offset": 4730
+                    },
+                    "start": {
+                      "column": 605,
+                      "line": 61,
+                      "offset": 4718
                     }
                   }
                 },
@@ -1500,15 +1528,15 @@
                   "type": "text",
                   "value": " comes from the program. Art needs the equivalent — a fixed construct form whose kinds are open.",
                   "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 617,
-                      "offset": 4730
-                    },
                     "end": {
-                      "line": 61,
                       "column": 713,
+                      "line": 61,
                       "offset": 4826
+                    },
+                    "start": {
+                      "column": 617,
+                      "line": 61,
+                      "offset": 4730
                     }
                   }
                 },
@@ -1519,15 +1547,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 61,
-                  "column": 1,
-                  "offset": 4114
-                },
                 "end": {
-                  "line": 61,
                   "column": 713,
+                  "line": 61,
                   "offset": 4826
+                },
+                "start": {
+                  "column": 1,
+                  "line": 61,
+                  "offset": 4114
                 }
               }
             },
@@ -1540,15 +1568,15 @@
                   "type": "text",
                   "value": " The SectionBlock is the resource declaration carrier: ",
                   "position": {
-                    "start": {
-                      "line": 63,
-                      "column": 14,
-                      "offset": 4841
-                    },
                     "end": {
-                      "line": 63,
                       "column": 69,
+                      "line": 63,
                       "offset": 4896
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 63,
+                      "offset": 4841
                     }
                   }
                 },
@@ -1557,15 +1585,15 @@
                   "type": "inlineCode",
                   "value": "`# Kind: Name`",
                   "position": {
-                    "start": {
-                      "line": 63,
-                      "column": 69,
-                      "offset": 4896
-                    },
                     "end": {
-                      "line": 63,
                       "column": 83,
+                      "line": 63,
                       "offset": 4910
+                    },
+                    "start": {
+                      "column": 69,
+                      "line": 63,
+                      "offset": 4896
                     }
                   }
                 },
@@ -1574,15 +1602,15 @@
                   "type": "text",
                   "value": " declares a resource of that kind with that name. The construct's form (optional kind, name, tags, content) is fixed by the grammar — closed syntax. The meaning of each kind is provided by the structures, the domain declarations in ",
                   "position": {
-                    "start": {
-                      "line": 63,
-                      "column": 83,
-                      "offset": 4910
-                    },
                     "end": {
-                      "line": 63,
                       "column": 315,
+                      "line": 63,
                       "offset": 5142
+                    },
+                    "start": {
+                      "column": 83,
+                      "line": 63,
+                      "offset": 4910
                     }
                   }
                 },
@@ -1591,15 +1619,15 @@
                   "type": "inlineCode",
                   "value": "`.art`",
                   "position": {
-                    "start": {
-                      "line": 63,
-                      "column": 315,
-                      "offset": 5142
-                    },
                     "end": {
-                      "line": 63,
                       "column": 321,
+                      "line": 63,
                       "offset": 5148
+                    },
+                    "start": {
+                      "column": 315,
+                      "line": 63,
+                      "offset": 5142
                     }
                   }
                 },
@@ -1608,15 +1636,15 @@
                   "type": "text",
                   "value": " — open semantics. The grammar and modules layers meet exactly here.",
                   "position": {
-                    "start": {
-                      "line": 63,
-                      "column": 321,
-                      "offset": 5148
-                    },
                     "end": {
-                      "line": 63,
                       "column": 389,
+                      "line": 63,
                       "offset": 5216
+                    },
+                    "start": {
+                      "column": 321,
+                      "line": 63,
+                      "offset": 5148
                     }
                   }
                 },
@@ -1627,15 +1655,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 63,
-                  "column": 1,
-                  "offset": 4828
-                },
                 "end": {
-                  "line": 63,
                   "column": 389,
+                  "line": 63,
                   "offset": 5216
+                },
+                "start": {
+                  "column": 1,
+                  "line": 63,
+                  "offset": 4828
                 }
               }
             },
@@ -1648,15 +1676,15 @@
                   "type": "text",
                   "value": " The parser captures declarations generically: it needs to know only that a resource of kind K named N is declared, never what K means. Domain semantics (fields, constraints, routines) attach to kinds through structures, keeping the core grammar frozen. The construct spec must state this purpose so the grammar-to-modules connection is explicit rather than implied.",
                   "position": {
-                    "start": {
-                      "line": 65,
-                      "column": 18,
-                      "offset": 5235
-                    },
                     "end": {
-                      "line": 65,
                       "column": 384,
+                      "line": 65,
                       "offset": 5601
+                    },
+                    "start": {
+                      "column": 18,
+                      "line": 65,
+                      "offset": 5235
                     }
                   }
                 },
@@ -1667,37 +1695,37 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 65,
-                  "column": 1,
-                  "offset": 5218
-                },
                 "end": {
-                  "line": 65,
                   "column": 384,
+                  "line": 65,
                   "offset": 5601
+                },
+                "start": {
+                  "column": 1,
+                  "line": 65,
+                  "offset": 5218
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 57,
-              "column": 1,
-              "offset": 4029
-            },
-            "end": {
-              "line": 57,
-              "column": 62,
-              "offset": 4090
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Projection-Aligned Tags",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 37,
+              "line": 67,
+              "offset": 5639
+            },
+            "start": {
+              "column": 1,
+              "line": 67,
+              "offset": 5603
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -1713,15 +1741,15 @@
                   "type": "text",
                   "value": " Adopted",
                   "position": {
-                    "start": {
-                      "line": 69,
-                      "column": 12,
-                      "offset": 5652
-                    },
                     "end": {
-                      "line": 69,
                       "column": 20,
+                      "line": 69,
                       "offset": 5660
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 69,
+                      "offset": 5652
                     }
                   }
                 },
@@ -1732,15 +1760,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 69,
-                  "column": 1,
-                  "offset": 5641
-                },
                 "end": {
-                  "line": 69,
                   "column": 20,
+                  "line": 69,
                   "offset": 5660
+                },
+                "start": {
+                  "column": 1,
+                  "line": 69,
+                  "offset": 5641
                 }
               }
             },
@@ -1753,15 +1781,15 @@
                   "type": "text",
                   "value": " Tags target content per projection but had drifted (",
                   "position": {
-                    "start": {
-                      "line": 71,
-                      "column": 13,
-                      "offset": 5674
-                    },
                     "end": {
-                      "line": 71,
                       "column": 66,
+                      "line": 71,
                       "offset": 5727
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 71,
+                      "offset": 5674
                     }
                   }
                 },
@@ -1770,15 +1798,15 @@
                   "type": "inlineCode",
                   "value": "`#curator`",
                   "position": {
-                    "start": {
-                      "line": 71,
-                      "column": 66,
-                      "offset": 5727
-                    },
                     "end": {
-                      "line": 71,
                       "column": 76,
+                      "line": 71,
                       "offset": 5737
+                    },
+                    "start": {
+                      "column": 66,
+                      "line": 71,
+                      "offset": 5727
                     }
                   }
                 },
@@ -1787,15 +1815,15 @@
                   "type": "text",
                   "value": ", ",
                   "position": {
-                    "start": {
-                      "line": 71,
-                      "column": 76,
-                      "offset": 5737
-                    },
                     "end": {
-                      "line": 71,
                       "column": 78,
+                      "line": 71,
                       "offset": 5739
+                    },
+                    "start": {
+                      "column": 76,
+                      "line": 71,
+                      "offset": 5737
                     }
                   }
                 },
@@ -1804,15 +1832,15 @@
                   "type": "inlineCode",
                   "value": "`#hoist`",
                   "position": {
-                    "start": {
-                      "line": 71,
-                      "column": 78,
-                      "offset": 5739
-                    },
                     "end": {
-                      "line": 71,
                       "column": 86,
+                      "line": 71,
                       "offset": 5747
+                    },
+                    "start": {
+                      "column": 78,
+                      "line": 71,
+                      "offset": 5739
                     }
                   }
                 },
@@ -1821,15 +1849,15 @@
                   "type": "text",
                   "value": "), so tag semantics and the projection vocabulary diverged.",
                   "position": {
-                    "start": {
-                      "line": 71,
-                      "column": 86,
-                      "offset": 5747
-                    },
                     "end": {
-                      "line": 71,
                       "column": 145,
+                      "line": 71,
                       "offset": 5806
+                    },
+                    "start": {
+                      "column": 86,
+                      "line": 71,
+                      "offset": 5747
                     }
                   }
                 },
@@ -1840,15 +1868,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 71,
-                  "column": 1,
-                  "offset": 5662
-                },
                 "end": {
-                  "line": 71,
                   "column": 145,
+                  "line": 71,
                   "offset": 5806
+                },
+                "start": {
+                  "column": 1,
+                  "line": 71,
+                  "offset": 5662
                 }
               }
             },
@@ -1861,15 +1889,15 @@
                   "type": "text",
                   "value": " Tags are aligned to the four projections: ",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 14,
-                      "offset": 5821
-                    },
                     "end": {
-                      "line": 73,
                       "column": 57,
+                      "line": 73,
                       "offset": 5864
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 73,
+                      "offset": 5821
                     }
                   }
                 },
@@ -1878,15 +1906,15 @@
                   "type": "inlineCode",
                   "value": "`#author`",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 57,
-                      "offset": 5864
-                    },
                     "end": {
-                      "line": 73,
                       "column": 66,
+                      "line": 73,
                       "offset": 5873
+                    },
+                    "start": {
+                      "column": 57,
+                      "line": 73,
+                      "offset": 5864
                     }
                   }
                 },
@@ -1895,15 +1923,15 @@
                   "type": "text",
                   "value": ", ",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 66,
-                      "offset": 5873
-                    },
                     "end": {
-                      "line": 73,
                       "column": 68,
+                      "line": 73,
                       "offset": 5875
+                    },
+                    "start": {
+                      "column": 66,
+                      "line": 73,
+                      "offset": 5873
                     }
                   }
                 },
@@ -1912,15 +1940,15 @@
                   "type": "inlineCode",
                   "value": "`#generator`",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 68,
-                      "offset": 5875
-                    },
                     "end": {
-                      "line": 73,
                       "column": 80,
+                      "line": 73,
                       "offset": 5887
+                    },
+                    "start": {
+                      "column": 68,
+                      "line": 73,
+                      "offset": 5875
                     }
                   }
                 },
@@ -1929,15 +1957,15 @@
                   "type": "text",
                   "value": ", ",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 80,
-                      "offset": 5887
-                    },
                     "end": {
-                      "line": 73,
                       "column": 82,
+                      "line": 73,
                       "offset": 5889
+                    },
+                    "start": {
+                      "column": 80,
+                      "line": 73,
+                      "offset": 5887
                     }
                   }
                 },
@@ -1946,15 +1974,15 @@
                   "type": "inlineCode",
                   "value": "`#operator`",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 82,
-                      "offset": 5889
-                    },
                     "end": {
-                      "line": 73,
                       "column": 93,
+                      "line": 73,
                       "offset": 5900
+                    },
+                    "start": {
+                      "column": 82,
+                      "line": 73,
+                      "offset": 5889
                     }
                   }
                 },
@@ -1963,15 +1991,15 @@
                   "type": "text",
                   "value": ", ",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 93,
-                      "offset": 5900
-                    },
                     "end": {
-                      "line": 73,
                       "column": 95,
+                      "line": 73,
                       "offset": 5902
+                    },
+                    "start": {
+                      "column": 93,
+                      "line": 73,
+                      "offset": 5900
                     }
                   }
                 },
@@ -1980,15 +2008,15 @@
                   "type": "inlineCode",
                   "value": "`#indexer`",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 95,
-                      "offset": 5902
-                    },
                     "end": {
-                      "line": 73,
                       "column": 105,
+                      "line": 73,
                       "offset": 5912
+                    },
+                    "start": {
+                      "column": 95,
+                      "line": 73,
+                      "offset": 5902
                     }
                   }
                 },
@@ -1997,15 +2025,15 @@
                   "type": "text",
                   "value": ". Tags determine inclusion, exclusion, or transformation of content per projection.",
                   "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 105,
-                      "offset": 5912
-                    },
                     "end": {
-                      "line": 73,
                       "column": 188,
+                      "line": 73,
                       "offset": 5995
+                    },
+                    "start": {
+                      "column": 105,
+                      "line": 73,
+                      "offset": 5912
                     }
                   }
                 },
@@ -2016,15 +2044,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 73,
-                  "column": 1,
-                  "offset": 5808
-                },
                 "end": {
-                  "line": 73,
                   "column": 188,
+                  "line": 73,
                   "offset": 5995
+                },
+                "start": {
+                  "column": 1,
+                  "line": 73,
+                  "offset": 5808
                 }
               }
             },
@@ -2037,15 +2065,15 @@
                   "type": "text",
                   "value": " The tag set is constrained by the projection taxonomy (see ",
                   "position": {
-                    "start": {
-                      "line": 75,
-                      "column": 18,
-                      "offset": 6014
-                    },
                     "end": {
-                      "line": 75,
                       "column": 78,
+                      "line": 75,
                       "offset": 6074
+                    },
+                    "start": {
+                      "column": 18,
+                      "line": 75,
+                      "offset": 6014
                     }
                   }
                 },
@@ -2054,15 +2082,15 @@
                   "type": "inlineCode",
                   "value": "`distribution.art`",
                   "position": {
-                    "start": {
-                      "line": 75,
-                      "column": 78,
-                      "offset": 6074
-                    },
                     "end": {
-                      "line": 75,
                       "column": 96,
+                      "line": 75,
                       "offset": 6092
+                    },
+                    "start": {
+                      "column": 78,
+                      "line": 75,
+                      "offset": 6074
                     }
                   }
                 },
@@ -2071,15 +2099,15 @@
                   "type": "text",
                   "value": ").",
                   "position": {
-                    "start": {
-                      "line": 75,
-                      "column": 96,
-                      "offset": 6092
-                    },
                     "end": {
-                      "line": 75,
                       "column": 98,
+                      "line": 75,
                       "offset": 6094
+                    },
+                    "start": {
+                      "column": 96,
+                      "line": 75,
+                      "offset": 6092
                     }
                   }
                 },
@@ -2090,37 +2118,37 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 75,
-                  "column": 1,
-                  "offset": 5997
-                },
                 "end": {
-                  "line": 75,
                   "column": 98,
+                  "line": 75,
                   "offset": 6094
+                },
+                "start": {
+                  "column": 1,
+                  "line": 75,
+                  "offset": 5997
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 67,
-              "column": 1,
-              "offset": 5603
-            },
-            "end": {
-              "line": 67,
-              "column": 37,
-              "offset": 5639
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Parser Containment Model",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 38,
+              "line": 77,
+              "offset": 6133
+            },
+            "start": {
+              "column": 1,
+              "line": 77,
+              "offset": 6096
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -2136,15 +2164,15 @@
                   "type": "text",
                   "value": " Adopted",
                   "position": {
-                    "start": {
-                      "line": 79,
-                      "column": 12,
-                      "offset": 6146
-                    },
                     "end": {
-                      "line": 79,
                       "column": 20,
+                      "line": 79,
                       "offset": 6154
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 79,
+                      "offset": 6146
                     }
                   }
                 },
@@ -2155,15 +2183,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 79,
-                  "column": 1,
-                  "offset": 6135
-                },
                 "end": {
-                  "line": 79,
                   "column": 20,
+                  "line": 79,
                   "offset": 6154
+                },
+                "start": {
+                  "column": 1,
+                  "line": 79,
+                  "offset": 6135
                 }
               }
             },
@@ -2176,15 +2204,15 @@
                   "type": "text",
                   "value": " The grammar spec files described containment loosely. The mdast-based parser implements explicit containment rules that need to be reflected in the spec.",
                   "position": {
-                    "start": {
-                      "line": 81,
-                      "column": 13,
-                      "offset": 6168
-                    },
                     "end": {
-                      "line": 81,
                       "column": 167,
+                      "line": 81,
                       "offset": 6322
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 81,
+                      "offset": 6168
                     }
                   }
                 },
@@ -2195,15 +2223,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 81,
-                  "column": 1,
-                  "offset": 6156
-                },
                 "end": {
-                  "line": 81,
                   "column": 167,
+                  "line": 81,
                   "offset": 6322
+                },
+                "start": {
+                  "column": 1,
+                  "line": 81,
+                  "offset": 6156
                 }
               }
             },
@@ -2216,15 +2244,15 @@
                   "type": "text",
                   "value": " SectionBlocks nest by heading level. FieldBlock values terminate at the next FieldBlock, SectionBlock, or end of enclosing SectionBlock. NaturalBlock is the catch-all for any unclassified content. Tags are detected in prose via regex, not in code blocks.",
                   "position": {
-                    "start": {
-                      "line": 83,
-                      "column": 14,
-                      "offset": 6337
-                    },
                     "end": {
-                      "line": 83,
                       "column": 269,
+                      "line": 83,
                       "offset": 6592
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 83,
+                      "offset": 6337
                     }
                   }
                 },
@@ -2235,15 +2263,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 83,
-                  "column": 1,
-                  "offset": 6324
-                },
                 "end": {
-                  "line": 83,
                   "column": 269,
+                  "line": 83,
                   "offset": 6592
+                },
+                "start": {
+                  "column": 1,
+                  "line": 83,
+                  "offset": 6324
                 }
               }
             },
@@ -2256,63 +2284,35 @@
                   "type": "text",
                   "value": " The spec files now match the parser implementation. The containment model is unambiguous for both parsers and spec readers.",
                   "position": {
-                    "start": {
-                      "line": 85,
-                      "column": 18,
-                      "offset": 6611
-                    },
                     "end": {
-                      "line": 85,
                       "column": 142,
+                      "line": 85,
                       "offset": 6735
+                    },
+                    "start": {
+                      "column": 18,
+                      "line": 85,
+                      "offset": 6611
                     }
                   }
                 }
               ],
               "position": {
-                "start": {
-                  "line": 85,
-                  "column": 1,
-                  "offset": 6594
-                },
                 "end": {
-                  "line": 85,
                   "column": 142,
+                  "line": 85,
                   "offset": 6735
+                },
+                "start": {
+                  "column": 1,
+                  "line": 85,
+                  "offset": 6594
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 77,
-              "column": 1,
-              "offset": 6096
-            },
-            "end": {
-              "line": 77,
-              "column": 38,
-              "offset": 6133
-            }
-          }
+          ]
         }
-      ],
-      "depth": 1,
-      "kind": "Module",
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 19,
-          "offset": 18
-        }
-      }
+      ]
     }
   ]
 }

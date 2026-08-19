@@ -4,6 +4,19 @@
     {
       "construct": "SectionBlock",
       "name": "Module",
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 9,
+          "line": 1,
+          "offset": 8
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
       "children": [
         {
           "construct": "NaturalBlock",
@@ -12,7 +25,21 @@
         },
         {
           "construct": "SectionBlock",
+          "kind": "Project",
           "name": "Artificial",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 23,
+              "line": 3,
+              "offset": 32
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 10
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -28,15 +55,15 @@
                   "type": "text",
                   "value": " Generate and manage (Art)ificial Driven Development environments.",
                   "position": {
-                    "start": {
-                      "line": 5,
-                      "column": 13,
-                      "offset": 46
-                    },
                     "end": {
-                      "line": 5,
                       "column": 79,
+                      "line": 5,
                       "offset": 112
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 5,
+                      "offset": 46
                     }
                   }
                 },
@@ -47,15 +74,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 5,
-                  "column": 1,
-                  "offset": 34
-                },
                 "end": {
-                  "line": 5,
                   "column": 79,
+                  "line": 5,
                   "offset": 112
+                },
+                "start": {
+                  "column": 1,
+                  "line": 5,
+                  "offset": 34
                 }
               }
             },
@@ -68,15 +95,15 @@
                   "type": "text",
                   "value": " Collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.",
                   "position": {
-                    "start": {
-                      "line": 7,
-                      "column": 17,
-                      "offset": 130
-                    },
                     "end": {
-                      "line": 7,
                       "column": 217,
+                      "line": 7,
                       "offset": 330
+                    },
+                    "start": {
+                      "column": 17,
+                      "line": 7,
+                      "offset": 130
                     }
                   }
                 },
@@ -87,15 +114,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 7,
-                  "column": 1,
-                  "offset": 114
-                },
                 "end": {
-                  "line": 7,
                   "column": 217,
+                  "line": 7,
                   "offset": 330
+                },
+                "start": {
+                  "column": 1,
+                  "line": 7,
+                  "offset": 114
                 }
               }
             },
@@ -108,15 +135,15 @@
                   "type": "text",
                   "value": " ",
                   "position": {
-                    "start": {
-                      "line": 9,
-                      "column": 12,
-                      "offset": 343
-                    },
                     "end": {
-                      "line": 9,
                       "column": 13,
+                      "line": 9,
                       "offset": 344
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 9,
+                      "offset": 343
                     }
                   }
                 },
@@ -125,15 +152,15 @@
                   "type": "inlineCode",
                   "value": "`git@github.com:noodlestan/artificial.git`",
                   "position": {
-                    "start": {
-                      "line": 9,
-                      "column": 13,
-                      "offset": 344
-                    },
                     "end": {
-                      "line": 9,
                       "column": 55,
+                      "line": 9,
                       "offset": 386
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 9,
+                      "offset": 344
                     }
                   }
                 },
@@ -144,15 +171,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 9,
-                  "column": 1,
-                  "offset": 332
-                },
                 "end": {
-                  "line": 9,
                   "column": 55,
+                  "line": 9,
                   "offset": 386
+                },
+                "start": {
+                  "column": 1,
+                  "line": 9,
+                  "offset": 332
                 }
               }
             },
@@ -165,15 +192,15 @@
                   "type": "text",
                   "value": " ",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 20,
-                      "offset": 407
-                    },
                     "end": {
-                      "line": 11,
                       "column": 21,
+                      "line": 11,
                       "offset": 408
+                    },
+                    "start": {
+                      "column": 20,
+                      "line": 11,
+                      "offset": 407
                     }
                   }
                 },
@@ -182,15 +209,15 @@
                   "type": "inlineCode",
                   "value": "`noodlestan/artificial`",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 21,
-                      "offset": 408
-                    },
                     "end": {
-                      "line": 11,
                       "column": 44,
+                      "line": 11,
                       "offset": 431
+                    },
+                    "start": {
+                      "column": 21,
+                      "line": 11,
+                      "offset": 408
                     }
                   }
                 },
@@ -201,15 +228,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 11,
-                  "column": 1,
-                  "offset": 388
-                },
                 "end": {
-                  "line": 11,
                   "column": 44,
+                  "line": 11,
                   "offset": 431
+                },
+                "start": {
+                  "column": 1,
+                  "line": 11,
+                  "offset": 388
                 }
               }
             },
@@ -222,15 +249,15 @@
                   "type": "text",
                   "value": " ",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 10,
-                      "offset": 442
-                    },
                     "end": {
-                      "line": 13,
                       "column": 11,
+                      "line": 13,
                       "offset": 443
+                    },
+                    "start": {
+                      "column": 10,
+                      "line": 13,
+                      "offset": 442
                     }
                   }
                 },
@@ -239,15 +266,15 @@
                   "type": "inlineCode",
                   "value": "`./`",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 11,
-                      "offset": 443
-                    },
                     "end": {
-                      "line": 13,
                       "column": 15,
+                      "line": 13,
                       "offset": 447
+                    },
+                    "start": {
+                      "column": 11,
+                      "line": 13,
+                      "offset": 443
                     }
                   }
                 },
@@ -258,15 +285,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 13,
-                  "column": 1,
-                  "offset": 433
-                },
                 "end": {
-                  "line": 13,
                   "column": 15,
+                  "line": 13,
                   "offset": 447
+                },
+                "start": {
+                  "column": 1,
+                  "line": 13,
+                  "offset": 433
                 }
               }
             },
@@ -279,15 +306,15 @@
                   "type": "text",
                   "value": " ",
                   "position": {
-                    "start": {
-                      "line": 15,
-                      "column": 13,
-                      "offset": 461
-                    },
                     "end": {
-                      "line": 15,
                       "column": 14,
+                      "line": 15,
                       "offset": 462
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 15,
+                      "offset": 461
                     }
                   }
                 },
@@ -296,15 +323,15 @@
                   "type": "inlineCode",
                   "value": "`0.0.1`",
                   "position": {
-                    "start": {
-                      "line": 15,
-                      "column": 14,
-                      "offset": 462
-                    },
                     "end": {
-                      "line": 15,
                       "column": 21,
+                      "line": 15,
                       "offset": 469
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 15,
+                      "offset": 462
                     }
                   }
                 },
@@ -315,15 +342,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 15,
-                  "column": 1,
-                  "offset": 449
-                },
                 "end": {
-                  "line": 15,
                   "column": 21,
+                  "line": 15,
                   "offset": 469
+                },
+                "start": {
+                  "column": 1,
+                  "line": 15,
+                  "offset": 449
                 }
               }
             },
@@ -336,15 +363,15 @@
                   "type": "text",
                   "value": " npm@10.2.3",
                   "position": {
-                    "start": {
-                      "line": 17,
-                      "column": 20,
-                      "offset": 490
-                    },
                     "end": {
-                      "line": 17,
                       "column": 31,
+                      "line": 17,
                       "offset": 501
+                    },
+                    "start": {
+                      "column": 20,
+                      "line": 17,
+                      "offset": 490
                     }
                   }
                 },
@@ -355,15 +382,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 17,
-                  "column": 1,
-                  "offset": 471
-                },
                 "end": {
-                  "line": 17,
                   "column": 31,
+                  "line": 17,
                   "offset": 501
+                },
+                "start": {
+                  "column": 1,
+                  "line": 17,
+                  "offset": 471
                 }
               }
             },
@@ -380,22 +407,35 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- Namespace: Art JS\n- Namespace: Artisans\n- Namespace: Art Domains",
+                  "position": {
+                    "end": {
+                      "column": 25,
+                      "line": 23,
+                      "offset": 586
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 21,
+                      "offset": 520
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "Namespace: Art JS",
                       "position": {
-                        "start": {
-                          "line": 21,
-                          "column": 3,
-                          "offset": 522
-                        },
                         "end": {
-                          "line": 21,
                           "column": 20,
+                          "line": 21,
                           "offset": 539
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 21,
+                          "offset": 522
                         }
                       }
                     },
@@ -403,15 +443,15 @@
                       "construct": "NaturalBlock",
                       "value": "Namespace: Artisans",
                       "position": {
-                        "start": {
-                          "line": 22,
-                          "column": 3,
-                          "offset": 542
-                        },
                         "end": {
-                          "line": 22,
                           "column": 22,
+                          "line": 22,
                           "offset": 561
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 22,
+                          "offset": 542
                         }
                       }
                     },
@@ -419,32 +459,19 @@
                       "construct": "NaturalBlock",
                       "value": "Namespace: Art Domains",
                       "position": {
-                        "start": {
-                          "line": 23,
-                          "column": 3,
-                          "offset": 564
-                        },
                         "end": {
-                          "line": 23,
                           "column": 25,
+                          "line": 23,
                           "offset": 586
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 23,
+                          "offset": 564
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 21,
-                      "column": 1,
-                      "offset": 520
-                    },
-                    "end": {
-                      "line": 23,
-                      "column": 25,
-                      "offset": 586
-                    }
-                  },
-                  "value": "- Namespace: Art JS\n- Namespace: Artisans\n- Namespace: Art Domains"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -453,15 +480,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 19,
-                  "column": 1,
-                  "offset": 503
-                },
                 "end": {
-                  "line": 19,
                   "column": 16,
+                  "line": 19,
                   "offset": 518
+                },
+                "start": {
+                  "column": 1,
+                  "line": 19,
+                  "offset": 503
                 }
               }
             },
@@ -478,22 +505,35 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- `art-domains/**`\n- `art-js/**`\n- `artisans/**`",
+                  "position": {
+                    "end": {
+                      "column": 16,
+                      "line": 29,
+                      "offset": 653
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 27,
+                      "offset": 605
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "`art-domains/**`",
                       "position": {
-                        "start": {
-                          "line": 27,
-                          "column": 3,
-                          "offset": 607
-                        },
                         "end": {
-                          "line": 27,
                           "column": 19,
+                          "line": 27,
                           "offset": 623
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 27,
+                          "offset": 607
                         }
                       }
                     },
@@ -501,15 +541,15 @@
                       "construct": "NaturalBlock",
                       "value": "`art-js/**`",
                       "position": {
-                        "start": {
-                          "line": 28,
-                          "column": 3,
-                          "offset": 626
-                        },
                         "end": {
-                          "line": 28,
                           "column": 14,
+                          "line": 28,
                           "offset": 637
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 28,
+                          "offset": 626
                         }
                       }
                     },
@@ -517,32 +557,19 @@
                       "construct": "NaturalBlock",
                       "value": "`artisans/**`",
                       "position": {
-                        "start": {
-                          "line": 29,
-                          "column": 3,
-                          "offset": 640
-                        },
                         "end": {
-                          "line": 29,
                           "column": 16,
+                          "line": 29,
                           "offset": 653
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 29,
+                          "offset": 640
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 27,
-                      "column": 1,
-                      "offset": 605
-                    },
-                    "end": {
-                      "line": 29,
-                      "column": 16,
-                      "offset": 653
-                    }
-                  },
-                  "value": "- `art-domains/**`\n- `art-js/**`\n- `artisans/**`"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -551,15 +578,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 25,
-                  "column": 1,
-                  "offset": 588
-                },
                 "end": {
-                  "line": 25,
                   "column": 16,
+                  "line": 25,
                   "offset": 603
+                },
+                "start": {
+                  "column": 1,
+                  "line": 25,
+                  "offset": 588
                 }
               }
             },
@@ -576,22 +603,35 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- Scaffolder Files: Project README\n- Scaffolder Files: Project Package Json\n- Scaffolder Files: Project Tsconfig\n- Scaffolder Files: Project Turbo\n- Scaffolder Files: Project Lefthook\n- Scaffolder Skeleton: Project Skeleton",
+                  "position": {
+                    "end": {
+                      "column": 40,
+                      "line": 38,
+                      "offset": 896
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 33,
+                      "offset": 673
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "Scaffolder Files: Project README",
                       "position": {
-                        "start": {
-                          "line": 33,
-                          "column": 3,
-                          "offset": 675
-                        },
                         "end": {
-                          "line": 33,
                           "column": 35,
+                          "line": 33,
                           "offset": 707
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 33,
+                          "offset": 675
                         }
                       }
                     },
@@ -599,15 +639,15 @@
                       "construct": "NaturalBlock",
                       "value": "Scaffolder Files: Project Package Json",
                       "position": {
-                        "start": {
-                          "line": 34,
-                          "column": 3,
-                          "offset": 710
-                        },
                         "end": {
-                          "line": 34,
                           "column": 41,
+                          "line": 34,
                           "offset": 748
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 34,
+                          "offset": 710
                         }
                       }
                     },
@@ -615,15 +655,15 @@
                       "construct": "NaturalBlock",
                       "value": "Scaffolder Files: Project Tsconfig",
                       "position": {
-                        "start": {
-                          "line": 35,
-                          "column": 3,
-                          "offset": 751
-                        },
                         "end": {
-                          "line": 35,
                           "column": 37,
+                          "line": 35,
                           "offset": 785
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 35,
+                          "offset": 751
                         }
                       }
                     },
@@ -631,15 +671,15 @@
                       "construct": "NaturalBlock",
                       "value": "Scaffolder Files: Project Turbo",
                       "position": {
-                        "start": {
-                          "line": 36,
-                          "column": 3,
-                          "offset": 788
-                        },
                         "end": {
-                          "line": 36,
                           "column": 34,
+                          "line": 36,
                           "offset": 819
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 36,
+                          "offset": 788
                         }
                       }
                     },
@@ -647,15 +687,15 @@
                       "construct": "NaturalBlock",
                       "value": "Scaffolder Files: Project Lefthook",
                       "position": {
-                        "start": {
-                          "line": 37,
-                          "column": 3,
-                          "offset": 822
-                        },
                         "end": {
-                          "line": 37,
                           "column": 37,
+                          "line": 37,
                           "offset": 856
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 37,
+                          "offset": 822
                         }
                       }
                     },
@@ -663,32 +703,19 @@
                       "construct": "NaturalBlock",
                       "value": "Scaffolder Skeleton: Project Skeleton",
                       "position": {
-                        "start": {
-                          "line": 38,
-                          "column": 3,
-                          "offset": 859
-                        },
                         "end": {
-                          "line": 38,
                           "column": 40,
+                          "line": 38,
                           "offset": 896
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 38,
+                          "offset": 859
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 33,
-                      "column": 1,
-                      "offset": 673
-                    },
-                    "end": {
-                      "line": 38,
-                      "column": 40,
-                      "offset": 896
-                    }
-                  },
-                  "value": "- Scaffolder Files: Project README\n- Scaffolder Files: Project Package Json\n- Scaffolder Files: Project Tsconfig\n- Scaffolder Files: Project Turbo\n- Scaffolder Files: Project Lefthook\n- Scaffolder Skeleton: Project Skeleton"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -697,15 +724,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 31,
-                  "column": 1,
-                  "offset": 655
-                },
                 "end": {
-                  "line": 31,
                   "column": 17,
+                  "line": 31,
                   "offset": 671
+                },
+                "start": {
+                  "column": 1,
+                  "line": 31,
+                  "offset": 655
                 }
               }
             },
@@ -718,15 +745,15 @@
                   "type": "text",
                   "value": " package.json",
                   "position": {
-                    "start": {
-                      "line": 40,
-                      "column": 17,
-                      "offset": 914
-                    },
                     "end": {
-                      "line": 40,
                       "column": 30,
+                      "line": 40,
                       "offset": 927
+                    },
+                    "start": {
+                      "column": 17,
+                      "line": 40,
+                      "offset": 914
                     }
                   }
                 },
@@ -737,15 +764,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 40,
-                  "column": 1,
-                  "offset": 898
-                },
                 "end": {
-                  "line": 40,
                   "column": 30,
+                  "line": 40,
                   "offset": 927
+                },
+                "start": {
+                  "column": 1,
+                  "line": 40,
+                  "offset": 898
                 }
               }
             },
@@ -761,37 +788,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Run at root of repository, not per package:",
+                  "position": {
+                    "end": {
+                      "column": 44,
+                      "line": 44,
+                      "offset": 984
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 44,
+                      "offset": 941
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Run at root of repository, not per package:",
                       "position": {
-                        "start": {
-                          "line": 44,
-                          "column": 1,
-                          "offset": 941
-                        },
                         "end": {
-                          "line": 44,
                           "column": 44,
+                          "line": 44,
                           "offset": 984
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 44,
+                          "offset": 941
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 44,
-                      "column": 1,
-                      "offset": 941
-                    },
-                    "end": {
-                      "line": 44,
-                      "column": 44,
-                      "offset": 984
-                    }
-                  },
-                  "value": "Run at root of repository, not per package:"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -805,15 +832,15 @@
                   "meta": null,
                   "value": "```bash\nnpm ci # to install dependencies.\n```",
                   "position": {
-                    "start": {
-                      "line": 46,
-                      "column": 1,
-                      "offset": 986
-                    },
                     "end": {
-                      "line": 48,
                       "column": 4,
+                      "line": 48,
                       "offset": 1031
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 46,
+                      "offset": 986
                     }
                   }
                 },
@@ -824,15 +851,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 42,
-                  "column": 1,
-                  "offset": 929
-                },
                 "end": {
-                  "line": 42,
                   "column": 11,
+                  "line": 42,
                   "offset": 939
+                },
+                "start": {
+                  "column": 1,
+                  "line": 42,
+                  "offset": 929
                 }
               }
             },
@@ -848,37 +875,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Run per package modified:",
+                  "position": {
+                    "end": {
+                      "column": 26,
+                      "line": 52,
+                      "offset": 1077
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 52,
+                      "offset": 1052
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Run per package modified:",
                       "position": {
-                        "start": {
-                          "line": 52,
-                          "column": 1,
-                          "offset": 1052
-                        },
                         "end": {
-                          "line": 52,
                           "column": 26,
+                          "line": 52,
                           "offset": 1077
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 52,
+                          "offset": 1052
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 52,
-                      "column": 1,
-                      "offset": 1052
-                    },
-                    "end": {
-                      "line": 52,
-                      "column": 26,
-                      "offset": 1077
-                    }
-                  },
-                  "value": "Run per package modified:"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -892,15 +919,15 @@
                   "meta": null,
                   "value": "```bash\nnpm run lint:fix # to fix formatting issues automatically\nnpm run lint # to report other issues\nnpm run build\nnpm run test\n```",
                   "position": {
-                    "start": {
-                      "line": 54,
-                      "column": 1,
-                      "offset": 1079
-                    },
                     "end": {
-                      "line": 59,
                       "column": 4,
+                      "line": 59,
                       "offset": 1213
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 54,
+                      "offset": 1079
                     }
                   }
                 },
@@ -911,15 +938,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 50,
-                  "column": 1,
-                  "offset": 1033
-                },
                 "end": {
-                  "line": 50,
                   "column": 18,
+                  "line": 50,
                   "offset": 1050
+                },
+                "start": {
+                  "column": 1,
+                  "line": 50,
+                  "offset": 1033
                 }
               }
             },
@@ -936,39 +963,39 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- Package Script Set: Root Lifecycle",
+                  "position": {
+                    "end": {
+                      "column": 37,
+                      "line": 63,
+                      "offset": 1265
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 63,
+                      "offset": 1229
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "Package Script Set: Root Lifecycle",
                       "position": {
-                        "start": {
-                          "line": 63,
-                          "column": 3,
-                          "offset": 1231
-                        },
                         "end": {
-                          "line": 63,
                           "column": 37,
+                          "line": 63,
                           "offset": 1265
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 63,
+                          "offset": 1231
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 63,
-                      "column": 1,
-                      "offset": 1229
-                    },
-                    "end": {
-                      "line": 63,
-                      "column": 37,
-                      "offset": 1265
-                    }
-                  },
-                  "value": "- Package Script Set: Root Lifecycle"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -978,54 +1005,54 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "**License.Short**",
+                  "position": {
+                    "end": {
+                      "column": 18,
+                      "line": 65,
+                      "offset": 1284
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 65,
+                      "offset": 1267
+                    }
+                  },
                   "children": [
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 18,
+                          "line": 65,
+                          "offset": 1284
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 65,
+                          "offset": 1267
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "License.Short",
                           "position": {
-                            "start": {
-                              "line": 65,
-                              "column": 3,
-                              "offset": 1269
-                            },
                             "end": {
-                              "line": 65,
                               "column": 16,
+                              "line": 65,
                               "offset": 1282
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 65,
+                              "offset": 1269
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 65,
-                          "column": 1,
-                          "offset": 1267
-                        },
-                        "end": {
-                          "line": 65,
-                          "column": 18,
-                          "offset": 1284
-                        }
-                      }
+                      ]
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 65,
-                      "column": 1,
-                      "offset": 1267
-                    },
-                    "end": {
-                      "line": 65,
-                      "column": 18,
-                      "offset": 1284
-                    }
-                  },
-                  "value": "**License.Short**"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1035,20 +1062,33 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Copyright (c) 2026 [Noodlestan](https://noodlestan.org/).",
+                  "position": {
+                    "end": {
+                      "column": 58,
+                      "line": 67,
+                      "offset": 1343
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 67,
+                      "offset": 1286
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Copyright (c) 2026 ",
                       "position": {
-                        "start": {
-                          "line": 67,
-                          "column": 1,
-                          "offset": 1286
-                        },
                         "end": {
-                          "line": 67,
                           "column": 20,
+                          "line": 67,
                           "offset": 1305
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 67,
+                          "offset": 1286
                         }
                       }
                     },
@@ -1056,67 +1096,54 @@
                       "type": "link",
                       "title": null,
                       "url": "https://noodlestan.org/",
+                      "position": {
+                        "end": {
+                          "column": 57,
+                          "line": 67,
+                          "offset": 1342
+                        },
+                        "start": {
+                          "column": 20,
+                          "line": 67,
+                          "offset": 1305
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Noodlestan",
                           "position": {
-                            "start": {
-                              "line": 67,
-                              "column": 21,
-                              "offset": 1306
-                            },
                             "end": {
-                              "line": 67,
                               "column": 31,
+                              "line": 67,
                               "offset": 1316
+                            },
+                            "start": {
+                              "column": 21,
+                              "line": 67,
+                              "offset": 1306
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 67,
-                          "column": 20,
-                          "offset": 1305
-                        },
-                        "end": {
-                          "line": 67,
-                          "column": 57,
-                          "offset": 1342
-                        }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
                       "value": ".",
                       "position": {
-                        "start": {
-                          "line": 67,
-                          "column": 57,
-                          "offset": 1342
-                        },
                         "end": {
-                          "line": 67,
                           "column": 58,
+                          "line": 67,
                           "offset": 1343
+                        },
+                        "start": {
+                          "column": 57,
+                          "line": 67,
+                          "offset": 1342
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 67,
-                      "column": 1,
-                      "offset": 1286
-                    },
-                    "end": {
-                      "line": 67,
-                      "column": 58,
-                      "offset": 1343
-                    }
-                  },
-                  "value": "Copyright (c) 2026 [Noodlestan](https://noodlestan.org/)."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1126,20 +1153,33 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Published under a [MIT license](https://noodlestan.mit-license.org/).",
+                  "position": {
+                    "end": {
+                      "column": 70,
+                      "line": 69,
+                      "offset": 1414
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 69,
+                      "offset": 1345
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Published under a ",
                       "position": {
-                        "start": {
-                          "line": 69,
-                          "column": 1,
-                          "offset": 1345
-                        },
                         "end": {
-                          "line": 69,
                           "column": 19,
+                          "line": 69,
                           "offset": 1363
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 69,
+                          "offset": 1345
                         }
                       }
                     },
@@ -1147,67 +1187,54 @@
                       "type": "link",
                       "title": null,
                       "url": "https://noodlestan.mit-license.org/",
+                      "position": {
+                        "end": {
+                          "column": 69,
+                          "line": 69,
+                          "offset": 1413
+                        },
+                        "start": {
+                          "column": 19,
+                          "line": 69,
+                          "offset": 1363
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "MIT license",
                           "position": {
-                            "start": {
-                              "line": 69,
-                              "column": 20,
-                              "offset": 1364
-                            },
                             "end": {
-                              "line": 69,
                               "column": 31,
+                              "line": 69,
                               "offset": 1375
+                            },
+                            "start": {
+                              "column": 20,
+                              "line": 69,
+                              "offset": 1364
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 69,
-                          "column": 19,
-                          "offset": 1363
-                        },
-                        "end": {
-                          "line": 69,
-                          "column": 69,
-                          "offset": 1413
-                        }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
                       "value": ".",
                       "position": {
-                        "start": {
-                          "line": 69,
-                          "column": 69,
-                          "offset": 1413
-                        },
                         "end": {
-                          "line": 69,
                           "column": 70,
+                          "line": 69,
                           "offset": 1414
+                        },
+                        "start": {
+                          "column": 69,
+                          "line": 69,
+                          "offset": 1413
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 69,
-                      "column": 1,
-                      "offset": 1345
-                    },
-                    "end": {
-                      "line": 69,
-                      "column": 70,
-                      "offset": 1414
-                    }
-                  },
-                  "value": "Published under a [MIT license](https://noodlestan.mit-license.org/)."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1217,54 +1244,54 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "**License.Long**",
+                  "position": {
+                    "end": {
+                      "column": 17,
+                      "line": 71,
+                      "offset": 1432
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 71,
+                      "offset": 1416
+                    }
+                  },
                   "children": [
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 17,
+                          "line": 71,
+                          "offset": 1432
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 71,
+                          "offset": 1416
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "License.Long",
                           "position": {
-                            "start": {
-                              "line": 71,
-                              "column": 3,
-                              "offset": 1418
-                            },
                             "end": {
-                              "line": 71,
                               "column": 15,
+                              "line": 71,
                               "offset": 1430
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 71,
+                              "offset": 1418
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 71,
-                          "column": 1,
-                          "offset": 1416
-                        },
-                        "end": {
-                          "line": 71,
-                          "column": 17,
-                          "offset": 1432
-                        }
-                      }
+                      ]
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 71,
-                      "column": 1,
-                      "offset": 1416
-                    },
-                    "end": {
-                      "line": 71,
-                      "column": 17,
-                      "offset": 1432
-                    }
-                  },
-                  "value": "**License.Long**"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1274,37 +1301,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "MIT License https://noodlestan.mit-license.org/",
+                  "position": {
+                    "end": {
+                      "column": 48,
+                      "line": 73,
+                      "offset": 1481
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 73,
+                      "offset": 1434
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "MIT License https://noodlestan.mit-license.org/",
                       "position": {
-                        "start": {
-                          "line": 73,
-                          "column": 1,
-                          "offset": 1434
-                        },
                         "end": {
-                          "line": 73,
                           "column": 48,
+                          "line": 73,
                           "offset": 1481
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 73,
+                          "offset": 1434
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 1,
-                      "offset": 1434
-                    },
-                    "end": {
-                      "line": 73,
-                      "column": 48,
-                      "offset": 1481
-                    }
-                  },
-                  "value": "MIT License https://noodlestan.mit-license.org/"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1314,37 +1341,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Copyright (c) 2026 Noodlestan https://noodlestan.org/",
+                  "position": {
+                    "end": {
+                      "column": 54,
+                      "line": 75,
+                      "offset": 1536
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 75,
+                      "offset": 1483
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Copyright (c) 2026 Noodlestan https://noodlestan.org/",
                       "position": {
-                        "start": {
-                          "line": 75,
-                          "column": 1,
-                          "offset": 1483
-                        },
                         "end": {
-                          "line": 75,
                           "column": 54,
+                          "line": 75,
                           "offset": 1536
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 75,
+                          "offset": 1483
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 75,
-                      "column": 1,
-                      "offset": 1483
-                    },
-                    "end": {
-                      "line": 75,
-                      "column": 54,
-                      "offset": 1536
-                    }
-                  },
-                  "value": "Copyright (c) 2026 Noodlestan https://noodlestan.org/"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1354,37 +1381,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:",
+                  "position": {
+                    "end": {
+                      "column": 57,
+                      "line": 82,
+                      "offset": 1970
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 77,
+                      "offset": 1538
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:",
                       "position": {
-                        "start": {
-                          "line": 77,
-                          "column": 1,
-                          "offset": 1538
-                        },
                         "end": {
-                          "line": 82,
                           "column": 57,
+                          "line": 82,
                           "offset": 1970
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 77,
+                          "offset": 1538
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 77,
-                      "column": 1,
-                      "offset": 1538
-                    },
-                    "end": {
-                      "line": 82,
-                      "column": 57,
-                      "offset": 1970
-                    }
-                  },
-                  "value": "Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1394,37 +1421,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.",
+                  "position": {
+                    "end": {
+                      "column": 48,
+                      "line": 85,
+                      "offset": 2098
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 84,
+                      "offset": 1972
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.",
                       "position": {
-                        "start": {
-                          "line": 84,
-                          "column": 1,
-                          "offset": 1972
-                        },
                         "end": {
-                          "line": 85,
                           "column": 48,
+                          "line": 85,
                           "offset": 2098
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 84,
+                          "offset": 1972
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 84,
-                      "column": 1,
-                      "offset": 1972
-                    },
-                    "end": {
-                      "line": 85,
-                      "column": 48,
-                      "offset": 2098
-                    }
-                  },
-                  "value": "The above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1434,82 +1461,55 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+                  "position": {
+                    "end": {
+                      "column": 10,
+                      "line": 93,
+                      "offset": 2560
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 87,
+                      "offset": 2100
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
                       "position": {
-                        "start": {
-                          "line": 87,
-                          "column": 1,
-                          "offset": 2100
-                        },
                         "end": {
-                          "line": 93,
                           "column": 10,
+                          "line": 93,
                           "offset": 2560
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 87,
+                          "offset": 2100
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 87,
-                      "column": 1,
-                      "offset": 2100
-                    },
-                    "end": {
-                      "line": 93,
-                      "column": 10,
-                      "offset": 2560
-                    }
-                  },
-                  "value": "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+                  ]
                 }
               ],
               "position": {
-                "start": {
-                  "line": 61,
-                  "column": 1,
-                  "offset": 1215
-                },
                 "end": {
-                  "line": 61,
                   "column": 13,
+                  "line": 61,
                   "offset": 1227
+                },
+                "start": {
+                  "column": 1,
+                  "line": 61,
+                  "offset": 1215
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Project",
-          "position": {
-            "start": {
-              "line": 3,
-              "column": 1,
-              "offset": 10
-            },
-            "end": {
-              "line": 3,
-              "column": 23,
-              "offset": 32
-            }
-          }
+          ]
         }
-      ],
-      "depth": 1,
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 9,
-          "offset": 8
-        }
-      }
+      ]
     }
   ]
 }
