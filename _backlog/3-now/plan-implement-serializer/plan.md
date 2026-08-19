@@ -71,7 +71,6 @@ This section describes the context feeding (and being affected by) the plan, inc
 For the delegatee (shared context; per-step context is in each instruction file):
 
 - `$PACKAGE_PARSER/test/fixtures/` — fixture inputs and snapshots used by the two-way tests.
-- `$PACKAGE_PARSER/_pairing_notes.md` — detailed analysis of roundtrip diffs and proposed solutions.
 
 ## Execution Context
 
@@ -160,9 +159,13 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 
 ### `fix-parser-field-inline-and-test-fixtures` - `COMMITTED`
 
+**Commit id:** `8a6415c`
+
 **Commit Message:** `fix(md-art-roundtrip): add FieldInline construct and fix test fixture comparison`
 
 **Instructions File:** `_backlog/3-now/plan-implement-serializer/instructions/fix-parser-field-inline-and-test-fixtures.md`
+
+**Report:** `_backlog/3-now/plan-implement-serializer/instructions/fix-parser-field-inline-and-test-fixtures__report.md`
 
 **Scope:**
 
@@ -178,6 +181,19 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 - The serializer-wip `test-parser.ts` writes `.art.json` files as a side-effect of testing; this is the problem this instruction aims to fix.
 - The serializer-wip also contains additional constructs/FieldInline work that may inform implementation, but the real fix is parser-side (see insight in planner reflection).
 
+### `build-incremental-roundtrip-fixtures` - `WORKING`
+
+**Commit Message:** `test(md-art-roundtrip): add incremental parser and serializer fixtures`
+
+**Instructions File:** `_backlog/3-now/plan-implement-serializer/instructions/build-incremental-roundtrip-fixtures.md`
+
+**Scope:**
+
+- Add a fixture ladder from the passing `hello-world.md` baseline through section-only, inline-field-only, block-field-only, and combined section/field cases.
+- For each fixture, generate the parser snapshot, inspect the captured AST, and run the focused serializer roundtrip.
+- Investigate demonstrated failures in parser/construct/serializer code and add focused constructs unit tests when fixes are required.
+- Document construct responsibilities: parser preprocessor, handler, factory, and construct `toMdast()` conversion.
+
 ## Follow ups
 
 None.
@@ -188,6 +204,7 @@ None.
 
 - `bootstrap-serializer-lib`: Instructions clear; all 12 unit tests passing; serializer package scaffolded with ToMdast functions for all 5 constructs; CI passes (12/12 tasks).
 - `two-way-fixture-tests`: Instructions clear and self-contained; pseudo-code matched implementation shape closely; 15 fixture snapshot checks pass (forward); return direction serializes without errors; roundtrip overhead logged as informational (1277 lines differ — expected, not failure).
+- `build-incremental-roundtrip-fixtures`: Blocked before any changes because the instruction's mandatory reading references `$PACKAGE_PARSER/_pairing_notes.md`, which is absent from this checkout.
 
 ### Planner Reflection
 
