@@ -2,7 +2,7 @@
 
 **ID:** `plan-cleaner-code`
 
-**Status:** `DRAFT`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 

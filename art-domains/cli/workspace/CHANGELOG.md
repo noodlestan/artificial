@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 0.0.16
+
+### Fixed
+
+- **Clone command:** Scan checkouts before presenting checkout report.
+- **Sanity command:** Fix false "extraneous checkout" flag for known checkouts.
+- **Scan state:** Fix wrong branch warning for extraneous checkouts with empty record branch.
+- **Clone command:** Detect wrong remote in checkout report.
+- **Clone command:** Respect record branch when cloning (checkout correct branch after clone).
+- **Clone command:** Allow second checkout of same repo at different location.
+- **Clone command:** Refuse clone when target directory already exists.
+- **Clone command:** Fix custom location producing wrong checkout name and path.
+
 ## 0.0.15
 
 ### Added

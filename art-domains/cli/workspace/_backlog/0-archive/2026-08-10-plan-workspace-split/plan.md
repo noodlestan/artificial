@@ -2,7 +2,7 @@
 
 **ID:** `workspace-split`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -173,14 +173,6 @@ Commits:
 - purrpose: `64c525b` (npm migration)
 - no-comply: `aa49a99` (npm migration), `1aebfb2` (remove configs/ and cli/mybin), `9e31966` (migrate cross-repo deps)
 
-### `repo-ci` - `DRAFT`
-
-**Commit Message:** `ci: per-repository pipelines and workspace orchestration`
-
-**Instructions File:** (sketch merged)
-
-**Sub-Agent:** (pending)
-
 ## Follow ups
 
 - **DONE:** Publish all packages to npm — all packages from workspace-tooling, artificial, purrception, purrtrait, purrpose, and no-comply are now published to npm.
@@ -189,7 +181,6 @@ Commits:
 - **DONE:** Extract no-comply — no-comply is extracted and working with npm-based dependencies.
 - Archive the legacy `noodlestan/eslint-config` repo once its package is migrated and consumed via npm.
 - `ops/_pseudo.md` rewritten against the new plan steps (workspace-first, tools-first, extract recipes).
-- **repo-ci** — GitHub Actions workflows for all repos (still DRAFT, needs instruction file).
 - **Reverse edge resolution** — `purrpose → @no-comply/solid-primitives` is still using `file:` resolution. After no-comply packages are published to npm, rewire to npm version.
 - **Workspace symlink orchestration** — implement `ops symlink <repo>` command to symlink local clones for development (optional, now that npm is working).
 

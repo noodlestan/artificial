@@ -4,7 +4,7 @@
 
 **commit.Id:** `split-test-files`
 
-**Status:** COMPLETED
+**Outcome:** COMPLETED
 
 ## Summary
 

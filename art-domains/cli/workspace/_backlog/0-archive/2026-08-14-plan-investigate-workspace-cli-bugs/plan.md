@@ -2,7 +2,7 @@
 
 **ID:** `investigate-workspace-cli-bugs`
 
-**Status:** `DRAFT`
+**Status:** `DONE`
 
 ## Summary
 
