@@ -2,7 +2,7 @@
 
 **ID:** `implement-serializer`
 
-**Status:** `READY`
+**Status:** `IN_PROGRESS`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -71,6 +71,7 @@ This section describes the context feeding (and being affected by) the plan, inc
 For the delegatee (shared context; per-step context is in each instruction file):
 
 - `$PACKAGE_PARSER/test/fixtures/` — fixture inputs and snapshots used by the two-way tests.
+- `$PACKAGE_PARSER/_pairing_notes.md` — detailed analysis of roundtrip diffs and proposed solutions.
 
 ## Execution Context
 
@@ -99,11 +100,15 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 
 ## Commits
 
-### `bootstrap-serializer-lib` - `PLANNED`
+### `bootstrap-serializer-lib` - `COMMITTED`
+
+**Commit id:** `a69f44a`
 
 **Commit Message:** `build(md-art-roundtrip): bootstrap serializer lib`
 
 **Instructions File:** `_backlog/3-now/plan-implement-serializer/instructions/bootstrap-serializer-lib.md`
+
+**Report:** `_backlog/3-now/plan-implement-serializer/instructions/bootstrap-serializer-lib__report.md`
 
 **Scope:**
 
@@ -113,11 +118,15 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 - Register package record `$PROJECT/ops/records/packages/artificial-serializer.art`.
 - Verify: `npm run lint`, `npm run build`, `npm run test` in serializer package.
 
-### `two-way-fixture-tests` - `PLANNED`
+### `two-way-fixture-tests` - `COMMITTED`
+
+**Commit id:** `2b3cbd3`
 
 **Commit Message:** `build(md-art-roundtrip): extend fixture tests to roundtrip both directions`
 
 **Instructions File:** `_backlog/3-now/plan-implement-serializer/instructions/two-way-fixture-tests.md`
+
+**Report:** `_backlog/3-now/plan-implement-serializer/instructions/two-way-fixture-tests__report.md`
 
 **Scope:**
 
@@ -126,10 +135,45 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 - When `--write` is provided, also write `{fixture}.parsed.md` for debugging.
 - Verify: `npm run test` passes in parser package with the two-way suite.
 
+### `integrate-serializer-reports` - `PLANNED`
+
+**Commit Message:** `plan(md-art-roundtrip): Integrate serializer commit reports.
+
+**Instructions File:** Executed in pairing session with user.
+
+### `split-tests-parser-vs-serialize` - `PLANNED`
+
+**Commit Message:** `build(md-art-roundtrip): Split parser and serializer tests.
+
+**Instructions File:** Executed in pairing session with user.
+
+### `fix-parser-field-inline-and-test-fixtures` - `PLANNED`
+
+**Commit Message:** `fix(md-art-roundtrip): add FieldInline construct and fix test fixture comparison`
+
+**Instructions File:** `_backlog/3-now/plan-implement-serializer/instructions/fix-parser-field-inline-and-test-fixtures.md`
+
+**Scope:**
+
+- Add `FieldInline` construct to parser to distinguish inline vs block field content.
+- Fix `test-parser.ts` to compare snapshots in memory instead of writing `.art.json` files.
+- Update test fixture snapshots to match new parser output.
+- Streamline serializer to use `FieldInline` metadata for correct rendering.
+
 ## Follow ups
 
 None.
 
 ## Feedback
 
-No sub-agent reports yet.
+### Delegatee Feedback
+
+- `bootstrap-serializer-lib`: Instructions clear; all 12 unit tests passing; serializer package scaffolded with ToMdast functions for all 5 constructs; CI passes (12/12 tasks).
+- `two-way-fixture-tests`: Instructions clear and self-contained; pseudo-code matched implementation shape closely; 15 fixture snapshot checks pass (forward); return direction serializes without errors; roundtrip overhead logged as informational (1277 lines differ — expected, not failure).
+
+### Planner Reflection
+
+- Both instructions executed cleanly — no blockers or technical debt surfaced.
+- Roundtrip diffs (1277 lines) are expected overhead; fidelity refinement is explicitly scoped to phase 8 (`plan-implement-gaps`).
+- The two-step dependency (serializer before fixture tests) held — second instruction successfully imported and used the new serializer package.
+- **New insight from pairing session:** The parser gap (no inline vs block distinction) is the root cause of 228 lines of roundtrip diffs across 6 fixtures. The serializer fixes in `serializer-wip` branch are workarounds. The real fix is parser-side (add `FieldInline` construct).
