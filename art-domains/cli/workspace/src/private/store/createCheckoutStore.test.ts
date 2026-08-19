@@ -17,7 +17,7 @@ describe('createCheckoutStore', () => {
 		const checkout = store.getAllCheckouts()[0];
 		expect(checkout).toBeDefined();
 		expect(checkout?.repo).toBe(repo);
-		expect(checkout?.record.name).toBe('Foo Bar @fix-test');
+		expect(checkout?.record.name).toBe('Foo Bar @ fix-test');
 		expect(checkout?.record.location).toBe('fix-test');
 	});
 
@@ -46,7 +46,7 @@ describe('createCheckoutStore', () => {
 		const c = createCheckout(config, 'fix-test', repo);
 		store.addCheckout(c);
 
-		const checkout = store.getCheckoutByName('Foo Bar @fix-test');
+		const checkout = store.getCheckoutByName('Foo Bar @ fix-test');
 		expect(checkout).toBeDefined();
 		expect(checkout?.repo?.name).toBe('Foo Bar');
 	});

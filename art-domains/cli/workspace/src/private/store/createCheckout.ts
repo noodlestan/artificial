@@ -19,7 +19,7 @@ export function createCheckout(
 	const l = safePath(target);
 	const r = repo;
 	const b = branch ?? 'main';
-	const n = name || (r?.name ? r?.name + ' @' + target : target);
+	const n = name || (r?.name ? r?.name + ' @ ' + target : target);
 
 	return {
 		repo: r,

@@ -25,7 +25,7 @@ describe('createCheckout', () => {
 		expect(checkout.path).toBe('repos/fix-test');
 		expect(checkout.repo).toBe(repo);
 		expect(checkout.record.repository).toBe('Foo Bar');
-		expect(checkout.record.name).toBe('Foo Bar @fix-test');
+		expect(checkout.record.name).toBe('Foo Bar @ fix-test');
 		expect(checkout.record.location).toBe('fix-test');
 		expect(checkout.record.branch).toBe('main');
 	});
@@ -36,7 +36,7 @@ describe('createCheckout', () => {
 		const checkout = createCheckout(config, 'fix-test', repo, 'branch-name');
 
 		expect(checkout.path).toBe('repos/fix-test');
-		expect(checkout.record.name).toBe('Foo Bar @fix-test');
+		expect(checkout.record.name).toBe('Foo Bar @ fix-test');
 		expect(checkout.record.location).toBe('fix-test');
 		expect(checkout.record.branch).toBe('branch-name');
 	});

@@ -81,6 +81,44 @@ describe('cloneSpecific', () => {
 		expect(content).toContain('**Location:** `foo-bar`');
 	});
 
+	it('clone with custom location uses correct name and path', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createMockCommandContext(tempDir);
+
+		const bareDir = join(tempDir, 'bare/foo');
+		await initBareRepoTest(bareDir);
+		writeRepoMockRecord(tempDir, 'Foo', bareDir);
+
+		const repos = loadRepositoryRecords(ctx.config);
+		await cloneSpecific(ctx, repos, 'Foo', 'bar');
+
+		const checkouts = ctx.store.getAllCheckouts();
+		const checkout = checkouts.find(c => c.record.location === 'foo-bar');
+		expect(checkout).toBeDefined();
+		expect(checkout?.record.name).toBe('Foo @ bar');
+		expect(checkout?.record.location).toBe('foo-bar');
+		expect(checkout?.path).toBe(join(tempDir, ctx.config.clone.path, 'foo-bar'));
+	});
+
+	it('clone without location uses repo name as name and path', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createMockCommandContext(tempDir);
+
+		const bareDir = join(tempDir, 'bare/foo');
+		await initBareRepoTest(bareDir);
+		writeRepoMockRecord(tempDir, 'Foo', bareDir);
+
+		const repos = loadRepositoryRecords(ctx.config);
+		await cloneSpecific(ctx, repos, 'Foo');
+
+		const checkouts = ctx.store.getAllCheckouts();
+		const checkout = checkouts.find(c => c.record.location === 'foo');
+		expect(checkout).toBeDefined();
+		expect(checkout?.record.name).toBe('Foo');
+		expect(checkout?.record.location).toBe('foo');
+		expect(checkout?.path).toBe(join(tempDir, ctx.config.clone.path, 'foo'));
+	});
+
 	it('logs failure when the location is already used by a different checkout', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createMockCommandContext(tempDir);
