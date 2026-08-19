@@ -158,7 +158,7 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 - Extract shared utilities (fixture discovery, arg parsing, diffing, summary) into `scripts/test/shared/`
 - Regenerate all 15 fixture snapshots with stable key ordering
 
-### `fix-parser-field-inline-and-test-fixtures` - `PLANNED`
+### `fix-parser-field-inline-and-test-fixtures` - `COMMITTED`
 
 **Commit Message:** `fix(md-art-roundtrip): add FieldInline construct and fix test fixture comparison`
 

@@ -1,7 +1,7 @@
 import type { ConstructParserFactory } from '../types';
 
-import { createFieldInlineMatcher } from './createFieldInlineMatcher';
+import { createFieldInlinePreProcessor } from './createFieldInlinePreProcessor';
 
 export const createFieldInlineParser: ConstructParserFactory = () => ({
-	preProcessor: createFieldInlineMatcher(),
+	preProcessor: createFieldInlinePreProcessor(),
 });

@@ -92,7 +92,7 @@ This iteration makes changes across three packages:
 
 1. Create `$PACKAGE_CONSTRUCTS/src/constructs/FieldInline/` directory with:
    - `FieldInline.ts` — AST node type definition
-   - `createFieldInlineMatcher.ts` — matcher function
+   - `createFieldInlinePreProcessor.ts` — matcher function
    - `createFieldInlineToMdast.ts` — toMdast converter
    - `index.ts` — exports
 
@@ -216,7 +216,7 @@ npm run ci # lint, build and test at repository level
    }
    ```
 
-3. Create `$PACKAGE_CONSTRUCTS/src/constructs/FieldInline/createFieldInlineMatcher.ts`:
+3. Create `$PACKAGE_CONSTRUCTS/src/constructs/FieldInline/createFieldInlinePreProcessor.ts`:
    - Match fields where content starts on the same line as `**Field:**`
    - Return `FieldInline` node with `name` and `value`
 
@@ -228,7 +228,7 @@ npm run ci # lint, build and test at repository level
 
    ```typescript
    export { FieldInline } from './FieldInline';
-   export { createFieldInlineMatcher } from './createFieldInlineMatcher';
+   export { createFieldInlineParser } from './createFieldInlineParser';
    export { createFieldInlineToMdast } from './createFieldInlineToMdast';
    ```
 

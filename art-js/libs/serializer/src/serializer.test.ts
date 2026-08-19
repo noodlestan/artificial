@@ -90,7 +90,7 @@ describe('serialize', () => {
 	});
 
 	it('roundtrips field-block.md.json fixture', () => {
-		const fixturePath = resolve(__dirname, '../../parser/test/fixtures/field-block.md.json');
+		const fixturePath = resolve(__dirname, '../../parser/test/fixtures/_field-block.md.json');
 		const artDoc = JSON.parse(readFileSync(fixturePath, 'utf8')) as ArtDocument;
 		const result = serialize(artDoc);
 		expect(result).toContain('# Field Block Fixtures');
@@ -100,7 +100,7 @@ describe('serialize', () => {
 	});
 
 	it('roundtrip smoke test: field-block.md parse then serialize', () => {
-		const mdPath = resolve(__dirname, '../../parser/test/fixtures/field-block.md');
+		const mdPath = resolve(__dirname, '../../parser/test/fixtures/_field-block.md');
 		const markdown = readFileSync(mdPath, 'utf8');
 		const doc = parse(markdown);
 		const result = serialize(doc);
