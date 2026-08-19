@@ -57,6 +57,30 @@ describe('cloneSpecific', () => {
 		expect(content).toContain('**Location:** `one`');
 	});
 
+	it('creates second checkout when repo already exists at different location', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createMockCommandContext(tempDir);
+
+		const bareDir = join(tempDir, 'bare/foo');
+		await initBareRepoTest(bareDir);
+		writeRepoMockRecord(tempDir, 'Foo', bareDir);
+		writeCheckoutMockRecord(tempDir, 'Foo', 'Foo', 'foo');
+
+		const repos = loadRepositoryRecords(ctx.config);
+		hydrateStoreFromRecords(ctx.config, ctx.store, loadCheckoutRecords(ctx.config, repos));
+		await cloneSpecific(ctx, repos, 'Foo', 'bar');
+
+		const ops = ctx.log.all();
+		const cloneOps = ops.filter(op => op.operation === 'clone');
+		expect(cloneOps.some(op => op.outcome === 'success')).toBe(true);
+
+		const recordFile = join(tempDir, 'ops/records/checkouts/foo-@-bar.art');
+		expect(existsSync(recordFile)).toBe(true);
+		const content = readFileSync(recordFile, 'utf-8');
+		expect(content).toContain('## Checkout: Foo @ bar');
+		expect(content).toContain('**Location:** `foo-bar`');
+	});
+
 	it('logs failure when the location is already used by a different checkout', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createMockCommandContext(tempDir);
