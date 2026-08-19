@@ -1,6 +1,7 @@
 import {
 	createDocumentToMdast,
 	createFieldBlockToMdast,
+	createFieldInlineToMdast,
 	createNaturalBlockToMdast,
 	createSectionBlockToMdast,
 	createTagToMdast,
@@ -14,6 +15,7 @@ export function createDefaultSerializerConfig(): SerializerConfig {
 			createDocumentToMdast,
 			createNaturalBlockToMdast,
 			createFieldBlockToMdast,
+			createFieldInlineToMdast,
 			createSectionBlockToMdast,
 			createTagToMdast,
 		],

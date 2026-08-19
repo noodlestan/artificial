@@ -1,5 +1,6 @@
 import {
 	createFieldBlockParser,
+	createFieldInlineParser,
 	createNaturalBlockParser,
 	createSectionBlockParser,
 	createTagParser,
@@ -10,6 +11,11 @@ import type { ParserConfig } from './types';
 export function createDefaultConfig(): ParserConfig {
 	return {
 		defaultConstruct: createNaturalBlockParser,
-		constructs: [createFieldBlockParser, createSectionBlockParser, createTagParser],
+		constructs: [
+			createFieldInlineParser,
+			createFieldBlockParser,
+			createSectionBlockParser,
+			createTagParser,
+		],
 	};
 }
