@@ -14,6 +14,9 @@ export type {
 export { cleanPosition, rawSlice } from './helpers';
 export { createFieldBlockParser } from './constructs/FieldBlock';
 export { createFieldBlockToMdast } from './constructs/FieldBlock';
+export { createFieldInlineMatcher } from './constructs/FieldInline';
+export { createFieldInlineToMdast } from './constructs/FieldInline';
+export { createFieldInlineParser } from './constructs/FieldInline';
 export { createNaturalBlockParser } from './constructs/NaturalBlock';
 export { createNaturalBlockToMdast } from './constructs/NaturalBlock';
 export { createSectionBlockParser } from './constructs/SectionBlock';

@@ -1,4 +1,5 @@
 import type { FieldBlock } from './constructs/FieldBlock/private/types';
+import type { FieldInline } from './constructs/FieldInline/private/types';
 import type { NaturalBlock } from './constructs/NaturalBlock/private/types';
 import type { SectionBlock } from './constructs/SectionBlock/private/types';
 import type { Tag } from './constructs/Tag/private/types';
@@ -7,6 +8,7 @@ import type { Tag } from './constructs/Tag/private/types';
 export interface BlockConstructMap {
 	SectionBlock: SectionBlock;
 	FieldBlock: FieldBlock;
+	FieldInline: FieldInline;
 	NaturalBlock: NaturalBlock;
 }
 
