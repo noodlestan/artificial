@@ -25,12 +25,13 @@ Complete the workspace CLI with remaining commands and infrastructure. This mile
 | 6 — Implement pull/push/sync          | `_backlog/0-archive/2026-08-18-plan-implement-pull-push-sync/plan.md`          | `ARCHIVED`  |
 | 7 — Cleaner code                      | `_backlog/0-archive/2026-08-18-plan-cleaner-code/plan.md`                      | `ARCHIVED`  |
 | 8 — Discover records dynamically      | `_backlog/4-next/plan-discover-records/plan.md`                                | `DRAFT`     |
-| 9 — Fix reported bugs                 | `_backlog/4-next/plan-fix-reported-bugs/plan.md`                               | `DRAFT`     |
+| 9 — Fix reported bugs                 | `_backlog/1-done/plan-fix-reported-bugs/plan.md`                               | `DONE`      |
 | 10 — Implement link                   | `_backlog/4-next/plan-implement-link/plan.md`                                  | `DRAFT`     |
 | 11 — Implement links                  | `_backlog/4-next/plan-implement-links/plan.md`                                 | `DRAFT`     |
 | 12 — Implement publish                | `_backlog/4-next/plan-implement-publish/plan.md`                               | `DRAFT`     |
 | 13 — Implement unlink                 | `_backlog/4-next/plan-implement-unlink/plan.md`                                | `DRAFT`     |
-| 14 — Update knowledge resources       | `_backlog/4-next/update-knowledge-resources/plan.md`                           | `PREPARING` |
+| 14 — Fixes and test coverage           | `_backlog/4-next/plan-fixes-and-test-coverage/plan.md`                         | `DRAFT`     |
+| 15 — Update knowledge resources       | `_backlog/4-next/update-knowledge-resources/plan.md`                           | `PREPARING` |
 
 **Next step:** Phase 8 — execute `plan-discover-records`.
 

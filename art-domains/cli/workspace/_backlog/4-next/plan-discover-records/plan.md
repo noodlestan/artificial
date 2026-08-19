@@ -10,7 +10,9 @@
 
 ## Summary
 
-Replace the workspace CLI's fixed `ops/records/{projects,namespaces,packages,repositories,checkouts}` assumptions with recursive `.art` discovery filtered by record kind, while preserving the filenames of existing checkout records so only newly created records need a generated destination.
+We are currently working on a major reorganization of records across all repositories. The goal is to move from centralized `ops/records/` directories to co-located `_records/` directories next to the resources they describe.
+
+Replace the workspace CLI's fixed `ops/records/{projects,namespaces,packages,repositories,checkouts}` assumptions with recursive `.art` discovery filtered by configurable pattern and optional record kind, and preserving the filenames of existing checkout records so that it can be update and saved in place, and creating new records in a configurable generated destination.
 
 ## Scope
 

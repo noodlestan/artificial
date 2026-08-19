@@ -6,22 +6,6 @@ This file is the tracker and parking lot. Column convention: **ACTIONABLE** / **
 
 ## Parking Lot
 
-### BUGS
-
-| bug | repro | expected | found |
-| -------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------- | ------- |
-| `--version` shows wrong version | `npm run workspace -- --version` | should show `0.0.14` (current package version) | shows `0.0.9` (stale version) |
-| `clone Foo` fails silently | `npm run workspace clone Foo` | log clone failure: `unknown repo "Foo"` | no output, no error |
-| Synthetic repo log noise | `npm run workspace sanity` | no console output before Checkout Report | `checkout Purrtrait: no matching repository record, using synthetic repository` |
-| Extraneous empty dir states | `repos/blah` (no .git) | `unknown project; no git` | `unknown project; uncommitted files` — fix: early `.git` existence check in `scanCheckout` before git introspection |
-| Operations Report missing outcome markers | `npm run workspace clone --all` | `🟢` / `🔴` column zero in Operations Report | no outcome markers — just `repo                                                                                     | operation | detail` |
-| Clone refuses second checkout of same repo | `clone Purrtrait bug-fix` when `repos/purrtrait` exists | create checkout `Purrtrait-bug-fix` at `repos/bug-fix/` | error: `Purrtrait already exists at repos/purrtrait` |
-| Clone should refuse if target dir is extraneous | `clone Purrtrait bug-fix` when `repos/bug-fix` exists | error: directory already exists | creates checkout anyway |
-| Clone custom location wrong name/path | `clone Purrtrait bug-fix` | name `Purrtrait-bug-fix`, dir `repos/bug-fix/` | name `Purrtrait`, dir `bug-fix` (at repo root, not under repos/) |
-| Extraneous items in Checkout Report | `npm run workspace sanity` | Extraneous checkouts only in Extraneous Report | extraneous items appear in Checkout Report too — filter them out |
-| Clone refuses extraneous dir but no failure logged | `clone Purrtrait bug-fix` when `repos/bug-fix` exists | log clone failure operation | refuses silently, no operation in report |
-| Extraneous with file (no .git) shows "uncommitted files" | `repos/blah` with a `foo` file | `unknown project; no git` | `unknown project; uncommitted files` — `.git` check should come before git introspection |
-
 ### PENDING FEATURES
 
 None current.
@@ -29,7 +13,11 @@ None current.
 ### ACTIONABLE
 
 - **Fix `--version` showing stale version** — `npm run workspace -- --version` shows `0.0.9` but package is at `0.0.14`. Investigate why version is not being read from package.json correctly.
-- **Implement checkout name resolution code fix** — `resolveCheckoutByName` is designed in `architecture/_pseudo.md` (commit `040b07e`) but `src/commands/repo/runRepo.ts` still calls `getCheckoutByName` directly; the `repo` command still doesn't accept checkout names.
+- **Add `checkouts` param to pull/push/sync commands** — follow-up from `plan-implement-pull-push-sync`: allow pull/push/sync on specific checkouts.
+- **Fix "behind" count not showing in checkout reports** — when a checkout is behind the remote, the behind count does not appear in checkout reports. Also, `sync` does not attempt to pull (probably same root cause). Investigate scan state population and sync command flow.
+- **Fix operations log shows repo name instead of checkout** — investigate if all operations add a checkout - it's possible that a clone operation failure logs only the repository name or (unnknown) and bails out without determining a loggable checkout name - change report to present 2 columns repo and "checkout" - ALSO: change the checkouts column "location" to be "checkout" as well.
+- **Fix workspace report shows "unknown project** — workspace report uses a normal checkout structure - in `workspace.scan?.issues().join` do also `filter()` to filter out "unknown project" (when refining the bug fix, inespect other possible issues and filter any that don't apply). Also in the fix: convert output from table to list of fields (one per line under Workspace:) remote (the git remote of the workspace), path: {the absolute path}, branch, issues.
+- **Implement checkout name resolution** — `resolveCheckoutByName` is designed in `architecture/_pseudo.md` (commit `040b07e`) but `src/commands/repo/runRepo.ts` still calls `getCheckoutByName` directly; the `repo` command still doesn't accept checkout names.
 - **Verify remaining bugs** — check if other bugs in the BUGS table are still valid (clone edge cases, extraneous items, etc.)
 
 ### PENDING
@@ -49,8 +37,6 @@ None current.
 - **repo-ci** — GitHub Actions workflows for all repos. **DRAFT** — needs instruction file. Not priority.
 
 - **Update CLI README** — match format of other CLI READMEs in the ecosystem, preserving command summary.
-
-- **Add `--force` flag to pull/push/sync commands** — follow-up from `plan-implement-pull-push-sync`: allow forcing pull/push/sync on dirty checkouts (currently they skip dirty checkouts).
 
 ### BLOCKER
 
