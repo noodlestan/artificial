@@ -16,10 +16,13 @@ async function run(): Promise<number> {
 	let totalSerializeTime = 0;
 	const startTime = Date.now();
 
-	console.info(`Found ${pairs.length} fixture(s) with snapshots. Tsting...\n`);
+	console.info(`Found ${pairs.length} fixture(s) with snapshots. Testing...\n`);
 
 	for (const { input, snapshot } of pairs) {
 		if (filterFixture && !path.basename(input).includes(filterFixture)) {
+			continue;
+		}
+		if (path.basename(input).startsWith('_')) {
 			continue;
 		}
 		if (!snapshot) {
