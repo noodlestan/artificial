@@ -13,15 +13,16 @@
 These are your instructions. They include a section at the end on how to report back to requester.
 
 - RULE: If at any point you are instructed to **REPORT A BLOCKER** execute the instruction in the "## How to Report Back" section and STOP processing any other instructions.
+- RULE: DO NOT modify files under `scripts/` or existing test fixtures under `test/fixtures/`. The test infrastructure is shared and stable; changes here affect all future work.
 
 ## Path Variables
 
-| Variable   | Resolved Path                                 | Purpose                 |
-| ---------- | --------------------------------------------- | ----------------------- |
-| `$PROJECT` | `$WORKSPACE/repos/artificial-parser-planning` | project repository root |
-| `$PACKAGE_PARSER` | `$PROJECT/art-js/libs/parser/`     | Parser package         |
-| `$PACKAGE_CONSTRUCTS` | `$PROJECT/art-js/libs/constructs/` | Constructs package     |
-| `$PACKAGE_SERIALIZER` | `$PROJECT/art-js/libs/serializer/` | Serializer package     |
+| Variable              | Resolved Path                                 | Purpose                 |
+| --------------------- | --------------------------------------------- | ----------------------- |
+| `$PROJECT`            | `$WORKSPACE/repos/artificial-parser-planning` | project repository root |
+| `$PACKAGE_PARSER`     | `$PROJECT/art-js/libs/parser/`                | Parser package          |
+| `$PACKAGE_CONSTRUCTS` | `$PROJECT/art-js/libs/constructs/`            | Constructs package      |
+| `$PACKAGE_SERIALIZER` | `$PROJECT/art-js/libs/serializer/`            | Serializer package      |
 
 ## Working Agreements
 
@@ -33,16 +34,37 @@ The plan workflow (see the entry point guide → Planning Workflow → Working T
 
 ## Goals
 
-This iteration addresses the root cause of 228 lines of roundtrip diffs across 6 fixtures. The parser currently treats all field values as flat `NaturalBlock` arrays, losing whether content starts on the same line as the field name. This forces the serializer to guess, causing incorrect roundtrip output.
+This iteration addresses the root cause of roundtrip diffs across all fixtures. The parser currently treats all field values as flat `NaturalBlock` arrays, losing whether content starts on the same line as the field name. This forces the serializer to guess, causing incorrect roundtrip output.
 
 **Primary goals:**
 
 1. Add `FieldInline` construct to parser to capture inline field content.
-2. Fix `test-parser.ts` to compare snapshots in memory instead of writing `.art.json` files.
+2. ~~Fix `test-parser.ts` to compare snapshots in memory instead of writing `.art.json` files.~~ ✅ DONE — snapshots compared in memory via `stableStringify` with custom field ordering.
 3. Update test fixture snapshots to match new parser output.
 4. Streamline serializer to use `FieldInline` metadata for correct rendering.
 
 **Insight from pairing session:** The parser gap is the root cause. The serializer fixes in `serializer-wip` branch are workarounds. The real fix is parser-side.
+
+## Test Infrastructure
+
+The test suite is split into two scripts, each with its own extracted modules:
+
+- `npm run test-parser` — parses fixtures, compares snapshots in memory, writes snapshots with `--write`.
+- `npm run test-serializer` — serializes snapshots, diffs against source markdown, reports roundtrip overhead.
+
+**Key flags:**
+
+| Flag                   | Script          | Purpose                                                                  |
+| ---------------------- | --------------- | ------------------------------------------------------------------------ |
+| `--write`              | test-parser     | Regenerate `.art.json` / `.md.json` snapshots from current parser output |
+| `--fixture {name}`     | both            | Scope to a single fixture (partial match)                                |
+| `--debug-write-result` | test-serializer | Write `{fixture}.parsed.md` for visual diff comparison                   |
+
+**Important notes:**
+
+- `test-serializer` currently does NOT return a non-zero exit code on roundtrip diffs in order to block progress. Check the last line for `"N snapshot check(s) failed"`. But this iteration will only be complete when diff is zero and the non-zero exit code is return for failures.
+- To test a single fixture end-to-end: create a minimal `.md` file in `test/fixtures/`, run `npm run test-parser -- --fixture {name} --write` to generate its snapshot, then `npm run test-serializer -- --fixture {name}` to verify roundtrip.
+- To inspect a roundtrip diff: `npm run test-serializer -- --fixture {name} --debug-write-result` writes `{name}.parsed.md` next to the snapshot for side-by-side comparison.
 
 ## Mandatory Reading
 
@@ -148,8 +170,8 @@ This section provides the verification commands to validate changes made by this
 Run from `$PACKAGE_PARSER` package directory:
 
 ```bash
-npm run test-parser # verify parser tests pass
-npm run test-serializer # verify serializer roundtrip tests
+npm run test-parser # verify parser snapshot comparison passes
+npm run test-serializer # verify serializer roundtrip (check last line for diff count)
 ```
 
 Run from `$PACKAGE_CONSTRUCTS` package directory:
@@ -183,6 +205,7 @@ npm run ci # lint, build and test at repository level
 1. Create directory `$PACKAGE_CONSTRUCTS/src/constructs/FieldInline/`.
 
 2. Create `$PACKAGE_CONSTRUCTS/src/constructs/FieldInline/FieldInline.ts`:
+
    ```typescript
    import type { ArtAstNode } from '../../types';
 
@@ -202,6 +225,7 @@ npm run ci # lint, build and test at repository level
    - Render as `**Field:** inline content`
 
 5. Create `$PACKAGE_CONSTRUCTS/src/constructs/FieldInline/index.ts`:
+
    ```typescript
    export { FieldInline } from './FieldInline';
    export { createFieldInlineMatcher } from './createFieldInlineMatcher';
@@ -246,38 +270,56 @@ cd $PACKAGE_CONSTRUCTS && npm run build
 cd $PACKAGE_PARSER && npm run build
 ```
 
-### Step `3/4` — Fix Test Script and Update Snapshots
+### Step `3/4` — Regenerate Snapshots and Verify
 
-**Goal:** Stop writing files; compare in memory; update snapshots.
+**Goal:** After parser changes, regenerate snapshots and verify serializer roundtrip.
 
 **Preparatory instructions:**
 
-1. Read `$PACKAGE_PARSER/scripts/test-parser.ts` to understand current implementation.
+1. Read `$PACKAGE_PARSER/scripts/test-parser.ts` to understand the snapshot comparison logic.
 
 **Detailed execution instructions:**
 
-1. Update `$PACKAGE_PARSER/scripts/test-parser.ts`:
-   - Read existing `.md.json` or `.art.json` files as expected output
-   - Compare parsed output with expected output in memory
-   - Mark errors if they don't match
-   - Remove the file-writing logic (lines 61-70)
+1. Regenerate snapshots to capture the new FieldInline output:
 
-2. Clean up untracked `.art.json` files:
    ```bash
-   rm test/fixtures/*.art.json
+   cd $PACKAGE_PARSER && npm run test-parser -- --write
    ```
 
-3. Run test script with `--write` flag to regenerate snapshots:
+2. Verify parser tests pass against the new snapshots:
+
    ```bash
-   npm run test-parser -- --write
+   npm run test-parser
    ```
 
-4. Review diffs to ensure FieldInline is correctly captured.
+3. Check serializer roundtrip status:
+
+   ```bash
+   npm run test-serializer
+   ```
+
+   The last line reports the number of fixtures with roundtrip diffs. This is informational (not a failure). Note the count before and after Step 4.
+
+4. To inspect a specific fixture's roundtrip diff:
+
+   ```bash
+   npm run test-serializer -- --fixture {name} --debug-write-result
+   ```
+
+   This writes `{name}.parsed.md` next to the snapshot for side-by-side comparison with the source.
+
+5. To create a minimal test fixture for validation:
+
+   - Create a new `.md` file in `$PACKAGE_PARSER/test/fixtures/` with minimal markdown (e.g., a heading, a field with inline content, a field with block content).
+   - Run `npm run test-parser -- --fixture {filename} --write` to generate its snapshot.
+   - Run `npm run test-serializer -- --fixture {filename}` to verify roundtrip.
+   - Run `npm run test-serializer -- --fixture {filename} --debug-write-result` to inspect the diff.
 
 **Extra validation commands:**
 
 ```bash
 cd $PACKAGE_PARSER && npm run test-parser
+cd $PACKAGE_PARSER && npm run test-serializer
 git status # verify no untracked .art.json files
 ```
 
@@ -297,14 +339,20 @@ git status # verify no untracked .art.json files
    - FieldBlock now only handles block content
 
 2. Verify serializer roundtrip with updated constructs:
+
    ```bash
    cd $PACKAGE_PARSER && npm run test-serializer
    ```
 
-3. Check how many fixtures fail:
+   Check the last line — the number of snapshot check failures should decrease compared to the count noted in Step 3.
+
+3. To inspect remaining diffs:
+
    ```bash
-   npm run test-serializer -- --report
+   npm run test-serializer -- --debug-write-result
    ```
+
+   This writes `.parsed.md` files for all fixtures with roundtrip diffs.
 
 **Extra validation commands:**
 
@@ -318,16 +366,19 @@ cd $PACKAGE_CONSTRUCTS && npm run test
 **Sanity check:**
 
 1. Verify no untracked `.art.json` files remain:
+
    ```bash
    git status
    ```
 
 2. Verify parser tests pass:
+
    ```bash
    cd $PACKAGE_PARSER && npm run test-parser
    ```
 
-3. Verify serializer roundtrip tests pass (or report expected failures):
+3. Verify serializer roundtrip — check last line for diff count (informational, not a failure):
+
    ```bash
    cd $PACKAGE_PARSER && npm run test-serializer
    ```
@@ -346,7 +397,7 @@ npm run lint:fix # to fix formatting issues automatically
 npm run lint # to report other issues (prettier, eslint, tsc --noEmit)
 npm run build
 npm run test-parser
-npm run test-serializer
+npm run test-serializer # check last line for diff count
 ```
 
 Runs on pre-commit hook from the repository root:

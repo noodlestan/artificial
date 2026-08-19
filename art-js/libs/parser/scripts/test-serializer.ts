@@ -22,6 +22,13 @@ async function run(): Promise<number> {
 		if (filterFixture && !path.basename(input).includes(filterFixture)) {
 			continue;
 		}
+		if (!snapshot) {
+			console.error(
+				`  Error: No snapshot for ${path.basename(input)}. Use "test-parser --write" to create one.`,
+			);
+			failed++;
+			continue;
+		}
 		tested++;
 		const result = serializeFixture(snapshot);
 		totalSerializeTime += result.durationMs;
