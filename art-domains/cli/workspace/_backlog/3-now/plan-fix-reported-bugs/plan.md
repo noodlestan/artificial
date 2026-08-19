@@ -248,11 +248,17 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Target dir exists and is a valid checkout for same repo → idempotent (no-op, existing behaviour).
 - Target dir does not exist → proceed with clone (existing behaviour).
 
-### `fix-clone-custom-location-wrong-name` - `READY`
+### `fix-clone-custom-location-wrong-name` - `COMMITTED`
 
 **Bug:** Clone custom location produces wrong name/path — captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): use correct name and path for custom location clone`
+
+**Commit:** `5a98d86` — `fix(workspace-cli): use correct name and path for custom location clone`
+
+**Feedback:**
+
+- Worker executed successfully. Fixed checkout name and path computation for custom locations.
 
 **Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-custom-location-wrong-name.md`
 
