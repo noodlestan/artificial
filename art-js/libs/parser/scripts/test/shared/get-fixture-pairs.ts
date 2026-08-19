@@ -3,7 +3,7 @@ import * as path from 'node:path';
 
 export interface FixturePair {
 	input: string;
-	snapshot: string;
+	snapshot?: string;
 }
 
 export function getFixturePairs(fixturesDir: string): FixturePair[] {
@@ -18,6 +18,7 @@ export function getFixturePairs(fixturesDir: string): FixturePair[] {
 		if (fs.existsSync(snapshotPath)) {
 			pairs.push({ input: inputPath, snapshot: snapshotPath });
 		} else {
+			pairs.push({ input: inputPath });
 			console.warn(`Skipping ${input} - no snapshot found (${snapshotName})`);
 		}
 	}

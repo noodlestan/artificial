@@ -135,17 +135,28 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 - When `--write` is provided, also write `{fixture}.parsed.md` for debugging.
 - Verify: `npm run test` passes in parser package with the two-way suite.
 
-### `integrate-serializer-reports` - `PLANNED`
+### `integrate-serializer-reports` - `COMMITTED`
+
+**Commit id:** `1bfdbe7`
 
 **Commit Message:** `plan(md-art-roundtrip): Integrate serializer commit reports.
 
 **Instructions File:** Executed in pairing session with user.
 
-### `split-tests-parser-vs-serialize` - `PLANNED`
+### `split-tests-parser-vs-serialize` - `COMMITTED`
 
-**Commit Message:** `build(md-art-roundtrip): Split parser and serializer tests.
+**Commit id:** `d8d0135`
+
+**Commit Message:** `build(md-art-roundtrip): split test scripts and add stable snapshot comparison.
 
 **Instructions File:** Executed in pairing session with user.
+
+**Changes:**
+
+- Replace combined `run-snapshot-check.ts` with separate `test-parser` and `test-serializer` scripts
+- Add `stableStringify` with custom field ordering for deterministic snapshot output
+- Extract shared utilities (fixture discovery, arg parsing, diffing, summary) into `scripts/test/shared/`
+- Regenerate all 15 fixture snapshots with stable key ordering
 
 ### `fix-parser-field-inline-and-test-fixtures` - `PLANNED`
 
@@ -155,10 +166,17 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 
 **Scope:**
 
-- Add `FieldInline` construct to parser to distinguish inline vs block field content.
-- Fix `test-parser.ts` to compare snapshots in memory instead of writing `.art.json` files.
+- Add `FieldInline` construct to constructs lib to distinguish inline vs block field content.
+- Add FieldInline in default parser config.
 - Update test fixture snapshots to match new parser output.
 - Streamline serializer to use `FieldInline` metadata for correct rendering.
+
+**Notes:**
+
+- Existing serializer-wip work lives at `$WORKSPACE/repos/artificial-wip/art-js/libs/parser` on branch `serializer-wip`.
+- The serializer-wip branch already has split test scripts (`test-parser.ts`, `test-serializer.ts`) with `--write` and `--fixture` flags.
+- The serializer-wip `test-parser.ts` writes `.art.json` files as a side-effect of testing; this is the problem this instruction aims to fix.
+- The serializer-wip also contains additional constructs/FieldInline work that may inform implementation, but the real fix is parser-side (see insight in planner reflection).
 
 ## Follow ups
 
