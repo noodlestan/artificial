@@ -219,11 +219,17 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Repo has checkout at location A, clone to location A → idempotent (no-op, existing behaviour).
 - Target location used by different repo → still refused (existing behaviour).
 
-### `fix-clone-should-refuse-extraneous-dir` - `READY`
+### `fix-clone-should-refuse-extraneous-dir` - `COMMITTED`
 
 **Bug:** Clone should refuse if target dir is extraneous — captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): refuse clone when target directory already exists`
+
+**Commit:** `7e69306` — `fix(workspace-cli): refuse clone when target directory already exists`
+
+**Feedback:**
+
+- Worker executed successfully. Added directory existence check before checkout creation.
 
 **Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-should-refuse-extraneous-dir.md`
 

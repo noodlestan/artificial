@@ -10,11 +10,11 @@
 
 ### Changes
 
-| Goal | Outcome |
-| --- | --- |
+| Goal                                                                                                                    | Outcome                                  |
+| ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
 | Remove the guard in `cloneSpecific` that refuses clone when a checkout for the same repo exists at a different location | Guard already removed (commit `35c1ccf`) |
-| Keep the guard that blocks clone when the target location is already used by a different checkout | Guard verified present and working |
-| Add test coverage for this edge case | Test added and passing |
+| Keep the guard that blocks clone when the target location is already used by a different checkout                       | Guard verified present and working       |
+| Add test coverage for this edge case                                                                                    | Test added and passing                   |
 
 #### Files changed
 
