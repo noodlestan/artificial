@@ -10,10 +10,10 @@
 
 ### Changes
 
-| Goal | Outcome |
-| --- | --- |
+| Goal                                                                                     | Outcome                                       |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------- |
 | Log a clone failure operation when clone refuses because target directory already exists | Already implemented in prior commit `7e69306` |
-| Add test coverage for clone failure logging on refusal | Already implemented in prior commit `7e69306` |
+| Add test coverage for clone failure logging on refusal                                   | Already implemented in prior commit `7e69306` |
 
 #### Files changed
 
