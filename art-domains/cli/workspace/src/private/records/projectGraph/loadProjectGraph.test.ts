@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { makeMockConfig } from '../../../test/helpers/context/makeMockConfig';
 import {
 	writeNamespaceMockRecord,
 	writePackageMockRecord,
@@ -10,12 +11,12 @@ import {
 } from '../../../test/helpers/records/writeProjectMockRecord';
 import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
 import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
+import { loadNamespaceRecords } from '../namespace/loadNamespaceRecords';
 import { readNamespaceRecord } from '../namespace/readNamespaceRecord';
-import { readNamespaceRecords } from '../namespace/readNamespaceRecords';
+import { loadPackageRecords } from '../package/loadPackageRecords';
 import { readPackageRecord } from '../package/readPackageRecord';
-import { readPackageRecords } from '../package/readPackageRecords';
+import { loadProjectRecords } from '../project/loadProjectRecords';
 import { readProjectRecord } from '../project/readProjectRecord';
-import { readProjectRecords } from '../project/readProjectRecords';
 
 import { consolidateProjectGraph } from './consolidateProjectGraph';
 import { loadProjectGraph } from './loadProjectGraph';
@@ -40,7 +41,7 @@ describe('readProjectRecord', () => {
 			namespaces: ['Art Domains', 'Art Tools'],
 		});
 
-		const file = join(tempDir, 'ops/records/projects/artificial.art');
+		const file = join(tempDir, '_records/artificial.art');
 		const record = readProjectRecord(file);
 
 		expect(record).not.toBeNull();
@@ -65,31 +66,33 @@ describe('readProjectRecord', () => {
 	});
 });
 
-describe('readProjectRecords', () => {
-	it('reads multiple project records from a directory', () => {
+describe('loadProjectRecords', () => {
+	it('discovers project records from _records/ directory', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeProjectMockRecord(tempDir, 'Project A', { path: '.' });
 		writeProjectMockRecord(tempDir, 'Project B', { path: 'b' });
+		const config = makeMockConfig(tempDir);
 
-		const records = readProjectRecords(join(tempDir, 'ops/records'));
+		const records = await loadProjectRecords(config, tempDir);
 		expect(records).toHaveLength(2);
 		expect(records.map(r => r.name).sort()).toEqual(['Project A', 'Project B']);
 	});
 
-	it('returns empty array for a missing directory', () => {
-		const records = readProjectRecords('/nonexistent/dir');
+	it('returns empty array for a missing checkout path', async () => {
+		const config = makeMockConfig('/nonexistent/checkout');
+		const records = await loadProjectRecords(config, '/nonexistent/checkout');
 		expect(records).toEqual([]);
 	});
 
-	it('filters out invalid records', () => {
+	it('filters out invalid records', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeProjectMockRecord(tempDir, 'Good', { path: '.' });
 
-		const badDir = join(tempDir, 'ops/records/projects');
-		mkdirSync(badDir, { recursive: true });
-		writeFileSync(join(badDir, 'bad.art'), 'no heading');
+		const badFile = join(tempDir, '_records/bad.art');
+		writeFileSync(badFile, 'no heading');
 
-		const records = readProjectRecords(join(tempDir, 'ops/records'));
+		const config = makeMockConfig(tempDir);
+		const records = await loadProjectRecords(config, tempDir);
 		expect(records).toHaveLength(1);
 		expect(records[0].name).toBe('Good');
 	});
@@ -103,7 +106,7 @@ describe('readNamespaceRecord', () => {
 			packages: ['Art Mantras', 'Art Tools'],
 		});
 
-		const file = join(tempDir, 'ops/records/namespaces/art-domains.art');
+		const file = join(tempDir, '_records/art-domains.art');
 		const record = readNamespaceRecord(file);
 
 		expect(record).not.toBeNull();
@@ -128,31 +131,33 @@ describe('readNamespaceRecord', () => {
 	});
 });
 
-describe('readNamespaceRecords', () => {
-	it('reads multiple namespace records from a directory', () => {
+describe('loadNamespaceRecords', () => {
+	it('discovers namespace records from _records/ directory', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeNamespaceMockRecord(tempDir, 'NS A', { path: 'a' });
 		writeNamespaceMockRecord(tempDir, 'NS B', { path: 'b' });
+		const config = makeMockConfig(tempDir);
 
-		const records = readNamespaceRecords(join(tempDir, 'ops/records'));
+		const records = await loadNamespaceRecords(config, tempDir);
 		expect(records).toHaveLength(2);
 		expect(records.map(r => r.name).sort()).toEqual(['NS A', 'NS B']);
 	});
 
-	it('returns empty array for a missing directory', () => {
-		const records = readNamespaceRecords('/nonexistent/dir');
+	it('returns empty array for a missing checkout path', async () => {
+		const config = makeMockConfig('/nonexistent/checkout');
+		const records = await loadNamespaceRecords(config, '/nonexistent/checkout');
 		expect(records).toEqual([]);
 	});
 
-	it('filters out invalid records', () => {
+	it('filters out invalid records', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeNamespaceMockRecord(tempDir, 'Good', { path: '.' });
 
-		const badDir = join(tempDir, 'ops/records/namespaces');
-		mkdirSync(badDir, { recursive: true });
-		writeFileSync(join(badDir, 'bad.art'), 'no heading');
+		const badFile = join(tempDir, '_records/bad.art');
+		writeFileSync(badFile, 'no heading');
 
-		const records = readNamespaceRecords(join(tempDir, 'ops/records'));
+		const config = makeMockConfig(tempDir);
+		const records = await loadNamespaceRecords(config, tempDir);
 		expect(records).toHaveLength(1);
 		expect(records[0].name).toBe('Good');
 	});
@@ -166,7 +171,7 @@ describe('readPackageRecord', () => {
 			path: 'apps/art-mantras',
 		});
 
-		const file = join(tempDir, 'ops/records/packages/art-mantras.art');
+		const file = join(tempDir, '_records/art-mantras.art');
 		const record = readPackageRecord(file);
 
 		expect(record).not.toBeNull();
@@ -191,31 +196,33 @@ describe('readPackageRecord', () => {
 	});
 });
 
-describe('readPackageRecords', () => {
-	it('reads multiple package records from a directory', () => {
+describe('loadPackageRecords', () => {
+	it('discovers package records from _records/ directory', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writePackageMockRecord(tempDir, 'Pkg A', { path: 'a' });
 		writePackageMockRecord(tempDir, 'Pkg B', { path: 'b' });
+		const config = makeMockConfig(tempDir);
 
-		const records = readPackageRecords(join(tempDir, 'ops/records'));
+		const records = await loadPackageRecords(config, tempDir);
 		expect(records).toHaveLength(2);
 		expect(records.map(r => r.name).sort()).toEqual(['Pkg A', 'Pkg B']);
 	});
 
-	it('returns empty array for a missing directory', () => {
-		const records = readPackageRecords('/nonexistent/dir');
+	it('returns empty array for a missing checkout path', async () => {
+		const config = makeMockConfig('/nonexistent/checkout');
+		const records = await loadPackageRecords(config, '/nonexistent/checkout');
 		expect(records).toEqual([]);
 	});
 
-	it('filters out invalid records', () => {
+	it('filters out invalid records', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writePackageMockRecord(tempDir, 'Good', { path: '.' });
 
-		const badDir = join(tempDir, 'ops/records/packages');
-		mkdirSync(badDir, { recursive: true });
-		writeFileSync(join(badDir, 'bad.art'), 'no heading');
+		const badFile = join(tempDir, '_records/bad.art');
+		writeFileSync(badFile, 'no heading');
 
-		const records = readPackageRecords(join(tempDir, 'ops/records'));
+		const config = makeMockConfig(tempDir);
+		const records = await loadPackageRecords(config, tempDir);
 		expect(records).toHaveLength(1);
 		expect(records[0].name).toBe('Good');
 	});
@@ -295,7 +302,7 @@ describe('consolidateProjectGraph', () => {
 });
 
 describe('loadProjectGraph', () => {
-	it('loads a complete project graph', () => {
+	it('loads a complete project graph from _records/', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeProjectMockRecord(tempDir, 'Artificial', {
 			path: '.',
@@ -309,8 +316,9 @@ describe('loadProjectGraph', () => {
 			canonicalName: '@artisans/art-mantras',
 			path: 'apps/art-mantras',
 		});
+		const config = makeMockConfig(tempDir);
 
-		const graph = loadProjectGraph(tempDir);
+		const graph = await loadProjectGraph(config, tempDir);
 
 		expect(graph.projects).toHaveLength(1);
 		expect(graph.projects[0].name).toBe('Artificial');
@@ -319,12 +327,82 @@ describe('loadProjectGraph', () => {
 		expect(graph.warnings).toEqual([]);
 	});
 
-	it('handles missing records directory', () => {
-		const graph = loadProjectGraph('/nonexistent/checkout');
+	it('loads a complete project graph from legacy ops/records/ layout', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const projectsDir = join(tempDir, 'ops/records/projects');
+		const namespacesDir = join(tempDir, 'ops/records/namespaces');
+		const packagesDir = join(tempDir, 'ops/records/packages');
+		mkdirSync(projectsDir, { recursive: true });
+		mkdirSync(namespacesDir, { recursive: true });
+		mkdirSync(packagesDir, { recursive: true });
+
+		writeFileSync(
+			join(projectsDir, 'artificial.art'),
+			'# Module\n\n## Project: Artificial\n\n**Path:** `.`\n\n**Namespaces:**\n- Namespace: Art Domains\n',
+		);
+		writeFileSync(
+			join(namespacesDir, 'art-domains.art'),
+			'# Module\n\n## Namespace: Art Domains\n\n**Path:** `artisans`\n\n**Packages:**\n- Package: Art Mantras\n',
+		);
+		writeFileSync(
+			join(packagesDir, 'art-mantras.art'),
+			'# Module\n\n## Package: Art Mantras\n\n**Canonical Name:** `@artisans/art-mantras`\n\n**Path:** `apps/art-mantras`\n',
+		);
+		const config = makeMockConfig(tempDir);
+
+		const graph = await loadProjectGraph(config, tempDir);
+
+		expect(graph.projects).toHaveLength(1);
+		expect(graph.projects[0].name).toBe('Artificial');
+		expect(graph.namespaces.get('Art Domains')).toBeDefined();
+		expect(graph.packages.get('Art Mantras')).toBeDefined();
+	});
+
+	it('ignores decoy .art files that are not project/namespace/package records', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		writeProjectMockRecord(tempDir, 'Real', { path: '.' });
+
+		writeFileSync(
+			join(tempDir, '_records/not-a-record.art'),
+			'# Module\n\n## Repository: Ignored\n',
+		);
+		writeFileSync(
+			join(tempDir, '_records/checkout-decoy.art'),
+			'# Module\n\n## Checkout: Ignored\n',
+		);
+		writeFileSync(join(tempDir, '_records/bad-project.art'), 'no heading');
+
+		const config = makeMockConfig(tempDir);
+		const graph = await loadProjectGraph(config, tempDir);
+
+		expect(graph.projects).toHaveLength(1);
+		expect(graph.projects[0].name).toBe('Real');
+		expect(graph.warnings).toEqual([]);
+	});
+
+	it('handles missing records directory', async () => {
+		const config = makeMockConfig('/nonexistent/checkout');
+		const graph = await loadProjectGraph(config, '/nonexistent/checkout');
 
 		expect(graph.projects).toEqual([]);
 		expect(graph.namespaces.size).toBe(0);
 		expect(graph.packages.size).toBe(0);
 		expect(graph.warnings).toEqual([]);
+	});
+
+	it('picks up records from nested _records/ directories', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const nestedDir = join(tempDir, 'libs/parser');
+		mkdirSync(join(nestedDir, '_records'), { recursive: true });
+
+		writeFileSync(
+			join(nestedDir, '_records/package.art'),
+			'# Module\n\n## Package: Parser\n\n**Canonical Name:** `@art/parser`\n\n**Path:** `.`\n',
+		);
+		const config = makeMockConfig(tempDir);
+
+		const records = await loadPackageRecords(config, tempDir);
+		expect(records).toHaveLength(1);
+		expect(records[0].name).toBe('Parser');
 	});
 });

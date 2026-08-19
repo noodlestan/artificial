@@ -64,7 +64,7 @@ describe('saveCheckoutRecord', () => {
 		const saved = await saveCheckoutRecord(config, data);
 		const content = readFileSync(saved, 'utf-8');
 
-		expect(saved).toBe(join(tempDir, '_records/my-checkout.art'));
+		expect(saved).toBe(join(tempDir, '_records/my-checkout-checkout.art'));
 		expect(content).toContain('## Checkout: My Checkout');
 	});
 });

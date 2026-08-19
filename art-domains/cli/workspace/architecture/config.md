@@ -74,17 +74,6 @@ The root `package.json` has no `"type": "module"`. The explicit `.mts` extension
 - Is unambiguous under Node's native type-stripping.
 - Signals TypeScript authoring to editors and tooling.
 
-## Source of Truth
-
-<<<<<<< HEAD
-Records (`_records/repositories/{repo}.art`, `_records/workspace.art`) are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands.
-=======
-Co-located `_records/` directories are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands.
-
-Note: `records.repositories` and `records.checkouts` have been restructured. Checkout persistence moved to top-level `checkouts` (`checkouts.path`, `checkouts.template`). Repository records are now discovered dynamically via `records.pattern` instead of a fixed path. The `findRecordFiles` helper scans for `.art` files matching the pattern, and each record reader filters by its kind heading (`## Repository:`, `## Checkout:`).
-
-> > > > > > > d9ab329 (feat(workspace-cli): add configurable record discovery)
-
 ## Design Decisions
 
 The configuration design is captured in `records/adr/cli.art`:

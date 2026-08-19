@@ -27,8 +27,8 @@ Every command starts by loading records into the store:
 
 ```pseudo
 hydrate(ctx)
-  repos = loadRepositoryRecords(ctx.config)
-  records = loadCheckoutRecords(ctx.config, repos)
+  repos = await loadRepositoryRecords(ctx.config)
+  records = await loadCheckoutRecords(ctx.config, repos)
   hydrateStoreFromRecords(ctx.config, ctx.store, records)
 ```
 
@@ -484,12 +484,12 @@ createWorkspaceCheckout(config)
 
 ### Function: makeCheckoutFilename(config, data)
 
-**Responsibility:** Derive the destination path for a new checkout record file. The slug is derived from `data.name`, lowercased with spaces replaced by dashes. Used by `saveCheckoutRecord` when no explicit filename is provided.
+**Responsibility:** Derive the destination path for a new checkout record file. The slug is derived from `data.name`, lowercased with spaces replaced by dashes, suffixed with `-checkout` to avoid collisions with repository records. Used by `saveCheckoutRecord` when no explicit filename is provided.
 
 ```pseudo
 makeCheckoutFilename(config, data)
   slug = data.name.toLowerCase().replace(/\s+/g, "-")
-  return join(config.root.path, config.records.checkouts.path, slug + ".art")
+  return join(config.root.path, config.records.checkouts.path, slug + "-checkout.art")
 ```
 
 ### Function: CheckoutScan guards
@@ -862,43 +862,43 @@ loadWorkspaceConfig(root)
 
 ### Function: loadRepositoryRecords(config)
 
-**Responsibility:** Read all repository records from the records directory. Empty when the directory is missing.
+**Responsibility:** Read all repository records dynamically. Uses `findRecordFiles` to discover `.art` files, then parses each with `readRepositoryRecord`. Returns `Promise`.
 
 **Pseudo:**
 
 ```pseudo
 loadRepositoryRecords(config)
-  dir = join(config.root.path, config.records.repositories.path)
-  if not dirExists(dir): return []
-  files = list .art files in dir
-  return files.map(f => readRepositoryRecord(join(dir, f)))
+  candidates = findRecordFiles(config.root.path, config.records.pattern)
+  records = []
+  for file in candidates:
+    record = readRepositoryRecord(file)
+    if record: records.push(record)
+  return records
 ```
 
 ### Function: loadCheckoutRecords(config, repos)
 
-**Responsibility:** Read all checkout records from the checkouts directory and pair them with their repository record (when found). Empty when the directory is missing.
+**Responsibility:** Read all checkout records dynamically. Uses `findRecordFiles` to discover `.art` files, then parses each with `readCheckoutRecord`. Returns `Promise`. Adds `filename` to each returned record.
 
 **Pseudo:**
 
 ```pseudo
 loadCheckoutRecords(config, repos)
-  dir = join(config.root.path, config.records.checkouts.path)
-  if not dirExists(dir): return []
-
+  candidates = findRecordFiles(config.root.path, config.records.pattern)
   records = []
-  for file in .art files in dir:
-    record = readCheckoutRecord(join(dir, file))
+  for file in candidates:
+    record = readCheckoutRecord(file)
     if not record.name:
       warn "checkout record with empty name, skipped"
       continue
     repo = repos.find(r => r.name === record.repository)
-    records.push({ repo, checkout: record })     // repo may be undefined
+    records.push({ repo, checkout: record, filename: file })
   return records
 ```
 
 ### Function: saveCheckoutRecord(config, data, filename?)
 
-**Responsibility:** Write a checkout record as an `.art` file. When `filename` is provided, write directly to that path (loaded-record update). When omitted, call `makeCheckoutFilename(config, data)` to derive the destination (new-record creation). The function is `async` returning `Promise<string>` for API consistency.
+**Responsibility:** Write a checkout record as an `.art` file. Data-first signature. When `filename` is provided, write directly to that path (loaded-record update). When omitted, call `makeCheckoutFilename(config, data)` to derive the destination (new-record creation). The function is `async` returning `Promise<string>` for API consistency.
 
 **Pseudo:**
 
@@ -915,17 +915,17 @@ saveCheckoutRecord(config, data, filename?)
 
 ### Function: readProjectRecords(ctx, checkout)
 
-**Responsibility:** Read a checkout's project records — project first, then namespaces, then packages — and link them by name. Read-only; mirrors `loadRepositoryRecords`/`loadCheckoutRecords` but for the record kinds living inside the checkout at `_records/`.
+**Responsibility:** Read a checkout's project records dynamically. Uses `findRecordFiles(checkoutPath, config.records.pattern)` to discover `.art` files, then filters by kind (project, namespace, package) using the singular readers. Returns `Promise`. Supports both legacy `ops/records/{kind}/` and co-located `_records/` layouts.
 
 **Pseudo:**
 
 ```pseudo
 readProjectRecords(ctx, checkout)
-  recordsDir = join(checkout.path, "_records")
+  checkoutPath = checkout.path
 
-  projects   = parse each .art in recordsDir                      // ProjectRecord (at root)
-  namespaces = parse each .art in subdirs                         // ProjectNamespace (at {namespace}/_records/)
-  packages   = parse each .art in subdirs                         // PackageRecord (at {package-path}/_records/)
+  projects   = await loadProjectRecords(ctx.config, checkoutPath)
+  namespaces = await loadNamespaceRecords(ctx.config, checkoutPath)
+  packages   = await loadPackageRecords(ctx.config, checkoutPath)
 
   for project in projects:
     project.namespaces = namespaces.filter(ns => project.namespaceNames.includes(ns.name))

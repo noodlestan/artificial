@@ -70,7 +70,7 @@ describe('cloneIfMissing', () => {
 		const branch = await getCurrentBranch(result?.path as string);
 		expect(branch).toBe('feature-branch');
 
-		const recordFileName = `${checkout.record.name.toLowerCase().replace(/\s+/g, '-')}.art`;
+		const recordFileName = `${checkout.record.name.toLowerCase().replace(/\s+/g, '-')}-checkout.art`;
 		const recordFile = join(tempDir, '_records', recordFileName);
 		expect(existsSync(recordFile)).toBe(true);
 		const content = readFileSync(recordFile, 'utf-8');
@@ -113,7 +113,7 @@ describe('cloneIfMissing', () => {
 		const branch = await getCurrentBranch(result?.path as string);
 		expect(branch).toBe('main');
 
-		const recordFileName = `${checkout.record.name.toLowerCase().replace(/\s+/g, '-')}.art`;
+		const recordFileName = `${checkout.record.name.toLowerCase().replace(/\s+/g, '-')}-checkout.art`;
 		const recordFile = join(tempDir, '_records', recordFileName);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('main');

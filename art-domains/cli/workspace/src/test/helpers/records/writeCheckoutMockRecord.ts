@@ -11,7 +11,7 @@ export function writeCheckoutMockRecord(
 	const dir = join(tempDir, '_records');
 	mkdirSync(dir, { recursive: true });
 	writeFileSync(
-		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '.art'),
+		join(dir, name.toLowerCase().replace(/\s+/g, '-') + '-checkout.art'),
 		'# Module\n\n## Checkout: ' +
 			name +
 			'\n\n**Repository:** ' +

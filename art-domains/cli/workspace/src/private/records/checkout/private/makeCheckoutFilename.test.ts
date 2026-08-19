@@ -17,7 +17,7 @@ describe('makeCheckoutFilename', () => {
 
 		const result = makeCheckoutFilename(config, data);
 
-		expect(result).toBe(join(tempDir, '_records/artificial.art'));
+		expect(result).toBe(join(tempDir, '_records/artificial-checkout.art'));
 	});
 
 	it('normalizes spaces to dashes', () => {
@@ -27,7 +27,7 @@ describe('makeCheckoutFilename', () => {
 
 		const result = makeCheckoutFilename(config, data);
 
-		expect(result).toBe(join(tempDir, '_records/my-checkout.art'));
+		expect(result).toBe(join(tempDir, '_records/my-checkout-checkout.art'));
 	});
 
 	it('lowercases the name', () => {
@@ -37,7 +37,7 @@ describe('makeCheckoutFilename', () => {
 
 		const result = makeCheckoutFilename(config, data);
 
-		expect(result).toBe(join(tempDir, '_records/upper-case.art'));
+		expect(result).toBe(join(tempDir, '_records/upper-case-checkout.art'));
 	});
 
 	it('uses config root path and checkouts path', () => {

@@ -50,7 +50,7 @@ describe('cloneSpecific', () => {
 		const repoDir = join(tempDir, ctx.config.clone.path, 'one');
 		expect(() => simpleGit(repoDir).status()).not.toThrow();
 
-		const recordFile = join(tempDir, '_records/one.art');
+		const recordFile = join(tempDir, '_records/one-checkout.art');
 		expect(existsSync(recordFile)).toBe(true);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: One');
@@ -74,7 +74,7 @@ describe('cloneSpecific', () => {
 		const cloneOps = ops.filter(op => op.operation === 'clone');
 		expect(cloneOps.some(op => op.outcome === 'success')).toBe(true);
 
-		const recordFile = join(tempDir, '_records/foo-@-bar.art');
+		const recordFile = join(tempDir, '_records/foo-@-bar-checkout.art');
 		expect(existsSync(recordFile)).toBe(true);
 		const content = readFileSync(recordFile, 'utf-8');
 		expect(content).toContain('## Checkout: Foo @ bar');

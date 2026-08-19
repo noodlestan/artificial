@@ -47,9 +47,9 @@ describe('loadCheckouts', () => {
 		expect(checkouts[0].repo?.name).toBe('A');
 		expect(checkouts[0].checkout.location).toBe('a');
 		expect(checkouts[0].checkout.branch).toBe('dev');
-		expect(checkouts[0].filename).toBe(join(tempDir, '_records/a.art'));
+		expect(checkouts[0].filename).toBe(join(tempDir, '_records/a-checkout.art'));
 		expect(checkouts[1].repo?.name).toBe('B');
-		expect(checkouts[1].filename).toBe(join(tempDir, '_records/b.art'));
+		expect(checkouts[1].filename).toBe(join(tempDir, '_records/b-checkout.art'));
 	});
 
 	it('includes an extraneous checkout for an unknown repo', async () => {
@@ -70,7 +70,7 @@ describe('loadCheckouts', () => {
 		expect(unknown?.checkout.name).toBe('Unknown');
 		expect(unknown?.checkout.location).toBe('unknown');
 		expect(unknown?.checkout.branch).toBe('main');
-		expect(unknown?.filename).toBe(join(tempDir, '_records/unknown.art'));
+		expect(unknown?.filename).toBe(join(tempDir, '_records/unknown-checkout.art'));
 	});
 
 	it('skips a checkout record with an empty name', async () => {
@@ -105,6 +105,6 @@ describe('loadCheckouts', () => {
 		const checkouts = await loadCheckoutRecords(config, []);
 
 		expect(checkouts).toHaveLength(1);
-		expect(checkouts[0].filename).toBe(join(tempDir, '_records/foo.art'));
+		expect(checkouts[0].filename).toBe(join(tempDir, '_records/foo-checkout.art'));
 	});
 });

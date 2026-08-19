@@ -373,7 +373,7 @@ describe('sanity command', () => {
 
 		writeFileSync(join(tempDir, '.gitignore'), 'repos/\n');
 		const rootGit = simpleGit(tempDir);
-		await rootGit.add(['.gitignore', 'ops/']);
+		await rootGit.add(['.gitignore', '_records/']);
 		await rootGit.commit('workspace records');
 
 		await simpleGit(tempDir).remote(['set-url', 'origin', join(tempDir, 'missing-origin')]);

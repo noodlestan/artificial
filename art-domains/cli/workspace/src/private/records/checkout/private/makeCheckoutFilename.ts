@@ -5,5 +5,5 @@ import type { CheckoutRecord } from '../../types';
 
 export function makeCheckoutFilename(config: WorkspaceConfig, data: CheckoutRecord): string {
 	const slug = data.name.toLowerCase().replace(/\s+/g, '-');
-	return join(config.root.path, config.checkouts.path, `${slug}.art`);
+	return join(config.root.path, config.checkouts.path, `${slug}-checkout.art`);
 }

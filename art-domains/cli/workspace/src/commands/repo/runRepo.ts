@@ -50,7 +50,7 @@ export async function runRepo(
 	const repositoryStates: CheckoutRepositoryState[] = [];
 
 	for (const checkout of targets) {
-		const graph = loadProjectGraph(checkout.path);
+		const graph = await loadProjectGraph(ctx.config, checkout.path);
 		const repositoryState: CheckoutRepositoryState = {
 			target: checkout,
 			branch: checkout.scan?.state('remote').branch ?? checkout.record.branch,
