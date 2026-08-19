@@ -54,14 +54,20 @@ describe('cloneIfMissing', () => {
 		const repos = await import('../../../private/records/repository/loadRepositoryRecords').then(
 			m => m.loadRepositoryRecords(ctx.config),
 		);
-		const repo = repos.find(r => r.name === 'FeatureRepo')!;
+		const repo = repos.find(r => r.name === 'FeatureRepo');
+		expect(repo).toBeDefined();
 
-		const checkout = createCheckout(ctx.config, 'feature-repo', repo, 'feature-branch');
+		const checkout = createCheckout(
+			ctx.config,
+			'feature-repo',
+			repo as NonNullable<typeof repo>,
+			'feature-branch',
+		);
 
 		const result = await cloneIfMissing(ctx, checkout);
 
 		expect(result).not.toBeNull();
-		const branch = await getCurrentBranch(result!.path);
+		const branch = await getCurrentBranch(result?.path as string);
 		expect(branch).toBe('feature-branch');
 
 		const recordFileName = `${checkout.record.name.toLowerCase().replace(/\s+/g, '-')}.art`;
@@ -91,14 +97,20 @@ describe('cloneIfMissing', () => {
 		const repos = await import('../../../private/records/repository/loadRepositoryRecords').then(
 			m => m.loadRepositoryRecords(ctx.config),
 		);
-		const repo = repos.find(r => r.name === 'FallbackRepo')!;
+		const repo = repos.find(r => r.name === 'FallbackRepo');
+		expect(repo).toBeDefined();
 
-		const checkout = createCheckout(ctx.config, 'fallback-repo', repo, 'nonexistent-branch');
+		const checkout = createCheckout(
+			ctx.config,
+			'fallback-repo',
+			repo as NonNullable<typeof repo>,
+			'nonexistent-branch',
+		);
 
 		const result = await cloneIfMissing(ctx, checkout);
 
 		expect(result).not.toBeNull();
-		const branch = await getCurrentBranch(result!.path);
+		const branch = await getCurrentBranch(result?.path as string);
 		expect(branch).toBe('main');
 
 		const recordFileName = `${checkout.record.name.toLowerCase().replace(/\s+/g, '-')}.art`;

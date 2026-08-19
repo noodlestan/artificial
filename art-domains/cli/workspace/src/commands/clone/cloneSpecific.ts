@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { createCloneFailure } from '../../private/commands/operations/createCloneFailure';
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
@@ -38,6 +41,14 @@ export async function cloneSpecific(
 	if (existing) {
 		await cloneIfMissing(ctx, existing);
 	} else {
+		const targetDir = join(ctx.config.root.path, ctx.config.clone.path, location);
+		if (existsSync(targetDir)) {
+			const msg = `directory already exists at ${targetDir}`;
+			ctx.log.log(createCloneFailure(undefined, msg));
+			presentOperationsReport(ctx.log);
+			return;
+		}
+
 		const checkoutName = checkoutInput ? `${repo.name} @ ${checkoutInput}` : repo.name;
 		const created = createCheckout(ctx.config, location, repo, 'main', checkoutName);
 

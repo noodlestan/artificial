@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import simpleGit from 'simple-git';
@@ -96,5 +96,22 @@ describe('cloneSpecific', () => {
 		expect(ops).toHaveLength(1);
 		expect(ops[0].outcome).toBe('failure');
 		expect(ops[0].message()).toContain("location one-custom is already used by checkout 'Two'.");
+	});
+
+	it('logs failure when target directory already exists on disk', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createMockCommandContext(tempDir);
+		writeRepoMockRecord(tempDir, 'One', 'git@example.com:one.git');
+
+		const targetDir = join(tempDir, ctx.config.clone.path, 'one');
+		mkdirSync(targetDir, { recursive: true });
+
+		const repos = loadRepositoryRecords(ctx.config);
+		await cloneSpecific(ctx, repos, 'One');
+
+		const ops = ctx.log.all();
+		expect(ops).toHaveLength(1);
+		expect(ops[0].outcome).toBe('failure');
+		expect(ops[0].message()).toContain('directory already exists at');
 	});
 });

@@ -190,11 +190,17 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Record branch does not exist on remote → clone lands on default branch, record updated.
 - Record branch is `main` → existing behaviour preserved.
 
-### `fix-clone-refuses-second-checkout` - `READY`
+### `fix-clone-refuses-second-checkout` - `COMMITTED`
 
 **Bug:** Clone refuses second checkout of same repo — captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): allow second checkout of same repo at different location`
+
+**Commit:** `754a08f` — `fix(workspace-cli): allow second checkout of same repo at different location`
+
+**Feedback:**
+
+- Guard removal already done; only test coverage was added. 197/197 tests pass.
 
 **Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-refuses-second-checkout.md`
 
