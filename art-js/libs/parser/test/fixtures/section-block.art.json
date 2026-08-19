@@ -4,6 +4,19 @@
     {
       "construct": "SectionBlock",
       "name": "Module",
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 9,
+          "line": 1,
+          "offset": 8
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
       "children": [
         {
           "construct": "NaturalBlock",
@@ -13,20 +26,33 @@
         {
           "construct": "NaturalBlock",
           "type": "paragraph",
+          "value": "::READ (Construct: Tag) FROM `../expressions/tag.art`.\n::READ (Construct: NaturalName) FROM `../expressions/natural-name.art`.\n::READ (Construct: NaturalBlock) FROM `./natural-block.art`.",
+          "position": {
+            "end": {
+              "column": 61,
+              "line": 5,
+              "offset": 197
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 10
+            }
+          },
           "children": [
             {
               "type": "text",
               "value": "::READ (Construct: Tag) FROM ",
               "position": {
-                "start": {
-                  "line": 3,
-                  "column": 1,
-                  "offset": 10
-                },
                 "end": {
-                  "line": 3,
                   "column": 30,
+                  "line": 3,
                   "offset": 39
+                },
+                "start": {
+                  "column": 1,
+                  "line": 3,
+                  "offset": 10
                 }
               }
             },
@@ -34,15 +60,15 @@
               "type": "inlineCode",
               "value": "../expressions/tag.art",
               "position": {
-                "start": {
-                  "line": 3,
-                  "column": 30,
-                  "offset": 39
-                },
                 "end": {
-                  "line": 3,
                   "column": 54,
+                  "line": 3,
                   "offset": 63
+                },
+                "start": {
+                  "column": 30,
+                  "line": 3,
+                  "offset": 39
                 }
               }
             },
@@ -50,15 +76,15 @@
               "type": "text",
               "value": ".\n::READ (Construct: NaturalName) FROM ",
               "position": {
-                "start": {
-                  "line": 3,
-                  "column": 54,
-                  "offset": 63
-                },
                 "end": {
-                  "line": 4,
                   "column": 38,
+                  "line": 4,
                   "offset": 102
+                },
+                "start": {
+                  "column": 54,
+                  "line": 3,
+                  "offset": 63
                 }
               }
             },
@@ -66,15 +92,15 @@
               "type": "inlineCode",
               "value": "../expressions/natural-name.art",
               "position": {
-                "start": {
-                  "line": 4,
-                  "column": 38,
-                  "offset": 102
-                },
                 "end": {
-                  "line": 4,
                   "column": 71,
+                  "line": 4,
                   "offset": 135
+                },
+                "start": {
+                  "column": 38,
+                  "line": 4,
+                  "offset": 102
                 }
               }
             },
@@ -82,15 +108,15 @@
               "type": "text",
               "value": ".\n::READ (Construct: NaturalBlock) FROM ",
               "position": {
-                "start": {
-                  "line": 4,
-                  "column": 71,
-                  "offset": 135
-                },
                 "end": {
-                  "line": 5,
                   "column": 39,
+                  "line": 5,
                   "offset": 175
+                },
+                "start": {
+                  "column": 71,
+                  "line": 4,
+                  "offset": 135
                 }
               }
             },
@@ -98,15 +124,15 @@
               "type": "inlineCode",
               "value": "./natural-block.art",
               "position": {
-                "start": {
-                  "line": 5,
-                  "column": 39,
-                  "offset": 175
-                },
                 "end": {
-                  "line": 5,
                   "column": 60,
+                  "line": 5,
                   "offset": 196
+                },
+                "start": {
+                  "column": 39,
+                  "line": 5,
+                  "offset": 175
                 }
               }
             },
@@ -114,32 +140,19 @@
               "type": "text",
               "value": ".",
               "position": {
-                "start": {
-                  "line": 5,
-                  "column": 60,
-                  "offset": 196
-                },
                 "end": {
-                  "line": 5,
                   "column": 61,
+                  "line": 5,
                   "offset": 197
+                },
+                "start": {
+                  "column": 60,
+                  "line": 5,
+                  "offset": 196
                 }
               }
             }
-          ],
-          "position": {
-            "start": {
-              "line": 3,
-              "column": 1,
-              "offset": 10
-            },
-            "end": {
-              "line": 5,
-              "column": 61,
-              "offset": 197
-            }
-          },
-          "value": "::READ (Construct: Tag) FROM `../expressions/tag.art`.\n::READ (Construct: NaturalName) FROM `../expressions/natural-name.art`.\n::READ (Construct: NaturalBlock) FROM `./natural-block.art`."
+          ]
         },
         {
           "construct": "NaturalBlock",
@@ -148,7 +161,21 @@
         },
         {
           "construct": "SectionBlock",
+          "kind": "Construct",
           "name": "SectionBlock",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 27,
+              "line": 7,
+              "offset": 225
+            },
+            "start": {
+              "column": 1,
+              "line": 7,
+              "offset": 199
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -164,15 +191,15 @@
                   "type": "text",
                   "value": " Structural",
                   "position": {
-                    "start": {
-                      "line": 9,
-                      "column": 14,
-                      "offset": 240
-                    },
                     "end": {
-                      "line": 9,
                       "column": 25,
+                      "line": 9,
                       "offset": 251
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 9,
+                      "offset": 240
                     }
                   }
                 },
@@ -183,15 +210,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 9,
-                  "column": 1,
-                  "offset": 227
-                },
                 "end": {
-                  "line": 9,
                   "column": 25,
+                  "line": 9,
                   "offset": 251
+                },
+                "start": {
+                  "column": 1,
+                  "line": 9,
+                  "offset": 227
                 }
               }
             },
@@ -204,15 +231,15 @@
                   "type": "text",
                   "value": " Capture resource declarations — the key construct that turns a markdown heading into a named, kinded resource that modules can reference, index, and project.",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 13,
-                      "offset": 265
-                    },
                     "end": {
-                      "line": 11,
                       "column": 171,
+                      "line": 11,
                       "offset": 423
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 11,
+                      "offset": 265
                     }
                   }
                 },
@@ -223,15 +250,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 11,
-                  "column": 1,
-                  "offset": 253
-                },
                 "end": {
-                  "line": 11,
                   "column": 171,
+                  "line": 11,
                   "offset": 423
+                },
+                "start": {
+                  "column": 1,
+                  "line": 11,
+                  "offset": 253
                 }
               }
             },
@@ -244,15 +271,15 @@
                   "type": "text",
                   "value": " A SectionBlock is a structural construct consisting of a heading and its associated content. ",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 17,
-                      "offset": 441
-                    },
                     "end": {
-                      "line": 13,
                       "column": 111,
+                      "line": 13,
                       "offset": 535
+                    },
+                    "start": {
+                      "column": 17,
+                      "line": 13,
+                      "offset": 441
                     }
                   }
                 },
@@ -261,15 +288,15 @@
                   "type": "inlineCode",
                   "value": "`# Kind: Name`",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 111,
-                      "offset": 535
-                    },
                     "end": {
-                      "line": 13,
                       "column": 125,
+                      "line": 13,
                       "offset": 549
+                    },
+                    "start": {
+                      "column": 111,
+                      "line": 13,
+                      "offset": 535
                     }
                   }
                 },
@@ -278,15 +305,15 @@
                   "type": "text",
                   "value": " declares a resource of that kind with that name, together with its tags and content. It is the bridge between the grammar and modules layers: the grammar fixes the form (optional kind, name, tags, content), while the meaning of each kind is provided by the structures — the domain declarations in ",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 125,
-                      "offset": 549
-                    },
                     "end": {
-                      "line": 13,
                       "column": 423,
+                      "line": 13,
                       "offset": 847
+                    },
+                    "start": {
+                      "column": 125,
+                      "line": 13,
+                      "offset": 549
                     }
                   }
                 },
@@ -295,15 +322,15 @@
                   "type": "inlineCode",
                   "value": "`.art`",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 423,
-                      "offset": 847
-                    },
                     "end": {
-                      "line": 13,
                       "column": 429,
+                      "line": 13,
                       "offset": 853
+                    },
+                    "start": {
+                      "column": 423,
+                      "line": 13,
+                      "offset": 847
                     }
                   }
                 },
@@ -312,15 +339,15 @@
                   "type": "text",
                   "value": ". This is the same separation as a keyword in a programming language: ",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 429,
-                      "offset": 853
-                    },
                     "end": {
-                      "line": 13,
                       "column": 499,
+                      "line": 13,
                       "offset": 923
+                    },
+                    "start": {
+                      "column": 429,
+                      "line": 13,
+                      "offset": 853
                     }
                   }
                 },
@@ -329,15 +356,15 @@
                   "type": "inlineCode",
                   "value": "`class`",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 499,
-                      "offset": 923
-                    },
                     "end": {
-                      "line": 13,
                       "column": 506,
+                      "line": 13,
                       "offset": 930
+                    },
+                    "start": {
+                      "column": 499,
+                      "line": 13,
+                      "offset": 923
                     }
                   }
                 },
@@ -346,15 +373,15 @@
                   "type": "text",
                   "value": " is fixed syntax, the meaning of ",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 506,
-                      "offset": 930
-                    },
                     "end": {
-                      "line": 13,
                       "column": 539,
+                      "line": 13,
                       "offset": 963
+                    },
+                    "start": {
+                      "column": 506,
+                      "line": 13,
+                      "offset": 930
                     }
                   }
                 },
@@ -363,15 +390,15 @@
                   "type": "inlineCode",
                   "value": "`class Task`",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 539,
-                      "offset": 963
-                    },
                     "end": {
-                      "line": 13,
                       "column": 551,
+                      "line": 13,
                       "offset": 975
+                    },
+                    "start": {
+                      "column": 539,
+                      "line": 13,
+                      "offset": 963
                     }
                   }
                 },
@@ -380,15 +407,15 @@
                   "type": "text",
                   "value": " comes from the program. Closed syntax, open semantics.",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 551,
-                      "offset": 975
-                    },
                     "end": {
-                      "line": 13,
                       "column": 606,
+                      "line": 13,
                       "offset": 1030
+                    },
+                    "start": {
+                      "column": 551,
+                      "line": 13,
+                      "offset": 975
                     }
                   }
                 },
@@ -402,15 +429,15 @@
                   "type": "html",
                   "value": "<!-- refine content rules -->",
                   "position": {
-                    "start": {
-                      "line": 15,
-                      "column": 1,
-                      "offset": 1032
-                    },
                     "end": {
-                      "line": 15,
                       "column": 30,
+                      "line": 15,
                       "offset": 1061
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 15,
+                      "offset": 1032
                     }
                   }
                 },
@@ -421,15 +448,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 13,
-                  "column": 1,
-                  "offset": 425
-                },
                 "end": {
-                  "line": 13,
                   "column": 606,
+                  "line": 13,
                   "offset": 1030
+                },
+                "start": {
+                  "column": 1,
+                  "line": 13,
+                  "offset": 425
                 }
               }
             },
@@ -449,15 +476,15 @@
                   "meta": null,
                   "value": "```\nSectionBlock {\n    kind?: string          // optional; present when heading has \"Kind: Name\" form\n    name: string           // resource name\n    tags?: Tag[]           // optional projection tags\n    content: NaturalBlock  // associated content (catch-all classification)\n}\n```",
                   "position": {
-                    "start": {
-                      "line": 19,
-                      "column": 1,
-                      "offset": 1076
-                    },
                     "end": {
-                      "line": 26,
                       "column": 4,
+                      "line": 26,
                       "offset": 1358
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 19,
+                      "offset": 1076
                     }
                   }
                 },
@@ -468,15 +495,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 17,
-                  "column": 1,
-                  "offset": 1063
-                },
                 "end": {
-                  "line": 17,
                   "column": 12,
+                  "line": 17,
                   "offset": 1074
+                },
+                "start": {
+                  "column": 1,
+                  "line": 17,
+                  "offset": 1063
                 }
               }
             },
@@ -496,15 +523,15 @@
                   "meta": null,
                   "value": "```art\n// Form 1: Name only\n<SectionBlock> =\n    # <name> [<Tags>]\n    <NaturalBlock>\n\n// Form 2: Kind and Name\n<SectionBlock> =\n    # <kind>: <name> [<Tags>]\n    <NaturalBlock>\n```",
                   "position": {
-                    "start": {
-                      "line": 30,
-                      "column": 1,
-                      "offset": 1373
-                    },
                     "end": {
-                      "line": 40,
                       "column": 4,
+                      "line": 40,
                       "offset": 1554
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 30,
+                      "offset": 1373
                     }
                   }
                 },
@@ -515,15 +542,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 28,
-                  "column": 1,
-                  "offset": 1360
-                },
                 "end": {
-                  "line": 28,
                   "column": 12,
+                  "line": 28,
                   "offset": 1371
+                },
+                "start": {
+                  "column": 1,
+                  "line": 28,
+                  "offset": 1360
                 }
               }
             },
@@ -540,22 +567,35 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- A SectionBlock MUST define a name.\n- A SectionBlock declares a resource identified by its kind and name.\n- A SectionBlock MAY define a kind.\n- A SectionBlock MAY be tagged with one or more Tag.\n- A SectionBlock MAY contain arbitrary content.\n- A SectionBlock MAY contain nested SectionBlocks.",
+                  "position": {
+                    "end": {
+                      "column": 51,
+                      "line": 49,
+                      "offset": 1862
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 44,
+                      "offset": 1568
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "A SectionBlock MUST define a name.",
                       "position": {
-                        "start": {
-                          "line": 44,
-                          "column": 3,
-                          "offset": 1570
-                        },
                         "end": {
-                          "line": 44,
                           "column": 37,
+                          "line": 44,
                           "offset": 1604
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 44,
+                          "offset": 1570
                         }
                       }
                     },
@@ -563,15 +603,15 @@
                       "construct": "NaturalBlock",
                       "value": "A SectionBlock declares a resource identified by its kind and name.",
                       "position": {
-                        "start": {
-                          "line": 45,
-                          "column": 3,
-                          "offset": 1607
-                        },
                         "end": {
-                          "line": 45,
                           "column": 70,
+                          "line": 45,
                           "offset": 1674
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 45,
+                          "offset": 1607
                         }
                       }
                     },
@@ -579,15 +619,15 @@
                       "construct": "NaturalBlock",
                       "value": "A SectionBlock MAY define a kind.",
                       "position": {
-                        "start": {
-                          "line": 46,
-                          "column": 3,
-                          "offset": 1677
-                        },
                         "end": {
-                          "line": 46,
                           "column": 36,
+                          "line": 46,
                           "offset": 1710
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 46,
+                          "offset": 1677
                         }
                       }
                     },
@@ -595,15 +635,15 @@
                       "construct": "NaturalBlock",
                       "value": "A SectionBlock MAY be tagged with one or more Tag.",
                       "position": {
-                        "start": {
-                          "line": 47,
-                          "column": 3,
-                          "offset": 1713
-                        },
                         "end": {
-                          "line": 47,
                           "column": 53,
+                          "line": 47,
                           "offset": 1763
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 47,
+                          "offset": 1713
                         }
                       }
                     },
@@ -611,15 +651,15 @@
                       "construct": "NaturalBlock",
                       "value": "A SectionBlock MAY contain arbitrary content.",
                       "position": {
-                        "start": {
-                          "line": 48,
-                          "column": 3,
-                          "offset": 1766
-                        },
                         "end": {
-                          "line": 48,
                           "column": 48,
+                          "line": 48,
                           "offset": 1811
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 48,
+                          "offset": 1766
                         }
                       }
                     },
@@ -627,32 +667,19 @@
                       "construct": "NaturalBlock",
                       "value": "A SectionBlock MAY contain nested SectionBlocks.",
                       "position": {
-                        "start": {
-                          "line": 49,
-                          "column": 3,
-                          "offset": 1814
-                        },
                         "end": {
-                          "line": 49,
                           "column": 51,
+                          "line": 49,
                           "offset": 1862
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 49,
+                          "offset": 1814
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 44,
-                      "column": 1,
-                      "offset": 1568
-                    },
-                    "end": {
-                      "line": 49,
-                      "column": 51,
-                      "offset": 1862
-                    }
-                  },
-                  "value": "- A SectionBlock MUST define a name.\n- A SectionBlock declares a resource identified by its kind and name.\n- A SectionBlock MAY define a kind.\n- A SectionBlock MAY be tagged with one or more Tag.\n- A SectionBlock MAY contain arbitrary content.\n- A SectionBlock MAY contain nested SectionBlocks."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -661,15 +688,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 42,
-                  "column": 1,
-                  "offset": 1556
-                },
                 "end": {
-                  "line": 42,
                   "column": 11,
+                  "line": 42,
                   "offset": 1566
+                },
+                "start": {
+                  "column": 1,
+                  "line": 42,
+                  "offset": 1556
                 }
               }
             },
@@ -685,37 +712,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Example of Section Block without kind.",
+                  "position": {
+                    "end": {
+                      "column": 39,
+                      "line": 53,
+                      "offset": 1917
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 53,
+                      "offset": 1879
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Example of Section Block without kind.",
                       "position": {
-                        "start": {
-                          "line": 53,
-                          "column": 1,
-                          "offset": 1879
-                        },
                         "end": {
-                          "line": 53,
                           "column": 39,
+                          "line": 53,
                           "offset": 1917
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 53,
+                          "offset": 1879
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 53,
-                      "column": 1,
-                      "offset": 1879
-                    },
-                    "end": {
-                      "line": 53,
-                      "column": 39,
-                      "offset": 1917
-                    }
-                  },
-                  "value": "Example of Section Block without kind."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -729,15 +756,15 @@
                   "meta": null,
                   "value": "```md\n## Rules\n\nLorem ipsum\n```",
                   "position": {
-                    "start": {
-                      "line": 55,
-                      "column": 1,
-                      "offset": 1919
-                    },
                     "end": {
-                      "line": 59,
                       "column": 4,
+                      "line": 59,
                       "offset": 1950
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 55,
+                      "offset": 1919
                     }
                   }
                 },
@@ -749,20 +776,33 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Example of Section Block with kind `rule`.",
+                  "position": {
+                    "end": {
+                      "column": 43,
+                      "line": 61,
+                      "offset": 1994
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 61,
+                      "offset": 1952
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Example of Section Block with kind ",
                       "position": {
-                        "start": {
-                          "line": 61,
-                          "column": 1,
-                          "offset": 1952
-                        },
                         "end": {
-                          "line": 61,
                           "column": 36,
+                          "line": 61,
                           "offset": 1987
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 61,
+                          "offset": 1952
                         }
                       }
                     },
@@ -770,15 +810,15 @@
                       "type": "inlineCode",
                       "value": "rule",
                       "position": {
-                        "start": {
-                          "line": 61,
-                          "column": 36,
-                          "offset": 1987
-                        },
                         "end": {
-                          "line": 61,
                           "column": 42,
+                          "line": 61,
                           "offset": 1993
+                        },
+                        "start": {
+                          "column": 36,
+                          "line": 61,
+                          "offset": 1987
                         }
                       }
                     },
@@ -786,32 +826,19 @@
                       "type": "text",
                       "value": ".",
                       "position": {
-                        "start": {
-                          "line": 61,
-                          "column": 42,
-                          "offset": 1993
-                        },
                         "end": {
-                          "line": 61,
                           "column": 43,
+                          "line": 61,
                           "offset": 1994
+                        },
+                        "start": {
+                          "column": 42,
+                          "line": 61,
+                          "offset": 1993
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 1,
-                      "offset": 1952
-                    },
-                    "end": {
-                      "line": 61,
-                      "column": 43,
-                      "offset": 1994
-                    }
-                  },
-                  "value": "Example of Section Block with kind `rule`."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -825,15 +852,15 @@
                   "meta": null,
                   "value": "```md\n### Rule: Maximum 4 items\n\nThis is a rule.\n```",
                   "position": {
-                    "start": {
-                      "line": 63,
-                      "column": 1,
-                      "offset": 1996
-                    },
                     "end": {
-                      "line": 67,
                       "column": 4,
+                      "line": 67,
                       "offset": 2048
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 63,
+                      "offset": 1996
                     }
                   }
                 },
@@ -845,37 +872,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Example of Section Block with tags.",
+                  "position": {
+                    "end": {
+                      "column": 36,
+                      "line": 69,
+                      "offset": 2085
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 69,
+                      "offset": 2050
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Example of Section Block with tags.",
                       "position": {
-                        "start": {
-                          "line": 69,
-                          "column": 1,
-                          "offset": 2050
-                        },
                         "end": {
-                          "line": 69,
                           "column": 36,
+                          "line": 69,
                           "offset": 2085
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 69,
+                          "offset": 2050
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 69,
-                      "column": 1,
-                      "offset": 2050
-                    },
-                    "end": {
-                      "line": 69,
-                      "column": 36,
-                      "offset": 2085
-                    }
-                  },
-                  "value": "Example of Section Block with tags."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -889,62 +916,35 @@
                   "meta": null,
                   "value": "```md\n### Routine: List Tasks (#generator) (#wip)\n\n**Purpose:** List tasks according to criteria, ...\n```",
                   "position": {
-                    "start": {
-                      "line": 71,
-                      "column": 1,
-                      "offset": 2087
-                    },
                     "end": {
-                      "line": 75,
                       "column": 4,
+                      "line": 75,
                       "offset": 2192
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 71,
+                      "offset": 2087
                     }
                   }
                 }
               ],
               "position": {
-                "start": {
-                  "line": 51,
-                  "column": 1,
-                  "offset": 1864
-                },
                 "end": {
-                  "line": 51,
                   "column": 14,
+                  "line": 51,
                   "offset": 1877
+                },
+                "start": {
+                  "column": 1,
+                  "line": 51,
+                  "offset": 1864
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Construct",
-          "position": {
-            "start": {
-              "line": 7,
-              "column": 1,
-              "offset": 199
-            },
-            "end": {
-              "line": 7,
-              "column": 27,
-              "offset": 225
-            }
-          }
+          ]
         }
-      ],
-      "depth": 1,
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 9,
-          "offset": 8
-        }
-      }
+      ]
     }
   ]
 }

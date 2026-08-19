@@ -4,6 +4,19 @@
     {
       "construct": "SectionBlock",
       "name": "Module",
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 9,
+          "line": 1,
+          "offset": 8
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
       "children": [
         {
           "construct": "NaturalBlock",
@@ -13,6 +26,19 @@
         {
           "construct": "SectionBlock",
           "name": "Uses",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 8,
+              "line": 3,
+              "offset": 17
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 10
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -22,20 +48,33 @@
             {
               "construct": "NaturalBlock",
               "type": "paragraph",
+              "value": "::READ (NaturalExpression, Identifier, NaturalName) `language/grammar/index.art`.",
+              "position": {
+                "end": {
+                  "column": 82,
+                  "line": 5,
+                  "offset": 100
+                },
+                "start": {
+                  "column": 1,
+                  "line": 5,
+                  "offset": 19
+                }
+              },
               "children": [
                 {
                   "type": "text",
                   "value": "::READ (NaturalExpression, Identifier, NaturalName) ",
                   "position": {
-                    "start": {
-                      "line": 5,
-                      "column": 1,
-                      "offset": 19
-                    },
                     "end": {
-                      "line": 5,
                       "column": 53,
+                      "line": 5,
                       "offset": 71
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 5,
+                      "offset": 19
                     }
                   }
                 },
@@ -43,15 +82,15 @@
                   "type": "inlineCode",
                   "value": "language/grammar/index.art",
                   "position": {
-                    "start": {
-                      "line": 5,
-                      "column": 53,
-                      "offset": 71
-                    },
                     "end": {
-                      "line": 5,
                       "column": 81,
+                      "line": 5,
                       "offset": 99
+                    },
+                    "start": {
+                      "column": 53,
+                      "line": 5,
+                      "offset": 71
                     }
                   }
                 },
@@ -59,56 +98,43 @@
                   "type": "text",
                   "value": ".",
                   "position": {
-                    "start": {
-                      "line": 5,
-                      "column": 81,
-                      "offset": 99
-                    },
                     "end": {
-                      "line": 5,
                       "column": 82,
+                      "line": 5,
                       "offset": 100
+                    },
+                    "start": {
+                      "column": 81,
+                      "line": 5,
+                      "offset": 99
                     }
                   }
                 }
-              ],
-              "position": {
-                "start": {
-                  "line": 5,
-                  "column": 1,
-                  "offset": 19
-                },
-                "end": {
-                  "line": 5,
-                  "column": 82,
-                  "offset": 100
-                }
-              },
-              "value": "::READ (NaturalExpression, Identifier, NaturalName) `language/grammar/index.art`."
+              ]
             },
             {
               "construct": "NaturalBlock",
               "type": "text",
               "value": "\n\n"
             }
-          ],
-          "depth": 2,
-          "position": {
-            "start": {
-              "line": 3,
-              "column": 1,
-              "offset": 10
-            },
-            "end": {
-              "line": 3,
-              "column": 8,
-              "offset": 17
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
           "name": "Declares",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 12,
+              "line": 7,
+              "offset": 113
+            },
+            "start": {
+              "column": 1,
+              "line": 7,
+              "offset": 102
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -117,7 +143,21 @@
             },
             {
               "construct": "SectionBlock",
+              "kind": "Type",
               "name": "ScalarValue",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 22,
+                  "line": 9,
+                  "offset": 136
+                },
+                "start": {
+                  "column": 1,
+                  "line": 9,
+                  "offset": 115
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -133,15 +173,15 @@
                       "type": "text",
                       "value": " Defines a single atomic value.",
                       "position": {
-                        "start": {
-                          "line": 11,
-                          "column": 13,
-                          "offset": 150
-                        },
                         "end": {
-                          "line": 11,
                           "column": 44,
+                          "line": 11,
                           "offset": 181
+                        },
+                        "start": {
+                          "column": 13,
+                          "line": 11,
+                          "offset": 150
                         }
                       }
                     },
@@ -152,15 +192,15 @@
                     }
                   ],
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 1,
-                      "offset": 138
-                    },
                     "end": {
-                      "line": 11,
                       "column": 44,
+                      "line": 11,
                       "offset": 181
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 11,
+                      "offset": 138
                     }
                   }
                 },
@@ -180,15 +220,15 @@
                       "meta": null,
                       "value": "```\nScalarValue {\n  value: NaturalExpression\n  type: NaturalName\n}\n```",
                       "position": {
-                        "start": {
-                          "line": 15,
-                          "column": 1,
-                          "offset": 196
-                        },
                         "end": {
-                          "line": 20,
                           "column": 4,
+                          "line": 20,
                           "offset": 266
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 15,
+                          "offset": 196
                         }
                       }
                     },
@@ -199,37 +239,37 @@
                     }
                   ],
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 1,
-                      "offset": 183
-                    },
                     "end": {
-                      "line": 13,
                       "column": 12,
+                      "line": 13,
                       "offset": 194
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 13,
+                      "offset": 183
                     }
                   }
                 }
-              ],
-              "depth": 3,
-              "kind": "Type",
-              "position": {
-                "start": {
-                  "line": 9,
-                  "column": 1,
-                  "offset": 115
-                },
-                "end": {
-                  "line": 9,
-                  "column": 22,
-                  "offset": 136
-                }
-              }
+              ]
             },
             {
               "construct": "SectionBlock",
+              "kind": "Primitive",
               "name": "Scalar",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 22,
+                  "line": 22,
+                  "offset": 289
+                },
+                "start": {
+                  "column": 1,
+                  "line": 22,
+                  "offset": 268
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -239,53 +279,66 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "**Id**: `scalar`",
+                  "position": {
+                    "end": {
+                      "column": 17,
+                      "line": 24,
+                      "offset": 307
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 24,
+                      "offset": 291
+                    }
+                  },
                   "children": [
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 7,
+                          "line": 24,
+                          "offset": 297
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 24,
+                          "offset": 291
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Id",
                           "position": {
-                            "start": {
-                              "line": 24,
-                              "column": 3,
-                              "offset": 293
-                            },
                             "end": {
-                              "line": 24,
                               "column": 5,
+                              "line": 24,
                               "offset": 295
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 24,
+                              "offset": 293
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 24,
-                          "column": 1,
-                          "offset": 291
-                        },
-                        "end": {
-                          "line": 24,
-                          "column": 7,
-                          "offset": 297
-                        }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
                       "value": ": ",
                       "position": {
-                        "start": {
-                          "line": 24,
-                          "column": 7,
-                          "offset": 297
-                        },
                         "end": {
-                          "line": 24,
                           "column": 9,
+                          "line": 24,
                           "offset": 299
+                        },
+                        "start": {
+                          "column": 7,
+                          "line": 24,
+                          "offset": 297
                         }
                       }
                     },
@@ -293,32 +346,19 @@
                       "type": "inlineCode",
                       "value": "scalar",
                       "position": {
-                        "start": {
-                          "line": 24,
-                          "column": 9,
-                          "offset": 299
-                        },
                         "end": {
-                          "line": 24,
                           "column": 17,
+                          "line": 24,
                           "offset": 307
+                        },
+                        "start": {
+                          "column": 9,
+                          "line": 24,
+                          "offset": 299
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 24,
-                      "column": 1,
-                      "offset": 291
-                    },
-                    "end": {
-                      "line": 24,
-                      "column": 17,
-                      "offset": 307
-                    }
-                  },
-                  "value": "**Id**: `scalar`"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -328,70 +368,70 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "**Name**: Scalar",
+                  "position": {
+                    "end": {
+                      "column": 17,
+                      "line": 26,
+                      "offset": 325
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 26,
+                      "offset": 309
+                    }
+                  },
                   "children": [
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 9,
+                          "line": 26,
+                          "offset": 317
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 26,
+                          "offset": 309
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Name",
                           "position": {
-                            "start": {
-                              "line": 26,
-                              "column": 3,
-                              "offset": 311
-                            },
                             "end": {
-                              "line": 26,
                               "column": 7,
+                              "line": 26,
                               "offset": 315
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 26,
+                              "offset": 311
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 26,
-                          "column": 1,
-                          "offset": 309
-                        },
-                        "end": {
-                          "line": 26,
-                          "column": 9,
-                          "offset": 317
-                        }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
                       "value": ": Scalar",
                       "position": {
-                        "start": {
-                          "line": 26,
-                          "column": 9,
-                          "offset": 317
-                        },
                         "end": {
-                          "line": 26,
                           "column": 17,
+                          "line": 26,
                           "offset": 325
+                        },
+                        "start": {
+                          "column": 9,
+                          "line": 26,
+                          "offset": 317
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 26,
-                      "column": 1,
-                      "offset": 309
-                    },
-                    "end": {
-                      "line": 26,
-                      "column": 17,
-                      "offset": 325
-                    }
-                  },
-                  "value": "**Name**: Scalar"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -401,70 +441,70 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "**Kind**: Primitive",
+                  "position": {
+                    "end": {
+                      "column": 20,
+                      "line": 28,
+                      "offset": 346
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 28,
+                      "offset": 327
+                    }
+                  },
                   "children": [
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 9,
+                          "line": 28,
+                          "offset": 335
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 28,
+                          "offset": 327
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Kind",
                           "position": {
-                            "start": {
-                              "line": 28,
-                              "column": 3,
-                              "offset": 329
-                            },
                             "end": {
-                              "line": 28,
                               "column": 7,
+                              "line": 28,
                               "offset": 333
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 28,
+                              "offset": 329
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 28,
-                          "column": 1,
-                          "offset": 327
-                        },
-                        "end": {
-                          "line": 28,
-                          "column": 9,
-                          "offset": 335
-                        }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
                       "value": ": Primitive",
                       "position": {
-                        "start": {
-                          "line": 28,
-                          "column": 9,
-                          "offset": 335
-                        },
                         "end": {
-                          "line": 28,
                           "column": 20,
+                          "line": 28,
                           "offset": 346
+                        },
+                        "start": {
+                          "column": 9,
+                          "line": 28,
+                          "offset": 335
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 28,
-                      "column": 1,
-                      "offset": 327
-                    },
-                    "end": {
-                      "line": 28,
-                      "column": 20,
-                      "offset": 346
-                    }
-                  },
-                  "value": "**Kind**: Primitive"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -480,15 +520,15 @@
                       "type": "text",
                       "value": " Defines single atomic values.",
                       "position": {
-                        "start": {
-                          "line": 30,
-                          "column": 13,
-                          "offset": 360
-                        },
                         "end": {
-                          "line": 30,
                           "column": 43,
+                          "line": 30,
                           "offset": 390
+                        },
+                        "start": {
+                          "column": 13,
+                          "line": 30,
+                          "offset": 360
                         }
                       }
                     },
@@ -499,15 +539,15 @@
                     }
                   ],
                   "position": {
-                    "start": {
-                      "line": 30,
-                      "column": 1,
-                      "offset": 348
-                    },
                     "end": {
-                      "line": 30,
                       "column": 43,
+                      "line": 30,
                       "offset": 390
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 30,
+                      "offset": 348
                     }
                   }
                 },
@@ -520,15 +560,15 @@
                       "type": "text",
                       "value": " A primitive that holds a single value of a specified type.",
                       "position": {
-                        "start": {
-                          "line": 32,
-                          "column": 17,
-                          "offset": 408
-                        },
                         "end": {
-                          "line": 32,
                           "column": 76,
+                          "line": 32,
                           "offset": 467
+                        },
+                        "start": {
+                          "column": 17,
+                          "line": 32,
+                          "offset": 408
                         }
                       }
                     },
@@ -539,15 +579,15 @@
                     }
                   ],
                   "position": {
-                    "start": {
-                      "line": 32,
-                      "column": 1,
-                      "offset": 392
-                    },
                     "end": {
-                      "line": 32,
                       "column": 76,
+                      "line": 32,
                       "offset": 467
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 32,
+                      "offset": 392
                     }
                   }
                 },
@@ -567,15 +607,15 @@
                       "meta": null,
                       "value": "```ts\ntype PrimitiveScalar = {\n  type: string;\n};\n```",
                       "position": {
-                        "start": {
-                          "line": 36,
-                          "column": 1,
-                          "offset": 485
-                        },
                         "end": {
-                          "line": 40,
                           "column": 4,
+                          "line": 40,
                           "offset": 538
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 36,
+                          "offset": 485
                         }
                       }
                     },
@@ -586,15 +626,15 @@
                     }
                   ],
                   "position": {
-                    "start": {
-                      "line": 34,
-                      "column": 1,
-                      "offset": 469
-                    },
                     "end": {
-                      "line": 34,
                       "column": 15,
+                      "line": 34,
                       "offset": 483
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 34,
+                      "offset": 469
                     }
                   }
                 },
@@ -614,15 +654,15 @@
                       "meta": null,
                       "value": "```ts\ntype PrmitiveScalarValue = {\n  value: T;\n};\n```",
                       "position": {
-                        "start": {
-                          "line": 44,
-                          "column": 1,
-                          "offset": 552
-                        },
                         "end": {
-                          "line": 48,
                           "column": 4,
+                          "line": 48,
                           "offset": 605
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 44,
+                          "offset": 552
                         }
                       }
                     },
@@ -633,21 +673,35 @@
                     }
                   ],
                   "position": {
-                    "start": {
-                      "line": 42,
-                      "column": 1,
-                      "offset": 540
-                    },
                     "end": {
-                      "line": 42,
                       "column": 11,
+                      "line": 42,
                       "offset": 550
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 42,
+                      "offset": 540
                     }
                   }
                 },
                 {
                   "construct": "SectionBlock",
+                  "kind": "Art",
                   "name": "Inline",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 17,
+                      "line": 50,
+                      "offset": 623
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 50,
+                      "offset": 607
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -657,54 +711,54 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "**Procedure**",
+                      "position": {
+                        "end": {
+                          "column": 14,
+                          "line": 52,
+                          "offset": 638
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 52,
+                          "offset": 625
+                        }
+                      },
                       "children": [
                         {
                           "type": "strong",
+                          "position": {
+                            "end": {
+                              "column": 14,
+                              "line": 52,
+                              "offset": 638
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 52,
+                              "offset": 625
+                            }
+                          },
                           "children": [
                             {
                               "type": "text",
                               "value": "Procedure",
                               "position": {
-                                "start": {
-                                  "line": 52,
-                                  "column": 3,
-                                  "offset": 627
-                                },
                                 "end": {
-                                  "line": 52,
                                   "column": 12,
+                                  "line": 52,
                                   "offset": 636
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 52,
+                                  "offset": 627
                                 }
                               }
                             }
-                          ],
-                          "position": {
-                            "start": {
-                              "line": 52,
-                              "column": 1,
-                              "offset": 625
-                            },
-                            "end": {
-                              "line": 52,
-                              "column": 14,
-                              "offset": 638
-                            }
-                          }
+                          ]
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 52,
-                          "column": 1,
-                          "offset": 625
-                        },
-                        "end": {
-                          "line": 52,
-                          "column": 14,
-                          "offset": 638
-                        }
-                      },
-                      "value": "**Procedure**"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -715,39 +769,39 @@
                       "construct": "NaturalBlock",
                       "type": "list",
                       "ordered": true,
-                      "start": 1,
                       "spread": false,
+                      "start": 1,
+                      "value": "1. Return \"Scalar ({`%type`})\"",
+                      "position": {
+                        "end": {
+                          "column": 31,
+                          "line": 54,
+                          "offset": 670
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 54,
+                          "offset": 640
+                        }
+                      },
                       "children": [
                         {
                           "construct": "NaturalBlock",
                           "value": "Return \"Scalar ({`%type`})\"",
                           "position": {
-                            "start": {
-                              "line": 54,
-                              "column": 4,
-                              "offset": 643
-                            },
                             "end": {
-                              "line": 54,
                               "column": 31,
+                              "line": 54,
                               "offset": 670
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 54,
+                              "offset": 643
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 54,
-                          "column": 1,
-                          "offset": 640
-                        },
-                        "end": {
-                          "line": 54,
-                          "column": 31,
-                          "offset": 670
-                        }
-                      },
-                      "value": "1. Return \"Scalar ({`%type`})\""
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -757,37 +811,37 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "Example:",
+                      "position": {
+                        "end": {
+                          "column": 9,
+                          "line": 56,
+                          "offset": 680
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 56,
+                          "offset": 672
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Example:",
                           "position": {
-                            "start": {
-                              "line": 56,
-                              "column": 1,
-                              "offset": 672
-                            },
                             "end": {
-                              "line": 56,
                               "column": 9,
+                              "line": 56,
                               "offset": 680
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 56,
+                              "offset": 672
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 56,
-                          "column": 1,
-                          "offset": 672
-                        },
-                        "end": {
-                          "line": 56,
-                          "column": 9,
-                          "offset": 680
-                        }
-                      },
-                      "value": "Example:"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -801,15 +855,15 @@
                       "meta": null,
                       "value": "```\nText: \"Hello World\"\n```",
                       "position": {
-                        "start": {
-                          "line": 58,
-                          "column": 1,
-                          "offset": 682
-                        },
                         "end": {
-                          "line": 60,
                           "column": 4,
+                          "line": 60,
                           "offset": 709
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 58,
+                          "offset": 682
                         }
                       }
                     },
@@ -818,25 +872,25 @@
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "kind": "Art",
-                  "position": {
-                    "start": {
-                      "line": 50,
-                      "column": 1,
-                      "offset": 607
-                    },
-                    "end": {
-                      "line": 50,
-                      "column": 17,
-                      "offset": 623
-                    }
-                  }
+                  ]
                 },
                 {
                   "construct": "SectionBlock",
+                  "kind": "Art",
                   "name": "Block",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 16,
+                      "line": 62,
+                      "offset": 726
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 62,
+                      "offset": 711
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -846,54 +900,54 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "**Procedure**",
+                      "position": {
+                        "end": {
+                          "column": 14,
+                          "line": 64,
+                          "offset": 741
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 64,
+                          "offset": 728
+                        }
+                      },
                       "children": [
                         {
                           "type": "strong",
+                          "position": {
+                            "end": {
+                              "column": 14,
+                              "line": 64,
+                              "offset": 741
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 64,
+                              "offset": 728
+                            }
+                          },
                           "children": [
                             {
                               "type": "text",
                               "value": "Procedure",
                               "position": {
-                                "start": {
-                                  "line": 64,
-                                  "column": 3,
-                                  "offset": 730
-                                },
                                 "end": {
-                                  "line": 64,
                                   "column": 12,
+                                  "line": 64,
                                   "offset": 739
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 64,
+                                  "offset": 730
                                 }
                               }
                             }
-                          ],
-                          "position": {
-                            "start": {
-                              "line": 64,
-                              "column": 1,
-                              "offset": 728
-                            },
-                            "end": {
-                              "line": 64,
-                              "column": 14,
-                              "offset": 741
-                            }
-                          }
+                          ]
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 64,
-                          "column": 1,
-                          "offset": 728
-                        },
-                        "end": {
-                          "line": 64,
-                          "column": 14,
-                          "offset": 741
-                        }
-                      },
-                      "value": "**Procedure**"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -904,39 +958,39 @@
                       "construct": "NaturalBlock",
                       "type": "list",
                       "ordered": true,
-                      "start": 1,
                       "spread": false,
+                      "start": 1,
+                      "value": "1. Return \"\"\"**ValueType:** {`%type`}\n   **Value:** {`%value`}\"\"\"",
+                      "position": {
+                        "end": {
+                          "column": 28,
+                          "line": 67,
+                          "offset": 808
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 66,
+                          "offset": 743
+                        }
+                      },
                       "children": [
                         {
                           "construct": "NaturalBlock",
                           "value": "Return \"\"\"**ValueType:** {`%type`}\n   **Value:** {`%value`}\"\"\"",
                           "position": {
-                            "start": {
-                              "line": 66,
-                              "column": 4,
-                              "offset": 746
-                            },
                             "end": {
-                              "line": 67,
                               "column": 28,
+                              "line": 67,
                               "offset": 808
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 66,
+                              "offset": 746
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 66,
-                          "column": 1,
-                          "offset": 743
-                        },
-                        "end": {
-                          "line": 67,
-                          "column": 28,
-                          "offset": 808
-                        }
-                      },
-                      "value": "1. Return \"\"\"**ValueType:** {`%type`}\n   **Value:** {`%value`}\"\"\""
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -946,37 +1000,37 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "Example:",
+                      "position": {
+                        "end": {
+                          "column": 9,
+                          "line": 69,
+                          "offset": 818
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 69,
+                          "offset": 810
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Example:",
                           "position": {
-                            "start": {
-                              "line": 69,
-                              "column": 1,
-                              "offset": 810
-                            },
                             "end": {
-                              "line": 69,
                               "column": 9,
+                              "line": 69,
                               "offset": 818
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 69,
+                              "offset": 810
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 69,
-                          "column": 1,
-                          "offset": 810
-                        },
-                        "end": {
-                          "line": 69,
-                          "column": 9,
-                          "offset": 818
-                        }
-                      },
-                      "value": "Example:"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -990,15 +1044,15 @@
                       "meta": null,
                       "value": "```md\n**ValueType:** Text\n**Value:** Hello World\n```",
                       "position": {
-                        "start": {
-                          "line": 71,
-                          "column": 1,
-                          "offset": 820
-                        },
                         "end": {
-                          "line": 74,
                           "column": 4,
+                          "line": 74,
                           "offset": 872
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 71,
+                          "offset": 820
                         }
                       }
                     },
@@ -1007,25 +1061,25 @@
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "kind": "Art",
-                  "position": {
-                    "start": {
-                      "line": 62,
-                      "column": 1,
-                      "offset": 711
-                    },
-                    "end": {
-                      "line": 62,
-                      "column": 16,
-                      "offset": 726
-                    }
-                  }
+                  ]
                 },
                 {
                   "construct": "SectionBlock",
+                  "kind": "Declaration",
                   "name": "Inline",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 25,
+                      "line": 76,
+                      "offset": 898
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 76,
+                      "offset": 874
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -1035,54 +1089,54 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "**Procedure**",
+                      "position": {
+                        "end": {
+                          "column": 14,
+                          "line": 78,
+                          "offset": 913
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 78,
+                          "offset": 900
+                        }
+                      },
                       "children": [
                         {
                           "type": "strong",
+                          "position": {
+                            "end": {
+                              "column": 14,
+                              "line": 78,
+                              "offset": 913
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 78,
+                              "offset": 900
+                            }
+                          },
                           "children": [
                             {
                               "type": "text",
                               "value": "Procedure",
                               "position": {
-                                "start": {
-                                  "line": 78,
-                                  "column": 3,
-                                  "offset": 902
-                                },
                                 "end": {
-                                  "line": 78,
                                   "column": 12,
+                                  "line": 78,
                                   "offset": 911
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 78,
+                                  "offset": 902
                                 }
                               }
                             }
-                          ],
-                          "position": {
-                            "start": {
-                              "line": 78,
-                              "column": 1,
-                              "offset": 900
-                            },
-                            "end": {
-                              "line": 78,
-                              "column": 14,
-                              "offset": 913
-                            }
-                          }
+                          ]
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 78,
-                          "column": 1,
-                          "offset": 900
-                        },
-                        "end": {
-                          "line": 78,
-                          "column": 14,
-                          "offset": 913
-                        }
-                      },
-                      "value": "**Procedure**"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -1093,39 +1147,39 @@
                       "construct": "NaturalBlock",
                       "type": "list",
                       "ordered": true,
-                      "start": 1,
                       "spread": false,
+                      "start": 1,
+                      "value": "1. Return \"{`%type`}\"",
+                      "position": {
+                        "end": {
+                          "column": 22,
+                          "line": 80,
+                          "offset": 936
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 80,
+                          "offset": 915
+                        }
+                      },
                       "children": [
                         {
                           "construct": "NaturalBlock",
                           "value": "Return \"{`%type`}\"",
                           "position": {
-                            "start": {
-                              "line": 80,
-                              "column": 4,
-                              "offset": 918
-                            },
                             "end": {
-                              "line": 80,
                               "column": 22,
+                              "line": 80,
                               "offset": 936
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 80,
+                              "offset": 918
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 80,
-                          "column": 1,
-                          "offset": 915
-                        },
-                        "end": {
-                          "line": 80,
-                          "column": 22,
-                          "offset": 936
-                        }
-                      },
-                      "value": "1. Return \"{`%type`}\""
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -1135,37 +1189,37 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "Example:",
+                      "position": {
+                        "end": {
+                          "column": 9,
+                          "line": 82,
+                          "offset": 946
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 82,
+                          "offset": 938
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Example:",
                           "position": {
-                            "start": {
-                              "line": 82,
-                              "column": 1,
-                              "offset": 938
-                            },
                             "end": {
-                              "line": 82,
                               "column": 9,
+                              "line": 82,
                               "offset": 946
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 82,
+                              "offset": 938
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 82,
-                          "column": 1,
-                          "offset": 938
-                        },
-                        "end": {
-                          "line": 82,
-                          "column": 9,
-                          "offset": 946
-                        }
-                      },
-                      "value": "Example:"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -1179,15 +1233,15 @@
                       "meta": null,
                       "value": "```\nA Text\n```",
                       "position": {
-                        "start": {
-                          "line": 84,
-                          "column": 1,
-                          "offset": 948
-                        },
                         "end": {
-                          "line": 86,
                           "column": 4,
+                          "line": 86,
                           "offset": 962
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 84,
+                          "offset": 948
                         }
                       }
                     },
@@ -1196,25 +1250,25 @@
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "kind": "Declaration",
-                  "position": {
-                    "start": {
-                      "line": 76,
-                      "column": 1,
-                      "offset": 874
-                    },
-                    "end": {
-                      "line": 76,
-                      "column": 25,
-                      "offset": 898
-                    }
-                  }
+                  ]
                 },
                 {
                   "construct": "SectionBlock",
+                  "kind": "Declaration",
                   "name": "Block",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 24,
+                      "line": 88,
+                      "offset": 987
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 88,
+                      "offset": 964
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -1224,54 +1278,54 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "**Procedure**",
+                      "position": {
+                        "end": {
+                          "column": 14,
+                          "line": 90,
+                          "offset": 1002
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 90,
+                          "offset": 989
+                        }
+                      },
                       "children": [
                         {
                           "type": "strong",
+                          "position": {
+                            "end": {
+                              "column": 14,
+                              "line": 90,
+                              "offset": 1002
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 90,
+                              "offset": 989
+                            }
+                          },
                           "children": [
                             {
                               "type": "text",
                               "value": "Procedure",
                               "position": {
-                                "start": {
-                                  "line": 90,
-                                  "column": 3,
-                                  "offset": 991
-                                },
                                 "end": {
-                                  "line": 90,
                                   "column": 12,
+                                  "line": 90,
                                   "offset": 1000
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 90,
+                                  "offset": 991
                                 }
                               }
                             }
-                          ],
-                          "position": {
-                            "start": {
-                              "line": 90,
-                              "column": 1,
-                              "offset": 989
-                            },
-                            "end": {
-                              "line": 90,
-                              "column": 14,
-                              "offset": 1002
-                            }
-                          }
+                          ]
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 90,
-                          "column": 1,
-                          "offset": 989
-                        },
-                        "end": {
-                          "line": 90,
-                          "column": 14,
-                          "offset": 1002
-                        }
-                      },
-                      "value": "**Procedure**"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -1282,39 +1336,39 @@
                       "construct": "NaturalBlock",
                       "type": "list",
                       "ordered": true,
-                      "start": 1,
                       "spread": false,
+                      "start": 1,
+                      "value": "1. Return \"\"\"\n   **ValueType:** {`%type`}\n   **Description:** A single {`%type`} value\n   \"\"\"",
+                      "position": {
+                        "end": {
+                          "column": 7,
+                          "line": 95,
+                          "offset": 1097
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 92,
+                          "offset": 1004
+                        }
+                      },
                       "children": [
                         {
                           "construct": "NaturalBlock",
                           "value": "Return \"\"\"\n   **ValueType:** {`%type`}\n   **Description:** A single {`%type`} value\n   \"\"\"",
                           "position": {
-                            "start": {
-                              "line": 92,
-                              "column": 4,
-                              "offset": 1007
-                            },
                             "end": {
-                              "line": 95,
                               "column": 7,
+                              "line": 95,
                               "offset": 1097
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 92,
+                              "offset": 1007
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 92,
-                          "column": 1,
-                          "offset": 1004
-                        },
-                        "end": {
-                          "line": 95,
-                          "column": 7,
-                          "offset": 1097
-                        }
-                      },
-                      "value": "1. Return \"\"\"\n   **ValueType:** {`%type`}\n   **Description:** A single {`%type`} value\n   \"\"\""
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -1324,37 +1378,37 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "Example:",
+                      "position": {
+                        "end": {
+                          "column": 9,
+                          "line": 97,
+                          "offset": 1107
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 97,
+                          "offset": 1099
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Example:",
                           "position": {
-                            "start": {
-                              "line": 97,
-                              "column": 1,
-                              "offset": 1099
-                            },
                             "end": {
-                              "line": 97,
                               "column": 9,
+                              "line": 97,
                               "offset": 1107
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 97,
+                              "offset": 1099
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 97,
-                          "column": 1,
-                          "offset": 1099
-                        },
-                        "end": {
-                          "line": 97,
-                          "column": 9,
-                          "offset": 1107
-                        }
-                      },
-                      "value": "Example:"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -1368,15 +1422,15 @@
                       "meta": null,
                       "value": "```md\n**ValueType:** Text\n**Description:** A single Text value\n```",
                       "position": {
-                        "start": {
-                          "line": 99,
-                          "column": 1,
-                          "offset": 1109
-                        },
                         "end": {
-                          "line": 102,
                           "column": 4,
+                          "line": 102,
                           "offset": 1175
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 99,
+                          "offset": 1109
                         }
                       }
                     },
@@ -1385,25 +1439,24 @@
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "kind": "Declaration",
-                  "position": {
-                    "start": {
-                      "line": 88,
-                      "column": 1,
-                      "offset": 964
-                    },
-                    "end": {
-                      "line": 88,
-                      "column": 24,
-                      "offset": 987
-                    }
-                  }
+                  ]
                 },
                 {
                   "construct": "SectionBlock",
                   "name": "Interpretation",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 20,
+                      "line": 104,
+                      "offset": 1196
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 104,
+                      "offset": 1177
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -1413,54 +1466,54 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "**Procedure**",
+                      "position": {
+                        "end": {
+                          "column": 14,
+                          "line": 106,
+                          "offset": 1211
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 106,
+                          "offset": 1198
+                        }
+                      },
                       "children": [
                         {
                           "type": "strong",
+                          "position": {
+                            "end": {
+                              "column": 14,
+                              "line": 106,
+                              "offset": 1211
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 106,
+                              "offset": 1198
+                            }
+                          },
                           "children": [
                             {
                               "type": "text",
                               "value": "Procedure",
                               "position": {
-                                "start": {
-                                  "line": 106,
-                                  "column": 3,
-                                  "offset": 1200
-                                },
                                 "end": {
-                                  "line": 106,
                                   "column": 12,
+                                  "line": 106,
                                   "offset": 1209
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 106,
+                                  "offset": 1200
                                 }
                               }
                             }
-                          ],
-                          "position": {
-                            "start": {
-                              "line": 106,
-                              "column": 1,
-                              "offset": 1198
-                            },
-                            "end": {
-                              "line": 106,
-                              "column": 14,
-                              "offset": 1211
-                            }
-                          }
+                          ]
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 106,
-                          "column": 1,
-                          "offset": 1198
-                        },
-                        "end": {
-                          "line": 106,
-                          "column": 14,
-                          "offset": 1211
-                        }
-                      },
-                      "value": "**Procedure**"
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -1471,100 +1524,47 @@
                       "construct": "NaturalBlock",
                       "type": "list",
                       "ordered": true,
-                      "start": 1,
                       "spread": false,
+                      "start": 1,
+                      "value": "1. Interpret the `%value` as the type specified by `%type`.",
+                      "position": {
+                        "end": {
+                          "column": 60,
+                          "line": 108,
+                          "offset": 1272
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 108,
+                          "offset": 1213
+                        }
+                      },
                       "children": [
                         {
                           "construct": "NaturalBlock",
                           "value": "Interpret the `%value` as the type specified by `%type`.",
                           "position": {
-                            "start": {
-                              "line": 108,
-                              "column": 4,
-                              "offset": 1216
-                            },
                             "end": {
-                              "line": 108,
                               "column": 60,
+                              "line": 108,
                               "offset": 1272
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 108,
+                              "offset": 1216
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 108,
-                          "column": 1,
-                          "offset": 1213
-                        },
-                        "end": {
-                          "line": 108,
-                          "column": 60,
-                          "offset": 1272
-                        }
-                      },
-                      "value": "1. Interpret the `%value` as the type specified by `%type`."
+                      ]
                     }
-                  ],
-                  "depth": 4,
-                  "position": {
-                    "start": {
-                      "line": 104,
-                      "column": 1,
-                      "offset": 1177
-                    },
-                    "end": {
-                      "line": 104,
-                      "column": 20,
-                      "offset": 1196
-                    }
-                  }
+                  ]
                 }
-              ],
-              "depth": 3,
-              "kind": "Primitive",
-              "position": {
-                "start": {
-                  "line": 22,
-                  "column": 1,
-                  "offset": 268
-                },
-                "end": {
-                  "line": 22,
-                  "column": 22,
-                  "offset": 289
-                }
-              }
+              ]
             }
-          ],
-          "depth": 2,
-          "position": {
-            "start": {
-              "line": 7,
-              "column": 1,
-              "offset": 102
-            },
-            "end": {
-              "line": 7,
-              "column": 12,
-              "offset": 113
-            }
-          }
+          ]
         }
-      ],
-      "depth": 1,
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 9,
-          "offset": 8
-        }
-      }
+      ]
     }
   ]
 }

@@ -3,7 +3,21 @@
   "children": [
     {
       "construct": "SectionBlock",
+      "kind": "Architecture",
       "name": "Artificial",
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 27,
+          "line": 1,
+          "offset": 26
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
       "children": [
         {
           "construct": "NaturalBlock",
@@ -13,6 +27,19 @@
         {
           "construct": "SectionBlock",
           "name": "Milestone One",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 17,
+              "line": 3,
+              "offset": 44
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 28
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -22,37 +49,37 @@
             {
               "construct": "NaturalBlock",
               "type": "paragraph",
+              "value": "Milestone One focuses on generating agent instructions from domain sources.",
+              "position": {
+                "end": {
+                  "column": 76,
+                  "line": 5,
+                  "offset": 121
+                },
+                "start": {
+                  "column": 1,
+                  "line": 5,
+                  "offset": 46
+                }
+              },
               "children": [
                 {
                   "type": "text",
                   "value": "Milestone One focuses on generating agent instructions from domain sources.",
                   "position": {
-                    "start": {
-                      "line": 5,
-                      "column": 1,
-                      "offset": 46
-                    },
                     "end": {
-                      "line": 5,
                       "column": 76,
+                      "line": 5,
                       "offset": 121
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 5,
+                      "offset": 46
                     }
                   }
                 }
-              ],
-              "position": {
-                "start": {
-                  "line": 5,
-                  "column": 1,
-                  "offset": 46
-                },
-                "end": {
-                  "line": 5,
-                  "column": 76,
-                  "offset": 121
-                }
-              },
-              "value": "Milestone One focuses on generating agent instructions from domain sources."
+              ]
             },
             {
               "construct": "NaturalBlock",
@@ -62,37 +89,37 @@
             {
               "construct": "NaturalBlock",
               "type": "paragraph",
+              "value": "The first implementation establishes the complete path from Art source to targeted agent context: defining domain resources in a distributable package, installing that package into a project, bootstrapping the domain, and compiling its resources into the projections required by different agents.",
+              "position": {
+                "end": {
+                  "column": 297,
+                  "line": 7,
+                  "offset": 419
+                },
+                "start": {
+                  "column": 1,
+                  "line": 7,
+                  "offset": 123
+                }
+              },
               "children": [
                 {
                   "type": "text",
                   "value": "The first implementation establishes the complete path from Art source to targeted agent context: defining domain resources in a distributable package, installing that package into a project, bootstrapping the domain, and compiling its resources into the projections required by different agents.",
                   "position": {
-                    "start": {
-                      "line": 7,
-                      "column": 1,
-                      "offset": 123
-                    },
                     "end": {
-                      "line": 7,
                       "column": 297,
+                      "line": 7,
                       "offset": 419
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 7,
+                      "offset": 123
                     }
                   }
                 }
-              ],
-              "position": {
-                "start": {
-                  "line": 7,
-                  "column": 1,
-                  "offset": 123
-                },
-                "end": {
-                  "line": 7,
-                  "column": 297,
-                  "offset": 419
-                }
-              },
-              "value": "The first implementation establishes the complete path from Art source to targeted agent context: defining domain resources in a distributable package, installing that package into a project, bootstrapping the domain, and compiling its resources into the projections required by different agents."
+              ]
             },
             {
               "construct": "NaturalBlock",
@@ -102,37 +129,37 @@
             {
               "construct": "NaturalBlock",
               "type": "paragraph",
+              "value": "A domain package provides the resources and supporting infrastructure required to use the domain in a project. Installation bootstraps the project with the domain's essential Art instructions, skills, agent modes, and domain resources such as templates and routines.",
+              "position": {
+                "end": {
+                  "column": 267,
+                  "line": 9,
+                  "offset": 687
+                },
+                "start": {
+                  "column": 1,
+                  "line": 9,
+                  "offset": 421
+                }
+              },
               "children": [
                 {
                   "type": "text",
                   "value": "A domain package provides the resources and supporting infrastructure required to use the domain in a project. Installation bootstraps the project with the domain's essential Art instructions, skills, agent modes, and domain resources such as templates and routines.",
                   "position": {
-                    "start": {
-                      "line": 9,
-                      "column": 1,
-                      "offset": 421
-                    },
                     "end": {
-                      "line": 9,
                       "column": 267,
+                      "line": 9,
                       "offset": 687
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 9,
+                      "offset": 421
                     }
                   }
                 }
-              ],
-              "position": {
-                "start": {
-                  "line": 9,
-                  "column": 1,
-                  "offset": 421
-                },
-                "end": {
-                  "line": 9,
-                  "column": 267,
-                  "offset": 687
-                }
-              },
-              "value": "A domain package provides the resources and supporting infrastructure required to use the domain in a project. Installation bootstraps the project with the domain's essential Art instructions, skills, agent modes, and domain resources such as templates and routines."
+              ]
             },
             {
               "construct": "NaturalBlock",
@@ -142,61 +169,61 @@
             {
               "construct": "NaturalBlock",
               "type": "paragraph",
+              "value": "The initial milestone therefore validates the core model rather than attempting to solve every possible Art compilation target: a domain can be packaged, installed, interpreted, and compiled into useful, use-case-specific agent instructions from a single source of truth.",
+              "position": {
+                "end": {
+                  "column": 272,
+                  "line": 11,
+                  "offset": 960
+                },
+                "start": {
+                  "column": 1,
+                  "line": 11,
+                  "offset": 689
+                }
+              },
               "children": [
                 {
                   "type": "text",
                   "value": "The initial milestone therefore validates the core model rather than attempting to solve every possible Art compilation target: a domain can be packaged, installed, interpreted, and compiled into useful, use-case-specific agent instructions from a single source of truth.",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 1,
-                      "offset": 689
-                    },
                     "end": {
-                      "line": 11,
                       "column": 272,
+                      "line": 11,
                       "offset": 960
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 11,
+                      "offset": 689
                     }
                   }
                 }
-              ],
-              "position": {
-                "start": {
-                  "line": 11,
-                  "column": 1,
-                  "offset": 689
-                },
-                "end": {
-                  "line": 11,
-                  "column": 272,
-                  "offset": 960
-                }
-              },
-              "value": "The initial milestone therefore validates the core model rather than attempting to solve every possible Art compilation target: a domain can be packaged, installed, interpreted, and compiled into useful, use-case-specific agent instructions from a single source of truth."
+              ]
             },
             {
               "construct": "NaturalBlock",
               "type": "text",
               "value": "\n\n"
             }
-          ],
-          "depth": 2,
-          "position": {
-            "start": {
-              "line": 3,
-              "column": 1,
-              "offset": 28
-            },
-            "end": {
-              "line": 3,
-              "column": 17,
-              "offset": 44
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
           "name": "Definitions",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 15,
+              "line": 13,
+              "offset": 976
+            },
+            "start": {
+              "column": 1,
+              "line": 13,
+              "offset": 962
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -206,6 +233,19 @@
             {
               "construct": "SectionBlock",
               "name": "Domain Projections",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 23,
+                  "line": 15,
+                  "offset": 1000
+                },
+                "start": {
+                  "column": 1,
+                  "line": 15,
+                  "offset": 978
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -215,37 +255,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The main goal of the projection system is to make the same domain knowledge usable by different consumers without requiring each consumer to receive the entire domain.",
+                  "position": {
+                    "end": {
+                      "column": 168,
+                      "line": 17,
+                      "offset": 1169
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 17,
+                      "offset": 1002
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The main goal of the projection system is to make the same domain knowledge usable by different consumers without requiring each consumer to receive the entire domain.",
                       "position": {
-                        "start": {
-                          "line": 17,
-                          "column": 1,
-                          "offset": 1002
-                        },
                         "end": {
-                          "line": 17,
                           "column": 168,
+                          "line": 17,
                           "offset": 1169
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 17,
+                          "offset": 1002
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 17,
-                      "column": 1,
-                      "offset": 1002
-                    },
-                    "end": {
-                      "line": 17,
-                      "column": 168,
-                      "offset": 1169
-                    }
-                  },
-                  "value": "The main goal of the projection system is to make the same domain knowledge usable by different consumers without requiring each consumer to receive the entire domain."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -255,86 +295,86 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The compiler produces a set of per-use-case **projections** — compiled representations of a domain tailored to a particular consumer. Projections are committed to git rather than generated at consumption time. Because compilation is deterministic, the same source and configuration always produce the same projections, making generated context diffable, reviewable, and reproducible.",
+                  "position": {
+                    "end": {
+                      "column": 384,
+                      "line": 19,
+                      "offset": 1554
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 19,
+                      "offset": 1171
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The compiler produces a set of per-use-case ",
                       "position": {
-                        "start": {
-                          "line": 19,
-                          "column": 1,
-                          "offset": 1171
-                        },
                         "end": {
-                          "line": 19,
                           "column": 45,
+                          "line": 19,
                           "offset": 1215
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 19,
+                          "offset": 1171
                         }
                       }
                     },
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 60,
+                          "line": 19,
+                          "offset": 1230
+                        },
+                        "start": {
+                          "column": 45,
+                          "line": 19,
+                          "offset": 1215
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "projections",
                           "position": {
-                            "start": {
-                              "line": 19,
-                              "column": 47,
-                              "offset": 1217
-                            },
                             "end": {
-                              "line": 19,
                               "column": 58,
+                              "line": 19,
                               "offset": 1228
+                            },
+                            "start": {
+                              "column": 47,
+                              "line": 19,
+                              "offset": 1217
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 19,
-                          "column": 45,
-                          "offset": 1215
-                        },
-                        "end": {
-                          "line": 19,
-                          "column": 60,
-                          "offset": 1230
-                        }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
                       "value": " — compiled representations of a domain tailored to a particular consumer. Projections are committed to git rather than generated at consumption time. Because compilation is deterministic, the same source and configuration always produce the same projections, making generated context diffable, reviewable, and reproducible.",
                       "position": {
-                        "start": {
-                          "line": 19,
-                          "column": 60,
-                          "offset": 1230
-                        },
                         "end": {
-                          "line": 19,
                           "column": 384,
+                          "line": 19,
                           "offset": 1554
+                        },
+                        "start": {
+                          "column": 60,
+                          "line": 19,
+                          "offset": 1230
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 19,
-                      "column": 1,
-                      "offset": 1171
-                    },
-                    "end": {
-                      "line": 19,
-                      "column": 384,
-                      "offset": 1554
-                    }
-                  },
-                  "value": "The compiler produces a set of per-use-case **projections** — compiled representations of a domain tailored to a particular consumer. Projections are committed to git rather than generated at consumption time. Because compilation is deterministic, the same source and configuration always produce the same projections, making generated context diffable, reviewable, and reproducible."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -344,37 +384,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Tags attached to resource declarations provide the primary projection mechanism. Tags identify the projections for which a declaration is relevant and can determine whether a declaration is included, excluded, or transformed. Projection rules can therefore express both simple membership and consumer-specific representations of the same underlying resource.",
+                  "position": {
+                    "end": {
+                      "column": 359,
+                      "line": 21,
+                      "offset": 1914
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 21,
+                      "offset": 1556
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Tags attached to resource declarations provide the primary projection mechanism. Tags identify the projections for which a declaration is relevant and can determine whether a declaration is included, excluded, or transformed. Projection rules can therefore express both simple membership and consumer-specific representations of the same underlying resource.",
                       "position": {
-                        "start": {
-                          "line": 21,
-                          "column": 1,
-                          "offset": 1556
-                        },
                         "end": {
-                          "line": 21,
                           "column": 359,
+                          "line": 21,
                           "offset": 1914
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 21,
+                          "offset": 1556
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 21,
-                      "column": 1,
-                      "offset": 1556
-                    },
-                    "end": {
-                      "line": 21,
-                      "column": 359,
-                      "offset": 1914
-                    }
-                  },
-                  "value": "Tags attached to resource declarations provide the primary projection mechanism. Tags identify the projections for which a declaration is relevant and can determine whether a declaration is included, excluded, or transformed. Projection rules can therefore express both simple membership and consumer-specific representations of the same underlying resource."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -384,37 +424,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The initial projections are:",
+                  "position": {
+                    "end": {
+                      "column": 29,
+                      "line": 23,
+                      "offset": 1944
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 23,
+                      "offset": 1916
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The initial projections are:",
                       "position": {
-                        "start": {
-                          "line": 23,
-                          "column": 1,
-                          "offset": 1916
-                        },
                         "end": {
-                          "line": 23,
                           "column": 29,
+                          "line": 23,
                           "offset": 1944
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 23,
+                          "offset": 1916
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 23,
-                      "column": 1,
-                      "offset": 1916
-                    },
-                    "end": {
-                      "line": 23,
-                      "column": 29,
-                      "offset": 1944
-                    }
-                  },
-                  "value": "The initial projections are:"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -425,22 +465,35 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- **Author** — complete knowledge required to create and modify Art sources.\n- **Generator** — knowledge required to consume Art sources and generate derived resources.\n- **Operator** — the minimum knowledge required to execute domain operations and make controlled modifications.\n- **Indexer** — a compact representation of the domain surface for general-purpose discovery, querying, and lightweight maintenance.",
+                  "position": {
+                    "end": {
+                      "column": 133,
+                      "line": 28,
+                      "offset": 2359
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 25,
+                      "offset": 1946
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "**Author** — complete knowledge required to create and modify Art sources.",
                       "position": {
-                        "start": {
-                          "line": 25,
-                          "column": 3,
-                          "offset": 1948
-                        },
                         "end": {
-                          "line": 25,
                           "column": 77,
+                          "line": 25,
                           "offset": 2022
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 25,
+                          "offset": 1948
                         }
                       }
                     },
@@ -448,15 +501,15 @@
                       "construct": "NaturalBlock",
                       "value": "**Generator** — knowledge required to consume Art sources and generate derived resources.",
                       "position": {
-                        "start": {
-                          "line": 26,
-                          "column": 3,
-                          "offset": 2025
-                        },
                         "end": {
-                          "line": 26,
                           "column": 92,
+                          "line": 26,
                           "offset": 2114
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 26,
+                          "offset": 2025
                         }
                       }
                     },
@@ -464,15 +517,15 @@
                       "construct": "NaturalBlock",
                       "value": "**Operator** — the minimum knowledge required to execute domain operations and make controlled modifications.",
                       "position": {
-                        "start": {
-                          "line": 27,
-                          "column": 3,
-                          "offset": 2117
-                        },
                         "end": {
-                          "line": 27,
                           "column": 112,
+                          "line": 27,
                           "offset": 2226
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 27,
+                          "offset": 2117
                         }
                       }
                     },
@@ -480,32 +533,19 @@
                       "construct": "NaturalBlock",
                       "value": "**Indexer** — a compact representation of the domain surface for general-purpose discovery, querying, and lightweight maintenance.",
                       "position": {
-                        "start": {
-                          "line": 28,
-                          "column": 3,
-                          "offset": 2229
-                        },
                         "end": {
-                          "line": 28,
                           "column": 133,
+                          "line": 28,
                           "offset": 2359
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 28,
+                          "offset": 2229
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 25,
-                      "column": 1,
-                      "offset": 1946
-                    },
-                    "end": {
-                      "line": 28,
-                      "column": 133,
-                      "offset": 2359
-                    }
-                  },
-                  "value": "- **Author** — complete knowledge required to create and modify Art sources.\n- **Generator** — knowledge required to consume Art sources and generate derived resources.\n- **Operator** — the minimum knowledge required to execute domain operations and make controlled modifications.\n- **Indexer** — a compact representation of the domain surface for general-purpose discovery, querying, and lightweight maintenance."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -515,61 +555,61 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Projections are not separate sources of truth. They are deterministic views of the same domain sources, compiled according to the needs and permissions of their consumers.",
+                  "position": {
+                    "end": {
+                      "column": 172,
+                      "line": 30,
+                      "offset": 2532
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 30,
+                      "offset": 2361
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Projections are not separate sources of truth. They are deterministic views of the same domain sources, compiled according to the needs and permissions of their consumers.",
                       "position": {
-                        "start": {
-                          "line": 30,
-                          "column": 1,
-                          "offset": 2361
-                        },
                         "end": {
-                          "line": 30,
                           "column": 172,
+                          "line": 30,
                           "offset": 2532
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 30,
+                          "offset": 2361
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 30,
-                      "column": 1,
-                      "offset": 2361
-                    },
-                    "end": {
-                      "line": 30,
-                      "column": 172,
-                      "offset": 2532
-                    }
-                  },
-                  "value": "Projections are not separate sources of truth. They are deterministic views of the same domain sources, compiled according to the needs and permissions of their consumers."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
                   "type": "text",
                   "value": "\n\n"
                 }
-              ],
-              "depth": 3,
-              "position": {
-                "start": {
-                  "line": 15,
-                  "column": 1,
-                  "offset": 978
-                },
-                "end": {
-                  "line": 15,
-                  "column": 23,
-                  "offset": 1000
-                }
-              }
+              ]
             },
             {
               "construct": "SectionBlock",
               "name": "Domains",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 12,
+                  "line": 32,
+                  "offset": 2545
+                },
+                "start": {
+                  "column": 1,
+                  "line": 32,
+                  "offset": 2534
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -579,20 +619,33 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "A domain is a self-contained area of knowledge and operations — a collection of art sources declaring structures, types, routines, commands, and vocabulary. A domain is the unit of targeting and packaging: the compiler compiles each declared domain into one projection per use case, and a domain can be packaged as a reusable artifact (e.g. `@artificial/tasks`).",
+                  "position": {
+                    "end": {
+                      "column": 363,
+                      "line": 34,
+                      "offset": 2909
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 34,
+                      "offset": 2547
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "A domain is a self-contained area of knowledge and operations — a collection of art sources declaring structures, types, routines, commands, and vocabulary. A domain is the unit of targeting and packaging: the compiler compiles each declared domain into one projection per use case, and a domain can be packaged as a reusable artifact (e.g. ",
                       "position": {
-                        "start": {
-                          "line": 34,
-                          "column": 1,
-                          "offset": 2547
-                        },
                         "end": {
-                          "line": 34,
                           "column": 342,
+                          "line": 34,
                           "offset": 2888
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 34,
+                          "offset": 2547
                         }
                       }
                     },
@@ -600,15 +653,15 @@
                       "type": "inlineCode",
                       "value": "@artificial/tasks",
                       "position": {
-                        "start": {
-                          "line": 34,
-                          "column": 342,
-                          "offset": 2888
-                        },
                         "end": {
-                          "line": 34,
                           "column": 361,
+                          "line": 34,
                           "offset": 2907
+                        },
+                        "start": {
+                          "column": 342,
+                          "line": 34,
+                          "offset": 2888
                         }
                       }
                     },
@@ -616,56 +669,43 @@
                       "type": "text",
                       "value": ").",
                       "position": {
-                        "start": {
-                          "line": 34,
-                          "column": 361,
-                          "offset": 2907
-                        },
                         "end": {
-                          "line": 34,
                           "column": 363,
+                          "line": 34,
                           "offset": 2909
+                        },
+                        "start": {
+                          "column": 361,
+                          "line": 34,
+                          "offset": 2907
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 34,
-                      "column": 1,
-                      "offset": 2547
-                    },
-                    "end": {
-                      "line": 34,
-                      "column": 363,
-                      "offset": 2909
-                    }
-                  },
-                  "value": "A domain is a self-contained area of knowledge and operations — a collection of art sources declaring structures, types, routines, commands, and vocabulary. A domain is the unit of targeting and packaging: the compiler compiles each declared domain into one projection per use case, and a domain can be packaged as a reusable artifact (e.g. `@artificial/tasks`)."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
                   "type": "text",
                   "value": "\n\n"
                 }
-              ],
-              "depth": 3,
-              "position": {
-                "start": {
-                  "line": 32,
-                  "column": 1,
-                  "offset": 2534
-                },
-                "end": {
-                  "line": 32,
-                  "column": 12,
-                  "offset": 2545
-                }
-              }
+              ]
             },
             {
               "construct": "SectionBlock",
               "name": "Source Code",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 16,
+                  "line": 36,
+                  "offset": 2926
+                },
+                "start": {
+                  "column": 1,
+                  "line": 36,
+                  "offset": 2911
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -675,20 +715,33 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Art files (`.art`) are the source of truth for declarations: structures, types, routines, commands, and vocabulary. Any markdown file is a valid `.art` file; files not authored in art require more inference to read correctly.",
+                  "position": {
+                    "end": {
+                      "column": 226,
+                      "line": 38,
+                      "offset": 3153
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 38,
+                      "offset": 2928
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Art files (",
                       "position": {
-                        "start": {
-                          "line": 38,
-                          "column": 1,
-                          "offset": 2928
-                        },
                         "end": {
-                          "line": 38,
                           "column": 12,
+                          "line": 38,
                           "offset": 2939
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 38,
+                          "offset": 2928
                         }
                       }
                     },
@@ -696,15 +749,15 @@
                       "type": "inlineCode",
                       "value": ".art",
                       "position": {
-                        "start": {
-                          "line": 38,
-                          "column": 12,
-                          "offset": 2939
-                        },
                         "end": {
-                          "line": 38,
                           "column": 18,
+                          "line": 38,
                           "offset": 2945
+                        },
+                        "start": {
+                          "column": 12,
+                          "line": 38,
+                          "offset": 2939
                         }
                       }
                     },
@@ -712,15 +765,15 @@
                       "type": "text",
                       "value": ") are the source of truth for declarations: structures, types, routines, commands, and vocabulary. Any markdown file is a valid ",
                       "position": {
-                        "start": {
-                          "line": 38,
-                          "column": 18,
-                          "offset": 2945
-                        },
                         "end": {
-                          "line": 38,
                           "column": 146,
+                          "line": 38,
                           "offset": 3073
+                        },
+                        "start": {
+                          "column": 18,
+                          "line": 38,
+                          "offset": 2945
                         }
                       }
                     },
@@ -728,15 +781,15 @@
                       "type": "inlineCode",
                       "value": ".art",
                       "position": {
-                        "start": {
-                          "line": 38,
-                          "column": 146,
-                          "offset": 3073
-                        },
                         "end": {
-                          "line": 38,
                           "column": 152,
+                          "line": 38,
                           "offset": 3079
+                        },
+                        "start": {
+                          "column": 146,
+                          "line": 38,
+                          "offset": 3073
                         }
                       }
                     },
@@ -744,32 +797,19 @@
                       "type": "text",
                       "value": " file; files not authored in art require more inference to read correctly.",
                       "position": {
-                        "start": {
-                          "line": 38,
-                          "column": 152,
-                          "offset": 3079
-                        },
                         "end": {
-                          "line": 38,
                           "column": 226,
+                          "line": 38,
                           "offset": 3153
+                        },
+                        "start": {
+                          "column": 152,
+                          "line": 38,
+                          "offset": 3079
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 38,
-                      "column": 1,
-                      "offset": 2928
-                    },
-                    "end": {
-                      "line": 38,
-                      "column": 226,
-                      "offset": 3153
-                    }
-                  },
-                  "value": "Art files (`.art`) are the source of truth for declarations: structures, types, routines, commands, and vocabulary. Any markdown file is a valid `.art` file; files not authored in art require more inference to read correctly."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -779,20 +819,33 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "A declaration is a resource: a markdown heading of the form `# Kind: Name` declares a resource of that kind with that name. The declaration form is fixed by the language — closed syntax — while the meaning of each kind is defined by the domain's structures — open semantics.",
+                  "position": {
+                    "end": {
+                      "column": 275,
+                      "line": 40,
+                      "offset": 3429
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 40,
+                      "offset": 3155
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "A declaration is a resource: a markdown heading of the form ",
                       "position": {
-                        "start": {
-                          "line": 40,
-                          "column": 1,
-                          "offset": 3155
-                        },
                         "end": {
-                          "line": 40,
                           "column": 61,
+                          "line": 40,
                           "offset": 3215
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 40,
+                          "offset": 3155
                         }
                       }
                     },
@@ -800,15 +853,15 @@
                       "type": "inlineCode",
                       "value": "# Kind: Name",
                       "position": {
-                        "start": {
-                          "line": 40,
-                          "column": 61,
-                          "offset": 3215
-                        },
                         "end": {
-                          "line": 40,
                           "column": 75,
+                          "line": 40,
                           "offset": 3229
+                        },
+                        "start": {
+                          "column": 61,
+                          "line": 40,
+                          "offset": 3215
                         }
                       }
                     },
@@ -816,32 +869,19 @@
                       "type": "text",
                       "value": " declares a resource of that kind with that name. The declaration form is fixed by the language — closed syntax — while the meaning of each kind is defined by the domain's structures — open semantics.",
                       "position": {
-                        "start": {
-                          "line": 40,
-                          "column": 75,
-                          "offset": 3229
-                        },
                         "end": {
-                          "line": 40,
                           "column": 275,
+                          "line": 40,
                           "offset": 3429
+                        },
+                        "start": {
+                          "column": 75,
+                          "line": 40,
+                          "offset": 3229
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 40,
-                      "column": 1,
-                      "offset": 3155
-                    },
-                    "end": {
-                      "line": 40,
-                      "column": 275,
-                      "offset": 3429
-                    }
-                  },
-                  "value": "A declaration is a resource: a markdown heading of the form `# Kind: Name` declares a resource of that kind with that name. The declaration form is fixed by the language — closed syntax — while the meaning of each kind is defined by the domain's structures — open semantics."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -851,20 +891,33 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Template files (`.tart`) are renderers that turn records into outputs. `.tart` files are typically compiled into markdown by the domain Generator, so agents mostly encounter the baked `.md` output rather than the `.tart` template itself.",
+                  "position": {
+                    "end": {
+                      "column": 238,
+                      "line": 42,
+                      "offset": 3668
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 42,
+                      "offset": 3431
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Template files (",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 1,
-                          "offset": 3431
-                        },
                         "end": {
-                          "line": 42,
                           "column": 17,
+                          "line": 42,
                           "offset": 3447
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 42,
+                          "offset": 3431
                         }
                       }
                     },
@@ -872,15 +925,15 @@
                       "type": "inlineCode",
                       "value": ".tart",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 17,
-                          "offset": 3447
-                        },
                         "end": {
-                          "line": 42,
                           "column": 24,
+                          "line": 42,
                           "offset": 3454
+                        },
+                        "start": {
+                          "column": 17,
+                          "line": 42,
+                          "offset": 3447
                         }
                       }
                     },
@@ -888,15 +941,15 @@
                       "type": "text",
                       "value": ") are renderers that turn records into outputs. ",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 24,
-                          "offset": 3454
-                        },
                         "end": {
-                          "line": 42,
                           "column": 72,
+                          "line": 42,
                           "offset": 3502
+                        },
+                        "start": {
+                          "column": 24,
+                          "line": 42,
+                          "offset": 3454
                         }
                       }
                     },
@@ -904,15 +957,15 @@
                       "type": "inlineCode",
                       "value": ".tart",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 72,
-                          "offset": 3502
-                        },
                         "end": {
-                          "line": 42,
                           "column": 79,
+                          "line": 42,
                           "offset": 3509
+                        },
+                        "start": {
+                          "column": 72,
+                          "line": 42,
+                          "offset": 3502
                         }
                       }
                     },
@@ -920,15 +973,15 @@
                       "type": "text",
                       "value": " files are typically compiled into markdown by the domain Generator, so agents mostly encounter the baked ",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 79,
-                          "offset": 3509
-                        },
                         "end": {
-                          "line": 42,
                           "column": 185,
+                          "line": 42,
                           "offset": 3615
+                        },
+                        "start": {
+                          "column": 79,
+                          "line": 42,
+                          "offset": 3509
                         }
                       }
                     },
@@ -936,15 +989,15 @@
                       "type": "inlineCode",
                       "value": ".md",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 185,
-                          "offset": 3615
-                        },
                         "end": {
-                          "line": 42,
                           "column": 190,
+                          "line": 42,
                           "offset": 3620
+                        },
+                        "start": {
+                          "column": 185,
+                          "line": 42,
+                          "offset": 3615
                         }
                       }
                     },
@@ -952,15 +1005,15 @@
                       "type": "text",
                       "value": " output rather than the ",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 190,
-                          "offset": 3620
-                        },
                         "end": {
-                          "line": 42,
                           "column": 214,
+                          "line": 42,
                           "offset": 3644
+                        },
+                        "start": {
+                          "column": 190,
+                          "line": 42,
+                          "offset": 3620
                         }
                       }
                     },
@@ -968,15 +1021,15 @@
                       "type": "inlineCode",
                       "value": ".tart",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 214,
-                          "offset": 3644
-                        },
                         "end": {
-                          "line": 42,
                           "column": 221,
+                          "line": 42,
                           "offset": 3651
+                        },
+                        "start": {
+                          "column": 214,
+                          "line": 42,
+                          "offset": 3644
                         }
                       }
                     },
@@ -984,56 +1037,43 @@
                       "type": "text",
                       "value": " template itself.",
                       "position": {
-                        "start": {
-                          "line": 42,
-                          "column": 221,
-                          "offset": 3651
-                        },
                         "end": {
-                          "line": 42,
                           "column": 238,
+                          "line": 42,
                           "offset": 3668
+                        },
+                        "start": {
+                          "column": 221,
+                          "line": 42,
+                          "offset": 3651
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 42,
-                      "column": 1,
-                      "offset": 3431
-                    },
-                    "end": {
-                      "line": 42,
-                      "column": 238,
-                      "offset": 3668
-                    }
-                  },
-                  "value": "Template files (`.tart`) are renderers that turn records into outputs. `.tart` files are typically compiled into markdown by the domain Generator, so agents mostly encounter the baked `.md` output rather than the `.tart` template itself."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
                   "type": "text",
                   "value": "\n\n"
                 }
-              ],
-              "depth": 3,
-              "position": {
-                "start": {
-                  "line": 36,
-                  "column": 1,
-                  "offset": 2911
-                },
-                "end": {
-                  "line": 36,
-                  "column": 16,
-                  "offset": 2926
-                }
-              }
+              ]
             },
             {
               "construct": "SectionBlock",
               "name": "Compiler",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 13,
+                  "line": 44,
+                  "offset": 3682
+                },
+                "start": {
+                  "column": 1,
+                  "line": 44,
+                  "offset": 3670
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -1043,135 +1083,135 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The compiler is **reactive** and works as a **pull system** — consumers pull compiled output from the sources they need, rather than having output pushed at them. An entry point selects what to compile; source changes propagate reactively to downstream consumers.",
+                  "position": {
+                    "end": {
+                      "column": 264,
+                      "line": 46,
+                      "offset": 3947
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 46,
+                      "offset": 3684
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The compiler is ",
                       "position": {
-                        "start": {
-                          "line": 46,
-                          "column": 1,
-                          "offset": 3684
-                        },
                         "end": {
-                          "line": 46,
                           "column": 17,
+                          "line": 46,
                           "offset": 3700
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 46,
+                          "offset": 3684
                         }
                       }
                     },
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 29,
+                          "line": 46,
+                          "offset": 3712
+                        },
+                        "start": {
+                          "column": 17,
+                          "line": 46,
+                          "offset": 3700
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "reactive",
                           "position": {
-                            "start": {
-                              "line": 46,
-                              "column": 19,
-                              "offset": 3702
-                            },
                             "end": {
-                              "line": 46,
                               "column": 27,
+                              "line": 46,
                               "offset": 3710
+                            },
+                            "start": {
+                              "column": 19,
+                              "line": 46,
+                              "offset": 3702
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 46,
-                          "column": 17,
-                          "offset": 3700
-                        },
-                        "end": {
-                          "line": 46,
-                          "column": 29,
-                          "offset": 3712
-                        }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
                       "value": " and works as a ",
                       "position": {
-                        "start": {
-                          "line": 46,
-                          "column": 29,
-                          "offset": 3712
-                        },
                         "end": {
-                          "line": 46,
                           "column": 45,
+                          "line": 46,
                           "offset": 3728
+                        },
+                        "start": {
+                          "column": 29,
+                          "line": 46,
+                          "offset": 3712
                         }
                       }
                     },
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 60,
+                          "line": 46,
+                          "offset": 3743
+                        },
+                        "start": {
+                          "column": 45,
+                          "line": 46,
+                          "offset": 3728
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "pull system",
                           "position": {
-                            "start": {
-                              "line": 46,
-                              "column": 47,
-                              "offset": 3730
-                            },
                             "end": {
-                              "line": 46,
                               "column": 58,
+                              "line": 46,
                               "offset": 3741
+                            },
+                            "start": {
+                              "column": 47,
+                              "line": 46,
+                              "offset": 3730
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 46,
-                          "column": 45,
-                          "offset": 3728
-                        },
-                        "end": {
-                          "line": 46,
-                          "column": 60,
-                          "offset": 3743
-                        }
-                      }
+                      ]
                     },
                     {
                       "type": "text",
                       "value": " — consumers pull compiled output from the sources they need, rather than having output pushed at them. An entry point selects what to compile; source changes propagate reactively to downstream consumers.",
                       "position": {
-                        "start": {
-                          "line": 46,
-                          "column": 60,
-                          "offset": 3743
-                        },
                         "end": {
-                          "line": 46,
                           "column": 264,
+                          "line": 46,
                           "offset": 3947
+                        },
+                        "start": {
+                          "column": 60,
+                          "line": 46,
+                          "offset": 3743
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 46,
-                      "column": 1,
-                      "offset": 3684
-                    },
-                    "end": {
-                      "line": 46,
-                      "column": 264,
-                      "offset": 3947
-                    }
-                  },
-                  "value": "The compiler is **reactive** and works as a **pull system** — consumers pull compiled output from the sources they need, rather than having output pushed at them. An entry point selects what to compile; source changes propagate reactively to downstream consumers."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1181,37 +1221,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Its responsibility is to transform Art sources into deterministic projections while remaining independent of the semantics of individual resource kinds. The parser understands the language's declaration syntax, but the meaning of a declaration belongs to the domain that defines its kind.",
+                  "position": {
+                    "end": {
+                      "column": 289,
+                      "line": 48,
+                      "offset": 4237
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 48,
+                      "offset": 3949
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Its responsibility is to transform Art sources into deterministic projections while remaining independent of the semantics of individual resource kinds. The parser understands the language's declaration syntax, but the meaning of a declaration belongs to the domain that defines its kind.",
                       "position": {
-                        "start": {
-                          "line": 48,
-                          "column": 1,
-                          "offset": 3949
-                        },
                         "end": {
-                          "line": 48,
                           "column": 289,
+                          "line": 48,
                           "offset": 4237
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 48,
+                          "offset": 3949
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 48,
-                      "column": 1,
-                      "offset": 3949
-                    },
-                    "end": {
-                      "line": 48,
-                      "column": 289,
-                      "offset": 4237
-                    }
-                  },
-                  "value": "Its responsibility is to transform Art sources into deterministic projections while remaining independent of the semantics of individual resource kinds. The parser understands the language's declaration syntax, but the meaning of a declaration belongs to the domain that defines its kind."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1221,37 +1261,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The compilation pipeline is:",
+                  "position": {
+                    "end": {
+                      "column": 29,
+                      "line": 50,
+                      "offset": 4267
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 50,
+                      "offset": 4239
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The compilation pipeline is:",
                       "position": {
-                        "start": {
-                          "line": 50,
-                          "column": 1,
-                          "offset": 4239
-                        },
                         "end": {
-                          "line": 50,
                           "column": 29,
+                          "line": 50,
                           "offset": 4267
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 50,
+                          "offset": 4239
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 50,
-                      "column": 1,
-                      "offset": 4239
-                    },
-                    "end": {
-                      "line": 50,
-                      "column": 29,
-                      "offset": 4267
-                    }
-                  },
-                  "value": "The compilation pipeline is:"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1262,22 +1302,35 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- **Parse** — read `.art` sources into structured records.\n- **Extract** — select the declarations relevant to the requested projection or compilation target.\n- **Transform** — apply projection tags, overloads, aggregations, and other transformations defined by the compilation configuration.\n- **Render** — format the resulting records as the target representation, such as sections, tables, lists, summaries, or other generated resources.",
+                  "position": {
+                    "end": {
+                      "column": 148,
+                      "line": 55,
+                      "offset": 4709
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 52,
+                      "offset": 4269
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "**Parse** — read `.art` sources into structured records.",
                       "position": {
-                        "start": {
-                          "line": 52,
-                          "column": 3,
-                          "offset": 4271
-                        },
                         "end": {
-                          "line": 52,
                           "column": 59,
+                          "line": 52,
                           "offset": 4327
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 52,
+                          "offset": 4271
                         }
                       }
                     },
@@ -1285,15 +1338,15 @@
                       "construct": "NaturalBlock",
                       "value": "**Extract** — select the declarations relevant to the requested projection or compilation target.",
                       "position": {
-                        "start": {
-                          "line": 53,
-                          "column": 3,
-                          "offset": 4330
-                        },
                         "end": {
-                          "line": 53,
                           "column": 100,
+                          "line": 53,
                           "offset": 4427
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 53,
+                          "offset": 4330
                         }
                       }
                     },
@@ -1301,15 +1354,15 @@
                       "construct": "NaturalBlock",
                       "value": "**Transform** — apply projection tags, overloads, aggregations, and other transformations defined by the compilation configuration.",
                       "position": {
-                        "start": {
-                          "line": 54,
-                          "column": 3,
-                          "offset": 4430
-                        },
                         "end": {
-                          "line": 54,
                           "column": 134,
+                          "line": 54,
                           "offset": 4561
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 54,
+                          "offset": 4430
                         }
                       }
                     },
@@ -1317,32 +1370,19 @@
                       "construct": "NaturalBlock",
                       "value": "**Render** — format the resulting records as the target representation, such as sections, tables, lists, summaries, or other generated resources.",
                       "position": {
-                        "start": {
-                          "line": 55,
-                          "column": 3,
-                          "offset": 4564
-                        },
                         "end": {
-                          "line": 55,
                           "column": 148,
+                          "line": 55,
                           "offset": 4709
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 55,
+                          "offset": 4564
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 52,
-                      "column": 1,
-                      "offset": 4269
-                    },
-                    "end": {
-                      "line": 55,
-                      "column": 148,
-                      "offset": 4709
-                    }
-                  },
-                  "value": "- **Parse** — read `.art` sources into structured records.\n- **Extract** — select the declarations relevant to the requested projection or compilation target.\n- **Transform** — apply projection tags, overloads, aggregations, and other transformations defined by the compilation configuration.\n- **Render** — format the resulting records as the target representation, such as sections, tables, lists, summaries, or other generated resources."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1352,37 +1392,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The parser is built on the unified ecosystem — micromark, the same foundation used by GFM and MDX. It is therefore kind-agnostic: it recognises the language-level declaration structure and captures resources generically without needing to understand what a particular kind means.",
+                  "position": {
+                    "end": {
+                      "column": 280,
+                      "line": 57,
+                      "offset": 4990
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 57,
+                      "offset": 4711
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The parser is built on the unified ecosystem — micromark, the same foundation used by GFM and MDX. It is therefore kind-agnostic: it recognises the language-level declaration structure and captures resources generically without needing to understand what a particular kind means.",
                       "position": {
-                        "start": {
-                          "line": 57,
-                          "column": 1,
-                          "offset": 4711
-                        },
                         "end": {
-                          "line": 57,
                           "column": 280,
+                          "line": 57,
                           "offset": 4990
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 57,
+                          "offset": 4711
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 57,
-                      "column": 1,
-                      "offset": 4711
-                    },
-                    "end": {
-                      "line": 57,
-                      "column": 280,
-                      "offset": 4990
-                    }
-                  },
-                  "value": "The parser is built on the unified ecosystem — micromark, the same foundation used by GFM and MDX. It is therefore kind-agnostic: it recognises the language-level declaration structure and captures resources generically without needing to understand what a particular kind means."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1392,20 +1432,33 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Configuration determines how compilation is performed. A project-level `.artificials.config.mts` declares namespaces, packages, domains, and projection targets, while build configuration maps targets and resource types to their output formats.",
+                  "position": {
+                    "end": {
+                      "column": 244,
+                      "line": 59,
+                      "offset": 5235
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 59,
+                      "offset": 4992
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Configuration determines how compilation is performed. A project-level ",
                       "position": {
-                        "start": {
-                          "line": 59,
-                          "column": 1,
-                          "offset": 4992
-                        },
                         "end": {
-                          "line": 59,
                           "column": 72,
+                          "line": 59,
                           "offset": 5063
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 59,
+                          "offset": 4992
                         }
                       }
                     },
@@ -1413,15 +1466,15 @@
                       "type": "inlineCode",
                       "value": ".artificials.config.mts",
                       "position": {
-                        "start": {
-                          "line": 59,
-                          "column": 72,
-                          "offset": 5063
-                        },
                         "end": {
-                          "line": 59,
                           "column": 97,
+                          "line": 59,
                           "offset": 5088
+                        },
+                        "start": {
+                          "column": 72,
+                          "line": 59,
+                          "offset": 5063
                         }
                       }
                     },
@@ -1429,32 +1482,19 @@
                       "type": "text",
                       "value": " declares namespaces, packages, domains, and projection targets, while build configuration maps targets and resource types to their output formats.",
                       "position": {
-                        "start": {
-                          "line": 59,
-                          "column": 97,
-                          "offset": 5088
-                        },
                         "end": {
-                          "line": 59,
                           "column": 244,
+                          "line": 59,
                           "offset": 5235
+                        },
+                        "start": {
+                          "column": 97,
+                          "line": 59,
+                          "offset": 5088
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 59,
-                      "column": 1,
-                      "offset": 4992
-                    },
-                    "end": {
-                      "line": 59,
-                      "column": 244,
-                      "offset": 5235
-                    }
-                  },
-                  "value": "Configuration determines how compilation is performed. A project-level `.artificials.config.mts` declares namespaces, packages, domains, and projection targets, while build configuration maps targets and resource types to their output formats."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1464,61 +1504,61 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The compiler consequently separates language processing from domain semantics: the language defines how declarations are written, domains define what those declarations mean, and compilation determines which representations are produced for each consumer.",
+                  "position": {
+                    "end": {
+                      "column": 256,
+                      "line": 61,
+                      "offset": 5492
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 61,
+                      "offset": 5237
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The compiler consequently separates language processing from domain semantics: the language defines how declarations are written, domains define what those declarations mean, and compilation determines which representations are produced for each consumer.",
                       "position": {
-                        "start": {
-                          "line": 61,
-                          "column": 1,
-                          "offset": 5237
-                        },
                         "end": {
-                          "line": 61,
                           "column": 256,
+                          "line": 61,
                           "offset": 5492
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 61,
+                          "offset": 5237
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 61,
-                      "column": 1,
-                      "offset": 5237
-                    },
-                    "end": {
-                      "line": 61,
-                      "column": 256,
-                      "offset": 5492
-                    }
-                  },
-                  "value": "The compiler consequently separates language processing from domain semantics: the language defines how declarations are written, domains define what those declarations mean, and compilation determines which representations are produced for each consumer."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
                   "type": "text",
                   "value": "\n\n"
                 }
-              ],
-              "depth": 3,
-              "position": {
-                "start": {
-                  "line": 44,
-                  "column": 1,
-                  "offset": 3670
-                },
-                "end": {
-                  "line": 44,
-                  "column": 13,
-                  "offset": 3682
-                }
-              }
+              ]
             },
             {
               "construct": "SectionBlock",
               "name": "Compilation Model",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 22,
+                  "line": 63,
+                  "offset": 5515
+                },
+                "start": {
+                  "column": 1,
+                  "line": 63,
+                  "offset": 5494
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -1528,37 +1568,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Compilation follows a deterministic model:",
+                  "position": {
+                    "end": {
+                      "column": 43,
+                      "line": 65,
+                      "offset": 5559
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 65,
+                      "offset": 5517
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Compilation follows a deterministic model:",
                       "position": {
-                        "start": {
-                          "line": 65,
-                          "column": 1,
-                          "offset": 5517
-                        },
                         "end": {
-                          "line": 65,
                           "column": 43,
+                          "line": 65,
                           "offset": 5559
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 65,
+                          "offset": 5517
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 65,
-                      "column": 1,
-                      "offset": 5517
-                    },
-                    "end": {
-                      "line": 65,
-                      "column": 43,
-                      "offset": 5559
-                    }
-                  },
-                  "value": "Compilation follows a deterministic model:"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1568,54 +1608,54 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "**source + configuration → projection**",
+                  "position": {
+                    "end": {
+                      "column": 40,
+                      "line": 67,
+                      "offset": 5600
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 67,
+                      "offset": 5561
+                    }
+                  },
                   "children": [
                     {
                       "type": "strong",
+                      "position": {
+                        "end": {
+                          "column": 40,
+                          "line": 67,
+                          "offset": 5600
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 67,
+                          "offset": 5561
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "source + configuration → projection",
                           "position": {
-                            "start": {
-                              "line": 67,
-                              "column": 3,
-                              "offset": 5563
-                            },
                             "end": {
-                              "line": 67,
                               "column": 38,
+                              "line": 67,
                               "offset": 5598
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 67,
+                              "offset": 5563
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 67,
-                          "column": 1,
-                          "offset": 5561
-                        },
-                        "end": {
-                          "line": 67,
-                          "column": 40,
-                          "offset": 5600
-                        }
-                      }
+                      ]
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 67,
-                      "column": 1,
-                      "offset": 5561
-                    },
-                    "end": {
-                      "line": 67,
-                      "column": 40,
-                      "offset": 5600
-                    }
-                  },
-                  "value": "**source + configuration → projection**"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1625,37 +1665,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Given identical sources and identical configuration, compilation produces identical projections every time.",
+                  "position": {
+                    "end": {
+                      "column": 108,
+                      "line": 69,
+                      "offset": 5709
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 69,
+                      "offset": 5602
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Given identical sources and identical configuration, compilation produces identical projections every time.",
                       "position": {
-                        "start": {
-                          "line": 69,
-                          "column": 1,
-                          "offset": 5602
-                        },
                         "end": {
-                          "line": 69,
                           "column": 108,
+                          "line": 69,
                           "offset": 5709
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 69,
+                          "offset": 5602
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 69,
-                      "column": 1,
-                      "offset": 5602
-                    },
-                    "end": {
-                      "line": 69,
-                      "column": 108,
-                      "offset": 5709
-                    }
-                  },
-                  "value": "Given identical sources and identical configuration, compilation produces identical projections every time."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1665,37 +1705,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "This makes compiled output a first-class, reviewable artifact rather than an opaque cache or runtime dependency. Projections can be committed to git, inspected by humans, consumed directly by agents, and reviewed as ordinary changes.",
+                  "position": {
+                    "end": {
+                      "column": 234,
+                      "line": 71,
+                      "offset": 5944
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 71,
+                      "offset": 5711
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "This makes compiled output a first-class, reviewable artifact rather than an opaque cache or runtime dependency. Projections can be committed to git, inspected by humans, consumed directly by agents, and reviewed as ordinary changes.",
                       "position": {
-                        "start": {
-                          "line": 71,
-                          "column": 1,
-                          "offset": 5711
-                        },
                         "end": {
-                          "line": 71,
                           "column": 234,
+                          "line": 71,
                           "offset": 5944
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 71,
+                          "offset": 5711
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 71,
-                      "column": 1,
-                      "offset": 5711
-                    },
-                    "end": {
-                      "line": 71,
-                      "column": 234,
-                      "offset": 5944
-                    }
-                  },
-                  "value": "This makes compiled output a first-class, reviewable artifact rather than an opaque cache or runtime dependency. Projections can be committed to git, inspected by humans, consumed directly by agents, and reviewed as ordinary changes."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1705,37 +1745,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "A change to an Art source or compilation configuration therefore produces a corresponding, visible change to its affected projections. The generated representation remains traceable to its source while allowing consumers to operate on a precompiled, purpose-specific view of the domain.",
+                  "position": {
+                    "end": {
+                      "column": 287,
+                      "line": 73,
+                      "offset": 6232
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 73,
+                      "offset": 5946
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "A change to an Art source or compilation configuration therefore produces a corresponding, visible change to its affected projections. The generated representation remains traceable to its source while allowing consumers to operate on a precompiled, purpose-specific view of the domain.",
                       "position": {
-                        "start": {
-                          "line": 73,
-                          "column": 1,
-                          "offset": 5946
-                        },
                         "end": {
-                          "line": 73,
                           "column": 287,
+                          "line": 73,
                           "offset": 6232
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 73,
+                          "offset": 5946
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 73,
-                      "column": 1,
-                      "offset": 5946
-                    },
-                    "end": {
-                      "line": 73,
-                      "column": 287,
-                      "offset": 6232
-                    }
-                  },
-                  "value": "A change to an Art source or compilation configuration therefore produces a corresponding, visible change to its affected projections. The generated representation remains traceable to its source while allowing consumers to operate on a precompiled, purpose-specific view of the domain."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1745,37 +1785,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "The model separates three concerns:",
+                  "position": {
+                    "end": {
+                      "column": 36,
+                      "line": 75,
+                      "offset": 6269
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 75,
+                      "offset": 6234
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "The model separates three concerns:",
                       "position": {
-                        "start": {
-                          "line": 75,
-                          "column": 1,
-                          "offset": 6234
-                        },
                         "end": {
-                          "line": 75,
                           "column": 36,
+                          "line": 75,
                           "offset": 6269
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 75,
+                          "offset": 6234
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 75,
-                      "column": 1,
-                      "offset": 6234
-                    },
-                    "end": {
-                      "line": 75,
-                      "column": 36,
-                      "offset": 6269
-                    }
-                  },
-                  "value": "The model separates three concerns:"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1786,22 +1826,35 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- **Sources** define the authoritative domain data and knowledge.\n- **Configuration** defines what should be compiled and how.\n- **Projections** provide deterministic, consumer-specific representations of those sources.",
+                  "position": {
+                    "end": {
+                      "column": 93,
+                      "line": 79,
+                      "offset": 6490
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 77,
+                      "offset": 6271
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "**Sources** define the authoritative domain data and knowledge.",
                       "position": {
-                        "start": {
-                          "line": 77,
-                          "column": 3,
-                          "offset": 6273
-                        },
                         "end": {
-                          "line": 77,
                           "column": 66,
+                          "line": 77,
                           "offset": 6336
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 77,
+                          "offset": 6273
                         }
                       }
                     },
@@ -1809,15 +1862,15 @@
                       "construct": "NaturalBlock",
                       "value": "**Configuration** defines what should be compiled and how.",
                       "position": {
-                        "start": {
-                          "line": 78,
-                          "column": 3,
-                          "offset": 6339
-                        },
                         "end": {
-                          "line": 78,
                           "column": 61,
+                          "line": 78,
                           "offset": 6397
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 78,
+                          "offset": 6339
                         }
                       }
                     },
@@ -1825,71 +1878,45 @@
                       "construct": "NaturalBlock",
                       "value": "**Projections** provide deterministic, consumer-specific representations of those sources.",
                       "position": {
-                        "start": {
-                          "line": 79,
-                          "column": 3,
-                          "offset": 6400
-                        },
                         "end": {
-                          "line": 79,
                           "column": 93,
+                          "line": 79,
                           "offset": 6490
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 79,
+                          "offset": 6400
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 77,
-                      "column": 1,
-                      "offset": 6271
-                    },
-                    "end": {
-                      "line": 79,
-                      "column": 93,
-                      "offset": 6490
-                    }
-                  },
-                  "value": "- **Sources** define the authoritative domain data and knowledge.\n- **Configuration** defines what should be compiled and how.\n- **Projections** provide deterministic, consumer-specific representations of those sources."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
                   "type": "text",
                   "value": "\n\n"
                 }
-              ],
-              "depth": 3,
-              "position": {
-                "start": {
-                  "line": 63,
-                  "column": 1,
-                  "offset": 5494
-                },
-                "end": {
-                  "line": 63,
-                  "column": 22,
-                  "offset": 5515
-                }
-              }
+              ]
             }
-          ],
-          "depth": 2,
-          "position": {
-            "start": {
-              "line": 13,
-              "column": 1,
-              "offset": 962
-            },
-            "end": {
-              "line": 13,
-              "column": 15,
-              "offset": 976
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
           "name": "Use Cases",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 13,
+              "line": 81,
+              "offset": 6504
+            },
+            "start": {
+              "column": 1,
+              "line": 81,
+              "offset": 6492
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -1899,6 +1926,19 @@
             {
               "construct": "SectionBlock",
               "name": "Generate Agent Instructions",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 32,
+                  "line": 83,
+                  "offset": 6537
+                },
+                "start": {
+                  "column": 1,
+                  "line": 83,
+                  "offset": 6506
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -1908,37 +1948,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Model an entire domain as instructions an agent needs: structures, types, routines, commands, and vocabulary. The system then compiles those instructions into projections per use case, so each agent gets a tailored projection — different agents get different instruction sets, different projections of the same processes, and different levels of detail per domain.",
+                  "position": {
+                    "end": {
+                      "column": 365,
+                      "line": 85,
+                      "offset": 6903
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 85,
+                      "offset": 6539
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Model an entire domain as instructions an agent needs: structures, types, routines, commands, and vocabulary. The system then compiles those instructions into projections per use case, so each agent gets a tailored projection — different agents get different instruction sets, different projections of the same processes, and different levels of detail per domain.",
                       "position": {
-                        "start": {
-                          "line": 85,
-                          "column": 1,
-                          "offset": 6539
-                        },
                         "end": {
-                          "line": 85,
                           "column": 365,
+                          "line": 85,
                           "offset": 6903
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 85,
+                          "offset": 6539
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 85,
-                      "column": 1,
-                      "offset": 6539
-                    },
-                    "end": {
-                      "line": 85,
-                      "column": 365,
-                      "offset": 6903
-                    }
-                  },
-                  "value": "Model an entire domain as instructions an agent needs: structures, types, routines, commands, and vocabulary. The system then compiles those instructions into projections per use case, so each agent gets a tailored projection — different agents get different instruction sets, different projections of the same processes, and different levels of detail per domain."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1948,37 +1988,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Each projection exposes the minimum context its consumer needs:",
+                  "position": {
+                    "end": {
+                      "column": 64,
+                      "line": 87,
+                      "offset": 6968
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 87,
+                      "offset": 6905
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Each projection exposes the minimum context its consumer needs:",
                       "position": {
-                        "start": {
-                          "line": 87,
-                          "column": 1,
-                          "offset": 6905
-                        },
                         "end": {
-                          "line": 87,
                           "column": 64,
+                          "line": 87,
                           "offset": 6968
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 87,
+                          "offset": 6905
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 87,
-                      "column": 1,
-                      "offset": 6905
-                    },
-                    "end": {
-                      "line": 87,
-                      "column": 64,
-                      "offset": 6968
-                    }
-                  },
-                  "value": "Each projection exposes the minimum context its consumer needs:"
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -1989,22 +2029,35 @@
                   "construct": "NaturalBlock",
                   "type": "list",
                   "ordered": false,
-                  "start": null,
                   "spread": false,
+                  "start": null,
+                  "value": "- **Author Projection** — for agents that declare and write art sources: full syntax, structures, rules, examples. Example: \"Create a new `.art` file\".\n- **Generator Projection** — for agents that generate derived outputs (markdown, generated resources) from art sources. Example: \"Generate the domain listing\".\n- **Operator Projection** — for agents that read, execute, and lightly modify existing resources through controlled routines, with minimum exposure to the domain. Example: \"Execute the Process: Render Resources\".\n- **Indexer Projection** — for agents with no predetermined relationship to the domain (generalists like assistants, spell-checking/fixing, querying/reporting). Exposes the entire domain surface as a compact index of resources — names, kinds, categories, brief descriptions, and source paths — resolving resource names to their art source, without application examples or full instructions. Not read-only: it may perform small, controlled modifications within its scope.",
+                  "position": {
+                    "end": {
+                      "column": 471,
+                      "line": 92,
+                      "offset": 7965
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 89,
+                      "offset": 6970
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "value": "**Author Projection** — for agents that declare and write art sources: full syntax, structures, rules, examples. Example: \"Create a new `.art` file\".",
                       "position": {
-                        "start": {
-                          "line": 89,
-                          "column": 3,
-                          "offset": 6972
-                        },
                         "end": {
-                          "line": 89,
                           "column": 152,
+                          "line": 89,
                           "offset": 7121
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 89,
+                          "offset": 6972
                         }
                       }
                     },
@@ -2012,15 +2065,15 @@
                       "construct": "NaturalBlock",
                       "value": "**Generator Projection** — for agents that generate derived outputs (markdown, generated resources) from art sources. Example: \"Generate the domain listing\".",
                       "position": {
-                        "start": {
-                          "line": 90,
-                          "column": 3,
-                          "offset": 7124
-                        },
                         "end": {
-                          "line": 90,
                           "column": 160,
+                          "line": 90,
                           "offset": 7281
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 90,
+                          "offset": 7124
                         }
                       }
                     },
@@ -2028,15 +2081,15 @@
                       "construct": "NaturalBlock",
                       "value": "**Operator Projection** — for agents that read, execute, and lightly modify existing resources through controlled routines, with minimum exposure to the domain. Example: \"Execute the Process: Render Resources\".",
                       "position": {
-                        "start": {
-                          "line": 91,
-                          "column": 3,
-                          "offset": 7284
-                        },
                         "end": {
-                          "line": 91,
                           "column": 213,
+                          "line": 91,
                           "offset": 7494
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 91,
+                          "offset": 7284
                         }
                       }
                     },
@@ -2044,32 +2097,19 @@
                       "construct": "NaturalBlock",
                       "value": "**Indexer Projection** — for agents with no predetermined relationship to the domain (generalists like assistants, spell-checking/fixing, querying/reporting). Exposes the entire domain surface as a compact index of resources — names, kinds, categories, brief descriptions, and source paths — resolving resource names to their art source, without application examples or full instructions. Not read-only: it may perform small, controlled modifications within its scope.",
                       "position": {
-                        "start": {
-                          "line": 92,
-                          "column": 3,
-                          "offset": 7497
-                        },
                         "end": {
-                          "line": 92,
                           "column": 471,
+                          "line": 92,
                           "offset": 7965
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 92,
+                          "offset": 7497
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 89,
-                      "column": 1,
-                      "offset": 6970
-                    },
-                    "end": {
-                      "line": 92,
-                      "column": 471,
-                      "offset": 7965
-                    }
-                  },
-                  "value": "- **Author Projection** — for agents that declare and write art sources: full syntax, structures, rules, examples. Example: \"Create a new `.art` file\".\n- **Generator Projection** — for agents that generate derived outputs (markdown, generated resources) from art sources. Example: \"Generate the domain listing\".\n- **Operator Projection** — for agents that read, execute, and lightly modify existing resources through controlled routines, with minimum exposure to the domain. Example: \"Execute the Process: Render Resources\".\n- **Indexer Projection** — for agents with no predetermined relationship to the domain (generalists like assistants, spell-checking/fixing, querying/reporting). Exposes the entire domain surface as a compact index of resources — names, kinds, categories, brief descriptions, and source paths — resolving resource names to their art source, without application examples or full instructions. Not read-only: it may perform small, controlled modifications within its scope."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -2079,6 +2119,19 @@
                 {
                   "construct": "SectionBlock",
                   "name": "Planning Agent",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 20,
+                      "line": 94,
+                      "offset": 7986
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 94,
+                      "offset": 7967
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -2088,61 +2141,61 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "A Planning Agent needs comprehensive knowledge of the planning domain: its structures, types, routines, commands, conventions, and workflows. It needs only the subset of the coding domain required to produce technically coherent plans and implementation instructions. Its projection therefore provides deep planning knowledge while keeping coding knowledge narrow and targeted.",
+                      "position": {
+                        "end": {
+                          "column": 378,
+                          "line": 96,
+                          "offset": 8365
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 96,
+                          "offset": 7988
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "A Planning Agent needs comprehensive knowledge of the planning domain: its structures, types, routines, commands, conventions, and workflows. It needs only the subset of the coding domain required to produce technically coherent plans and implementation instructions. Its projection therefore provides deep planning knowledge while keeping coding knowledge narrow and targeted.",
                           "position": {
-                            "start": {
-                              "line": 96,
-                              "column": 1,
-                              "offset": 7988
-                            },
                             "end": {
-                              "line": 96,
                               "column": 378,
+                              "line": 96,
                               "offset": 8365
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 96,
+                              "offset": 7988
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 96,
-                          "column": 1,
-                          "offset": 7988
-                        },
-                        "end": {
-                          "line": 96,
-                          "column": 378,
-                          "offset": 8365
-                        }
-                      },
-                      "value": "A Planning Agent needs comprehensive knowledge of the planning domain: its structures, types, routines, commands, conventions, and workflows. It needs only the subset of the coding domain required to produce technically coherent plans and implementation instructions. Its projection therefore provides deep planning knowledge while keeping coding knowledge narrow and targeted."
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "position": {
-                    "start": {
-                      "line": 94,
-                      "column": 1,
-                      "offset": 7967
-                    },
-                    "end": {
-                      "line": 94,
-                      "column": 20,
-                      "offset": 7986
-                    }
-                  }
+                  ]
                 },
                 {
                   "construct": "SectionBlock",
                   "name": "Delegator Agent",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 21,
+                      "line": 98,
+                      "offset": 8387
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 98,
+                      "offset": 8367
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -2152,76 +2205,63 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "A Delegator Agent needs enough knowledge of planning to understand plans, commits, and implementation instructions, but does not need the full planning domain. The Worker agents it delegates to require a different projection: limited knowledge of planning, particularly how to interpret and follow plan instructions, combined with substantial knowledge resources for understanding and improving references such as architecture decisions, patterns, and conventions.",
+                      "position": {
+                        "end": {
+                          "column": 465,
+                          "line": 100,
+                          "offset": 8853
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 100,
+                          "offset": 8389
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "A Delegator Agent needs enough knowledge of planning to understand plans, commits, and implementation instructions, but does not need the full planning domain. The Worker agents it delegates to require a different projection: limited knowledge of planning, particularly how to interpret and follow plan instructions, combined with substantial knowledge resources for understanding and improving references such as architecture decisions, patterns, and conventions.",
                           "position": {
-                            "start": {
-                              "line": 100,
-                              "column": 1,
-                              "offset": 8389
-                            },
                             "end": {
-                              "line": 100,
                               "column": 465,
+                              "line": 100,
                               "offset": 8853
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 100,
+                              "offset": 8389
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 100,
-                          "column": 1,
-                          "offset": 8389
-                        },
-                        "end": {
-                          "line": 100,
-                          "column": 465,
-                          "offset": 8853
-                        }
-                      },
-                      "value": "A Delegator Agent needs enough knowledge of planning to understand plans, commits, and implementation instructions, but does not need the full planning domain. The Worker agents it delegates to require a different projection: limited knowledge of planning, particularly how to interpret and follow plan instructions, combined with substantial knowledge resources for understanding and improving references such as architecture decisions, patterns, and conventions."
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "position": {
-                    "start": {
-                      "line": 98,
-                      "column": 1,
-                      "offset": 8367
-                    },
-                    "end": {
-                      "line": 98,
-                      "column": 21,
-                      "offset": 8387
-                    }
-                  }
+                  ]
                 }
-              ],
-              "depth": 3,
-              "position": {
-                "start": {
-                  "line": 83,
-                  "column": 1,
-                  "offset": 6506
-                },
-                "end": {
-                  "line": 83,
-                  "column": 32,
-                  "offset": 6537
-                }
-              }
+              ]
             },
             {
               "construct": "SectionBlock",
               "name": "Single Source of Truth for Declarations",
+              "depth": 3,
+              "position": {
+                "end": {
+                  "column": 44,
+                  "line": 102,
+                  "offset": 8898
+                },
+                "start": {
+                  "column": 1,
+                  "line": 102,
+                  "offset": 8855
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
@@ -2231,37 +2271,37 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "paragraph",
+                  "value": "Art unifies, under a single source of truth, declarations of things that are typically represented separately as machine-readable data and human- or agent-readable knowledge. A resource can therefore contain both structured data and natural-language information that agents can process, while remaining suitable for deterministic compilation into different representations.",
+                  "position": {
+                    "end": {
+                      "column": 374,
+                      "line": 104,
+                      "offset": 9273
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 104,
+                      "offset": 8900
+                    }
+                  },
                   "children": [
                     {
                       "type": "text",
                       "value": "Art unifies, under a single source of truth, declarations of things that are typically represented separately as machine-readable data and human- or agent-readable knowledge. A resource can therefore contain both structured data and natural-language information that agents can process, while remaining suitable for deterministic compilation into different representations.",
                       "position": {
-                        "start": {
-                          "line": 104,
-                          "column": 1,
-                          "offset": 8900
-                        },
                         "end": {
-                          "line": 104,
                           "column": 374,
+                          "line": 104,
                           "offset": 9273
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 104,
+                          "offset": 8900
                         }
                       }
                     }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 104,
-                      "column": 1,
-                      "offset": 8900
-                    },
-                    "end": {
-                      "line": 104,
-                      "column": 374,
-                      "offset": 9273
-                    }
-                  },
-                  "value": "Art unifies, under a single source of truth, declarations of things that are typically represented separately as machine-readable data and human- or agent-readable knowledge. A resource can therefore contain both structured data and natural-language information that agents can process, while remaining suitable for deterministic compilation into different representations."
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
@@ -2271,6 +2311,19 @@
                 {
                   "construct": "SectionBlock",
                   "name": "Scaffolders",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 17,
+                      "line": 106,
+                      "offset": 9291
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 106,
+                      "offset": 9275
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -2280,37 +2333,37 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "Project, package, namespace, and other scaffolding definitions can be declared once as structured resources and compiled into the files and configurations required to instantiate them. The declaration becomes the source of truth rather than one generated output being treated as authoritative.",
+                      "position": {
+                        "end": {
+                          "column": 294,
+                          "line": 108,
+                          "offset": 9586
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 108,
+                          "offset": 9293
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Project, package, namespace, and other scaffolding definitions can be declared once as structured resources and compiled into the files and configurations required to instantiate them. The declaration becomes the source of truth rather than one generated output being treated as authoritative.",
                           "position": {
-                            "start": {
-                              "line": 108,
-                              "column": 1,
-                              "offset": 9293
-                            },
                             "end": {
-                              "line": 108,
                               "column": 294,
+                              "line": 108,
                               "offset": 9586
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 108,
+                              "offset": 9293
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 108,
-                          "column": 1,
-                          "offset": 9293
-                        },
-                        "end": {
-                          "line": 108,
-                          "column": 294,
-                          "offset": 9586
-                        }
-                      },
-                      "value": "Project, package, namespace, and other scaffolding definitions can be declared once as structured resources and compiled into the files and configurations required to instantiate them. The declaration becomes the source of truth rather than one generated output being treated as authoritative."
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -2320,61 +2373,61 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "For example, a package or namespace can be described once in Art and used to generate its project structure, configuration, documentation, or other representations required by different consumers.",
+                      "position": {
+                        "end": {
+                          "column": 197,
+                          "line": 110,
+                          "offset": 9784
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 110,
+                          "offset": 9588
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "For example, a package or namespace can be described once in Art and used to generate its project structure, configuration, documentation, or other representations required by different consumers.",
                           "position": {
-                            "start": {
-                              "line": 110,
-                              "column": 1,
-                              "offset": 9588
-                            },
                             "end": {
-                              "line": 110,
                               "column": 197,
+                              "line": 110,
                               "offset": 9784
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 110,
+                              "offset": 9588
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 110,
-                          "column": 1,
-                          "offset": 9588
-                        },
-                        "end": {
-                          "line": 110,
-                          "column": 197,
-                          "offset": 9784
-                        }
-                      },
-                      "value": "For example, a package or namespace can be described once in Art and used to generate its project structure, configuration, documentation, or other representations required by different consumers."
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "position": {
-                    "start": {
-                      "line": 106,
-                      "column": 1,
-                      "offset": 9275
-                    },
-                    "end": {
-                      "line": 106,
-                      "column": 17,
-                      "offset": 9291
-                    }
-                  }
+                  ]
                 },
                 {
                   "construct": "SectionBlock",
                   "name": "Documentation",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 19,
+                      "line": 112,
+                      "offset": 9804
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 112,
+                      "offset": 9786
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -2384,37 +2437,37 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "References, patterns, architecture decisions, guides, conventions, and other knowledge resources can be authored once and rendered into representations for different consumers.",
+                      "position": {
+                        "end": {
+                          "column": 177,
+                          "line": 114,
+                          "offset": 9982
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 114,
+                          "offset": 9806
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "References, patterns, architecture decisions, guides, conventions, and other knowledge resources can be authored once and rendered into representations for different consumers.",
                           "position": {
-                            "start": {
-                              "line": 114,
-                              "column": 1,
-                              "offset": 9806
-                            },
                             "end": {
-                              "line": 114,
                               "column": 177,
+                              "line": 114,
                               "offset": 9982
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 114,
+                              "offset": 9806
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 114,
-                          "column": 1,
-                          "offset": 9806
-                        },
-                        "end": {
-                          "line": 114,
-                          "column": 177,
-                          "offset": 9982
-                        }
-                      },
-                      "value": "References, patterns, architecture decisions, guides, conventions, and other knowledge resources can be authored once and rendered into representations for different consumers."
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -2424,61 +2477,61 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "The same source can produce human-oriented documentation, compact agent instructions, searchable indexes, or targeted domain references without maintaining separate versions of the underlying knowledge.",
+                      "position": {
+                        "end": {
+                          "column": 203,
+                          "line": 116,
+                          "offset": 10186
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 116,
+                          "offset": 9984
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "The same source can produce human-oriented documentation, compact agent instructions, searchable indexes, or targeted domain references without maintaining separate versions of the underlying knowledge.",
                           "position": {
-                            "start": {
-                              "line": 116,
-                              "column": 1,
-                              "offset": 9984
-                            },
                             "end": {
-                              "line": 116,
                               "column": 203,
+                              "line": 116,
                               "offset": 10186
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 116,
+                              "offset": 9984
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 116,
-                          "column": 1,
-                          "offset": 9984
-                        },
-                        "end": {
-                          "line": 116,
-                          "column": 203,
-                          "offset": 10186
-                        }
-                      },
-                      "value": "The same source can produce human-oriented documentation, compact agent instructions, searchable indexes, or targeted domain references without maintaining separate versions of the underlying knowledge."
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "position": {
-                    "start": {
-                      "line": 112,
-                      "column": 1,
-                      "offset": 9786
-                    },
-                    "end": {
-                      "line": 112,
-                      "column": 19,
-                      "offset": 9804
-                    }
-                  }
+                  ]
                 },
                 {
                   "construct": "SectionBlock",
                   "name": "Domain Records",
+                  "depth": 4,
+                  "position": {
+                    "end": {
+                      "column": 20,
+                      "line": 118,
+                      "offset": 10207
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 118,
+                      "offset": 10188
+                    }
+                  },
                   "children": [
                     {
                       "construct": "NaturalBlock",
@@ -2488,37 +2541,37 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "Operational records such as tasks, plans, changelogs, and backlogs can be declared as structured resources while retaining the natural-language content needed to interpret them.",
+                      "position": {
+                        "end": {
+                          "column": 178,
+                          "line": 120,
+                          "offset": 10386
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 120,
+                          "offset": 10209
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "Operational records such as tasks, plans, changelogs, and backlogs can be declared as structured resources while retaining the natural-language content needed to interpret them.",
                           "position": {
-                            "start": {
-                              "line": 120,
-                              "column": 1,
-                              "offset": 10209
-                            },
                             "end": {
-                              "line": 120,
                               "column": 178,
+                              "line": 120,
                               "offset": 10386
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 120,
+                              "offset": 10209
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 120,
-                          "column": 1,
-                          "offset": 10209
-                        },
-                        "end": {
-                          "line": 120,
-                          "column": 178,
-                          "offset": 10386
-                        }
-                      },
-                      "value": "Operational records such as tasks, plans, changelogs, and backlogs can be declared as structured resources while retaining the natural-language content needed to interpret them."
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
@@ -2528,91 +2581,65 @@
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
+                      "value": "This allows the same record to serve as machine-readable data for tooling and as contextual knowledge for agents, while projections determine which fields, relationships, descriptions, and instructions are exposed to each consumer.",
+                      "position": {
+                        "end": {
+                          "column": 232,
+                          "line": 122,
+                          "offset": 10619
+                        },
+                        "start": {
+                          "column": 1,
+                          "line": 122,
+                          "offset": 10388
+                        }
+                      },
                       "children": [
                         {
                           "type": "text",
                           "value": "This allows the same record to serve as machine-readable data for tooling and as contextual knowledge for agents, while projections determine which fields, relationships, descriptions, and instructions are exposed to each consumer.",
                           "position": {
-                            "start": {
-                              "line": 122,
-                              "column": 1,
-                              "offset": 10388
-                            },
                             "end": {
-                              "line": 122,
                               "column": 232,
+                              "line": 122,
                               "offset": 10619
+                            },
+                            "start": {
+                              "column": 1,
+                              "line": 122,
+                              "offset": 10388
                             }
                           }
                         }
-                      ],
-                      "position": {
-                        "start": {
-                          "line": 122,
-                          "column": 1,
-                          "offset": 10388
-                        },
-                        "end": {
-                          "line": 122,
-                          "column": 232,
-                          "offset": 10619
-                        }
-                      },
-                      "value": "This allows the same record to serve as machine-readable data for tooling and as contextual knowledge for agents, while projections determine which fields, relationships, descriptions, and instructions are exposed to each consumer."
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
                       "type": "text",
                       "value": "\n\n"
                     }
-                  ],
-                  "depth": 4,
-                  "position": {
-                    "start": {
-                      "line": 118,
-                      "column": 1,
-                      "offset": 10188
-                    },
-                    "end": {
-                      "line": 118,
-                      "column": 20,
-                      "offset": 10207
-                    }
-                  }
+                  ]
                 }
-              ],
-              "depth": 3,
-              "position": {
-                "start": {
-                  "line": 102,
-                  "column": 1,
-                  "offset": 8855
-                },
-                "end": {
-                  "line": 102,
-                  "column": 44,
-                  "offset": 8898
-                }
-              }
+              ]
             }
-          ],
-          "depth": 2,
-          "position": {
-            "start": {
-              "line": 81,
-              "column": 1,
-              "offset": 6492
-            },
-            "end": {
-              "line": 81,
-              "column": 13,
-              "offset": 6504
-            }
-          }
+          ]
         },
         {
           "construct": "SectionBlock",
           "name": "Key Benefits",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 16,
+              "line": 124,
+              "offset": 10636
+            },
+            "start": {
+              "column": 1,
+              "line": 124,
+              "offset": 10621
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -2623,22 +2650,35 @@
               "construct": "NaturalBlock",
               "type": "list",
               "ordered": false,
-              "start": null,
               "spread": false,
+              "start": null,
+              "value": "- **Context minimisation** — each agent receives only the subset of a domain it needs, reducing token usage and shortening inference loops.\n- **Fewer ambiguities, omissions, contradictions** — one source of truth feeding generated instructions; nothing hand-maintained in parallel.\n- **Automated SoT → instructions** — sources become instructions without manual transcription.\n- **Portable, reusable, shareable** — domains package as artifacts (e.g. `@artificial/tasks`) and can be reused across repositories.",
+              "position": {
+                "end": {
+                  "column": 133,
+                  "line": 129,
+                  "offset": 11147
+                },
+                "start": {
+                  "column": 1,
+                  "line": 126,
+                  "offset": 10638
+                }
+              },
               "children": [
                 {
                   "construct": "NaturalBlock",
                   "value": "**Context minimisation** — each agent receives only the subset of a domain it needs, reducing token usage and shortening inference loops.",
                   "position": {
-                    "start": {
-                      "line": 126,
-                      "column": 3,
-                      "offset": 10640
-                    },
                     "end": {
-                      "line": 126,
                       "column": 140,
+                      "line": 126,
                       "offset": 10777
+                    },
+                    "start": {
+                      "column": 3,
+                      "line": 126,
+                      "offset": 10640
                     }
                   }
                 },
@@ -2646,15 +2686,15 @@
                   "construct": "NaturalBlock",
                   "value": "**Fewer ambiguities, omissions, contradictions** — one source of truth feeding generated instructions; nothing hand-maintained in parallel.",
                   "position": {
-                    "start": {
-                      "line": 127,
-                      "column": 3,
-                      "offset": 10780
-                    },
                     "end": {
-                      "line": 127,
                       "column": 142,
+                      "line": 127,
                       "offset": 10919
+                    },
+                    "start": {
+                      "column": 3,
+                      "line": 127,
+                      "offset": 10780
                     }
                   }
                 },
@@ -2662,15 +2702,15 @@
                   "construct": "NaturalBlock",
                   "value": "**Automated SoT → instructions** — sources become instructions without manual transcription.",
                   "position": {
-                    "start": {
-                      "line": 128,
-                      "column": 3,
-                      "offset": 10922
-                    },
                     "end": {
-                      "line": 128,
                       "column": 95,
+                      "line": 128,
                       "offset": 11014
+                    },
+                    "start": {
+                      "column": 3,
+                      "line": 128,
+                      "offset": 10922
                     }
                   }
                 },
@@ -2678,63 +2718,23 @@
                   "construct": "NaturalBlock",
                   "value": "**Portable, reusable, shareable** — domains package as artifacts (e.g. `@artificial/tasks`) and can be reused across repositories.",
                   "position": {
-                    "start": {
-                      "line": 129,
-                      "column": 3,
-                      "offset": 11017
-                    },
                     "end": {
-                      "line": 129,
                       "column": 133,
+                      "line": 129,
                       "offset": 11147
+                    },
+                    "start": {
+                      "column": 3,
+                      "line": 129,
+                      "offset": 11017
                     }
                   }
                 }
-              ],
-              "position": {
-                "start": {
-                  "line": 126,
-                  "column": 1,
-                  "offset": 10638
-                },
-                "end": {
-                  "line": 129,
-                  "column": 133,
-                  "offset": 11147
-                }
-              },
-              "value": "- **Context minimisation** — each agent receives only the subset of a domain it needs, reducing token usage and shortening inference loops.\n- **Fewer ambiguities, omissions, contradictions** — one source of truth feeding generated instructions; nothing hand-maintained in parallel.\n- **Automated SoT → instructions** — sources become instructions without manual transcription.\n- **Portable, reusable, shareable** — domains package as artifacts (e.g. `@artificial/tasks`) and can be reused across repositories."
+              ]
             }
-          ],
-          "depth": 2,
-          "position": {
-            "start": {
-              "line": 124,
-              "column": 1,
-              "offset": 10621
-            },
-            "end": {
-              "line": 124,
-              "column": 16,
-              "offset": 10636
-            }
-          }
+          ]
         }
-      ],
-      "depth": 1,
-      "kind": "Architecture",
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 27,
-          "offset": 26
-        }
-      }
+      ]
     }
   ]
 }

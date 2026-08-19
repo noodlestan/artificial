@@ -3,7 +3,21 @@
   "children": [
     {
       "construct": "SectionBlock",
+      "kind": "Module",
       "name": "Configuration",
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 24,
+          "line": 1,
+          "offset": 23
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
       "children": [
         {
           "construct": "NaturalBlock",
@@ -19,15 +33,15 @@
               "type": "text",
               "value": " Decisions about how the project declares itself to tooling.",
               "position": {
-                "start": {
-                  "line": 3,
-                  "column": 13,
-                  "offset": 37
-                },
                 "end": {
-                  "line": 3,
                   "column": 73,
+                  "line": 3,
                   "offset": 97
+                },
+                "start": {
+                  "column": 13,
+                  "line": 3,
+                  "offset": 37
                 }
               }
             },
@@ -38,21 +52,35 @@
             }
           ],
           "position": {
-            "start": {
-              "line": 3,
-              "column": 1,
-              "offset": 25
-            },
             "end": {
-              "line": 3,
               "column": 73,
+              "line": 3,
               "offset": 97
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 25
             }
           }
         },
         {
           "construct": "SectionBlock",
+          "kind": "Decision",
           "name": "Config as Source of Truth",
+          "depth": 2,
+          "position": {
+            "end": {
+              "column": 39,
+              "line": 5,
+              "offset": 137
+            },
+            "start": {
+              "column": 1,
+              "line": 5,
+              "offset": 99
+            }
+          },
           "children": [
             {
               "construct": "NaturalBlock",
@@ -68,15 +96,15 @@
                   "type": "text",
                   "value": " Adopted",
                   "position": {
-                    "start": {
-                      "line": 7,
-                      "column": 12,
-                      "offset": 150
-                    },
                     "end": {
-                      "line": 7,
                       "column": 20,
+                      "line": 7,
                       "offset": 158
+                    },
+                    "start": {
+                      "column": 12,
+                      "line": 7,
+                      "offset": 150
                     }
                   }
                 },
@@ -87,15 +115,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 7,
-                  "column": 1,
-                  "offset": 139
-                },
                 "end": {
-                  "line": 7,
                   "column": 20,
+                  "line": 7,
                   "offset": 158
+                },
+                "start": {
+                  "column": 1,
+                  "line": 7,
+                  "offset": 139
                 }
               }
             },
@@ -108,15 +136,15 @@
                   "type": "text",
                   "value": " Init, update, and build tooling all need to know what a project contains and how outputs are targeted. If each tool inferred this independently, their views of the project would drift apart and commands would behave differently from the same inputs.",
                   "position": {
-                    "start": {
-                      "line": 9,
-                      "column": 13,
-                      "offset": 172
-                    },
                     "end": {
-                      "line": 9,
                       "column": 263,
+                      "line": 9,
                       "offset": 422
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 9,
+                      "offset": 172
                     }
                   }
                 },
@@ -127,15 +155,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 9,
-                  "column": 1,
-                  "offset": 160
-                },
                 "end": {
-                  "line": 9,
                   "column": 263,
+                  "line": 9,
                   "offset": 422
+                },
+                "start": {
+                  "column": 1,
+                  "line": 9,
+                  "offset": 160
                 }
               }
             },
@@ -148,15 +176,15 @@
                   "type": "text",
                   "value": " ",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 14,
-                      "offset": 437
-                    },
                     "end": {
-                      "line": 11,
                       "column": 15,
+                      "line": 11,
                       "offset": 438
+                    },
+                    "start": {
+                      "column": 14,
+                      "line": 11,
+                      "offset": 437
                     }
                   }
                 },
@@ -165,15 +193,15 @@
                   "type": "inlineCode",
                   "value": "`.artificials.config.mts`",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 15,
-                      "offset": 438
-                    },
                     "end": {
-                      "line": 11,
                       "column": 40,
+                      "line": 11,
                       "offset": 463
+                    },
+                    "start": {
+                      "column": 15,
+                      "line": 11,
+                      "offset": 438
                     }
                   }
                 },
@@ -182,15 +210,15 @@
                   "type": "text",
                   "value": " is the single source of truth for namespaces, packages, domains, and projection targets. ",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 40,
-                      "offset": 463
-                    },
                     "end": {
-                      "line": 11,
                       "column": 130,
+                      "line": 11,
                       "offset": 553
+                    },
+                    "start": {
+                      "column": 40,
+                      "line": 11,
+                      "offset": 463
                     }
                   }
                 },
@@ -199,15 +227,15 @@
                   "type": "inlineCode",
                   "value": "`art init`",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 130,
-                      "offset": 553
-                    },
                     "end": {
-                      "line": 11,
                       "column": 140,
+                      "line": 11,
                       "offset": 563
+                    },
+                    "start": {
+                      "column": 130,
+                      "line": 11,
+                      "offset": 553
                     }
                   }
                 },
@@ -216,15 +244,15 @@
                   "type": "text",
                   "value": " writes it; ",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 140,
-                      "offset": 563
-                    },
                     "end": {
-                      "line": 11,
                       "column": 152,
+                      "line": 11,
                       "offset": 575
+                    },
+                    "start": {
+                      "column": 140,
+                      "line": 11,
+                      "offset": 563
                     }
                   }
                 },
@@ -233,15 +261,15 @@
                   "type": "inlineCode",
                   "value": "`art update`",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 152,
-                      "offset": 575
-                    },
                     "end": {
-                      "line": 11,
                       "column": 164,
+                      "line": 11,
                       "offset": 587
+                    },
+                    "start": {
+                      "column": 152,
+                      "line": 11,
+                      "offset": 575
                     }
                   }
                 },
@@ -250,15 +278,15 @@
                   "type": "text",
                   "value": " reads it.",
                   "position": {
-                    "start": {
-                      "line": 11,
-                      "column": 164,
-                      "offset": 587
-                    },
                     "end": {
-                      "line": 11,
                       "column": 174,
+                      "line": 11,
                       "offset": 597
+                    },
+                    "start": {
+                      "column": 164,
+                      "line": 11,
+                      "offset": 587
                     }
                   }
                 },
@@ -269,15 +297,15 @@
                 }
               ],
               "position": {
-                "start": {
-                  "line": 11,
-                  "column": 1,
-                  "offset": 424
-                },
                 "end": {
-                  "line": 11,
                   "column": 174,
+                  "line": 11,
                   "offset": 597
+                },
+                "start": {
+                  "column": 1,
+                  "line": 11,
+                  "offset": 424
                 }
               }
             },
@@ -290,15 +318,15 @@
                   "type": "text",
                   "value": " Every command is driven from this one file; the planned ",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 18,
-                      "offset": 616
-                    },
                     "end": {
-                      "line": 13,
                       "column": 75,
+                      "line": 13,
                       "offset": 673
+                    },
+                    "start": {
+                      "column": 18,
+                      "line": 13,
+                      "offset": 616
                     }
                   }
                 },
@@ -307,15 +335,15 @@
                   "type": "inlineCode",
                   "value": "`art update`",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 75,
-                      "offset": 673
-                    },
                     "end": {
-                      "line": 13,
                       "column": 87,
+                      "line": 13,
                       "offset": 685
+                    },
+                    "start": {
+                      "column": 75,
+                      "line": 13,
+                      "offset": 673
                     }
                   }
                 },
@@ -324,63 +352,35 @@
                   "type": "text",
                   "value": " consolidation depends on it.",
                   "position": {
-                    "start": {
-                      "line": 13,
-                      "column": 87,
-                      "offset": 685
-                    },
                     "end": {
-                      "line": 13,
                       "column": 116,
+                      "line": 13,
                       "offset": 714
+                    },
+                    "start": {
+                      "column": 87,
+                      "line": 13,
+                      "offset": 685
                     }
                   }
                 }
               ],
               "position": {
-                "start": {
-                  "line": 13,
-                  "column": 1,
-                  "offset": 599
-                },
                 "end": {
-                  "line": 13,
                   "column": 116,
+                  "line": 13,
                   "offset": 714
+                },
+                "start": {
+                  "column": 1,
+                  "line": 13,
+                  "offset": 599
                 }
               }
             }
-          ],
-          "depth": 2,
-          "kind": "Decision",
-          "position": {
-            "start": {
-              "line": 5,
-              "column": 1,
-              "offset": 99
-            },
-            "end": {
-              "line": 5,
-              "column": 39,
-              "offset": 137
-            }
-          }
+          ]
         }
-      ],
-      "depth": 1,
-      "kind": "Module",
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 24,
-          "offset": 23
-        }
-      }
+      ]
     }
   ]
 }
