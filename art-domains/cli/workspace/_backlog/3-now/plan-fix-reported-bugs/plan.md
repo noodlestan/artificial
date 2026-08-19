@@ -161,11 +161,17 @@ If any of these fail, resolve the issue before proceeding with implementation.
 - Checkout remote differs from record → `wrong remote` issue surfaced.
 - Checkout has no remote → `no remote` issue surfaced (existing behaviour).
 
-### `fix-clone-ignores-record-branch` - `READY`
+### `fix-clone-ignores-record-branch` - `COMMITTED`
 
 **Bug:** `cloneIfMissing` ignores the record branch — captured in `plan__bugs.md`.
 
 **Commit Message:** `fix(workspace-cli): use recorded branch when cloning missing checkout`
+
+**Commit:** `e74693e` — `fix(workspace-cli): use recorded branch when cloning missing checkout`
+
+**Feedback:**
+
+- Worker executed successfully. Added branch checkout after clone and updated record with actual branch.
 
 **Instructions File:** `plan-fix-reported-bugs/instructions/fix-clone-ignores-record-branch.md`
 

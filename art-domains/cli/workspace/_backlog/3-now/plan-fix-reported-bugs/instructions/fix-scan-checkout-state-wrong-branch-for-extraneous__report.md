@@ -10,10 +10,10 @@
 
 ### Changes
 
-| Goal | Outcome |
-| --- | --- |
+| Goal                                                                           | Outcome                                                                      |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
 | Guard "wrong branch" check so it fires only when `expectedBranch` is non-empty | Done — added `remote.expectedBranch !== ''` guard in `createCheckoutScan.ts` |
-| Add test coverage for empty-record-branch edge case | Done — 3 new test cases in `scanCheckoutState.test.ts` |
+| Add test coverage for empty-record-branch edge case                            | Done — 3 new test cases in `scanCheckoutState.test.ts`                       |
 
 #### Files changed
 
@@ -22,12 +22,12 @@
 
 ### Verification
 
-| Step | Result |
-| --- | --- |
+| Step                | Result                                                             |
+| ------------------- | ------------------------------------------------------------------ |
 | `npx prettier . -c` | Pass (2 pre-existing warnings in backlog files, not changed files) |
-| `npx tsc --noEmit` | Pass |
-| `npm run build` | Pass |
-| `npm run test` | 62 files, 192 tests, all pass |
+| `npx tsc --noEmit`  | Pass                                                               |
+| `npm run build`     | Pass                                                               |
+| `npm run test`      | 62 files, 192 tests, all pass                                      |
 
 ## Blockers (if any)
 

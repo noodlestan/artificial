@@ -10,13 +10,13 @@
 
 ### Changes
 
-| Goal                               | Status | Evidence                                                                                                                                                                                                                  |
+| Goal | Status | Evidence |
 | ---------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------ | -------- |
-| `verifyCheckouts` in config module | Done   | `src/config/verify-checkouts.ts` created, exported from `src/config/index.ts`; fills only requested fields (`exists`, `pushed`); missing dir → `exists: false`; no remote → `pushed: false`; dirty tree → `pushed: false` |
-| `sanity` command                   | Done   | `src/sanity.ts` created with `runSanity({ root, auto })`; wired into `src/index.ts` with `--auto` option; classifies green vs non-green; table output with `repo/directory                                                | branch | issues | pushed?` |
-| `--auto` push                      | Done   | Pushes clean unpushed repos only; marks as `pushed? = now`; never pushes dirty repos                                                                                                                                      |
-| Tests per BDD spec                 | Done   | 23 tests pass (14 config + 9 sanity); coverage 94% lines, 100% functions, 79% branches                                                                                                                                    |
-| Publish 0.0.7 and consume          | Done   | `@art-domains/workspace-cli@0.0.7` published to npm; workspace root devDependency bumped to `0.0.7`; `art-workspace sanity` runs end-to-end                                                                               |
+| `verifyCheckouts` in config module | Done | `src/config/verify-checkouts.ts` created, exported from `src/config/index.ts`; fills only requested fields (`exists`, `pushed`); missing dir → `exists: false`; no remote → `pushed: false`; dirty tree → `pushed: false` |
+| `sanity` command | Done | `src/sanity.ts` created with `runSanity({ root, auto })`; wired into `src/index.ts` with `--auto` option; classifies green vs non-green; table output with `repo/directory                                                | branch | issues | pushed?` |
+| `--auto` push | Done | Pushes clean unpushed repos only; marks as `pushed? = now`; never pushes dirty repos |
+| Tests per BDD spec | Done | 23 tests pass (14 config + 9 sanity); coverage 94% lines, 100% functions, 79% branches |
+| Publish 0.0.7 and consume | Done | `@art-domains/workspace-cli@0.0.7` published to npm; workspace root devDependency bumped to `0.0.7`; `art-workspace sanity` runs end-to-end |
 
 #### Files changed
 
