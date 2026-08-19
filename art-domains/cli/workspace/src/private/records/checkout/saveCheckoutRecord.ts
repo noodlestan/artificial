@@ -4,6 +4,8 @@ import { dirname, join } from 'node:path';
 import type { WorkspaceConfig } from '../../../config/types';
 import { CheckoutRecord } from '../types';
 
+import { makeCheckoutFilename } from './private/makeCheckoutFilename';
+
 const HARDCODED_TEMPLATE = `# Module
 
 ## Checkout: {{ name }}
@@ -17,8 +19,8 @@ const HARDCODED_TEMPLATE = `# Module
 
 export async function saveCheckoutRecord(
 	config: WorkspaceConfig,
-	file: string,
 	data: CheckoutRecord,
+	filename?: string,
 ): Promise<string> {
 	let template = HARDCODED_TEMPLATE;
 	const templatePath = join(config.root.path, config.records.checkouts.template);
@@ -26,11 +28,7 @@ export async function saveCheckoutRecord(
 		template = readFileSync(templatePath, 'utf-8');
 	}
 
-	const fileName = join(
-		config.root.path,
-		config.records.checkouts.path,
-		`${file.toLowerCase().replace(/\s+/g, '-')}.art`,
-	);
+	const fileName = filename ?? makeCheckoutFilename(config, data);
 
 	let content = template
 		.replace('{{ name }}', data.name)

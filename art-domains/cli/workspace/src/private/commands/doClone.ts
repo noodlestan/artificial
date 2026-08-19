@@ -32,7 +32,7 @@ export async function doClone(ctx: WorkspaceContext, checkout: Checkout): Promis
 		ctx.log.log(createCloneSuccess(rescan));
 
 		const actualBranch = await getCurrentBranch(checkout.path);
-		await saveCheckoutRecord(ctx.config, rescan.record.name, {
+		await saveCheckoutRecord(ctx.config, {
 			name: rescan.record.name,
 			repository: rescan.repo?.name,
 			location: rescan.record.location,

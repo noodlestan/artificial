@@ -53,7 +53,7 @@ export async function cloneSpecific(
 		const created = createCheckout(ctx.config, location, repo, 'main', checkoutName);
 
 		ctx.store.addCheckout(created);
-		await saveCheckoutRecord(ctx.config, created.record.name, created.record);
+		await saveCheckoutRecord(ctx.config, created.record);
 
 		await cloneIfMissing(ctx, created);
 	}

@@ -20,7 +20,7 @@ export async function doBranchCheckout(
 
 		const updated = { ...checkout, record: { ...checkout.record, branch } };
 		ctx.store.updateCheckout(updated);
-		await saveCheckoutRecord(ctx.config, updated.record.name, updated.record);
+		await saveCheckoutRecord(ctx.config, updated.record, updated.filename);
 		return updated;
 	} catch (error) {
 		const op = createBranchFailure(branch, error, checkout);

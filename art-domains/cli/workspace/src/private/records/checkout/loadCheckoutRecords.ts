@@ -16,7 +16,8 @@ export function loadCheckoutRecords(
 	const files = readdirSync(dir).filter(f => f.endsWith('.art'));
 	const checkouts: RepositoryCheckoutRecord[] = [];
 	for (const file of files) {
-		const record = readCheckoutRecord(join(dir, file));
+		const filePath = join(dir, file);
+		const record = readCheckoutRecord(filePath);
 		if (!record.name) {
 			console.warn('checkout record with empty name, skipped');
 			continue;
@@ -26,10 +27,12 @@ export function loadCheckoutRecords(
 			checkouts.push({
 				repo,
 				checkout: record,
+				filename: filePath,
 			});
 		} else {
 			checkouts.push({
 				checkout: record,
+				filename: filePath,
 			});
 		}
 	}

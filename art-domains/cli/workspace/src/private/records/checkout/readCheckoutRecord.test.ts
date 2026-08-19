@@ -24,7 +24,7 @@ describe('readCheckoutRecord', () => {
 		const file = join(tempDir, 'test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
-		const saved = await saveCheckoutRecord(config, file, data);
+		const saved = await saveCheckoutRecord(config, data, file);
 		const read = readCheckoutRecord(saved);
 
 		expect(read).toEqual(data);

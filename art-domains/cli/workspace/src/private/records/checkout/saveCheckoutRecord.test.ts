@@ -22,7 +22,7 @@ describe('saveCheckoutRecord', () => {
 		const file = join(tempDir, 'test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
-		const saved = await saveCheckoutRecord(config, file, data);
+		const saved = await saveCheckoutRecord(config, data, file);
 		const content = readFileSync(saved, 'utf-8');
 
 		expect(content).toContain('## Checkout: Artificial');
@@ -36,7 +36,7 @@ describe('saveCheckoutRecord', () => {
 		const file = join(tempDir, 'ops/records/checkouts/test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
-		const saved = await saveCheckoutRecord(config, file, data);
+		const saved = await saveCheckoutRecord(config, data, file);
 		const content = readFileSync(saved, 'utf-8');
 
 		expect(content).toContain('## Checkout: Artificial');
@@ -49,10 +49,22 @@ describe('saveCheckoutRecord', () => {
 		const file = join(tempDir, 'ops/records/checkouts/test.art');
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
-		const saved = await saveCheckoutRecord(config, file, data);
+		const saved = await saveCheckoutRecord(config, data, file);
 		const content = readFileSync(saved, 'utf-8');
 
 		expect(content).toContain('## Checkout: Artificial');
 		expect(content).toContain('**Location:** `repos/artificial`');
+	});
+
+	it('generates filename when no explicit file is provided', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const config = makeMockConfig(tempDir);
+		const data = { name: 'My Checkout', location: 'repos/my-checkout', branch: 'main' };
+
+		const saved = await saveCheckoutRecord(config, data);
+		const content = readFileSync(saved, 'utf-8');
+
+		expect(saved).toBe(join(tempDir, 'ops/records/checkouts/my-checkout.art'));
+		expect(content).toContain('## Checkout: My Checkout');
 	});
 });

@@ -108,7 +108,7 @@ cloneSpecific(ctx, repos, repoName, checkoutInput)
     name = checkoutInput ? `${repo.name} @ ${checkoutInput}` : repo.name
     checkout = createCheckout(ctx.config, location, repo, "main", name)
     ctx.store.addCheckout(checkout)
-    saveCheckoutRecord(ctx.config, checkout.record.name, checkout.record)
+    await saveCheckoutRecord(ctx.config, checkout.record)
 
   cloneIfMissing(ctx, checkout)
   scanCheckoutState(checkout)
@@ -151,7 +151,7 @@ branch(branch, checkoutLocations)
       updated = { ...checkout, record: { ...checkout.record, branch } }
       ctx.store.updateCheckout(updated)
       scanned = scanCheckoutState(updated)
-      saveCheckoutRecord(ctx.config, scanned.record.name, scanned.record)
+      await saveCheckoutRecord(ctx.config, scanned.record, scanned.filename)
     catch error:
       ctx.log.log(createBranchFailure(branch, error, checkout))
       continue
@@ -482,6 +482,16 @@ createWorkspaceCheckout(config)
   }
 ```
 
+### Function: makeCheckoutFilename(config, data)
+
+**Responsibility:** Derive the destination path for a new checkout record file. The slug is derived from `data.name`, lowercased with spaces replaced by dashes. Used by `saveCheckoutRecord` when no explicit filename is provided.
+
+```pseudo
+makeCheckoutFilename(config, data)
+  slug = data.name.toLowerCase().replace(/\s+/g, "-")
+  return join(config.root.path, config.records.checkouts.path, slug + ".art")
+```
+
 ### Function: CheckoutScan guards
 
 **Responsibility:** Whether a checkout is clean (no uncommitted changes, no conflicts, not detached).
@@ -749,7 +759,7 @@ cloneIfMissing(ctx, checkout)
   ctx.log.log(createCloneSuccess(rescan))
 
   actualBranch = getCurrentBranch(scanned.path)
-  saveCheckoutRecord(ctx.config, rescan.record.name, {
+  await saveCheckoutRecord(ctx.config, {
     name: rescan.record.name,
     repository: rescan.repo?.name,
     location: rescan.record.location,
@@ -886,18 +896,18 @@ loadCheckoutRecords(config, repos)
   return records
 ```
 
-### Function: saveCheckoutRecord(config, name, record)
+### Function: saveCheckoutRecord(config, data, filename?)
 
-**Responsibility:** Write a checkout record as an `.art` file under the checkouts records path, rendering the record template (`{{ name }}`, `{{ repository }}`, `{{ location }}`, `{{ branch }}`). The file name is the record name lowercased with spaces replaced by dashes.
+**Responsibility:** Write a checkout record as an `.art` file. When `filename` is provided, write directly to that path (loaded-record update). When omitted, call `makeCheckoutFilename(config, data)` to derive the destination (new-record creation). The function is `async` returning `Promise<string>` for API consistency.
 
 **Pseudo:**
 
 ```pseudo
-saveCheckoutRecord(config, name, record)
+saveCheckoutRecord(config, data, filename?)
   template = read template at config.records.checkouts.template (or hardcoded default)
-  content = render(template, record)
-  fileName = join(config.root.path, config.records.checkouts.path, name.toLowerCase().replace(/\s+/g, "-") + ".art")
-  if not record.repository: drop the "Repository:" line from content
+  content = render(template, data)
+  fileName = filename ?? makeCheckoutFilename(config, data)
+  if not data.repository: drop the "Repository:" line from content
   mkdir dirname(fileName), recursive
   write file fileName with content
   return fileName

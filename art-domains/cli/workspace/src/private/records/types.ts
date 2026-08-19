@@ -9,6 +9,7 @@ export interface RepositoryRecord {
 export interface RepositoryCheckoutRecord {
 	repo?: RepositoryRecord;
 	checkout: CheckoutRecord;
+	filename: string;
 }
 
 export interface CheckoutRecord {

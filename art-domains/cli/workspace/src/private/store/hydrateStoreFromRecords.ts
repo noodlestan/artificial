@@ -17,6 +17,6 @@ export function hydrateStoreFromRecords(
 			record.checkout.branch,
 			record.checkout.name,
 		);
-		store.addCheckout(checkout);
+		store.addCheckout({ ...checkout, filename: record.filename });
 	}
 }
