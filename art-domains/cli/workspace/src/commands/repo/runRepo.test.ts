@@ -36,9 +36,10 @@ afterEach(() => {
 });
 
 describe('repo command', () => {
-	it("lists a single checkout's packages", async () => {
-		const tempDir = makeTempDir(tempDirs);
-		const ctx = createMockCommandContext(tempDir);
+	async function setupCheckoutWithPackages(
+		tempDir: string,
+		ctx: { config: { clone: { path: string } } },
+	) {
 		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial');
 		await initGitRepoTest(checkoutDir);
 
@@ -81,6 +82,15 @@ describe('repo command', () => {
 		writeFileSync(join(pkgDir, 'package.json'), JSON.stringify({ version: '1.0.0' }));
 
 		vi.mocked(execSync).mockReturnValue('1.2.3\n');
+		vi.mocked(execSync).mockClear();
+
+		return checkoutDir;
+	}
+
+	it("lists a single checkout's packages", async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createMockCommandContext(tempDir);
+		await setupCheckoutWithPackages(tempDir, ctx);
 
 		await runRepo(ctx, { locations: ['artificial'] });
 
@@ -153,6 +163,7 @@ describe('repo command', () => {
 		writeFileSync(join(pkgDir2, 'package.json'), JSON.stringify({ version: '2.0.0' }));
 
 		vi.mocked(execSync).mockReturnValue('1.2.3\n');
+		vi.mocked(execSync).mockClear();
 
 		await runRepo(ctx, { locations: [] });
 
@@ -180,6 +191,65 @@ describe('repo command', () => {
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
 		expect(output).toContain('issues: no project records');
+	});
+
+	it('groups each repository report with its package report', async () => {
+		const tempDir = makeTempDir(tempDirs);
+		const ctx = createMockCommandContext(tempDir);
+		const dir1 = join(tempDir, ctx.config.clone.path, 'artificial');
+		const dir2 = join(tempDir, ctx.config.clone.path, 'purrception');
+		await initGitRepoTest(dir1);
+		await initGitRepoTest(dir2);
+
+		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
+		writeRepoMockRecord(tempDir, 'Purrception', 'git@example.com:purrception.git');
+		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
+		writeCheckoutMockRecord(tempDir, 'Purrception', 'Purrception', 'purrception');
+
+		writeProjectMockRecord(dir1, 'Artificial', {
+			remote: 'git@example.com:artificial.git',
+			path: '.',
+			namespaces: ['Art Domains'],
+		});
+		writeNamespaceMockRecord(dir1, 'Art Domains', {
+			path: 'artisans',
+			packages: ['Art Mantras'],
+		});
+		writePackageMockRecord(dir1, 'Art Mantras', {
+			canonicalName: '@artisans/art-mantras',
+			path: 'apps/art-mantras',
+		});
+
+		writeProjectMockRecord(dir2, 'Purrception', {
+			remote: 'git@example.com:purrception.git',
+			path: '.',
+			namespaces: ['Purrception Domains'],
+		});
+		writeNamespaceMockRecord(dir2, 'Purrception Domains', {
+			path: 'core',
+			packages: ['Purrception Core'],
+		});
+		writePackageMockRecord(dir2, 'Purrception Core', {
+			canonicalName: '@purrception/core',
+			path: 'packages/core',
+		});
+
+		await runRepo(ctx, { locations: [] });
+
+		const lines = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]);
+		const repoIdx1 = lines.findIndex(l => l === '  name: Artificial');
+		const repoIdx2 = lines.findIndex(l => l === '  name: Purrception');
+		const pkgIdx1 = lines.findIndex(l => l.startsWith('Packages for Artificial'));
+		const pkgIdx2 = lines.findIndex(l => l.startsWith('Packages for Purrception'));
+
+		expect(repoIdx1).toBeGreaterThanOrEqual(0);
+		expect(repoIdx2).toBeGreaterThanOrEqual(0);
+		expect(pkgIdx1).toBeGreaterThanOrEqual(0);
+		expect(pkgIdx2).toBeGreaterThanOrEqual(0);
+
+		expect(repoIdx1).toBeLessThan(pkgIdx1);
+		expect(pkgIdx1).toBeLessThan(repoIdx2);
+		expect(repoIdx2).toBeLessThan(pkgIdx2);
 	});
 
 	it('unknown checkout warns and skips', async () => {
@@ -268,6 +338,7 @@ describe('repo command', () => {
 		});
 
 		vi.mocked(execSync).mockReturnValue('1.2.3\n');
+		vi.mocked(execSync).mockClear();
 
 		await runRepo(ctx, { locations: ['artificial'] });
 
@@ -281,29 +352,7 @@ describe('repo command', () => {
 	it('identifies packages where npm info fails', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createMockCommandContext(tempDir);
-		const checkoutDir = join(tempDir, ctx.config.clone.path, 'artificial');
-		await initGitRepoTest(checkoutDir);
-
-		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
-		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
-
-		writeProjectMockRecord(checkoutDir, 'Artificial', {
-			remote: 'git@example.com:artificial.git',
-			path: '.',
-			namespaces: ['Art Domains'],
-		});
-		writeNamespaceMockRecord(checkoutDir, 'Art Domains', {
-			path: 'artisans',
-			packages: ['Art Mantras'],
-		});
-		writePackageMockRecord(checkoutDir, 'Art Mantras', {
-			canonicalName: '@artisans/art-mantras',
-			path: 'apps/art-mantras',
-		});
-
-		const pkgDir = join(checkoutDir, 'artisans', 'apps', 'art-mantras');
-		mkdirSync(pkgDir, { recursive: true });
-		writeFileSync(join(pkgDir, 'package.json'), JSON.stringify({ version: '1.2.3' }));
+		await setupCheckoutWithPackages(tempDir, ctx);
 
 		vi.mocked(execSync).mockImplementation(() => {
 			throw new Error('npm info failed');

@@ -106,7 +106,9 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/repo-state-report-repeated-checkouts.md`
 
-### `fix-tests-and-update-plan` - `PLANNED`
+### `fix-tests-and-update-plan` - `DONE`
+
+**Bug.id:** `repo-identify-checkout`, `repo-state-report-under-its-repo-report`, `repo-state-report-repeated-checkouts`
 
 **Commit Message:** `test(workspace-cli): improve repo command test coverage`
 
@@ -132,4 +134,28 @@ Milestone 1 — Complete Workspace CLI (`$PACKAGE/_backlog/3-now/milestone-one/m
 
 ## Feedback
 
-No implementation feedback yet; all five commits are planned for Milestone 1 execution.
+### `fix-tests-and-update-plan`
+
+**Test baseline:** 10 tests, 4.25s → **11 tests, 5.12s** (focused suite). Full suite: 228/228 passed.
+
+**Coverage decisions:**
+
+| Test                                                        | Decision                | Evidence                                                                                              |
+| ----------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| `lists a single checkout's packages`                        | Retained + consolidated | Refactored to shared `setupCheckoutWithPackages` helper; same assertions                              |
+| `keeps two checkouts of one repository distinct`            | Retained as-is          | Unique setup (two same-repo checkouts); tests distinct package versions                               |
+| `defaults to all checkouts when none specified`             | Retained as-is          | Unique setup (two different repos); tests default behavior                                            |
+| `checkout has no project records`                           | Retained as-is          | Unique setup (no project records)                                                                     |
+| `resolves checkout by location when name does not match`    | Retained                | Direct regression for `repo-identify-checkout`                                                        |
+| `unknown checkout warns and skips`                          | Retained as-is          | Tests negative path (no records)                                                                      |
+| `project references a missing namespace`                    | Retained as-is          | Unique setup (no packages)                                                                            |
+| `namespace references a missing package`                    | Retained as-is          | Unique setup (no packages)                                                                            |
+| `package path has no package.json`                          | Retained as-is          | Unique setup (no package.json file); cannot use shared helper                                         |
+| `npm info fails`                                            | Retained + consolidated | Refactored to shared `setupCheckoutWithPackages` helper                                               |
+| **`groups each repository report with its package report`** | **Added**               | **New focused regression for `repo-state-report-under-its-repo-report`; asserts contiguous ordering** |
+
+**Consolidation:**
+
+- Extracted `setupCheckoutWithPackages` helper for the single-checkout-with-packages pattern (used by 2 tests).
+- Two tests remain with full inline setup because their setup differs meaningfully (no package.json, no packages at all).
+- No tests removed — all existing tests cover unique behavior paths.
