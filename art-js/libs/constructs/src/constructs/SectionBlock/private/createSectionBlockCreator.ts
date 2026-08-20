@@ -35,6 +35,5 @@ export function createSectionBlockCreator(): ConstructCreator {
 			if (tags.length) section.tags = tags;
 			return section;
 		},
-		shouldVisit: false,
 	};
 }

@@ -21,7 +21,7 @@
 
 ## Summary
 
-Bootstrap `@art-js/artificial-serializer` (artast → mdast → md) at `$PACKAGE_SERIALIZER` with test coverage, and extend the fixture tests to two directions: `source.md → art.json` (already asserted) and `art.json → parsed.md`, diffing `source.md` against `parsed.md` (diff counted as overhead). Executed within the Artificial repository (`$PROJECT`) as phase 5 of the MD Art Roundtrip milestone. The serializer depends on primitives and constructs; it is responsible for the last part of (lossless) roundtrip.
+Bootstrap `@art-js/artificial-serializer` (artast → mdast → md) at `$PACKAGE_SERIALIZER` with test coverage, and extend the fixture tests to two directions: `source.md → art.json` and `art.json → parsed.md`, diffing `source.md` against `parsed.md`. The work also makes the parser's block/inline conversion and construct capture boundaries explicit enough for the serializer to consume the resulting tree. Executed within the Artificial repository (`$PROJECT`) as phase 5 of the MD Art Roundtrip milestone.
 
 ## Scope
 
@@ -95,7 +95,7 @@ npm run build
 npm run test
 ```
 
-Serializer package: unit tests for `serialize(document): string`. Parser package: two-way fixture tests pass — forward direction (`md/art → art.json` vs checked in `art.json`) and return direction (`art.json → parsed.md`, diffed against `source.md`).
+Serializer package: unit tests for `serialize(document): string`. Parser package: two-way fixture tests pass for the maintained numbered fixtures — forward direction (`md/art → art.json` vs checked-in snapshots) and return direction (`art.json → parsed.md`, diffed against `source.md`). Exploratory underscore fixtures remain parser-only inspection material and may have intentionally stale snapshots.
 
 ## Commits
 
@@ -181,9 +181,9 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 - The serializer-wip `test-parser.ts` writes `.art.json` files as a side-effect of testing; this is the problem this instruction aims to fix.
 - The serializer-wip also contains additional constructs/FieldInline work that may inform implementation, but the real fix is parser-side (see insight in planner reflection).
 
-### `build-incremental-roundtrip-fixtures` - `WORKING`
+### `build-incremental-roundtrip-fixtures` - `READY`
 
-**Commit Message:** `test(md-art-roundtrip): add incremental parser and serializer fixtures`
+**Commit Message:** `build(md-art-roundtrip): add incremental parser and serializer fixtures`
 
 **Instructions File:** `_backlog/3-now/plan-implement-serializer/instructions/build-incremental-roundtrip-fixtures.md`
 
@@ -192,7 +192,9 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 - Add a fixture ladder from the passing `hello-world.md` baseline through section-only, inline-field-only, block-field-only, and combined section/field cases.
 - For each fixture, generate the parser snapshot, inspect the captured AST, and run the focused serializer roundtrip.
 - Investigate demonstrated failures in parser/construct/serializer code and add focused constructs unit tests when fixes are required.
-- Document construct responsibilities: parser preprocessor, handler, factory, and construct `toMdast()` conversion.
+- Preserve the block/inline distinction recursively: natural block records contain natural expression records for phrasing children, while list items and other mdast attributes are retained.
+- Make FieldBlock capture construct-owned: it captures following natural blocks and closes itself before the next FieldBlock, FieldInline, or SectionBlock.
+- Simplify construct APIs by removing redundant matching/visit hooks and document the remaining preprocessor, factory, handler, and context responsibilities.
 
 ## Follow ups
 
@@ -204,11 +206,14 @@ None.
 
 - `bootstrap-serializer-lib`: Instructions clear; all 12 unit tests passing; serializer package scaffolded with ToMdast functions for all 5 constructs; CI passes (12/12 tasks).
 - `two-way-fixture-tests`: Instructions clear and self-contained; pseudo-code matched implementation shape closely; 15 fixture snapshot checks pass (forward); return direction serializes without errors; roundtrip overhead logged as informational (1277 lines differ — expected, not failure).
-- `build-incremental-roundtrip-fixtures`: Blocked before any changes because the instruction's mandatory reading references `$PACKAGE_PARSER/_pairing_notes.md`, which is absent from this checkout.
+- `build-incremental-roundtrip-fixtures`: Completed in the workspace after the mandatory-reading blocker was removed; the incremental fixtures were added and verified, parser natural-node conversion and FieldBlock boundaries were corrected, and the parser/serializer/package checks passed for the maintained fixture set.
 
 ### Planner Reflection
 
 - Both instructions executed cleanly — no blockers or technical debt surfaced.
 - Roundtrip diffs (1277 lines) are expected overhead; fidelity refinement is explicitly scoped to phase 8 (`plan-implement-gaps`).
 - The two-step dependency (serializer before fixture tests) held — second instruction successfully imported and used the new serializer package.
-- **New insight from pairing session:** The parser gap (no inline vs block distinction) is the root cause of 228 lines of roundtrip diffs across 6 fixtures. The serializer fixes in `serializer-wip` branch are workarounds. The real fix is parser-side (add `FieldInline` construct).
+- **Architecture insight:** The parser must preserve the mdast block/phrasing distinction recursively. `NaturalBlock` handles block content and `NaturalExpression` handles mdast phrasing content, with mdast attributes stored generically apart from `children`.
+- **Architecture insight:** FieldBlock, not FieldInline or the generic builder, owns its capture boundary. Its active context closes when the next `FieldBlock`, `FieldInline`, or `SectionBlock` arrives; the builder only invokes `beforeRecord()` and dispatches the returned context.
+- **Architecture insight:** `ConstructCreator.shouldVisit` and `ConstructPreProcessor.canPreProcess` were redundant and were removed. The remaining APIs are `preProcess`, `detect/create`, and `handle`, grouped by `ConstructParser`.
+- The remaining known WIP is formatted SectionBlock heading fidelity and the serializer debug flag naming; neither should be hidden by changing snapshots without inspection.

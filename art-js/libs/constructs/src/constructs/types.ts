@@ -8,16 +8,13 @@ import type { Construct } from '../registry';
 export interface ConstructCreator {
 	detect(node: MdastNode, context: VisitContext): boolean;
 	create(node: MdastNode, context: VisitContext): Construct | Construct[];
-	shouldVisit: boolean;
 }
 
 export interface ConstructPreProcessor {
-	canPreProcess(node: MdastNode, context: VisitContext): boolean;
 	preProcess(node: MdastNode, context: VisitContext): Construct | null;
 }
 
 export interface ConstructHandler {
-	canHandle(record: Construct): boolean;
 	handle(record: Construct, node: MdastNode, context: VisitContext): VisitContext;
 }
 

@@ -6,9 +6,6 @@ import type { Tag } from './types';
 
 export function createTagRoutingHandler(): ConstructHandler {
 	return {
-		canHandle(record) {
-			return record.construct === 'Tag';
-		},
 		handle(record, _node, context) {
 			const section = findTagable(context) as SectionBlock;
 			if (section) {

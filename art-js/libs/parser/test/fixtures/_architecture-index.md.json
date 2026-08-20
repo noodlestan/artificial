@@ -64,7 +64,9 @@
               },
               "children": [
                 {
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": "Milestone One focuses on generating agent instructions from domain sources.",
                   "position": {
                     "end": {
@@ -104,7 +106,9 @@
               },
               "children": [
                 {
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": "The first implementation establishes the complete path from Art source to targeted agent context: defining domain resources in a distributable package, installing that package into a project, bootstrapping the domain, and compiling its resources into the projections required by different agents.",
                   "position": {
                     "end": {
@@ -144,7 +148,9 @@
               },
               "children": [
                 {
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": "A domain package provides the resources and supporting infrastructure required to use the domain in a project. Installation bootstraps the project with the domain's essential Art instructions, skills, agent modes, and domain resources such as templates and routines.",
                   "position": {
                     "end": {
@@ -184,7 +190,9 @@
               },
               "children": [
                 {
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": "The initial milestone therefore validates the core model rather than attempting to solve every possible Art compilation target: a domain can be packaged, installed, interpreted, and compiled into useful, use-case-specific agent instructions from a single source of truth.",
                   "position": {
                     "end": {
@@ -270,7 +278,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The main goal of the projection system is to make the same domain knowledge usable by different consumers without requiring each consumer to receive the entire domain.",
                       "position": {
                         "end": {
@@ -310,7 +320,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The compiler produces a set of per-use-case ",
                       "position": {
                         "end": {
@@ -326,7 +338,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 60,
@@ -341,7 +355,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "projections",
                           "position": {
                             "end": {
@@ -359,7 +375,9 @@
                       ]
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " — compiled representations of a domain tailored to a particular consumer. Projections are committed to git rather than generated at consumption time. Because compilation is deterministic, the same source and configuration always produce the same projections, making generated context diffable, reviewable, and reproducible.",
                       "position": {
                         "end": {
@@ -399,7 +417,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Tags attached to resource declarations provide the primary projection mechanism. Tags identify the projections for which a declaration is relevant and can determine whether a declaration is included, excluded, or transformed. Projection rules can therefore express both simple membership and consumer-specific representations of the same underlying resource.",
                       "position": {
                         "end": {
@@ -439,7 +459,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The initial projections are:",
                       "position": {
                         "end": {
@@ -483,7 +505,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Author** — complete knowledge required to create and modify Art sources.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Author** — complete knowledge required to create and modify Art sources.",
                       "position": {
                         "end": {
                           "column": 77,
@@ -491,15 +516,94 @@
                           "offset": 2022
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 25,
-                          "offset": 1948
+                          "offset": 1946
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Author** — complete knowledge required to create and modify Art sources.",
+                          "position": {
+                            "end": {
+                              "column": 77,
+                              "line": 25,
+                              "offset": 2022
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 25,
+                              "offset": 1948
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 13,
+                                  "line": 25,
+                                  "offset": 1958
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 25,
+                                  "offset": 1948
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Author",
+                                  "position": {
+                                    "end": {
+                                      "column": 11,
+                                      "line": 25,
+                                      "offset": 1956
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 25,
+                                      "offset": 1950
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — complete knowledge required to create and modify Art sources.",
+                              "position": {
+                                "end": {
+                                  "column": 77,
+                                  "line": 25,
+                                  "offset": 2022
+                                },
+                                "start": {
+                                  "column": 13,
+                                  "line": 25,
+                                  "offset": 1958
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Generator** — knowledge required to consume Art sources and generate derived resources.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Generator** — knowledge required to consume Art sources and generate derived resources.",
                       "position": {
                         "end": {
                           "column": 92,
@@ -507,15 +611,94 @@
                           "offset": 2114
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 26,
-                          "offset": 2025
+                          "offset": 2023
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Generator** — knowledge required to consume Art sources and generate derived resources.",
+                          "position": {
+                            "end": {
+                              "column": 92,
+                              "line": 26,
+                              "offset": 2114
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 26,
+                              "offset": 2025
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 16,
+                                  "line": 26,
+                                  "offset": 2038
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 26,
+                                  "offset": 2025
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Generator",
+                                  "position": {
+                                    "end": {
+                                      "column": 14,
+                                      "line": 26,
+                                      "offset": 2036
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 26,
+                                      "offset": 2027
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — knowledge required to consume Art sources and generate derived resources.",
+                              "position": {
+                                "end": {
+                                  "column": 92,
+                                  "line": 26,
+                                  "offset": 2114
+                                },
+                                "start": {
+                                  "column": 16,
+                                  "line": 26,
+                                  "offset": 2038
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Operator** — the minimum knowledge required to execute domain operations and make controlled modifications.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Operator** — the minimum knowledge required to execute domain operations and make controlled modifications.",
                       "position": {
                         "end": {
                           "column": 112,
@@ -523,15 +706,94 @@
                           "offset": 2226
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 27,
-                          "offset": 2117
+                          "offset": 2115
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Operator** — the minimum knowledge required to execute domain operations and make controlled modifications.",
+                          "position": {
+                            "end": {
+                              "column": 112,
+                              "line": 27,
+                              "offset": 2226
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 27,
+                              "offset": 2117
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 15,
+                                  "line": 27,
+                                  "offset": 2129
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 27,
+                                  "offset": 2117
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Operator",
+                                  "position": {
+                                    "end": {
+                                      "column": 13,
+                                      "line": 27,
+                                      "offset": 2127
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 27,
+                                      "offset": 2119
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — the minimum knowledge required to execute domain operations and make controlled modifications.",
+                              "position": {
+                                "end": {
+                                  "column": 112,
+                                  "line": 27,
+                                  "offset": 2226
+                                },
+                                "start": {
+                                  "column": 15,
+                                  "line": 27,
+                                  "offset": 2129
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Indexer** — a compact representation of the domain surface for general-purpose discovery, querying, and lightweight maintenance.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Indexer** — a compact representation of the domain surface for general-purpose discovery, querying, and lightweight maintenance.",
                       "position": {
                         "end": {
                           "column": 133,
@@ -539,11 +801,87 @@
                           "offset": 2359
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 28,
-                          "offset": 2229
+                          "offset": 2227
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Indexer** — a compact representation of the domain surface for general-purpose discovery, querying, and lightweight maintenance.",
+                          "position": {
+                            "end": {
+                              "column": 133,
+                              "line": 28,
+                              "offset": 2359
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 28,
+                              "offset": 2229
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 14,
+                                  "line": 28,
+                                  "offset": 2240
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 28,
+                                  "offset": 2229
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Indexer",
+                                  "position": {
+                                    "end": {
+                                      "column": 12,
+                                      "line": 28,
+                                      "offset": 2238
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 28,
+                                      "offset": 2231
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — a compact representation of the domain surface for general-purpose discovery, querying, and lightweight maintenance.",
+                              "position": {
+                                "end": {
+                                  "column": 133,
+                                  "line": 28,
+                                  "offset": 2359
+                                },
+                                "start": {
+                                  "column": 14,
+                                  "line": 28,
+                                  "offset": 2240
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 },
@@ -570,7 +908,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Projections are not separate sources of truth. They are deterministic views of the same domain sources, compiled according to the needs and permissions of their consumers.",
                       "position": {
                         "end": {
@@ -634,7 +974,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "A domain is a self-contained area of knowledge and operations — a collection of art sources declaring structures, types, routines, commands, and vocabulary. A domain is the unit of targeting and packaging: the compiler compiles each declared domain into one projection per use case, and a domain can be packaged as a reusable artifact (e.g. ",
                       "position": {
                         "end": {
@@ -650,7 +992,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": "@artificial/tasks",
                       "position": {
                         "end": {
@@ -666,7 +1010,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ").",
                       "position": {
                         "end": {
@@ -730,7 +1076,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Art files (",
                       "position": {
                         "end": {
@@ -746,7 +1094,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": ".art",
                       "position": {
                         "end": {
@@ -762,7 +1112,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ") are the source of truth for declarations: structures, types, routines, commands, and vocabulary. Any markdown file is a valid ",
                       "position": {
                         "end": {
@@ -778,7 +1130,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": ".art",
                       "position": {
                         "end": {
@@ -794,7 +1148,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " file; files not authored in art require more inference to read correctly.",
                       "position": {
                         "end": {
@@ -834,7 +1190,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "A declaration is a resource: a markdown heading of the form ",
                       "position": {
                         "end": {
@@ -850,7 +1208,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": "# Kind: Name",
                       "position": {
                         "end": {
@@ -866,7 +1226,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " declares a resource of that kind with that name. The declaration form is fixed by the language — closed syntax — while the meaning of each kind is defined by the domain's structures — open semantics.",
                       "position": {
                         "end": {
@@ -906,7 +1268,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Template files (",
                       "position": {
                         "end": {
@@ -922,7 +1286,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": ".tart",
                       "position": {
                         "end": {
@@ -938,7 +1304,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ") are renderers that turn records into outputs. ",
                       "position": {
                         "end": {
@@ -954,7 +1322,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": ".tart",
                       "position": {
                         "end": {
@@ -970,7 +1340,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " files are typically compiled into markdown by the domain Generator, so agents mostly encounter the baked ",
                       "position": {
                         "end": {
@@ -986,7 +1358,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": ".md",
                       "position": {
                         "end": {
@@ -1002,7 +1376,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " output rather than the ",
                       "position": {
                         "end": {
@@ -1018,7 +1394,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": ".tart",
                       "position": {
                         "end": {
@@ -1034,7 +1412,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " template itself.",
                       "position": {
                         "end": {
@@ -1098,7 +1478,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The compiler is ",
                       "position": {
                         "end": {
@@ -1114,7 +1496,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 29,
@@ -1129,7 +1513,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "reactive",
                           "position": {
                             "end": {
@@ -1147,7 +1533,9 @@
                       ]
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " and works as a ",
                       "position": {
                         "end": {
@@ -1163,7 +1551,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 60,
@@ -1178,7 +1568,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "pull system",
                           "position": {
                             "end": {
@@ -1196,7 +1588,9 @@
                       ]
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " — consumers pull compiled output from the sources they need, rather than having output pushed at them. An entry point selects what to compile; source changes propagate reactively to downstream consumers.",
                       "position": {
                         "end": {
@@ -1236,7 +1630,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Its responsibility is to transform Art sources into deterministic projections while remaining independent of the semantics of individual resource kinds. The parser understands the language's declaration syntax, but the meaning of a declaration belongs to the domain that defines its kind.",
                       "position": {
                         "end": {
@@ -1276,7 +1672,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The compilation pipeline is:",
                       "position": {
                         "end": {
@@ -1320,7 +1718,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Parse** — read `.art` sources into structured records.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Parse** — read `.art` sources into structured records.",
                       "position": {
                         "end": {
                           "column": 59,
@@ -1328,15 +1729,130 @@
                           "offset": 4327
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 52,
-                          "offset": 4271
+                          "offset": 4269
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Parse** — read `.art` sources into structured records.",
+                          "position": {
+                            "end": {
+                              "column": 59,
+                              "line": 52,
+                              "offset": 4327
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 52,
+                              "offset": 4271
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 12,
+                                  "line": 52,
+                                  "offset": 4280
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 52,
+                                  "offset": 4271
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Parse",
+                                  "position": {
+                                    "end": {
+                                      "column": 10,
+                                      "line": 52,
+                                      "offset": 4278
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 52,
+                                      "offset": 4273
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — read ",
+                              "position": {
+                                "end": {
+                                  "column": 20,
+                                  "line": 52,
+                                  "offset": 4288
+                                },
+                                "start": {
+                                  "column": 12,
+                                  "line": 52,
+                                  "offset": 4280
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": ".art",
+                              "position": {
+                                "end": {
+                                  "column": 26,
+                                  "line": 52,
+                                  "offset": 4294
+                                },
+                                "start": {
+                                  "column": 20,
+                                  "line": 52,
+                                  "offset": 4288
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " sources into structured records.",
+                              "position": {
+                                "end": {
+                                  "column": 59,
+                                  "line": 52,
+                                  "offset": 4327
+                                },
+                                "start": {
+                                  "column": 26,
+                                  "line": 52,
+                                  "offset": 4294
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Extract** — select the declarations relevant to the requested projection or compilation target.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Extract** — select the declarations relevant to the requested projection or compilation target.",
                       "position": {
                         "end": {
                           "column": 100,
@@ -1344,15 +1860,94 @@
                           "offset": 4427
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 53,
-                          "offset": 4330
+                          "offset": 4328
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Extract** — select the declarations relevant to the requested projection or compilation target.",
+                          "position": {
+                            "end": {
+                              "column": 100,
+                              "line": 53,
+                              "offset": 4427
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 53,
+                              "offset": 4330
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 14,
+                                  "line": 53,
+                                  "offset": 4341
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 53,
+                                  "offset": 4330
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Extract",
+                                  "position": {
+                                    "end": {
+                                      "column": 12,
+                                      "line": 53,
+                                      "offset": 4339
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 53,
+                                      "offset": 4332
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — select the declarations relevant to the requested projection or compilation target.",
+                              "position": {
+                                "end": {
+                                  "column": 100,
+                                  "line": 53,
+                                  "offset": 4427
+                                },
+                                "start": {
+                                  "column": 14,
+                                  "line": 53,
+                                  "offset": 4341
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Transform** — apply projection tags, overloads, aggregations, and other transformations defined by the compilation configuration.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Transform** — apply projection tags, overloads, aggregations, and other transformations defined by the compilation configuration.",
                       "position": {
                         "end": {
                           "column": 134,
@@ -1360,15 +1955,94 @@
                           "offset": 4561
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 54,
-                          "offset": 4430
+                          "offset": 4428
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Transform** — apply projection tags, overloads, aggregations, and other transformations defined by the compilation configuration.",
+                          "position": {
+                            "end": {
+                              "column": 134,
+                              "line": 54,
+                              "offset": 4561
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 54,
+                              "offset": 4430
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 16,
+                                  "line": 54,
+                                  "offset": 4443
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 54,
+                                  "offset": 4430
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Transform",
+                                  "position": {
+                                    "end": {
+                                      "column": 14,
+                                      "line": 54,
+                                      "offset": 4441
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 54,
+                                      "offset": 4432
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — apply projection tags, overloads, aggregations, and other transformations defined by the compilation configuration.",
+                              "position": {
+                                "end": {
+                                  "column": 134,
+                                  "line": 54,
+                                  "offset": 4561
+                                },
+                                "start": {
+                                  "column": 16,
+                                  "line": 54,
+                                  "offset": 4443
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Render** — format the resulting records as the target representation, such as sections, tables, lists, summaries, or other generated resources.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Render** — format the resulting records as the target representation, such as sections, tables, lists, summaries, or other generated resources.",
                       "position": {
                         "end": {
                           "column": 148,
@@ -1376,11 +2050,87 @@
                           "offset": 4709
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 55,
-                          "offset": 4564
+                          "offset": 4562
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Render** — format the resulting records as the target representation, such as sections, tables, lists, summaries, or other generated resources.",
+                          "position": {
+                            "end": {
+                              "column": 148,
+                              "line": 55,
+                              "offset": 4709
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 55,
+                              "offset": 4564
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 13,
+                                  "line": 55,
+                                  "offset": 4574
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 55,
+                                  "offset": 4564
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Render",
+                                  "position": {
+                                    "end": {
+                                      "column": 11,
+                                      "line": 55,
+                                      "offset": 4572
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 55,
+                                      "offset": 4566
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — format the resulting records as the target representation, such as sections, tables, lists, summaries, or other generated resources.",
+                              "position": {
+                                "end": {
+                                  "column": 148,
+                                  "line": 55,
+                                  "offset": 4709
+                                },
+                                "start": {
+                                  "column": 13,
+                                  "line": 55,
+                                  "offset": 4574
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 },
@@ -1407,7 +2157,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The parser is built on the unified ecosystem — micromark, the same foundation used by GFM and MDX. It is therefore kind-agnostic: it recognises the language-level declaration structure and captures resources generically without needing to understand what a particular kind means.",
                       "position": {
                         "end": {
@@ -1447,7 +2199,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Configuration determines how compilation is performed. A project-level ",
                       "position": {
                         "end": {
@@ -1463,7 +2217,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": ".artificials.config.mts",
                       "position": {
                         "end": {
@@ -1479,7 +2235,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": " declares namespaces, packages, domains, and projection targets, while build configuration maps targets and resource types to their output formats.",
                       "position": {
                         "end": {
@@ -1519,7 +2277,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The compiler consequently separates language processing from domain semantics: the language defines how declarations are written, domains define what those declarations mean, and compilation determines which representations are produced for each consumer.",
                       "position": {
                         "end": {
@@ -1583,7 +2343,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Compilation follows a deterministic model:",
                       "position": {
                         "end": {
@@ -1623,7 +2385,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 40,
@@ -1638,7 +2402,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "source + configuration → projection",
                           "position": {
                             "end": {
@@ -1680,7 +2446,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Given identical sources and identical configuration, compilation produces identical projections every time.",
                       "position": {
                         "end": {
@@ -1720,7 +2488,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "This makes compiled output a first-class, reviewable artifact rather than an opaque cache or runtime dependency. Projections can be committed to git, inspected by humans, consumed directly by agents, and reviewed as ordinary changes.",
                       "position": {
                         "end": {
@@ -1760,7 +2530,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "A change to an Art source or compilation configuration therefore produces a corresponding, visible change to its affected projections. The generated representation remains traceable to its source while allowing consumers to operate on a precompiled, purpose-specific view of the domain.",
                       "position": {
                         "end": {
@@ -1800,7 +2572,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The model separates three concerns:",
                       "position": {
                         "end": {
@@ -1844,7 +2618,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Sources** define the authoritative domain data and knowledge.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Sources** define the authoritative domain data and knowledge.",
                       "position": {
                         "end": {
                           "column": 66,
@@ -1852,15 +2629,94 @@
                           "offset": 6336
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 77,
-                          "offset": 6273
+                          "offset": 6271
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Sources** define the authoritative domain data and knowledge.",
+                          "position": {
+                            "end": {
+                              "column": 66,
+                              "line": 77,
+                              "offset": 6336
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 77,
+                              "offset": 6273
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 14,
+                                  "line": 77,
+                                  "offset": 6284
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 77,
+                                  "offset": 6273
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Sources",
+                                  "position": {
+                                    "end": {
+                                      "column": 12,
+                                      "line": 77,
+                                      "offset": 6282
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 77,
+                                      "offset": 6275
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " define the authoritative domain data and knowledge.",
+                              "position": {
+                                "end": {
+                                  "column": 66,
+                                  "line": 77,
+                                  "offset": 6336
+                                },
+                                "start": {
+                                  "column": 14,
+                                  "line": 77,
+                                  "offset": 6284
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Configuration** defines what should be compiled and how.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Configuration** defines what should be compiled and how.",
                       "position": {
                         "end": {
                           "column": 61,
@@ -1868,15 +2724,94 @@
                           "offset": 6397
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 78,
-                          "offset": 6339
+                          "offset": 6337
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Configuration** defines what should be compiled and how.",
+                          "position": {
+                            "end": {
+                              "column": 61,
+                              "line": 78,
+                              "offset": 6397
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 78,
+                              "offset": 6339
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 20,
+                                  "line": 78,
+                                  "offset": 6356
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 78,
+                                  "offset": 6339
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Configuration",
+                                  "position": {
+                                    "end": {
+                                      "column": 18,
+                                      "line": 78,
+                                      "offset": 6354
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 78,
+                                      "offset": 6341
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " defines what should be compiled and how.",
+                              "position": {
+                                "end": {
+                                  "column": 61,
+                                  "line": 78,
+                                  "offset": 6397
+                                },
+                                "start": {
+                                  "column": 20,
+                                  "line": 78,
+                                  "offset": 6356
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Projections** provide deterministic, consumer-specific representations of those sources.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Projections** provide deterministic, consumer-specific representations of those sources.",
                       "position": {
                         "end": {
                           "column": 93,
@@ -1884,11 +2819,87 @@
                           "offset": 6490
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 79,
-                          "offset": 6400
+                          "offset": 6398
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Projections** provide deterministic, consumer-specific representations of those sources.",
+                          "position": {
+                            "end": {
+                              "column": 93,
+                              "line": 79,
+                              "offset": 6490
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 79,
+                              "offset": 6400
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 18,
+                                  "line": 79,
+                                  "offset": 6415
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 79,
+                                  "offset": 6400
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Projections",
+                                  "position": {
+                                    "end": {
+                                      "column": 16,
+                                      "line": 79,
+                                      "offset": 6413
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 79,
+                                      "offset": 6402
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " provide deterministic, consumer-specific representations of those sources.",
+                              "position": {
+                                "end": {
+                                  "column": 93,
+                                  "line": 79,
+                                  "offset": 6490
+                                },
+                                "start": {
+                                  "column": 18,
+                                  "line": 79,
+                                  "offset": 6415
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 },
@@ -1963,7 +2974,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Model an entire domain as instructions an agent needs: structures, types, routines, commands, and vocabulary. The system then compiles those instructions into projections per use case, so each agent gets a tailored projection — different agents get different instruction sets, different projections of the same processes, and different levels of detail per domain.",
                       "position": {
                         "end": {
@@ -2003,7 +3016,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Each projection exposes the minimum context its consumer needs:",
                       "position": {
                         "end": {
@@ -2047,7 +3062,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Author Projection** — for agents that declare and write art sources: full syntax, structures, rules, examples. Example: \"Create a new `.art` file\".",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Author Projection** — for agents that declare and write art sources: full syntax, structures, rules, examples. Example: \"Create a new `.art` file\".",
                       "position": {
                         "end": {
                           "column": 152,
@@ -2055,15 +3073,130 @@
                           "offset": 7121
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 89,
-                          "offset": 6972
+                          "offset": 6970
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Author Projection** — for agents that declare and write art sources: full syntax, structures, rules, examples. Example: \"Create a new `.art` file\".",
+                          "position": {
+                            "end": {
+                              "column": 152,
+                              "line": 89,
+                              "offset": 7121
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 89,
+                              "offset": 6972
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 24,
+                                  "line": 89,
+                                  "offset": 6993
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 89,
+                                  "offset": 6972
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Author Projection",
+                                  "position": {
+                                    "end": {
+                                      "column": 22,
+                                      "line": 89,
+                                      "offset": 6991
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 89,
+                                      "offset": 6974
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — for agents that declare and write art sources: full syntax, structures, rules, examples. Example: \"Create a new ",
+                              "position": {
+                                "end": {
+                                  "column": 139,
+                                  "line": 89,
+                                  "offset": 7108
+                                },
+                                "start": {
+                                  "column": 24,
+                                  "line": 89,
+                                  "offset": 6993
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": ".art",
+                              "position": {
+                                "end": {
+                                  "column": 145,
+                                  "line": 89,
+                                  "offset": 7114
+                                },
+                                "start": {
+                                  "column": 139,
+                                  "line": 89,
+                                  "offset": 7108
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " file\".",
+                              "position": {
+                                "end": {
+                                  "column": 152,
+                                  "line": 89,
+                                  "offset": 7121
+                                },
+                                "start": {
+                                  "column": 145,
+                                  "line": 89,
+                                  "offset": 7114
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Generator Projection** — for agents that generate derived outputs (markdown, generated resources) from art sources. Example: \"Generate the domain listing\".",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Generator Projection** — for agents that generate derived outputs (markdown, generated resources) from art sources. Example: \"Generate the domain listing\".",
                       "position": {
                         "end": {
                           "column": 160,
@@ -2071,15 +3204,94 @@
                           "offset": 7281
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 90,
-                          "offset": 7124
+                          "offset": 7122
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Generator Projection** — for agents that generate derived outputs (markdown, generated resources) from art sources. Example: \"Generate the domain listing\".",
+                          "position": {
+                            "end": {
+                              "column": 160,
+                              "line": 90,
+                              "offset": 7281
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 90,
+                              "offset": 7124
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 27,
+                                  "line": 90,
+                                  "offset": 7148
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 90,
+                                  "offset": 7124
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Generator Projection",
+                                  "position": {
+                                    "end": {
+                                      "column": 25,
+                                      "line": 90,
+                                      "offset": 7146
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 90,
+                                      "offset": 7126
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — for agents that generate derived outputs (markdown, generated resources) from art sources. Example: \"Generate the domain listing\".",
+                              "position": {
+                                "end": {
+                                  "column": 160,
+                                  "line": 90,
+                                  "offset": 7281
+                                },
+                                "start": {
+                                  "column": 27,
+                                  "line": 90,
+                                  "offset": 7148
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Operator Projection** — for agents that read, execute, and lightly modify existing resources through controlled routines, with minimum exposure to the domain. Example: \"Execute the Process: Render Resources\".",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Operator Projection** — for agents that read, execute, and lightly modify existing resources through controlled routines, with minimum exposure to the domain. Example: \"Execute the Process: Render Resources\".",
                       "position": {
                         "end": {
                           "column": 213,
@@ -2087,15 +3299,94 @@
                           "offset": 7494
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 91,
-                          "offset": 7284
+                          "offset": 7282
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Operator Projection** — for agents that read, execute, and lightly modify existing resources through controlled routines, with minimum exposure to the domain. Example: \"Execute the Process: Render Resources\".",
+                          "position": {
+                            "end": {
+                              "column": 213,
+                              "line": 91,
+                              "offset": 7494
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 91,
+                              "offset": 7284
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 26,
+                                  "line": 91,
+                                  "offset": 7307
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 91,
+                                  "offset": 7284
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Operator Projection",
+                                  "position": {
+                                    "end": {
+                                      "column": 24,
+                                      "line": 91,
+                                      "offset": 7305
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 91,
+                                      "offset": 7286
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — for agents that read, execute, and lightly modify existing resources through controlled routines, with minimum exposure to the domain. Example: \"Execute the Process: Render Resources\".",
+                              "position": {
+                                "end": {
+                                  "column": 213,
+                                  "line": 91,
+                                  "offset": 7494
+                                },
+                                "start": {
+                                  "column": 26,
+                                  "line": 91,
+                                  "offset": 7307
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "**Indexer Projection** — for agents with no predetermined relationship to the domain (generalists like assistants, spell-checking/fixing, querying/reporting). Exposes the entire domain surface as a compact index of resources — names, kinds, categories, brief descriptions, and source paths — resolving resource names to their art source, without application examples or full instructions. Not read-only: it may perform small, controlled modifications within its scope.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- **Indexer Projection** — for agents with no predetermined relationship to the domain (generalists like assistants, spell-checking/fixing, querying/reporting). Exposes the entire domain surface as a compact index of resources — names, kinds, categories, brief descriptions, and source paths — resolving resource names to their art source, without application examples or full instructions. Not read-only: it may perform small, controlled modifications within its scope.",
                       "position": {
                         "end": {
                           "column": 471,
@@ -2103,11 +3394,87 @@
                           "offset": 7965
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 92,
-                          "offset": 7497
+                          "offset": 7495
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "**Indexer Projection** — for agents with no predetermined relationship to the domain (generalists like assistants, spell-checking/fixing, querying/reporting). Exposes the entire domain surface as a compact index of resources — names, kinds, categories, brief descriptions, and source paths — resolving resource names to their art source, without application examples or full instructions. Not read-only: it may perform small, controlled modifications within its scope.",
+                          "position": {
+                            "end": {
+                              "column": 471,
+                              "line": 92,
+                              "offset": 7965
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 92,
+                              "offset": 7497
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "strong",
+                              "attributes": {},
+                              "position": {
+                                "end": {
+                                  "column": 25,
+                                  "line": 92,
+                                  "offset": 7519
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 92,
+                                  "offset": 7497
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Indexer Projection",
+                                  "position": {
+                                    "end": {
+                                      "column": 23,
+                                      "line": 92,
+                                      "offset": 7517
+                                    },
+                                    "start": {
+                                      "column": 5,
+                                      "line": 92,
+                                      "offset": 7499
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " — for agents with no predetermined relationship to the domain (generalists like assistants, spell-checking/fixing, querying/reporting). Exposes the entire domain surface as a compact index of resources — names, kinds, categories, brief descriptions, and source paths — resolving resource names to their art source, without application examples or full instructions. Not read-only: it may perform small, controlled modifications within its scope.",
+                              "position": {
+                                "end": {
+                                  "column": 471,
+                                  "line": 92,
+                                  "offset": 7965
+                                },
+                                "start": {
+                                  "column": 25,
+                                  "line": 92,
+                                  "offset": 7519
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 },
@@ -2156,7 +3523,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "A Planning Agent needs comprehensive knowledge of the planning domain: its structures, types, routines, commands, conventions, and workflows. It needs only the subset of the coding domain required to produce technically coherent plans and implementation instructions. Its projection therefore provides deep planning knowledge while keeping coding knowledge narrow and targeted.",
                           "position": {
                             "end": {
@@ -2220,7 +3589,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "A Delegator Agent needs enough knowledge of planning to understand plans, commits, and implementation instructions, but does not need the full planning domain. The Worker agents it delegates to require a different projection: limited knowledge of planning, particularly how to interpret and follow plan instructions, combined with substantial knowledge resources for understanding and improving references such as architecture decisions, patterns, and conventions.",
                           "position": {
                             "end": {
@@ -2286,7 +3657,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Art unifies, under a single source of truth, declarations of things that are typically represented separately as machine-readable data and human- or agent-readable knowledge. A resource can therefore contain both structured data and natural-language information that agents can process, while remaining suitable for deterministic compilation into different representations.",
                       "position": {
                         "end": {
@@ -2348,7 +3721,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Project, package, namespace, and other scaffolding definitions can be declared once as structured resources and compiled into the files and configurations required to instantiate them. The declaration becomes the source of truth rather than one generated output being treated as authoritative.",
                           "position": {
                             "end": {
@@ -2388,7 +3763,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "For example, a package or namespace can be described once in Art and used to generate its project structure, configuration, documentation, or other representations required by different consumers.",
                           "position": {
                             "end": {
@@ -2452,7 +3829,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "References, patterns, architecture decisions, guides, conventions, and other knowledge resources can be authored once and rendered into representations for different consumers.",
                           "position": {
                             "end": {
@@ -2492,7 +3871,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "The same source can produce human-oriented documentation, compact agent instructions, searchable indexes, or targeted domain references without maintaining separate versions of the underlying knowledge.",
                           "position": {
                             "end": {
@@ -2556,7 +3937,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Operational records such as tasks, plans, changelogs, and backlogs can be declared as structured resources while retaining the natural-language content needed to interpret them.",
                           "position": {
                             "end": {
@@ -2596,7 +3979,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "This allows the same record to serve as machine-readable data for tooling and as contextual knowledge for agents, while projections determine which fields, relationships, descriptions, and instructions are exposed to each consumer.",
                           "position": {
                             "end": {
@@ -2668,7 +4053,10 @@
               "children": [
                 {
                   "construct": "NaturalBlock",
-                  "value": "**Context minimisation** — each agent receives only the subset of a domain it needs, reducing token usage and shortening inference loops.",
+                  "type": "listItem",
+                  "checked": null,
+                  "spread": false,
+                  "value": "- **Context minimisation** — each agent receives only the subset of a domain it needs, reducing token usage and shortening inference loops.",
                   "position": {
                     "end": {
                       "column": 140,
@@ -2676,15 +4064,94 @@
                       "offset": 10777
                     },
                     "start": {
-                      "column": 3,
+                      "column": 1,
                       "line": 126,
-                      "offset": 10640
+                      "offset": 10638
                     }
-                  }
+                  },
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "type": "paragraph",
+                      "value": "**Context minimisation** — each agent receives only the subset of a domain it needs, reducing token usage and shortening inference loops.",
+                      "position": {
+                        "end": {
+                          "column": 140,
+                          "line": 126,
+                          "offset": 10777
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 126,
+                          "offset": 10640
+                        }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "strong",
+                          "attributes": {},
+                          "position": {
+                            "end": {
+                              "column": 27,
+                              "line": 126,
+                              "offset": 10664
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 126,
+                              "offset": 10640
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Context minimisation",
+                              "position": {
+                                "end": {
+                                  "column": 25,
+                                  "line": 126,
+                                  "offset": 10662
+                                },
+                                "start": {
+                                  "column": 5,
+                                  "line": 126,
+                                  "offset": 10642
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": " — each agent receives only the subset of a domain it needs, reducing token usage and shortening inference loops.",
+                          "position": {
+                            "end": {
+                              "column": 140,
+                              "line": 126,
+                              "offset": 10777
+                            },
+                            "start": {
+                              "column": 27,
+                              "line": 126,
+                              "offset": 10664
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
-                  "value": "**Fewer ambiguities, omissions, contradictions** — one source of truth feeding generated instructions; nothing hand-maintained in parallel.",
+                  "type": "listItem",
+                  "checked": null,
+                  "spread": false,
+                  "value": "- **Fewer ambiguities, omissions, contradictions** — one source of truth feeding generated instructions; nothing hand-maintained in parallel.",
                   "position": {
                     "end": {
                       "column": 142,
@@ -2692,15 +4159,94 @@
                       "offset": 10919
                     },
                     "start": {
-                      "column": 3,
+                      "column": 1,
                       "line": 127,
-                      "offset": 10780
+                      "offset": 10778
                     }
-                  }
+                  },
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "type": "paragraph",
+                      "value": "**Fewer ambiguities, omissions, contradictions** — one source of truth feeding generated instructions; nothing hand-maintained in parallel.",
+                      "position": {
+                        "end": {
+                          "column": 142,
+                          "line": 127,
+                          "offset": 10919
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 127,
+                          "offset": 10780
+                        }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "strong",
+                          "attributes": {},
+                          "position": {
+                            "end": {
+                              "column": 51,
+                              "line": 127,
+                              "offset": 10828
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 127,
+                              "offset": 10780
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Fewer ambiguities, omissions, contradictions",
+                              "position": {
+                                "end": {
+                                  "column": 49,
+                                  "line": 127,
+                                  "offset": 10826
+                                },
+                                "start": {
+                                  "column": 5,
+                                  "line": 127,
+                                  "offset": 10782
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": " — one source of truth feeding generated instructions; nothing hand-maintained in parallel.",
+                          "position": {
+                            "end": {
+                              "column": 142,
+                              "line": 127,
+                              "offset": 10919
+                            },
+                            "start": {
+                              "column": 51,
+                              "line": 127,
+                              "offset": 10828
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
-                  "value": "**Automated SoT → instructions** — sources become instructions without manual transcription.",
+                  "type": "listItem",
+                  "checked": null,
+                  "spread": false,
+                  "value": "- **Automated SoT → instructions** — sources become instructions without manual transcription.",
                   "position": {
                     "end": {
                       "column": 95,
@@ -2708,15 +4254,94 @@
                       "offset": 11014
                     },
                     "start": {
-                      "column": 3,
+                      "column": 1,
                       "line": 128,
-                      "offset": 10922
+                      "offset": 10920
                     }
-                  }
+                  },
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "type": "paragraph",
+                      "value": "**Automated SoT → instructions** — sources become instructions without manual transcription.",
+                      "position": {
+                        "end": {
+                          "column": 95,
+                          "line": 128,
+                          "offset": 11014
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 128,
+                          "offset": 10922
+                        }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "strong",
+                          "attributes": {},
+                          "position": {
+                            "end": {
+                              "column": 35,
+                              "line": 128,
+                              "offset": 10954
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 128,
+                              "offset": 10922
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Automated SoT → instructions",
+                              "position": {
+                                "end": {
+                                  "column": 33,
+                                  "line": 128,
+                                  "offset": 10952
+                                },
+                                "start": {
+                                  "column": 5,
+                                  "line": 128,
+                                  "offset": 10924
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": " — sources become instructions without manual transcription.",
+                          "position": {
+                            "end": {
+                              "column": 95,
+                              "line": 128,
+                              "offset": 11014
+                            },
+                            "start": {
+                              "column": 35,
+                              "line": 128,
+                              "offset": 10954
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "construct": "NaturalBlock",
-                  "value": "**Portable, reusable, shareable** — domains package as artifacts (e.g. `@artificial/tasks`) and can be reused across repositories.",
+                  "type": "listItem",
+                  "checked": null,
+                  "spread": false,
+                  "value": "- **Portable, reusable, shareable** — domains package as artifacts (e.g. `@artificial/tasks`) and can be reused across repositories.",
                   "position": {
                     "end": {
                       "column": 133,
@@ -2724,11 +4349,123 @@
                       "offset": 11147
                     },
                     "start": {
-                      "column": 3,
+                      "column": 1,
                       "line": 129,
-                      "offset": 11017
+                      "offset": 11015
                     }
-                  }
+                  },
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "type": "paragraph",
+                      "value": "**Portable, reusable, shareable** — domains package as artifacts (e.g. `@artificial/tasks`) and can be reused across repositories.",
+                      "position": {
+                        "end": {
+                          "column": 133,
+                          "line": 129,
+                          "offset": 11147
+                        },
+                        "start": {
+                          "column": 3,
+                          "line": 129,
+                          "offset": 11017
+                        }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "strong",
+                          "attributes": {},
+                          "position": {
+                            "end": {
+                              "column": 36,
+                              "line": 129,
+                              "offset": 11050
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 129,
+                              "offset": 11017
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Portable, reusable, shareable",
+                              "position": {
+                                "end": {
+                                  "column": 34,
+                                  "line": 129,
+                                  "offset": 11048
+                                },
+                                "start": {
+                                  "column": 5,
+                                  "line": 129,
+                                  "offset": 11019
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": " — domains package as artifacts (e.g. ",
+                          "position": {
+                            "end": {
+                              "column": 74,
+                              "line": 129,
+                              "offset": 11088
+                            },
+                            "start": {
+                              "column": 36,
+                              "line": 129,
+                              "offset": 11050
+                            }
+                          }
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "inlineCode",
+                          "attributes": {},
+                          "value": "@artificial/tasks",
+                          "position": {
+                            "end": {
+                              "column": 93,
+                              "line": 129,
+                              "offset": 11107
+                            },
+                            "start": {
+                              "column": 74,
+                              "line": 129,
+                              "offset": 11088
+                            }
+                          }
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": ") and can be reused across repositories.",
+                          "position": {
+                            "end": {
+                              "column": 133,
+                              "line": 129,
+                              "offset": 11147
+                            },
+                            "start": {
+                              "column": 93,
+                              "line": 129,
+                              "offset": 11107
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }

@@ -1,5 +1,5 @@
 import type { ArtDocument, ConstructToMdast } from '@art-js/artificial-constructs';
-import type { Node } from 'mdast';
+import type { Node, Root } from 'mdast';
 
 import type { SerializerConfig } from './config/types';
 
@@ -30,19 +30,28 @@ export function artAstToMdast(config: SerializerConfig, document: ArtDocument): 
 			throw new Error(`Unknown construct: ${node.construct}`);
 		}
 		const mainNode = impl.toMdast(node as never, childNodes);
+		const mainNodes = mainNode.type === 'root' ? (mainNode as Root).children : [mainNode];
 
-		// For block constructs with children (SectionBlock), return the main node
-		// followed by the children as siblings — they are not nested inside the heading.
+		// For block constructs with nested value content (SectionBlock, FieldBlock),
+		// return the main node followed by the children as siblings.
 		if (
 			'children' in node &&
 			Array.isArray(node.children) &&
 			node.children.length > 0 &&
-			node.construct !== 'Document'
+			node.construct === 'SectionBlock'
 		) {
-			return [mainNode, ...childNodes];
+			return [...mainNodes, ...childNodes];
+		}
+		if (
+			'value' in node &&
+			Array.isArray(node.value) &&
+			node.value.length > 0 &&
+			(node.construct === 'SectionBlock' || node.construct === 'FieldBlock')
+		) {
+			return [...mainNodes, ...childNodes];
 		}
 
-		return [mainNode];
+		return mainNodes;
 	}
 
 	const mdastChildren = document.children.flatMap(child =>

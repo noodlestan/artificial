@@ -1,6 +1,6 @@
 export type { ArtDocument } from './constructs/Document/types';
 
-export type { BlockContent, Construct } from './registry';
+export type { BlockContent, Construct, InlineContent } from './registry';
 
 export type {
 	ConstructCreator,
@@ -18,6 +18,7 @@ export { createFieldInlineToMdast } from './constructs/FieldInline';
 export { createFieldInlineParser } from './constructs/FieldInline';
 export { createNaturalBlockParser } from './constructs/NaturalBlock';
 export { createNaturalBlockToMdast } from './constructs/NaturalBlock';
+export { createNaturalExpressionToMdast } from './constructs/NaturalExpression';
 export { createSectionBlockParser } from './constructs/SectionBlock';
 export { createSectionBlockToMdast } from './constructs/SectionBlock';
 export { createTagParser } from './constructs/Tag';

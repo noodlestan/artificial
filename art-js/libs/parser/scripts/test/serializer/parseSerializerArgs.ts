@@ -4,7 +4,7 @@ import type { SerializerCliArgs } from './types';
 
 export function parseSerializerArgs(): SerializerCliArgs {
 	return {
-		doWriteDebugResult: process.argv.includes('--debug-write-result'),
+		doWriteDebug: process.argv.includes('--debug-write'),
 		filterFixture: getFilterFixtureArg(),
 	};
 }

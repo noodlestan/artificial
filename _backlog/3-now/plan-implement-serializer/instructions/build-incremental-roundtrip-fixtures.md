@@ -4,7 +4,7 @@
 
 **Commit.id:** `build-incremental-roundtrip-fixtures`
 
-**Commit.message:** `test(md-art-roundtrip): add incremental parser and serializer fixtures`
+**Commit.message:** `build(md-art-roundtrip): add incremental parser and serializer fixtures`
 
 ## Before you Start
 
@@ -38,17 +38,40 @@ Build a small, deliberately incremental fixture ladder from the passing `hello-w
 
 The instruction also documents the current architecture while executing the fixtures:
 
+## Parser Architecture
+
 ### Parse pipeline: preprocessor, handler, factory
 
-- **Preprocessor** (`preProcessor`) runs first for a matching mdast node and can replace it immediately. `FieldInline` and `FieldBlock` use this path to recognise field paragraphs. `canPreProcess()` decides whether the node belongs to the construct; `preProcess()` captures the construct data and source position.
-- **Factory** (`factory`) detects and creates constructs when preprocessing did not claim the node. `detect()` recognises a node, `create()` builds the AST record, and `shouldVisit` controls whether child mdast nodes are visited. `SectionBlock` uses this path for headings.
-- **Handler** (`handler`) manages nesting and context. `handle()` pushes the record into the current context, closes or unwinds a prior capture when needed, and creates a nested context for children. `SectionBlock` and `FieldBlock` use handlers; `FieldInline` is a leaf preprocessor and has no handler.
-- The parser builder checks preprocessors before factories, then applies handlers or pushes leaf records. Read `$PACKAGE_PARSER/src/builder.ts` to verify this order.
+- The builder parses Markdown to mdast, visits nodes in source order, and offers each node to configured preprocessors before specialised factories and the natural fallback.
+- A **preprocessor** (`preProcess`) combines detection and creation for constructs that claim a complete mdast node immediately. It returns a record or `null`; `FieldInline` and `FieldBlock` use this path for field paragraphs.
+- A **factory** (`detect`/`create`) recognises and creates specialised records when no preprocessor claims the node. `SectionBlock` uses this path for headings. The builder does not inspect construct fields and there is no `shouldVisit` hook; claimed records own any child conversion they need.
+- A **handler** (`handle`) inserts a record, mutates construct-owned capture state, and may return a nested `VisitContext`. `SectionBlock` and `FieldBlock` use handlers; `FieldInline` is a leaf preprocessor.
+- Before dispatching each record, the builder calls `currentContext.beforeRecord(record)`. This lets the active FieldBlock context return to its parent when a boundary record arrives. The builder remains construct-agnostic.
+- The current API is therefore `preProcess`, `detect/create`, and `handle`, grouped by the optional `ConstructParser` record. `canPreProcess` and `shouldVisit` are removed.
+
+### Insights
+
+- The parser and construct-parser APIs need a readability pass. Their responsibilities should be expressed as capture rules and tested as state transitions rather than inferred from generic callbacks.
+- The intended capture rules are simple in pseudocode but difficult to see in the current implementation. For example:
+
+  ```text
+  FieldBlock:
+    capture the following NaturalBlock values in field.value
+    stop when the next SectionBlock, FieldBlock, or FieldInline begins
+  ```
+
+  The implementation should make this lifecycle and its stopping conditions explicit.
+
+- `FieldInline` cannot reduce the paragraph tail to a raw string. It must continue parsing every child after the field label. Phrasing children are represented as `NaturalExpression` records, preserving their mdast `type`, attributes, value, and recursively converted children.
+- A field paragraph must consume the complete paragraph tail so that every inline child can be processed. This should leave room for future constructs, such as a `Tag`, to claim or transform an inline child instead of silently losing its structure.
+- MDAST already distinguishes headings, paragraphs, and other block-level nodes from phrasing children such as text, emphasis, links, and code. The parser now models that boundary deliberately: `NaturalBlock` handles block content and `NaturalExpression` handles `PhrasingContent`.
+- Natural conversion should recurse through all mdast children and retain generic attributes, including list-item attributes, instead of maintaining restrictive special cases for individual node types.
+- Add this parser/construct API cleanup to the parking lot: document dispatch and capture semantics, extract capture rules into readable helpers or state transitions, and add focused tests for child traversal, capture stopping, nesting, and inline-child preservation.
 
 ### toMdast pipeline: construct name and `toMdast()`
 
 - Each serializer adapter is selected by the construct name (`construct`, for example `SectionBlock`, `FieldInline`, or `FieldBlock`).
-- `toMdast(node)` converts one AST construct into mdast nodes. `FieldInline.toMdast()` emits a paragraph containing a strong `Name:` node, a space, and the inline value. Section and block-field converters preserve their respective heading or block structure.
+- `toMdast(node)` converts one AST construct into mdast nodes. `NaturalExpression` reconstructs its mdast node from the stored type, attributes, value, and children. `FieldInline.toMdast()` emits a paragraph containing a strong `Name:` node, a space, and the inline value. Section and block-field converters preserve their respective heading or block structure.
 - Read the relevant `create*ToMdast.ts` files before diagnosing a roundtrip mismatch. Do not “fix” a fixture by changing its expected output without understanding the construct conversion.
 
 ## Mandatory Reading
@@ -76,7 +99,7 @@ npm ci
 
 ## Changes
 
-Add only focused markdown fixtures and their generated parser snapshots, plus any narrowly scoped construct implementation or construct unit-test changes required to correct a demonstrated failure. Do not modify skipped underscore-prefixed fixtures.
+Add focused markdown fixtures and their generated parser snapshots, plus narrowly scoped construct implementation or unit-test changes required by demonstrated failures. Numbered fixtures are roundtrip-ready; underscore-prefixed fixtures are parser-only exploratory material and may be regenerated deliberately for analysis, but are not serializer acceptance criteria.
 
 ## Fixture Ladder
 
@@ -101,10 +124,10 @@ For each fixture, in ladder order:
 
    ```bash
    cd $PACKAGE_PARSER
-   npm run test-parse -- --fixture {fixture} --write
+   npm run test-parser -- --fixture {fixture} --write
    ```
 
-   If this repository exposes the script as `test-parser` rather than `test-parse`, use `npm run test-parser -- --fixture {fixture} --write` and record the script-name discrepancy in the report.
+   The parser runner is `test-parser`.
 
 3. Inspect `$PACKAGE_PARSER/test/fixtures/{fixture}.md.json` as JSON. Record:
    - every construct name and nesting relationship;
@@ -120,7 +143,7 @@ For each fixture, in ladder order:
 
    The fixture name is the basename without `.md`; use an unambiguous substring only when necessary.
 
-5. Treat a non-zero failure or a reported roundtrip mismatch as a debugging task, not as an acceptable snapshot update. Use `--debug-write-result` to compare the generated markdown with the fixture source.
+5. Treat a non-zero failure or a reported roundtrip mismatch as a debugging task, not as an acceptable snapshot update. Use `--debug-write` to compare generated parser JSON or serialized Markdown with the fixture source.
 6. If the fixture fails, inspect the responsible parser/construct/serializer code, make the smallest corrective change, add or update a focused unit test under `$PACKAGE_CONSTRUCTS` when the behavior belongs to a construct, and run `cd $PACKAGE_CONSTRUCTS && npm run test` before retrying the fixture.
 7. Only after the focused fixture passes, continue to the next ladder case.
 
@@ -160,11 +183,11 @@ After every fixture:
 
 ```bash
 cd $PACKAGE_PARSER
-npm run test-parse -- --fixture {fixture} --write
+npm run test-parser -- --fixture {fixture} --write
 npm run test-serializer -- --fixture {fixture}
 ```
 
-Use `npm run test-parser -- --fixture {fixture} --write` when `test-parse` is not an available script.
+Use `--debug-write` to create a `.debug.json` parser snapshot or `.parsed.md` serializer output for comparison; do not confuse either debug output with the checked-in acceptance snapshot.
 
 When a construct fix is made:
 
@@ -197,7 +220,7 @@ Confirm that all seven named fixtures are tested, no new fixture begins with `_`
 ## How to Report Back to the Delegator
 
 1. State whether reporting completion or a BLOCKER.
-2. Render the report with `.agents/domains/plans/templates/report__template.md` next to this instruction as `build-incremental-roundtrip-fixtures__report.md`.
+2. Render the report next to this instruction as `build-incremental-roundtrip-fixtures__report.md`.
 3. Include a compact row or bullet for every fixture: source file, detected constructs, AST oddities, serializer result, and any code/test fix.
-4. Include the actual parser script name used (`test-parse` or `test-parser`) and final verification results.
-5. Keep the chat response terse: happy face + up to 3 bullets (done `build-incremental-roundtrip-fixtures`, created artefacts, thumbs up).
+4. Include the actual parser script name used (`test-parser`) and final verification results.
+5. Keep the chat response terse: state completion or the blocker and point to the report.

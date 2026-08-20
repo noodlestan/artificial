@@ -1,4 +1,14 @@
-import { FIELD_ORDER } from '../stableStringify';
+export const FIELD_ORDER = [
+	'construct',
+	'type',
+	'kind',
+	'name',
+	'attributes',
+	'...',
+	'value',
+	'position',
+	'children',
+];
 
 export function orderedKeys(keys: string[]): string[] {
 	const remaining = new Set(keys);

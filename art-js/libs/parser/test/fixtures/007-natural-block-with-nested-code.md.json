@@ -1,0 +1,108 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "NaturalBlock",
+      "type": "paragraph",
+      "value": "A list.",
+      "position": {
+        "end": {
+          "column": 8,
+          "line": 1,
+          "offset": 7
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
+      "children": [
+        {
+          "construct": "NaturalExpression",
+          "type": "text",
+          "attributes": {},
+          "value": "A list.",
+          "position": {
+            "end": {
+              "column": 8,
+              "line": 1,
+              "offset": 7
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "construct": "NaturalBlock",
+      "type": "text",
+      "value": "\n\n"
+    },
+    {
+      "construct": "NaturalBlock",
+      "type": "code",
+      "lang": "meta",
+      "meta": null,
+      "value": "````meta\n```language\nSome code:\n  With identend content;\n```\n// comment\n````",
+      "position": {
+        "end": {
+          "column": 5,
+          "line": 9,
+          "offset": 85
+        },
+        "start": {
+          "column": 1,
+          "line": 3,
+          "offset": 9
+        }
+      }
+    },
+    {
+      "construct": "NaturalBlock",
+      "type": "text",
+      "value": "\n\n"
+    },
+    {
+      "construct": "NaturalBlock",
+      "type": "paragraph",
+      "value": "WIP: Code blocks not captured",
+      "position": {
+        "end": {
+          "column": 30,
+          "line": 11,
+          "offset": 116
+        },
+        "start": {
+          "column": 1,
+          "line": 11,
+          "offset": 87
+        }
+      },
+      "children": [
+        {
+          "construct": "NaturalExpression",
+          "type": "text",
+          "attributes": {},
+          "value": "WIP: Code blocks not captured",
+          "position": {
+            "end": {
+              "column": 30,
+              "line": 11,
+              "offset": 116
+            },
+            "start": {
+              "column": 1,
+              "line": 11,
+              "offset": 87
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

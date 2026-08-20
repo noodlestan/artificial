@@ -5,7 +5,6 @@ import {
 	type ConstructHandler,
 } from '@art-js/artificial-constructs';
 import type { Point, VisitContext } from '@art-js/artificial-primitives';
-import type { Nodes } from 'mdast';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import type { Node } from 'unist';
 import { SKIP, visit } from 'unist-util-visit';
@@ -19,7 +18,6 @@ import { getFactory } from './private/getFactory';
 interface HandleResult {
 	records: Construct[];
 	handler: ConstructHandler | null;
-	shouldVisit: boolean;
 }
 
 export function buildDocument(config: ParserConfig, markdown: string): ArtDocument {
@@ -38,13 +36,11 @@ export function buildDocument(config: ParserConfig, markdown: string): ArtDocume
 	function tryPreProcessors(node: Node): HandleResult | null {
 		for (const construct of constructs) {
 			const preProcessor = construct.preProcessor;
-			if (preProcessor?.canPreProcess(node, currentContext)) {
-				const record = preProcessor.preProcess(node, currentContext);
-				if (record) {
-					const rec = record as Construct;
-					const handler = construct.handler ?? null;
-					return { records: [rec], handler, shouldVisit: false };
-				}
+			const record = preProcessor?.preProcess(node, currentContext);
+			if (record) {
+				const rec = record as Construct;
+				const handler = construct.handler ?? null;
+				return { records: [rec], handler };
 			}
 		}
 		return null;
@@ -61,12 +57,13 @@ export function buildDocument(config: ParserConfig, markdown: string): ArtDocume
 		const firstRecord = records[0] as Construct | undefined;
 		const handler = records.length > 0 && firstRecord ? (construct.handler ?? null) : null;
 
-		return { records, handler, shouldVisit: construct.factory.shouldVisit };
+		return { records, handler };
 	}
 
 	function handleNaturalBlock(node: Node): typeof SKIP | undefined {
 		if (!defaultConstruct.factory) return SKIP;
-		const record = defaultConstruct.factory.create(node as Nodes, currentContext) as Construct;
+		const record = defaultConstruct.factory.create(node, currentContext) as Construct;
+		currentContext = currentContext.beforeRecord(record);
 		if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
 		currentContext.push(record);
 		if (record.position) {
@@ -75,49 +72,36 @@ export function buildDocument(config: ParserConfig, markdown: string): ArtDocume
 		return node.type === 'paragraph' ? undefined : SKIP;
 	}
 
+	function dispatch(node: Node, records: Construct[], handler: ConstructHandler | null): void {
+		for (const record of records) {
+			currentContext = currentContext.beforeRecord(record);
+
+			if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
+
+			if (handler) {
+				currentContext = handler.handle(record, node, currentContext);
+			} else {
+				currentContext.push(record as BlockContent);
+			}
+
+			if (record.position) updateLastEnd(record.position.end);
+		}
+	}
+
 	function visitNode(node: Node): typeof SKIP | undefined {
 		if (node.type === 'root') return undefined;
 
 		const preResult = tryPreProcessors(node);
 		if (preResult) {
-			const { records, handler } = preResult;
-
-			for (const record of records) {
-				if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
-
-				if (handler) {
-					currentContext = handler.handle(record, node, currentContext);
-				} else {
-					currentContext.push(record as BlockContent);
-				}
-
-				if (record.position) {
-					updateLastEnd(record.position.end);
-				}
-			}
-
+			dispatch(node, preResult.records, preResult.handler);
 			return SKIP;
 		}
 
 		const factoryResult = maybeHandleFactory(node);
 		if (factoryResult) {
-			const { records, handler, shouldVisit } = factoryResult;
-
-			for (const record of records) {
-				if (record.position) flushGap(record.position.start, lastEnd, markdown, currentContext);
-
-				if (handler) {
-					currentContext = handler.handle(record, node, currentContext);
-				} else {
-					currentContext.push(record as BlockContent);
-				}
-
-				if (record.position) {
-					updateLastEnd(record.position.end);
-				}
-			}
-
-			return shouldVisit ? undefined : SKIP;
+			const { records, handler } = factoryResult;
+			dispatch(node, records, handler);
+			return SKIP;
 		}
 
 		if (isBlockType(node.type)) {

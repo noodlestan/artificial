@@ -1,0 +1,155 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "NaturalBlock",
+      "type": "paragraph",
+      "value": "Hello _World_ [example](http://example.com).",
+      "position": {
+        "end": {
+          "column": 45,
+          "line": 1,
+          "offset": 44
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
+      "children": [
+        {
+          "construct": "NaturalExpression",
+          "type": "text",
+          "attributes": {},
+          "value": "Hello ",
+          "position": {
+            "end": {
+              "column": 7,
+              "line": 1,
+              "offset": 6
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0
+            }
+          }
+        },
+        {
+          "construct": "NaturalExpression",
+          "type": "emphasis",
+          "attributes": {},
+          "position": {
+            "end": {
+              "column": 14,
+              "line": 1,
+              "offset": 13
+            },
+            "start": {
+              "column": 7,
+              "line": 1,
+              "offset": 6
+            }
+          },
+          "children": [
+            {
+              "construct": "NaturalExpression",
+              "type": "text",
+              "attributes": {},
+              "value": "World",
+              "position": {
+                "end": {
+                  "column": 13,
+                  "line": 1,
+                  "offset": 12
+                },
+                "start": {
+                  "column": 8,
+                  "line": 1,
+                  "offset": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "construct": "NaturalExpression",
+          "type": "text",
+          "attributes": {},
+          "value": " ",
+          "position": {
+            "end": {
+              "column": 15,
+              "line": 1,
+              "offset": 14
+            },
+            "start": {
+              "column": 14,
+              "line": 1,
+              "offset": 13
+            }
+          }
+        },
+        {
+          "construct": "NaturalExpression",
+          "type": "link",
+          "attributes": {
+            "title": null,
+            "url": "http://example.com"
+          },
+          "position": {
+            "end": {
+              "column": 44,
+              "line": 1,
+              "offset": 43
+            },
+            "start": {
+              "column": 15,
+              "line": 1,
+              "offset": 14
+            }
+          },
+          "children": [
+            {
+              "construct": "NaturalExpression",
+              "type": "text",
+              "attributes": {},
+              "value": "example",
+              "position": {
+                "end": {
+                  "column": 23,
+                  "line": 1,
+                  "offset": 22
+                },
+                "start": {
+                  "column": 16,
+                  "line": 1,
+                  "offset": 15
+                }
+              }
+            }
+          ]
+        },
+        {
+          "construct": "NaturalExpression",
+          "type": "text",
+          "attributes": {},
+          "value": ".",
+          "position": {
+            "end": {
+              "column": 45,
+              "line": 1,
+              "offset": 44
+            },
+            "start": {
+              "column": 44,
+              "line": 1,
+              "offset": 43
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -7,7 +7,8 @@ import type { FieldBlock } from './private/types';
 export function createFieldBlockToMdast(): ConstructToMdast {
 	return {
 		construct: 'FieldBlock',
-		toMdast(node, children) {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		toMdast(node, _children) {
 			const field = node as unknown as FieldBlock;
 			return {
 				type: 'paragraph',
@@ -16,8 +17,6 @@ export function createFieldBlockToMdast(): ConstructToMdast {
 						type: 'strong',
 						children: [{ type: 'text', value: `${field.name}:` }],
 					},
-					{ type: 'text', value: ' ' },
-					...children,
 				],
 			} as Node;
 		},

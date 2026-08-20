@@ -1,0 +1,66 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "SectionBlock",
+      "name": "Hello _World_! How are **you**?",
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 34,
+          "line": 1,
+          "offset": 33
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
+      "children": [
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
+        },
+        {
+          "construct": "NaturalBlock",
+          "type": "paragraph",
+          "value": "WIP: Section Block name does not capture formatting.",
+          "position": {
+            "end": {
+              "column": 53,
+              "line": 3,
+              "offset": 87
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 35
+            }
+          },
+          "children": [
+            {
+              "construct": "NaturalExpression",
+              "type": "text",
+              "attributes": {},
+              "value": "WIP: Section Block name does not capture formatting.",
+              "position": {
+                "end": {
+                  "column": 53,
+                  "line": 3,
+                  "offset": 87
+                },
+                "start": {
+                  "column": 1,
+                  "line": 3,
+                  "offset": 35
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

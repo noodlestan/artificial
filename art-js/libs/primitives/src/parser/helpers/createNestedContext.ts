@@ -1,5 +1,5 @@
 import type { ConstructBase } from '../../constructs.js';
-import type { VisitContext } from '../types.js';
+import type { BeforeRecord, VisitContext } from '../types.js';
 
 const sectionMap = new WeakMap<VisitContext, unknown>();
 
@@ -13,6 +13,7 @@ export function createNestedContext(
 	source?: string,
 	targetArray?: ConstructBase[],
 	section?: unknown,
+	boundary?: BeforeRecord,
 ): VisitContext {
 	const children = targetArray ?? [];
 
@@ -25,6 +26,9 @@ export function createNestedContext(
 		},
 		push(record: ConstructBase) {
 			children.push(record);
+		},
+		beforeRecord(record: ConstructBase) {
+			return boundary ? boundary(record, ctx) : ctx;
 		},
 		parent() {
 			return parentContext;
