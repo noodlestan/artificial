@@ -6,7 +6,7 @@
 
 ## Summary
 
-Complete the workspace CLI with remaining commands and infrastructure. This milestone delivers the full command surface (pull, push, sync, link, links, unlink, publish) and critical infrastructure (bug fixes, dynamic record discovery, code quality improvements).
+Complete the workspace CLI with remaining commands and infrastructure. This milestone delivers the full command surface (pull, push, sync, link, links, unlink, publish) and critical infrastructure (repository-command bug fixes, regression test coverage, dynamic record discovery, and knowledge/code quality improvements).
 
 ## Source
 
@@ -24,16 +24,16 @@ Complete the workspace CLI with remaining commands and infrastructure. This mile
 | 5 — Fix repo command issues           | `_backlog/0-archive/2026-08-18-plan-fix-repo-command-issues/plan.md`           | `ARCHIVED`  |
 | 6 — Implement pull/push/sync          | `_backlog/0-archive/2026-08-18-plan-implement-pull-push-sync/plan.md`          | `ARCHIVED`  |
 | 7 — Cleaner code                      | `_backlog/0-archive/2026-08-18-plan-cleaner-code/plan.md`                      | `ARCHIVED`  |
-| 8 — Discover records dynamically      | `_backlog/3-now/plan-discover-records/plan.md`                                 | `READY`     |
+| 8 — Discover records dynamically      | `_backlog/1-done/plan-discover-records/plan.md`                                | `DONE`      |
 | 9 — Fix reported bugs                 | `_backlog/0-archive/2026-08-19-plan-fix-reported-bugs/plan.md`                 | `ARCHIVED`  |
 | 10 — Implement link                   | `_backlog/4-next/plan-implement-link/plan.md`                                  | `DRAFT`     |
 | 11 — Implement links                  | `_backlog/4-next/plan-implement-links/plan.md`                                 | `DRAFT`     |
 | 12 — Implement publish                | `_backlog/4-next/plan-implement-publish/plan.md`                               | `DRAFT`     |
 | 13 — Implement unlink                 | `_backlog/4-next/plan-implement-unlink/plan.md`                                | `DRAFT`     |
-| 14 — Fixes and test coverage          | `_backlog/4-next/plan-fixes-and-test-coverage/plan.md`                         | `DRAFT`     |
+| 14 — Fixes and test coverage          | `_backlog/3-now/plan-repo-command-fixes-and-tests/plan.md`                     | `READY`     |
 | 15 — Update knowledge resources       | `_backlog/4-next/update-knowledge-resources/plan.md`                           | `PREPARING` |
 
-**Next step:** Phase 8 — execute `plan-discover-records`.
+**Next step:** Phase 10 — execute `plan-implement-link`.
 
 ## Follow-ups
 

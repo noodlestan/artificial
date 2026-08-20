@@ -2,7 +2,7 @@
 
 **ID:** `discover-records`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -54,7 +54,8 @@ Running on `$WORKSPACE`, managed by `@art-domains/workspace-cli`; the repository
 - `$PROJECT/architecture/config.md` — current manifest shape and runtime configuration loading.
 - `$PROJECT/architecture/context-model.md` — record kinds, checkout hydration, and project-graph responsibilities.
 - `$PROJECT/architecture/_pseudo.md` — current loader and `repo` command contracts to update.
-- `$PACKAGE/src/private/records/` — current readers/loaders and their test fixtures.
+- `$PACKAGE/src/private/records/` — record-file discovery, `RecordFile` types, and discovery helpers.
+- `$PACKAGE/src/private/resources/` — resource readers/loaders and their test fixtures.
 
 ## Decisions and Assumptions
 
@@ -64,7 +65,10 @@ Running on `$WORKSPACE`, managed by `@art-domains/workspace-cli`; the repository
 - `RepositoryCheckoutRecord` gains `filename`, containing the discovered record file path. The in-memory `Checkout` carries the optional filename through hydration so updates overwrite the existing record instead of generating a second file.
 - `saveCheckoutRecord` stays `async` returning `Promise<string>` and uses the data-first signature `(config, data, filename?)`: loaded records call `await saveCheckoutRecord(config, record.record, record.filename)` and new records call `await saveCheckoutRecord(config, data)`.
 - `loadCheckoutRecords`, `loadRepositoryRecords`, `loadProjectRecords`, `loadNamespaceRecords`, `loadPackageRecords`, and `loadProjectGraph` all become async, returning Promises. Callers are updated to `await` them.
-- `findRecordFiles(path, pattern)` is synchronous, matching the low-level filesystem scan pattern.
+- `findRecordFiles(path, pattern, kinds?)` is async and returns `Promise<RecordFile[]>`.
+- `RecordFile` carries the resolved filename, search path, relative path, optional content, and optional read error. Content is loaded lazily by async readers.
+- Singular resource readers accept `RecordFile` and return Promises. Kind filtering reads candidate files in parallel with `Promise.all`.
+- Resource collection loaders use `Promise.all` to read matching files in parallel and filter `null` results.
 - Discovery is recursive. A filename-only pattern such as `*.art` is applied at every depth; path-containing patterns retain their path semantics.
 - Discovery uses Node's built-in `globSync` for candidate files and `git check-ignore --no-index --stdin` to filter candidates matched by applicable `.gitignore` rules. A non-Git temporary directory remains usable in unit tests and simply has no Git ignore filtering.
 - Record files are filtered by their `#`/`## {Kind}:` heading in the kind-specific reader. A file with no matching kind heading returns `null` and is skipped without becoming a malformed default record.
@@ -161,16 +165,22 @@ The implementation must also run the workspace CLI tests against both legacy `op
 - Update `makeCheckoutFilename` and any remaining checkout persistence references from `config.records.checkouts` to top-level `config.checkouts`.
 - Update `architecture/config.md` with the new `WorkspaceConfig` shape and `_guide.md` records/config sections. Do NOT update `architecture/context-model.md` or `architecture/_pseudo.md` in this commit.
 
-### `load-colocated-records` - `PLANNED`
+### `load-colocated-records` - `COMMITTED`
 
 **Commit Message:** `feat(workspace-cli): load project records from any location`
 
 **Instructions File:** `plan-discover-records/instructions/load-colocated-records.md`
 
+**Commit ID:** `1eb4fa2`
+
+**Report:** `plan-discover-records/instructions/discover-record-files__report.md`
+
 **Scope:**
 
+- Move resource readers/loaders from `src/private/records/` to `src/private/resources/`; keep record-file discovery under `src/private/records/`.
 - Rename the plural project/namespace/package loader modules and APIs to `loadProjectRecords`, `loadNamespaceRecords`, and `loadPackageRecords` — all async, returning Promises.
-- Make each loader accept `(config, checkoutPath)`, discover matching files with `findRecordFiles`, call its singular reader, and filter `null` results.
+- Make each loader accept `(config, checkoutPath)`, await `findRecordFiles(..., ['{kind}'])`, call its async singular reader with `RecordFile`, use `Promise.all`, and filter `null` results.
+- Make `readRecordFileContent`, all singular readers, and `filterFilenamesByKinds` async; use `Promise.all` for parallel file reads.
 - Change `loadProjectGraph` to async `loadProjectGraph(config, checkoutPath)` and compose the dynamic loaders.
 - Update `runRepo` to `await loadProjectGraph` and every affected call site and test.
 - Add legacy centralized and co-located fixture coverage, including cross-kind `.art` files and ignored records.
@@ -188,4 +198,5 @@ The implementation must also run the workspace CLI tests against both legacy `op
 - **preserve-checkout-filenames (aebefee):** Worker completed all changes. Data-first `saveCheckoutRecord(config, data, filename?)` signature applied. `RepositoryCheckoutRecord` and `Checkout` carry `filename` through hydration. `makeCheckoutFilename` extracted. Architecture docs updated. 63 test files, 208 tests, 12 CI tasks all passing.
 - **discover-record-files (d9ab329):** Worker completed all changes. Config reshaped to top-level `checkouts.*` and `records.pattern`. `findRecordFiles` added with gitignore-aware glob discovery. `loadRepositoryRecords` and `loadCheckoutRecords` now async. 8 new tests for `findRecordFiles`. 55 test files pass, 9 fail (all outside instruction scope — `loadProjectGraph` mock paths and slug collisions in command tests). Lint, build pass.
   - **Delegatee feedback:** 9 test files (44 tests) fail due to mock repo+checkout records sharing the same slug name in `_records/`, causing filename collisions. Root cause: `writeRepoMockRecord` and `writeCheckoutMockRecord` both write to `_records/{slug}.art`; when tests use the same name for both, the checkout record overwrites the repo record. Fix belongs in `load-colocated-records` commit.
-  - **Planner reflection:** The slug collision is an expected consequence of co-locating both record kinds in `_records/`. The next commit must resolve this by using distinct mock names or separate mock directories. The worker correctly identified and documented the root cause.
+- **Planner reflection:** The slug collision is an expected consequence of co-locating both record kinds in `_records/`. The next commit must resolve this by using distinct mock names or separate mock directories. The worker correctly identified and documented the root cause.
+- **Implementation update:** The colocated-records work is complete in the working tree. Discovery returns async `RecordFile` objects, content/error state is populated asynchronously, kind filtering and all five resource loaders use `Promise.all`, and focused verification passes.

@@ -8,6 +8,10 @@
 
 ::switch `agent-worker` — switch to the agent-worker agent mode to execute this instruction. Your mode must be `worker` before you start changing files.
 
+## Status
+
+**Implementation:** Completed in the working tree. Record discovery now lives under `$PACKAGE/src/private/records/`; resource readers and loaders live under `$PACKAGE/src/private/resources/`.
+
 ## Path Variables
 
 | Variable     | Resolved Path                        | Purpose                                                   |
@@ -53,10 +57,10 @@ Complete the migration from fixed project-record directories to dynamic, kind-fi
 - `$PROJECT/art-domains/cli/workspace/_backlog/_note_from_workspace_architect.md`
 - `$PROJECT/art-domains/cli/workspace/architecture/context-model.md`
 - `$PROJECT/art-domains/cli/workspace/architecture/_pseudo.md`
-- `$PROJECT/art-domains/cli/workspace/src/private/records/projectGraph/`
-- `$PROJECT/art-domains/cli/workspace/src/private/records/project/`
-- `$PROJECT/art-domains/cli/workspace/src/private/records/namespace/`
-- `$PROJECT/art-domains/cli/workspace/src/private/records/package/`
+- `$PROJECT/art-domains/cli/workspace/src/private/resources/projectGraph/`
+- `$PROJECT/art-domains/cli/workspace/src/private/resources/project/`
+- `$PROJECT/art-domains/cli/workspace/src/private/resources/namespace/`
+- `$PROJECT/art-domains/cli/workspace/src/private/resources/package/`
 - `$PROJECT/art-domains/cli/workspace/src/commands/repo/runRepo.ts`
 - `$WORKSPACE/.agents/domains/plans/definitions/index.md`
 
@@ -87,7 +91,7 @@ npx vitest run src/commands/sync/runSync.test.ts
 npx vitest run src/commands/repo/runRepo.test.ts
 
 # Then fix loadProjectGraph — run only the graph test:
-npx vitest run src/private/records/projectGraph/loadProjectGraph.test.ts
+npx vitest run src/private/resources/projectGraph/loadProjectGraph.test.ts
 
 # After all fixes pass, run the full suite:
 npm run test
@@ -113,8 +117,8 @@ Update these architecture files BEFORE making source code changes. Config-relate
 ### `architecture/_pseudo.md`
 
 - Update `hydrate` pseudo block: note that `loadRepositoryRecords` and `loadCheckoutRecords` are now async and must be awaited.
-- Update `loadRepositoryRecords` pseudo block: change from reading `config.records.repositories.path` to using `findRecordFiles(config.root.path, config.records.pattern)`. Show it returns `Promise`.
-- Update `loadCheckoutRecords` pseudo block: change from reading `config.records.checkouts.path` to using `findRecordFiles(config.root.path, config.records.pattern)`. Show it returns `Promise`. Add `filename` to the returned record shape.
+- Update `loadRepositoryRecords` pseudo block: change from reading `config.records.repositories.path` to using `findRecordFiles(config.root.path, config.records.pattern, [kinds])`. Show it returns `Promise`.
+- Update `loadCheckoutRecords` pseudo block: change from reading `config.records.checkouts.path` to using `findRecordFiles(config.root.path, config.records.pattern, [kinds])`. Show it returns `Promise`. Add `filename` to the returned record shape.
 - Update `saveCheckoutRecord` pseudo block: change to data-first `(config, data, filename?)`.
 - Update `readProjectRecords` pseudo block: replace hardcoded `ops/records/{projects|namespaces|packages}` with dynamic `findRecordFiles(checkoutPath, config.records.pattern)` + kind filtering.
 - Update `cloneIfMissing` pseudo: `saveCheckoutRecord` calls to data-first.
@@ -131,12 +135,14 @@ Update these architecture files BEFORE making source code changes. Config-relate
    - `readProjectRecords` → `loadProjectRecords(config, checkoutPath): Promise<ProjectRecord[]>`.
    - `readNamespaceRecords` → `loadNamespaceRecords(config, checkoutPath): Promise<NamespaceRecord[]>`.
    - `readPackageRecords` → `loadPackageRecords(config, checkoutPath): Promise<PackageRecord[]>`.
-   - Keep `readProjectRecord`, `readNamespaceRecord`, and `readPackageRecord` as synchronous singular file readers.
+   - Keep the singular readers as kind-specific readers, but make them async and accept `RecordFile` values.
+   - `readRecordFileContent` asynchronously populates `RecordFile.content` or `RecordFile.error`.
 2. Implement each loader with the same pipeline:
-   - call `findRecordFiles(checkoutPath, config.records.pattern)`;
-   - pass each file to the corresponding singular reader;
+   - await `findRecordFiles(checkoutPath, config.records.pattern, [kind])`;
+   - pass each `RecordFile` to the corresponding async singular reader in `Promise.all`;
    - ignore `null` results;
    - return typed records.
+   - `filterFilenamesByKinds` is async and loads candidate contents in parallel with `Promise.all`.
 3. Change `loadProjectGraph` to async: `loadProjectGraph(config, checkoutPath): Promise<ProjectGraph>`. Compose the three async dynamic loaders with `await` before calling `consolidateProjectGraph`.
 4. Update `runRepo` to `await loadProjectGraph(ctx.config, checkoutPath)`; update every import, direct call, test helper, and test name affected by the loader rename.
 5. Preserve compatibility by testing both layouts:
@@ -160,11 +166,11 @@ The following test files are likely affected by this commit. Update existing tes
 - `$PACKAGE/src/commands/pull/runPull.test.ts` — verify passes after mock name fix.
 - `$PACKAGE/src/commands/sync/runSync.test.ts` — verify passes after mock name fix.
 - `$PACKAGE/src/commands/repo/runRepo.test.ts` — verify passes after mock name fix.
-- `$PACKAGE/src/private/records/projectGraph/loadProjectGraph.test.ts` — currently calls `loadProjectGraph(tempDir)` synchronously. Make async: `const graph = await loadProjectGraph(config, tempDir)`. Add tests for co-located `_records/` layout. Add tests for ignored `.art` files. Run this file in isolation after each change to validate incrementally.
+- `$PACKAGE/src/private/resources/projectGraph/loadProjectGraph.test.ts` — calls `loadProjectGraph(config, tempDir)` asynchronously. Coverage includes co-located `_records/` layout and ignored `.art` files.
 - `$PACKAGE/src/commands/repo/runRepo.ts` callers — update any tests that call `loadProjectGraph` to await it.
-- `$PACKAGE/src/private/records/project/readProjectRecords.ts` callers — update imports to new `loadProjectRecords` name.
-- `$PACKAGE/src/private/records/namespace/readNamespaceRecords.ts` callers — update imports to new `loadNamespaceRecords` name.
-- `$PACKAGE/src/private/records/package/readPackageRecords.ts` callers — update imports to new `loadPackageRecords` name.
+- `$PACKAGE/src/private/resources/project/readProjectRecords.ts` callers — update imports to new `loadProjectRecords` name.
+- `$PACKAGE/src/private/resources/namespace/readNamespaceRecords.ts` callers — update imports to new `loadNamespaceRecords` name.
+- `$PACKAGE/src/private/resources/package/readPackageRecords.ts` callers — update imports to new `loadPackageRecords` name.
 
 ### New tests to create
 
@@ -193,7 +199,7 @@ npm run ci
 Run the focused graph and repository command tests first:
 
 ```bash
-npx vitest run src/private/records/projectGraph/loadProjectGraph.test.ts
+npx vitest run src/private/resources/projectGraph/loadProjectGraph.test.ts
 npx vitest run src/commands/clone/runClone.test.ts
 npx vitest run src/commands/repo/runRepo.test.ts
 ```
@@ -208,3 +214,9 @@ Then run the full package suite. Confirm:
 ## How to Report Back
 
 Render `$PACKAGE/_backlog/3-now/plan-discover-records/instructions/load-colocated-records__report.md` with the report template. Include changed files, architecture doc updates, legacy/co-located fixture evidence, test results, and any compatibility issues.
+
+## Implementation Feedback
+
+- `findRecordFiles` now returns `Promise<RecordFile[]>`, carrying resolved filename, search root, relative path, and lazy content/error state.
+- Discovery helpers live under `$PACKAGE/src/private/records/private/`; resource readers and loaders live under `$PACKAGE/src/private/resources/`.
+- All singular readers and collection loaders are async. Collection loaders and kind filtering use `Promise.all` for parallel reads.
