@@ -2,7 +2,7 @@
 
 **ID:** `plan-repo-command-fixes-and-tests`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan__template.md`
 
@@ -82,7 +82,11 @@ Run focused regression tests for each bug before the full package suite.
 
 All bug details remain in `plan__bugs.md`; commit entries below carry only the stable bug reference and implementation intent.
 
-### `fix-repo-identify-checkout` - `PLANNED`
+### `fix-repo-identify-checkout` - `COMMITTED`
+
+**Commit:** `9c6c6c5`
+
+**Report:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/fix-repo-identify-checkout.report.md`
 
 **Bug.id:** `repo-identify-checkout`
 
@@ -90,7 +94,13 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/fix-repo-identify-checkout.md`
 
-### `repo-state-report-under-its-repo-report` - `PLANNED`
+### `repo-state-report-under-its-repo-report` - `COMMITTED`
+
+**Commit:** `9c6c6c5`
+
+**Report:** Incorporated into `fix-repo-identify-checkout` and `repo-state-report-repeated-checkouts` reports.
+
+**Note:** Fix was applied by the repeated-checkouts worker (merged presentation loops). No standalone report rendered.
 
 **Bug.id:** `repo-state-report-under-its-repo-report`
 
@@ -98,7 +108,11 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/repo-state-report-under-its-repo-report.md`
 
-### `repo-state-report-repeated-checkouts` - `PLANNED`
+### `repo-state-report-repeated-checkouts` - `COMMITTED`
+
+**Commit:** `9c6c6c5`
+
+**Report:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/repo-state-report-repeated-checkouts.report.md`
 
 **Bug.id:** `repo-state-report-repeated-checkouts`
 
@@ -106,7 +120,7 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/repo-state-report-repeated-checkouts.md`
 
-### `fix-tests-and-update-plan` - `DONE`
+### `fix-tests-and-update-plan` - `COMMITTED`
 
 **Bug.id:** `repo-identify-checkout`, `repo-state-report-under-its-repo-report`, `repo-state-report-repeated-checkouts`
 
@@ -116,7 +130,19 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Scope:** Add focused regression coverage for all three bugs, profile repeated setup, and remove only demonstrably redundant tests.
 
-### `update-knowledge` - `PLANNED`
+### `repo-state-report-under-its-repo-report`
+
+**Root cause:** `repositoryStates` presented in one loop, then separate loop over `targets` for package reports, breaking association.
+
+**Fix:** Incorporated into `repo-state-report-repeated-checkouts` — single presentation loop now shows each repo report followed immediately by its package report.
+
+**Tests:** Covered by `groups each repository report with its package report` regression test (added in `fix-tests-and-update-plan`).
+
+### `update-knowledge` - `COMMITTED`
+
+**Commit:** `4eb0ce4`
+
+**Report:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/update-knowledge__report.md`
 
 **Commit Message:** `docs(workspace-cli): update repo command knowledge`
 
@@ -159,3 +185,39 @@ Milestone 1 — Complete Workspace CLI (`$PACKAGE/_backlog/3-now/milestone-one/m
 - Extracted `setupCheckoutWithPackages` helper for the single-checkout-with-packages pattern (used by 2 tests).
 - Two tests remain with full inline setup because their setup differs meaningfully (no package.json, no packages at all).
 - No tests removed — all existing tests cover unique behavior paths.
+
+### `fix-repo-identify-checkout`
+
+**Root cause:** `runRepo` only called `getCheckoutByName(name)`, never `getCheckoutForLocation(location)`.
+
+**Fix:** Added `?? ctx.store.getCheckoutForLocation(name)` fallback after `getCheckoutByName`.
+
+**Precedence:** Name lookup first (case-insensitive), then location (exact match), then `unknown checkout` warning.
+
+**Tests:** 9/9 focused, 226/227 full suite (1 pre-existing unrelated failure).
+
+### `repo-state-report-repeated-checkouts`
+
+**Root cause:** Package states keyed by `checkout.record.name` caused collisions when multiple checkouts of one repo existed. Presentation split into two separate loops broke association.
+
+**Fix:** Keyed by `checkout.record.location`; replaced flat arrays with Maps; merged into single presentation loop. Extracted helpers: `getRepositoryCheckoutPackages`, `createPackageStateRecord`, `scanPackageStateRecord`.
+
+**Tests:** 10/10 focused, 227/227 full suite.
+
+### `repo-state-report-under-its-repo-report`
+
+**Root cause:** `repositoryStates` presented in one loop, then separate loop over `targets` for package reports, breaking association.
+
+**Fix:** Incorporated into `repo-state-report-repeated-checkouts` — single presentation loop now shows each repo report followed immediately by its package report.
+
+**Tests:** Covered by `groups each repository report with its package report` regression test (added in `fix-tests-and-update-plan`).
+
+### `update-knowledge`
+
+**Files updated:**
+
+- `architecture/commands.md` — recursive record discovery, multiple-checkout scenario
+- `architecture/_pseudo.md` — Map-based grouped reporting, new auxiliary functions
+- `architecture/reports.md` — Repository State Report section, corrected Package State Report ordering
+
+**Verification:** Lint clean, no broken local links.
