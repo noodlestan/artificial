@@ -113,15 +113,15 @@ program
 
 program
 	.command('repo')
-	.description('List repositories, namespaces, and packages')
-	.argument('[checkouts...]', 'checkout names to list (default: all checkouts)')
-	.action(async (checkoutNames: string[]) => {
+	.description('List checkout resources')
+	.argument('[checkouts...]', 'checkout locations to list (default: all checkouts)')
+	.action(async (locations: string[]) => {
 		const root = process.cwd();
 		const config = await loadWorkspaceConfig(root);
 		const store = createCheckoutStore();
 		const log = createOperationsLog();
 		const ctx = createWorkspaceContext(config, store, log);
-		await runRepo(ctx, { checkoutNames });
+		await runRepo(ctx, { locations });
 	});
 
 program

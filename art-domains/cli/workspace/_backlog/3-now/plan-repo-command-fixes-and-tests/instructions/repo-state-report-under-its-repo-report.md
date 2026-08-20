@@ -34,7 +34,7 @@ Present each Repository State Report immediately followed by the matching Packag
 - `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md`
 - `$PACKAGE/src/commands/repo/runRepo.ts`
 - `$PACKAGE/src/commands/repo/runRepo.test.ts`
-- `$PACKAGE/src/private/present/presentRepositoryState.ts`
+- `$PACKAGE/src/private/present/presentCheckoutRepositoryState.ts`
 - `$PACKAGE/src/private/present/presentPackageStateReport.ts`
 - `$PACKAGE/architecture/_pseudo.md`
 

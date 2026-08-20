@@ -14,6 +14,7 @@ export async function loadProjectRecords(
 		['Project'],
 		config.records,
 	);
+
 	const records = await Promise.all(recordFiles.map(file => readProjectRecord(file)));
 	return records.filter((record): record is ProjectRecord => record !== null);
 }

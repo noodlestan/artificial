@@ -49,7 +49,7 @@ npm ci
 
 ### Step 1 — Confirm the root cause
 
-1. Follow `runRepo` from its command argument to `checkoutNames`.
+1. Follow `runRepo` from its command argument to `locations`.
 2. Confirm the current lookup calls `ctx.store.getCheckoutByName(name)` only.
 3. Reproduce the bug with a checkout whose record name differs from its location, such as `Artificial @ bug-fixes` at `artificial-bug-fixes`.
 4. Verify the name succeeds while the location produces `unknown checkout`.

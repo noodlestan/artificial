@@ -1,16 +1,14 @@
-import { execSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
-
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
+import { presentCheckoutRepositoryState } from '../../private/present/presentCheckoutRepositoryState';
 import { presentPackageStateReport } from '../../private/present/presentPackageStateReport';
-import { presentRepositoryState } from '../../private/present/presentRepositoryState';
+import { getRepositoryCheckoutPackages } from '../../private/repositories/getRepositoryCheckoutPackages';
 import { loadCheckoutRecords } from '../../private/resources/checkout/loadCheckoutRecords';
 import { loadProjectGraph } from '../../private/resources/projectGraph/loadProjectGraph';
 import { loadRepositoryRecords } from '../../private/resources/repository/loadRepositoryRecords';
 import type { PackageStateRecord, ProjectGraph } from '../../private/resources/types';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
+import { Checkout } from '../../private/store/types';
 
 export interface CheckoutRepositoryState {
 	target: import('../../private/store/types').Checkout;
@@ -21,34 +19,34 @@ export interface CheckoutRepositoryState {
 
 export async function runRepo(
 	ctx: WorkspaceContext,
-	options: { checkoutNames: string[] },
+	options: { locations?: string[] },
 ): Promise<void> {
 	const repos = await loadRepositoryRecords(ctx.config);
 	const records = await loadCheckoutRecords(ctx.config, repos);
 	hydrateStoreFromRecords(ctx.config, ctx.store, records);
 	await scanAllCheckoutsStates(ctx.store);
 
-	const { checkoutNames } = options;
+	const { locations = [] } = options;
 
-	let targets;
-	if (checkoutNames.length === 0) {
-		targets = ctx.store.getAllCheckouts();
+	const checkouts: Map<string, Checkout> = new Map();
+	if (locations.length === 0) {
+		const all = ctx.store.getAllCheckouts();
+		all.forEach(checkout => checkouts.set(checkout.record.location, checkout));
 	} else {
-		targets = [];
-		for (const name of checkoutNames) {
-			const checkout = ctx.store.getCheckoutByName(name);
+		for (const name of locations) {
+			const checkout = ctx.store.getCheckoutByName(name) ?? ctx.store.getCheckoutForLocation(name);
 			if (!checkout) {
 				console.warn(`unknown checkout: ${name}`);
 				continue;
 			}
-			targets.push(checkout);
+			checkouts.set(checkout.record.location, checkout);
 		}
 	}
 
-	const allPackageStates = new Map<string, PackageStateRecord[]>();
-	const repositoryStates: CheckoutRepositoryState[] = [];
+	const repositoryCheckoutStates = new Map<string, CheckoutRepositoryState>();
+	const repositoryCheckoutPackages = new Map<string, PackageStateRecord[]>();
 
-	for (const checkout of targets) {
+	for (const [location, checkout] of checkouts) {
 		const graph = await loadProjectGraph(ctx.config, checkout.path);
 		const repositoryState: CheckoutRepositoryState = {
 			target: checkout,
@@ -56,7 +54,7 @@ export async function runRepo(
 			issues: [],
 			graph,
 		};
-		repositoryStates.push(repositoryState);
+		repositoryCheckoutStates.set(location, repositoryState);
 
 		for (const w of graph.warnings) {
 			console.warn(w);
@@ -67,73 +65,13 @@ export async function runRepo(
 			continue;
 		}
 
-		const packageStates: PackageStateRecord[] = [];
-
-		for (const project of graph.projects) {
-			for (const nsName of project.namespaceNames) {
-				const ns = graph.namespaces.get(nsName);
-				if (!ns) continue;
-				for (const pkgName of ns.packageNames) {
-					const pkg = graph.packages.get(pkgName);
-					if (!pkg) continue;
-
-					let pkgPath = join(checkout.path, project.path, ns.path, pkg.path);
-					let pkgJsonPath = join(pkgPath, 'package.json');
-
-					if (!existsSync(pkgJsonPath)) {
-						const altPath = join(checkout.path, project.path, pkg.path);
-						const altPkgJsonPath = join(altPath, 'package.json');
-						if (existsSync(altPkgJsonPath)) {
-							pkgPath = altPath;
-							pkgJsonPath = altPkgJsonPath;
-						}
-					}
-
-					let version: string | null = null;
-					const states: string[] = [];
-
-					if (existsSync(pkgJsonPath)) {
-						try {
-							const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
-							version = pkgJson.version ?? null;
-						} catch {
-							states.push('no package.json');
-						}
-					} else {
-						states.push('no package.json');
-					}
-
-					let publishedVersion: string | null = null;
-					if (version !== null && version !== '0.0.0') {
-						try {
-							const output = execSync(`npm info ${pkg.canonicalName} version`, {
-								encoding: 'utf-8',
-								timeout: 10000,
-								stdio: ['pipe', 'pipe', 'ignore'],
-							});
-							publishedVersion = output.trim() || null;
-						} catch {
-							publishedVersion = 'unknown';
-						}
-					}
-
-					packageStates.push({
-						canonicalName: pkg.canonicalName,
-						version,
-						publishedVersion,
-						directory: pkgPath,
-						states,
-					});
-				}
-			}
-		}
-
-		allPackageStates.set(checkout.record.name, packageStates);
+		const packageStates = getRepositoryCheckoutPackages(checkout.path, graph);
+		repositoryCheckoutPackages.set(location, packageStates);
 	}
 
-	for (const state of repositoryStates) presentRepositoryState(state);
-	for (const checkout of targets) {
-		const packageStates = allPackageStates.get(checkout.record.name) ?? [];
-		presentPackageStateReport(checkout, packageStates);
+	for (const [location, state] of repositoryCheckoutStates) {
+		presentCheckoutRepositoryState(state);
+		const packageStates = repositoryCheckoutPackages.get(location) ?? [];
+		presentPackageStateReport(state.target, packageStates);
 	}
 }
