@@ -56,6 +56,7 @@ Records are co-located with the resources they describe in `_records/` directori
 - **Deployment:** `{app-path}/_records/deployment.art`
 
 Examples:
+
 - `repos/artificial/_records/project.art`
 - `repos/artificial/artisans/apps/art-mantras/_records/deployment.art`
 

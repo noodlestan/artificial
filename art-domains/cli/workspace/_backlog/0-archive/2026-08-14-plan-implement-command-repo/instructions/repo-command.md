@@ -252,7 +252,7 @@ npm run ci # to verify build is green before starting
      - Filter out nulls and return array
 2. Implement graph loading:
    - `loadProjectGraph(checkoutPath: string): ProjectGraph` in `src/private/records/projectGraph/loadProjectGraph.ts`:
-      - Call `readProjectRecords`, `readNamespaceRecords`, and `readPackageRecords` to load all records from `{checkoutPath}/_records/`
+     - Call `readProjectRecords`, `readNamespaceRecords`, and `readPackageRecords` to load all records from `{checkoutPath}/_records/`
      - Call `consolidateProjectGraph` to link and validate
    - `consolidateProjectGraph(projects, namespaces, packages): ProjectGraph` in `src/private/records/projectGraph/consolidateProjectGraph.ts`:
      - Link project.namespaceNames → namespaces
