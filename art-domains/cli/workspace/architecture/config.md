@@ -81,8 +81,5 @@ The configuration design is captured in `records/adr/cli.art`:
 - **Type-safe Configuration in Workspace Root** — `.art-workspace.mts` as a TypeScript ESM module; `/config` subpath for the authoring API; main entry re-exports for the CLI.
 - **Runtime Config Loading — esbuild Bundle-at-Runtime** — the manifest is bundled and imported at runtime; `esbuild` becomes a runtime dependency. Reconsider Node native type-stripping when the minimum Node version is guaranteed (≥ 22.6).
 - **Manifest Mirrors Records Structures; Checkouts Derived at Entry Point** — superseded in part by the Checkout record decision below.
-  <<<<<<< HEAD
-- # **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.
-- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/`) managed by CLI commands, keeping repository records as read-only facts.
-  > > > > > > > d9ab329 (feat(workspace-cli): add configurable record discovery)
+- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/checkouts/{repo}.art`) and managed by CLI commands.
 - **Records as Source of Truth** — generated files (`.art-workspace.mts`) are derived from records, not maintained separately.
