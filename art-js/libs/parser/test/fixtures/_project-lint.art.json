@@ -47,30 +47,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 5,
-                      "offset": 61
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 5,
-                      "offset": 60
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`eslint`",
+                  "attributes": {},
+                  "value": "eslint",
                   "position": {
                     "end": {
                       "column": 29,
@@ -83,11 +67,6 @@
                       "offset": 61
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -104,13 +83,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " JavaScript linter.",
+                  "attributes": {},
+                  "value": "JavaScript linter.",
                   "position": {
                     "end": {
                       "column": 32,
@@ -123,11 +108,6 @@
                       "offset": 83
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -144,30 +124,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 9,
-                      "offset": 117
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 9,
-                      "offset": 116
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`8.57.1`",
+                  "attributes": {},
+                  "value": "8.57.1",
                   "position": {
                     "end": {
                       "column": 22,
@@ -180,11 +149,6 @@
                       "offset": 117
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -199,6 +163,11 @@
                   "offset": 104
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -226,30 +195,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 13,
-                      "offset": 180
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 13,
-                      "offset": 179
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`prettier`",
+                  "attributes": {},
+                  "value": "prettier",
                   "position": {
                     "end": {
                       "column": 31,
@@ -262,11 +215,6 @@
                       "offset": 180
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -283,13 +231,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Code formatter.",
+                  "attributes": {},
+                  "value": "Code formatter.",
                   "position": {
                     "end": {
                       "column": 29,
@@ -302,11 +256,6 @@
                       "offset": 204
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -323,30 +272,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 17,
-                      "offset": 235
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 17,
-                      "offset": 234
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`3.8.4`",
+                  "attributes": {},
+                  "value": "3.8.4",
                   "position": {
                     "end": {
                       "column": 21,
@@ -359,11 +297,6 @@
                       "offset": 235
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -378,6 +311,11 @@
                   "offset": 222
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -405,30 +343,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 21,
-                      "offset": 311
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 21,
-                      "offset": 310
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`eslint-config-standard`",
+                  "attributes": {},
+                  "value": "eslint-config-standard",
                   "position": {
                     "end": {
                       "column": 45,
@@ -441,11 +363,6 @@
                       "offset": 311
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -462,13 +379,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Standard ESLint config.",
+                  "attributes": {},
+                  "value": "Standard ESLint config.",
                   "position": {
                     "end": {
                       "column": 37,
@@ -481,11 +404,6 @@
                       "offset": 349
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -502,30 +420,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 25,
-                      "offset": 388
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 25,
-                      "offset": 387
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`17.1.0`",
+                  "attributes": {},
+                  "value": "17.1.0",
                   "position": {
                     "end": {
                       "column": 22,
@@ -538,11 +445,6 @@
                       "offset": 388
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -557,6 +459,11 @@
                   "offset": 375
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -584,30 +491,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 29,
-                      "offset": 463
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 29,
-                      "offset": 462
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`eslint-plugin-import`",
+                  "attributes": {},
+                  "value": "eslint-plugin-import",
                   "position": {
                     "end": {
                       "column": 43,
@@ -620,11 +511,6 @@
                       "offset": 463
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -641,13 +527,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Import rules for ESLint.",
+                  "attributes": {},
+                  "value": "Import rules for ESLint.",
                   "position": {
                     "end": {
                       "column": 38,
@@ -660,11 +552,6 @@
                       "offset": 499
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -681,30 +568,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 33,
-                      "offset": 539
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 33,
-                      "offset": 538
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`2.32.0`",
+                  "attributes": {},
+                  "value": "2.32.0",
                   "position": {
                     "end": {
                       "column": 22,
@@ -717,11 +593,6 @@
                       "offset": 539
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -736,6 +607,11 @@
                   "offset": 526
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -763,30 +639,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 37,
-                      "offset": 616
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 37,
-                      "offset": 615
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`eslint-plugin-jsx-a11y`",
+                  "attributes": {},
+                  "value": "eslint-plugin-jsx-a11y",
                   "position": {
                     "end": {
                       "column": 45,
@@ -799,11 +659,6 @@
                       "offset": 616
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -820,13 +675,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Accessibility rules for JSX.",
+                  "attributes": {},
+                  "value": "Accessibility rules for JSX.",
                   "position": {
                     "end": {
                       "column": 42,
@@ -839,11 +700,6 @@
                       "offset": 654
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -860,30 +716,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 41,
-                      "offset": 698
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 41,
-                      "offset": 697
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`6.10.2`",
+                  "attributes": {},
+                  "value": "6.10.2",
                   "position": {
                     "end": {
                       "column": 22,
@@ -896,11 +741,6 @@
                       "offset": 698
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -915,6 +755,11 @@
                   "offset": 685
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -942,30 +787,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 45,
-                      "offset": 770
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 45,
-                      "offset": 769
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`eslint-plugin-mdx`",
+                  "attributes": {},
+                  "value": "eslint-plugin-mdx",
                   "position": {
                     "end": {
                       "column": 40,
@@ -978,11 +807,6 @@
                       "offset": 770
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -999,13 +823,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " MDX support for ESLint.",
+                  "attributes": {},
+                  "value": "MDX support for ESLint.",
                   "position": {
                     "end": {
                       "column": 37,
@@ -1018,11 +848,6 @@
                       "offset": 803
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1039,30 +864,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 49,
-                      "offset": 842
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 49,
-                      "offset": 841
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`3.8.1`",
+                  "attributes": {},
+                  "value": "3.8.1",
                   "position": {
                     "end": {
                       "column": 21,
@@ -1075,11 +889,6 @@
                       "offset": 842
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1094,6 +903,11 @@
                   "offset": 829
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -1121,30 +935,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 53,
-                      "offset": 918
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 53,
-                      "offset": 917
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`eslint-plugin-prettier`",
+                  "attributes": {},
+                  "value": "eslint-plugin-prettier",
                   "position": {
                     "end": {
                       "column": 45,
@@ -1157,11 +955,6 @@
                       "offset": 918
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1178,13 +971,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Run Prettier as ESLint rule.",
+                  "attributes": {},
+                  "value": "Run Prettier as ESLint rule.",
                   "position": {
                     "end": {
                       "column": 42,
@@ -1197,11 +996,6 @@
                       "offset": 956
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1218,30 +1012,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 57,
-                      "offset": 1000
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 57,
-                      "offset": 999
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`5.5.6`",
+                  "attributes": {},
+                  "value": "5.5.6",
                   "position": {
                     "end": {
                       "column": 21,
@@ -1254,11 +1037,6 @@
                       "offset": 1000
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1273,6 +1051,11 @@
                   "offset": 987
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -1300,30 +1083,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 61,
-                      "offset": 1073
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 61,
-                      "offset": 1072
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`eslint-plugin-solid`",
+                  "attributes": {},
+                  "value": "eslint-plugin-solid",
                   "position": {
                     "end": {
                       "column": 42,
@@ -1336,11 +1103,6 @@
                       "offset": 1073
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1357,13 +1119,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " SolidJS rules for ESLint.",
+                  "attributes": {},
+                  "value": "SolidJS rules for ESLint.",
                   "position": {
                     "end": {
                       "column": 39,
@@ -1376,11 +1144,6 @@
                       "offset": 1108
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1397,30 +1160,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 65,
-                      "offset": 1149
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 65,
-                      "offset": 1148
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`0.14.5`",
+                  "attributes": {},
+                  "value": "0.14.5",
                   "position": {
                     "end": {
                       "column": 22,
@@ -1433,11 +1185,6 @@
                       "offset": 1149
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1452,6 +1199,11 @@
                   "offset": 1136
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -1479,30 +1231,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 69,
-                      "offset": 1228
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 69,
-                      "offset": 1227
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`@noodlestan/eslint-config`",
+                  "attributes": {},
+                  "value": "@noodlestan/eslint-config",
                   "position": {
                     "end": {
                       "column": 48,
@@ -1515,11 +1251,6 @@
                       "offset": 1228
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1536,13 +1267,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Shared ESLint configuration.",
+                  "attributes": {},
+                  "value": "Shared ESLint configuration.",
                   "position": {
                     "end": {
                       "column": 42,
@@ -1555,11 +1292,6 @@
                       "offset": 1269
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1576,30 +1308,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 73,
-                      "offset": 1313
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 73,
-                      "offset": 1312
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`0.0.7`",
+                  "attributes": {},
+                  "value": "0.0.7",
                   "position": {
                     "end": {
                       "column": 21,
@@ -1612,11 +1333,6 @@
                       "offset": 1313
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1631,6 +1347,11 @@
                   "offset": 1300
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -1658,30 +1379,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 77,
-                      "offset": 1391
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 77,
-                      "offset": 1390
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`@typescript-eslint/eslint-plugin`",
+                  "attributes": {},
+                  "value": "@typescript-eslint/eslint-plugin",
                   "position": {
                     "end": {
                       "column": 55,
@@ -1694,11 +1399,6 @@
                       "offset": 1391
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1715,13 +1415,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " TypeScript rules for ESLint.",
+                  "attributes": {},
+                  "value": "TypeScript rules for ESLint.",
                   "position": {
                     "end": {
                       "column": 42,
@@ -1734,11 +1440,6 @@
                       "offset": 1439
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1755,30 +1456,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 81,
-                      "offset": 1483
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 81,
-                      "offset": 1482
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`8.11.0`",
+                  "attributes": {},
+                  "value": "8.11.0",
                   "position": {
                     "end": {
                       "column": 22,
@@ -1791,11 +1481,6 @@
                       "offset": 1483
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1810,6 +1495,11 @@
                   "offset": 1470
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -1867,7 +1557,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: ESLint",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: ESLint",
                       "position": {
                         "end": {
                           "column": 29,
@@ -1875,15 +1568,57 @@
                           "offset": 1578
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 87,
-                          "offset": 1552
+                          "offset": 1550
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: ESLint",
+                          "position": {
+                            "end": {
+                              "column": 29,
+                              "line": 87,
+                              "offset": 1578
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 87,
+                              "offset": 1552
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: ESLint",
+                              "position": {
+                                "end": {
+                                  "column": 29,
+                                  "line": 87,
+                                  "offset": 1578
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 87,
+                                  "offset": 1552
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: Prettier",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: Prettier",
                       "position": {
                         "end": {
                           "column": 31,
@@ -1891,15 +1626,57 @@
                           "offset": 1609
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 88,
-                          "offset": 1581
+                          "offset": 1579
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: Prettier",
+                          "position": {
+                            "end": {
+                              "column": 31,
+                              "line": 88,
+                              "offset": 1609
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 88,
+                              "offset": 1581
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: Prettier",
+                              "position": {
+                                "end": {
+                                  "column": 31,
+                                  "line": 88,
+                                  "offset": 1609
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 88,
+                                  "offset": 1581
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: ESLint Config Standard",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: ESLint Config Standard",
                       "position": {
                         "end": {
                           "column": 45,
@@ -1907,15 +1684,57 @@
                           "offset": 1654
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 89,
-                          "offset": 1612
+                          "offset": 1610
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: ESLint Config Standard",
+                          "position": {
+                            "end": {
+                              "column": 45,
+                              "line": 89,
+                              "offset": 1654
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 89,
+                              "offset": 1612
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: ESLint Config Standard",
+                              "position": {
+                                "end": {
+                                  "column": 45,
+                                  "line": 89,
+                                  "offset": 1654
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 89,
+                                  "offset": 1612
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: ESLint Plugin Import",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: ESLint Plugin Import",
                       "position": {
                         "end": {
                           "column": 43,
@@ -1923,15 +1742,57 @@
                           "offset": 1697
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 90,
-                          "offset": 1657
+                          "offset": 1655
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: ESLint Plugin Import",
+                          "position": {
+                            "end": {
+                              "column": 43,
+                              "line": 90,
+                              "offset": 1697
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 90,
+                              "offset": 1657
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: ESLint Plugin Import",
+                              "position": {
+                                "end": {
+                                  "column": 43,
+                                  "line": 90,
+                                  "offset": 1697
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 90,
+                                  "offset": 1657
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: ESLint Plugin JSX A11y",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: ESLint Plugin JSX A11y",
                       "position": {
                         "end": {
                           "column": 45,
@@ -1939,15 +1800,57 @@
                           "offset": 1742
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 91,
-                          "offset": 1700
+                          "offset": 1698
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: ESLint Plugin JSX A11y",
+                          "position": {
+                            "end": {
+                              "column": 45,
+                              "line": 91,
+                              "offset": 1742
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 91,
+                              "offset": 1700
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: ESLint Plugin JSX A11y",
+                              "position": {
+                                "end": {
+                                  "column": 45,
+                                  "line": 91,
+                                  "offset": 1742
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 91,
+                                  "offset": 1700
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: ESLint Plugin MDX",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: ESLint Plugin MDX",
                       "position": {
                         "end": {
                           "column": 40,
@@ -1955,15 +1858,57 @@
                           "offset": 1782
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 92,
-                          "offset": 1745
+                          "offset": 1743
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: ESLint Plugin MDX",
+                          "position": {
+                            "end": {
+                              "column": 40,
+                              "line": 92,
+                              "offset": 1782
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 92,
+                              "offset": 1745
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: ESLint Plugin MDX",
+                              "position": {
+                                "end": {
+                                  "column": 40,
+                                  "line": 92,
+                                  "offset": 1782
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 92,
+                                  "offset": 1745
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: ESLint Plugin Prettier",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: ESLint Plugin Prettier",
                       "position": {
                         "end": {
                           "column": 45,
@@ -1971,15 +1916,57 @@
                           "offset": 1827
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 93,
-                          "offset": 1785
+                          "offset": 1783
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: ESLint Plugin Prettier",
+                          "position": {
+                            "end": {
+                              "column": 45,
+                              "line": 93,
+                              "offset": 1827
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 93,
+                              "offset": 1785
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: ESLint Plugin Prettier",
+                              "position": {
+                                "end": {
+                                  "column": 45,
+                                  "line": 93,
+                                  "offset": 1827
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 93,
+                                  "offset": 1785
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: ESLint Plugin Solid",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: ESLint Plugin Solid",
                       "position": {
                         "end": {
                           "column": 42,
@@ -1987,15 +1974,57 @@
                           "offset": 1869
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 94,
-                          "offset": 1830
+                          "offset": 1828
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: ESLint Plugin Solid",
+                          "position": {
+                            "end": {
+                              "column": 42,
+                              "line": 94,
+                              "offset": 1869
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 94,
+                              "offset": 1830
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: ESLint Plugin Solid",
+                              "position": {
+                                "end": {
+                                  "column": 42,
+                                  "line": 94,
+                                  "offset": 1869
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 94,
+                                  "offset": 1830
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: Noodlestan ESLint Config",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: Noodlestan ESLint Config",
                       "position": {
                         "end": {
                           "column": 47,
@@ -2003,15 +2032,57 @@
                           "offset": 1916
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 95,
-                          "offset": 1872
+                          "offset": 1870
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: Noodlestan ESLint Config",
+                          "position": {
+                            "end": {
+                              "column": 47,
+                              "line": 95,
+                              "offset": 1916
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 95,
+                              "offset": 1872
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: Noodlestan ESLint Config",
+                              "position": {
+                                "end": {
+                                  "column": 47,
+                                  "line": 95,
+                                  "offset": 1916
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 95,
+                                  "offset": 1872
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Dependency: TypeScript ESLint Plugin",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Dependency: TypeScript ESLint Plugin",
                       "position": {
                         "end": {
                           "column": 47,
@@ -2019,11 +2090,50 @@
                           "offset": 1963
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 96,
-                          "offset": 1919
+                          "offset": 1917
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Dependency: TypeScript ESLint Plugin",
+                          "position": {
+                            "end": {
+                              "column": 47,
+                              "line": 96,
+                              "offset": 1963
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 96,
+                              "offset": 1919
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Dependency: TypeScript ESLint Plugin",
+                              "position": {
+                                "end": {
+                                  "column": 47,
+                                  "line": 96,
+                                  "offset": 1963
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 96,
+                                  "offset": 1919
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }

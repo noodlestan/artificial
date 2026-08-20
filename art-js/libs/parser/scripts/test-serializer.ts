@@ -7,7 +7,7 @@ import { serializeFixture } from './test/serializer/serializeFixture';
 import { getFixturePairs } from './test/shared/get-fixture-pairs';
 import { printSummary } from './test/shared/printSummary';
 
-const { doWriteDebugResult, filterFixture } = parseSerializerArgs();
+const { doWriteDebug, filterFixture } = parseSerializerArgs();
 
 async function run(): Promise<number> {
 	const pairs = getFixturePairs(FIXTURES_DIR);
@@ -42,7 +42,7 @@ async function run(): Promise<number> {
 			continue;
 		}
 
-		const diffResult = diffFixtureResults(input, snapshot, doWriteDebugResult);
+		const diffResult = diffFixtureResults(input, snapshot, doWriteDebug);
 		if (diffResult.hasDiff) {
 			failed++;
 		}

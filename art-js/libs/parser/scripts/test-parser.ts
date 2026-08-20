@@ -4,11 +4,23 @@ import * as path from 'node:path';
 import { FIXTURES_DIR } from './test/constants';
 import { parseFixture } from './test/parser/parseFixture';
 import { parseParserArgs } from './test/parser/parseParserArgs';
+import type { ParseResult } from './test/parser/types';
 import { getFixturePairs } from './test/shared/get-fixture-pairs';
 import { printSummary } from './test/shared/printSummary';
 import { stableStringify } from './test/shared/stableStringify';
 
-const { doWrite, filterFixture } = parseParserArgs();
+const { doWrite, doWriteDebug, filterFixture } = parseParserArgs();
+
+function reportFixture(input: string, result: ParseResult, error?: string) {
+	const fixture = path.basename(input);
+	const status = result.success && !error ? 'PASS' : 'FAIL';
+	const duration = `${String(result.durationMs)}ms`;
+	console.info(`${status} ${duration.padEnd(5)} ${fixture}`);
+	if (error) {
+		console.error(`  ERROR in fixture "${fixture}": ${error}`);
+		console.info('');
+	}
+}
 
 async function run(): Promise<number> {
 	const pairs = getFixturePairs(FIXTURES_DIR);
@@ -27,32 +39,38 @@ async function run(): Promise<number> {
 		const result = parseFixture(input);
 		totalParseTime += result.durationMs;
 
-		const status = result.success ? 'PASS' : 'FAIL';
-		console.info(`${path.basename(input).padEnd(30)} ${status} (${result.durationMs}ms)`);
-
 		if (doWrite && result.success) {
 			const outPath = input + '.json';
 			fs.writeFileSync(outPath, stableStringify(result.document) + '\n', 'utf-8');
 		}
+		if (doWriteDebug) {
+			const outPath = input + '.debug.json';
+			fs.writeFileSync(outPath, stableStringify(result.document) + '\n', 'utf-8');
+		}
 
 		if (!result.success) {
-			console.error(`  Error: ${result.error}`);
+			reportFixture(input, result, result.error);
 			failed++;
 			continue;
 		}
 
 		const snapshotPath = input + '.json';
-		if (fs.existsSync(snapshotPath)) {
-			const expected = fs.readFileSync(snapshotPath, 'utf-8');
-			const actual = stableStringify(result.document) + '\n';
-			if (expected !== actual) {
-				console.error(`  MISMATCH ${path.basename(input)} — snapshot differs`);
-				failed++;
-			}
-		} else {
-			console.error(`  Error: No snapshot for ${path.basename(input)}. Use --write to create one.`);
+		if (!fs.existsSync(snapshotPath)) {
+			const error = `No snapshot for ${path.basename(input)}. Use --write to create one.`;
+			reportFixture(input, result, error);
 			failed++;
+			continue;
 		}
+
+		const expected = fs.readFileSync(snapshotPath, 'utf-8');
+		const actual = stableStringify(result.document) + '\n';
+		if (expected !== actual) {
+			reportFixture(input, result, 'MISMATCH');
+			failed++;
+			continue;
+		}
+
+		reportFixture(input, result);
 	}
 
 	printSummary({

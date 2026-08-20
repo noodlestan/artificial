@@ -25,13 +25,14 @@
           "value": "\n\n"
         },
         {
-          "construct": "FieldBlock",
+          "construct": "FieldInline",
           "name": "Purpose",
           "value": [
             {
-              "construct": "NaturalBlock",
+              "construct": "NaturalExpression",
               "type": "text",
-              "value": " Decisions about how the project declares itself to tooling.",
+              "attributes": {},
+              "value": "Decisions about how the project declares itself to tooling.",
               "position": {
                 "end": {
                   "column": 73,
@@ -44,11 +45,6 @@
                   "offset": 37
                 }
               }
-            },
-            {
-              "construct": "NaturalBlock",
-              "type": "text",
-              "value": "\n\n"
             }
           ],
           "position": {
@@ -63,6 +59,11 @@
               "offset": 25
             }
           }
+        },
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
         },
         {
           "construct": "SectionBlock",
@@ -88,13 +89,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Status",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Adopted",
+                  "attributes": {},
+                  "value": "Adopted",
                   "position": {
                     "end": {
                       "column": 20,
@@ -107,11 +109,6 @@
                       "offset": 150
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -128,13 +125,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Context",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Init, update, and build tooling all need to know what a project contains and how outputs are targeted. If each tool inferred this independently, their views of the project would drift apart and commands would behave differently from the same inputs.",
+                  "attributes": {},
+                  "value": "Init, update, and build tooling all need to know what a project contains and how outputs are targeted. If each tool inferred this independently, their views of the project would drift apart and commands would behave differently from the same inputs.",
                   "position": {
                     "end": {
                       "column": 263,
@@ -147,11 +150,6 @@
                       "offset": 172
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -168,30 +166,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Decision",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 15,
-                      "line": 11,
-                      "offset": 438
-                    },
-                    "start": {
-                      "column": 14,
-                      "line": 11,
-                      "offset": 437
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`.artificials.config.mts`",
+                  "attributes": {},
+                  "value": ".artificials.config.mts",
                   "position": {
                     "end": {
                       "column": 40,
@@ -206,8 +193,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " is the single source of truth for namespaces, packages, domains, and projection targets. ",
                   "position": {
                     "end": {
@@ -223,9 +211,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`art init`",
+                  "attributes": {},
+                  "value": "art init",
                   "position": {
                     "end": {
                       "column": 140,
@@ -240,8 +229,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " writes it; ",
                   "position": {
                     "end": {
@@ -257,9 +247,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`art update`",
+                  "attributes": {},
+                  "value": "art update",
                   "position": {
                     "end": {
                       "column": 164,
@@ -274,8 +265,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " reads it.",
                   "position": {
                     "end": {
@@ -289,11 +281,6 @@
                       "offset": 587
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -310,13 +297,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Consequences",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Every command is driven from this one file; the planned ",
+                  "attributes": {},
+                  "value": "Every command is driven from this one file; the planned ",
                   "position": {
                     "end": {
                       "column": 75,
@@ -331,9 +324,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`art update`",
+                  "attributes": {},
+                  "value": "art update",
                   "position": {
                     "end": {
                       "column": 87,
@@ -348,8 +342,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " consolidation depends on it.",
                   "position": {
                     "end": {

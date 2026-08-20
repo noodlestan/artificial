@@ -3,6 +3,7 @@ import {
 	createFieldBlockToMdast,
 	createFieldInlineToMdast,
 	createNaturalBlockToMdast,
+	createNaturalExpressionToMdast,
 	createSectionBlockToMdast,
 	createTagToMdast,
 } from '@art-js/artificial-constructs';
@@ -14,6 +15,7 @@ export function createDefaultSerializerConfig(): SerializerConfig {
 		constructs: [
 			createDocumentToMdast,
 			createNaturalBlockToMdast,
+			createNaturalExpressionToMdast,
 			createFieldBlockToMdast,
 			createFieldInlineToMdast,
 			createSectionBlockToMdast,

@@ -1,34 +1,29 @@
 import type { MdastNode, VisitContext } from '@art-js/artificial-primitives';
-import type { List } from 'mdast';
+import type { Node } from 'mdast';
+import { phrasing } from 'mdast-util-phrasing';
 
 import { cleanPosition } from '../../../helpers/cleanPosition';
 import { rawSlice } from '../../../helpers/rawSlice';
+import { createNaturalExpression } from '../../NaturalExpression/private/createNaturalExpression';
 
 import type { NaturalBlock } from './types';
 
-export function createNaturalBlock(node: MdastNode, context: VisitContext): NaturalBlock {
+export function createNaturalBlock(node: Node, context: VisitContext): NaturalBlock {
 	const block: NaturalBlock = {
 		construct: 'NaturalBlock',
 		...node,
 		value: rawSlice(node, context),
 		position: cleanPosition(node.position),
 	};
-	if (node.type === 'code') {
-		block.lang = node.lang ?? null;
-		block.meta = node.meta ?? null;
-	} else if (node.type === 'list') {
-		block.children = [];
-		for (const item of (node as List).children) {
-			const content = item.children.find(child => child.type === 'paragraph');
-			if (content)
-				block.children.push({
-					construct: 'NaturalBlock',
-					value: rawSlice(content, context).trim(),
-					position: cleanPosition(content.position),
-				});
-		}
-	} else if (node.type === 'blockquote') {
-		block.children = node.children.map((child: MdastNode) => createNaturalBlock(child, context));
+	if (Array.isArray((node as MdastNode).children)) {
+		const children = (node as MdastNode).children ?? [];
+		const phrasingContainer =
+			node.type === 'paragraph' || node.type === 'heading' || node.type === 'tableCell';
+		block.children = children.map(child =>
+			phrasingContainer || phrasing(child)
+				? createNaturalExpression(child, context)
+				: createNaturalBlock(child as Node, context),
+		) as NaturalBlock['children'];
 	}
 	return block;
 }

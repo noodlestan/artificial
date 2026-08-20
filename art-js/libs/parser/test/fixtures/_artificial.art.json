@@ -47,13 +47,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Generate and manage (Art)ificial Driven Development environments.",
+                  "attributes": {},
+                  "value": "Generate and manage (Art)ificial Driven Development environments.",
                   "position": {
                     "end": {
                       "column": 79,
@@ -66,11 +67,6 @@
                       "offset": 46
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -87,13 +83,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Description",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.",
+                  "attributes": {},
+                  "value": "Collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.",
                   "position": {
                     "end": {
                       "column": 217,
@@ -106,11 +108,6 @@
                       "offset": 130
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -127,30 +124,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Remote",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 13,
-                      "line": 9,
-                      "offset": 344
-                    },
-                    "start": {
-                      "column": 12,
-                      "line": 9,
-                      "offset": 343
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`git@github.com:noodlestan/artificial.git`",
+                  "attributes": {},
+                  "value": "git@github.com:noodlestan/artificial.git",
                   "position": {
                     "end": {
                       "column": 55,
@@ -163,11 +149,6 @@
                       "offset": 344
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -184,30 +165,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Canonical Name",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 21,
-                      "line": 11,
-                      "offset": 408
-                    },
-                    "start": {
-                      "column": 20,
-                      "line": 11,
-                      "offset": 407
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`noodlestan/artificial`",
+                  "attributes": {},
+                  "value": "noodlestan/artificial",
                   "position": {
                     "end": {
                       "column": 44,
@@ -220,11 +190,6 @@
                       "offset": 408
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -241,30 +206,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Path",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 11,
-                      "line": 13,
-                      "offset": 443
-                    },
-                    "start": {
-                      "column": 10,
-                      "line": 13,
-                      "offset": 442
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`./`",
+                  "attributes": {},
+                  "value": "./",
                   "position": {
                     "end": {
                       "column": 15,
@@ -277,11 +231,6 @@
                       "offset": 443
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -298,30 +247,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Version",
               "value": [
                 {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": " ",
-                  "position": {
-                    "end": {
-                      "column": 14,
-                      "line": 15,
-                      "offset": 462
-                    },
-                    "start": {
-                      "column": 13,
-                      "line": 15,
-                      "offset": 461
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`0.0.1`",
+                  "attributes": {},
+                  "value": "0.0.1",
                   "position": {
                     "end": {
                       "column": 21,
@@ -334,11 +272,6 @@
                       "offset": 462
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -355,13 +288,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "packageManager",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " npm@10.2.3",
+                  "attributes": {},
+                  "value": "npm@10.2.3",
                   "position": {
                     "end": {
                       "column": 31,
@@ -374,11 +313,6 @@
                       "offset": 490
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -393,6 +327,11 @@
                   "offset": 471
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -425,7 +364,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "Namespace: Art JS",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Namespace: Art JS",
                       "position": {
                         "end": {
                           "column": 20,
@@ -433,15 +375,57 @@
                           "offset": 539
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 21,
-                          "offset": 522
+                          "offset": 520
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Namespace: Art JS",
+                          "position": {
+                            "end": {
+                              "column": 20,
+                              "line": 21,
+                              "offset": 539
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 21,
+                              "offset": 522
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Namespace: Art JS",
+                              "position": {
+                                "end": {
+                                  "column": 20,
+                                  "line": 21,
+                                  "offset": 539
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 21,
+                                  "offset": 522
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Namespace: Artisans",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Namespace: Artisans",
                       "position": {
                         "end": {
                           "column": 22,
@@ -449,15 +433,57 @@
                           "offset": 561
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 22,
-                          "offset": 542
+                          "offset": 540
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Namespace: Artisans",
+                          "position": {
+                            "end": {
+                              "column": 22,
+                              "line": 22,
+                              "offset": 561
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 22,
+                              "offset": 542
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Namespace: Artisans",
+                              "position": {
+                                "end": {
+                                  "column": 22,
+                                  "line": 22,
+                                  "offset": 561
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 22,
+                                  "offset": 542
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Namespace: Art Domains",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Namespace: Art Domains",
                       "position": {
                         "end": {
                           "column": 25,
@@ -465,18 +491,52 @@
                           "offset": 586
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 23,
-                          "offset": 564
+                          "offset": 562
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Namespace: Art Domains",
+                          "position": {
+                            "end": {
+                              "column": 25,
+                              "line": 23,
+                              "offset": 586
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 23,
+                              "offset": 564
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Namespace: Art Domains",
+                              "position": {
+                                "end": {
+                                  "column": 25,
+                                  "line": 23,
+                                  "offset": 586
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 23,
+                                  "offset": 564
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -491,6 +551,11 @@
                   "offset": 503
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -523,7 +588,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "`art-domains/**`",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- `art-domains/**`",
                       "position": {
                         "end": {
                           "column": 19,
@@ -531,15 +599,57 @@
                           "offset": 623
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 27,
-                          "offset": 607
+                          "offset": 605
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "`art-domains/**`",
+                          "position": {
+                            "end": {
+                              "column": 19,
+                              "line": 27,
+                              "offset": 623
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 27,
+                              "offset": 607
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": "art-domains/**",
+                              "position": {
+                                "end": {
+                                  "column": 19,
+                                  "line": 27,
+                                  "offset": 623
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 27,
+                                  "offset": 607
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "`art-js/**`",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- `art-js/**`",
                       "position": {
                         "end": {
                           "column": 14,
@@ -547,15 +657,57 @@
                           "offset": 637
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 28,
-                          "offset": 626
+                          "offset": 624
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "`art-js/**`",
+                          "position": {
+                            "end": {
+                              "column": 14,
+                              "line": 28,
+                              "offset": 637
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 28,
+                              "offset": 626
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": "art-js/**",
+                              "position": {
+                                "end": {
+                                  "column": 14,
+                                  "line": 28,
+                                  "offset": 637
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 28,
+                                  "offset": 626
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "`artisans/**`",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- `artisans/**`",
                       "position": {
                         "end": {
                           "column": 16,
@@ -563,18 +715,52 @@
                           "offset": 653
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 29,
-                          "offset": 640
+                          "offset": 638
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "`artisans/**`",
+                          "position": {
+                            "end": {
+                              "column": 16,
+                              "line": 29,
+                              "offset": 653
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 29,
+                              "offset": 640
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": "artisans/**",
+                              "position": {
+                                "end": {
+                                  "column": 16,
+                                  "line": 29,
+                                  "offset": 653
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 29,
+                                  "offset": 640
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -589,6 +775,11 @@
                   "offset": 588
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -621,7 +812,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "Scaffolder Files: Project README",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Scaffolder Files: Project README",
                       "position": {
                         "end": {
                           "column": 35,
@@ -629,15 +823,57 @@
                           "offset": 707
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 33,
-                          "offset": 675
+                          "offset": 673
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Scaffolder Files: Project README",
+                          "position": {
+                            "end": {
+                              "column": 35,
+                              "line": 33,
+                              "offset": 707
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 33,
+                              "offset": 675
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Scaffolder Files: Project README",
+                              "position": {
+                                "end": {
+                                  "column": 35,
+                                  "line": 33,
+                                  "offset": 707
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 33,
+                                  "offset": 675
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Scaffolder Files: Project Package Json",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Scaffolder Files: Project Package Json",
                       "position": {
                         "end": {
                           "column": 41,
@@ -645,15 +881,57 @@
                           "offset": 748
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 34,
-                          "offset": 710
+                          "offset": 708
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Scaffolder Files: Project Package Json",
+                          "position": {
+                            "end": {
+                              "column": 41,
+                              "line": 34,
+                              "offset": 748
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 34,
+                              "offset": 710
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Scaffolder Files: Project Package Json",
+                              "position": {
+                                "end": {
+                                  "column": 41,
+                                  "line": 34,
+                                  "offset": 748
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 34,
+                                  "offset": 710
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Scaffolder Files: Project Tsconfig",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Scaffolder Files: Project Tsconfig",
                       "position": {
                         "end": {
                           "column": 37,
@@ -661,15 +939,57 @@
                           "offset": 785
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 35,
-                          "offset": 751
+                          "offset": 749
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Scaffolder Files: Project Tsconfig",
+                          "position": {
+                            "end": {
+                              "column": 37,
+                              "line": 35,
+                              "offset": 785
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 35,
+                              "offset": 751
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Scaffolder Files: Project Tsconfig",
+                              "position": {
+                                "end": {
+                                  "column": 37,
+                                  "line": 35,
+                                  "offset": 785
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 35,
+                                  "offset": 751
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Scaffolder Files: Project Turbo",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Scaffolder Files: Project Turbo",
                       "position": {
                         "end": {
                           "column": 34,
@@ -677,15 +997,57 @@
                           "offset": 819
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 36,
-                          "offset": 788
+                          "offset": 786
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Scaffolder Files: Project Turbo",
+                          "position": {
+                            "end": {
+                              "column": 34,
+                              "line": 36,
+                              "offset": 819
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 36,
+                              "offset": 788
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Scaffolder Files: Project Turbo",
+                              "position": {
+                                "end": {
+                                  "column": 34,
+                                  "line": 36,
+                                  "offset": 819
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 36,
+                                  "offset": 788
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Scaffolder Files: Project Lefthook",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Scaffolder Files: Project Lefthook",
                       "position": {
                         "end": {
                           "column": 37,
@@ -693,15 +1055,57 @@
                           "offset": 856
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 37,
-                          "offset": 822
+                          "offset": 820
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Scaffolder Files: Project Lefthook",
+                          "position": {
+                            "end": {
+                              "column": 37,
+                              "line": 37,
+                              "offset": 856
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 37,
+                              "offset": 822
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Scaffolder Files: Project Lefthook",
+                              "position": {
+                                "end": {
+                                  "column": 37,
+                                  "line": 37,
+                                  "offset": 856
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 37,
+                                  "offset": 822
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Scaffolder Skeleton: Project Skeleton",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Scaffolder Skeleton: Project Skeleton",
                       "position": {
                         "end": {
                           "column": 40,
@@ -709,18 +1113,52 @@
                           "offset": 896
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 38,
-                          "offset": 859
+                          "offset": 857
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Scaffolder Skeleton: Project Skeleton",
+                          "position": {
+                            "end": {
+                              "column": 40,
+                              "line": 38,
+                              "offset": 896
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 38,
+                              "offset": 859
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Scaffolder Skeleton: Project Skeleton",
+                              "position": {
+                                "end": {
+                                  "column": 40,
+                                  "line": 38,
+                                  "offset": 896
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 38,
+                                  "offset": 859
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -737,13 +1175,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "PackageFile",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " package.json",
+                  "attributes": {},
+                  "value": "package.json",
                   "position": {
                     "end": {
                       "column": 30,
@@ -756,11 +1200,6 @@
                       "offset": 914
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -775,6 +1214,11 @@
                   "offset": 898
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -803,7 +1247,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Run at root of repository, not per package:",
                       "position": {
                         "end": {
@@ -843,11 +1289,6 @@
                       "offset": 986
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -862,6 +1303,11 @@
                   "offset": 929
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -890,7 +1336,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Run per package modified:",
                       "position": {
                         "end": {
@@ -930,11 +1378,6 @@
                       "offset": 1079
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -949,6 +1392,11 @@
                   "offset": 1033
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -981,7 +1429,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "Package Script Set: Root Lifecycle",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Package Script Set: Root Lifecycle",
                       "position": {
                         "end": {
                           "column": 37,
@@ -989,11 +1440,50 @@
                           "offset": 1265
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 63,
-                          "offset": 1231
+                          "offset": 1229
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Package Script Set: Root Lifecycle",
+                          "position": {
+                            "end": {
+                              "column": 37,
+                              "line": 63,
+                              "offset": 1265
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 63,
+                              "offset": 1231
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Package Script Set: Root Lifecycle",
+                              "position": {
+                                "end": {
+                                  "column": 37,
+                                  "line": 63,
+                                  "offset": 1265
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 63,
+                                  "offset": 1231
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 },
@@ -1020,7 +1510,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 18,
@@ -1035,7 +1527,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "License.Short",
                           "position": {
                             "end": {
@@ -1077,7 +1571,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Copyright (c) 2026 ",
                       "position": {
                         "end": {
@@ -1093,9 +1589,12 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "link",
-                      "title": null,
-                      "url": "https://noodlestan.org/",
+                      "attributes": {
+                        "title": null,
+                        "url": "https://noodlestan.org/"
+                      },
                       "position": {
                         "end": {
                           "column": 57,
@@ -1110,7 +1609,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Noodlestan",
                           "position": {
                             "end": {
@@ -1128,7 +1629,9 @@
                       ]
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ".",
                       "position": {
                         "end": {
@@ -1168,7 +1671,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Published under a ",
                       "position": {
                         "end": {
@@ -1184,9 +1689,12 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "link",
-                      "title": null,
-                      "url": "https://noodlestan.mit-license.org/",
+                      "attributes": {
+                        "title": null,
+                        "url": "https://noodlestan.mit-license.org/"
+                      },
                       "position": {
                         "end": {
                           "column": 69,
@@ -1201,7 +1709,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "MIT license",
                           "position": {
                             "end": {
@@ -1219,7 +1729,9 @@
                       ]
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ".",
                       "position": {
                         "end": {
@@ -1259,7 +1771,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 17,
@@ -1274,7 +1788,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "License.Long",
                           "position": {
                             "end": {
@@ -1316,7 +1832,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "MIT License https://noodlestan.mit-license.org/",
                       "position": {
                         "end": {
@@ -1356,7 +1874,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Copyright (c) 2026 Noodlestan https://noodlestan.org/",
                       "position": {
                         "end": {
@@ -1396,7 +1916,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Permission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:",
                       "position": {
                         "end": {
@@ -1436,7 +1958,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "The above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.",
                       "position": {
                         "end": {
@@ -1476,7 +2000,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
                       "position": {
                         "end": {

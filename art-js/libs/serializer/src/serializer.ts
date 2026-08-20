@@ -8,5 +8,5 @@ import { createDefaultSerializerConfig } from './config/createDefaultSerializerC
 export function serialize(document: ArtDocument): string {
 	const config = createDefaultSerializerConfig();
 	const root = artAstToMdast(config, document) as Root;
-	return toMarkdown(root);
+	return toMarkdown(root, { bullet: '-', emphasis: '_' });
 }

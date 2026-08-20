@@ -19,6 +19,5 @@ export function createTagCreator(): ConstructCreator {
 				position: cleanPosition(text.position),
 			}));
 		},
-		shouldVisit: false,
 	};
 }

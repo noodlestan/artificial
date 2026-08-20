@@ -1,0 +1,217 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "SectionBlock",
+      "name": "Hello World",
+      "depth": 1,
+      "position": {
+        "end": {
+          "column": 14,
+          "line": 1,
+          "offset": 13
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
+      "children": [
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
+        },
+        {
+          "construct": "FieldInline",
+          "name": "Greeting",
+          "value": [
+            {
+              "construct": "NaturalExpression",
+              "type": "text",
+              "attributes": {},
+              "value": "Hello world!\n",
+              "position": {
+                "end": {
+                  "column": 1,
+                  "line": 4,
+                  "offset": 42
+                },
+                "start": {
+                  "column": 14,
+                  "line": 3,
+                  "offset": 28
+                }
+              }
+            },
+            {
+              "construct": "NaturalExpression",
+              "type": "emphasis",
+              "attributes": {},
+              "position": {
+                "end": {
+                  "column": 6,
+                  "line": 4,
+                  "offset": 47
+                },
+                "start": {
+                  "column": 1,
+                  "line": 4,
+                  "offset": 42
+                }
+              },
+              "children": [
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": "How",
+                  "position": {
+                    "end": {
+                      "column": 5,
+                      "line": 4,
+                      "offset": 46
+                    },
+                    "start": {
+                      "column": 2,
+                      "line": 4,
+                      "offset": 43
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "construct": "NaturalExpression",
+              "type": "text",
+              "attributes": {},
+              "value": " are ",
+              "position": {
+                "end": {
+                  "column": 11,
+                  "line": 4,
+                  "offset": 52
+                },
+                "start": {
+                  "column": 6,
+                  "line": 4,
+                  "offset": 47
+                }
+              }
+            },
+            {
+              "construct": "NaturalExpression",
+              "type": "strong",
+              "attributes": {},
+              "position": {
+                "end": {
+                  "column": 18,
+                  "line": 4,
+                  "offset": 59
+                },
+                "start": {
+                  "column": 11,
+                  "line": 4,
+                  "offset": 52
+                }
+              },
+              "children": [
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": "you",
+                  "position": {
+                    "end": {
+                      "column": 16,
+                      "line": 4,
+                      "offset": 57
+                    },
+                    "start": {
+                      "column": 13,
+                      "line": 4,
+                      "offset": 54
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "construct": "NaturalExpression",
+              "type": "text",
+              "attributes": {},
+              "value": "?",
+              "position": {
+                "end": {
+                  "column": 19,
+                  "line": 4,
+                  "offset": 60
+                },
+                "start": {
+                  "column": 18,
+                  "line": 4,
+                  "offset": 59
+                }
+              }
+            }
+          ],
+          "position": {
+            "end": {
+              "column": 19,
+              "line": 4,
+              "offset": 60
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 15
+            }
+          }
+        },
+        {
+          "construct": "NaturalBlock",
+          "type": "text",
+          "value": "\n\n"
+        },
+        {
+          "construct": "NaturalBlock",
+          "type": "paragraph",
+          "value": "WIP: Only how is included in field value.",
+          "position": {
+            "end": {
+              "column": 42,
+              "line": 6,
+              "offset": 103
+            },
+            "start": {
+              "column": 1,
+              "line": 6,
+              "offset": 62
+            }
+          },
+          "children": [
+            {
+              "construct": "NaturalExpression",
+              "type": "text",
+              "attributes": {},
+              "value": "WIP: Only how is included in field value.",
+              "position": {
+                "end": {
+                  "column": 42,
+                  "line": 6,
+                  "offset": 103
+                },
+                "start": {
+                  "column": 1,
+                  "line": 6,
+                  "offset": 62
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

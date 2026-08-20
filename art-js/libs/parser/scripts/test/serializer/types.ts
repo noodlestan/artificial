@@ -1,5 +1,5 @@
 export interface SerializerCliArgs {
-	doWriteDebugResult: boolean;
+	doWriteDebug: boolean;
 	filterFixture: string | undefined;
 }
 

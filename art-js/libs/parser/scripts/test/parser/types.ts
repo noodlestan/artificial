@@ -1,5 +1,6 @@
 export interface ParserCliArgs {
 	doWrite: boolean;
+	doWriteDebug: boolean;
 	filterFixture: string | undefined;
 }
 

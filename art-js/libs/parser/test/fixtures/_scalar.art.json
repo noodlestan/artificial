@@ -63,7 +63,9 @@
               },
               "children": [
                 {
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": "::READ (NaturalExpression, Identifier, NaturalName) ",
                   "position": {
                     "end": {
@@ -79,7 +81,9 @@
                   }
                 },
                 {
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
+                  "attributes": {},
                   "value": "language/grammar/index.art",
                   "position": {
                     "end": {
@@ -95,7 +99,9 @@
                   }
                 },
                 {
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": ".",
                   "position": {
                     "end": {
@@ -165,13 +171,14 @@
                   "value": "\n\n"
                 },
                 {
-                  "construct": "FieldBlock",
+                  "construct": "FieldInline",
                   "name": "purpose",
                   "value": [
                     {
-                      "construct": "NaturalBlock",
+                      "construct": "NaturalExpression",
                       "type": "text",
-                      "value": " Defines a single atomic value.",
+                      "attributes": {},
+                      "value": "Defines a single atomic value.",
                       "position": {
                         "end": {
                           "column": 44,
@@ -184,11 +191,6 @@
                           "offset": 150
                         }
                       }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "type": "text",
-                      "value": "\n\n"
                     }
                   ],
                   "position": {
@@ -203,6 +205,11 @@
                       "offset": 138
                     }
                   }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
                 },
                 {
                   "construct": "FieldBlock",
@@ -231,11 +238,6 @@
                           "offset": 196
                         }
                       }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "type": "text",
-                      "value": "\n\n"
                     }
                   ],
                   "position": {
@@ -250,6 +252,11 @@
                       "offset": 183
                     }
                   }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
                 }
               ]
             },
@@ -294,7 +301,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 7,
@@ -309,7 +318,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Id",
                           "position": {
                             "end": {
@@ -327,7 +338,9 @@
                       ]
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ": ",
                       "position": {
                         "end": {
@@ -343,7 +356,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": "scalar",
                       "position": {
                         "end": {
@@ -383,7 +398,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 9,
@@ -398,7 +415,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Name",
                           "position": {
                             "end": {
@@ -416,7 +435,9 @@
                       ]
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ": Scalar",
                       "position": {
                         "end": {
@@ -456,7 +477,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "strong",
+                      "attributes": {},
                       "position": {
                         "end": {
                           "column": 9,
@@ -471,7 +494,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Kind",
                           "position": {
                             "end": {
@@ -489,7 +514,9 @@
                       ]
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ": Primitive",
                       "position": {
                         "end": {
@@ -512,13 +539,14 @@
                   "value": "\n\n"
                 },
                 {
-                  "construct": "FieldBlock",
+                  "construct": "FieldInline",
                   "name": "Purpose",
                   "value": [
                     {
-                      "construct": "NaturalBlock",
+                      "construct": "NaturalExpression",
                       "type": "text",
-                      "value": " Defines single atomic values.",
+                      "attributes": {},
+                      "value": "Defines single atomic values.",
                       "position": {
                         "end": {
                           "column": 43,
@@ -531,11 +559,6 @@
                           "offset": 360
                         }
                       }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "type": "text",
-                      "value": "\n\n"
                     }
                   ],
                   "position": {
@@ -552,13 +575,19 @@
                   }
                 },
                 {
-                  "construct": "FieldBlock",
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
+                },
+                {
+                  "construct": "FieldInline",
                   "name": "Description",
                   "value": [
                     {
-                      "construct": "NaturalBlock",
+                      "construct": "NaturalExpression",
                       "type": "text",
-                      "value": " A primitive that holds a single value of a specified type.",
+                      "attributes": {},
+                      "value": "A primitive that holds a single value of a specified type.",
                       "position": {
                         "end": {
                           "column": 76,
@@ -571,11 +600,6 @@
                           "offset": 408
                         }
                       }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "type": "text",
-                      "value": "\n\n"
                     }
                   ],
                   "position": {
@@ -590,6 +614,11 @@
                       "offset": 392
                     }
                   }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
                 },
                 {
                   "construct": "FieldBlock",
@@ -618,11 +647,6 @@
                           "offset": 485
                         }
                       }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "type": "text",
-                      "value": "\n\n"
                     }
                   ],
                   "position": {
@@ -637,6 +661,11 @@
                       "offset": 469
                     }
                   }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
                 },
                 {
                   "construct": "FieldBlock",
@@ -665,11 +694,6 @@
                           "offset": 552
                         }
                       }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "type": "text",
-                      "value": "\n\n"
                     }
                   ],
                   "position": {
@@ -684,6 +708,11 @@
                       "offset": 540
                     }
                   }
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "text",
+                  "value": "\n\n"
                 },
                 {
                   "construct": "SectionBlock",
@@ -726,7 +755,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "strong",
+                          "attributes": {},
                           "position": {
                             "end": {
                               "column": 14,
@@ -741,7 +772,9 @@
                           },
                           "children": [
                             {
+                              "construct": "NaturalExpression",
                               "type": "text",
+                              "attributes": {},
                               "value": "Procedure",
                               "position": {
                                 "end": {
@@ -787,7 +820,10 @@
                       "children": [
                         {
                           "construct": "NaturalBlock",
-                          "value": "Return \"Scalar ({`%type`})\"",
+                          "type": "listItem",
+                          "checked": null,
+                          "spread": false,
+                          "value": "1. Return \"Scalar ({`%type`})\"",
                           "position": {
                             "end": {
                               "column": 31,
@@ -795,11 +831,86 @@
                               "offset": 670
                             },
                             "start": {
-                              "column": 4,
+                              "column": 1,
                               "line": 54,
-                              "offset": 643
+                              "offset": 640
                             }
-                          }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalBlock",
+                              "type": "paragraph",
+                              "value": "Return \"Scalar ({`%type`})\"",
+                              "position": {
+                                "end": {
+                                  "column": 31,
+                                  "line": 54,
+                                  "offset": 670
+                                },
+                                "start": {
+                                  "column": 4,
+                                  "line": 54,
+                                  "offset": 643
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Return \"Scalar ({",
+                                  "position": {
+                                    "end": {
+                                      "column": 21,
+                                      "line": 54,
+                                      "offset": 660
+                                    },
+                                    "start": {
+                                      "column": 4,
+                                      "line": 54,
+                                      "offset": 643
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "inlineCode",
+                                  "attributes": {},
+                                  "value": "%type",
+                                  "position": {
+                                    "end": {
+                                      "column": 28,
+                                      "line": 54,
+                                      "offset": 667
+                                    },
+                                    "start": {
+                                      "column": 21,
+                                      "line": 54,
+                                      "offset": 660
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "})\"",
+                                  "position": {
+                                    "end": {
+                                      "column": 31,
+                                      "line": 54,
+                                      "offset": 670
+                                    },
+                                    "start": {
+                                      "column": 28,
+                                      "line": 54,
+                                      "offset": 667
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     },
@@ -826,7 +937,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Example:",
                           "position": {
                             "end": {
@@ -915,7 +1028,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "strong",
+                          "attributes": {},
                           "position": {
                             "end": {
                               "column": 14,
@@ -930,7 +1045,9 @@
                           },
                           "children": [
                             {
+                              "construct": "NaturalExpression",
                               "type": "text",
+                              "attributes": {},
                               "value": "Procedure",
                               "position": {
                                 "end": {
@@ -976,7 +1093,10 @@
                       "children": [
                         {
                           "construct": "NaturalBlock",
-                          "value": "Return \"\"\"**ValueType:** {`%type`}\n   **Value:** {`%value`}\"\"\"",
+                          "type": "listItem",
+                          "checked": null,
+                          "spread": false,
+                          "value": "1. Return \"\"\"**ValueType:** {`%type`}\n   **Value:** {`%value`}\"\"\"",
                           "position": {
                             "end": {
                               "column": 28,
@@ -984,11 +1104,232 @@
                               "offset": 808
                             },
                             "start": {
-                              "column": 4,
+                              "column": 1,
                               "line": 66,
-                              "offset": 746
+                              "offset": 743
                             }
-                          }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalBlock",
+                              "type": "paragraph",
+                              "value": "Return \"\"\"**ValueType:** {`%type`}\n   **Value:** {`%value`}\"\"\"",
+                              "position": {
+                                "end": {
+                                  "column": 28,
+                                  "line": 67,
+                                  "offset": 808
+                                },
+                                "start": {
+                                  "column": 4,
+                                  "line": 66,
+                                  "offset": 746
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Return \"\"\"",
+                                  "position": {
+                                    "end": {
+                                      "column": 14,
+                                      "line": 66,
+                                      "offset": 756
+                                    },
+                                    "start": {
+                                      "column": 4,
+                                      "line": 66,
+                                      "offset": 746
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "strong",
+                                  "attributes": {},
+                                  "position": {
+                                    "end": {
+                                      "column": 28,
+                                      "line": 66,
+                                      "offset": 770
+                                    },
+                                    "start": {
+                                      "column": 14,
+                                      "line": 66,
+                                      "offset": 756
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "construct": "NaturalExpression",
+                                      "type": "text",
+                                      "attributes": {},
+                                      "value": "ValueType:",
+                                      "position": {
+                                        "end": {
+                                          "column": 26,
+                                          "line": 66,
+                                          "offset": 768
+                                        },
+                                        "start": {
+                                          "column": 16,
+                                          "line": 66,
+                                          "offset": 758
+                                        }
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": " {",
+                                  "position": {
+                                    "end": {
+                                      "column": 30,
+                                      "line": 66,
+                                      "offset": 772
+                                    },
+                                    "start": {
+                                      "column": 28,
+                                      "line": 66,
+                                      "offset": 770
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "inlineCode",
+                                  "attributes": {},
+                                  "value": "%type",
+                                  "position": {
+                                    "end": {
+                                      "column": 37,
+                                      "line": 66,
+                                      "offset": 779
+                                    },
+                                    "start": {
+                                      "column": 30,
+                                      "line": 66,
+                                      "offset": 772
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "}\n",
+                                  "position": {
+                                    "end": {
+                                      "column": 1,
+                                      "line": 67,
+                                      "offset": 781
+                                    },
+                                    "start": {
+                                      "column": 37,
+                                      "line": 66,
+                                      "offset": 779
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "strong",
+                                  "attributes": {},
+                                  "position": {
+                                    "end": {
+                                      "column": 14,
+                                      "line": 67,
+                                      "offset": 794
+                                    },
+                                    "start": {
+                                      "column": 4,
+                                      "line": 67,
+                                      "offset": 784
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "construct": "NaturalExpression",
+                                      "type": "text",
+                                      "attributes": {},
+                                      "value": "Value:",
+                                      "position": {
+                                        "end": {
+                                          "column": 12,
+                                          "line": 67,
+                                          "offset": 792
+                                        },
+                                        "start": {
+                                          "column": 6,
+                                          "line": 67,
+                                          "offset": 786
+                                        }
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": " {",
+                                  "position": {
+                                    "end": {
+                                      "column": 16,
+                                      "line": 67,
+                                      "offset": 796
+                                    },
+                                    "start": {
+                                      "column": 14,
+                                      "line": 67,
+                                      "offset": 794
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "inlineCode",
+                                  "attributes": {},
+                                  "value": "%value",
+                                  "position": {
+                                    "end": {
+                                      "column": 24,
+                                      "line": 67,
+                                      "offset": 804
+                                    },
+                                    "start": {
+                                      "column": 16,
+                                      "line": 67,
+                                      "offset": 796
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "}\"\"\"",
+                                  "position": {
+                                    "end": {
+                                      "column": 28,
+                                      "line": 67,
+                                      "offset": 808
+                                    },
+                                    "start": {
+                                      "column": 24,
+                                      "line": 67,
+                                      "offset": 804
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     },
@@ -1015,7 +1356,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Example:",
                           "position": {
                             "end": {
@@ -1104,7 +1447,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "strong",
+                          "attributes": {},
                           "position": {
                             "end": {
                               "column": 14,
@@ -1119,7 +1464,9 @@
                           },
                           "children": [
                             {
+                              "construct": "NaturalExpression",
                               "type": "text",
+                              "attributes": {},
                               "value": "Procedure",
                               "position": {
                                 "end": {
@@ -1165,7 +1512,10 @@
                       "children": [
                         {
                           "construct": "NaturalBlock",
-                          "value": "Return \"{`%type`}\"",
+                          "type": "listItem",
+                          "checked": null,
+                          "spread": false,
+                          "value": "1. Return \"{`%type`}\"",
                           "position": {
                             "end": {
                               "column": 22,
@@ -1173,11 +1523,86 @@
                               "offset": 936
                             },
                             "start": {
-                              "column": 4,
+                              "column": 1,
                               "line": 80,
-                              "offset": 918
+                              "offset": 915
                             }
-                          }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalBlock",
+                              "type": "paragraph",
+                              "value": "Return \"{`%type`}\"",
+                              "position": {
+                                "end": {
+                                  "column": 22,
+                                  "line": 80,
+                                  "offset": 936
+                                },
+                                "start": {
+                                  "column": 4,
+                                  "line": 80,
+                                  "offset": 918
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Return \"{",
+                                  "position": {
+                                    "end": {
+                                      "column": 13,
+                                      "line": 80,
+                                      "offset": 927
+                                    },
+                                    "start": {
+                                      "column": 4,
+                                      "line": 80,
+                                      "offset": 918
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "inlineCode",
+                                  "attributes": {},
+                                  "value": "%type",
+                                  "position": {
+                                    "end": {
+                                      "column": 20,
+                                      "line": 80,
+                                      "offset": 934
+                                    },
+                                    "start": {
+                                      "column": 13,
+                                      "line": 80,
+                                      "offset": 927
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "}\"",
+                                  "position": {
+                                    "end": {
+                                      "column": 22,
+                                      "line": 80,
+                                      "offset": 936
+                                    },
+                                    "start": {
+                                      "column": 20,
+                                      "line": 80,
+                                      "offset": 934
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     },
@@ -1204,7 +1629,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Example:",
                           "position": {
                             "end": {
@@ -1293,7 +1720,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "strong",
+                          "attributes": {},
                           "position": {
                             "end": {
                               "column": 14,
@@ -1308,7 +1737,9 @@
                           },
                           "children": [
                             {
+                              "construct": "NaturalExpression",
                               "type": "text",
+                              "attributes": {},
                               "value": "Procedure",
                               "position": {
                                 "end": {
@@ -1354,7 +1785,10 @@
                       "children": [
                         {
                           "construct": "NaturalBlock",
-                          "value": "Return \"\"\"\n   **ValueType:** {`%type`}\n   **Description:** A single {`%type`} value\n   \"\"\"",
+                          "type": "listItem",
+                          "checked": null,
+                          "spread": false,
+                          "value": "1. Return \"\"\"\n   **ValueType:** {`%type`}\n   **Description:** A single {`%type`} value\n   \"\"\"",
                           "position": {
                             "end": {
                               "column": 7,
@@ -1362,11 +1796,232 @@
                               "offset": 1097
                             },
                             "start": {
-                              "column": 4,
+                              "column": 1,
                               "line": 92,
-                              "offset": 1007
+                              "offset": 1004
                             }
-                          }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalBlock",
+                              "type": "paragraph",
+                              "value": "Return \"\"\"\n   **ValueType:** {`%type`}\n   **Description:** A single {`%type`} value\n   \"\"\"",
+                              "position": {
+                                "end": {
+                                  "column": 7,
+                                  "line": 95,
+                                  "offset": 1097
+                                },
+                                "start": {
+                                  "column": 4,
+                                  "line": 92,
+                                  "offset": 1007
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Return \"\"\"\n",
+                                  "position": {
+                                    "end": {
+                                      "column": 1,
+                                      "line": 93,
+                                      "offset": 1018
+                                    },
+                                    "start": {
+                                      "column": 4,
+                                      "line": 92,
+                                      "offset": 1007
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "strong",
+                                  "attributes": {},
+                                  "position": {
+                                    "end": {
+                                      "column": 18,
+                                      "line": 93,
+                                      "offset": 1035
+                                    },
+                                    "start": {
+                                      "column": 4,
+                                      "line": 93,
+                                      "offset": 1021
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "construct": "NaturalExpression",
+                                      "type": "text",
+                                      "attributes": {},
+                                      "value": "ValueType:",
+                                      "position": {
+                                        "end": {
+                                          "column": 16,
+                                          "line": 93,
+                                          "offset": 1033
+                                        },
+                                        "start": {
+                                          "column": 6,
+                                          "line": 93,
+                                          "offset": 1023
+                                        }
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": " {",
+                                  "position": {
+                                    "end": {
+                                      "column": 20,
+                                      "line": 93,
+                                      "offset": 1037
+                                    },
+                                    "start": {
+                                      "column": 18,
+                                      "line": 93,
+                                      "offset": 1035
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "inlineCode",
+                                  "attributes": {},
+                                  "value": "%type",
+                                  "position": {
+                                    "end": {
+                                      "column": 27,
+                                      "line": 93,
+                                      "offset": 1044
+                                    },
+                                    "start": {
+                                      "column": 20,
+                                      "line": 93,
+                                      "offset": 1037
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "}\n",
+                                  "position": {
+                                    "end": {
+                                      "column": 1,
+                                      "line": 94,
+                                      "offset": 1046
+                                    },
+                                    "start": {
+                                      "column": 27,
+                                      "line": 93,
+                                      "offset": 1044
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "strong",
+                                  "attributes": {},
+                                  "position": {
+                                    "end": {
+                                      "column": 20,
+                                      "line": 94,
+                                      "offset": 1065
+                                    },
+                                    "start": {
+                                      "column": 4,
+                                      "line": 94,
+                                      "offset": 1049
+                                    }
+                                  },
+                                  "children": [
+                                    {
+                                      "construct": "NaturalExpression",
+                                      "type": "text",
+                                      "attributes": {},
+                                      "value": "Description:",
+                                      "position": {
+                                        "end": {
+                                          "column": 18,
+                                          "line": 94,
+                                          "offset": 1063
+                                        },
+                                        "start": {
+                                          "column": 6,
+                                          "line": 94,
+                                          "offset": 1051
+                                        }
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": " A single {",
+                                  "position": {
+                                    "end": {
+                                      "column": 31,
+                                      "line": 94,
+                                      "offset": 1076
+                                    },
+                                    "start": {
+                                      "column": 20,
+                                      "line": 94,
+                                      "offset": 1065
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "inlineCode",
+                                  "attributes": {},
+                                  "value": "%type",
+                                  "position": {
+                                    "end": {
+                                      "column": 38,
+                                      "line": 94,
+                                      "offset": 1083
+                                    },
+                                    "start": {
+                                      "column": 31,
+                                      "line": 94,
+                                      "offset": 1076
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "} value\n\"\"\"",
+                                  "position": {
+                                    "end": {
+                                      "column": 7,
+                                      "line": 95,
+                                      "offset": 1097
+                                    },
+                                    "start": {
+                                      "column": 38,
+                                      "line": 94,
+                                      "offset": 1083
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     },
@@ -1393,7 +2048,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "text",
+                          "attributes": {},
                           "value": "Example:",
                           "position": {
                             "end": {
@@ -1481,7 +2138,9 @@
                       },
                       "children": [
                         {
+                          "construct": "NaturalExpression",
                           "type": "strong",
+                          "attributes": {},
                           "position": {
                             "end": {
                               "column": 14,
@@ -1496,7 +2155,9 @@
                           },
                           "children": [
                             {
+                              "construct": "NaturalExpression",
                               "type": "text",
+                              "attributes": {},
                               "value": "Procedure",
                               "position": {
                                 "end": {
@@ -1542,7 +2203,10 @@
                       "children": [
                         {
                           "construct": "NaturalBlock",
-                          "value": "Interpret the `%value` as the type specified by `%type`.",
+                          "type": "listItem",
+                          "checked": null,
+                          "spread": false,
+                          "value": "1. Interpret the `%value` as the type specified by `%type`.",
                           "position": {
                             "end": {
                               "column": 60,
@@ -1550,11 +2214,122 @@
                               "offset": 1272
                             },
                             "start": {
-                              "column": 4,
+                              "column": 1,
                               "line": 108,
-                              "offset": 1216
+                              "offset": 1213
                             }
-                          }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalBlock",
+                              "type": "paragraph",
+                              "value": "Interpret the `%value` as the type specified by `%type`.",
+                              "position": {
+                                "end": {
+                                  "column": 60,
+                                  "line": 108,
+                                  "offset": 1272
+                                },
+                                "start": {
+                                  "column": 4,
+                                  "line": 108,
+                                  "offset": 1216
+                                }
+                              },
+                              "children": [
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": "Interpret the ",
+                                  "position": {
+                                    "end": {
+                                      "column": 18,
+                                      "line": 108,
+                                      "offset": 1230
+                                    },
+                                    "start": {
+                                      "column": 4,
+                                      "line": 108,
+                                      "offset": 1216
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "inlineCode",
+                                  "attributes": {},
+                                  "value": "%value",
+                                  "position": {
+                                    "end": {
+                                      "column": 26,
+                                      "line": 108,
+                                      "offset": 1238
+                                    },
+                                    "start": {
+                                      "column": 18,
+                                      "line": 108,
+                                      "offset": 1230
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": " as the type specified by ",
+                                  "position": {
+                                    "end": {
+                                      "column": 52,
+                                      "line": 108,
+                                      "offset": 1264
+                                    },
+                                    "start": {
+                                      "column": 26,
+                                      "line": 108,
+                                      "offset": 1238
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "inlineCode",
+                                  "attributes": {},
+                                  "value": "%type",
+                                  "position": {
+                                    "end": {
+                                      "column": 59,
+                                      "line": 108,
+                                      "offset": 1271
+                                    },
+                                    "start": {
+                                      "column": 52,
+                                      "line": 108,
+                                      "offset": 1264
+                                    }
+                                  }
+                                },
+                                {
+                                  "construct": "NaturalExpression",
+                                  "type": "text",
+                                  "attributes": {},
+                                  "value": ".",
+                                  "position": {
+                                    "end": {
+                                      "column": 60,
+                                      "line": 108,
+                                      "offset": 1272
+                                    },
+                                    "start": {
+                                      "column": 59,
+                                      "line": 108,
+                                      "offset": 1271
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }

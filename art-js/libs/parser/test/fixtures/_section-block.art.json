@@ -41,7 +41,9 @@
           },
           "children": [
             {
+              "construct": "NaturalExpression",
               "type": "text",
+              "attributes": {},
               "value": "::READ (Construct: Tag) FROM ",
               "position": {
                 "end": {
@@ -57,7 +59,9 @@
               }
             },
             {
+              "construct": "NaturalExpression",
               "type": "inlineCode",
+              "attributes": {},
               "value": "../expressions/tag.art",
               "position": {
                 "end": {
@@ -73,7 +77,9 @@
               }
             },
             {
+              "construct": "NaturalExpression",
               "type": "text",
+              "attributes": {},
               "value": ".\n::READ (Construct: NaturalName) FROM ",
               "position": {
                 "end": {
@@ -89,7 +95,9 @@
               }
             },
             {
+              "construct": "NaturalExpression",
               "type": "inlineCode",
+              "attributes": {},
               "value": "../expressions/natural-name.art",
               "position": {
                 "end": {
@@ -105,7 +113,9 @@
               }
             },
             {
+              "construct": "NaturalExpression",
               "type": "text",
+              "attributes": {},
               "value": ".\n::READ (Construct: NaturalBlock) FROM ",
               "position": {
                 "end": {
@@ -121,7 +131,9 @@
               }
             },
             {
+              "construct": "NaturalExpression",
               "type": "inlineCode",
+              "attributes": {},
               "value": "./natural-block.art",
               "position": {
                 "end": {
@@ -137,7 +149,9 @@
               }
             },
             {
+              "construct": "NaturalExpression",
               "type": "text",
+              "attributes": {},
               "value": ".",
               "position": {
                 "end": {
@@ -183,13 +197,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Category",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Structural",
+                  "attributes": {},
+                  "value": "Structural",
                   "position": {
                     "end": {
                       "column": 25,
@@ -202,11 +217,6 @@
                       "offset": 240
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -223,13 +233,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Purpose",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Capture resource declarations — the key construct that turns a markdown heading into a named, kinded resource that modules can reference, index, and project.",
+                  "attributes": {},
+                  "value": "Capture resource declarations — the key construct that turns a markdown heading into a named, kinded resource that modules can reference, index, and project.",
                   "position": {
                     "end": {
                       "column": 171,
@@ -242,11 +258,6 @@
                       "offset": 265
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -263,13 +274,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Description",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " A SectionBlock is a structural construct consisting of a heading and its associated content. ",
+                  "attributes": {},
+                  "value": "A SectionBlock is a structural construct consisting of a heading and its associated content. ",
                   "position": {
                     "end": {
                       "column": 111,
@@ -284,9 +301,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`# Kind: Name`",
+                  "attributes": {},
+                  "value": "# Kind: Name",
                   "position": {
                     "end": {
                       "column": 125,
@@ -301,8 +319,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " declares a resource of that kind with that name, together with its tags and content. It is the bridge between the grammar and modules layers: the grammar fixes the form (optional kind, name, tags, content), while the meaning of each kind is provided by the structures — the domain declarations in ",
                   "position": {
                     "end": {
@@ -318,9 +337,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`.art`",
+                  "attributes": {},
+                  "value": ".art",
                   "position": {
                     "end": {
                       "column": 429,
@@ -335,8 +355,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": ". This is the same separation as a keyword in a programming language: ",
                   "position": {
                     "end": {
@@ -352,9 +373,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`class`",
+                  "attributes": {},
+                  "value": "class",
                   "position": {
                     "end": {
                       "column": 506,
@@ -369,8 +391,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " is fixed syntax, the meaning of ",
                   "position": {
                     "end": {
@@ -386,9 +409,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`class Task`",
+                  "attributes": {},
+                  "value": "class Task",
                   "position": {
                     "end": {
                       "column": 551,
@@ -403,8 +427,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " comes from the program. Closed syntax, open semantics.",
                   "position": {
                     "end": {
@@ -418,33 +443,6 @@
                       "offset": 975
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "html",
-                  "value": "<!-- refine content rules -->",
-                  "position": {
-                    "end": {
-                      "column": 30,
-                      "line": 15,
-                      "offset": 1061
-                    },
-                    "start": {
-                      "column": 1,
-                      "line": 15,
-                      "offset": 1032
-                    }
-                  }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -459,6 +457,33 @@
                   "offset": 425
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "html",
+              "value": "<!-- refine content rules -->",
+              "position": {
+                "end": {
+                  "column": 30,
+                  "line": 15,
+                  "offset": 1061
+                },
+                "start": {
+                  "column": 1,
+                  "line": 15,
+                  "offset": 1032
+                }
+              }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -487,11 +512,6 @@
                       "offset": 1076
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -506,6 +526,11 @@
                   "offset": 1063
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -534,11 +559,6 @@
                       "offset": 1373
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -553,6 +573,11 @@
                   "offset": 1360
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -585,7 +610,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "A SectionBlock MUST define a name.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- A SectionBlock MUST define a name.",
                       "position": {
                         "end": {
                           "column": 37,
@@ -593,15 +621,57 @@
                           "offset": 1604
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 44,
-                          "offset": 1570
+                          "offset": 1568
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "A SectionBlock MUST define a name.",
+                          "position": {
+                            "end": {
+                              "column": 37,
+                              "line": 44,
+                              "offset": 1604
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 44,
+                              "offset": 1570
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "A SectionBlock MUST define a name.",
+                              "position": {
+                                "end": {
+                                  "column": 37,
+                                  "line": 44,
+                                  "offset": 1604
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 44,
+                                  "offset": 1570
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "A SectionBlock declares a resource identified by its kind and name.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- A SectionBlock declares a resource identified by its kind and name.",
                       "position": {
                         "end": {
                           "column": 70,
@@ -609,15 +679,57 @@
                           "offset": 1674
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 45,
-                          "offset": 1607
+                          "offset": 1605
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "A SectionBlock declares a resource identified by its kind and name.",
+                          "position": {
+                            "end": {
+                              "column": 70,
+                              "line": 45,
+                              "offset": 1674
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 45,
+                              "offset": 1607
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "A SectionBlock declares a resource identified by its kind and name.",
+                              "position": {
+                                "end": {
+                                  "column": 70,
+                                  "line": 45,
+                                  "offset": 1674
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 45,
+                                  "offset": 1607
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "A SectionBlock MAY define a kind.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- A SectionBlock MAY define a kind.",
                       "position": {
                         "end": {
                           "column": 36,
@@ -625,15 +737,57 @@
                           "offset": 1710
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 46,
-                          "offset": 1677
+                          "offset": 1675
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "A SectionBlock MAY define a kind.",
+                          "position": {
+                            "end": {
+                              "column": 36,
+                              "line": 46,
+                              "offset": 1710
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 46,
+                              "offset": 1677
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "A SectionBlock MAY define a kind.",
+                              "position": {
+                                "end": {
+                                  "column": 36,
+                                  "line": 46,
+                                  "offset": 1710
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 46,
+                                  "offset": 1677
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "A SectionBlock MAY be tagged with one or more Tag.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- A SectionBlock MAY be tagged with one or more Tag.",
                       "position": {
                         "end": {
                           "column": 53,
@@ -641,15 +795,57 @@
                           "offset": 1763
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 47,
-                          "offset": 1713
+                          "offset": 1711
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "A SectionBlock MAY be tagged with one or more Tag.",
+                          "position": {
+                            "end": {
+                              "column": 53,
+                              "line": 47,
+                              "offset": 1763
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 47,
+                              "offset": 1713
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "A SectionBlock MAY be tagged with one or more Tag.",
+                              "position": {
+                                "end": {
+                                  "column": 53,
+                                  "line": 47,
+                                  "offset": 1763
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 47,
+                                  "offset": 1713
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "A SectionBlock MAY contain arbitrary content.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- A SectionBlock MAY contain arbitrary content.",
                       "position": {
                         "end": {
                           "column": 48,
@@ -657,15 +853,57 @@
                           "offset": 1811
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 48,
-                          "offset": 1766
+                          "offset": 1764
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "A SectionBlock MAY contain arbitrary content.",
+                          "position": {
+                            "end": {
+                              "column": 48,
+                              "line": 48,
+                              "offset": 1811
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 48,
+                              "offset": 1766
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "A SectionBlock MAY contain arbitrary content.",
+                              "position": {
+                                "end": {
+                                  "column": 48,
+                                  "line": 48,
+                                  "offset": 1811
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 48,
+                                  "offset": 1766
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "A SectionBlock MAY contain nested SectionBlocks.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- A SectionBlock MAY contain nested SectionBlocks.",
                       "position": {
                         "end": {
                           "column": 51,
@@ -673,18 +911,52 @@
                           "offset": 1862
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 49,
-                          "offset": 1814
+                          "offset": 1812
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "A SectionBlock MAY contain nested SectionBlocks.",
+                          "position": {
+                            "end": {
+                              "column": 51,
+                              "line": 49,
+                              "offset": 1862
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 49,
+                              "offset": 1814
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "A SectionBlock MAY contain nested SectionBlocks.",
+                              "position": {
+                                "end": {
+                                  "column": 51,
+                                  "line": 49,
+                                  "offset": 1862
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 49,
+                                  "offset": 1814
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -699,6 +971,11 @@
                   "offset": 1556
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -727,7 +1004,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Example of Section Block without kind.",
                       "position": {
                         "end": {
@@ -791,7 +1070,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Example of Section Block with kind ",
                       "position": {
                         "end": {
@@ -807,7 +1088,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "inlineCode",
+                      "attributes": {},
                       "value": "rule",
                       "position": {
                         "end": {
@@ -823,7 +1106,9 @@
                       }
                     },
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": ".",
                       "position": {
                         "end": {
@@ -887,7 +1172,9 @@
                   },
                   "children": [
                     {
+                      "construct": "NaturalExpression",
                       "type": "text",
+                      "attributes": {},
                       "value": "Example of Section Block with tags.",
                       "position": {
                         "end": {

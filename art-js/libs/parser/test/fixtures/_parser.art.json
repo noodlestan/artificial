@@ -48,13 +48,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Status",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Adopted",
+                  "attributes": {},
+                  "value": "Adopted",
                   "position": {
                     "end": {
                       "column": 20,
@@ -67,11 +68,6 @@
                       "offset": 70
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -88,13 +84,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Context",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " The parse POC explored two substrate strategies: (1) build directly on micromark token events, or (2) build on mdast, the AST layer of the unified ecosystem. The micromark approach was implemented and revealed that tokens are too low-level — manual span reconstruction, complex stack logic, and flattened structured content made the builder a monolith.",
+                  "attributes": {},
+                  "value": "The parse POC explored two substrate strategies: (1) build directly on micromark token events, or (2) build on mdast, the AST layer of the unified ecosystem. The micromark approach was implemented and revealed that tokens are too low-level — manual span reconstruction, complex stack logic, and flattened structured content made the builder a monolith.",
                   "position": {
                     "end": {
                       "column": 366,
@@ -107,179 +109,6 @@
                       "offset": 92
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "paragraph",
-                  "value": "mdast sits between micromark (syntax) and remark (pipeline). It provides a tree of typed nodes (`heading`, `strong`, `list`, `paragraph`, etc.) with children, positions, and inline content already reconstructed. This is exactly the layer where art's construct classification belongs.",
-                  "position": {
-                    "end": {
-                      "column": 284,
-                      "line": 9,
-                      "offset": 730
-                    },
-                    "start": {
-                      "column": 1,
-                      "line": 9,
-                      "offset": 447
-                    }
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "value": "mdast sits between micromark (syntax) and remark (pipeline). It provides a tree of typed nodes (",
-                      "position": {
-                        "end": {
-                          "column": 97,
-                          "line": 9,
-                          "offset": 543
-                        },
-                        "start": {
-                          "column": 1,
-                          "line": 9,
-                          "offset": 447
-                        }
-                      }
-                    },
-                    {
-                      "type": "inlineCode",
-                      "value": "heading",
-                      "position": {
-                        "end": {
-                          "column": 106,
-                          "line": 9,
-                          "offset": 552
-                        },
-                        "start": {
-                          "column": 97,
-                          "line": 9,
-                          "offset": 543
-                        }
-                      }
-                    },
-                    {
-                      "type": "text",
-                      "value": ", ",
-                      "position": {
-                        "end": {
-                          "column": 108,
-                          "line": 9,
-                          "offset": 554
-                        },
-                        "start": {
-                          "column": 106,
-                          "line": 9,
-                          "offset": 552
-                        }
-                      }
-                    },
-                    {
-                      "type": "inlineCode",
-                      "value": "strong",
-                      "position": {
-                        "end": {
-                          "column": 116,
-                          "line": 9,
-                          "offset": 562
-                        },
-                        "start": {
-                          "column": 108,
-                          "line": 9,
-                          "offset": 554
-                        }
-                      }
-                    },
-                    {
-                      "type": "text",
-                      "value": ", ",
-                      "position": {
-                        "end": {
-                          "column": 118,
-                          "line": 9,
-                          "offset": 564
-                        },
-                        "start": {
-                          "column": 116,
-                          "line": 9,
-                          "offset": 562
-                        }
-                      }
-                    },
-                    {
-                      "type": "inlineCode",
-                      "value": "list",
-                      "position": {
-                        "end": {
-                          "column": 124,
-                          "line": 9,
-                          "offset": 570
-                        },
-                        "start": {
-                          "column": 118,
-                          "line": 9,
-                          "offset": 564
-                        }
-                      }
-                    },
-                    {
-                      "type": "text",
-                      "value": ", ",
-                      "position": {
-                        "end": {
-                          "column": 126,
-                          "line": 9,
-                          "offset": 572
-                        },
-                        "start": {
-                          "column": 124,
-                          "line": 9,
-                          "offset": 570
-                        }
-                      }
-                    },
-                    {
-                      "type": "inlineCode",
-                      "value": "paragraph",
-                      "position": {
-                        "end": {
-                          "column": 137,
-                          "line": 9,
-                          "offset": 583
-                        },
-                        "start": {
-                          "column": 126,
-                          "line": 9,
-                          "offset": 572
-                        }
-                      }
-                    },
-                    {
-                      "type": "text",
-                      "value": ", etc.) with children, positions, and inline content already reconstructed. This is exactly the layer where art's construct classification belongs.",
-                      "position": {
-                        "end": {
-                          "column": 284,
-                          "line": 9,
-                          "offset": 730
-                        },
-                        "start": {
-                          "column": 137,
-                          "line": 9,
-                          "offset": 583
-                        }
-                      }
-                    }
-                  ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -296,13 +125,205 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "paragraph",
+              "value": "mdast sits between micromark (syntax) and remark (pipeline). It provides a tree of typed nodes (`heading`, `strong`, `list`, `paragraph`, etc.) with children, positions, and inline content already reconstructed. This is exactly the layer where art's construct classification belongs.",
+              "position": {
+                "end": {
+                  "column": 284,
+                  "line": 9,
+                  "offset": 730
+                },
+                "start": {
+                  "column": 1,
+                  "line": 9,
+                  "offset": 447
+                }
+              },
+              "children": [
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": "mdast sits between micromark (syntax) and remark (pipeline). It provides a tree of typed nodes (",
+                  "position": {
+                    "end": {
+                      "column": 97,
+                      "line": 9,
+                      "offset": 543
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 9,
+                      "offset": 447
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "inlineCode",
+                  "attributes": {},
+                  "value": "heading",
+                  "position": {
+                    "end": {
+                      "column": 106,
+                      "line": 9,
+                      "offset": 552
+                    },
+                    "start": {
+                      "column": 97,
+                      "line": 9,
+                      "offset": 543
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": ", ",
+                  "position": {
+                    "end": {
+                      "column": 108,
+                      "line": 9,
+                      "offset": 554
+                    },
+                    "start": {
+                      "column": 106,
+                      "line": 9,
+                      "offset": 552
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "inlineCode",
+                  "attributes": {},
+                  "value": "strong",
+                  "position": {
+                    "end": {
+                      "column": 116,
+                      "line": 9,
+                      "offset": 562
+                    },
+                    "start": {
+                      "column": 108,
+                      "line": 9,
+                      "offset": 554
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": ", ",
+                  "position": {
+                    "end": {
+                      "column": 118,
+                      "line": 9,
+                      "offset": 564
+                    },
+                    "start": {
+                      "column": 116,
+                      "line": 9,
+                      "offset": 562
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "inlineCode",
+                  "attributes": {},
+                  "value": "list",
+                  "position": {
+                    "end": {
+                      "column": 124,
+                      "line": 9,
+                      "offset": 570
+                    },
+                    "start": {
+                      "column": 118,
+                      "line": 9,
+                      "offset": 564
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": ", ",
+                  "position": {
+                    "end": {
+                      "column": 126,
+                      "line": 9,
+                      "offset": 572
+                    },
+                    "start": {
+                      "column": 124,
+                      "line": 9,
+                      "offset": 570
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "inlineCode",
+                  "attributes": {},
+                  "value": "paragraph",
+                  "position": {
+                    "end": {
+                      "column": 137,
+                      "line": 9,
+                      "offset": 583
+                    },
+                    "start": {
+                      "column": 126,
+                      "line": 9,
+                      "offset": 572
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": ", etc.) with children, positions, and inline content already reconstructed. This is exactly the layer where art's construct classification belongs.",
+                  "position": {
+                    "end": {
+                      "column": 284,
+                      "line": 9,
+                      "offset": 730
+                    },
+                    "start": {
+                      "column": 137,
+                      "line": 9,
+                      "offset": 583
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Decision",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Parse markdown to mdast using ",
+                  "attributes": {},
+                  "value": "Parse markdown to mdast using ",
                   "position": {
                     "end": {
                       "column": 45,
@@ -317,9 +338,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`mdast-util-from-markdown`",
+                  "attributes": {},
+                  "value": "mdast-util-from-markdown",
                   "position": {
                     "end": {
                       "column": 71,
@@ -334,8 +356,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": ", then visit each node with ",
                   "position": {
                     "end": {
@@ -351,9 +374,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`unist-util-visit`",
+                  "attributes": {},
+                  "value": "unist-util-visit",
                   "position": {
                     "end": {
                       "column": 117,
@@ -368,8 +392,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " and map it to art records using a layered architecture:",
                   "position": {
                     "end": {
@@ -383,174 +408,6 @@
                       "offset": 848
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "list",
-                  "ordered": true,
-                  "spread": false,
-                  "start": 1,
-                  "value": "1. **Pre-processors** — detect and transform nodes before factory detection\n2. **Factories** — detect and create records\n3. **Handlers** — process records after creation\n4. **Injection** — all components injected via `ParserConfig`",
-                  "position": {
-                    "end": {
-                      "column": 62,
-                      "line": 16,
-                      "offset": 1137
-                    },
-                    "start": {
-                      "column": 1,
-                      "line": 13,
-                      "offset": 906
-                    }
-                  },
-                  "children": [
-                    {
-                      "construct": "NaturalBlock",
-                      "value": "**Pre-processors** — detect and transform nodes before factory detection",
-                      "position": {
-                        "end": {
-                          "column": 76,
-                          "line": 13,
-                          "offset": 981
-                        },
-                        "start": {
-                          "column": 4,
-                          "line": 13,
-                          "offset": 909
-                        }
-                      }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "value": "**Factories** — detect and create records",
-                      "position": {
-                        "end": {
-                          "column": 45,
-                          "line": 14,
-                          "offset": 1026
-                        },
-                        "start": {
-                          "column": 4,
-                          "line": 14,
-                          "offset": 985
-                        }
-                      }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "value": "**Handlers** — process records after creation",
-                      "position": {
-                        "end": {
-                          "column": 49,
-                          "line": 15,
-                          "offset": 1075
-                        },
-                        "start": {
-                          "column": 4,
-                          "line": 15,
-                          "offset": 1030
-                        }
-                      }
-                    },
-                    {
-                      "construct": "NaturalBlock",
-                      "value": "**Injection** — all components injected via `ParserConfig`",
-                      "position": {
-                        "end": {
-                          "column": 62,
-                          "line": 16,
-                          "offset": 1137
-                        },
-                        "start": {
-                          "column": 4,
-                          "line": 16,
-                          "offset": 1079
-                        }
-                      }
-                    }
-                  ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "paragraph",
-                  "value": "Unmatched nodes fall back to `NaturalBlock`.",
-                  "position": {
-                    "end": {
-                      "column": 45,
-                      "line": 18,
-                      "offset": 1183
-                    },
-                    "start": {
-                      "column": 1,
-                      "line": 18,
-                      "offset": 1139
-                    }
-                  },
-                  "children": [
-                    {
-                      "type": "text",
-                      "value": "Unmatched nodes fall back to ",
-                      "position": {
-                        "end": {
-                          "column": 30,
-                          "line": 18,
-                          "offset": 1168
-                        },
-                        "start": {
-                          "column": 1,
-                          "line": 18,
-                          "offset": 1139
-                        }
-                      }
-                    },
-                    {
-                      "type": "inlineCode",
-                      "value": "NaturalBlock",
-                      "position": {
-                        "end": {
-                          "column": 44,
-                          "line": 18,
-                          "offset": 1182
-                        },
-                        "start": {
-                          "column": 30,
-                          "line": 18,
-                          "offset": 1168
-                        }
-                      }
-                    },
-                    {
-                      "type": "text",
-                      "value": ".",
-                      "position": {
-                        "end": {
-                          "column": 45,
-                          "line": 18,
-                          "offset": 1183
-                        },
-                        "start": {
-                          "column": 44,
-                          "line": 18,
-                          "offset": 1182
-                        }
-                      }
-                    }
-                  ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -565,6 +422,514 @@
                   "offset": 732
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "list",
+              "ordered": true,
+              "spread": false,
+              "start": 1,
+              "value": "1. **Pre-processors** — detect and transform nodes before factory detection\n2. **Factories** — detect and create records\n3. **Handlers** — process records after creation\n4. **Injection** — all components injected via `ParserConfig`",
+              "position": {
+                "end": {
+                  "column": 62,
+                  "line": 16,
+                  "offset": 1137
+                },
+                "start": {
+                  "column": 1,
+                  "line": 13,
+                  "offset": 906
+                }
+              },
+              "children": [
+                {
+                  "construct": "NaturalBlock",
+                  "type": "listItem",
+                  "checked": null,
+                  "spread": false,
+                  "value": "1. **Pre-processors** — detect and transform nodes before factory detection",
+                  "position": {
+                    "end": {
+                      "column": 76,
+                      "line": 13,
+                      "offset": 981
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 13,
+                      "offset": 906
+                    }
+                  },
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "type": "paragraph",
+                      "value": "**Pre-processors** — detect and transform nodes before factory detection",
+                      "position": {
+                        "end": {
+                          "column": 76,
+                          "line": 13,
+                          "offset": 981
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 13,
+                          "offset": 909
+                        }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "strong",
+                          "attributes": {},
+                          "position": {
+                            "end": {
+                              "column": 22,
+                              "line": 13,
+                              "offset": 927
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 13,
+                              "offset": 909
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Pre-processors",
+                              "position": {
+                                "end": {
+                                  "column": 20,
+                                  "line": 13,
+                                  "offset": 925
+                                },
+                                "start": {
+                                  "column": 6,
+                                  "line": 13,
+                                  "offset": 911
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": " — detect and transform nodes before factory detection",
+                          "position": {
+                            "end": {
+                              "column": 76,
+                              "line": 13,
+                              "offset": 981
+                            },
+                            "start": {
+                              "column": 22,
+                              "line": 13,
+                              "offset": 927
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "listItem",
+                  "checked": null,
+                  "spread": false,
+                  "value": "2. **Factories** — detect and create records",
+                  "position": {
+                    "end": {
+                      "column": 45,
+                      "line": 14,
+                      "offset": 1026
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 14,
+                      "offset": 982
+                    }
+                  },
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "type": "paragraph",
+                      "value": "**Factories** — detect and create records",
+                      "position": {
+                        "end": {
+                          "column": 45,
+                          "line": 14,
+                          "offset": 1026
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 14,
+                          "offset": 985
+                        }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "strong",
+                          "attributes": {},
+                          "position": {
+                            "end": {
+                              "column": 17,
+                              "line": 14,
+                              "offset": 998
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 14,
+                              "offset": 985
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Factories",
+                              "position": {
+                                "end": {
+                                  "column": 15,
+                                  "line": 14,
+                                  "offset": 996
+                                },
+                                "start": {
+                                  "column": 6,
+                                  "line": 14,
+                                  "offset": 987
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": " — detect and create records",
+                          "position": {
+                            "end": {
+                              "column": 45,
+                              "line": 14,
+                              "offset": 1026
+                            },
+                            "start": {
+                              "column": 17,
+                              "line": 14,
+                              "offset": 998
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "listItem",
+                  "checked": null,
+                  "spread": false,
+                  "value": "3. **Handlers** — process records after creation",
+                  "position": {
+                    "end": {
+                      "column": 49,
+                      "line": 15,
+                      "offset": 1075
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 15,
+                      "offset": 1027
+                    }
+                  },
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "type": "paragraph",
+                      "value": "**Handlers** — process records after creation",
+                      "position": {
+                        "end": {
+                          "column": 49,
+                          "line": 15,
+                          "offset": 1075
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 15,
+                          "offset": 1030
+                        }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "strong",
+                          "attributes": {},
+                          "position": {
+                            "end": {
+                              "column": 16,
+                              "line": 15,
+                              "offset": 1042
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 15,
+                              "offset": 1030
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Handlers",
+                              "position": {
+                                "end": {
+                                  "column": 14,
+                                  "line": 15,
+                                  "offset": 1040
+                                },
+                                "start": {
+                                  "column": 6,
+                                  "line": 15,
+                                  "offset": 1032
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": " — process records after creation",
+                          "position": {
+                            "end": {
+                              "column": 49,
+                              "line": 15,
+                              "offset": 1075
+                            },
+                            "start": {
+                              "column": 16,
+                              "line": 15,
+                              "offset": 1042
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "construct": "NaturalBlock",
+                  "type": "listItem",
+                  "checked": null,
+                  "spread": false,
+                  "value": "4. **Injection** — all components injected via `ParserConfig`",
+                  "position": {
+                    "end": {
+                      "column": 62,
+                      "line": 16,
+                      "offset": 1137
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 16,
+                      "offset": 1076
+                    }
+                  },
+                  "children": [
+                    {
+                      "construct": "NaturalBlock",
+                      "type": "paragraph",
+                      "value": "**Injection** — all components injected via `ParserConfig`",
+                      "position": {
+                        "end": {
+                          "column": 62,
+                          "line": 16,
+                          "offset": 1137
+                        },
+                        "start": {
+                          "column": 4,
+                          "line": 16,
+                          "offset": 1079
+                        }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "strong",
+                          "attributes": {},
+                          "position": {
+                            "end": {
+                              "column": 17,
+                              "line": 16,
+                              "offset": 1092
+                            },
+                            "start": {
+                              "column": 4,
+                              "line": 16,
+                              "offset": 1079
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Injection",
+                              "position": {
+                                "end": {
+                                  "column": 15,
+                                  "line": 16,
+                                  "offset": 1090
+                                },
+                                "start": {
+                                  "column": 6,
+                                  "line": 16,
+                                  "offset": 1081
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "text",
+                          "attributes": {},
+                          "value": " — all components injected via ",
+                          "position": {
+                            "end": {
+                              "column": 48,
+                              "line": 16,
+                              "offset": 1123
+                            },
+                            "start": {
+                              "column": 17,
+                              "line": 16,
+                              "offset": 1092
+                            }
+                          }
+                        },
+                        {
+                          "construct": "NaturalExpression",
+                          "type": "inlineCode",
+                          "attributes": {},
+                          "value": "ParserConfig",
+                          "position": {
+                            "end": {
+                              "column": 62,
+                              "line": 16,
+                              "offset": 1137
+                            },
+                            "start": {
+                              "column": 48,
+                              "line": 16,
+                              "offset": 1123
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "paragraph",
+              "value": "Unmatched nodes fall back to `NaturalBlock`.",
+              "position": {
+                "end": {
+                  "column": 45,
+                  "line": 18,
+                  "offset": 1183
+                },
+                "start": {
+                  "column": 1,
+                  "line": 18,
+                  "offset": 1139
+                }
+              },
+              "children": [
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": "Unmatched nodes fall back to ",
+                  "position": {
+                    "end": {
+                      "column": 30,
+                      "line": 18,
+                      "offset": 1168
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 18,
+                      "offset": 1139
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "inlineCode",
+                  "attributes": {},
+                  "value": "NaturalBlock",
+                  "position": {
+                    "end": {
+                      "column": 44,
+                      "line": 18,
+                      "offset": 1182
+                    },
+                    "start": {
+                      "column": 30,
+                      "line": 18,
+                      "offset": 1168
+                    }
+                  }
+                },
+                {
+                  "construct": "NaturalExpression",
+                  "type": "text",
+                  "attributes": {},
+                  "value": ".",
+                  "position": {
+                    "end": {
+                      "column": 45,
+                      "line": 18,
+                      "offset": 1183
+                    },
+                    "start": {
+                      "column": 44,
+                      "line": 18,
+                      "offset": 1182
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -597,7 +962,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "mdast handles token reconstruction — strong spans are complete, nesting is resolved, inline formatting is preserved.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- mdast handles token reconstruction — strong spans are complete, nesting is resolved, inline formatting is preserved.",
                       "position": {
                         "end": {
                           "column": 119,
@@ -605,15 +973,57 @@
                           "offset": 1322
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 22,
-                          "offset": 1206
+                          "offset": 1204
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "mdast handles token reconstruction — strong spans are complete, nesting is resolved, inline formatting is preserved.",
+                          "position": {
+                            "end": {
+                              "column": 119,
+                              "line": 22,
+                              "offset": 1322
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 22,
+                              "offset": 1206
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "mdast handles token reconstruction — strong spans are complete, nesting is resolved, inline formatting is preserved.",
+                              "position": {
+                                "end": {
+                                  "column": 119,
+                                  "line": 22,
+                                  "offset": 1322
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 22,
+                                  "offset": 1206
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "The layered architecture cleanly separates concerns.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- The layered architecture cleanly separates concerns.",
                       "position": {
                         "end": {
                           "column": 55,
@@ -621,15 +1031,57 @@
                           "offset": 1377
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 23,
-                          "offset": 1325
+                          "offset": 1323
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "The layered architecture cleanly separates concerns.",
+                          "position": {
+                            "end": {
+                              "column": 55,
+                              "line": 23,
+                              "offset": 1377
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 23,
+                              "offset": 1325
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "The layered architecture cleanly separates concerns.",
+                              "position": {
+                                "end": {
+                                  "column": 55,
+                                  "line": 23,
+                                  "offset": 1377
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 23,
+                                  "offset": 1325
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "`VisitContext` is a pure container — no construct-specific logic.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- `VisitContext` is a pure container — no construct-specific logic.",
                       "position": {
                         "end": {
                           "column": 68,
@@ -637,15 +1089,75 @@
                           "offset": 1445
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 24,
-                          "offset": 1380
+                          "offset": 1378
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "`VisitContext` is a pure container — no construct-specific logic.",
+                          "position": {
+                            "end": {
+                              "column": 68,
+                              "line": 24,
+                              "offset": 1445
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 24,
+                              "offset": 1380
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": "VisitContext",
+                              "position": {
+                                "end": {
+                                  "column": 17,
+                                  "line": 24,
+                                  "offset": 1394
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 24,
+                                  "offset": 1380
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " is a pure container — no construct-specific logic.",
+                              "position": {
+                                "end": {
+                                  "column": 68,
+                                  "line": 24,
+                                  "offset": 1445
+                                },
+                                "start": {
+                                  "column": 17,
+                                  "line": 24,
+                                  "offset": 1394
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "NaturalBlock can have structured content (`.children`) when inside a FieldBlock with lists.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- NaturalBlock can have structured content (`.children`) when inside a FieldBlock with lists.",
                       "position": {
                         "end": {
                           "column": 94,
@@ -653,15 +1165,93 @@
                           "offset": 1539
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 25,
-                          "offset": 1448
+                          "offset": 1446
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "NaturalBlock can have structured content (`.children`) when inside a FieldBlock with lists.",
+                          "position": {
+                            "end": {
+                              "column": 94,
+                              "line": 25,
+                              "offset": 1539
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 25,
+                              "offset": 1448
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "NaturalBlock can have structured content (",
+                              "position": {
+                                "end": {
+                                  "column": 45,
+                                  "line": 25,
+                                  "offset": 1490
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 25,
+                                  "offset": 1448
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": ".children",
+                              "position": {
+                                "end": {
+                                  "column": 56,
+                                  "line": 25,
+                                  "offset": 1501
+                                },
+                                "start": {
+                                  "column": 45,
+                                  "line": 25,
+                                  "offset": 1490
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": ") when inside a FieldBlock with lists.",
+                              "position": {
+                                "end": {
+                                  "column": 94,
+                                  "line": 25,
+                                  "offset": 1539
+                                },
+                                "start": {
+                                  "column": 56,
+                                  "line": 25,
+                                  "offset": 1501
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Position objects are clean — mdast positions don't carry internal micromark fields.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Position objects are clean — mdast positions don't carry internal micromark fields.",
                       "position": {
                         "end": {
                           "column": 86,
@@ -669,15 +1259,57 @@
                           "offset": 1625
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 26,
-                          "offset": 1542
+                          "offset": 1540
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Position objects are clean — mdast positions don't carry internal micromark fields.",
+                          "position": {
+                            "end": {
+                              "column": 86,
+                              "line": 26,
+                              "offset": 1625
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 26,
+                              "offset": 1542
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Position objects are clean — mdast positions don't carry internal micromark fields.",
+                              "position": {
+                                "end": {
+                                  "column": 86,
+                                  "line": 26,
+                                  "offset": 1625
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 26,
+                                  "offset": 1542
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Section nesting is driven by heading level — mdast headings are flat siblings, level determines parent/child relationships.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Section nesting is driven by heading level — mdast headings are flat siblings, level determines parent/child relationships.",
                       "position": {
                         "end": {
                           "column": 126,
@@ -685,15 +1317,57 @@
                           "offset": 1751
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 27,
-                          "offset": 1628
+                          "offset": 1626
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Section nesting is driven by heading level — mdast headings are flat siblings, level determines parent/child relationships.",
+                          "position": {
+                            "end": {
+                              "column": 126,
+                              "line": 27,
+                              "offset": 1751
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 27,
+                              "offset": 1628
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Section nesting is driven by heading level — mdast headings are flat siblings, level determines parent/child relationships.",
+                              "position": {
+                                "end": {
+                                  "column": 126,
+                                  "line": 27,
+                                  "offset": 1751
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 27,
+                                  "offset": 1628
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Dependencies: `mdast-util-from-markdown` (parses markdown → mdast), `unist-util-visit` (traverses the tree).",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Dependencies: `mdast-util-from-markdown` (parses markdown → mdast), `unist-util-visit` (traverses the tree).",
                       "position": {
                         "end": {
                           "column": 111,
@@ -701,18 +1375,124 @@
                           "offset": 1862
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 28,
-                          "offset": 1754
+                          "offset": 1752
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Dependencies: `mdast-util-from-markdown` (parses markdown → mdast), `unist-util-visit` (traverses the tree).",
+                          "position": {
+                            "end": {
+                              "column": 111,
+                              "line": 28,
+                              "offset": 1862
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 28,
+                              "offset": 1754
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Dependencies: ",
+                              "position": {
+                                "end": {
+                                  "column": 17,
+                                  "line": 28,
+                                  "offset": 1768
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 28,
+                                  "offset": 1754
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": "mdast-util-from-markdown",
+                              "position": {
+                                "end": {
+                                  "column": 43,
+                                  "line": 28,
+                                  "offset": 1794
+                                },
+                                "start": {
+                                  "column": 17,
+                                  "line": 28,
+                                  "offset": 1768
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " (parses markdown → mdast), ",
+                              "position": {
+                                "end": {
+                                  "column": 71,
+                                  "line": 28,
+                                  "offset": 1822
+                                },
+                                "start": {
+                                  "column": 43,
+                                  "line": 28,
+                                  "offset": 1794
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": "unist-util-visit",
+                              "position": {
+                                "end": {
+                                  "column": 89,
+                                  "line": 28,
+                                  "offset": 1840
+                                },
+                                "start": {
+                                  "column": 71,
+                                  "line": 28,
+                                  "offset": 1822
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " (traverses the tree).",
+                              "position": {
+                                "end": {
+                                  "column": 111,
+                                  "line": 28,
+                                  "offset": 1862
+                                },
+                                "start": {
+                                  "column": 89,
+                                  "line": 28,
+                                  "offset": 1840
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -729,13 +1509,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Rejected alternative",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Micromark-first — direct token events with an explicit stack. Superseded because tokens are the wrong abstraction boundary for record building.",
+                  "attributes": {},
+                  "value": "Micromark-first — direct token events with an explicit stack. Superseded because tokens are the wrong abstraction boundary for record building.",
                   "position": {
                     "end": {
                       "column": 170,
@@ -748,11 +1534,6 @@
                       "offset": 1889
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -767,6 +1548,11 @@
                   "offset": 1864
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             },
             {
               "construct": "FieldBlock",
@@ -799,7 +1585,10 @@
                   "children": [
                     {
                       "construct": "NaturalBlock",
-                      "value": "`_research.md` best practice #1: \"Two layers, always — micromark owns syntax, we own semantics.\" mdast is the semantics layer.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- `_research.md` best practice #1: \"Two layers, always — micromark owns syntax, we own semantics.\" mdast is the semantics layer.",
                       "position": {
                         "end": {
                           "column": 129,
@@ -807,15 +1596,75 @@
                           "offset": 2184
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 34,
-                          "offset": 2058
+                          "offset": 2056
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "`_research.md` best practice #1: \"Two layers, always — micromark owns syntax, we own semantics.\" mdast is the semantics layer.",
+                          "position": {
+                            "end": {
+                              "column": 129,
+                              "line": 34,
+                              "offset": 2184
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 34,
+                              "offset": 2058
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": "_research.md",
+                              "position": {
+                                "end": {
+                                  "column": 17,
+                                  "line": 34,
+                                  "offset": 2072
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 34,
+                                  "offset": 2058
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " best practice #1: \"Two layers, always — micromark owns syntax, we own semantics.\" mdast is the semantics layer.",
+                              "position": {
+                                "end": {
+                                  "column": 129,
+                                  "line": 34,
+                                  "offset": 2184
+                                },
+                                "start": {
+                                  "column": 17,
+                                  "line": 34,
+                                  "offset": 2072
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "Surveyed projects: mdx-js/mdx, remarkjs/remark, mdast-util-from-markdown.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- Surveyed projects: mdx-js/mdx, remarkjs/remark, mdast-util-from-markdown.",
                       "position": {
                         "end": {
                           "column": 76,
@@ -823,15 +1672,57 @@
                           "offset": 2260
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 35,
-                          "offset": 2187
+                          "offset": 2185
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "Surveyed projects: mdx-js/mdx, remarkjs/remark, mdast-util-from-markdown.",
+                          "position": {
+                            "end": {
+                              "column": 76,
+                              "line": 35,
+                              "offset": 2260
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 35,
+                              "offset": 2187
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": "Surveyed projects: mdx-js/mdx, remarkjs/remark, mdast-util-from-markdown.",
+                              "position": {
+                                "end": {
+                                  "column": 76,
+                                  "line": 35,
+                                  "offset": 2260
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 35,
+                                  "offset": 2187
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "construct": "NaturalBlock",
-                      "value": "`language.art` construct containment rules inform factory detection patterns.",
+                      "type": "listItem",
+                      "checked": null,
+                      "spread": false,
+                      "value": "- `language.art` construct containment rules inform factory detection patterns.",
                       "position": {
                         "end": {
                           "column": 80,
@@ -839,18 +1730,70 @@
                           "offset": 2340
                         },
                         "start": {
-                          "column": 3,
+                          "column": 1,
                           "line": 36,
-                          "offset": 2263
+                          "offset": 2261
                         }
-                      }
+                      },
+                      "children": [
+                        {
+                          "construct": "NaturalBlock",
+                          "type": "paragraph",
+                          "value": "`language.art` construct containment rules inform factory detection patterns.",
+                          "position": {
+                            "end": {
+                              "column": 80,
+                              "line": 36,
+                              "offset": 2340
+                            },
+                            "start": {
+                              "column": 3,
+                              "line": 36,
+                              "offset": 2263
+                            }
+                          },
+                          "children": [
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "inlineCode",
+                              "attributes": {},
+                              "value": "language.art",
+                              "position": {
+                                "end": {
+                                  "column": 17,
+                                  "line": 36,
+                                  "offset": 2277
+                                },
+                                "start": {
+                                  "column": 3,
+                                  "line": 36,
+                                  "offset": 2263
+                                }
+                              }
+                            },
+                            {
+                              "construct": "NaturalExpression",
+                              "type": "text",
+                              "attributes": {},
+                              "value": " construct containment rules inform factory detection patterns.",
+                              "position": {
+                                "end": {
+                                  "column": 80,
+                                  "line": 36,
+                                  "offset": 2340
+                                },
+                                "start": {
+                                  "column": 17,
+                                  "line": 36,
+                                  "offset": 2277
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -865,6 +1808,11 @@
                   "offset": 2035
                 }
               }
+            },
+            {
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
             }
           ]
         },
@@ -892,13 +1840,14 @@
               "value": "\n\n"
             },
             {
-              "construct": "FieldBlock",
+              "construct": "FieldInline",
               "name": "Status",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Adopted",
+                  "attributes": {},
+                  "value": "Adopted",
                   "position": {
                     "end": {
                       "column": 20,
@@ -911,11 +1860,6 @@
                       "offset": 2388
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -932,13 +1876,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Context",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Every SectionBlock arrives as ",
+                  "attributes": {},
+                  "value": "Every SectionBlock arrives as ",
                   "position": {
                     "end": {
                       "column": 44,
@@ -953,9 +1903,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`# Kind: Name`",
+                  "attributes": {},
+                  "value": "# Kind: Name",
                   "position": {
                     "end": {
                       "column": 58,
@@ -970,8 +1921,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": ". If the parser enumerated known kinds it would have to grow with the language.",
                   "position": {
                     "end": {
@@ -985,11 +1937,6 @@
                       "offset": 2455
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1006,13 +1953,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Decision",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " The parser is kind-agnostic: ",
+                  "attributes": {},
+                  "value": "The parser is kind-agnostic: ",
                   "position": {
                     "end": {
                       "column": 44,
@@ -1027,9 +1980,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`kind`",
+                  "attributes": {},
+                  "value": "kind",
                   "position": {
                     "end": {
                       "column": 50,
@@ -1044,8 +1998,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " is an open string, captured but never enumerated or interpreted at parse time. Any ",
                   "position": {
                     "end": {
@@ -1061,9 +2016,10 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "inlineCode",
-                  "value": "`# Kind: Name`",
+                  "attributes": {},
+                  "value": "# Kind: Name",
                   "position": {
                     "end": {
                       "column": 148,
@@ -1078,8 +2034,9 @@
                   }
                 },
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
+                  "attributes": {},
                   "value": " heading becomes a generic SectionBlock record; kind semantics are resolved downstream.",
                   "position": {
                     "end": {
@@ -1093,11 +2050,6 @@
                       "offset": 2683
                     }
                   }
-                },
-                {
-                  "construct": "NaturalBlock",
-                  "type": "text",
-                  "value": "\n\n"
                 }
               ],
               "position": {
@@ -1114,13 +2066,19 @@
               }
             },
             {
-              "construct": "FieldBlock",
+              "construct": "NaturalBlock",
+              "type": "text",
+              "value": "\n\n"
+            },
+            {
+              "construct": "FieldInline",
               "name": "Consequences",
               "value": [
                 {
-                  "construct": "NaturalBlock",
+                  "construct": "NaturalExpression",
                   "type": "text",
-                  "value": " Parse never rejects and never special-cases; the core schema stays frozen; per-kind typed records are an extract concern; the schema exposes kinds as an open registry for domain augmentations.",
+                  "attributes": {},
+                  "value": "Parse never rejects and never special-cases; the core schema stays frozen; per-kind typed records are an extract concern; the schema exposes kinds as an open registry for domain augmentations.",
                   "position": {
                     "end": {
                       "column": 211,

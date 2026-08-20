@@ -1,0 +1,126 @@
+{
+  "construct": "Document",
+  "children": [
+    {
+      "construct": "NaturalBlock",
+      "type": "paragraph",
+      "value": "Hello World",
+      "position": {
+        "end": {
+          "column": 12,
+          "line": 1,
+          "offset": 11
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
+      "children": [
+        {
+          "construct": "NaturalExpression",
+          "type": "text",
+          "attributes": {},
+          "value": "Hello World",
+          "position": {
+            "end": {
+              "column": 12,
+              "line": 1,
+              "offset": 11
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "construct": "NaturalBlock",
+      "type": "text",
+      "value": "\n\n"
+    },
+    {
+      "construct": "NaturalBlock",
+      "type": "paragraph",
+      "value": "Hello World\nAgain",
+      "position": {
+        "end": {
+          "column": 6,
+          "line": 4,
+          "offset": 30
+        },
+        "start": {
+          "column": 1,
+          "line": 3,
+          "offset": 13
+        }
+      },
+      "children": [
+        {
+          "construct": "NaturalExpression",
+          "type": "text",
+          "attributes": {},
+          "value": "Hello World\nAgain",
+          "position": {
+            "end": {
+              "column": 6,
+              "line": 4,
+              "offset": 30
+            },
+            "start": {
+              "column": 1,
+              "line": 3,
+              "offset": 13
+            }
+          }
+        }
+      ]
+    },
+    {
+      "construct": "NaturalBlock",
+      "type": "text",
+      "value": "\n\n"
+    },
+    {
+      "construct": "NaturalBlock",
+      "type": "paragraph",
+      "value": "Hello World\nOnce More",
+      "position": {
+        "end": {
+          "column": 10,
+          "line": 7,
+          "offset": 53
+        },
+        "start": {
+          "column": 1,
+          "line": 6,
+          "offset": 32
+        }
+      },
+      "children": [
+        {
+          "construct": "NaturalExpression",
+          "type": "text",
+          "attributes": {},
+          "value": "Hello World\nOnce More",
+          "position": {
+            "end": {
+              "column": 10,
+              "line": 7,
+              "offset": 53
+            },
+            "start": {
+              "column": 1,
+              "line": 6,
+              "offset": 32
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

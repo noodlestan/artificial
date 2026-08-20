@@ -1,4 +1,4 @@
-import type { ConstructCreator, ConstructParser } from '@art-js/artificial-constructs';
+import type { ConstructParser } from '@art-js/artificial-constructs';
 import type { MdastNode, VisitContext } from '@art-js/artificial-primitives';
 
 export function getFactory(
@@ -12,5 +12,3 @@ export function getFactory(
 	}
 	return null;
 }
-
-export type { ConstructCreator };

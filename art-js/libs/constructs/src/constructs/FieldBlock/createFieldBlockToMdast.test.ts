@@ -4,17 +4,13 @@ import { describe, expect, it } from 'vitest';
 import { createFieldBlockToMdast } from './createFieldBlockToMdast';
 
 describe('createFieldBlockToMdast', () => {
-	it('converts a FieldBlock to a paragraph with strong key and children', () => {
+	it('converts a FieldBlock to a label paragraph', () => {
 		const impl = createFieldBlockToMdast();
 		const value: Text = { type: 'text', value: ' Generate and manage agent instructions.' };
 		const result = impl.toMdast({ construct: 'FieldBlock', name: 'Purpose' } as never, [value]);
 		expect(result).toEqual({
 			type: 'paragraph',
-			children: [
-				{ type: 'strong', children: [{ type: 'text', value: 'Purpose:' }] },
-				{ type: 'text', value: ' ' },
-				value,
-			],
+			children: [{ type: 'strong', children: [{ type: 'text', value: 'Purpose:' }] }],
 		});
 	});
 });

@@ -7,7 +7,7 @@ import type { FieldInline } from './private/types';
 export function createFieldInlineToMdast(): ConstructToMdast {
 	return {
 		construct: 'FieldInline',
-		toMdast(node) {
+		toMdast(node, children) {
 			const field = node as unknown as FieldInline;
 			return {
 				type: 'paragraph',
@@ -17,7 +17,7 @@ export function createFieldInlineToMdast(): ConstructToMdast {
 						children: [{ type: 'text', value: `${field.name}:` }],
 					},
 					{ type: 'text', value: ' ' },
-					{ type: 'text', value: field.value },
+					...children,
 				],
 			} as Node;
 		},
