@@ -1,13 +1,14 @@
-import { existsSync, readFileSync } from 'node:fs';
-
+import { readRecordFileContent } from '../../records/readRecordFileContent';
+import type { RecordFile } from '../../records/types';
 import type { RepositoryRecord } from '../types';
 
-export function readRepositoryRecord(file: string): RepositoryRecord | null {
-	if (!existsSync(file)) {
+export async function readRepositoryRecord(file: RecordFile): Promise<RepositoryRecord | null> {
+	const fileWithContents = file.content ? file : await readRecordFileContent(file);
+	if (!fileWithContents.content) {
 		return null;
 	}
 
-	const content = readFileSync(file, 'utf-8');
+	const content = fileWithContents.content;
 
 	const nameMatch = content.match(/## Repository:\s*(.+)/);
 	if (!nameMatch) {
@@ -20,7 +21,7 @@ export function readRepositoryRecord(file: string): RepositoryRecord | null {
 	const consumersMatch = content.match(/\*\*Consumers:\*\*\s*(.+)/);
 
 	if (!remoteMatch) {
-		console.warn(`repository record ${file}: missing remote, using default`);
+		console.warn(`repository record ${file.filename}: missing remote, using default`);
 	}
 
 	return {

@@ -1,5 +1,5 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -11,6 +11,7 @@ import {
 } from '../../../test/helpers/records/writeProjectMockRecord';
 import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
 import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
+import { createRecordFile } from '../../records/private/createRecordFile';
 import { loadNamespaceRecords } from '../namespace/loadNamespaceRecords';
 import { readNamespaceRecord } from '../namespace/readNamespaceRecord';
 import { loadPackageRecords } from '../package/loadPackageRecords';
@@ -23,6 +24,8 @@ import { loadProjectGraph } from './loadProjectGraph';
 
 const tempDirs: string[] = [];
 
+const makeRecordFile = (filename: string) => createRecordFile(dirname(filename), filename);
+
 beforeEach(() => {
 	vi.spyOn(console, 'warn').mockImplementation(() => {});
 });
@@ -33,7 +36,7 @@ afterEach(() => {
 });
 
 describe('readProjectRecord', () => {
-	it('parses a valid project record', () => {
+	it('parses a valid project record', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeProjectMockRecord(tempDir, 'Artificial', {
 			remote: 'git@example.com:artificial.git',
@@ -42,7 +45,7 @@ describe('readProjectRecord', () => {
 		});
 
 		const file = join(tempDir, '_records/artificial.art');
-		const record = readProjectRecord(file);
+		const record = await readProjectRecord(makeRecordFile(file));
 
 		expect(record).not.toBeNull();
 		expect(record?.kind).toBe('project');
@@ -51,17 +54,17 @@ describe('readProjectRecord', () => {
 		expect(record?.namespaceNames).toEqual(['Art Domains', 'Art Tools']);
 	});
 
-	it('returns null for a missing file', () => {
-		const record = readProjectRecord('/nonexistent/file.art');
+	it('returns null for a missing file', async () => {
+		const record = await readProjectRecord(makeRecordFile('/nonexistent/file.art'));
 		expect(record).toBeNull();
 	});
 
-	it('returns null for an invalid file', () => {
+	it('returns null for an invalid file', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'bad.art');
 		writeFileSync(file, 'no project heading here');
 
-		const record = readProjectRecord(file);
+		const record = await readProjectRecord(makeRecordFile(file));
 		expect(record).toBeNull();
 	});
 });
@@ -99,7 +102,7 @@ describe('loadProjectRecords', () => {
 });
 
 describe('readNamespaceRecord', () => {
-	it('parses a valid namespace record', () => {
+	it('parses a valid namespace record', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeNamespaceMockRecord(tempDir, 'Art Domains', {
 			path: 'artisans',
@@ -107,7 +110,7 @@ describe('readNamespaceRecord', () => {
 		});
 
 		const file = join(tempDir, '_records/art-domains.art');
-		const record = readNamespaceRecord(file);
+		const record = await readNamespaceRecord(makeRecordFile(file));
 
 		expect(record).not.toBeNull();
 		expect(record?.kind).toBe('namespace');
@@ -116,17 +119,17 @@ describe('readNamespaceRecord', () => {
 		expect(record?.packageNames).toEqual(['Art Mantras', 'Art Tools']);
 	});
 
-	it('returns null for a missing file', () => {
-		const record = readNamespaceRecord('/nonexistent/file.art');
+	it('returns null for a missing file', async () => {
+		const record = await readNamespaceRecord(makeRecordFile('/nonexistent/file.art'));
 		expect(record).toBeNull();
 	});
 
-	it('returns null for an invalid file', () => {
+	it('returns null for an invalid file', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'bad.art');
 		writeFileSync(file, 'no namespace heading here');
 
-		const record = readNamespaceRecord(file);
+		const record = await readNamespaceRecord(makeRecordFile(file));
 		expect(record).toBeNull();
 	});
 });
@@ -164,7 +167,7 @@ describe('loadNamespaceRecords', () => {
 });
 
 describe('readPackageRecord', () => {
-	it('parses a valid package record', () => {
+	it('parses a valid package record', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writePackageMockRecord(tempDir, 'Art Mantras', {
 			canonicalName: '@artisans/art-mantras',
@@ -172,7 +175,7 @@ describe('readPackageRecord', () => {
 		});
 
 		const file = join(tempDir, '_records/art-mantras.art');
-		const record = readPackageRecord(file);
+		const record = await readPackageRecord(makeRecordFile(file));
 
 		expect(record).not.toBeNull();
 		expect(record?.kind).toBe('package');
@@ -181,17 +184,17 @@ describe('readPackageRecord', () => {
 		expect(record?.path).toBe('apps/art-mantras');
 	});
 
-	it('returns null for a missing file', () => {
-		const record = readPackageRecord('/nonexistent/file.art');
+	it('returns null for a missing file', async () => {
+		const record = await readPackageRecord(makeRecordFile('/nonexistent/file.art'));
 		expect(record).toBeNull();
 	});
 
-	it('returns null for an invalid file', () => {
+	it('returns null for an invalid file', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'bad.art');
 		writeFileSync(file, 'no package heading here');
 
-		const record = readPackageRecord(file);
+		const record = await readPackageRecord(makeRecordFile(file));
 		expect(record).toBeNull();
 	});
 });

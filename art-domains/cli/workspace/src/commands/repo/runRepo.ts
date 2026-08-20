@@ -3,13 +3,12 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
-import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentPackageStateReport } from '../../private/present/presentPackageStateReport';
 import { presentRepositoryState } from '../../private/present/presentRepositoryState';
-import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
-import { loadProjectGraph } from '../../private/records/projectGraph/loadProjectGraph';
-import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
-import type { PackageStateRecord, ProjectGraph } from '../../private/records/types';
+import { loadCheckoutRecords } from '../../private/resources/checkout/loadCheckoutRecords';
+import { loadProjectGraph } from '../../private/resources/projectGraph/loadProjectGraph';
+import { loadRepositoryRecords } from '../../private/resources/repository/loadRepositoryRecords';
+import type { PackageStateRecord, ProjectGraph } from '../../private/resources/types';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 
@@ -132,7 +131,6 @@ export async function runRepo(
 		allPackageStates.set(checkout.record.name, packageStates);
 	}
 
-	presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts());
 	for (const state of repositoryStates) presentRepositoryState(state);
 	for (const checkout of targets) {
 		const packageStates = allPackageStates.get(checkout.record.name) ?? [];

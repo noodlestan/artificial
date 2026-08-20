@@ -5,8 +5,8 @@ import { createCloneFailure } from '../../private/commands/operations/createClon
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
-import { saveCheckoutRecord } from '../../private/records/checkout/saveCheckoutRecord';
-import type { RepositoryRecord } from '../../private/records/types';
+import { saveCheckoutRecord } from '../../private/resources/checkout/saveCheckoutRecord';
+import type { RepositoryRecord } from '../../private/resources/types';
 import { createCheckout } from '../../private/store/createCheckout';
 import { createCheckoutLocation } from '../../private/store/createCheckoutLocation';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';

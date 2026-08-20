@@ -1,4 +1,4 @@
-import type { CheckoutRecord, RepositoryRecord } from '../records/types';
+import type { CheckoutRecord, RepositoryRecord } from '../resources/types';
 import type { CheckoutScan } from '../scan/types';
 
 export interface Checkout {

@@ -2,7 +2,7 @@ import simpleGit from 'simple-git';
 
 import type { WorkspaceContext } from '../context/createWorkspaceContext';
 import { getCurrentBranch } from '../git/getCurrentBranch';
-import { saveCheckoutRecord } from '../records/checkout/saveCheckoutRecord';
+import { saveCheckoutRecord } from '../resources/checkout/saveCheckoutRecord';
 import { scanCheckoutState } from '../scan/scanCheckoutState';
 import type { Checkout } from '../store/createCheckout';
 

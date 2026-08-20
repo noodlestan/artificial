@@ -7,7 +7,7 @@ import { initGitRepoTest } from '../../test/helpers/git/initGitRepoTest';
 import { initWorkingRepoTest } from '../../test/helpers/git/initWorkingRepoTest';
 import { makeTempDir } from '../../test/helpers/tempDirs/makeTempDir';
 import { removeTempDirs } from '../../test/helpers/tempDirs/removeTempDirs';
-import type { RepositoryRecord } from '../records/types';
+import type { RepositoryRecord } from '../resources/types';
 import { createCheckout } from '../store/createCheckout';
 
 import { scanCheckoutState } from './scanCheckoutState';

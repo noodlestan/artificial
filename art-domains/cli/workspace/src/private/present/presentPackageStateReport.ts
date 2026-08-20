@@ -1,4 +1,4 @@
-import type { PackageStateRecord } from '../records/types';
+import type { PackageStateRecord } from '../resources/types';
 import type { Checkout } from '../store/createCheckout';
 
 import { formatTable } from './formatTable';

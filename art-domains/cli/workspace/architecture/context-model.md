@@ -149,7 +149,7 @@ loadProjectGraph(config, checkoutPath)
   return consolidateProjectGraph(projects, namespaces, packages)
 ```
 
-Each loader uses `findRecordFiles(checkoutPath, config.records.pattern)` to discover `.art` files recursively, passes each file to the corresponding singular reader (`readProjectRecord`, `readNamespaceRecord`, `readPackageRecord`), ignores null results, and returns typed records. Both legacy `ops/records/{kind}/` and co-located `_records/` layouts are supported.
+Each loader uses `findRecordFiles(checkoutPath, config.records.pattern, [{kind}])` to discover `.art` files recursively, passes each file to the corresponding singular reader (`readProjectRecord`, `readNamespaceRecord`, `readPackageRecord`), ignores null results, and returns typed records. Both legacy `ops/records/{kind}/` and co-located `_records/` layouts are supported.
 
 `consolidateProjectGraph` links projects → namespaces → packages by name, generates warnings for missing references, and returns a `ProjectGraph`.
 

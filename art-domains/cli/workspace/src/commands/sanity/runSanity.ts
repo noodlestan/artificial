@@ -4,8 +4,8 @@ import { presentCheckoutReport } from '../../private/present/presentCheckoutRepo
 import { presentExtraneousReport } from '../../private/present/presentExtraneousReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
 import { presentWorkspaceReport } from '../../private/present/presentWorkspaceReport';
-import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
-import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
+import { loadCheckoutRecords } from '../../private/resources/checkout/loadCheckoutRecords';
+import { loadRepositoryRecords } from '../../private/resources/repository/loadRepositoryRecords';
 import { scanCheckoutState } from '../../private/scan/scanCheckoutState';
 import { createCheckout } from '../../private/store/createCheckout';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';

@@ -1,17 +1,18 @@
-import { existsSync, readFileSync } from 'node:fs';
-
+import { readRecordFileContent } from '../../records/readRecordFileContent';
+import type { RecordFile } from '../../records/types';
 import type { PackageRecord } from '../types';
 
-export function readPackageRecord(file: string): PackageRecord | null {
-	if (!existsSync(file)) {
+export async function readPackageRecord(file: RecordFile): Promise<PackageRecord | null> {
+	const fileWithContents = file.content ? file : await readRecordFileContent(file);
+	if (!fileWithContents.content) {
 		return null;
 	}
 
-	const content = readFileSync(file, 'utf-8');
+	const content = fileWithContents.content;
 
 	const nameMatch = content.match(/## Package:\s*(.+)/);
 	if (!nameMatch) {
-		console.warn(`package record ${file}: missing name, skipped`);
+		console.warn(`package record ${file.filename}: missing name, skipped`);
 		return null;
 	}
 

@@ -1,7 +1,7 @@
 import path, { join } from 'node:path';
 
 import { WorkspaceConfig } from '../../config';
-import { RepositoryRecord } from '../records/types';
+import { RepositoryRecord } from '../resources/types';
 
 import { safePath } from './safePath';
 import type { Checkout } from './types';

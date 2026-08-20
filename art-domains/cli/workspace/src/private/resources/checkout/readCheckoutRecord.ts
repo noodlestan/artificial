@@ -1,13 +1,14 @@
-import { existsSync, readFileSync } from 'node:fs';
-
+import { readRecordFileContent } from '../../records/readRecordFileContent';
+import type { RecordFile } from '../../records/types';
 import type { CheckoutRecord } from '../types';
 
-export function readCheckoutRecord(file: string): CheckoutRecord | null {
-	if (!existsSync(file)) {
+export async function readCheckoutRecord(file: RecordFile): Promise<CheckoutRecord | null> {
+	const fileWithContents = file.content ? file : await readRecordFileContent(file);
+	if (!fileWithContents.content) {
 		return null;
 	}
 
-	const content = readFileSync(file, 'utf-8');
+	const content = fileWithContents.content;
 
 	const nameMatch = content.match(/## Checkout:\s*(.+)/);
 	if (!nameMatch) {
@@ -19,10 +20,10 @@ export function readCheckoutRecord(file: string): CheckoutRecord | null {
 	const branchMatch = content.match(/\*\*Branch:\*\*\s*`([^`]+)`/);
 
 	if (!locationMatch) {
-		console.warn(`checkout record ${file}: missing location, using default`);
+		console.warn(`checkout record ${file.filename}: missing location, using default`);
 	}
 	if (!branchMatch) {
-		console.warn(`checkout record ${file}: missing branch, using default`);
+		console.warn(`checkout record ${file.filename}: missing branch, using default`);
 	}
 
 	return {

@@ -88,7 +88,7 @@ Update these architecture files BEFORE making source code changes. Config-relate
    - Update `defineConfig`, runtime defaults, manifest-loading tests, `src/test/makeConfig.ts`, and any affected config consumers in this same commit.
    - Update `src/test/writeCheckoutRecord.ts`, `src/test/writeRepoRecord.ts`, `src/test/writeProjectRecord.ts` (including its namespace/package fixture writers), and `src/private/records/checkout/loadCheckoutRecords.test.ts` to use `_records/` and `*.art` rather than the old centralized test paths.
 2. Add `src/private/records/shared/findRecordFiles.ts`:
-   - Keep the public function synchronous: `findRecordFiles(path: string, pattern: string): string[]`.
+   - Keep the public function synchronous: `findRecordFiles(path: string, pattern: string, kinds?: string[]): string[]`.
    - Recursively enumerate files with Node `globSync`; normalize a filename-only pattern such as `*.art` so it matches at every depth.
    - Exclude directories and skip `.git` internals.
    - Filter candidates through `git check-ignore --no-index --stdin` from the search root so ignored tracked and untracked candidates are excluded. If the search root is not a Git worktree, return the glob matches without Git filtering.
@@ -96,7 +96,7 @@ Update these architecture files BEFORE making source code changes. Config-relate
 3. Refactor `loadRepositoryRecords(config)` and make `loadCheckoutRecords` async:
    - `loadRepositoryRecords` becomes async: `loadRepositoryRecords(config): Promise<RepositoryRecord[]>`.
    - `loadCheckoutRecords` becomes async: `loadCheckoutRecords(config, repos): Promise<RepositoryCheckoutRecord[]>`.
-   - Both call `findRecordFiles(config.root.path, config.records.pattern)`.
+   - Both call `findRecordFiles(config.root.path, config.records.pattern, [{kind}]`.
    - Pass every candidate to the appropriate singular reader.
    - Filter `null` values; checkout loading must continue resolving `record.repository` against the loaded repository records.
    - Update all callers of both loaders to `await` the result.
@@ -120,7 +120,7 @@ The following test files are likely affected by this commit. Update existing tes
 
 ### New tests to create
 
-- `$PACKAGE/src/private/records/shared/findRecordFiles.test.ts` — test recursive default pattern (`*.art`), custom pattern, missing path (returns `[]`), `.gitignore` exclusion, deterministic output ordering.
+- `$PACKAGE/src/private/records/shared/findRecordFiles.test.ts` — test recursive default pattern (`*.art`), custom pattern, missing path (returns `[]`), `.gitignore` exclusion, deterministic output ordering. kinds filtering.
 
 ### Verification
 

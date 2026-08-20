@@ -1,7 +1,7 @@
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
-import { RepositoryRecord } from '../../private/records/types';
+import { RepositoryRecord } from '../../private/resources/types';
 import { createCheckout } from '../../private/store/createCheckout';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 

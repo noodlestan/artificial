@@ -21,7 +21,7 @@ function makeMockConfig(
 		clone: { path: 'repos' },
 		root: { path: rootPath },
 		checkouts: { path: checkoutPath, template: templatePath },
-		records: { pattern: '*.art' },
+		records: { pattern: '*.art', dotignored: ['gitignore'], ignored: [], included: [] },
 	};
 }
 

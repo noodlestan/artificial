@@ -1,6 +1,6 @@
 import type { WorkspaceContext } from '../../context/createWorkspaceContext';
 import { createOrSwitchBranch } from '../../git/createOrSwitchBranch';
-import { saveCheckoutRecord } from '../../records/checkout/saveCheckoutRecord';
+import { saveCheckoutRecord } from '../../resources/checkout/saveCheckoutRecord';
 import type { Checkout } from '../../store/createCheckout';
 import { createBranchFailure } from '../operations/createBranchFailure';
 import { createBranchSuccess } from '../operations/createBranchSuccess';

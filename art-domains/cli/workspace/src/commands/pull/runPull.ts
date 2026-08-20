@@ -2,8 +2,8 @@ import { doPullCheckout } from '../../private/commands/checkouts/doPullCheckout'
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
 import { presentCheckoutReport } from '../../private/present/presentCheckoutReport';
 import { presentOperationsReport } from '../../private/present/presentOperationsReport';
-import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
-import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
+import { loadCheckoutRecords } from '../../private/resources/checkout/loadCheckoutRecords';
+import { loadRepositoryRecords } from '../../private/resources/repository/loadRepositoryRecords';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 import { scanAllCheckoutsStates } from '../../private/store/scanAllCheckoutsStates';
 

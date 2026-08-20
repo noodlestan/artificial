@@ -1,6 +1,6 @@
 import type { WorkspaceContext } from '../../private/context/createWorkspaceContext';
-import { loadCheckoutRecords } from '../../private/records/checkout/loadCheckoutRecords';
-import { loadRepositoryRecords } from '../../private/records/repository/loadRepositoryRecords';
+import { loadCheckoutRecords } from '../../private/resources/checkout/loadCheckoutRecords';
+import { loadRepositoryRecords } from '../../private/resources/repository/loadRepositoryRecords';
 import { hydrateStoreFromRecords } from '../../private/store/hydrateStoreFromRecords';
 
 import { cloneAll } from './cloneAll';

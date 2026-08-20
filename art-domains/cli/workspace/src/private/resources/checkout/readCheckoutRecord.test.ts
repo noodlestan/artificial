@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { makeMockConfig } from '../../../test/helpers/context/makeMockConfig';
 import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
 import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
+import { createRecordFile } from '../../records/private/createRecordFile';
 
 import { readCheckoutRecord } from './readCheckoutRecord';
 import { saveCheckoutRecord } from './saveCheckoutRecord';
@@ -25,38 +26,38 @@ describe('readCheckoutRecord', () => {
 		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
 
 		const saved = await saveCheckoutRecord(config, data, file);
-		const read = readCheckoutRecord(saved);
+		const read = await readCheckoutRecord(createRecordFile(tempDir, saved));
 
 		expect(read).toEqual(data);
 	});
 
-	it('returns null for a missing file', () => {
+	it('returns null for a missing file', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'missing.art');
 
-		const read = readCheckoutRecord(file);
+		const read = await readCheckoutRecord(createRecordFile(tempDir, file));
 
 		expect(read).toBeNull();
 	});
 
-	it('returns null when kind heading is absent', () => {
+	it('returns null when kind heading is absent', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'noheading.art');
 		writeFileSync(file, '# Module\n\n**Location:** `repos/test`\n\n**Branch:** `main`\n');
 
-		const read = readCheckoutRecord(file);
+		const read = await readCheckoutRecord(createRecordFile(tempDir, file));
 
 		expect(read).toBeNull();
 	});
 
-	it('warns and uses defaults for malformed lines', () => {
+	it('warns and uses defaults for malformed lines', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'malformed.art');
 		writeFileSync(file, '# Module\n\n## Checkout: Test\n\n**Location:** `repos/test`\n');
 
 		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-		const read = readCheckoutRecord(file);
+		const read = await readCheckoutRecord(createRecordFile(tempDir, file));
 
 		expect(read).not.toBeNull();
 		if (!read) return;

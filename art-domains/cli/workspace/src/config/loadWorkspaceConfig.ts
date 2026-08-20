@@ -4,7 +4,8 @@ import { pathToFileURL } from 'node:url';
 
 import { build } from 'esbuild';
 
-import type { WorkspaceConfig } from './types';
+import { defineConfig } from './defineConfig';
+import type { PartialWorkspaceConfig, WorkspaceConfig } from './types';
 
 const MANIFEST_FILE = '.art-workspace.mts';
 const TEMP_FILE = '.art-workspace-bundle.mjs';
@@ -15,7 +16,12 @@ const DEFAULT_CONFIG: Pick<WorkspaceConfig, 'clone' | 'checkouts' | 'records'> =
 		path: '_records/',
 		template: '.agents/domains/workspace/templates/checkout.art.njk',
 	},
-	records: { pattern: '*.art' },
+	records: {
+		pattern: '*.art',
+		dotignored: ['gitignore'],
+		ignored: [],
+		included: [],
+	},
 };
 
 function formatError(error: unknown): string {
@@ -62,9 +68,8 @@ export async function loadWorkspaceConfig(rootPath: string): Promise<WorkspaceCo
 
 	try {
 		const loaded = await import(pathToFileURL(tempFile).href);
-		const config = loaded.default as WorkspaceConfig;
-		config.root.path = rootPath;
-		return config;
+		const config = loaded.default as PartialWorkspaceConfig;
+		return defineConfig({ ...config, root: { path: rootPath } });
 	} catch (error) {
 		throw new Error(`Failed to load workspace manifest at ${manifestPath}: ${formatError(error)}`);
 	}
