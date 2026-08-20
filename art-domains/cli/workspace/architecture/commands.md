@@ -10,7 +10,7 @@ The command surface of the workspace CLI, their procedures, and their edge cases
 | `pull`    | `pull`                                     | planned     |
 | `push`    | `push`                                     | planned     |
 | `sync`    | `sync`                                     | planned     |
-| `repo`    | `repo [<checkout-name>...]`                | implemented |
+| `repo`    | `repo [<location>...]`                     | implemented |
 | `clone`   | `clone [--all] [<repo>] [<location>]`      | implemented |
 | `branch`  | `branch <branch> [<checkout-location>...]` | implemented |
 | `link`    | `link <location> <package> [<target>]`     | designed    |
@@ -222,11 +222,9 @@ Feature: Sync checkouts
 
 ## Repo
 
-**Usage:** `repo [<checkout-name>...]`
+**Usage:** `repo [<location>...]`
 
-List the repositories under active checkouts, their namespaces, and their packages. The infrastructure for this command is needed for `link` and `publish`. Works for one or more checkouts (all checkouts when none specified).
-
-Procedure: read the checkout's project records — project first, then namespaces, then packages (records live inside the checkout at `_records/`). For each package resolve `packagePath` = `{checkout.location}/{project-path}/{namespace-path}/{package-path}` and read its `package.json` (current version) and run `npm info` (last published version). Collect a `PackageStateRecord` (canonical name, version, published version, branch, directory, states) per package. For each checkout present its Checkout Report row (`repo | location | branch | states`) followed by the Package State Report for its packages.
+List the packages of active checkouts (all checkouts when none specified). Each argument is a checkout location. Read each checkout's project graph recursively via `loadProjectGraph` (project → namespaces → packages; record files are discovered by `findRecordFiles` supporting both legacy `ops/records/{kind}/` and co-located `_records/` layouts). Collect `PackageStateRecord` values per checkout via `getRepositoryCheckoutPackages`. Present results grouped by checkout: each checkout's Repository State Report (`Repository:`, `Checkout:`) is immediately followed by its Package State Report (`Packages for ...`). Multiple checkouts of the same repository remain distinct — each checkout location produces its own report pair.
 
 **BDD:**
 
@@ -235,7 +233,7 @@ Feature: List repositories and their packages
   Scenario: list a single checkout's packages
     Given checkout "Artificial" is cloned with project records
     When I run "art-workspace repo Artificial"
-    Then the Checkout Report lists "Artificial"
+    Then the Repository State Report lists "Artificial"
     And the Package State Report lists namespace "Art Domains"
     And the Package State Report lists package "@artisans/art-mantras" with current version from package.json
     And the Package State Report lists the published version from npm info
@@ -243,13 +241,25 @@ Feature: List repositories and their packages
   Scenario: repo defaults to all checkouts when none specified
     Given checkouts "Artificial" and "Purrception" are cloned
     When I run "art-workspace repo"
-    Then the Checkout Report lists "Artificial"
-    And the Checkout Report lists "Purrception"
+    Then the Repository State Report lists "Artificial"
+    And the Package State Report lists packages for "Artificial"
+    And the Repository State Report lists "Purrception"
+    And the Package State Report lists packages for "Purrception"
+    And each Repository State Report is immediately followed by its Package State Report
+
+  Scenario: keeps two checkouts of one repository distinct
+    Given checkout "Artificial" is cloned at "repos/artificial" with version "1.0.0"
+    And checkout "Artificial @ bug-fixes" is cloned at "repos/artificial-bug-fixes" with version "2.0.0"
+    When I run "art-workspace repo"
+    Then the Repository State Report lists "Artificial"
+    And the Package State Report lists version "1.0.0" for "Artificial"
+    And the Repository State Report lists "Artificial @ bug-fixes"
+    And the Package State Report lists version "2.0.0" for "Artificial @ bug-fixes"
 
   Scenario: checkout has no project records
     Given checkout "Purrception" is cloned without project records
     When I run "art-workspace repo Purrception"
-    Then the Checkout Report lists "Purrception" with state "no project records"
+    Then the Repository State Report lists "Purrception" with state "no project records"
 
   Scenario: unknown checkout warns and skips
     When I run "art-workspace repo Unknown"
@@ -281,7 +291,7 @@ Feature: List repositories and their packages
 
 **Edge cases:**
 
-- Unknown checkout → warn on stderr, skip.
+- Unknown checkout (name or location) → warn on stderr, skip.
 - No project records in the checkout → report the checkout with state `no project records`.
 - Project record references a missing namespace record → warn, skip the namespace.
 - Namespace record references a missing package record → warn, skip the package.

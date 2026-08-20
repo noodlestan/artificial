@@ -160,66 +160,55 @@ branch(branch, checkoutLocations)
   presentOperationsReport(ctx.log)
 ```
 
-### Command: repo [<checkoutNames...>]
+### Command: repo [<locations...>]
 
-**Responsibility:** List the packages of active checkouts (all checkouts when none specified). Read each checkout's project records — project first, then namespaces, then packages — resolve each package's `package.json` (current version) and query `npm info` (published version). Present Checkout Report + Package State Report.
+**Responsibility:** List the packages of active checkouts (all checkouts when none specified). Read each checkout's project graph recursively via `loadProjectGraph` (project → namespaces → packages; record files discovered by `findRecordFiles`). Resolve each package's `package.json` (current version) and query `npm info` (published version). Present grouped results: each checkout's Repository State Report is immediately followed by its Package State Report. Multiple checkouts of the same repository remain distinct.
 
 **Pseudo:**
 
 ```pseudo
-repo(checkoutNames)
+repo(locations)
   ctx = createWorkspaceContext(config, store, log)
   hydrate(ctx)
 
-  if checkoutNames is empty:
+  if locations is empty:
     targets = ctx.store.getAllCheckouts()
   else:
     targets = []
-    for name in checkoutNames:
-      checkout = resolveCheckoutByName(ctx.store, name)
+    for name in locations:
+      checkout = ctx.store.getCheckoutByName(name) ?? ctx.store.getCheckoutForLocation(name)
       if not checkout:
         warn "unknown checkout: {name}"
         continue
       targets.push(checkout)
 
+  repositoryCheckoutStates = new Map()
+  repositoryCheckoutPackages = new Map()
+
   for checkout in targets:
-    projects = readProjectRecords(ctx, checkout)
-    if projects is empty:
-      updated = { ...checkout, issues: [...checkout.issues, "no project records"] }
-      ctx.store.updateCheckout(updated)
+    graph = await loadProjectGraph(ctx.config, checkout.path)
+    state = { target: checkout, branch, issues: [], graph }
+    repositoryCheckoutStates.set(checkout.record.location, state)
+
+    for warning in graph.warnings:
+      warn warning
+
+    if graph.projects is empty:
+      state.issues.push("no project records")
       continue
 
-    packageStates = []
-    for project in projects:
-      for ns in project.namespaces:
-        for pkg in ns.packages:
-          pkgPath = join(checkout.path, project.path, ns.path, pkg.path)
-          version = readPackageVersion(join(pkgPath, "package.json"))   // null if missing
-          if version is null:
-            altPath = join(checkout.path, project.path, pkg.path)       // try without namespace
-            version = readPackageVersion(join(altPath, "package.json"))
-            if version is not null: pkgPath = altPath
-          states = []
-          if version is null:
-            states.push("no package.json")
-            published = null
-          else if version === "0.0.0":
-            published = null                                            // skip npm info for unpublished marker
-          else:
-            published = npmInfo(pkg.canonicalName)                      // try/catch -> null, suppress stderr
-            if published is null: published = "unknown"                 // don't add to states
-          packageStates.push({
-            canonicalName: pkg.canonicalName, version, published,
-            branch: checkout.record.branch, directory: pkgPath, states
-          })
+    packageStates = getRepositoryCheckoutPackages(checkout.path, graph)
+    repositoryCheckoutPackages.set(checkout.record.location, packageStates)
 
-    presentCheckoutReport(ctx.config, ctx.store.getAllCheckouts())
-    presentPackageStateReport(checkout, packageStates)
+  for [location, state] in repositoryCheckoutStates:
+    presentRepositoryState(state)
+    packageStates = repositoryCheckoutPackages.get(location) ?? []
+    presentPackageStateReport(state.target, packageStates)
 ```
 
 ### Function: resolveCheckoutByName(store, input)
 
-**Responsibility:** Resolve a checkout by name, handling multiple input formats (exact name, "Repository:" prefix, slug format, location). Returns the matching checkout or null.
+**Responsibility:** Resolve a checkout by name, handling multiple input formats (exact name, "Repository:" prefix, slug format, location). Returns the matching checkout or null. Note: not yet used by `repo` — the current implementation resolves inline with `getCheckoutByName ?? getCheckoutForLocation`. Designed for future use by other commands.
 
 **Pseudo:**
 
@@ -822,6 +811,37 @@ presentOperationsReport(log)
   print ""
 ```
 
+### Function: presentRepositoryState(state)
+
+**Responsibility:** Present a single checkout's Repository State Report. Shows the repository name, current branch, and any issues. Used by `repo`.
+
+**Pseudo:**
+
+```pseudo
+presentRepositoryState(state)
+  print "Repository: {state.target.repo?.name or state.target.record.name}"
+  print "Branch: {state.branch or state.target.record.branch}"
+  if state.issues is not empty:
+    print "States: {state.issues.join('; ')}"
+```
+
+### Function: presentPackageStateReport(checkout, packageStates)
+
+**Responsibility:** Present the Package State Report for a checkout's packages. Omitted when no packages. Shows each package's canonical name, version, published version, and states.
+
+**Pseudo:**
+
+```pseudo
+presentPackageStateReport(checkout, packageStates)
+  if packageStates is empty: return
+  print "Packages for {checkout.record.name}:"
+  print table (package, version, published, states)
+    // version = record.version ?? "-"
+    // published = record.publishedVersion ?? "-"
+    // states = record.states.join("; ") or "-"
+  print ""
+```
+
 ### Function: presentExtraneousReport(extraneous)
 
 **Responsibility:** Present the Extraneous Report. Omitted when none found.
@@ -938,6 +958,65 @@ readProjectRecords(ctx, checkout)
       warn "unknown namespace: {name}"
 
   return projects
+```
+
+### Function: getRepositoryCheckoutPackages(checkoutPath, graph)
+
+**Responsibility:** Collect `PackageStateRecord` values for all packages in a checkout's project graph. Iterates projects → namespaces → packages, delegates to `createPackageStateRecord` (resolves `package.json` path) and `scanPackageStateRecord` (queries `npm info`). Extracted from `runRepo` into `src/private/repositories/`.
+
+**Pseudo:**
+
+```pseudo
+getRepositoryCheckoutPackages(checkoutPath, graph)
+  packageStates = []
+  for project in graph.projects:
+    for nsName in project.namespaceNames:
+      ns = graph.namespaces.get(nsName)
+      if not ns: continue
+      for pkgName in ns.packageNames:
+        pkg = graph.packages.get(pkgName)
+        if not pkg: continue
+        { record } = createPackageStateRecord(checkoutPath, project.path, ns.path, pkg)
+        scanPackageStateRecord(pkg, record)
+        packageStates.push(record)
+  return packageStates
+```
+
+### Function: createPackageStateRecord(checkoutPath, projectPath, nsPath, pkg)
+
+**Responsibility:** Build a `PackageStateRecord` with initial null version and states. Resolves the `package.json` path (with namespace, falling back to without namespace when missing). Returns `{ pkgPath, record }`.
+
+**Pseudo:**
+
+```pseudo
+createPackageStateRecord(checkoutPath, projectPath, nsPath, pkg)
+  pkgPath = join(checkoutPath, projectPath, nsPath, pkg.path)
+  if not exists(join(pkgPath, "package.json")):
+    altPath = join(checkoutPath, projectPath, pkg.path)     // try without namespace
+    if exists(join(altPath, "package.json")): pkgPath = altPath
+
+  record = { canonicalName: pkg.canonicalName, version: null, publishedVersion: null, directory: pkgPath, states: [] }
+
+  if exists(join(pkgPath, "package.json")):
+    try: record.version = readJson(join(pkgPath, "package.json")).version ?? null
+    catch: record.states.push("no package.json")
+  else:
+    record.states.push("no package.json")
+
+  return { pkgPath, record }
+```
+
+### Function: scanPackageStateRecord(pkg, record)
+
+**Responsibility:** Populate `publishedVersion` on an existing `PackageStateRecord` by querying `npm info`. Skips for unpublished marker version `0.0.0`.
+
+**Pseudo:**
+
+```pseudo
+scanPackageStateRecord(pkg, record)
+  if record.version is not null and record.version !== "0.0.0":
+    try: record.publishedVersion = exec("npm info {pkg.canonicalName} version").trim()
+    catch: record.publishedVersion = "unknown"
 ```
 
 ### Function: findPackage(projects, package)

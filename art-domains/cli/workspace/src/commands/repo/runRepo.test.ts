@@ -108,57 +108,49 @@ describe('repo command', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createMockCommandContext(tempDir);
 		const dir1 = join(tempDir, ctx.config.clone.path, 'artificial');
-		const dir2 = join(tempDir, ctx.config.clone.path, 'artificial-bug-fixes');
+		const dir2 = join(tempDir, ctx.config.clone.path, 'conventions-fixes');
 		await initGitRepoTest(dir1);
 		await initGitRepoTest(dir2);
 
 		writeRepoMockRecord(tempDir, 'Artificial', 'git@example.com:artificial.git');
+		writeRepoMockRecord(tempDir, 'Conventions', 'git@example.com:conventions.git');
 		writeCheckoutMockRecord(tempDir, 'Artificial', 'Artificial', 'artificial');
-		writeCheckoutMockRecord(
-			tempDir,
-			'Artificial',
-			'Artificial @ bug-fixes',
-			'artificial-bug-fixes',
-		);
+		writeCheckoutMockRecord(tempDir, 'Conventions', 'Conventions @ fixes', 'conventions-fixes');
 
 		const recDir1 = join(dir1, '_records');
 		const recDir2 = join(dir2, '_records');
 		mkdirSync(recDir1, { recursive: true });
 		mkdirSync(recDir2, { recursive: true });
 		writeFileSync(
-			join(recDir1, 'artificial-v1.art'),
+			join(recDir1, 'artificial.art'),
 			'# Module\n\n## Project: Artificial v1\n\n**Remote:** `git@example.com:artificial.git`\n\n**Path:** `.`\n\n**Namespaces:**\n- Namespace: Art Domains\n',
 		);
 		writeFileSync(
 			join(recDir1, 'art-domains.art'),
-			'# Module\n\n## Namespace: Art Domains\n\n**Path:** `artisans`\n\n**Packages:**\n- Package: Art Mantras\n',
+			'# Module\n\n## Namespace: Art Domains\n\n**Path:** `domains`\n\n**Packages:**\n- Package: Art Mantras\n',
 		);
 		writeFileSync(
 			join(recDir1, 'art-mantras.art'),
-			'# Module\n\n## Package: Art Mantras\n\n**Canonical Name:** `@artisans/art-mantras`\n\n**Path:** `apps/art-mantras`\n',
+			'# Module\n\n## Package: Art Mantras\n\n**Canonical Name:** `@domains/art-mantras`\n\n**Path:** `apps/art-mantras`\n',
 		);
 		writeFileSync(
-			join(recDir2, 'artificial-v2.art'),
-			'# Module\n\n## Project: Artificial v2\n\n**Remote:** `git@example.com:artificial.git`\n\n**Path:** `.`\n\n**Namespaces:**\n- Namespace: Art Domains\n',
+			join(recDir2, 'conventions.art'),
+			'# Module\n\n## Project: Conventions v2\n\n**Remote:** `git@example.com:conventions.git`\n\n**Path:** `.`\n\n**Namespaces:**\n- Namespace: Noodlestan\n',
 		);
 		writeFileSync(
-			join(recDir2, 'art-domains.art'),
-			'# Module\n\n## Namespace: Art Domains\n\n**Path:** `artisans`\n\n**Packages:**\n- Package: Art Mantras\n',
+			join(recDir2, 'noodlestan.art'),
+			'# Module\n\n## Namespace: Noodlestan\n\n**Path:** `noodlestan`\n\n**Packages:**\n- Package: Solid Conventions\n',
 		);
 		writeFileSync(
-			join(recDir2, 'art-mantras.art'),
-			'# Module\n\n## Package: Art Mantras\n\n**Canonical Name:** `@artisans/art-mantras`\n\n**Path:** `apps/art-mantras`\n',
-		);
-		writeFileSync(
-			join(recDir2, 'art-mantras.art'),
-			'# Module\n\n## Package: Art Projections\n\n**Canonical Name:** `@artisans/art-projections`\n\n**Path:** `apps/art-projections`\n',
+			join(recDir2, 'art-projections.art'),
+			'# Module\n\n## Package: Solid Conventions\n\n**Canonical Name:** `@noodlestan/solid-conventions`\n\n**Path:** `libs/solid-conventions`\n',
 		);
 
-		const pkgDir1 = join(dir1, 'artisans', 'apps', 'art-mantras');
+		const pkgDir1 = join(dir1, 'domains', 'apps', 'art-mantras');
 		mkdirSync(pkgDir1, { recursive: true });
 		writeFileSync(join(pkgDir1, 'package.json'), JSON.stringify({ version: '1.0.0' }));
 
-		const pkgDir2 = join(dir2, 'artisans', 'apps', 'art-projections');
+		const pkgDir2 = join(dir2, 'noodlestan', 'libs', 'solid-conventions');
 		mkdirSync(pkgDir2, { recursive: true });
 		writeFileSync(join(pkgDir2, 'package.json'), JSON.stringify({ version: '2.0.0' }));
 
@@ -167,11 +159,26 @@ describe('repo command', () => {
 
 		await runRepo(ctx, { locations: [] });
 
-		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('name: Artificial');
-		expect(output).toContain('name: git@example.com:artificial.git');
+		const lines = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]);
+
+		const output = lines.join('\n');
 		expect(output).toContain('1.0.0');
-		expect(output).toContain('1.2.3');
+		expect(output).toContain('2.0.0');
+		expect(output).toContain('@domains/art-mantras');
+		expect(output).toContain('@noodlestan/solid-conventions');
+
+		const repoIdx1 = lines.findIndex(l => l.startsWith('  name: Artificial'));
+		const pkgIdx1 = lines.findIndex(l => l.startsWith('Packages for Artificial:'));
+		const repoIdx2 = lines.findIndex(l => l.startsWith('  name: Conventions'));
+		const pkgIdx2 = lines.findIndex(l => l.startsWith('Packages for Conventions @ fixes:'));
+
+		expect(pkgIdx1).toBeGreaterThanOrEqual(0);
+		expect(pkgIdx2).toBeGreaterThanOrEqual(0);
+
+		expect(repoIdx1).toBeLessThan(pkgIdx1);
+		expect(pkgIdx1).toBeLessThan(repoIdx2);
+		expect(repoIdx2).toBeLessThan(pkgIdx2);
+
 		const warnCalls = (console.warn as ReturnType<typeof vi.fn>).mock.calls
 			.map(c => c[0])
 			.join('\n');

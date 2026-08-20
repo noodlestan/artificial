@@ -69,11 +69,13 @@ Repo identity is by name, case-insensitive; package names are interchangeable wi
 
 ## Project Records
 
-Three record kinds are read from _inside_ each checkout (the project's own `_records/`), by the `repo`, `link`, `links`, and `publish` commands. All are **read-only** — never mutated by commands.
+Three record kinds are read from _inside_ each checkout — from the project's own `.art` records — by the `repo`, `link`, `links`, and `publish` commands. All are **read-only** — never mutated by commands.
 
-- **`ProjectRecord`** — a project hosted in a checkout: name, remote, canonical name, path, namespaces (by name), workspaces. Persisted at `_records/project.art`.
-- **`ProjectNamespace`** — a namespace within a project: name, path, packages (by name). Persisted at `{namespace}/_records/namespace.art`.
-- **`ProjectPackage`** — a package within a namespace: name, canonical name, path, version. Persisted at `{package-path}/_records/package.art`.
+- **`ProjectRecord`** — a project hosted in a checkout: name, remote, canonical name, path, namespaces (by name), workspaces. Discovered via `findRecordFiles` and parsed by `readProjectRecord`.
+- **`ProjectNamespace`** — a namespace within a project: name, path, packages (by name). Discovered via `findRecordFiles` and parsed by `readNamespaceRecord`.
+- **`ProjectPackage`** — a package within a namespace: name, canonical name, path, version. Discovered via `findRecordFiles` and parsed by `readPackageRecord`.
+
+Records are discovered dynamically using `findRecordFiles(checkoutPath, config.records.pattern, [{kind}])` which scans for `.art` files recursively. This supports both legacy `ops/records/{kind}/` and co-located `_records/` layouts.
 
 Reading is hierarchical — **project first, then namespaces, then packages** — and the records are linked by name (`project.namespaces` → `namespace.name`, `namespace.packages` → `package.name`). A record missing a referenced name is skipped with a warning. This order matters: the project is the root (remote + canonical name), namespaces mediate between project and packages, and packages are the leaves (most numerous, resolved last when paths can be fully composed).
 
@@ -155,7 +157,7 @@ Each loader uses `findRecordFiles(checkoutPath, config.records.pattern, [{kind}]
 
 `findPackage(graph, packageName)` locates a package across all projects by canonical name first, then by plain name.
 
-## Scanning
+## Scanning Checkouts
 
 - **`scanCheckoutState(checkout)`** — read git state from the filesystem and return a new checkout with an optional `scan` field. Records are not mutated.
 - **`scanAllCheckoutsStates(store)`** — scan every checkout in the store (store capability).

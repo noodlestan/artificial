@@ -46,9 +46,21 @@ Columns: `directory`, `branch`, `states`.
 | my-test-clone  | main    | clean             |
 | old-experiment | feature | uncommitted files |
 
+## Repository State Report
+
+Presented by `repo` for each checkout, followed immediately by its matching Package State Report. Shows the checkout's repository name, current branch, and any issues (e.g. `no project records`).
+
+Columns: `Repository:`, `Branch:`, `States:` (when issues exist).
+
+```
+Repository: Artificial
+Branch: main
+States: no project records
+```
+
 ## Package State Report
 
-Presented by `repo` after the Checkout Report, one per checkout. Lists each package's current version (from `package.json`), last published version (from `npm info`), and states.
+Presented by `repo` immediately after the matching Repository State Report for each checkout. Lists each package's current version (from `package.json`), last published version (from `npm info`), and states. When multiple checkouts exist, each checkout produces its own Repository State Report + Package State Report pair.
 
 Columns: `canonical name`, `version`, `published`, `directory`, `states`.
 
