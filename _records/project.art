@@ -6,11 +6,11 @@
 
 **Description:** Collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.
 
+**Path:** `./`
+
 **Remote:** `git@github.com:noodlestan/artificial.git`
 
 **Canonical Name:** `noodlestan/artificial`
-
-**Path:** `./`
 
 **Version:** `0.0.1`
 
