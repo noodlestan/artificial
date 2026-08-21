@@ -30,7 +30,7 @@ Complete the workspace CLI with remaining commands and infrastructure. This mile
 | 11 — Implement links                  | `_backlog/4-next/plan-implement-links/plan.md`                                 | `DRAFT`     |
 | 12 — Implement publish                | `_backlog/4-next/plan-implement-publish/plan.md`                               | `DRAFT`     |
 | 13 — Implement unlink                 | `_backlog/4-next/plan-implement-unlink/plan.md`                                | `DRAFT`     |
-| 14 — Fixes and test coverage          | `_backlog/3-now/plan-repo-command-fixes-and-tests/plan.md`                     | `READY`     |
+| 14 — Fixes and test coverage          | `_backlog/1-done/plan-repo-command-fixes-and-tests/plan.md`                    | `DONE`      |
 | 15 — Update knowledge resources       | `_backlog/4-next/update-knowledge-resources/plan.md`                           | `PREPARING` |
 
 **Next step:** Phase 10 — execute `plan-implement-link`.

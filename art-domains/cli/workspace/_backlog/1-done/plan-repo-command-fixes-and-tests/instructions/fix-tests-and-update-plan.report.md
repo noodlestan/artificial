@@ -22,11 +22,11 @@
 
 #### Files changed
 
-| File                                                             | Change                                                                                                     |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `src/commands/repo/runRepo.test.ts`                              | Added `setupCheckoutWithPackages` helper; added ordering regression test; refactored 2 tests to use helper |
-| `_backlog/3-now/plan-repo-command-fixes-and-tests/plan.md`       | Updated commit status to DONE; added feedback with test decisions                                          |
-| `_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md` | Added `Test:` entries to all three bugs                                                                    |
+| File                                                              | Change                                                                                                     |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `src/commands/repo/runRepo.test.ts`                               | Added `setupCheckoutWithPackages` helper; added ordering regression test; refactored 2 tests to use helper |
+| `_backlog/1-done/plan-repo-command-fixes-and-tests/plan.md`       | Updated commit status to DONE; added feedback with test decisions                                          |
+| `_backlog/1-done/plan-repo-command-fixes-and-tests/plan__bugs.md` | Added `Test:` entries to all three bugs                                                                    |
 
 ### Test Results
 

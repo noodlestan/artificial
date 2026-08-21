@@ -32,9 +32,9 @@ Add missing repository-command regression coverage and remove only demonstrably 
 
 ## Mandatory Reading
 
-- `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan.md`
-- `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md`
-- `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/`
+- `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan.md`
+- `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan__bugs.md`
+- `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/`
 - `$PACKAGE/src/commands/repo/runRepo.ts`
 - `$PACKAGE/src/commands/repo/runRepo.test.ts`
 - `$PACKAGE/_guide.md`

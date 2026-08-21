@@ -30,8 +30,8 @@ Synchronize repository-command architecture and pseudo-code with dynamic record 
 
 ## Mandatory Reading
 
-- `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan.md`
-- `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md`
+- `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan.md`
+- `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan__bugs.md`
 - `$PACKAGE/architecture/commands.md`
 - `$PACKAGE/architecture/_pseudo.md`
 - `$PACKAGE/architecture/context-model.md`

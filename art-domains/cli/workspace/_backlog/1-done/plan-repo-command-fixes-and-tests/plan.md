@@ -18,7 +18,7 @@
 
 ## Summary
 
-Fix the three reported `@art-domains/workspace-cli` repository-command bugs, add focused regression coverage, remove only demonstrably redundant test work, and update the affected architecture knowledge. Bug details and reproduction evidence are maintained in `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md`; this plan contains five executable commit blueprints covering the complete scope.
+Fix the three reported `@art-domains/workspace-cli` repository-command bugs, add focused regression coverage, remove only demonstrably redundant test work, and update the affected architecture knowledge. Bug details and reproduction evidence are maintained in `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan__bugs.md`; this plan contains five executable commit blueprints covering the complete scope.
 
 ## Scope
 
@@ -31,7 +31,7 @@ Fix the three reported `@art-domains/workspace-cli` repository-command bugs, add
 
 ### Sources
 
-- Bugs attachment: `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md` — authoritative bug scenarios and evidence.
+- Bugs attachment: `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan__bugs.md` — authoritative bug scenarios and evidence.
 - Parking lot: `$PACKAGE/_backlog/_parking-lot.md` — actionable fixes and test follow-ups.
 - Architect briefing: `$PACKAGE/_backlog/_architect.md` — command and records principles.
 
@@ -48,7 +48,7 @@ Fix the three reported `@art-domains/workspace-cli` repository-command bugs, add
 
 ## Mandatory Reading
 
-- `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md`
+- `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan__bugs.md`
 - `$PACKAGE/architecture/context-model.md`
 - `$PACKAGE/architecture/_pseudo.md`
 - `$PACKAGE/src/commands/repo/runRepo.ts`
@@ -86,13 +86,13 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Commit:** `9c6c6c5`
 
-**Report:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/fix-repo-identify-checkout.report.md`
+**Report:** `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/fix-repo-identify-checkout.report.md`
 
 **Bug.id:** `repo-identify-checkout`
 
 **Commit Message:** `fix(workspace-cli): repo command does not find checkout by location`
 
-**Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/fix-repo-identify-checkout.md`
+**Instructions File:** `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/fix-repo-identify-checkout.md`
 
 ### `repo-state-report-under-its-repo-report` - `COMMITTED`
 
@@ -106,19 +106,19 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Commit Message:** `fix(workspace-cli): group package reports under repository reports`
 
-**Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/repo-state-report-under-its-repo-report.md`
+**Instructions File:** `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/repo-state-report-under-its-repo-report.md`
 
 ### `repo-state-report-repeated-checkouts` - `COMMITTED`
 
 **Commit:** `9c6c6c5`
 
-**Report:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/repo-state-report-repeated-checkouts.report.md`
+**Report:** `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/repo-state-report-repeated-checkouts.report.md`
 
 **Bug.id:** `repo-state-report-repeated-checkouts`
 
 **Commit Message:** `fix(workspace-cli): avoid repeated repository reports for multiple checkouts`
 
-**Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/repo-state-report-repeated-checkouts.md`
+**Instructions File:** `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/repo-state-report-repeated-checkouts.md`
 
 ### `fix-tests-and-update-plan` - `COMMITTED`
 
@@ -126,7 +126,7 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Commit Message:** `test(workspace-cli): improve repo command test coverage`
 
-**Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/fix-tests-and-update-plan.md`
+**Instructions File:** `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/fix-tests-and-update-plan.md`
 
 **Scope:** Add focused regression coverage for all three bugs, profile repeated setup, and remove only demonstrably redundant tests.
 
@@ -142,11 +142,11 @@ All bug details remain in `plan__bugs.md`; commit entries below carry only the s
 
 **Commit:** `4eb0ce4`
 
-**Report:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/update-knowledge__report.md`
+**Report:** `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/update-knowledge__report.md`
 
 **Commit Message:** `docs(workspace-cli): update repo command knowledge`
 
-**Instructions File:** `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/instructions/update-knowledge.md`
+**Instructions File:** `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/instructions/update-knowledge.md`
 
 **Scope:** Synchronize architecture, pseudo-code, and context knowledge with dynamic record discovery and checkout-keyed repository/package reports.
 

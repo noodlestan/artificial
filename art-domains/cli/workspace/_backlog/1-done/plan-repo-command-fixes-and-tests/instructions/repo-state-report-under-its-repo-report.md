@@ -31,7 +31,7 @@ Present each Repository State Report immediately followed by the matching Packag
 
 ## Mandatory Reading
 
-- `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md`
+- `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan__bugs.md`
 - `$PACKAGE/src/commands/repo/runRepo.ts`
 - `$PACKAGE/src/commands/repo/runRepo.test.ts`
 - `$PACKAGE/src/private/present/presentCheckoutRepositoryState.ts`

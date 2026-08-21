@@ -31,7 +31,7 @@ Ensure multiple checkouts of one repository remain distinct in `repo` output, wi
 
 ## Mandatory Reading
 
-- `$PACKAGE/_backlog/3-now/plan-repo-command-fixes-and-tests/plan__bugs.md`
+- `$PACKAGE/_backlog/1-done/plan-repo-command-fixes-and-tests/plan__bugs.md`
 - `$PACKAGE/src/commands/repo/runRepo.ts`
 - `$PACKAGE/src/commands/repo/runRepo.test.ts`
 - `$PACKAGE/src/private/store/`
