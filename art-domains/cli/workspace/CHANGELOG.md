@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## 0.0.17
+
+### Added
+
+- **Record discovery:** Recursively discover `.art` records with configurable filename patterns and record-kind filtering.
+- **Checkout record tracking:** Preserve discovered filenames so updates write the original records in place.
+
+### Fixed
+
+- **Repo command:** Resolve checkouts by location when their name does not match.
+- **Repo command:** Keep package reports grouped beneath their repository reports and distinguish multiple checkouts of the same repository.
+
+### Changed
+
+- **Configuration:** Move checkout persistence settings to top-level `checkouts` and add configurable `records.pattern` discovery settings.
+
+### Tested
+
+- **Repo command:** Add regression coverage for checkout identification and grouped repository/package reporting.
+
+### Documented
+
+- **Architecture:** Update workspace CLI knowledge and pseudo-code for dynamic loading and checkout-keyed reporting.
+
 ## 0.0.16
 
 ### Fixed
