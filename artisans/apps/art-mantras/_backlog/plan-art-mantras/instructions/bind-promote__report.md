@@ -34,9 +34,9 @@ No application file was changed during this fresh validation session; the workin
 
 **where:** Instruction `Mandatory Reading`; plan `Source Tasks` and historical feedback.
 
-**problem:** The plan contains historical `artificials/...` paths, while this checkout and the user instruction require repository-relative `repos/artificial` paths. The prior blocker report also claimed the module design file was missing, but `artisans/apps/art-mantras/_architect.md` is present in this checkout.
+**problem:** The plan contains historical `artificials/...` paths, while this checkout and the user instruction require repository-relative `checkouts/artificial` paths. The prior blocker report also claimed the module design file was missing, but `artisans/apps/art-mantras/_architect.md` is present in this checkout.
 
-**decision:** Followed the user instruction and current instruction paths rooted at `repos/artificial`, and read the present `_guide.md`, `_architect.md`, `_pseudo.md`, and `_wip.md`. No design document was substituted or modified.
+**decision:** Followed the user instruction and current instruction paths rooted at `checkouts/artificial`, and read the present `_guide.md`, `_architect.md`, `_pseudo.md`, and `_wip.md`. No design document was substituted or modified.
 
 **READY-TO-APPLY snippet:**
 

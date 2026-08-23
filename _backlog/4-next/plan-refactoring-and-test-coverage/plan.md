@@ -4,13 +4,13 @@
 
 **Status:** `PREPARING`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
 ## Summary
 
-Refactoring and test coverage across the migrated `@art-js/artificial-*` packages, hardening the codebase before archive and publish. Executed within the Artificial repository (`repos/artificial`) as phase 9 of the MD Art Roundtrip milestone — draft; commit strategy and implementation instructions to be defined during planning.
+Refactoring and test coverage across the migrated `@art-js/artificial-*` packages, hardening the codebase before archive and publish. Executed within the Artificial repository (`checkouts/artificial`) as phase 9 of the MD Art Roundtrip milestone — draft; commit strategy and implementation instructions to be defined during planning.
 
 ## Source Tasks
 

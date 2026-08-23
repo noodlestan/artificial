@@ -4,7 +4,7 @@
 
 **Status:** `DRAFT`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
@@ -48,7 +48,7 @@ Implement `art-workspace unlink <location> <package> [<target>]` end-to-end, tes
 
 **Use case:**
 
-- `art-workspace unlink Artificial @artisans/art-mantras Purrception` → remove the symlink at `repos/purrception/node_modules/@artisans/art-mantras`, run `npm install` in "Purrception", log an `unlink` success.
+- `art-workspace unlink Artificial @artisans/art-mantras Purrception` → remove the symlink at `checkouts/purrception/node_modules/@artisans/art-mantras`, run `npm install` in "Purrception", log an `unlink` success.
 - `art-workspace unlink Artificial @artisans/art-mantras` → same against the workspace root `node_modules/`.
 
 **Responsibilities:**
@@ -106,7 +106,7 @@ You are working on `art-domains/cli/workspace/_backlog/4-next/plan-implement-unl
 Goal: implement the `art-workspace unlink <location> <package> [<target>]` command for `@art-domains/workspace-cli`, replacing the stub at `src/commands/unlink/runUnlink.ts`. Reuse the package/target resolution shared with the `link` command; coordinate with `plan-implement-link` if both slices land together.
 
 Use the **write-plan** skill to refine this DRAFT into a READY plan:
-1. Compose scope and context: workspace `ops-workspace` (managed by `@art-domains/workspace-cli`); repository `artificial` at `$WORKSPACE/repos/artificial/art-domains/cli/workspace`; package `@art-domains/workspace-cli`.
+1. Compose scope and context: workspace `ops-workspace` (managed by `@art-domains/workspace-cli`); repository `artificial` at `$WORKSPACE/checkouts/artificial/art-domains/cli/workspace`; package `@art-domains/workspace-cli`.
 2. Validate guides have setup/verification (`_guide.md` does).
 3. Group work into commit(s), write the plan file, and generate instruction file(s) in this plan directory.
 4. Enforce the project lesson: tests implemented first, no `it.todo()` left.

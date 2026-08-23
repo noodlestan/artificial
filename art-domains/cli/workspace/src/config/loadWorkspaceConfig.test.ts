@@ -28,7 +28,7 @@ describe('loadWorkspaceConfig', () => {
 
 		const config = await loadWorkspaceConfig(tempDir);
 
-		expect(config.clone.path).toBe('repos');
+		expect(config.clone.path).toBe('checkouts');
 		expect(config.checkouts.path).toBe('_records/');
 		expect(config.checkouts.template).toBe('.agents/domains/workspace/templates/checkout.art.njk');
 		expect(config.records.pattern).toBe('*.art');
@@ -41,7 +41,7 @@ describe('loadWorkspaceConfig', () => {
 		const config = await loadWorkspaceConfig(tempDir);
 
 		expect(warn).toHaveBeenCalled();
-		expect(config.clone.path).toBe('repos');
+		expect(config.clone.path).toBe('checkouts');
 		expect(config.records.pattern).toBe('*.art');
 	});
 

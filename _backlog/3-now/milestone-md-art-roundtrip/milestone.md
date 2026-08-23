@@ -60,7 +60,7 @@ integrate(md-art-roundtrip): complete parser migration and advance milestone
 
 Integrated from `_backlog/1-done/plan-poc-parse/` (plan.md, `attachments/_architect.md`, `attachments/_parking-lot.md`).
 
-**Roundtrip fixture strategy** (from the archived POC briefing, MD Art Roundtrip milestone): use one art file `ops/records/packages/art-mantras.art` to parse and serialize back with zero diffs. Store the file's contents as a fixture in `@art-js/artificial-spec`; the parser package imports the fixture from there. All code unit tested.
+**Roundtrip fixture strategy** (from the archived POC briefing, MD Art Roundtrip milestone): use incrementally complex fixtures to generate and check-in a validated `art-ast.json` file with a parser test, then generate back and compare the md with a serializer test.
 
 **POC split design** (from the archived POC briefing): the POC was internally partitioned along the pipeline boundaries to mirror the future `art-js` modules — `libs/primitives` (types, type assertions), `libs/parser` (md → mdast → artast), `libs/serializer` (artast → mdast → md). The serializer is missing from the package plan above and is required for the roundtrip (phase 5).
 

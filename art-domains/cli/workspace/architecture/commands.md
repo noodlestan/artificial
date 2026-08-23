@@ -224,7 +224,7 @@ Feature: Sync checkouts
 
 **Usage:** `repo [<location>...]`
 
-List the packages of active checkouts (all checkouts when none specified). Each argument is a checkout location. Read each checkout's project graph recursively via `loadProjectGraph` (project → namespaces → packages; record files are discovered by `findRecordFiles` supporting both legacy `ops/records/{kind}/` and co-located `_records/` layouts). Collect `PackageStateRecord` values per checkout via `getRepositoryCheckoutPackages`. Present results grouped by checkout: each checkout's Repository State Report (`Repository:`, `Checkout:`) is immediately followed by its Package State Report (`Packages for ...`). Multiple checkouts of the same repository remain distinct — each checkout location produces its own report pair.
+List the packages of active checkouts (all checkouts when none specified). Each argument is a checkout location. Read each checkout's project graph recursively via `loadProjectGraph` (project → namespaces → packages; record files are discovered by `findRecordFiles`). Collect `PackageStateRecord` values per checkout via `getRepositoryCheckoutPackages`. Present results grouped by checkout: each checkout's Repository State Report (`Repository:`, `Checkout:`) is immediately followed by its Package State Report (`Packages for ...`). Multiple checkouts of the same repository remain distinct — each checkout location produces its own report pair.
 
 **BDD:**
 
@@ -248,8 +248,8 @@ Feature: List repositories and their packages
     And each Repository State Report is immediately followed by its Package State Report
 
   Scenario: keeps two checkouts of one repository distinct
-    Given checkout "Artificial" is cloned at "repos/artificial" with version "1.0.0"
-    And checkout "Artificial @ bug-fixes" is cloned at "repos/artificial-bug-fixes" with version "2.0.0"
+    Given checkout "Artificial" is cloned at "checkouts/artificial" with version "1.0.0"
+    And checkout "Artificial @ bug-fixes" is cloned at "checkouts/artificial-bug-fixes" with version "2.0.0"
     When I run "art-workspace repo"
     Then the Repository State Report lists "Artificial"
     And the Package State Report lists version "1.0.0" for "Artificial"
@@ -306,7 +306,7 @@ Feature: List repositories and their packages
 Three modes:
 
 - **`clone --all`** — bootstrap the workspace by cloning all repos from the workspace record, updating records, and presenting the Checkout Report with Operations Report.
-- **`clone <repo> [<location>]`** — clone a single repo for targeted work. The first argument is the repository name (case-insensitive manifest lookup; an `@scope/` prefix is stripped). The optional second argument is a location suffix: the resolved location is `safePath(<repo> <location>)` (e.g. `clone Artificial foo` → location `artificial foo` → `repos/artificial foo`). When omitted, the location defaults to `safePath(<repo>)` (e.g. `repos/artificial`). The checkout name is `{repo-name}` at the default location, or `{repo-name} @ {location}` at a custom location. Multiple checkouts of the same repo are not created by `clone` — a repo that already has a checkout at a different location is refused. Refuses when the target location is already used by another checkout.
+- **`clone <repo> [<location>]`** — clone a single repo for targeted work. The first argument is the repository name (case-insensitive manifest lookup; an `@scope/` prefix is stripped). The optional second argument is a location suffix: the resolved location is `safePath(<repo> <location>)` (e.g. `clone Artificial foo` → location `artificial foo` → `checkouts/artificial foo`). When omitted, the location defaults to `safePath(<repo>)` (e.g. `checkouts/artificial`). The checkout name is `{repo-name}` at the default location, or `{repo-name} @ {location}` at a custom location. Multiple checkouts of the same repo are not created by `clone` — a repo that already has a checkout at a different location is refused. Refuses when the target location is already used by another checkout.
 - **`clone`** (no args) — status mode: present the Checkout Report and Extraneous Report without cloning.
 
 **BDD:**
@@ -316,17 +316,17 @@ Feature: Clone single repo
   Scenario: clone with default location
     Given repo "Artificial" exists in the manifest
     When I run "art-workspace clone Artificial"
-    Then checkout "Artificial" is created at "repos/artificial"
+    Then checkout "Artificial" is created at "checkouts/artificial"
     And the Checkout Report contains "Artificial"
 
   Scenario: clone with explicit location
     Given repo "Artificial" exists in the manifest
     When I run "art-workspace clone Artificial foo"
-    Then checkout "Artificial @ foo" is created at "repos/artificial foo"
+    Then checkout "Artificial @ foo" is created at "checkouts/artificial foo"
     And the Checkout Report contains "Artificial @ foo"
 
   Scenario: clone is idempotent
-    Given checkout "Artificial" exists at "repos/artificial"
+    Given checkout "Artificial" exists at "checkouts/artificial"
     When I run "art-workspace clone Artificial"
     Then no new checkout is created
     And the Checkout Report contains "Artificial"
@@ -336,12 +336,12 @@ Feature: Clone single repo
     Then a clone failure is logged for "unknown repo"
 
   Scenario: location taken by different checkout
-    Given checkout "foo" exists at "repos/artificial foo"
+    Given checkout "foo" exists at "checkouts/artificial foo"
     When I run "art-workspace clone Artificial foo"
     Then a clone failure is logged for "location artificial foo is already used by checkout 'foo'"
 
   Scenario: checkout exists at different location
-    Given checkout "Artificial" exists at "repos/artificial"
+    Given checkout "Artificial" exists at "checkouts/artificial"
     When I run "art-workspace clone Artificial custom"
     Then a clone failure is logged for "checkout for 'Artificial' exists at artificial. Cannot clone to artificial custom"
 ```
@@ -364,8 +364,8 @@ Create and checkout the same feature branch in each specified checkout (all chec
 ```gherkin
 Feature: Branch across checkouts
   Scenario: branch creates new branch in specified checkouts
-    Given checkout "Artificial" is cloned on branch "main" at "repos/artificial"
-    And checkout "Purrception" is cloned on branch "main" at "repos/purrception"
+    Given checkout "Artificial" is cloned on branch "main" at "checkouts/artificial"
+    And checkout "Purrception" is cloned on branch "main" at "checkouts/purrception"
     When I run "art-workspace branch feat/x artificial purrception"
     Then branch "feat/x" exists in checkout "Artificial"
     And branch "feat/x" exists in checkout "Purrception"
@@ -418,13 +418,13 @@ Feature: Link a local package into a target checkout
     And package "@artisans/art-mantras" exists at path "artisans/apps/art-mantras/"
     When I run "art-workspace link Artificial @artisans/art-mantras"
     Then a symlink is created at "node_modules/@artisans/art-mantras"
-    And the symlink points to "repos/artificial/artisans/apps/art-mantras/"
+    And the symlink points to "checkouts/artificial/artisans/apps/art-mantras/"
     And a linked operation is logged with outcome success
 
   Scenario: link package to explicit target
     Given checkout "Purrception" is cloned
     When I run "art-workspace link Artificial @artisans/art-mantras Purrception"
-    Then a symlink is created at "repos/purrception/node_modules/@artisans/art-mantras"
+    Then a symlink is created at "checkouts/purrception/node_modules/@artisans/art-mantras"
 
   Scenario: link replaces an existing symlink
     Given a symlink already exists at "node_modules/@artisans/art-mantras"
@@ -515,10 +515,10 @@ Remove a package symlink created by `link` and restore the published version wit
 ```gherkin
 Feature: Unlink a local package from a target checkout
   Scenario: unlink removes an existing symlink and restores
-    Given a symlink exists at "repos/purrception/node_modules/@artisans/art-mantras"
+    Given a symlink exists at "checkouts/purrception/node_modules/@artisans/art-mantras"
     When I run "art-workspace unlink Artificial @artisans/art-mantras Purrception"
     Then the symlink is removed
-    And npm install runs in "repos/purrception"
+    And npm install runs in "checkouts/purrception"
     And an unlink operation is logged with outcome success
 
   Scenario: unlink defaults to workspace root target

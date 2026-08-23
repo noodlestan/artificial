@@ -8,7 +8,7 @@
 
 **Context:** The workspace meta-repo currently hosts cross-repo orchestration commands (`ops clone/branch/symlink/preview`) as shell scripts and manual processes. As the ecosystem grows, these commands need a proper home with versioning, testing, and distribution.
 
-**Decision:** Create `@art-domains/workspace-cli` at `repos/artificial/art-domains/cli/workspace` (bin: `art-workspace`). The CLI hosts workspace orchestration commands: `clone`, `branch`, `symlink`, `preview`. It follows the art-domains pattern: CLI package for commands, companion domain package (`@art-domains/workspace`) for structures and resources.
+**Decision:** Create `@art-domains/workspace-cli` at `checkouts/artificial/art-domains/cli/workspace` (bin: `art-workspace`). The CLI hosts workspace orchestration commands: `clone`, `branch`, `symlink`, `preview`. It follows the art-domains pattern: CLI package for commands, companion domain package (`@art-domains/workspace`) for structures and resources.
 
 **Consequences:** Workspace commands become versioned, testable, distributable. Artificial repo becomes the home for workspace tooling (in addition to art toolchain). Requires migrating current ops scripts to TypeScript.
 
@@ -66,7 +66,7 @@
 
 **Status:** Adopted
 
-**Context:** The workspace tracks repository information in `ops/records/repositories/{repo}.art` and `ops/records/workspace.art`. These records are human-readable, structured, and maintained by agents. A separate machine-readable manifest would duplicate this information.
+**Context:** The workspace tracks repository information in `_records/repositories/{repo}.art` and `_records/workspace.art`. These records are human-readable, structured, and maintained by agents. A separate machine-readable manifest would duplicate this information.
 
 **Decision:** Records are the source of truth for workspace structure. Generated files (`.art-workspace.mts`) are derived from records, not maintained separately. Commands read the generated manifest, which is regenerated when records change.
 

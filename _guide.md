@@ -54,16 +54,11 @@ npm run test
 Records are co-located with the resources they describe in `_records/` directories:
 
 - **Project:** `_records/project.art`
-- **Namespace:** `{namespace}/_records/namespace.art`
-- **Package:** `{package-path}/_records/package.art`
-- **Deployment:** `{app-path}/_records/deployment.art`
-- **Published:** `{package-path}/_records/published.art`
-
-Examples:
-- `repos/artificial/_records/project.art`
-- `repos/artificial/art-js/_records/namespace.art`
-- `repos/artificial/art-js/libs/parser/_records/package.art`
-- `repos/artificial/artisans/apps/art-mantras/_records/deployment.art`
+- **Repository:** - `_records/repository.art`
+- **Namespaces:** `{namespace}/_records/namespace.art`
+- **Packages:** `{package-path}/_records/package.art`
+- **NPM Deployments:** `{package-path}/_records/npm-deployment.art`
+- **APP Deployments:** `{app-path}/_records/spa-deployment.art`
 
 ## References
 

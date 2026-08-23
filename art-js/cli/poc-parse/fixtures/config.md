@@ -6,7 +6,7 @@ The configuration system of the workspace CLI: the `.art-workspace.mts` manifest
 
 The workspace configuration is a TypeScript module (`.art-workspace.mts`) at the workspace root that exports workspace paths. It provides type-safe access to workspace structure via `defineConfig` and the `WorkspaceConfig` type.
 
-The config is **manually authored, not generated**. Records (`ops/records/repositories/{repo}.art`, `ops/records/workspace.art`) are the source of truth; the config points the CLI at them. A future generator derives the manifest from records, eliminating the manual step.
+The config is **manually authored, not generated**. Records (`_records/repositories/{repo}.art`, `_records/workspace.art`) are the source of truth; the config points the CLI at them. A future generator derives the manifest from records, eliminating the manual step.
 
 ## Configuration Structure
 
@@ -20,10 +20,10 @@ interface WorkspaceConfig {
   };
   records: {
     repositories: {
-      path: string; // Path to repository records (e.g., 'ops/records/repositories')
+      path: string; // Path to repository records (e.g., '_records/repositories')
     };
     checkouts: {
-      path: string; // Path to checkout records (e.g., 'ops/records/checkouts')
+      path: string; // Path to checkout records (e.g., '_records/checkouts')
       template: string; // Template for generating checkout records
     };
   };
@@ -40,9 +40,9 @@ import { defineConfig } from '@art-domains/workspace-cli/config';
 export default defineConfig({
   clone: { path: 'repos' },
   records: {
-    repositories: { path: 'ops/records/repositories' },
+    repositories: { path: '_records/repositories' },
     checkouts: {
-      path: 'ops/records/checkouts',
+      path: '_records/checkouts',
       template: '.agents/domains/workspace/templates/checkout.art.njk',
     },
   },
@@ -89,7 +89,7 @@ The root `package.json` has no `"type": "module"`. The explicit `.mts` extension
 
 ## Source of Truth
 
-Records (`ops/records/repositories/{repo}.art`, `ops/records/workspace.art`) are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands.
+Records (`_records/repositories/{repo}.art`, `_records/workspace.art`) are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands.
 
 ## Design Decisions
 
@@ -98,5 +98,5 @@ The configuration design is captured in `records/adr/cli.art`:
 - **Type-safe Configuration in Workspace Root** — `.art-workspace.mts` as a TypeScript ESM module; `/config` subpath for the authoring API; main entry re-exports for the CLI.
 - **Runtime Config Loading — esbuild Bundle-at-Runtime** — the manifest is bundled and imported at runtime; `esbuild` becomes a runtime dependency. Reconsider Node native type-stripping when the minimum Node version is guaranteed (≥ 22.6).
 - **Manifest Mirrors Records Structures; Checkouts Derived at Entry Point** — superseded in part by the Checkout record decision below.
-- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`ops/records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.
+- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.
 - **Records as Source of Truth** — generated files (`.art-workspace.mts`) are derived from records, not maintained separately.

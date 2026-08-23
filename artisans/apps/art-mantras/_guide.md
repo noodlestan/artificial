@@ -57,8 +57,8 @@ Records are co-located with the resources they describe in `_records/` directori
 
 Examples:
 
-- `repos/artificial/_records/project.art`
-- `repos/artificial/artisans/apps/art-mantras/_records/deployment.art`
+- `checkouts/artificial/_records/project.art`
+- `checkouts/artificial/artisans/apps/art-mantras/_records/deployment.art`
 
 ## References
 

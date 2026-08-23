@@ -11,7 +11,7 @@ const MANIFEST_FILE = '.art-workspace.mts';
 const TEMP_FILE = '.art-workspace-bundle.mjs';
 
 const DEFAULT_CONFIG: Pick<WorkspaceConfig, 'clone' | 'checkouts' | 'records'> = {
-	clone: { path: 'repos' },
+	clone: { path: 'checkouts' },
 	checkouts: {
 		path: '_records/',
 		template: '.agents/domains/workspace/templates/checkout.art.njk',

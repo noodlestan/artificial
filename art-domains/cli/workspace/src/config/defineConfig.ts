@@ -1,7 +1,7 @@
 import type { PartialWorkspaceConfig, WorkspaceConfig } from './types';
 
 export function defineConfig(config: PartialWorkspaceConfig): WorkspaceConfig {
-	const clonePath = config.clone?.path || 'repos';
+	const clonePath = config.clone?.path || 'checkouts';
 	const rootPath = config.root?.path || process.cwd();
 	const checkoutsPath = config.checkouts?.path || '_records/';
 	const checkoutTemplatePath =

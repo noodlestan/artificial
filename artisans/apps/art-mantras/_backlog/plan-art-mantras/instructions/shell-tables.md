@@ -118,7 +118,7 @@ Execute all the steps autonomously, one by one, including running the **validati
 1. Summarise the current context, asking: are you reporting completion or a BLOCKER?
 2. Gather the evidence of changes made and outcomes achieved, or the blocker error details.
 3. If your prompt included a `DIRECTIVE FEEDBACK:`:
-   1. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your feedback.
+   1. Use the **render-template** skill with the `.agents/domains/plans/templates/instructions-report.tart` to render your feedback.
 4. Generate the response and send it back to the delegator.
 5. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `shell-tables`, created semantic `<table>` markup, thumbs up). The full trail lives in the report file; never repeat it in chat.
 

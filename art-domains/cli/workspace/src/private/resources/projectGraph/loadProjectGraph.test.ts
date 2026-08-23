@@ -330,37 +330,6 @@ describe('loadProjectGraph', () => {
 		expect(graph.warnings).toEqual([]);
 	});
 
-	it('loads a complete project graph from legacy ops/records/ layout', async () => {
-		const tempDir = makeTempDir(tempDirs);
-		const projectsDir = join(tempDir, 'ops/records/projects');
-		const namespacesDir = join(tempDir, 'ops/records/namespaces');
-		const packagesDir = join(tempDir, 'ops/records/packages');
-		mkdirSync(projectsDir, { recursive: true });
-		mkdirSync(namespacesDir, { recursive: true });
-		mkdirSync(packagesDir, { recursive: true });
-
-		writeFileSync(
-			join(projectsDir, 'artificial.art'),
-			'# Module\n\n## Project: Artificial\n\n**Path:** `.`\n\n**Namespaces:**\n- Namespace: Art Domains\n',
-		);
-		writeFileSync(
-			join(namespacesDir, 'art-domains.art'),
-			'# Module\n\n## Namespace: Art Domains\n\n**Path:** `artisans`\n\n**Packages:**\n- Package: Art Mantras\n',
-		);
-		writeFileSync(
-			join(packagesDir, 'art-mantras.art'),
-			'# Module\n\n## Package: Art Mantras\n\n**Canonical Name:** `@artisans/art-mantras`\n\n**Path:** `apps/art-mantras`\n',
-		);
-		const config = makeMockConfig(tempDir);
-
-		const graph = await loadProjectGraph(config, tempDir);
-
-		expect(graph.projects).toHaveLength(1);
-		expect(graph.projects[0].name).toBe('Artificial');
-		expect(graph.namespaces.get('Art Domains')).toBeDefined();
-		expect(graph.packages.get('Art Mantras')).toBeDefined();
-	});
-
 	it('ignores decoy .art files that are not project/namespace/package records', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeProjectMockRecord(tempDir, 'Real', { path: '.' });

@@ -1,0 +1,23 @@
+# Module
+
+## Structure: Resource (Abstract)
+
+**For Kind:** `Resource`
+
+**Status:** `WIP`
+
+**Purpose:** Base shape for all structured resources. Each structure governs resources of a specific kind by describing the shape of all resource records of its kind.
+
+**Description:** A base structure for other structures to extend from with shape: kind, name, purpose, and description.
+
+**Shape:**
+
+- `kind`: Natural Name. Resource kind. Example: "Task".
+- `name` — NaturalName. Resource name. Example: "Task: Configure Services".
+- `purpose` — A short sentence summary of what the resource kind enables.
+- `description` — A short sentence summary of what the resource kind defines and exposes.
+
+**Examples:**
+
+- This file (self-referential)
+- `.agents/domains/plans/structures/plan.art`

@@ -309,7 +309,6 @@ cd $PACKAGE_PARSER && npm run build
    This writes `{name}.parsed.md` next to the snapshot for side-by-side comparison with the source.
 
 5. To create a minimal test fixture for validation:
-
    - Create a new `.md` file in `$PACKAGE_PARSER/test/fixtures/` with minimal markdown (e.g., a heading, a field with inline content, a field with block content).
    - Run `npm run test-parser -- --fixture {filename} --write` to generate its snapshot.
    - Run `npm run test-serializer -- --fixture {filename}` to verify roundtrip.
@@ -410,7 +409,7 @@ npm run ci # lint, build and test at repository level
 
 1. Summarise the current context, asking: are you reporting completion or a BLOCKER?
 2. Gather the evidence of changes made and outcomes achieved, or the blocker error details.
-3. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your report and write it next to this instruction file: `plan-implement-serializer/instructions/fix-parser-field-inline-and-test-fixtures__report.md`. No separate delegation record is created.
+3. Use the **render-template** skill with the `.agents/domains/plans/templates/instructions-report.tart` to render your report and write it next to this instruction file: `plan-implement-serializer/instructions/fix-parser-field-inline-and-test-fixtures__report.md`. No separate delegation record is created.
 4. If your prompt included a `DIRECTIVE FEEDBACK:` include the feedback sections in the rendered report.
 5. Generate the response and send it back to the delegator.
 6. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `fix-parser-field-inline-and-test-fixtures`, created `{artefacts}`, thumbs up). The full trail lives in the report file; never repeat it in chat.

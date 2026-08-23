@@ -10,7 +10,7 @@ These are self-contained instructions for the art-mantras step 7 delegation.
 
 ## Working Agreements
 
-Work from the `repos/artificial` checkout root. Repository-relative paths in this instruction begin at that root. Modify only the application file named below; do not modify the architecture, pseudo, WIP, guide, module, plan, or report files. Commit successful work with `git commit`.Using `--no-verify` to bypass pre-commit hooks is forbidden.
+Work from the `checkouts/artificial` checkout root. Repository-relative paths in this instruction begin at that root. Modify only the application file named below; do not modify the architecture, pseudo, WIP, guide, module, plan, or report files. Commit successful work with `git commit`.Using `--no-verify` to bypass pre-commit hooks is forbidden.
 
 ## Goals
 
@@ -20,7 +20,7 @@ Implement race step 7 — **use case: reorder (^ / v)**. A strong word's up/down
 
 - `.agents/domains/plans/definitions/index.md`
 - `.agents/domains/plans/files/index.md`
-- `.agents/domains/plans/templates/report__template.md`
+- `.agents/domains/plans/templates/instructions-report.tart`
 - `_backlog/plan-art-mantras/plan.md`
 - `artisans/apps/art-mantras/_guide.md`
 - `artisans/apps/art-mantras/_architect.md`
@@ -114,6 +114,6 @@ The step is complete when `^` and `v` reorder only the selected slot's `strong[]
 
 ## How to Report Back
 
-Report `COMPLETED` or `BLOCKER`, include evidence and validation, and render the report with `.agents/domains/plans/templates/report__template.md`. Include any ambiguity with `where`, `problem`, `decision`, and a ready-to-apply snippet. Return only a terse completion/blocker summary; the full trail belongs in the report.
+Report `COMPLETED` or `BLOCKER`, include evidence and validation, and render the report with `.agents/domains/plans/templates/instructions-report.tart`. Include any ambiguity with `where`, `problem`, `decision`, and a ready-to-apply snippet. Return only a terse completion/blocker summary; the full trail belongs in the report.
 
 Thank you for your service.

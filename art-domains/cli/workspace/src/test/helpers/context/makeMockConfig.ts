@@ -5,7 +5,7 @@ export function makeMockConfig(
 	overrides?: Partial<WorkspaceConfig>,
 ): WorkspaceConfig {
 	return {
-		clone: { path: 'repos' },
+		clone: { path: 'checkouts' },
 		root: { path: rootPath },
 		checkouts: { path: '_records/', template: 'checkout.art.njk' },
 		records: { pattern: '*.art', dotignored: ['gitignore'], ignored: [], included: [] },

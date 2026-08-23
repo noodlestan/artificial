@@ -4,13 +4,13 @@
 
 **Status:** `PREPARING`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
 ## Summary
 
-Migrate the test suites into `@art-js/pipeline-test-cli` at `art-js/cli/pipeline-tests/`, where tests depend on BOTH `@art-js/artificial-parser` and `@art-js/artificial-serializer`. Add a second test on `scripts/roundtrip.ts` with fixtures at `fixtures/roundtrip/`, adding one fixture at a time and starting with a simple `# File one line` to prove the roundtrip test works. When whitespace (or other) roundtrip gaps surface, attempt a quick hack; if blocked, do NOT add more fixtures — defer to the next plan (`implement-gaps`). Executed within the Artificial repository (`repos/artificial`) as phase 6 of the MD Art Roundtrip milestone.
+Migrate the test suites into `@art-js/pipeline-test-cli` at `art-js/cli/pipeline-tests/`, where tests depend on BOTH `@art-js/artificial-parser` and `@art-js/artificial-serializer`. Add a second test on `scripts/roundtrip.ts` with fixtures at `fixtures/roundtrip/`, adding one fixture at a time and starting with a simple `# File one line` to prove the roundtrip test works. When whitespace (or other) roundtrip gaps surface, attempt a quick hack; if blocked, do NOT add more fixtures — defer to the next plan (`implement-gaps`). Executed within the Artificial repository (`checkouts/artificial`) as phase 6 of the MD Art Roundtrip milestone.
 
 ## Scope
 
@@ -27,14 +27,19 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial — Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial — Checked out at `checkouts/artificial` branch `main`; described by `_records/projects/artificial.art`.
 
 ### Packages
 
-- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (pipeline test dependency).
-- Package: Artificial Serializer — Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `ops/records/packages/artificial-serializer.art`; located at `art-js/libs/serializer/` (pipeline test dependency).
-- Package: Pipeline Test CLI — Canonical `@art-js/pipeline-test-cli`; located at `art-js/cli/pipeline-tests/` (test harness CLI; not published; depends on parser + serializer).
-- Package: Artificial POC Parse — Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
+- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `art-js/libs/parser/_records/package.art`; located at `art-js/libs/parser/` (pipeline test dependency).
+- Package: Artificial Serializer — Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `art-js/libs/serializer/_records/package.art`; located at `art-js/libs/serializer/` (pipeline test dependency).
+- Package: Pipeline Test CLI — Canonical `@art-js/pipeline-test-cli`; described by `art-js/cli/pipeline-tests/_records/package.art`; located at `art-js/cli/pipeline-tests/` (test harness CLI; not published; depends on parser + serializer).
+- Package: Artificial POC Parse — Canonical `@art-js/poc-parse`; described by `art-js/cli/poc-parse/_records/package.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
+
+
+
+
+
 
 ### Deployments
 
@@ -53,8 +58,8 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Guides
 
-- `repos/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
-- `repos/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
+- `checkouts/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
+- `checkouts/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
 
 ### Knowledge
 
@@ -71,11 +76,11 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 ## Execution Context
 
-Execution occurs in `$WORKSPACE/repos/artificial` on branch `main`; working directory is `$PROJECT/art-js/cli/pipeline-tests`.
+Execution occurs in `$WORKSPACE/checkouts/artificial` on branch `main`; working directory is `$PROJECT/art-js/cli/pipeline-tests`.
 
 ## Setup
 
-Run from `repos/artificial` repository directory:
+Run from `checkouts/artificial` repository directory:
 
 ```bash
 npm ci # to install dependencies.

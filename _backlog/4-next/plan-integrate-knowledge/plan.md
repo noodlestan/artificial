@@ -4,13 +4,13 @@
 
 **Status:** `PREPARING`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
 ## Summary
 
-After publish (phase 10), integrate the knowledge and learnings from milestone execution back into briefings, guides, architecture docs, and records — integrate again, closing the MD Art Roundtrip milestone. Executed within the Artificial repository (`repos/artificial`) as phase 11 of the MD Art Roundtrip milestone — draft; commit strategy and implementation instructions to be defined during planning.
+After publish (phase 10), integrate the knowledge and learnings from milestone execution back into briefings, guides, architecture docs, and records — integrate again, closing the MD Art Roundtrip milestone. Executed within the Artificial repository (`checkouts/artificial`) as phase 11 of the MD Art Roundtrip milestone — draft; commit strategy and implementation instructions to be defined during planning.
 
 ## Source Tasks
 

@@ -17,8 +17,10 @@
 **Syntax:**
 
 ```art
+{BACKTICK} = `
+
 <Identifier> =
-    <kebab-case-name>
+    {BACKTICK}<kebab-case-name>{BACKTICK}
 ```
 
 **Examples:**

@@ -31,7 +31,7 @@ Syntax of _Suffix_, _Singular_:
 
 ```art
 <ExampleInline:Suffix:Singular> =
-    <NaturalExpression>. Example: "<NaturalExpression (example text)>"
+    <NaturalExpression>. Example: "<NaturalExpression (example text)>".
 ```
 
 Syntax of _Suffix_, _Plural_:
@@ -43,7 +43,7 @@ Syntax of _Suffix_, _Plural_:
 
 ```art
 <ExampleInline:Suffix:Plural> =
-    <NaturalExpression>. Examples: "<NaturalExpression (example text)>"[, "<NaturalExpression (example text)>" ...]
+    <NaturalExpression>. Examples: "<NaturalExpression (example text)>"[, "<NaturalExpression (example text)>" ...].
 ```
 
 Syntax of _Nested_, _Singular_:
@@ -80,7 +80,7 @@ Current Status. Example: "READY".
 Example of _Suffix_, _Plural_:
 
 ```
-Resource Category. Examples: "Conventions", "Patterns", "References"
+Resource Category. Examples: "Conventions", "Patterns", "References".
 ```
 
 Example of _Nested_, _Plural_ and _Singular_:

@@ -18,7 +18,7 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 - `architecture/_pseudo.md` — the CLI pseudo-code contract: data structures, use cases, and auxiliary functions.
 - `$WORKSPACE/.agents/domains/plans/definitions/index.md` — plan, implementation-instruction, delegation, and report definitions.
 - `$WORKSPACE/.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
-- `$WORKSPACE/.agents/domains/plans/structures/plan__structure.md` — plan record fields and statuses.
+- `$WORKSPACE/.agents/domains/plans/structures/plan.art` — plan record fields and statuses.
 - `$WORKSPACE/.agents/domains/plans/templates/` — plan, instruction, and report templates.
 - `$WORKSPACE/.agents/domains/engineering/_guide.md` — working agreements and agent modes.
 
@@ -65,7 +65,7 @@ The short-term focus is captured in `_backlog/_parking-lot.md` — actionable it
 
 The requirements, use cases, and principles are captured in `_backlog/_architect.md`, along with the forward-looking plan.
 
-The backlog lives at `_backlog/` with subdirectories such as `/3-now` (implementation in progress) and `/4-next/` (planned work not yet started) containg plan records following the structure defined in `$WORKSPACE/.agents/domains/plans/structures/plan__structure.md`
+The backlog lives at `_backlog/` with subdirectories such as `/3-now` (implementation in progress) and `/4-next/` (planned work not yet started) containg plan records following the structure defined in `$WORKSPACE/.agents/domains/plans/structures/plan.art`
 
 ## Delivery Workflow
 

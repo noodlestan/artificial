@@ -208,7 +208,7 @@ cd $PROJECT && npm run ci # lint, build and test at repository level
 
 1. Summarise the current context, asking: are you reporting completion or a BLOCKER?
 2. Gather the evidence of changes made and outcomes achieved, or the blocker error details.
-3. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your report and write it next to this instruction file: `$PROJECT/_backlog/3-now/plan-implement-serializer/instructions/two-way-fixture-tests__report.md`. No separate delegation record is created.
+3. Use the **render-template** skill with the `.agents/domains/plans/templates/instructions-report.tart` to render your report and write it next to this instruction file: `$PROJECT/_backlog/3-now/plan-implement-serializer/instructions/two-way-fixture-tests__report.md`. No separate delegation record is created.
 4. Generate the response and send it back to the delegator.
 5. Keep the response terse per the Working Agreements: happy face + up to 3 bullet points (done `two-way-fixture-tests`, created `{artefacts}`, thumbs up). The full trail lives in the report file; never repeat it in chat.
 

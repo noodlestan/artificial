@@ -22,7 +22,7 @@ For the delegator (execution mechanics):
 
 - `.agents/domains/plans/definitions/index.md` — plan, implementation-instructions, delegation, and report definitions.
 - `.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
-- `.agents/domains/plans/structures/plan__structure.md` — plan record fields and statuses.
+- `.agents/domains/plans/structures/plan.art` — plan record fields and statuses.
 - `.agents/skills/execute-plan/SKILL.md` — how this plan is executed by delegation.
 
 ## Commits

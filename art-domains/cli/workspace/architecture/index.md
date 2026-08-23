@@ -40,7 +40,7 @@ The workspace owns:
 - **Records** — Workspace config and repository and checkouts records (source of truth). Example: `$WORKSPACE/_records/`
 - **Config** — The `.art-workspace.mts` module at the workspace root, defines paths (records, templates, checkouts), importable by tools. See `architecture/config.md`.
 - **Context** — Agent instructions and reference material. Example: `$WORKSPACE/.agents/`, `$WORKSPACE/reference/`.
-- **Checkouts** — The cloned repositories under a checkout path, whose state is scanned from git and tracked in records. Examples: `repos/{checkout-name}`.
+- **Checkouts** — The cloned repositories under a checkout path, whose state is scanned from git and tracked in records. Examples: `checkouts/{checkout-name}`.
 
 Commands run as **imperative one-shot processes**: each invocation creates a `WorkspaceContext` (an in-memory `CheckoutStore` plus `OperationsLog`), performs work, presents reports, and exits. The design stays clean enough that a reactive layer (`npm run workspace watch`) can subscribe to the same store and log APIs without rearchitecting: the store is rehydratable from disk, the log is append-only, and checkout records are saved per mutation by the commands themselves (`saveCheckoutRecord`) — there is no global sync step. See `records/adr/execution-model.art`.
 

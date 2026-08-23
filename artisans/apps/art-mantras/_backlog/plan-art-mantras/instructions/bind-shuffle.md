@@ -16,7 +16,7 @@ Implement the art-mantras race step 5 — **use case: shuffle**. Render the shuf
 
 - `.agents/domains/plans/definitions/index.md` — plan, implementation-instructions, delegation, and report definitions.
 - `.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
-- `.agents/domains/plans/templates/report__template.md` — the report format you render at the end.
+- `.agents/domains/plans/templates/instructions-report.tart` — the report format you render at the end.
 - `artificials/_backlog/plan-art-mantras/plan.md` — the plan; this commit is `bind-shuffle`.
 - `artificials/artisans/apps/art-mantras/_guide.md` — module map; read order is `_guide` → `_plan` → `_pseudo`.
 - `artificials/artisans/apps/art-mantras/_architect.md` — the design contract; read **Layer: Entry Point** (`apply`, `run`), **Layer: Derivation** (`shuffle`), **Layer: UI** (render api).
@@ -105,7 +105,7 @@ The art-mantras race step 5 goal is met: the shuffle button is bound to `onNextS
 1. Summarise the current context, asking: are you reporting completion or a BLOCKER?
 2. Gather the evidence of changes made and outcomes achieved, or the blocker error details.
 3. If your prompt included a `DIRECTIVE FEEDBACK:`:
-   1. Use the **render-template** skill with the `.agents/domains/plans/templates/report__template.md` to render your feedback.
+   1. Use the **render-template** skill with the `.agents/domains/plans/templates/instructions-report.tart` to render your feedback.
 4. Generate the response and send it back to the delegator.
 5. Keep the response terse — happy face + up to 3 bullet points (done `bind-shuffle`, wired `apply()` shuffle intent, thumbs up). The full trail lives in the report file; do not repeat it in chat.
 

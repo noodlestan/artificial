@@ -31,7 +31,7 @@
 - `art-js/libs/constructs/src/constructs/Tag/createTagToMdast.ts` — Tag → mdast text with @ prefix
 - `art-js/libs/constructs/src/index.ts` — Exported new ToMdast factories
 - `art-js/libs/constructs/package.json` — Added `mdast-util-from-markdown` as runtime dependency
-- `ops/records/packages/artificial-serializer.art` — Package record
+- `art-js/libs/serializer/_records/package.art` — Package record
 
 ### Verification
 

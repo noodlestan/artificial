@@ -11,13 +11,13 @@ Test scenarios: delete checkouts and clone all, clone specific repos, dirty file
 
 ```bash
 # Delete all checkouts
-rm -rf repos/artificial repos/purrception repos/purrtrait repos/purrpose repos/no-comply repos/workspace-tooling
+rm -rf checkouts/artificial checkouts/purrception checkouts/purrtrait checkouts/purrpose checkouts/no-comply checkouts/workspace-tooling
 
 # Clone all repos
 npm run workspace -- clone --all
 
 # Verify all repos are cloned
-ls -la repos/
+ls -la checkouts/
 
 # Run sanity to verify status
 npm run workspace:sanity
@@ -27,13 +27,13 @@ npm run workspace:sanity
 
 ```bash
 # Delete artificial checkout
-rm -rf repos/artificial
+rm -rf checkouts/artificial
 
 # Clone only artificial
 npm run workspace -- clone artificial
 
 # Verify it's cloned
-ls -la repos/artificial
+ls -la checkouts/artificial
 
 # Run sanity
 npm run workspace:sanity
@@ -53,7 +53,7 @@ npm run workspace:sanity
 
 ```bash
 # Add a dirty file to artificial
-echo "test" > repos/artificial/dirty.txt
+echo "test" > checkouts/artificial/dirty.txt
 
 # Clone artificial again
 npm run workspace -- clone artificial
@@ -62,7 +62,7 @@ npm run workspace -- clone artificial
 npm run workspace:sanity
 
 # Clean up
-rm repos/artificial/dirty.txt
+rm checkouts/artificial/dirty.txt
 ```
 
 ## Test 5: Compare clone status with sanity
@@ -116,7 +116,7 @@ npm run workspace:sanity
 
 ```bash
 # Make a micro-change in purrception
-echo "// test" >> repos/purrception/README.md
+echo "// test" >> checkouts/purrception/README.md
 
 # Clone purrception
 npm run workspace -- clone purrception
@@ -125,14 +125,14 @@ npm run workspace -- clone purrception
 npm run workspace:sanity
 
 # Clean up
-git -C repos/purrception checkout README.md
+git -C checkouts/purrception checkout README.md
 ```
 
 ## Test 9: Branch manually, commit, clone and sanity report unpushed
 
 ```bash
 # Branch purrception to tmp-branch
-cd repos/purrception
+cd checkouts/purrception
 git checkout -b tmp-branch
 
 # Make a change and commit
@@ -156,7 +156,7 @@ npm run workspace -- sanity --auto
 npm run workspace:sanity
 
 # Clean up: switch back to main and delete tmp-branch
-cd repos/purrception
+cd checkouts/purrception
 git checkout main
 git branch -D tmp-branch
 cd ../..
@@ -166,8 +166,8 @@ cd ../..
 
 ```bash
 # Create an extraneous checkout (directory without record)
-mkdir -p repos/extraneous-test
-cd repos/extraneous-test
+mkdir -p checkouts/extraneous-test
+cd checkouts/extraneous-test
 git init
 git config user.email "test@example.com"
 git config user.name "Test"
@@ -180,7 +180,7 @@ cd ../..
 npm run workspace:sanity
 
 # Clean up
-rm -rf repos/extraneous-test
+rm -rf checkouts/extraneous-test
 ```
 
 ## Test 11: Clone status mode (no arguments)
@@ -205,8 +205,8 @@ npm run workspace -- clone unknown-repo
 
 ```bash
 # Create extraneous directory
-mkdir -p repos/test-extraneous
-cd repos/test-extraneous
+mkdir -p checkouts/test-extraneous
+cd checkouts/test-extraneous
 git init
 git config user.email "test@example.com"
 git config user.name "Test"
@@ -221,18 +221,18 @@ npm run workspace:sanity
 # Should show "test-extraneous (extraneous)" in the output
 
 # Clean up
-rm -rf repos/test-extraneous
+rm -rf checkouts/test-extraneous
 ```
 
 ## Cleanup Commands
 
 ```bash
 # Reset all repos to clean state
-cd repos/artificial && git checkout main && git clean -fd && cd ../..
-cd repos/purrception && git checkout main && git clean -fd && cd ../..
+cd checkouts/artificial && git checkout main && git clean -fd && cd ../..
+cd checkouts/purrception && git checkout main && git clean -fd && cd ../..
 # ... repeat for other repos
 
 # Remove any test artifacts
 rm -rf custom/
-rm -f repos/*/dirty.txt
+rm -f checkouts/*/dirty.txt
 ```

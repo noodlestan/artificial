@@ -4,7 +4,7 @@
 
 **Status:** `WORKING`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
@@ -26,7 +26,7 @@ For the delegator (execution mechanics):
 
 - `.agents/domains/plans/definitions/index.md` — plan, implementation-instructions, delegation, and report definitions.
 - `.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
-- `.agents/domains/plans/structures/plan__structure.md` — plan record fields and statuses.
+- `.agents/domains/plans/structures/plan.art` — plan record fields and statuses.
 - `.agents/skills/execute-plan/SKILL.md` — how this plan is executed by delegation.
 
 For the delegatee (shared context; per-step context is in each instruction file):
@@ -187,7 +187,7 @@ For the delegatee (shared context; per-step context is in each instruction file)
 ## Feedback
 
 - (delegator, 2026-08-09) — delegated `bind-promote` verbatim to worker `Anscombe`; blocked during mandatory reading.
-- (delegator, 2026-08-09) — blocker: the instruction references a missing `artificials/.../_architect.md`; the checkout has the design contract as `_plan.md` under the requested `repos/artificial` root. Report: `instructions/bind-promote__report.md`.
+- (delegator, 2026-08-09) — blocker: the instruction references a missing `artificials/.../_architect.md`; the checkout has the design contract as `_plan.md` under the requested `checkouts/artificial` root. Report: `instructions/bind-promote__report.md`.
 
 - (planner, 2026-08-09) — resolved: the `_plan.md` → `_architect.md` rename is committed in `3dd1b78`; the fresh delegation completed against the current checkout. Implementation is `dcc28d0`; report corrected and committed as `7a2689b`.
 

@@ -49,11 +49,11 @@ aws cloudfront create-invalidation --distribution-id E3MR81TGFNVD2W --paths "/*"
 - **Production:** https://art-mantras.noodlestan.org (bucket: `art-mantras-noodlestan-org-prod`, distribution: `E3MR81TGFNVD2W`)
 - **Staging:** https://stage-art-mantras.noodlestan.org (bucket: `art-mantras-noodlestan-org-stage`, distribution: `EVVYS72BO8V4I`)
 
-**Infrastructure:** Managed in `$WORKSPACE/repos/terraform/domains/noodlestan/websites/art-mantras/`
+**Infrastructure:** Managed in `$WORKSPACE/checkouts/terraform/domains/noodlestan/websites/art-mantras/`
 
 ## Records Management
 
-The workspace maintains ops records at `ops/records` detailing project configurations, namespaces, packages, dependencies, scaffolding and more.
+The workspace maintains ops records at `_records` detailing project configurations, namespaces, packages, dependencies, scaffolding and more.
 
 ## References
 

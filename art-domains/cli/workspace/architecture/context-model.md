@@ -60,10 +60,10 @@ derived from those states; callers do not inspect raw git flags.
 
 Records are the source of truth (see `records/adr/cli.art` — "Records as Source of Truth").
 
-- **`RepositoryRecord`** — repository facts: name, remote, purpose, description, consumers. Persisted in `ops/records/repositories/{repo}.art`. Read-only facts; never mutated by commands.
-- **`CheckoutRecord`** — checkout state: name, location, branch, repository (repo name reference). Persisted in `ops/records/checkouts/{name}.art`. Workspace-local state, owned by the CLI commands (see `records/adr/cli.art` — "Checkouts as CLI-Managed Records — Structure: Checkout").
+- **`RepositoryRecord`** — repository facts: name, remote, purpose, description, consumers. Persisted in `_records/repositories/{repo}.art`. Read-only facts; never mutated by commands.
+- **`CheckoutRecord`** — checkout state: name, location, branch, repository (repo name reference). Persisted (but gitignored) in `_ops/_records/checkouts/{name}.art`. Workspace-local state, owned by the CLI commands (see `records/adr/cli.art` — "Checkouts as CLI-Managed Records — Structure: Checkout").
 - **`RepositoryCheckoutRecord`** — pairs a `CheckoutRecord` with an optional `RepositoryRecord` and the source `filename: string` (the physical path used to read the record). Returned by `loadCheckoutRecords` so callers can carry the filename through to `saveCheckoutRecord` for in-place updates.
-- **`WorkspaceRecord`** — the workspace itself and its known repositories, in `ops/records/workspace.art`.
+- **`WorkspaceRecord`** — the workspace itself and its known repositories, in `_records/workspace.art`.
 
 Repo identity is by name, case-insensitive; package names are interchangeable with repo names. The canonical form is the record heading (`## Repository: Artificial`).
 
@@ -75,7 +75,7 @@ Three record kinds are read from _inside_ each checkout — from the project's o
 - **`ProjectNamespace`** — a namespace within a project: name, path, packages (by name). Discovered via `findRecordFiles` and parsed by `readNamespaceRecord`.
 - **`ProjectPackage`** — a package within a namespace: name, canonical name, path, version. Discovered via `findRecordFiles` and parsed by `readPackageRecord`.
 
-Records are discovered dynamically using `findRecordFiles(checkoutPath, config.records.pattern, [{kind}])` which scans for `.art` files recursively. This supports both legacy `ops/records/{kind}/` and co-located `_records/` layouts.
+Records are discovered dynamically using `findRecordFiles(checkoutPath, config.records.pattern, [{kind}])` which scans for `.art` files recursively.
 
 Reading is hierarchical — **project first, then namespaces, then packages** — and the records are linked by name (`project.namespaces` → `namespace.name`, `namespace.packages` → `package.name`). A record missing a referenced name is skipped with a warning. This order matters: the project is the root (remote + canonical name), namespaces mediate between project and packages, and packages are the leaves (most numerous, resolved last when paths can be fully composed).
 
@@ -151,7 +151,7 @@ loadProjectGraph(config, checkoutPath)
   return consolidateProjectGraph(projects, namespaces, packages)
 ```
 
-Each loader uses `findRecordFiles(checkoutPath, config.records.pattern, [{kind}])` to discover `.art` files recursively, passes each file to the corresponding singular reader (`readProjectRecord`, `readNamespaceRecord`, `readPackageRecord`), ignores null results, and returns typed records. Both legacy `ops/records/{kind}/` and co-located `_records/` layouts are supported.
+Each loader uses `findRecordFiles(checkoutPath, config.records.pattern, [{kind}])` to discover `.art` files recursively, passes each file to the corresponding singular reader (`readProjectRecord`, `readNamespaceRecord`, `readPackageRecord`), ignores null results, and returns typed records.
 
 `consolidateProjectGraph` links projects → namespaces → packages by name, generates warnings for missing references, and returns a `ProjectGraph`.
 

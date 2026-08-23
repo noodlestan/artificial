@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { WorkspaceConfig } from '../../../config';
+import { makeMockConfig } from '../../../test/helpers/context/makeMockConfig';
 import { writeCheckoutMockRecord } from '../../../test/helpers/records/writeCheckoutMockRecord';
 import { makeTempDir } from '../../../test/helpers/tempDirs/makeTempDir';
 import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
@@ -11,19 +11,6 @@ import { removeTempDirs } from '../../../test/helpers/tempDirs/removeTempDirs';
 import { loadCheckoutRecords } from './loadCheckoutRecords';
 
 const tempDirs: string[] = [];
-
-function makeMockConfig(
-	rootPath: string,
-	checkoutPath: string,
-	templatePath: string,
-): WorkspaceConfig {
-	return {
-		clone: { path: 'repos' },
-		root: { path: rootPath },
-		checkouts: { path: checkoutPath, template: templatePath },
-		records: { pattern: '*.art', dotignored: ['gitignore'], ignored: [], included: [] },
-	};
-}
 
 afterEach(() => {
 	removeTempDirs(tempDirs);
@@ -40,7 +27,7 @@ describe('loadCheckouts', () => {
 		writeCheckoutMockRecord(tempDir, 'A', 'A', 'a', 'dev');
 		writeCheckoutMockRecord(tempDir, 'B', 'B', 'b', 'main');
 
-		const config = makeMockConfig(tempDir, '_records/', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir);
 		const checkouts = await loadCheckoutRecords(config, repos);
 
 		expect(checkouts).toHaveLength(2);
@@ -60,7 +47,7 @@ describe('loadCheckouts', () => {
 		writeCheckoutMockRecord(tempDir, 'A', 'A', 'a');
 		writeCheckoutMockRecord(tempDir, 'Unknown', 'Unknown', 'unknown');
 
-		const config = makeMockConfig(tempDir, '_records/', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir);
 		const checkouts = await loadCheckoutRecords(config, repos);
 
 		expect(checkouts).toHaveLength(2);
@@ -80,7 +67,7 @@ describe('loadCheckouts', () => {
 		writeFileSync(join(dir, 'unnamed.art'), '# Module\n\n## Checkout: \n');
 
 		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-		const config = makeMockConfig(tempDir, '_records/', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir);
 		const checkouts = await loadCheckoutRecords(config, []);
 
 		expect(checkouts).toEqual([]);
@@ -91,7 +78,7 @@ describe('loadCheckouts', () => {
 		const tempDir = makeTempDir(tempDirs);
 		mkdirSync(join(tempDir, '_records'), { recursive: true });
 
-		const config = makeMockConfig(tempDir, '_records/', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir);
 		const checkouts = await loadCheckoutRecords(config, []);
 
 		expect(checkouts).toEqual([]);
@@ -101,7 +88,7 @@ describe('loadCheckouts', () => {
 		const tempDir = makeTempDir(tempDirs);
 		writeCheckoutMockRecord(tempDir, 'Foo', 'Foo', 'foo');
 
-		const config = makeMockConfig(tempDir, '_records/', 'checkout.art.njk');
+		const config = makeMockConfig(tempDir);
 		const checkouts = await loadCheckoutRecords(config, []);
 
 		expect(checkouts).toHaveLength(1);

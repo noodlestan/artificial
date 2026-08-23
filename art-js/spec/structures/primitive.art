@@ -25,15 +25,13 @@
 
 ## Structure: Primitive
 
-**id**: primitive
-
 **Name**: Primitive
 
 **Kind**: Structure
 
 **Purpose:** Represents the meta-model used to describe interpreter-defined primitive value types.
 
-**Composes:** Structure: Base
+**Composes:** Type: Structure Base (Abstract)
 
 **Primitive:** Record
 

@@ -371,7 +371,7 @@ describe('sanity command', () => {
 		writeRepoMockRecord(tempDir, 'AutoPush', 'git@example.com:autopush.git');
 		writeCheckoutMockRecord(tempDir, 'AutoPush', 'AutoPush', 'autopush');
 
-		writeFileSync(join(tempDir, '.gitignore'), 'repos/\n');
+		writeFileSync(join(tempDir, '.gitignore'), 'checkouts/\n');
 		const rootGit = simpleGit(tempDir);
 		await rootGit.add(['.gitignore', '_records/']);
 		await rootGit.commit('workspace records');

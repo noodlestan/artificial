@@ -276,12 +276,12 @@
             {
               "construct": "NaturalBlock",
               "type": "paragraph",
-              "value": "The config is **manually authored, not generated**. Records (`ops/records/repositories/{repo}.art`, `ops/records/workspace.art`) are the source of truth; the config points the CLI at them. A future generator derives the manifest from records, eliminating the manual step.",
+              "value": "The config is **manually authored, not generated**. Records (`_records/repositories/{repo}.art`, `_records/workspace.art`) are the source of truth; the config points the CLI at them. A future generator derives the manifest from records, eliminating the manual step.",
               "position": {
                 "end": {
-                  "column": 272,
+                  "column": 266,
                   "line": 9,
-                  "offset": 709
+                  "offset": 703
                 },
                 "start": {
                   "column": 1,
@@ -367,12 +367,12 @@
                   "construct": "NaturalExpression",
                   "type": "inlineCode",
                   "attributes": {},
-                  "value": "ops/records/repositories/{repo}.art",
+                  "value": "_records/repositories/{repo}.art",
                   "position": {
                     "end": {
-                      "column": 99,
+                      "column": 96,
                       "line": 9,
-                      "offset": 536
+                      "offset": 533
                     },
                     "start": {
                       "column": 62,
@@ -388,14 +388,14 @@
                   "value": ", ",
                   "position": {
                     "end": {
-                      "column": 101,
+                      "column": 98,
                       "line": 9,
-                      "offset": 538
+                      "offset": 535
                     },
                     "start": {
-                      "column": 99,
+                      "column": 96,
                       "line": 9,
-                      "offset": 536
+                      "offset": 533
                     }
                   }
                 },
@@ -403,17 +403,17 @@
                   "construct": "NaturalExpression",
                   "type": "inlineCode",
                   "attributes": {},
-                  "value": "ops/records/workspace.art",
+                  "value": "_records/workspace.art",
                   "position": {
                     "end": {
-                      "column": 128,
+                      "column": 122,
                       "line": 9,
-                      "offset": 565
+                      "offset": 559
                     },
                     "start": {
-                      "column": 101,
+                      "column": 98,
                       "line": 9,
-                      "offset": 538
+                      "offset": 535
                     }
                   }
                 },
@@ -424,14 +424,14 @@
                   "value": ") are the source of truth; the config points the CLI at them. A future generator derives the manifest from records, eliminating the manual step.",
                   "position": {
                     "end": {
-                      "column": 272,
+                      "column": 266,
                       "line": 9,
-                      "offset": 709
+                      "offset": 703
                     },
                     "start": {
-                      "column": 128,
+                      "column": 122,
                       "line": 9,
-                      "offset": 565
+                      "offset": 559
                     }
                   }
                 }
@@ -452,12 +452,12 @@
             "end": {
               "column": 27,
               "line": 11,
-              "offset": 737
+              "offset": 731
             },
             "start": {
               "column": 1,
               "line": 11,
-              "offset": 711
+              "offset": 705
             }
           },
           "children": [
@@ -471,17 +471,17 @@
               "type": "code",
               "lang": "typescript",
               "meta": null,
-              "value": "```typescript\ninterface WorkspaceConfig {\n  root: {\n    path: string; // Workspace root; set by loadWorkspaceConfig to the invocation cwd\n  };\n  clone: {\n    path: string; // Where repos are cloned (e.g., 'repos')\n  };\n  records: {\n    repositories: {\n      path: string; // Path to repository records (e.g., 'ops/records/repositories')\n    };\n    checkouts: {\n      path: string; // Path to checkout records (e.g., 'ops/records/checkouts')\n      template: string; // Template for generating checkout records\n    };\n  };\n}\n```",
+              "value": "```typescript\ninterface WorkspaceConfig {\n  root: {\n    path: string; // Workspace root; set by loadWorkspaceConfig to the invocation cwd\n  };\n  clone: {\n    path: string; // Where repos are cloned (e.g., 'repos')\n  };\n  records: {\n    repositories: {\n      path: string; // Path to repository records (e.g., '_records/repositories')\n    };\n    checkouts: {\n      path: string; // Path to checkout records (e.g., '_records/checkouts')\n      template: string; // Template for generating checkout records\n    };\n  };\n}\n```",
               "position": {
                 "end": {
                   "column": 4,
                   "line": 31,
-                  "offset": 1265
+                  "offset": 1253
                 },
                 "start": {
                   "column": 1,
                   "line": 13,
-                  "offset": 739
+                  "offset": 733
                 }
               }
             },
@@ -500,12 +500,12 @@
             "end": {
               "column": 20,
               "line": 33,
-              "offset": 1286
+              "offset": 1274
             },
             "start": {
               "column": 1,
               "line": 33,
-              "offset": 1267
+              "offset": 1255
             }
           },
           "children": [
@@ -522,12 +522,12 @@
                 "end": {
                   "column": 64,
                   "line": 35,
-                  "offset": 1351
+                  "offset": 1339
                 },
                 "start": {
                   "column": 1,
                   "line": 35,
-                  "offset": 1288
+                  "offset": 1276
                 }
               },
               "children": [
@@ -540,12 +540,12 @@
                     "end": {
                       "column": 22,
                       "line": 35,
-                      "offset": 1309
+                      "offset": 1297
                     },
                     "start": {
                       "column": 1,
                       "line": 35,
-                      "offset": 1288
+                      "offset": 1276
                     }
                   }
                 },
@@ -558,12 +558,12 @@
                     "end": {
                       "column": 36,
                       "line": 35,
-                      "offset": 1323
+                      "offset": 1311
                     },
                     "start": {
                       "column": 22,
                       "line": 35,
-                      "offset": 1309
+                      "offset": 1297
                     }
                   }
                 },
@@ -576,12 +576,12 @@
                     "end": {
                       "column": 46,
                       "line": 35,
-                      "offset": 1333
+                      "offset": 1321
                     },
                     "start": {
                       "column": 36,
                       "line": 35,
-                      "offset": 1323
+                      "offset": 1311
                     }
                   }
                 },
@@ -594,12 +594,12 @@
                     "end": {
                       "column": 55,
                       "line": 35,
-                      "offset": 1342
+                      "offset": 1330
                     },
                     "start": {
                       "column": 46,
                       "line": 35,
-                      "offset": 1333
+                      "offset": 1321
                     }
                   }
                 },
@@ -612,12 +612,12 @@
                     "end": {
                       "column": 64,
                       "line": 35,
-                      "offset": 1351
+                      "offset": 1339
                     },
                     "start": {
                       "column": 55,
                       "line": 35,
-                      "offset": 1342
+                      "offset": 1330
                     }
                   }
                 }
@@ -633,17 +633,17 @@
               "type": "code",
               "lang": "typescript",
               "meta": null,
-              "value": "```typescript\nimport { defineConfig } from '@art-domains/workspace-cli/config';\n\nexport default defineConfig({\n  clone: { path: 'repos' },\n  records: {\n    repositories: { path: 'ops/records/repositories' },\n    checkouts: {\n      path: 'ops/records/checkouts',\n      template: '.agents/domains/workspace/templates/checkout.art.njk',\n    },\n  },\n});\n```",
+              "value": "```typescript\nimport { defineConfig } from '@art-domains/workspace-cli/config';\n\nexport default defineConfig({\n  clone: { path: 'repos' },\n  records: {\n    repositories: { path: '_records/repositories' },\n    checkouts: {\n      path: '_records/checkouts',\n      template: '.agents/domains/workspace/templates/checkout.art.njk',\n    },\n  },\n});\n```",
               "position": {
                 "end": {
                   "column": 4,
                   "line": 50,
-                  "offset": 1706
+                  "offset": 1688
                 },
                 "start": {
                   "column": 1,
                   "line": 37,
-                  "offset": 1353
+                  "offset": 1341
                 }
               }
             },
@@ -662,12 +662,12 @@
             "end": {
               "column": 21,
               "line": 52,
-              "offset": 1728
+              "offset": 1710
             },
             "start": {
               "column": 1,
               "line": 52,
-              "offset": 1708
+              "offset": 1690
             }
           },
           "children": [
@@ -684,12 +684,12 @@
                 "end": {
                   "column": 82,
                   "line": 54,
-                  "offset": 1811
+                  "offset": 1793
                 },
                 "start": {
                   "column": 1,
                   "line": 54,
-                  "offset": 1730
+                  "offset": 1712
                 }
               },
               "children": [
@@ -702,12 +702,12 @@
                     "end": {
                       "column": 82,
                       "line": 54,
-                      "offset": 1811
+                      "offset": 1793
                     },
                     "start": {
                       "column": 1,
                       "line": 54,
-                      "offset": 1730
+                      "offset": 1712
                     }
                   }
                 }
@@ -729,12 +729,12 @@
                 "end": {
                   "column": 35,
                   "line": 59,
-                  "offset": 2030
+                  "offset": 2012
                 },
                 "start": {
                   "column": 1,
                   "line": 56,
-                  "offset": 1813
+                  "offset": 1795
                 }
               },
               "children": [
@@ -748,12 +748,12 @@
                     "end": {
                       "column": 30,
                       "line": 56,
-                      "offset": 1842
+                      "offset": 1824
                     },
                     "start": {
                       "column": 1,
                       "line": 56,
-                      "offset": 1813
+                      "offset": 1795
                     }
                   },
                   "children": [
@@ -765,12 +765,12 @@
                         "end": {
                           "column": 30,
                           "line": 56,
-                          "offset": 1842
+                          "offset": 1824
                         },
                         "start": {
                           "column": 4,
                           "line": 56,
-                          "offset": 1816
+                          "offset": 1798
                         }
                       },
                       "children": [
@@ -783,12 +783,12 @@
                             "end": {
                               "column": 9,
                               "line": 56,
-                              "offset": 1821
+                              "offset": 1803
                             },
                             "start": {
                               "column": 4,
                               "line": 56,
-                              "offset": 1816
+                              "offset": 1798
                             }
                           }
                         },
@@ -801,12 +801,12 @@
                             "end": {
                               "column": 29,
                               "line": 56,
-                              "offset": 1841
+                              "offset": 1823
                             },
                             "start": {
                               "column": 9,
                               "line": 56,
-                              "offset": 1821
+                              "offset": 1803
                             }
                           }
                         },
@@ -819,12 +819,12 @@
                             "end": {
                               "column": 30,
                               "line": 56,
-                              "offset": 1842
+                              "offset": 1824
                             },
                             "start": {
                               "column": 29,
                               "line": 56,
-                              "offset": 1841
+                              "offset": 1823
                             }
                           }
                         }
@@ -842,12 +842,12 @@
                     "end": {
                       "column": 102,
                       "line": 57,
-                      "offset": 1944
+                      "offset": 1926
                     },
                     "start": {
                       "column": 1,
                       "line": 57,
-                      "offset": 1843
+                      "offset": 1825
                     }
                   },
                   "children": [
@@ -859,12 +859,12 @@
                         "end": {
                           "column": 102,
                           "line": 57,
-                          "offset": 1944
+                          "offset": 1926
                         },
                         "start": {
                           "column": 4,
                           "line": 57,
-                          "offset": 1846
+                          "offset": 1828
                         }
                       },
                       "children": [
@@ -877,12 +877,12 @@
                             "end": {
                               "column": 8,
                               "line": 57,
-                              "offset": 1850
+                              "offset": 1832
                             },
                             "start": {
                               "column": 4,
                               "line": 57,
-                              "offset": 1846
+                              "offset": 1828
                             }
                           }
                         },
@@ -895,12 +895,12 @@
                             "end": {
                               "column": 101,
                               "line": 57,
-                              "offset": 1943
+                              "offset": 1925
                             },
                             "start": {
                               "column": 8,
                               "line": 57,
-                              "offset": 1850
+                              "offset": 1832
                             }
                           }
                         },
@@ -913,12 +913,12 @@
                             "end": {
                               "column": 102,
                               "line": 57,
-                              "offset": 1944
+                              "offset": 1926
                             },
                             "start": {
                               "column": 101,
                               "line": 57,
-                              "offset": 1943
+                              "offset": 1925
                             }
                           }
                         }
@@ -936,12 +936,12 @@
                     "end": {
                       "column": 51,
                       "line": 58,
-                      "offset": 1995
+                      "offset": 1977
                     },
                     "start": {
                       "column": 1,
                       "line": 58,
-                      "offset": 1945
+                      "offset": 1927
                     }
                   },
                   "children": [
@@ -953,12 +953,12 @@
                         "end": {
                           "column": 51,
                           "line": 58,
-                          "offset": 1995
+                          "offset": 1977
                         },
                         "start": {
                           "column": 4,
                           "line": 58,
-                          "offset": 1948
+                          "offset": 1930
                         }
                       },
                       "children": [
@@ -971,12 +971,12 @@
                             "end": {
                               "column": 39,
                               "line": 58,
-                              "offset": 1983
+                              "offset": 1965
                             },
                             "start": {
                               "column": 4,
                               "line": 58,
-                              "offset": 1948
+                              "offset": 1930
                             }
                           }
                         },
@@ -989,12 +989,12 @@
                             "end": {
                               "column": 45,
                               "line": 58,
-                              "offset": 1989
+                              "offset": 1971
                             },
                             "start": {
                               "column": 39,
                               "line": 58,
-                              "offset": 1983
+                              "offset": 1965
                             }
                           }
                         },
@@ -1007,12 +1007,12 @@
                             "end": {
                               "column": 51,
                               "line": 58,
-                              "offset": 1995
+                              "offset": 1977
                             },
                             "start": {
                               "column": 45,
                               "line": 58,
-                              "offset": 1989
+                              "offset": 1971
                             }
                           }
                         }
@@ -1030,12 +1030,12 @@
                     "end": {
                       "column": 35,
                       "line": 59,
-                      "offset": 2030
+                      "offset": 2012
                     },
                     "start": {
                       "column": 1,
                       "line": 59,
-                      "offset": 1996
+                      "offset": 1978
                     }
                   },
                   "children": [
@@ -1047,12 +1047,12 @@
                         "end": {
                           "column": 35,
                           "line": 59,
-                          "offset": 2030
+                          "offset": 2012
                         },
                         "start": {
                           "column": 4,
                           "line": 59,
-                          "offset": 1999
+                          "offset": 1981
                         }
                       },
                       "children": [
@@ -1065,12 +1065,12 @@
                             "end": {
                               "column": 20,
                               "line": 59,
-                              "offset": 2015
+                              "offset": 1997
                             },
                             "start": {
                               "column": 4,
                               "line": 59,
-                              "offset": 1999
+                              "offset": 1981
                             }
                           }
                         },
@@ -1083,12 +1083,12 @@
                             "end": {
                               "column": 35,
                               "line": 59,
-                              "offset": 2030
+                              "offset": 2012
                             },
                             "start": {
                               "column": 20,
                               "line": 59,
-                              "offset": 2015
+                              "offset": 1997
                             }
                           }
                         }
@@ -1111,12 +1111,12 @@
                 "end": {
                   "column": 464,
                   "line": 61,
-                  "offset": 2495
+                  "offset": 2477
                 },
                 "start": {
                   "column": 1,
                   "line": 61,
-                  "offset": 2032
+                  "offset": 2014
                 }
               },
               "children": [
@@ -1129,12 +1129,12 @@
                     "end": {
                       "column": 14,
                       "line": 61,
-                      "offset": 2045
+                      "offset": 2027
                     },
                     "start": {
                       "column": 1,
                       "line": 61,
-                      "offset": 2032
+                      "offset": 2014
                     }
                   }
                 },
@@ -1147,12 +1147,12 @@
                     "end": {
                       "column": 80,
                       "line": 61,
-                      "offset": 2111
+                      "offset": 2093
                     },
                     "start": {
                       "column": 14,
                       "line": 61,
-                      "offset": 2045
+                      "offset": 2027
                     }
                   }
                 },
@@ -1165,12 +1165,12 @@
                     "end": {
                       "column": 111,
                       "line": 61,
-                      "offset": 2142
+                      "offset": 2124
                     },
                     "start": {
                       "column": 80,
                       "line": 61,
-                      "offset": 2111
+                      "offset": 2093
                     }
                   }
                 },
@@ -1183,12 +1183,12 @@
                     "end": {
                       "column": 125,
                       "line": 61,
-                      "offset": 2156
+                      "offset": 2138
                     },
                     "start": {
                       "column": 111,
                       "line": 61,
-                      "offset": 2142
+                      "offset": 2124
                     }
                   }
                 },
@@ -1201,12 +1201,12 @@
                     "end": {
                       "column": 143,
                       "line": 61,
-                      "offset": 2174
+                      "offset": 2156
                     },
                     "start": {
                       "column": 125,
                       "line": 61,
-                      "offset": 2156
+                      "offset": 2138
                     }
                   }
                 },
@@ -1219,12 +1219,12 @@
                     "end": {
                       "column": 152,
                       "line": 61,
-                      "offset": 2183
+                      "offset": 2165
                     },
                     "start": {
                       "column": 143,
                       "line": 61,
-                      "offset": 2174
+                      "offset": 2156
                     }
                   }
                 },
@@ -1237,12 +1237,12 @@
                     "end": {
                       "column": 190,
                       "line": 61,
-                      "offset": 2221
+                      "offset": 2203
                     },
                     "start": {
                       "column": 152,
                       "line": 61,
-                      "offset": 2183
+                      "offset": 2165
                     }
                   }
                 },
@@ -1255,12 +1255,12 @@
                     "end": {
                       "column": 199,
                       "line": 61,
-                      "offset": 2230
+                      "offset": 2212
                     },
                     "start": {
                       "column": 190,
                       "line": 61,
-                      "offset": 2221
+                      "offset": 2203
                     }
                   }
                 },
@@ -1273,12 +1273,12 @@
                     "end": {
                       "column": 301,
                       "line": 61,
-                      "offset": 2332
+                      "offset": 2314
                     },
                     "start": {
                       "column": 199,
                       "line": 61,
-                      "offset": 2230
+                      "offset": 2212
                     }
                   }
                 },
@@ -1291,12 +1291,12 @@
                     "end": {
                       "column": 310,
                       "line": 61,
-                      "offset": 2341
+                      "offset": 2323
                     },
                     "start": {
                       "column": 301,
                       "line": 61,
-                      "offset": 2332
+                      "offset": 2314
                     }
                   }
                 },
@@ -1309,12 +1309,12 @@
                     "end": {
                       "column": 326,
                       "line": 61,
-                      "offset": 2357
+                      "offset": 2339
                     },
                     "start": {
                       "column": 310,
                       "line": 61,
-                      "offset": 2341
+                      "offset": 2323
                     }
                   }
                 },
@@ -1326,12 +1326,12 @@
                     "end": {
                       "column": 348,
                       "line": 61,
-                      "offset": 2379
+                      "offset": 2361
                     },
                     "start": {
                       "column": 326,
                       "line": 61,
-                      "offset": 2357
+                      "offset": 2339
                     }
                   },
                   "children": [
@@ -1344,12 +1344,12 @@
                         "end": {
                           "column": 346,
                           "line": 61,
-                          "offset": 2377
+                          "offset": 2359
                         },
                         "start": {
                           "column": 328,
                           "line": 61,
-                          "offset": 2359
+                          "offset": 2341
                         }
                       }
                     }
@@ -1364,12 +1364,12 @@
                     "end": {
                       "column": 352,
                       "line": 61,
-                      "offset": 2383
+                      "offset": 2365
                     },
                     "start": {
                       "column": 348,
                       "line": 61,
-                      "offset": 2379
+                      "offset": 2361
                     }
                   }
                 },
@@ -1382,12 +1382,12 @@
                     "end": {
                       "column": 380,
                       "line": 61,
-                      "offset": 2411
+                      "offset": 2393
                     },
                     "start": {
                       "column": 352,
                       "line": 61,
-                      "offset": 2383
+                      "offset": 2365
                     }
                   }
                 },
@@ -1400,12 +1400,12 @@
                     "end": {
                       "column": 386,
                       "line": 61,
-                      "offset": 2417
+                      "offset": 2399
                     },
                     "start": {
                       "column": 380,
                       "line": 61,
-                      "offset": 2411
+                      "offset": 2393
                     }
                   }
                 },
@@ -1418,12 +1418,12 @@
                     "end": {
                       "column": 407,
                       "line": 61,
-                      "offset": 2438
+                      "offset": 2420
                     },
                     "start": {
                       "column": 386,
                       "line": 61,
-                      "offset": 2417
+                      "offset": 2399
                     }
                   }
                 },
@@ -1436,12 +1436,12 @@
                     "end": {
                       "column": 464,
                       "line": 61,
-                      "offset": 2495
+                      "offset": 2477
                     },
                     "start": {
                       "column": 407,
                       "line": 61,
-                      "offset": 2438
+                      "offset": 2420
                     }
                   }
                 }
@@ -1462,12 +1462,12 @@
             "end": {
               "column": 19,
               "line": 63,
-              "offset": 2515
+              "offset": 2497
             },
             "start": {
               "column": 1,
               "line": 63,
-              "offset": 2497
+              "offset": 2479
             }
           },
           "children": [
@@ -1484,12 +1484,12 @@
                 "end": {
                   "column": 38,
                   "line": 65,
-                  "offset": 2554
+                  "offset": 2536
                 },
                 "start": {
                   "column": 1,
                   "line": 65,
-                  "offset": 2517
+                  "offset": 2499
                 }
               },
               "children": [
@@ -1502,12 +1502,12 @@
                     "end": {
                       "column": 38,
                       "line": 65,
-                      "offset": 2554
+                      "offset": 2536
                     },
                     "start": {
                       "column": 1,
                       "line": 65,
-                      "offset": 2517
+                      "offset": 2499
                     }
                   }
                 }
@@ -1529,12 +1529,12 @@
                 "end": {
                   "column": 156,
                   "line": 68,
-                  "offset": 2858
+                  "offset": 2840
                 },
                 "start": {
                   "column": 1,
                   "line": 67,
-                  "offset": 2556
+                  "offset": 2538
                 }
               },
               "children": [
@@ -1548,12 +1548,12 @@
                     "end": {
                       "column": 147,
                       "line": 67,
-                      "offset": 2702
+                      "offset": 2684
                     },
                     "start": {
                       "column": 1,
                       "line": 67,
-                      "offset": 2556
+                      "offset": 2538
                     }
                   },
                   "children": [
@@ -1565,12 +1565,12 @@
                         "end": {
                           "column": 147,
                           "line": 67,
-                          "offset": 2702
+                          "offset": 2684
                         },
                         "start": {
                           "column": 3,
                           "line": 67,
-                          "offset": 2558
+                          "offset": 2540
                         }
                       },
                       "children": [
@@ -1582,12 +1582,12 @@
                             "end": {
                               "column": 42,
                               "line": 67,
-                              "offset": 2597
+                              "offset": 2579
                             },
                             "start": {
                               "column": 3,
                               "line": 67,
-                              "offset": 2558
+                              "offset": 2540
                             }
                           },
                           "children": [
@@ -1600,12 +1600,12 @@
                                 "end": {
                                   "column": 40,
                                   "line": 67,
-                                  "offset": 2595
+                                  "offset": 2577
                                 },
                                 "start": {
                                   "column": 5,
                                   "line": 67,
-                                  "offset": 2560
+                                  "offset": 2542
                                 }
                               }
                             }
@@ -1620,12 +1620,12 @@
                             "end": {
                               "column": 77,
                               "line": 67,
-                              "offset": 2632
+                              "offset": 2614
                             },
                             "start": {
                               "column": 42,
                               "line": 67,
-                              "offset": 2597
+                              "offset": 2579
                             }
                           }
                         },
@@ -1638,12 +1638,12 @@
                             "end": {
                               "column": 91,
                               "line": 67,
-                              "offset": 2646
+                              "offset": 2628
                             },
                             "start": {
                               "column": 77,
                               "line": 67,
-                              "offset": 2632
+                              "offset": 2614
                             }
                           }
                         },
@@ -1656,12 +1656,12 @@
                             "end": {
                               "column": 97,
                               "line": 67,
-                              "offset": 2652
+                              "offset": 2634
                             },
                             "start": {
                               "column": 91,
                               "line": 67,
-                              "offset": 2646
+                              "offset": 2628
                             }
                           }
                         },
@@ -1674,12 +1674,12 @@
                             "end": {
                               "column": 114,
                               "line": 67,
-                              "offset": 2669
+                              "offset": 2651
                             },
                             "start": {
                               "column": 97,
                               "line": 67,
-                              "offset": 2652
+                              "offset": 2634
                             }
                           }
                         },
@@ -1692,12 +1692,12 @@
                             "end": {
                               "column": 125,
                               "line": 67,
-                              "offset": 2680
+                              "offset": 2662
                             },
                             "start": {
                               "column": 114,
                               "line": 67,
-                              "offset": 2669
+                              "offset": 2651
                             }
                           }
                         },
@@ -1710,12 +1710,12 @@
                             "end": {
                               "column": 146,
                               "line": 67,
-                              "offset": 2701
+                              "offset": 2683
                             },
                             "start": {
                               "column": 125,
                               "line": 67,
-                              "offset": 2680
+                              "offset": 2662
                             }
                           }
                         },
@@ -1728,12 +1728,12 @@
                             "end": {
                               "column": 147,
                               "line": 67,
-                              "offset": 2702
+                              "offset": 2684
                             },
                             "start": {
                               "column": 146,
                               "line": 67,
-                              "offset": 2701
+                              "offset": 2683
                             }
                           }
                         }
@@ -1751,12 +1751,12 @@
                     "end": {
                       "column": 156,
                       "line": 68,
-                      "offset": 2858
+                      "offset": 2840
                     },
                     "start": {
                       "column": 1,
                       "line": 68,
-                      "offset": 2703
+                      "offset": 2685
                     }
                   },
                   "children": [
@@ -1768,12 +1768,12 @@
                         "end": {
                           "column": 156,
                           "line": 68,
-                          "offset": 2858
+                          "offset": 2840
                         },
                         "start": {
                           "column": 3,
                           "line": 68,
-                          "offset": 2705
+                          "offset": 2687
                         }
                       },
                       "children": [
@@ -1785,12 +1785,12 @@
                             "end": {
                               "column": 35,
                               "line": 68,
-                              "offset": 2737
+                              "offset": 2719
                             },
                             "start": {
                               "column": 3,
                               "line": 68,
-                              "offset": 2705
+                              "offset": 2687
                             }
                           },
                           "children": [
@@ -1803,12 +1803,12 @@
                                 "end": {
                                   "column": 33,
                                   "line": 68,
-                                  "offset": 2735
+                                  "offset": 2717
                                 },
                                 "start": {
                                   "column": 5,
                                   "line": 68,
-                                  "offset": 2707
+                                  "offset": 2689
                                 }
                               }
                             }
@@ -1823,12 +1823,12 @@
                             "end": {
                               "column": 54,
                               "line": 68,
-                              "offset": 2756
+                              "offset": 2738
                             },
                             "start": {
                               "column": 35,
                               "line": 68,
-                              "offset": 2737
+                              "offset": 2719
                             }
                           }
                         },
@@ -1841,12 +1841,12 @@
                             "end": {
                               "column": 69,
                               "line": 68,
-                              "offset": 2771
+                              "offset": 2753
                             },
                             "start": {
                               "column": 54,
                               "line": 68,
-                              "offset": 2756
+                              "offset": 2738
                             }
                           }
                         },
@@ -1859,12 +1859,12 @@
                             "end": {
                               "column": 156,
                               "line": 68,
-                              "offset": 2858
+                              "offset": 2840
                             },
                             "start": {
                               "column": 69,
                               "line": 68,
-                              "offset": 2771
+                              "offset": 2753
                             }
                           }
                         }
@@ -1887,12 +1887,12 @@
                 "end": {
                   "column": 194,
                   "line": 70,
-                  "offset": 3053
+                  "offset": 3035
                 },
                 "start": {
                   "column": 1,
                   "line": 70,
-                  "offset": 2860
+                  "offset": 2842
                 }
               },
               "children": [
@@ -1905,12 +1905,12 @@
                     "end": {
                       "column": 5,
                       "line": 70,
-                      "offset": 2864
+                      "offset": 2846
                     },
                     "start": {
                       "column": 1,
                       "line": 70,
-                      "offset": 2860
+                      "offset": 2842
                     }
                   }
                 },
@@ -1923,12 +1923,12 @@
                     "end": {
                       "column": 14,
                       "line": 70,
-                      "offset": 2873
+                      "offset": 2855
                     },
                     "start": {
                       "column": 5,
                       "line": 70,
-                      "offset": 2864
+                      "offset": 2846
                     }
                   }
                 },
@@ -1941,12 +1941,12 @@
                     "end": {
                       "column": 20,
                       "line": 70,
-                      "offset": 2879
+                      "offset": 2861
                     },
                     "start": {
                       "column": 14,
                       "line": 70,
-                      "offset": 2873
+                      "offset": 2855
                     }
                   }
                 },
@@ -1959,12 +1959,12 @@
                     "end": {
                       "column": 30,
                       "line": 70,
-                      "offset": 2889
+                      "offset": 2871
                     },
                     "start": {
                       "column": 20,
                       "line": 70,
-                      "offset": 2879
+                      "offset": 2861
                     }
                   }
                 },
@@ -1977,12 +1977,12 @@
                     "end": {
                       "column": 33,
                       "line": 70,
-                      "offset": 2892
+                      "offset": 2874
                     },
                     "start": {
                       "column": 30,
                       "line": 70,
-                      "offset": 2889
+                      "offset": 2871
                     }
                   }
                 },
@@ -1995,12 +1995,12 @@
                     "end": {
                       "column": 40,
                       "line": 70,
-                      "offset": 2899
+                      "offset": 2881
                     },
                     "start": {
                       "column": 33,
                       "line": 70,
-                      "offset": 2892
+                      "offset": 2874
                     }
                   }
                 },
@@ -2013,12 +2013,12 @@
                     "end": {
                       "column": 43,
                       "line": 70,
-                      "offset": 2902
+                      "offset": 2884
                     },
                     "start": {
                       "column": 40,
                       "line": 70,
-                      "offset": 2899
+                      "offset": 2881
                     }
                   }
                 },
@@ -2031,12 +2031,12 @@
                     "end": {
                       "column": 51,
                       "line": 70,
-                      "offset": 2910
+                      "offset": 2892
                     },
                     "start": {
                       "column": 43,
                       "line": 70,
-                      "offset": 2902
+                      "offset": 2884
                     }
                   }
                 },
@@ -2049,12 +2049,12 @@
                     "end": {
                       "column": 194,
                       "line": 70,
-                      "offset": 3053
+                      "offset": 3035
                     },
                     "start": {
                       "column": 51,
                       "line": 70,
-                      "offset": 2910
+                      "offset": 2892
                     }
                   }
                 }
@@ -2075,12 +2075,12 @@
             "end": {
               "column": 15,
               "line": 72,
-              "offset": 3069
+              "offset": 3051
             },
             "start": {
               "column": 1,
               "line": 72,
-              "offset": 3055
+              "offset": 3037
             }
           },
           "children": [
@@ -2097,12 +2097,12 @@
                 "end": {
                   "column": 50,
                   "line": 74,
-                  "offset": 3120
+                  "offset": 3102
                 },
                 "start": {
                   "column": 1,
                   "line": 74,
-                  "offset": 3071
+                  "offset": 3053
                 }
               },
               "children": [
@@ -2115,12 +2115,12 @@
                     "end": {
                       "column": 50,
                       "line": 74,
-                      "offset": 3120
+                      "offset": 3102
                     },
                     "start": {
                       "column": 1,
                       "line": 74,
-                      "offset": 3071
+                      "offset": 3053
                     }
                   }
                 }
@@ -2142,12 +2142,12 @@
                 "end": {
                   "column": 74,
                   "line": 78,
-                  "offset": 3376
+                  "offset": 3358
                 },
                 "start": {
                   "column": 1,
                   "line": 76,
-                  "offset": 3122
+                  "offset": 3104
                 }
               },
               "children": [
@@ -2161,12 +2161,12 @@
                     "end": {
                       "column": 92,
                       "line": 76,
-                      "offset": 3213
+                      "offset": 3195
                     },
                     "start": {
                       "column": 1,
                       "line": 76,
-                      "offset": 3122
+                      "offset": 3104
                     }
                   },
                   "children": [
@@ -2178,12 +2178,12 @@
                         "end": {
                           "column": 92,
                           "line": 76,
-                          "offset": 3213
+                          "offset": 3195
                         },
                         "start": {
                           "column": 3,
                           "line": 76,
-                          "offset": 3124
+                          "offset": 3106
                         }
                       },
                       "children": [
@@ -2196,12 +2196,12 @@
                             "end": {
                               "column": 20,
                               "line": 76,
-                              "offset": 3141
+                              "offset": 3123
                             },
                             "start": {
                               "column": 3,
                               "line": 76,
-                              "offset": 3124
+                              "offset": 3106
                             }
                           }
                         },
@@ -2214,12 +2214,12 @@
                             "end": {
                               "column": 52,
                               "line": 76,
-                              "offset": 3173
+                              "offset": 3155
                             },
                             "start": {
                               "column": 20,
                               "line": 76,
-                              "offset": 3141
+                              "offset": 3123
                             }
                           }
                         },
@@ -2232,12 +2232,12 @@
                             "end": {
                               "column": 63,
                               "line": 76,
-                              "offset": 3184
+                              "offset": 3166
                             },
                             "start": {
                               "column": 52,
                               "line": 76,
-                              "offset": 3173
+                              "offset": 3155
                             }
                           }
                         },
@@ -2250,12 +2250,12 @@
                             "end": {
                               "column": 65,
                               "line": 76,
-                              "offset": 3186
+                              "offset": 3168
                             },
                             "start": {
                               "column": 63,
                               "line": 76,
-                              "offset": 3184
+                              "offset": 3166
                             }
                           }
                         },
@@ -2268,12 +2268,12 @@
                             "end": {
                               "column": 77,
                               "line": 76,
-                              "offset": 3198
+                              "offset": 3180
                             },
                             "start": {
                               "column": 65,
                               "line": 76,
-                              "offset": 3186
+                              "offset": 3168
                             }
                           }
                         },
@@ -2286,12 +2286,12 @@
                             "end": {
                               "column": 79,
                               "line": 76,
-                              "offset": 3200
+                              "offset": 3182
                             },
                             "start": {
                               "column": 77,
                               "line": 76,
-                              "offset": 3198
+                              "offset": 3180
                             }
                           }
                         },
@@ -2304,12 +2304,12 @@
                             "end": {
                               "column": 90,
                               "line": 76,
-                              "offset": 3211
+                              "offset": 3193
                             },
                             "start": {
                               "column": 79,
                               "line": 76,
-                              "offset": 3200
+                              "offset": 3182
                             }
                           }
                         },
@@ -2322,12 +2322,12 @@
                             "end": {
                               "column": 92,
                               "line": 76,
-                              "offset": 3213
+                              "offset": 3195
                             },
                             "start": {
                               "column": 90,
                               "line": 76,
-                              "offset": 3211
+                              "offset": 3193
                             }
                           }
                         }
@@ -2345,12 +2345,12 @@
                     "end": {
                       "column": 89,
                       "line": 77,
-                      "offset": 3302
+                      "offset": 3284
                     },
                     "start": {
                       "column": 1,
                       "line": 77,
-                      "offset": 3214
+                      "offset": 3196
                     }
                   },
                   "children": [
@@ -2362,12 +2362,12 @@
                         "end": {
                           "column": 89,
                           "line": 77,
-                          "offset": 3302
+                          "offset": 3284
                         },
                         "start": {
                           "column": 3,
                           "line": 77,
-                          "offset": 3216
+                          "offset": 3198
                         }
                       },
                       "children": [
@@ -2380,12 +2380,12 @@
                             "end": {
                               "column": 21,
                               "line": 77,
-                              "offset": 3234
+                              "offset": 3216
                             },
                             "start": {
                               "column": 3,
                               "line": 77,
-                              "offset": 3216
+                              "offset": 3198
                             }
                           }
                         },
@@ -2398,12 +2398,12 @@
                             "end": {
                               "column": 89,
                               "line": 77,
-                              "offset": 3302
+                              "offset": 3284
                             },
                             "start": {
                               "column": 21,
                               "line": 77,
-                              "offset": 3234
+                              "offset": 3216
                             }
                           }
                         }
@@ -2421,12 +2421,12 @@
                     "end": {
                       "column": 74,
                       "line": 78,
-                      "offset": 3376
+                      "offset": 3358
                     },
                     "start": {
                       "column": 1,
                       "line": 78,
-                      "offset": 3303
+                      "offset": 3285
                     }
                   },
                   "children": [
@@ -2438,12 +2438,12 @@
                         "end": {
                           "column": 74,
                           "line": 78,
-                          "offset": 3376
+                          "offset": 3358
                         },
                         "start": {
                           "column": 3,
                           "line": 78,
-                          "offset": 3305
+                          "offset": 3287
                         }
                       },
                       "children": [
@@ -2456,12 +2456,12 @@
                             "end": {
                               "column": 19,
                               "line": 78,
-                              "offset": 3321
+                              "offset": 3303
                             },
                             "start": {
                               "column": 3,
                               "line": 78,
-                              "offset": 3305
+                              "offset": 3287
                             }
                           }
                         },
@@ -2474,12 +2474,12 @@
                             "end": {
                               "column": 74,
                               "line": 78,
-                              "offset": 3376
+                              "offset": 3358
                             },
                             "start": {
                               "column": 19,
                               "line": 78,
-                              "offset": 3321
+                              "offset": 3303
                             }
                           }
                         }
@@ -2502,12 +2502,12 @@
                 "end": {
                   "column": 135,
                   "line": 80,
-                  "offset": 3512
+                  "offset": 3494
                 },
                 "start": {
                   "column": 1,
                   "line": 80,
-                  "offset": 3378
+                  "offset": 3360
                 }
               },
               "children": [
@@ -2520,12 +2520,12 @@
                     "end": {
                       "column": 32,
                       "line": 80,
-                      "offset": 3409
+                      "offset": 3391
                     },
                     "start": {
                       "column": 1,
                       "line": 80,
-                      "offset": 3378
+                      "offset": 3360
                     }
                   }
                 },
@@ -2538,12 +2538,12 @@
                     "end": {
                       "column": 49,
                       "line": 80,
-                      "offset": 3426
+                      "offset": 3408
                     },
                     "start": {
                       "column": 32,
                       "line": 80,
-                      "offset": 3409
+                      "offset": 3391
                     }
                   }
                 },
@@ -2556,12 +2556,12 @@
                     "end": {
                       "column": 59,
                       "line": 80,
-                      "offset": 3436
+                      "offset": 3418
                     },
                     "start": {
                       "column": 49,
                       "line": 80,
-                      "offset": 3426
+                      "offset": 3408
                     }
                   }
                 },
@@ -2574,12 +2574,12 @@
                     "end": {
                       "column": 68,
                       "line": 80,
-                      "offset": 3445
+                      "offset": 3427
                     },
                     "start": {
                       "column": 59,
                       "line": 80,
-                      "offset": 3436
+                      "offset": 3418
                     }
                   }
                 },
@@ -2592,12 +2592,12 @@
                     "end": {
                       "column": 119,
                       "line": 80,
-                      "offset": 3496
+                      "offset": 3478
                     },
                     "start": {
                       "column": 68,
                       "line": 80,
-                      "offset": 3445
+                      "offset": 3427
                     }
                   }
                 },
@@ -2610,12 +2610,12 @@
                     "end": {
                       "column": 125,
                       "line": 80,
-                      "offset": 3502
+                      "offset": 3484
                     },
                     "start": {
                       "column": 119,
                       "line": 80,
-                      "offset": 3496
+                      "offset": 3478
                     }
                   }
                 },
@@ -2628,12 +2628,12 @@
                     "end": {
                       "column": 135,
                       "line": 80,
-                      "offset": 3512
+                      "offset": 3494
                     },
                     "start": {
                       "column": 125,
                       "line": 80,
-                      "offset": 3502
+                      "offset": 3484
                     }
                   }
                 }
@@ -2654,12 +2654,12 @@
             "end": {
               "column": 15,
               "line": 82,
-              "offset": 3528
+              "offset": 3510
             },
             "start": {
               "column": 1,
               "line": 82,
-              "offset": 3514
+              "offset": 3496
             }
           },
           "children": [
@@ -2676,12 +2676,12 @@
                 "end": {
                   "column": 82,
                   "line": 84,
-                  "offset": 3611
+                  "offset": 3593
                 },
                 "start": {
                   "column": 1,
                   "line": 84,
-                  "offset": 3530
+                  "offset": 3512
                 }
               },
               "children": [
@@ -2694,12 +2694,12 @@
                     "end": {
                       "column": 10,
                       "line": 84,
-                      "offset": 3539
+                      "offset": 3521
                     },
                     "start": {
                       "column": 1,
                       "line": 84,
-                      "offset": 3530
+                      "offset": 3512
                     }
                   }
                 },
@@ -2712,12 +2712,12 @@
                     "end": {
                       "column": 24,
                       "line": 84,
-                      "offset": 3553
+                      "offset": 3535
                     },
                     "start": {
                       "column": 10,
                       "line": 84,
-                      "offset": 3539
+                      "offset": 3521
                     }
                   }
                 },
@@ -2730,12 +2730,12 @@
                     "end": {
                       "column": 32,
                       "line": 84,
-                      "offset": 3561
+                      "offset": 3543
                     },
                     "start": {
                       "column": 24,
                       "line": 84,
-                      "offset": 3553
+                      "offset": 3535
                     }
                   }
                 },
@@ -2748,12 +2748,12 @@
                     "end": {
                       "column": 50,
                       "line": 84,
-                      "offset": 3579
+                      "offset": 3561
                     },
                     "start": {
                       "column": 32,
                       "line": 84,
-                      "offset": 3561
+                      "offset": 3543
                     }
                   }
                 },
@@ -2766,12 +2766,12 @@
                     "end": {
                       "column": 65,
                       "line": 84,
-                      "offset": 3594
+                      "offset": 3576
                     },
                     "start": {
                       "column": 50,
                       "line": 84,
-                      "offset": 3579
+                      "offset": 3561
                     }
                   }
                 },
@@ -2784,12 +2784,12 @@
                     "end": {
                       "column": 71,
                       "line": 84,
-                      "offset": 3600
+                      "offset": 3582
                     },
                     "start": {
                       "column": 65,
                       "line": 84,
-                      "offset": 3594
+                      "offset": 3576
                     }
                   }
                 },
@@ -2802,12 +2802,12 @@
                     "end": {
                       "column": 82,
                       "line": 84,
-                      "offset": 3611
+                      "offset": 3593
                     },
                     "start": {
                       "column": 71,
                       "line": 84,
-                      "offset": 3600
+                      "offset": 3582
                     }
                   }
                 }
@@ -2829,12 +2829,12 @@
                 "end": {
                   "column": 55,
                   "line": 88,
-                  "offset": 3754
+                  "offset": 3736
                 },
                 "start": {
                   "column": 1,
                   "line": 86,
-                  "offset": 3613
+                  "offset": 3595
                 }
               },
               "children": [
@@ -2848,12 +2848,12 @@
                     "end": {
                       "column": 34,
                       "line": 86,
-                      "offset": 3646
+                      "offset": 3628
                     },
                     "start": {
                       "column": 1,
                       "line": 86,
-                      "offset": 3613
+                      "offset": 3595
                     }
                   },
                   "children": [
@@ -2865,12 +2865,12 @@
                         "end": {
                           "column": 34,
                           "line": 86,
-                          "offset": 3646
+                          "offset": 3628
                         },
                         "start": {
                           "column": 3,
                           "line": 86,
-                          "offset": 3615
+                          "offset": 3597
                         }
                       },
                       "children": [
@@ -2883,12 +2883,12 @@
                             "end": {
                               "column": 34,
                               "line": 86,
-                              "offset": 3646
+                              "offset": 3628
                             },
                             "start": {
                               "column": 3,
                               "line": 86,
-                              "offset": 3615
+                              "offset": 3597
                             }
                           }
                         }
@@ -2906,12 +2906,12 @@
                     "end": {
                       "column": 53,
                       "line": 87,
-                      "offset": 3699
+                      "offset": 3681
                     },
                     "start": {
                       "column": 1,
                       "line": 87,
-                      "offset": 3647
+                      "offset": 3629
                     }
                   },
                   "children": [
@@ -2923,12 +2923,12 @@
                         "end": {
                           "column": 53,
                           "line": 87,
-                          "offset": 3699
+                          "offset": 3681
                         },
                         "start": {
                           "column": 3,
                           "line": 87,
-                          "offset": 3649
+                          "offset": 3631
                         }
                       },
                       "children": [
@@ -2941,12 +2941,12 @@
                             "end": {
                               "column": 53,
                               "line": 87,
-                              "offset": 3699
+                              "offset": 3681
                             },
                             "start": {
                               "column": 3,
                               "line": 87,
-                              "offset": 3649
+                              "offset": 3631
                             }
                           }
                         }
@@ -2964,12 +2964,12 @@
                     "end": {
                       "column": 55,
                       "line": 88,
-                      "offset": 3754
+                      "offset": 3736
                     },
                     "start": {
                       "column": 1,
                       "line": 88,
-                      "offset": 3700
+                      "offset": 3682
                     }
                   },
                   "children": [
@@ -2981,12 +2981,12 @@
                         "end": {
                           "column": 55,
                           "line": 88,
-                          "offset": 3754
+                          "offset": 3736
                         },
                         "start": {
                           "column": 3,
                           "line": 88,
-                          "offset": 3702
+                          "offset": 3684
                         }
                       },
                       "children": [
@@ -2999,12 +2999,12 @@
                             "end": {
                               "column": 55,
                               "line": 88,
-                              "offset": 3754
+                              "offset": 3736
                             },
                             "start": {
                               "column": 3,
                               "line": 88,
-                              "offset": 3702
+                              "offset": 3684
                             }
                           }
                         }
@@ -3029,12 +3029,12 @@
             "end": {
               "column": 19,
               "line": 90,
-              "offset": 3774
+              "offset": 3756
             },
             "start": {
               "column": 1,
               "line": 90,
-              "offset": 3756
+              "offset": 3738
             }
           },
           "children": [
@@ -3046,17 +3046,17 @@
             {
               "construct": "NaturalBlock",
               "type": "paragraph",
-              "value": "Records (`ops/records/repositories/{repo}.art`, `ops/records/workspace.art`) are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands.",
+              "value": "Records (`_records/repositories/{repo}.art`, `_records/workspace.art`) are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands.",
               "position": {
                 "end": {
-                  "column": 208,
+                  "column": 202,
                   "line": 92,
-                  "offset": 3983
+                  "offset": 3959
                 },
                 "start": {
                   "column": 1,
                   "line": 92,
-                  "offset": 3776
+                  "offset": 3758
                 }
               },
               "children": [
@@ -3069,12 +3069,12 @@
                     "end": {
                       "column": 10,
                       "line": 92,
-                      "offset": 3785
+                      "offset": 3767
                     },
                     "start": {
                       "column": 1,
                       "line": 92,
-                      "offset": 3776
+                      "offset": 3758
                     }
                   }
                 },
@@ -3082,17 +3082,17 @@
                   "construct": "NaturalExpression",
                   "type": "inlineCode",
                   "attributes": {},
-                  "value": "ops/records/repositories/{repo}.art",
+                  "value": "_records/repositories/{repo}.art",
                   "position": {
                     "end": {
-                      "column": 47,
+                      "column": 44,
                       "line": 92,
-                      "offset": 3822
+                      "offset": 3801
                     },
                     "start": {
                       "column": 10,
                       "line": 92,
-                      "offset": 3785
+                      "offset": 3767
                     }
                   }
                 },
@@ -3103,14 +3103,14 @@
                   "value": ", ",
                   "position": {
                     "end": {
-                      "column": 49,
+                      "column": 46,
                       "line": 92,
-                      "offset": 3824
+                      "offset": 3803
                     },
                     "start": {
-                      "column": 47,
+                      "column": 44,
                       "line": 92,
-                      "offset": 3822
+                      "offset": 3801
                     }
                   }
                 },
@@ -3118,17 +3118,17 @@
                   "construct": "NaturalExpression",
                   "type": "inlineCode",
                   "attributes": {},
-                  "value": "ops/records/workspace.art",
+                  "value": "_records/workspace.art",
                   "position": {
                     "end": {
-                      "column": 76,
+                      "column": 70,
                       "line": 92,
-                      "offset": 3851
+                      "offset": 3827
                     },
                     "start": {
-                      "column": 49,
+                      "column": 46,
                       "line": 92,
-                      "offset": 3824
+                      "offset": 3803
                     }
                   }
                 },
@@ -3139,14 +3139,14 @@
                   "value": ") are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands.",
                   "position": {
                     "end": {
-                      "column": 208,
+                      "column": 202,
                       "line": 92,
-                      "offset": 3983
+                      "offset": 3959
                     },
                     "start": {
-                      "column": 76,
+                      "column": 70,
                       "line": 92,
-                      "offset": 3851
+                      "offset": 3827
                     }
                   }
                 }
@@ -3167,12 +3167,12 @@
             "end": {
               "column": 20,
               "line": 94,
-              "offset": 4004
+              "offset": 3980
             },
             "start": {
               "column": 1,
               "line": 94,
-              "offset": 3985
+              "offset": 3961
             }
           },
           "children": [
@@ -3189,12 +3189,12 @@
                 "end": {
                   "column": 63,
                   "line": 96,
-                  "offset": 4068
+                  "offset": 4044
                 },
                 "start": {
                   "column": 1,
                   "line": 96,
-                  "offset": 4006
+                  "offset": 3982
                 }
               },
               "children": [
@@ -3207,12 +3207,12 @@
                     "end": {
                       "column": 41,
                       "line": 96,
-                      "offset": 4046
+                      "offset": 4022
                     },
                     "start": {
                       "column": 1,
                       "line": 96,
-                      "offset": 4006
+                      "offset": 3982
                     }
                   }
                 },
@@ -3225,12 +3225,12 @@
                     "end": {
                       "column": 62,
                       "line": 96,
-                      "offset": 4067
+                      "offset": 4043
                     },
                     "start": {
                       "column": 41,
                       "line": 96,
-                      "offset": 4046
+                      "offset": 4022
                     }
                   }
                 },
@@ -3243,12 +3243,12 @@
                     "end": {
                       "column": 63,
                       "line": 96,
-                      "offset": 4068
+                      "offset": 4044
                     },
                     "start": {
                       "column": 62,
                       "line": 96,
-                      "offset": 4067
+                      "offset": 4043
                     }
                   }
                 }
@@ -3265,17 +3265,17 @@
               "ordered": false,
               "spread": false,
               "start": null,
-              "value": "- **Type-safe Configuration in Workspace Root** — `.art-workspace.mts` as a TypeScript ESM module; `/config` subpath for the authoring API; main entry re-exports for the CLI.\n- **Runtime Config Loading — esbuild Bundle-at-Runtime** — the manifest is bundled and imported at runtime; `esbuild` becomes a runtime dependency. Reconsider Node native type-stripping when the minimum Node version is guaranteed (≥ 22.6).\n- **Manifest Mirrors Records Structures; Checkouts Derived at Entry Point** — superseded in part by the Checkout record decision below.\n- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`ops/records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.\n- **Records as Source of Truth** — generated files (`.art-workspace.mts`) are derived from records, not maintained separately.",
+              "value": "- **Type-safe Configuration in Workspace Root** — `.art-workspace.mts` as a TypeScript ESM module; `/config` subpath for the authoring API; main entry re-exports for the CLI.\n- **Runtime Config Loading — esbuild Bundle-at-Runtime** — the manifest is bundled and imported at runtime; `esbuild` becomes a runtime dependency. Reconsider Node native type-stripping when the minimum Node version is guaranteed (≥ 22.6).\n- **Manifest Mirrors Records Structures; Checkouts Derived at Entry Point** — superseded in part by the Checkout record decision below.\n- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.\n- **Records as Source of Truth** — generated files (`.art-workspace.mts`) are derived from records, not maintained separately.",
               "position": {
                 "end": {
                   "column": 127,
                   "line": 102,
-                  "offset": 5034
+                  "offset": 5007
                 },
                 "start": {
                   "column": 1,
                   "line": 98,
-                  "offset": 4070
+                  "offset": 4046
                 }
               },
               "children": [
@@ -3289,12 +3289,12 @@
                     "end": {
                       "column": 175,
                       "line": 98,
-                      "offset": 4244
+                      "offset": 4220
                     },
                     "start": {
                       "column": 1,
                       "line": 98,
-                      "offset": 4070
+                      "offset": 4046
                     }
                   },
                   "children": [
@@ -3306,12 +3306,12 @@
                         "end": {
                           "column": 175,
                           "line": 98,
-                          "offset": 4244
+                          "offset": 4220
                         },
                         "start": {
                           "column": 3,
                           "line": 98,
-                          "offset": 4072
+                          "offset": 4048
                         }
                       },
                       "children": [
@@ -3323,12 +3323,12 @@
                             "end": {
                               "column": 48,
                               "line": 98,
-                              "offset": 4117
+                              "offset": 4093
                             },
                             "start": {
                               "column": 3,
                               "line": 98,
-                              "offset": 4072
+                              "offset": 4048
                             }
                           },
                           "children": [
@@ -3341,12 +3341,12 @@
                                 "end": {
                                   "column": 46,
                                   "line": 98,
-                                  "offset": 4115
+                                  "offset": 4091
                                 },
                                 "start": {
                                   "column": 5,
                                   "line": 98,
-                                  "offset": 4074
+                                  "offset": 4050
                                 }
                               }
                             }
@@ -3361,12 +3361,12 @@
                             "end": {
                               "column": 51,
                               "line": 98,
-                              "offset": 4120
+                              "offset": 4096
                             },
                             "start": {
                               "column": 48,
                               "line": 98,
-                              "offset": 4117
+                              "offset": 4093
                             }
                           }
                         },
@@ -3379,12 +3379,12 @@
                             "end": {
                               "column": 71,
                               "line": 98,
-                              "offset": 4140
+                              "offset": 4116
                             },
                             "start": {
                               "column": 51,
                               "line": 98,
-                              "offset": 4120
+                              "offset": 4096
                             }
                           }
                         },
@@ -3397,12 +3397,12 @@
                             "end": {
                               "column": 100,
                               "line": 98,
-                              "offset": 4169
+                              "offset": 4145
                             },
                             "start": {
                               "column": 71,
                               "line": 98,
-                              "offset": 4140
+                              "offset": 4116
                             }
                           }
                         },
@@ -3415,12 +3415,12 @@
                             "end": {
                               "column": 109,
                               "line": 98,
-                              "offset": 4178
+                              "offset": 4154
                             },
                             "start": {
                               "column": 100,
                               "line": 98,
-                              "offset": 4169
+                              "offset": 4145
                             }
                           }
                         },
@@ -3433,12 +3433,12 @@
                             "end": {
                               "column": 175,
                               "line": 98,
-                              "offset": 4244
+                              "offset": 4220
                             },
                             "start": {
                               "column": 109,
                               "line": 98,
-                              "offset": 4178
+                              "offset": 4154
                             }
                           }
                         }
@@ -3456,12 +3456,12 @@
                     "end": {
                       "column": 240,
                       "line": 99,
-                      "offset": 4484
+                      "offset": 4460
                     },
                     "start": {
                       "column": 1,
                       "line": 99,
-                      "offset": 4245
+                      "offset": 4221
                     }
                   },
                   "children": [
@@ -3473,12 +3473,12 @@
                         "end": {
                           "column": 240,
                           "line": 99,
-                          "offset": 4484
+                          "offset": 4460
                         },
                         "start": {
                           "column": 3,
                           "line": 99,
-                          "offset": 4247
+                          "offset": 4223
                         }
                       },
                       "children": [
@@ -3490,12 +3490,12 @@
                             "end": {
                               "column": 57,
                               "line": 99,
-                              "offset": 4301
+                              "offset": 4277
                             },
                             "start": {
                               "column": 3,
                               "line": 99,
-                              "offset": 4247
+                              "offset": 4223
                             }
                           },
                           "children": [
@@ -3508,12 +3508,12 @@
                                 "end": {
                                   "column": 55,
                                   "line": 99,
-                                  "offset": 4299
+                                  "offset": 4275
                                 },
                                 "start": {
                                   "column": 5,
                                   "line": 99,
-                                  "offset": 4249
+                                  "offset": 4225
                                 }
                               }
                             }
@@ -3528,12 +3528,12 @@
                             "end": {
                               "column": 109,
                               "line": 99,
-                              "offset": 4353
+                              "offset": 4329
                             },
                             "start": {
                               "column": 57,
                               "line": 99,
-                              "offset": 4301
+                              "offset": 4277
                             }
                           }
                         },
@@ -3546,12 +3546,12 @@
                             "end": {
                               "column": 118,
                               "line": 99,
-                              "offset": 4362
+                              "offset": 4338
                             },
                             "start": {
                               "column": 109,
                               "line": 99,
-                              "offset": 4353
+                              "offset": 4329
                             }
                           }
                         },
@@ -3564,12 +3564,12 @@
                             "end": {
                               "column": 240,
                               "line": 99,
-                              "offset": 4484
+                              "offset": 4460
                             },
                             "start": {
                               "column": 118,
                               "line": 99,
-                              "offset": 4362
+                              "offset": 4338
                             }
                           }
                         }
@@ -3587,12 +3587,12 @@
                     "end": {
                       "column": 136,
                       "line": 100,
-                      "offset": 4620
+                      "offset": 4596
                     },
                     "start": {
                       "column": 1,
                       "line": 100,
-                      "offset": 4485
+                      "offset": 4461
                     }
                   },
                   "children": [
@@ -3604,12 +3604,12 @@
                         "end": {
                           "column": 136,
                           "line": 100,
-                          "offset": 4620
+                          "offset": 4596
                         },
                         "start": {
                           "column": 3,
                           "line": 100,
-                          "offset": 4487
+                          "offset": 4463
                         }
                       },
                       "children": [
@@ -3621,12 +3621,12 @@
                             "end": {
                               "column": 76,
                               "line": 100,
-                              "offset": 4560
+                              "offset": 4536
                             },
                             "start": {
                               "column": 3,
                               "line": 100,
-                              "offset": 4487
+                              "offset": 4463
                             }
                           },
                           "children": [
@@ -3639,12 +3639,12 @@
                                 "end": {
                                   "column": 74,
                                   "line": 100,
-                                  "offset": 4558
+                                  "offset": 4534
                                 },
                                 "start": {
                                   "column": 5,
                                   "line": 100,
-                                  "offset": 4489
+                                  "offset": 4465
                                 }
                               }
                             }
@@ -3659,12 +3659,12 @@
                             "end": {
                               "column": 136,
                               "line": 100,
-                              "offset": 4620
+                              "offset": 4596
                             },
                             "start": {
                               "column": 76,
                               "line": 100,
-                              "offset": 4560
+                              "offset": 4536
                             }
                           }
                         }
@@ -3677,34 +3677,34 @@
                   "type": "listItem",
                   "checked": null,
                   "spread": false,
-                  "value": "- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`ops/records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.",
+                  "value": "- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.",
                   "position": {
                     "end": {
-                      "column": 287,
+                      "column": 284,
                       "line": 101,
-                      "offset": 4907
+                      "offset": 4880
                     },
                     "start": {
                       "column": 1,
                       "line": 101,
-                      "offset": 4621
+                      "offset": 4597
                     }
                   },
                   "children": [
                     {
                       "construct": "NaturalBlock",
                       "type": "paragraph",
-                      "value": "**Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`ops/records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.",
+                      "value": "**Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.",
                       "position": {
                         "end": {
-                          "column": 287,
+                          "column": 284,
                           "line": 101,
-                          "offset": 4907
+                          "offset": 4880
                         },
                         "start": {
                           "column": 3,
                           "line": 101,
-                          "offset": 4623
+                          "offset": 4599
                         }
                       },
                       "children": [
@@ -3716,12 +3716,12 @@
                             "end": {
                               "column": 61,
                               "line": 101,
-                              "offset": 4681
+                              "offset": 4657
                             },
                             "start": {
                               "column": 3,
                               "line": 101,
-                              "offset": 4623
+                              "offset": 4599
                             }
                           },
                           "children": [
@@ -3734,12 +3734,12 @@
                                 "end": {
                                   "column": 59,
                                   "line": 101,
-                                  "offset": 4679
+                                  "offset": 4655
                                 },
                                 "start": {
                                   "column": 5,
                                   "line": 101,
-                                  "offset": 4625
+                                  "offset": 4601
                                 }
                               }
                             }
@@ -3754,12 +3754,12 @@
                             "end": {
                               "column": 180,
                               "line": 101,
-                              "offset": 4800
+                              "offset": 4776
                             },
                             "start": {
                               "column": 61,
                               "line": 101,
-                              "offset": 4681
+                              "offset": 4657
                             }
                           }
                         },
@@ -3767,17 +3767,17 @@
                           "construct": "NaturalExpression",
                           "type": "inlineCode",
                           "attributes": {},
-                          "value": "ops/records/checkouts/{repo}.art",
+                          "value": "_records/checkouts/{repo}.art",
                           "position": {
                             "end": {
-                              "column": 214,
+                              "column": 211,
                               "line": 101,
-                              "offset": 4834
+                              "offset": 4807
                             },
                             "start": {
                               "column": 180,
                               "line": 101,
-                              "offset": 4800
+                              "offset": 4776
                             }
                           }
                         },
@@ -3788,14 +3788,14 @@
                           "value": ") managed by CLI commands, keeping repository records as read-only facts.",
                           "position": {
                             "end": {
-                              "column": 287,
+                              "column": 284,
                               "line": 101,
-                              "offset": 4907
+                              "offset": 4880
                             },
                             "start": {
-                              "column": 214,
+                              "column": 211,
                               "line": 101,
-                              "offset": 4834
+                              "offset": 4807
                             }
                           }
                         }
@@ -3813,12 +3813,12 @@
                     "end": {
                       "column": 127,
                       "line": 102,
-                      "offset": 5034
+                      "offset": 5007
                     },
                     "start": {
                       "column": 1,
                       "line": 102,
-                      "offset": 4908
+                      "offset": 4881
                     }
                   },
                   "children": [
@@ -3830,12 +3830,12 @@
                         "end": {
                           "column": 127,
                           "line": 102,
-                          "offset": 5034
+                          "offset": 5007
                         },
                         "start": {
                           "column": 3,
                           "line": 102,
-                          "offset": 4910
+                          "offset": 4883
                         }
                       },
                       "children": [
@@ -3847,12 +3847,12 @@
                             "end": {
                               "column": 33,
                               "line": 102,
-                              "offset": 4940
+                              "offset": 4913
                             },
                             "start": {
                               "column": 3,
                               "line": 102,
-                              "offset": 4910
+                              "offset": 4883
                             }
                           },
                           "children": [
@@ -3865,12 +3865,12 @@
                                 "end": {
                                   "column": 31,
                                   "line": 102,
-                                  "offset": 4938
+                                  "offset": 4911
                                 },
                                 "start": {
                                   "column": 5,
                                   "line": 102,
-                                  "offset": 4912
+                                  "offset": 4885
                                 }
                               }
                             }
@@ -3885,12 +3885,12 @@
                             "end": {
                               "column": 53,
                               "line": 102,
-                              "offset": 4960
+                              "offset": 4933
                             },
                             "start": {
                               "column": 33,
                               "line": 102,
-                              "offset": 4940
+                              "offset": 4913
                             }
                           }
                         },
@@ -3903,12 +3903,12 @@
                             "end": {
                               "column": 73,
                               "line": 102,
-                              "offset": 4980
+                              "offset": 4953
                             },
                             "start": {
                               "column": 53,
                               "line": 102,
-                              "offset": 4960
+                              "offset": 4933
                             }
                           }
                         },
@@ -3921,12 +3921,12 @@
                             "end": {
                               "column": 127,
                               "line": 102,
-                              "offset": 5034
+                              "offset": 5007
                             },
                             "start": {
                               "column": 73,
                               "line": 102,
-                              "offset": 4980
+                              "offset": 4953
                             }
                           }
                         }

@@ -54,7 +54,7 @@ describe('clone command', () => {
 		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepoTest(bareDir);
-		const workingDir = join(tempDir, 'repos/artificial');
+		const workingDir = join(tempDir, 'checkouts/artificial');
 		await initWorkingRepoTest(workingDir, bareDir);
 		writeFileSync(join(workingDir, 'dirty.txt'), 'dirty');
 
@@ -72,7 +72,7 @@ describe('clone command', () => {
 		const ctx = createMockCommandContext(tempDir);
 		const bareDir = join(tempDir, 'bare/artificial');
 		await initBareRepoTest(bareDir);
-		const workingDir = join(tempDir, 'repos/artificial');
+		const workingDir = join(tempDir, 'checkouts/artificial');
 		await initWorkingRepoTest(workingDir, bareDir);
 		const git = simpleGit(workingDir);
 		await git.checkoutLocalBranch('feature');
@@ -177,7 +177,7 @@ describe('clone command', () => {
 		await runClone(ctx, { repoName: 'Artificial' });
 
 		const output = (console.info as ReturnType<typeof vi.fn>).mock.calls.map(c => c[0]).join('\n');
-		expect(output).toContain('repos/artificial');
+		expect(output).toContain('checkouts/artificial');
 	});
 
 	it('allows multiple checkouts of the same repo with different locations', async () => {

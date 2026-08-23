@@ -23,7 +23,7 @@ describe('readCheckoutRecord', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const config = makeMockConfig(tempDir);
 		const file = join(tempDir, 'test.art');
-		const data = { name: 'Artificial', location: 'repos/artificial', branch: 'main' };
+		const data = { name: 'Artificial', location: 'checkouts/artificial', branch: 'main' };
 
 		const saved = await saveCheckoutRecord(config, data, file);
 		const read = await readCheckoutRecord(createRecordFile(tempDir, saved));
@@ -43,7 +43,7 @@ describe('readCheckoutRecord', () => {
 	it('returns null when kind heading is absent', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'noheading.art');
-		writeFileSync(file, '# Module\n\n**Location:** `repos/test`\n\n**Branch:** `main`\n');
+		writeFileSync(file, '# Module\n\n**Location:** `checkouts/test`\n\n**Branch:** `main`\n');
 
 		const read = await readCheckoutRecord(createRecordFile(tempDir, file));
 
@@ -53,7 +53,7 @@ describe('readCheckoutRecord', () => {
 	it('warns and uses defaults for malformed lines', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const file = join(tempDir, 'malformed.art');
-		writeFileSync(file, '# Module\n\n## Checkout: Test\n\n**Location:** `repos/test`\n');
+		writeFileSync(file, '# Module\n\n## Checkout: Test\n\n**Location:** `checkouts/test`\n');
 
 		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
@@ -62,7 +62,7 @@ describe('readCheckoutRecord', () => {
 		expect(read).not.toBeNull();
 		if (!read) return;
 		expect(read.name).toBe('Test');
-		expect(read.location).toBe('repos/test');
+		expect(read.location).toBe('checkouts/test');
 		expect(read.branch).toBe('main');
 		expect(warn).toHaveBeenCalledWith(expect.stringContaining('missing branch'));
 	});

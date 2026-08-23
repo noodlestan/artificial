@@ -16,12 +16,12 @@ Columns: `repo`, `location`, `branch`, `states`. `states` is the joined list of 
 
 The primary status table, presented after every command that reads or mutates checkouts. Ordered by repo name; checkouts without a remote last.
 
-Columns: `repo`, `location`, `branch`, `states`. `states` is the joined list of issues (e.g. `uncommitted files`, `2 commits ahead`) or `-` when clean. `location` is displayed relative to the checkouts path (e.g. `repos/artificial`).
+Columns: `repo`, `location`, `branch`, `states`. `states` is the joined list of issues (e.g. `uncommitted files`, `2 commits ahead`) or `-` when clean. `location` is displayed relative to the checkouts path (e.g. `checkouts/artificial`).
 
-| repo        | location          | branch | states          |
-| ----------- | ----------------- | ------ | --------------- |
-| artificial  | repos/artificial  | main   | -               |
-| purrception | repos/purrception | feat/x | 2 commits ahead |
+| repo        | location              | branch | states          |
+| ----------- | --------------------- | ------ | --------------- |
+| artificial  | checkouts/artificial  | main   | -               |
+| purrception | checkouts/purrception | feat/x | 2 commits ahead |
 
 ## Operations Report
 
@@ -29,11 +29,11 @@ Appended when a command performs side effects; omitted when nothing was done. Ea
 
 Columns: ``, `repo`, `operation`, `message`.
 
-|     | repo        | operation | detail                       |
-| --- | ----------- | --------- | ---------------------------- |
-| 🟢  | artificial  | clone     | cloned to repos/artificial   |
-| 🟢  | purrception | push      | 2 commits to origin/feat/x   |
-| 🔴  | no-comply   | publish   | @no-comply/core@1.2.3 failed |
+|     | repo        | operation | detail                         |
+| --- | ----------- | --------- | ------------------------------ |
+| 🟢  | artificial  | clone     | cloned to checkouts/artificial |
+| 🟢  | purrception | push      | 2 commits to origin/feat/x     |
+| 🔴  | no-comply   | publish   | @no-comply/core@1.2.3 failed   |
 
 ## Extraneous Report
 
@@ -64,10 +64,10 @@ Presented by `repo` immediately after the matching Repository State Report for e
 
 Columns: `canonical name`, `version`, `published`, `directory`, `states`.
 
-| canonical name        | version | published | directory                          | states          |
-| --------------------- | ------- | --------- | ---------------------------------- | --------------- |
-| @artisans/art-mantras | 0.0.1   | 0.0.1     | repos/artificial/artisans/apps/... | clean           |
-| @artisans/art-doom    | 1.2.0   | unknown   | repos/artificial/artisans/apps/... | npm info failed |
+| canonical name        | version | published | directory                              | states          |
+| --------------------- | ------- | --------- | -------------------------------------- | --------------- |
+| @artisans/art-mantras | 0.0.1   | 0.0.1     | checkouts/artificial/artisans/apps/... | clean           |
+| @artisans/art-doom    | 1.2.0   | unknown   | checkouts/artificial/artisans/apps/... | npm info failed |
 
 ## Symlink Report
 

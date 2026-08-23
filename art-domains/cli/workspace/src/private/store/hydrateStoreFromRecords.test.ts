@@ -24,12 +24,12 @@ describe('hydrateStoreFromRecords', () => {
 			{
 				repo: { name: 'Alpha', remote: 'git@example.com:alpha.git' },
 				checkout: { name: 'Alpha', location: 'alpha', branch: 'main' },
-				filename: join(tempDir, 'ops/records/checkouts/alpha.art'),
+				filename: join(tempDir, '_records/checkouts/alpha.art'),
 			},
 			{
 				repo: { name: 'Beta', remote: 'git@example.com:beta.git' },
 				checkout: { name: 'Beta', location: 'beta', branch: 'develop' },
-				filename: join(tempDir, 'ops/records/checkouts/beta.art'),
+				filename: join(tempDir, '_records/checkouts/beta.art'),
 			},
 		];
 
@@ -45,7 +45,7 @@ describe('hydrateStoreFromRecords', () => {
 		const tempDir = makeTempDir(tempDirs);
 		const config = makeMockConfig(tempDir);
 		const store = createCheckoutStore();
-		const filename = join(tempDir, 'ops/records/checkouts/foo.art');
+		const filename = join(tempDir, '_records/checkouts/foo.art');
 		const records = [
 			{
 				repo: { name: 'Foo', remote: 'git@example.com:foo.git' },
@@ -68,7 +68,7 @@ describe('hydrateStoreFromRecords', () => {
 		const records = [
 			{
 				checkout: { name: 'Orphan', location: 'orphan', branch: 'main' },
-				filename: join(tempDir, 'ops/records/checkouts/orphan.art'),
+				filename: join(tempDir, '_records/checkouts/orphan.art'),
 			},
 		];
 
@@ -77,6 +77,6 @@ describe('hydrateStoreFromRecords', () => {
 		const checkout = store.getCheckoutForLocation('orphan');
 		expect(checkout).toBeDefined();
 		expect(checkout?.repo).toBeUndefined();
-		expect(checkout?.filename).toBe(join(tempDir, 'ops/records/checkouts/orphan.art'));
+		expect(checkout?.filename).toBe(join(tempDir, '_records/checkouts/orphan.art'));
 	});
 });

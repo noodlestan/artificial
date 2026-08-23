@@ -4,13 +4,13 @@
 
 **Status:** `PREPARING`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
 ## Summary
 
-Close the roundtrip gaps surfaced by the pipeline suite (phase 6), one gap at a time. Move from the one-liner markdown fixture toward text, lists, sections, and formatting in small fixture files, addressing gaps as they surface and refining the parser/serializer implementation. Planned last and reactive to the pipeline test results. Pure-whitespace gap `NaturalBlock`s are **preserved** (milestone decision) — no filtering; all refinements stay consistent with the verified migration baseline. Executed within the Artificial repository (`repos/artificial`) as phase 8 of the MD Art Roundtrip milestone.
+Close the roundtrip gaps surfaced by the pipeline suite (phase 6), one gap at a time. Move from the one-liner markdown fixture toward text, lists, sections, and formatting in small fixture files, addressing gaps as they surface and refining the parser/serializer implementation. Planned last and reactive to the pipeline test results. Pure-whitespace gap `NaturalBlock`s are **preserved** (milestone decision) — no filtering; all refinements stay consistent with the verified migration baseline. Executed within the Artificial repository (`checkouts/artificial`) as phase 8 of the MD Art Roundtrip milestone.
 
 ## Scope
 
@@ -26,15 +26,15 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial — Checked out at `repos/artificial` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial — Checked out at `checkouts/artificial` branch `main`; described by `_records/projects/artificial.art`.
 
 ### Packages
 
-- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `art-js/libs/parser/` (refined as gaps close).
-- Package: Artificial Serializer — Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `ops/records/packages/artificial-serializer.art`; located at `art-js/libs/serializer/` (refined as gaps close).
-- Package: Artificial Constructs — Canonical `@art-js/artificial-constructs` (public @0.0.1); described by `ops/records/packages/artificial-constructs.art`; located at `art-js/libs/constructs/` (refined as gaps close).
-- Package: Artificial Primitives — Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `ops/records/packages/artificial-primitives.art`; located at `art-js/libs/primitives/` (refined as gaps close).
-- Package: Artificial POC Parse — Canonical `@art-js/poc-parse`; described by `ops/records/packages/artificial-poc-parse.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
+- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `art-js/libs/parser/_records package.art`; located at `art-js/libs/parser/` (refined as gaps close).
+- Package: Artificial Serializer — Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `art-js/libs/serializer/_records package.art`; located at `art-js/libs/serializer/` (refined as gaps close).
+- Package: Artificial Constructs — Canonical `@art-js/artificial-constructs` (public @0.0.1); described by `art-js/libs/constructs/_records package.art`; located at `art-js/libs/constructs/` (refined as gaps close).
+- Package: Artificial Primitives — Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `art-js/libs/primitives/_records package.art`; located at `art-js/libs/primitives/` (refined as gaps close).
+- Package: Artificial POC Parse — Canonical `@art-js/poc-parse`; described by `art-js/cli/poc-parse/_records artificia.art`; located at `art-js/cli/poc-parse/` (migration source; read-only).
 
 ### Deployments
 
@@ -53,8 +53,8 @@ This section describes the context feeding (and being affected by) the plan, inc
 
 ### Guides
 
-- `repos/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
-- `repos/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
+- `checkouts/artificial/_guide.md` — repository layout, setup (`npm ci` at root), per-package verification commands, records and references locations, planning workflow.
+- `checkouts/artificial/art-js/cli/poc-parse/_guide.md` — nested guide for the POC package (migration source); references `_pseudo.md` and architecture; notes the archived backlog.
 
 ### Knowledge
 
@@ -72,11 +72,11 @@ For the delegatee (shared context; per-step context is in each instruction file)
 
 ## Execution Context
 
-Execution occurs in `$WORKSPACE/repos/artificial` on branch `main`; working directories are `$PROJECT/art-js/cli/pipeline-tests`, `$PROJECT/art-js/libs/parser`, `$PROJECT/art-js/libs/serializer`, and `$PROJECT/art-js/libs/constructs`.
+Execution occurs in `$WORKSPACE/checkouts/artificial` on branch `main`; working directories are `$PROJECT/art-js/cli/pipeline-tests`, `$PROJECT/art-js/libs/parser`, `$PROJECT/art-js/libs/serializer`, and `$PROJECT/art-js/libs/constructs`.
 
 ## Setup
 
-Run from `repos/artificial` repository directory:
+Run from `checkouts/artificial` repository directory:
 
 ```bash
 npm ci # to install dependencies.

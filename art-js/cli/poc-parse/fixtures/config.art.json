@@ -298,7 +298,7 @@
                 },
                 {
                   "type": "inlineCode",
-                  "value": "ops/records/repositories/{repo}.art",
+                  "value": "_records/repositories/{repo}.art",
                   "position": {
                     "start": {
                       "line": 9,
@@ -330,7 +330,7 @@
                 },
                 {
                   "type": "inlineCode",
-                  "value": "ops/records/workspace.art",
+                  "value": "_records/workspace.art",
                   "position": {
                     "start": {
                       "line": 9,
@@ -373,7 +373,7 @@
                   "offset": 709
                 }
               },
-              "value": "The config is **manually authored, not generated**. Records (`ops/records/repositories/{repo}.art`, `ops/records/workspace.art`) are the source of truth; the config points the CLI at them. A future generator derives the manifest from records, eliminating the manual step."
+              "value": "The config is **manually authored, not generated**. Records (`_records/repositories/{repo}.art`, `_records/workspace.art`) are the source of truth; the config points the CLI at them. A future generator derives the manifest from records, eliminating the manual step."
             },
             {
               "construct": "NaturalBlock",
@@ -409,7 +409,7 @@
               "type": "code",
               "lang": "typescript",
               "meta": null,
-              "value": "```typescript\ninterface WorkspaceConfig {\n  root: {\n    path: string; // Workspace root; set by loadWorkspaceConfig to the invocation cwd\n  };\n  clone: {\n    path: string; // Where repos are cloned (e.g., 'repos')\n  };\n  records: {\n    repositories: {\n      path: string; // Path to repository records (e.g., 'ops/records/repositories')\n    };\n    checkouts: {\n      path: string; // Path to checkout records (e.g., 'ops/records/checkouts')\n      template: string; // Template for generating checkout records\n    };\n  };\n}\n```",
+              "value": "```typescript\ninterface WorkspaceConfig {\n  root: {\n    path: string; // Workspace root; set by loadWorkspaceConfig to the invocation cwd\n  };\n  clone: {\n    path: string; // Where repos are cloned (e.g., 'repos')\n  };\n  records: {\n    repositories: {\n      path: string; // Path to repository records (e.g., '_records/repositories')\n    };\n    checkouts: {\n      path: string; // Path to checkout records (e.g., '_records/checkouts')\n      template: string; // Template for generating checkout records\n    };\n  };\n}\n```",
               "position": {
                 "start": {
                   "line": 13,
@@ -561,7 +561,7 @@
               "type": "code",
               "lang": "typescript",
               "meta": null,
-              "value": "```typescript\nimport { defineConfig } from '@art-domains/workspace-cli/config';\n\nexport default defineConfig({\n  clone: { path: 'repos' },\n  records: {\n    repositories: { path: 'ops/records/repositories' },\n    checkouts: {\n      path: 'ops/records/checkouts',\n      template: '.agents/domains/workspace/templates/checkout.art.njk',\n    },\n  },\n});\n```",
+              "value": "```typescript\nimport { defineConfig } from '@art-domains/workspace-cli/config';\n\nexport default defineConfig({\n  clone: { path: 'repos' },\n  records: {\n    repositories: { path: '_records/repositories' },\n    checkouts: {\n      path: '_records/checkouts',\n      template: '.agents/domains/workspace/templates/checkout.art.njk',\n    },\n  },\n});\n```",
               "position": {
                 "start": {
                   "line": 37,
@@ -1895,7 +1895,7 @@
                 },
                 {
                   "type": "inlineCode",
-                  "value": "ops/records/repositories/{repo}.art",
+                  "value": "_records/repositories/{repo}.art",
                   "position": {
                     "start": {
                       "line": 92,
@@ -1927,7 +1927,7 @@
                 },
                 {
                   "type": "inlineCode",
-                  "value": "ops/records/workspace.art",
+                  "value": "_records/workspace.art",
                   "position": {
                     "start": {
                       "line": 92,
@@ -1970,7 +1970,7 @@
                   "offset": 3983
                 }
               },
-              "value": "Records (`ops/records/repositories/{repo}.art`, `ops/records/workspace.art`) are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands."
+              "value": "Records (`_records/repositories/{repo}.art`, `_records/workspace.art`) are the source of truth. The config is manually authored, not generated — the two stay in sync manually until the generator lands."
             },
             {
               "construct": "NaturalBlock",
@@ -2130,7 +2130,7 @@
                 },
                 {
                   "construct": "NaturalBlock",
-                  "value": "**Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`ops/records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.",
+                  "value": "**Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.",
                   "position": {
                     "start": {
                       "line": 101,
@@ -2173,7 +2173,7 @@
                   "offset": 5034
                 }
               },
-              "value": "- **Type-safe Configuration in Workspace Root** — `.art-workspace.mts` as a TypeScript ESM module; `/config` subpath for the authoring API; main entry re-exports for the CLI.\n- **Runtime Config Loading — esbuild Bundle-at-Runtime** — the manifest is bundled and imported at runtime; `esbuild` becomes a runtime dependency. Reconsider Node native type-stripping when the minimum Node version is guaranteed (≥ 22.6).\n- **Manifest Mirrors Records Structures; Checkouts Derived at Entry Point** — superseded in part by the Checkout record decision below.\n- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`ops/records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.\n- **Records as Source of Truth** — generated files (`.art-workspace.mts`) are derived from records, not maintained separately."
+              "value": "- **Type-safe Configuration in Workspace Root** — `.art-workspace.mts` as a TypeScript ESM module; `/config` subpath for the authoring API; main entry re-exports for the CLI.\n- **Runtime Config Loading — esbuild Bundle-at-Runtime** — the manifest is bundled and imported at runtime; `esbuild` becomes a runtime dependency. Reconsider Node native type-stripping when the minimum Node version is guaranteed (≥ 22.6).\n- **Manifest Mirrors Records Structures; Checkouts Derived at Entry Point** — superseded in part by the Checkout record decision below.\n- **Checkouts as CLI-Managed Records — Structure: Checkout** — status Proposed in the ADR but effectively adopted in implementation: checkouts are persisted in their own records (`_records/checkouts/{repo}.art`) managed by CLI commands, keeping repository records as read-only facts.\n- **Records as Source of Truth** — generated files (`.art-workspace.mts`) are derived from records, not maintained separately."
             }
           ],
           "depth": 2,

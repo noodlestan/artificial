@@ -1,0 +1,26 @@
+# Module
+
+## Type: Record Field
+
+**Description:** A named element within a structure, with a value type and optional description and examples.
+
+<!-- align with PrimitiveRecordField -->
+
+**Status:** wip
+
+**Primitive**: Record
+
+**Shape:**
+
+- `name` - Natural Name. Identifies the field in a record. Example: "`name`".
+- `valueType` - Union(Primitive, Structure, NaturalExpression)
+- `description` — NaturalExpression.
+- `examples` — ExampleInline.
+
+**Examples:**
+
+Example of a Record Field
+
+```md
+- `name` - Natural Name. Identifies the field in a record. Example: "`name`".
+```

@@ -19,13 +19,13 @@
 **ValueType:**
 
 ```ts
-type PrimitiveRecordFieldValueType = PrimitiveScalar | PrimitiveStructure | ... WIP
+type PrimitiveRecordFieldValueType = PrimitiveScalar | PrimitiveStructure | NaturalExpression ... WIP
 
 type PrimitiveRecordField = {
   name: string;
-  description: string;
-  purpose: string;
   valueType: PrimitiveRecordFieldValueType;
+  description: string;
+  examples: string;
 };
 
 type PrimitiveRecord = {

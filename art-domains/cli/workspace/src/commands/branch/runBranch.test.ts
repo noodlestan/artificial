@@ -71,7 +71,7 @@ describe('branch command', () => {
 	it('warns and skips a checkout that is not cloned yet', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createMockCommandContext(tempDir);
-		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'repos/one'));
+		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'checkouts/one'));
 
 		writeRepoMockRecord(tempDir, 'One', 'git@example.com:one.git');
 		writeCheckoutMockRecord(tempDir, 'One', 'One', 'one');
@@ -86,7 +86,7 @@ describe('branch command', () => {
 	it('logs a failure and continues when a checkout is not cloned', async () => {
 		const tempDir = makeTempDir(tempDirs);
 		const ctx = createMockCommandContext(tempDir);
-		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'repos/good'));
+		await initGitRepoTest(join(tempDir, ctx.config.clone.path, 'checkouts/good'));
 
 		writeRepoMockRecord(tempDir, 'Good', 'git@example.com:good.git');
 		writeRepoMockRecord(tempDir, 'Missing', 'git@example.com:missing.git');

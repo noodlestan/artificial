@@ -4,7 +4,7 @@
 
 **Status:** `IN_PROGRESS`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
@@ -34,14 +34,14 @@ This section describes the working scope, where the plan is executed and what it
 
 ### Project Repositories
 
-- Repository: Artificial — Checked out at `$PROJECT` branch `main`; described by `ops/records/projects/artificial.art`.
+- Repository: Artificial — Checked out at `$PROJECT` branch `main`; described by `_records/projects/artificial.art`.
 
 ### Packages
 
-- Package: Artificial Serializer — Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `ops/records/packages/artificial-serializer.art` (record created in this plan); located at `$PACKAGE_SERIALIZER`.
-- Package: Artificial Primitives — Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `ops/records/packages/artificial-primitives.art`; located at `$PACKAGE_PRIMITIVES` (dependency of serializer).
-- Package: Artificial Constructs — Canonical `@art-js/artificial-constructs` (public @0.0.1); described by `ops/records/packages/artificial-constructs.art`; located at `$PACKAGE_CONSTRUCTS` (dependency of serializer; factories it owns map back to md).
-- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `ops/records/packages/artificial-parser.art`; located at `$PACKAGE_PARSER` (fixture suite extended to two directions in this plan).
+- Package: Artificial Serializer — Canonical `@art-js/artificial-serializer` (public @0.0.1); described by `$PACKAGE_SERIALIZER/_records/package.art` (record created in this plan); located at `$PACKAGE_SERIALIZER`.
+- Package: Artificial Primitives — Canonical `@art-js/artificial-primitives` (public @0.0.1); described by `$PACKAGE_PRIMITIVES/_records/package.art`; located at `$PACKAGE_PRIMITIVES` (dependency of serializer).
+- Package: Artificial Constructs — Canonical `@art-js/artificial-constructs` (public @0.0.1); described by `$PACKAGE_CONSTRUCTS/_records/package.art`; located at `$PACKAGE_CONSTRUCTS` (dependency of serializer; factories it owns map back to md).
+- Package: Artificial Parser — Canonical `@art-js/artificial-parser` (public @0.0.1); described by `$PACKAGE_PARSER/_records/package.art`; located at `$PACKAGE_PARSER` (fixture suite extended to two directions in this plan).
 
 ### Deployments
 
@@ -114,7 +114,7 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 - Scaffold `@art-js/artificial-serializer` at `$PACKAGE_SERIALIZER` (vite build, tsconfig, package.json; license, dotfiles; mirrors `$PACKAGE_PRIMITIVES` scaffold).
 - Implement `serialize(document): string` — artast → mdast → md — based on the lossless roundtrip contract; depends on primitives and constructs.
 - Add unit test coverage for the serializer.
-- Register package record `$PROJECT/ops/records/packages/artificial-serializer.art`.
+- Register package record `$PROJECT/_records/packages/artificial-serializer.art`.
 - Verify: `npm run lint`, `npm run build`, `npm run test` in serializer package.
 
 ### `two-way-fixture-tests` - `COMMITTED`
@@ -176,7 +176,7 @@ Serializer package: unit tests for `serialize(document): string`. Parser package
 
 **Notes:**
 
-- Existing serializer-wip work lives at `$WORKSPACE/repos/artificial-wip/art-js/libs/parser` on branch `serializer-wip`.
+- Existing serializer-wip work lives at `$WORKSPACE/checkouts/artificial-wip/art-js/libs/parser` on branch `serializer-wip`.
 - The serializer-wip branch already has split test scripts (`test-parser.ts`, `test-serializer.ts`) with `--write` and `--fixture` flags.
 - The serializer-wip `test-parser.ts` writes `.art.json` files as a side-effect of testing; this is the problem this instruction aims to fix.
 - The serializer-wip also contains additional constructs/FieldInline work that may inform implementation, but the real fix is parser-side (see insight in planner reflection).

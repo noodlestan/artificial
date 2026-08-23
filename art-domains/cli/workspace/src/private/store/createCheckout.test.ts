@@ -9,7 +9,7 @@ describe('createCheckout', () => {
 		const config = makeMockConfig('.');
 		const checkout = createCheckout(config, 'target');
 
-		expect(checkout.path).toBe('repos/target');
+		expect(checkout.path).toBe('checkouts/target');
 		expect(checkout.repo).toBe(undefined);
 		expect(checkout.record.repository).toBe(undefined);
 		expect(checkout.record.name).toBe('target');
@@ -22,7 +22,7 @@ describe('createCheckout', () => {
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:foo-bar.git' };
 		const checkout = createCheckout(config, 'fix-test', repo);
 
-		expect(checkout.path).toBe('repos/fix-test');
+		expect(checkout.path).toBe('checkouts/fix-test');
 		expect(checkout.repo).toBe(repo);
 		expect(checkout.record.repository).toBe('Foo Bar');
 		expect(checkout.record.name).toBe('Foo Bar @ fix-test');
@@ -35,7 +35,7 @@ describe('createCheckout', () => {
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:foo-bar.git' };
 		const checkout = createCheckout(config, 'fix-test', repo, 'branch-name');
 
-		expect(checkout.path).toBe('repos/fix-test');
+		expect(checkout.path).toBe('checkouts/fix-test');
 		expect(checkout.record.name).toBe('Foo Bar @ fix-test');
 		expect(checkout.record.location).toBe('fix-test');
 		expect(checkout.record.branch).toBe('branch-name');
@@ -46,7 +46,7 @@ describe('createCheckout', () => {
 		const repo = { name: 'Foo Bar', remote: 'git@example.com:foo-bar.git' };
 		const checkout = createCheckout(config, 'fix-test', repo, undefined, 'Checkout Name');
 
-		expect(checkout.path).toBe('repos/fix-test');
+		expect(checkout.path).toBe('checkouts/fix-test');
 		expect(checkout.repo).toBe(repo);
 		expect(checkout.record.name).toBe('Checkout Name');
 		expect(checkout.record.location).toBe('fix-test');

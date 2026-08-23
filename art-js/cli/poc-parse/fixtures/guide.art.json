@@ -688,7 +688,7 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "inlineCode",
-                  "value": "`$WORKSPACE/repos/terraform/domains/noodlestan/websites/art-mantras/`",
+                  "value": "`$WORKSPACE/checkouts/terraform/domains/noodlestan/websites/art-mantras/`",
                   "position": {
                     "start": {
                       "line": 57,
@@ -767,7 +767,7 @@
                 },
                 {
                   "type": "inlineCode",
-                  "value": "ops/records",
+                  "value": "_records",
                   "position": {
                     "start": {
                       "line": 61,
@@ -810,7 +810,7 @@
                   "offset": 2306
                 }
               },
-              "value": "The workspace maintains ops records at `ops/records` detailing project configurations, namespaces, packages, dependencies, scaffolding and more."
+              "value": "The workspace maintains ops records at `_records` detailing project configurations, namespaces, packages, dependencies, scaffolding and more."
             },
             {
               "construct": "NaturalBlock",

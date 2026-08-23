@@ -935,7 +935,7 @@ saveCheckoutRecord(config, data, filename?)
 
 ### Function: readProjectRecords(ctx, checkout)
 
-**Responsibility:** Read a checkout's project records dynamically. Uses `findRecordFiles(checkoutPath, config.records.pattern, ['Records'])` to discover `.art` files, then filters by kind (project, namespace, package) using the singular readers. Returns `Promise`. Supports both legacy `ops/records/{kind}/` and co-located `_records/` layouts.
+**Responsibility:** Read a checkout's project records dynamically. Uses `findRecordFiles(checkoutPath, config.records.pattern, ['Records'])` to discover `.art` files, then filters by kind (project, namespace, package) using the singular readers. Returns `Promise`.
 
 **Pseudo:**
 

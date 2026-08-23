@@ -4,7 +4,7 @@
 
 **Status:** `DRAFT`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
@@ -104,7 +104,7 @@ You are working on `art-domains/cli/workspace/_backlog/4-next/plan-implement-lin
 Goal: implement the `art-workspace links` command for `@art-domains/workspace-cli` — a read-only scan of symlinks (workspace root + every checkout's project `node_modules`) presenting the Symlink Report. Not wired yet: create `src/commands/links/` and add the commander entry.
 
 Use the **write-plan** skill to refine this DRAFT into a READY plan:
-1. Compose scope and context: workspace `ops-workspace` (managed by `@art-domains/workspace-cli`); repository `artificial` at `$WORKSPACE/repos/artificial/art-domains/cli/workspace`; package `@art-domains/workspace-cli`.
+1. Compose scope and context: workspace `ops-workspace` (managed by `@art-domains/workspace-cli`); repository `artificial` at `$WORKSPACE/checkouts/artificial/art-domains/cli/workspace`; package `@art-domains/workspace-cli`.
 2. Validate guides have setup/verification (`_guide.md` does).
 3. Group work into commit(s), write the plan file, and generate instruction file(s) in this plan directory.
 4. Enforce the project lesson: tests implemented first, no `it.todo()` left.

@@ -4,13 +4,13 @@
 
 **Status:** `PREPARING`
 
-**Template:** `.agents/domains/plans/templates/plan__template.md`
+**Template:** `.agents/domains/plans/templates/plan.tart`
 
 **Skill:** `write-plan`
 
 ## Summary
 
-Seed the art-js knowledge resources: the `art-js/architecture/` directory (layers, parser, serializer, constructs, and records/adrs); create and update guides, archive milestone, update architecture briefings; make sure package `_records` exist for package publishing or other resources created meanwhile. Executed within the Artificial repository (`repos/artificial`) as phase 7 of the MD Art Roundtrip milestone — draft; commit strategy and implementation instructions to be defined during planning.
+Seed the art-js knowledge resources: the `art-js/architecture/` directory (layers, parser, serializer, constructs, and records/adrs); create and update guides, archive milestone, update architecture briefings; make sure package `_records` exist for package publishing or other resources created meanwhile. Executed within the Artificial repository (`checkouts/artificial`) as phase 7 of the MD Art Roundtrip milestone — draft; commit strategy and implementation instructions to be defined during planning.
 
 ## Source Tasks
 

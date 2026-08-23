@@ -24,7 +24,7 @@ Implement art-mantras race step 6 — **use case: promote (+ strong)**. When a m
 
 - `.agents/domains/plans/definitions/index.md` — plan, implementation-instruction, delegation, and report definitions.
 - `.agents/domains/plans/files/index.md` — plan, instruction, delegation, and report file conventions.
-- `.agents/domains/plans/templates/report__template.md` — report format to render at the end.
+- `.agents/domains/plans/templates/instructions-report.tart` — report format to render at the end.
 - `_backlog/plan-art-mantras/plan.md` — authoritative plan; this commit is `bind-promote`.
 - `artisans/apps/art-mantras/_guide.md` — module map and companion-file reading order.
 - `artisans/apps/art-mantras/_architect.md` — design contract, especially Entry Point, Store, and UI layers.
@@ -131,7 +131,7 @@ The art-mantras step 6 goal is met: a pool-sourced mantra word is appended to it
 
 1. State whether you are reporting completion or a BLOCKER.
 2. Gather evidence of changes and verification, or the blocker details.
-3. Because this instruction includes `DIRECTIVE FEEDBACK`, use the `render-template` skill with `.agents/domains/plans/templates/report__template.md` to render the report file.
+3. Because this instruction includes `DIRECTIVE FEEDBACK`, use the `render-template` skill with `.agents/domains/plans/templates/instructions-report.tart` to render the report file.
 4. Include every ambiguity, omission, or contradiction found, with `where`, `problem`, `decision`, and a ready-to-apply snippet. Do not silently fix design documents.
 5. Return a terse response: happy face plus up to three bullets. The full trail belongs in the report file.
 
