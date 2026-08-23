@@ -43,8 +43,8 @@ pids
 **/generated
 **/dist
 
+# TypeScript build info
+*.tsbuildinfo
+
 # Test directories
 **/coverage
-
-# Asset directories and data files
-resources/assets

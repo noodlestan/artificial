@@ -45,7 +45,3 @@ pids
 
 # Test directories
 **/coverage
-
-# Asset directories and data files
-resources/assets
-
