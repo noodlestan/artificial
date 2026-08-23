@@ -1,4 +1,4 @@
-## Published: Artificials Spec
+## NPM Deployment: Artificials Spec
 
 **Canonical Name:** `@art-js/artificials-spec`
 
@@ -13,4 +13,4 @@
 - Build artifacts exist in `dist/`
 - All dependencies published
 
-**Publish Command:** `cd $WORKSPACE/repos/artificial/art-js/spec && npm publish --access public`
+**Publish Command:** `cd $WORKSPACE/checkouts/artificial/art-js/spec && npm publish --access public`

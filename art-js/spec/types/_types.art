@@ -1,0 +1,80 @@
+# Module
+
+## Uses
+
+::READ (ExampleBlock) FROM `../grammar/constructs/structural/example-block.art`.
+::READ (Identifier) FROM `../grammar/constructs/expressions/identifier.art`.
+::READ (NaturalName) FROM `../grammar/constructs/expressions/natural-name.art`.
+::READ (NaturalExpression) FROM `../grammar/constructs/expressions/natural-expression.art`.
+
+::READ (List, Record, Enum) FROM `../primitives/index.art`.
+
+## Declares
+
+### Type: PrimitiveName
+
+**Primitive:** Identifier
+
+**Purpose:** Defines the name of a primitive.
+
+### Type: PrimitiveStatus
+
+**Purpose:** Defines the status of the primitive.
+
+**Primitive:** Enum
+
+**Shape:**
+
+- SPECULATIVE: This routine is a POC.
+- WIP: This routine ...
+- UNSTABLE: This routine...
+- STABLE: This routine ..
+- DEPRECATED: This routine ..
+
+### Type: PrimitivePurpose
+
+**Purpose:** Describes what the primitive provides.
+
+**Primitive:** NaturalExpression
+
+### Type: PrimitiveDescription
+
+**Purpose:** Describes what a primitive is and how it work.
+
+**Primitive:** NaturalExpression
+
+### Type: PrimitiveSchema
+
+**Purpose:** Defines the primitive internal schema.
+
+**Primitive:** ? WIP
+
+### Type: PrimitiveArt
+
+**Purpose:** Defines how a primitive is expressed in artificial code.
+
+**Primitive:** ? WIP
+
+### Type: PrimitiveAuthor
+
+**Purpose:** Defines how a primitive should be declared in structures and types.
+
+**Primitive:** ? WIP
+
+### Type: PrimitiveGenerator
+
+**Purpose:** Defines how a primitive value should be presented in generated instances.
+
+**Primitive:** ? WIP
+
+### Type: PrimitiveOperator
+
+**Purpose:** Defines how a primitive value should be interpreted from generated instances.
+
+**Primitive:** ? WIP
+
+### Type: PrimitiveIndexer
+
+**Purpose:** Defines how a primitive should be summarised for discovery.
+
+**Primitive:** ? WIP

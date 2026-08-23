@@ -1,0 +1,27 @@
+# Module
+
+## Type: Structure
+
+**Status:** `WIP`
+
+**Purpose:** Shape for all structures.
+
+**Description:** A record with kind, name, status, purpose, description, extends, overrides, inherits, and examples, shape (structure fields) and example.
+
+**Primitive**: Record
+
+**Shape:**
+
+- `status` — One of `active`, `wip`, `broken`, `deprecated`.
+- `purpose` — A short description of what the resource enables.
+- `description` — A short description of what the resource defines.
+- `extends` — Type: Structure Base (Abstract)
+- `overrides` — List(Type: Record Field)
+- `inherits` — List(Type: Record Field)
+- `shape` — List(Type: Record Field)
+- `examples` — A list of example resource records.
+
+**Examples:**
+
+- `.agents/domains/_artificials/structures/structure-abstract.art`
+- `.agents/domains/plans/structures/plan.art`
