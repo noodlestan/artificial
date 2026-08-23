@@ -12,7 +12,7 @@
     "artisans/**"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "clean": "turbo run build:clean",
@@ -39,6 +39,7 @@
     "vite-plugin-solid": "2.11.12",
     "vite-plugin-solid-svg": "0.8.1",
     "vite-plugin-top-level-await": "1.6.0",
-    "vitest": "4.1.8"
+    "vitest": "4.1.8",
+    "@vitest/coverage-v8": "^1.6.1"
   }
 }

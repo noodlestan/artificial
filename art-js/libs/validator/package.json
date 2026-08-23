@@ -10,15 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/noodlestan/no-comply.git",
+    "url": "https://github.com/noodlestan/artificial",
     "directory": "libs/validator/"
   },
   "type": "module",
   "sideEffects": false,
   "main": "./src/index.ts",
   "files": [
-    "src",
-    "LICENSE-MIT"
+    "dist",
+    "LICENSE-MIT",
+    "README.md"
   ],
   "scripts": {
     "dev": "vite build --watch",

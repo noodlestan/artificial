@@ -10,7 +10,7 @@
 
 **Decision:** The language spec (`art-js/spec/`) is the first scope and the first test case for the bundling pipeline. Work on any other domain is deferred until the spec and pipeline are proven.
 
-**Consequences:** A spec content package (`@art-js/artificials-spec`) is created before pipeline implementation.
+**Consequences:** A spec content package (`@art-js/artificial-spec`) is created before pipeline implementation.
 
 ## Decision: Two Main Use Cases
 

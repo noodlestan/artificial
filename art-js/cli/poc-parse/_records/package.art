@@ -6,22 +6,35 @@
 
 **Description:** Internally partitioned along the pipeline boundaries (parse/extract/transform/render) so it mirrors the future art-js modules. POC step 1 scaffolds the runnable CLI; parsing logic, schema types, and the micromark substrate are deliberately deferred.
 
-**Path:** `cli/poc-parse/`
+**Owner:** Project: Artificial
+
+**Namespace:** Namespace: Art JS
+
+**Author:** Noodlestan Collective
+
+**Path:** `art-js/cli/poc-parse/`
 
 **Canonical Name:** `@art-js/poc-parse`
 
-**Version:** `0.0.1`
+**Published:** `false`
 
-**Private:** `false`
-
-**Published:** `true`
+**Private:** `true`
 
 **Language:** Typescript
 
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
+
 **Dependencies:**
 
-- Dev:
-  - Package Dependency Set: Cli Development
+- Runtime:
+  - `mdast-util-from-markdown` @ `^2.0.0` — Generates mdast from MD.
+  - `unist-util-visit` @ `^5.0.0` — mdast traversing.
 
 **Scripts:**
 
@@ -32,4 +45,4 @@
 - Scaffolder Skeleton: CLI Package
 - Scaffolder Skeleton: Package Common
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT

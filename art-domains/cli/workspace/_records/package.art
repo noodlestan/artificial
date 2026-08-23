@@ -1,30 +1,80 @@
 # Module
 
+## Package Dependency: Commander
+
+**Canonical Name:** `commander`
+
+**Purpose:** CLI framework for argument parsing and command routing.
+
+**Version:** `^12.0.0`
+
+## Package Dependency: Simple Git
+
+**Canonical Name:** `simple-git`
+
+**Purpose:** Git operations library for status, push, clone, branch commands.
+
+**Version:** `^3.24.0`
+
+## Package Dependency: ESBuild
+
+**Canonical Name:** `esbuild`
+
+**Purpose:** Workspace configs are expressed in `.mts` modules and need to be compiled by CLI.
+
+**Version:** `^0.28.0`
+
 ## Package: Workspace CLI
 
 **Purpose:** CLI for workspace orchestration (clone, branch, link, sanity, publish).
 
 **Description:** Provides commands for managing multiple repositories: cloning repos, branching across repos, symlinking packages for local dev, checking repo status, and publishing packages.
 
-**Path:** `cli/workspace/`
+**Owner:** Project: Artificial
+
+**Namespace:** Namespace: Art Domains
+
+**Author:** Noodlestan Collective
+
+**Path:** `art-domains/cli/workspace/`
 
 **Canonical Name:** `@art-domains/workspace-cli`
 
-**Version:** `0.0.1`
+**Published:** `true`
 
 **Private:** `false`
 
-**Published:** `true`
+**Deployment:** NPM Package Deployment: Workspace CLI
+
+**Files:**
+
+- `dist`
+- `LICENSE-MIT`
+- `README.md`
 
 **Language:** TypeScript
+
+**Bin:**
+
+- `art-workspace`: `./dist/index.js`
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
 
 **Dependencies:**
 
 - Runtime:
   - Package Dependency: Commander
   - Package Dependency: Simple Git
+  - Package Dependency: ESBuild
+
 - Dev:
-  - Package Dependency Set: Workspace CLI Development
+  - Package Dependency Set: CLI Development
 
 **Scripts:**
 
@@ -36,4 +86,4 @@
 - Scaffolder Skeleton: CLI Package
 - Scaffolder Skeleton: Package Common
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT

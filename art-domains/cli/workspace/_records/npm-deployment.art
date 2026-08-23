@@ -1,0 +1,17 @@
+# Module
+
+## NPM Package Deployment: Workspace CLI
+
+**Owner:** Package: Workspace CLI
+
+**Status:** `DEPLOYED`
+
+**Build:** Deployment Build: NPM Command
+
+**Deploy:** Deployment Command: NPM Package CLI
+
+**Canonical Name:** `@art-domains/workspace-cli`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`

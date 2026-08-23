@@ -16,7 +16,7 @@ A collection of tools and resources to generate and manage agent instructions. I
 | `@art-js`   | `art-js/libs/program/`       | `@art-js/artificial-program`    | Executes parsed Art modules               |
 | `@art-js`   | `art-js/cli/bin/`            | `@art-js/artificial-bin`        | CLI for pipeline commands                 |
 | `@art-js`   | `art-js/cli/dev-server/`     | `@art-js/artificial-dev-server` | Local dev server for Art modules          |
-| `@art-js`   | `art-js/cli/watcher/`        | `@art-js/artificials-watcher`   | Watches for changes, triggers rebuilds    |
+| `@art-js`   | `art-js/cli/watcher/`        | `@art-js/artificial-watcher`    | Watches for changes, triggers rebuilds    |
 | `@art-js`   | `art-js/cli/poc-parse/`      | `@art-js/poc-parse`             | POC parser spike                          |
 | `@artisans` | `artisans/apps/art-mantras/` | `@artisans/art-mantras`         | Interactive A.R.T.I.F.I.C.I.A.L.S curator |
 

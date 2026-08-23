@@ -7,7 +7,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/noodlestan/no-comply.git",
+    "url": "https://github.com/noodlestan/artificial",
     "directory": "art-js/cli/bin"
   },
   "type": "module",
@@ -22,8 +22,8 @@
   },
   "files": [
     "dist",
-    "LICENSE-MIT"
+    "LICENSE-MIT",
+    "README.md"
   ],
-  "scripts": {
-  }
+  "scripts": {}
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@art-js/artificials-watcher",
+  "name": "@art-js/artificial-watcher",
   "version": "0.0.1",
   "description": "Watches for changes in Art modules and triggers rebuilds.",
   "author": "Noodlestan Collective",
@@ -7,7 +7,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/noodlestan/no-comply.git",
+    "url": "https://github.com/noodlestan/artificial",
     "directory": "cli/watcher/"
   },
   "type": "module",
@@ -22,7 +22,8 @@
   },
   "files": [
     "dist",
-    "LICENSE-MIT"
+    "LICENSE-MIT",
+    "README.md"
   ],
   "scripts": {
     "dev": "esbuild-cli-watch",

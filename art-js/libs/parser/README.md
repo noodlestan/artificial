@@ -2,7 +2,7 @@
 
 > Parses Art modules (.art) and markdown files (.md).
 
-Parses context files and art modules into structured representations.
+Parses context files and art modules into Art AST representations.
 
 This package is part of the [@artificials](../../README.md) toolkit.
 

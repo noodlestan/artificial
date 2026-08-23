@@ -1,16 +1,13 @@
-## NPM Deployment: Artificials Spec
+# Module
 
-**Canonical Name:** `@art-js/artificials-spec`
+## NPM Package Deployment: Artificials Spec
+
+**Canonical Name:** `@art-js/artificial-spec`
 
 **Registry:** `https://registry.npmjs.org`
 
 **Access:** `public`
 
-**Version:** `0.0.1`
+**Build:** Deployment Build: NPM Command
 
-**Prerequisites:**
-
-- Build artifacts exist in `dist/`
-- All dependencies published
-
-**Publish Command:** `cd $WORKSPACE/checkouts/artificial/art-js/spec && npm publish --access public`
+**Deploy:** Deployment Command: NPM Package CLI

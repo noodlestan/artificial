@@ -5,13 +5,14 @@
 **Purpose:** Hand-crafted micro applications for humans working with Art and Artificials.
 
 **Description:** No-build vanilla HTML/CSS/JS apps. State lives in plain JSON files next to each app. Each app is served with a single zero-dependency node http script.
+**Owner:** Project: Artificial
+
+**Author:** Noodlestan Collective
 
 **Path:** `artisans/`
-
-**Packages:**
-
-- Package: Art Mantras
 
 **Scaffolders:**
 
 - Scaffolder Files: App Namespace Readme
+
+**License:** License: Noodlestan 2026 MIT

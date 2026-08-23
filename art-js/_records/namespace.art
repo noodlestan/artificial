@@ -6,21 +6,14 @@
 
 **Description:** Art Language and modules implementation. The (reactive) pipeline flows from bundler to compiler to validator to parser to sources.
 
+**Owner:** Project: Artificial
+
+**Author:** Noodlestan Collective
+
 **Path:** `art-js/`
-
-**Packages:**
-
-- Package: Artificial Bin
-- Package: Artificial Bundler
-- Package: Artificial Dev Server
-- Package: Artificial Language Server
-- Package: Artificial Parser
-- Package: Artificial Primitives
-- Package: Artificial Program
-- Package: Artificial Tools
-- Package: Artificial Validator
-- Package: Artificials Watcher
 
 **Scaffolders:**
 
 - Scaffolder Files: Namespace README
+
+**License:** License: Noodlestan 2026 MIT

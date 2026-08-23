@@ -1,0 +1,64 @@
+# Module
+
+## Package: Artificial Serializer
+
+**Purpose:** Serializes Art AST back to markdown.
+
+**Description:** Serializes Art AST back to markdown.
+
+**Owner:** Project: Artificial
+
+**Namespace:** Namespace: Art JS
+
+**Author:** Noodlestan Collective
+
+**Path:** `art-js/libs/serializer/`
+
+**Canonical Name:** `@art-js/artificial-serializer`
+
+**Published:** `true`
+
+**Private:** `false`
+
+**Deployment:** NPM Package Deployment: Artificial Serializer
+
+**Files:**
+
+- `dist`
+- `LICENSE-MIT`
+- `README.md`
+
+**Language:** Typescript
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
+
+**Dependencies:**
+
+- Runtime:
+  - `@art-js/artificial-primitives`
+  - `@art-js/artificial-constructs`
+  - `mdast-util-to-markdown`
+- Dev:
+  - `vite`
+  - `vite-plugin-solid`
+  - `vite-plugin-solid-svg`
+  - `vite-plugin-top-level-await`
+  - `solid-js`
+
+**Scripts:**
+
+- Package Script Set: Artificial Lib Build
+- Package Script Set: Common Scripts
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Lib Package
+- Scaffolder Skeleton: Package Common
+
+**License:** License: Noodlestan 2026 MIT

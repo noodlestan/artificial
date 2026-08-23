@@ -4,19 +4,39 @@
 
 **Purpose:** Agent Tools for working with Art.
 
-**Description:** Deterministic operations for agents to work with art and context files..
+**Description:** Deterministic operations for agents to work with Art and context files..
 
-**Path:** `cli/tools/`
+**Owner:** Project: Artificial
+
+**Namespace:** Namespace: Art JS
+
+**Author:** Noodlestan Collective
+
+**Path:** `art-js/cli/tools/`
 
 **Canonical Name:** `@art-js/artificial-tools`
 
-**Version:** `0.0.1`
+**Published:** `false`
 
 **Private:** `false`
 
-**Published:** `true`
+**Deployment:** NPM Package Deployment: Artificial Tools
+
+**Files:**
+
+- `dist`
+- `LICENSE-MIT`
+- `README.md`
 
 **Language:** Typescript
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
 
 **Dependencies:**
 
@@ -33,4 +53,4 @@
 - Scaffolder Skeleton: Lib Package
 - Scaffolder Skeleton: Package Common
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT

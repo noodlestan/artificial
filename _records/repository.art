@@ -1,0 +1,57 @@
+# Module
+
+## Repository: Artificial
+
+**Purpose:** Host and manage the (Art)ificial collection of projects.
+
+**Description:** A collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.
+
+**Owner:** Project: Artificial
+
+**Author:** Noodlestan Collective
+
+**Remote:** `git@github.com:noodlestan/artificial.git`
+
+**Consumers:**
+
+- Repository: Workspace Tooling
+
+**Private:** `true`
+
+**Workspaces:**
+
+- `art-domains/**`
+- `art-js/**`
+- `artisans/**`
+
+**Language:** Typescript
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** package.json
+
+**Dependencies:**
+
+- Runtime:
+  - TBD
+- Dev:
+  - TBD
+
+**Scripts:**
+
+- Package Script Set: Root Lifecycle
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Project Skeleton
+- Scaffolder Files: Project README
+- Scaffolder Files: Project Package Json
+- Scaffolder Files: Project Tsconfig
+- Scaffolder Files: Project Turbo
+- Scaffolder Files: Project Lefthook
+
+**License:** License: Noodlestan 2026 MIT

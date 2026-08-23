@@ -1,0 +1,17 @@
+# Module
+
+## NPM Package Deployment: Artificial Watcher
+
+**Owner:** Package: Artificial Watcher
+
+**Status:** `DEPLOYED`
+
+**Build:** Deployment Build: NPM Command
+
+**Deploy:** Deployment Command: NPM Package CLI
+
+**Canonical Name:** `@art-js/artificial-watcher`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`

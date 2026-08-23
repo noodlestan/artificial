@@ -4,19 +4,39 @@
 
 **Purpose:** Development server for Art modules.
 
-**Description:** Local development server for testing Art modules.
+**Description:** CLI that exposes all core pipeline commands.
 
-**Path:** `cli/dev-server/`
+**Owner:** Project: Artificial
+
+**Namespace:** Namespace: Art JS
+
+**Author:** Noodlestan Collective
+
+**Path:** `art-js/cli/dev-server/`
 
 **Canonical Name:** `@art-js/artificial-dev-server`
 
-**Version:** `0.0.1`
+**Published:** `true`
 
 **Private:** `false`
 
-**Published:** `true`
+**Deployment:** NPM Package Deployment: Artificial Dev Server
+
+**Files:**
+
+- `dist`
+- `LICENSE-MIT`
+- `README.md`
 
 **Language:** Typescript
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
 
 **Dependencies:**
 
@@ -33,4 +53,4 @@
 - Scaffolder Skeleton: CLI Package
 - Scaffolder Skeleton: Package Common
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT

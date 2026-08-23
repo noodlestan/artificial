@@ -1,8 +1,8 @@
 # artificial-serializer
 
-> Serializes Art documents back to markdown.
+> Serializes Art AST back to markdown.
 
-Serializes Art documents back to markdown.
+Exposes serializer entry point and utils.
 
 This package is part of the [@artificials](../../README.md) toolkit.
 

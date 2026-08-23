@@ -237,7 +237,7 @@
                 {
                   "construct": "NaturalBlock",
                   "type": "inlineCode",
-                  "value": "`@art-js/artificials-spec`",
+                  "value": "`@art-js/artificial-spec`",
                   "position": {
                     "start": {
                       "line": 13,

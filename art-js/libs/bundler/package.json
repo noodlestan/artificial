@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/noodlestan/no-comply.git",
+    "url": "https://github.com/noodlestan/artificial",
     "directory": "art-js/libs/bundler/"
   },
   "type": "module",

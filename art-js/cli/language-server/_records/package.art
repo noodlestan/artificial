@@ -6,17 +6,37 @@
 
 **Description:** Provides IDE support for Art module development.
 
-**Path:** `cli/language-server/`
+**Owner:** Project: Artificial
+
+**Namespace:** Namespace: Art JS
+
+**Author:** Noodlestan Collective
+
+**Path:** `art-js/cli/language-server/`
 
 **Canonical Name:** `@art-js/artificial-language-server`
 
-**Version:** `0.0.1`
+**Published:** `false`
 
 **Private:** `false`
 
-**Published:** `true`
+**Deployment:** NPM Package Deployment: Artificial Language Server
+
+**Files:**
+
+- `dist`
+- `LICENSE-MIT`
+- `README.md`
 
 **Language:** Typescript
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
 
 **Dependencies:**
 
@@ -33,4 +53,4 @@
 - Scaffolder Skeleton: Lib Package
 - Scaffolder Skeleton: Package Common
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT

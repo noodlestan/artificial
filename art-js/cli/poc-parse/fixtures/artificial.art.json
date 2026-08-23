@@ -764,7 +764,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "value": "Run at root of repository, not per package:",
+                      "value": "Run at the root of the repository:",
                       "position": {
                         "start": {
                           "line": 44,
@@ -791,7 +791,7 @@
                       "offset": 984
                     }
                   },
-                  "value": "Run at root of repository, not per package:"
+                  "value": "Run at the root of the repository:"
                 },
                 {
                   "construct": "NaturalBlock",

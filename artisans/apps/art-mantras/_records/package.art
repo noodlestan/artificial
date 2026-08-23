@@ -6,21 +6,35 @@
 
 **Description:** Generates mantra options for the ART acronym from per-letter word pools. Random mantra composition, strong promotion, banning, reordering, and saved mantras. Vanilla JS micro app, no build; state persisted in `src/data.json`.
 
+**Owner:** Project: Artificial
+
+**Namespace:** Namespace: Artisans
+
+**Author:** Noodlestan Collective
+
 **Path:** `artisans/apps/art-mantras/`
 
 **Canonical Name:** `@artisans/art-mantras`
 
-**Version:** `0.0.1`
+**Published:** `false`
 
-**Private:** `false`
+**Private:** `true`
 
-**Published:** `true`
+**Deployment:** Static Web Deployment: Art Mantras
 
 **Language:** Vanilla JavaScript (HTML/CSS/JS, no build)
 
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
+
 **Dependencies:**
 
-- none
+- TBD
 
 **Scripts:**
 
@@ -31,4 +45,4 @@
 - Scaffolder Skeleton: Micro App
 - Scaffolder Skeleton: Package Common
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT

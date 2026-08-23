@@ -6,12 +6,14 @@
 
 **Description:** Domains are self-contained areas of knowledge and operations — structures, types, routines, commands, and vocabulary. This namespace hosts domain packages that can be distributed and reused across repositories. Examples: plans, tasks, references, workspaces, changelogs.
 
-**Path:** `art-domains`
+**Owner:** Project: Artificial
 
-**Packages:**
+**Author:** Noodlestan Collective
 
-- Package: Workspace CLI
+**Path:** `art-domains/`
 
 **Scaffolders:**
 
 - Scaffolder Files: Namespace README
+
+**License:** License: Noodlestan 2026 MIT

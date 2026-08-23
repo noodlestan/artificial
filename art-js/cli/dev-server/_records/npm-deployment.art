@@ -1,0 +1,17 @@
+# Module
+
+## NPM Package Deployment: Artificial Dev Server
+
+**Owner:** Package: Artificial Dev Server
+
+**Status:** `DEPLOYED`
+
+**Build:** Deployment Build: NPM Command
+
+**Deploy:** Deployment Command: NPM Package CLI
+
+**Canonical Name:** `@art-js/artificial-dev-server`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`

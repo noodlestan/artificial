@@ -1,8 +1,8 @@
 # Artificial Tools
 
-> Agent entry points.
+> Agent Tools for working with Art.
 
-Deterministic operations for agents to work with art and context files.
+Deterministic operations for agents to work with Art and context files.
 
 This package is part of the [@artificials](../../README.md) toolkit.
 

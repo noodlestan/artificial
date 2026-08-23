@@ -1,13 +1,5 @@
 # Module
 
-## Package Dependency: Artificials Build Tools
-
-**Canonical Name:** `@artificials/build`
-
-**Purpose:** Internal build tooling.
-
-**Version:** `0.0.11`
-
 ## Package Dependency: Types Node
 
 **Canonical Name:** `@types/node`
@@ -16,9 +8,35 @@
 
 **Version:** `^25.9.3`
 
-## Package Dependency Set: Cli Development
+## Package Dependency: TypeScript
+
+**Canonical Name:** `typescript`
+
+**Purpose:** TypeScript compiler.
+
+**Version:** `^5.4.0`
+
+## Package Dependency: Vitest
+
+**Canonical Name:** `vitest`
+
+**Purpose:** Testing framework.
+
+**Version:** `^1.4.0`
+
+## Package Dependency: Noodlestan Esbuild
+
+**Canonical Name:** `@noodlestan/esbuild`
+
+**Purpose:** Build tooling.
+
+**Version:** `^0.0.11`
+
+## Package Dependency Set: CLI Development
 
 **Dependencies:**
 
-- Package Dependency: Artificials Build Tools
+- Package Dependency: Noodlestan Esbuild
 - Package Dependency: Types Node
+- Package Dependency: TypeScript
+- Package Dependency: Vitest

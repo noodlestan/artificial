@@ -10,13 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/noodlestan/no-comply.git",
+    "url": "https://github.com/noodlestan/artificial",
     "directory": "art-js/spec/"
   },
   "type": "module",
   "files": [
-    "language",
-    "LICENSE-MIT"
+    "dist",
+    "LICENSE-MIT",
+    "README.md"
   ],
   "scripts": {
     "lint": "prettier . -c",

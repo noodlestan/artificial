@@ -1,16 +1,16 @@
 # Module
 
-## Package Script Set: Artificials Cli Build
+## Package Script Set: Cli Build
 
 **Scripts:**
 
 - Package Script: Dev
   - Purpose: Watch mode for development
-  - Command: `artificials-watch`
+  - Command: `esbuild-cli-watch`
 
 - Package Script: Build
   - Purpose: Build the CLI package
-  - Command: `artificials-build`
+  - Command: `esbuild-cli`
 
 - Package Script: Build Types ESM
   - Purpose: Generate ESM type definitions

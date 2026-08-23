@@ -18,7 +18,7 @@ fixtures/           — test fixtures
 
 ## Setup
 
-Run at root of repository, not per package:
+Run at the root of the repository:
 
 ```bash
 npm ci # to install dependencies.

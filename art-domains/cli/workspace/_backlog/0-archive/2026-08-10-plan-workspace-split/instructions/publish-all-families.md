@@ -158,7 +158,7 @@ Execute all the steps autonomously, one by one, including running the **validati
 
 **Extra validation commands:**
 
-- `npm view @art-js/artificials-spec version` should return `0.0.1` (or the published version).
+- `npm view @art-js/artificial-spec version` should return `0.0.1` (or the published version).
 - (Verify all 11 packages similarly)
 
 ## Step 4/6 — Publish purrtrait packages
@@ -225,10 +225,10 @@ Confirm that all family packages (except possibly purrpose) are now available on
 **Verification steps**
 
 - Execute `npm view @purrception/primitives version` to verify purrception is published.
-- Execute `npm view @art-js/artificials-spec version` to verify artificial is published.
+- Execute `npm view @art-js/artificial-spec version` to verify artificial is published.
 - Execute `npm view @purrtrait/lang-ts version` to verify purrtrait is published.
 - Execute `npm view @purrpose/client-babel version` to verify purrpose is published (if successful).
-- Optionally, create a scratch directory and run `npm init -y && npm install @purrception/primitives @art-js/artificials-spec @purrtrait/lang-ts` to verify packages can be installed together.
+- Optionally, create a scratch directory and run `npm init -y && npm install @purrception/primitives @art-js/artificial-spec @purrtrait/lang-ts` to verify packages can be installed together.
 
 ## How to Report Back to the Delegator
 

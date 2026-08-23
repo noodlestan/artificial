@@ -1,0 +1,20 @@
+# Module
+
+## Static Web Deployment: Art Mantras
+
+**Owner:** Project: Art Mantras
+
+**Status:** `DEPLOYED`
+
+**Build:** Deployment Build: NPM Command
+
+**Deploy:** Deployment Command: Static Web AWS CLI
+
+**Domain:** `noodlestan.org`
+
+**Environments:**
+
+- `Production` — Deployment Environment: Art Mantras Production
+- `Staging` — Deployment Environment: Art Mantras Staging
+
+**Infrastructure:** Deployment Infrastructure: Art Mantras

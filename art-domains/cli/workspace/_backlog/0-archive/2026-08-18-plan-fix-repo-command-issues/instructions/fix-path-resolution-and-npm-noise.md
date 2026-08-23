@@ -22,7 +22,7 @@ These issues are related: if the path is wrong (Issue 1), the package.json can't
 
 **Symptom:** Many packages show "no package.json" even though they exist:
 
-- `@art-js/artificials-language-server` → "no package.json"
+- `@art-js/artificial-language-server` → "no package.json"
 - `@artisans/art-mantras` → "no package.json"
 - All Conventions packages → "no package.json"
 

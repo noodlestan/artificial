@@ -1,0 +1,17 @@
+# Module
+
+## NPM Package Deployment: Artificial Validator
+
+**Owner:** Package: Artificial Validator
+
+**Status:** `DEPLOYED`
+
+**Build:** Deployment Build: NPM Command
+
+**Deploy:** Deployment Command: NPM Package CLI
+
+**Canonical Name:** `@art-js/artificial-validator`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`
