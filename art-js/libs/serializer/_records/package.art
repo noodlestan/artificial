@@ -43,13 +43,10 @@
 - Runtime:
   - `@art-js/artificial-primitives`
   - `@art-js/artificial-constructs`
-  - `mdast-util-to-markdown`
+  - `mdast-util-to-markdown` @ `2.0.0`
+
 - Dev:
-  - `vite`
-  - `vite-plugin-solid`
-  - `vite-plugin-solid-svg`
-  - `vite-plugin-top-level-await`
-  - `solid-js`
+  - Package Dependency Set: Solid Lib Development
 
 **Scripts:**
 

@@ -2,7 +2,7 @@
 
 The workspace CLI package (`@art-domains/workspace-cli`, binary `art-workspace`) orchestrates cross-repo work for the Noodlestan ecosystem. It clones repositories, branches across them, symlinks packages for local development, checks repository status, and publishes packages.
 
-## Recommend Reading
+## Recommended Reading
 
 Agents SHOULD scan these files for relevant clarifications when faced with ambiguity or omissions that may result from missing definitions.
 

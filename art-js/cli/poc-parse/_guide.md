@@ -2,7 +2,7 @@
 
 POC spike of the artificials parser: a self-contained, CLI-executable package.
 
-## Recommend Reading
+## Recommended Reading
 
 Agents SHOULD scan these files for relevant clarifications when faced with ambiguity or omissions that may result from missing definitions.
 

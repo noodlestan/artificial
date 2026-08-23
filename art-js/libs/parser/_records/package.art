@@ -47,7 +47,8 @@
   - `unist-util-visit` @ `^5.0.0` — mdast traversing.
 - Dev:
   - Package Dependency Set: Solid Lib Development
-  - `@art-js/artificial-serializer` — WIP REMOVE once pipeline-tests exist in its own library.
+  - `tsx`: `^4.8.1` - WIP REMOVE when pipeline-tests exist
+  - `@art-js/artificial-serializer` — WIP REMOVE same reason
 
 **Scripts:**
 

@@ -26,12 +26,12 @@
         {
           "construct": "NaturalBlock",
           "type": "paragraph",
-          "value": "WIP: Section Block name does not capture formatting.",
+          "value": "WIP: Section Block does not captures formatting and escapes uderscores and asterisks when serializing.",
           "position": {
             "end": {
-              "column": 53,
+              "column": 103,
               "line": 3,
-              "offset": 87
+              "offset": 137
             },
             "start": {
               "column": 1,
@@ -44,12 +44,12 @@
               "construct": "NaturalExpression",
               "type": "text",
               "attributes": {},
-              "value": "WIP: Section Block name does not capture formatting.",
+              "value": "WIP: Section Block does not captures formatting and escapes uderscores and asterisks when serializing.",
               "position": {
                 "end": {
-                  "column": 53,
+                  "column": 103,
                   "line": 3,
-                  "offset": 87
+                  "offset": 137
                 },
                 "start": {
                   "column": 1,

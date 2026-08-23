@@ -2,7 +2,7 @@
 
 A micro app that generates mantras through a 12-step race.
 
-## Recommend Reading
+## Recommended Reading
 
 Agents SHOULD scan these files for relevant clarifications when faced with ambiguity or omissions that may result from missing definitions.
 
