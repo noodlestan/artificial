@@ -7,8 +7,6 @@ A collection of tools and resources to generate and manage agent instructions. I
 Agents SHOULD scan these files for relevant clarifications when faced with ambiguity or omissions that may result from missing definitions.
 
 - `_guide.md` — this file: system overview, layout, setup, verification.
-- `_backlog/_parking-lot.md` — current work-in-progress tracker with actionable items, pending work, blockers, and follow-ups.
-- `_backlog/_architect.md` — forward-looking architect plan with approach, work sequence, and milestone steps.
 
 ## Repository Layout
 
@@ -23,12 +21,14 @@ artisans/           — (namespace) experiments
 
 ## Projects
 
-| Project            | Guide                                 | Backlog                                      |
-| ------------------ | ------------------------------------- | -------------------------------------------- |
-| Artificials (root) | `_guide.md`                           | `_backlog/`                                  |
-| POC Parse          | `art-js/cli/poc-parse/_guide.md`      | `_backlog/1-done/plan-poc-parse/` (archived) |
-| Art Mantras        | `artisans/apps/art-mantras/_guide.md` | `artisans/apps/art-mantras/_backlog/`        |
-| Workspace CLI      | `art-domains/cli/workspace/_guide.md` | `art-domains/cli/workspace/_backlog/`        |
+| Project            | Guide                                  | Backlog                                      |
+| ------------------ | -------------------------------------- | -------------------------------------------- |
+| Artificials (root) | `_guide.md`                            | `NONE`                                       |
+| POC Parse          | `art-js/cli/poc-parse/_guide.md`       | `_backlog/1-done/plan-poc-parse/` (archived) |
+| Art Mantras        | `artisans/apps/art-mantras/_guide.md`  | `artisans/apps/art-mantras/_backlog/`        |
+| Workspace CLI      | `art-domains/cli/workspace/_guide.md`  | `art-domains/cli/workspace/_backlog/`        |
+| Art JS             | `art-js/_backlog/_parking-lot.md`      | `art-js/_backlog/`                           |
+| Art Domains        | `art-domains/_backlog/_parking-lot.md` | `art-domains/_backlog/_architect.md`         |
 
 ## Setup
 
