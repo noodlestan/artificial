@@ -2,7 +2,7 @@
 
 **ID:** `workflows-make-work-flow`
 
-**Status:** `PLANNING`
+**Status:** `REFINING`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -50,16 +50,14 @@ Scope covers the write-plan skill, plan structure, plan template, and work domai
 
 ### Work Scope Types
 
-| Work Scope Type / Path                                                      | Resource Kind / Path                                                      |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Type: Project Scope `$DOMAINS/projects/types/project-scope.art`             | Structure: Project `$DOMAINS/projects/structures/project.art`             |
-| Type: Repository Scope `$DOMAINS/repositories/types/repository-scope.art`   | Structure: Repository `$DOMAINS/repositories/structures/repository.art`   |
-| Type: Package Scope `$DOMAINS/packages/types/package-scope.art`             | Structure: Package `$DOMAINS/packages/structures/package.art`             |
-| Type: Application Scope `$DOMAINS/applications/types/application-scope.art` | Structure: Application `$DOMAINS/applications/structures/application.art` |
-| Type: Deployment Scope `$DOMAINS/deployments/types/deployment-scope.art`    | Structure: Deployment `$DOMAINS/deployments/structures/deployment.art`    |
-| No work scope type for kind `Skill`                                         | Structure: Skill `$SKILLS/{skill}/SKILL.md`                               |
-| No work scope type for kind `Domain`                                        | Structure: Domain `$DOMAINS/domains/structures/domain.art`                |
-| No work scope type for kind `Workspace`                                     | Structure: Workspace `$DOMAINS/workspaces/structures/workspace.art`       |
+| Work Scope Type / Path                                                    | Resource Kind / Path                                                    |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Type: Project Scope `$DOMAINS/projects/types/project-scope.art`           | Structure: Project `$DOMAINS/projects/structures/project.art`           |
+| Type: Repository Scope `$DOMAINS/repositories/types/repository-scope.art` | Structure: Repository `$DOMAINS/repositories/structures/repository.art` |
+| Type: Package Scope `$DOMAINS/packages/types/package-scope.art`           | Structure: Package `$DOMAINS/packages/structures/package.art`           |
+| No work scope type for kind `Skill`                                       | Structure: Skill `$SKILLS/{skill}/SKILL.md`                             |
+| No work scope type for kind `Domain`                                      | Structure: Domain `$DOMAINS/domains/structures/domain.art`              |
+| No work scope type for kind `Workspace`                                   | Structure: Workspace `$DOMAINS/workspaces/structures/workspace.art`     |
 
 ### Workflows
 
@@ -203,11 +201,11 @@ This plan updates the write-plan skill and exercises the plan structures. The sc
 
 **Changes:**
 
-- Add Work Status enum (DRAFT, PLANNING, READY, WORKING, BLOCKED, DELIVERED, INTEGRATING, DONE)
-- Rewrite work-item-abstract.art with plan-level examples
-- Create scope types (Project Scope, Repository Scope, Package Scope, Application Scope, Deployment Scope)
-- Create Work Phase type, Work Attachment type, Workflow structure
-- Define 6 core types
+- Add Work Status enum (DRAFT, PLANNING, READY, WORKING, BLOCKED, DELIVERED, INTEGRATING, DONE).
+- Rewrite work-item-abstract.art with plan-level examples.
+- Create scope types (Project Scope, Repository Scope, Package Scope, Application Scope, Deployment Scope).
+- Create Work Phase type, Work Attachment type, Workflow structure.
+- Define 6 core types.
 
 ### Domain: Plans
 
@@ -219,11 +217,11 @@ This plan updates the write-plan skill and exercises the plan structures. The sc
 
 **Changes:**
 
-- Refactor `plan.art` to use inherited fields from Work Item (Abstract) and new scope/context model
-- Create `iteration.art` structure for plan iterations (replaces `plan.commits`)
-- Update plan.tart template for new structure
-- Update `instructions.tart` and `instructions-report.tart`
-- Remove `planning.art` workflow (to be recreated)
+- Refactor `plan.art` to use inherited fields from Work Item (Abstract) and new scope/context model.
+- Create `iteration.art` structure for plan iterations (replaces `plan.commits`).
+- Update plan.tart template for new structure.
+- Update `instructions.tart` and `instructions-report.tart`.
+- Remove `planning.art` workflow (to be recreated).
 
 ### Domain: Milestones
 
@@ -235,9 +233,9 @@ This plan updates the write-plan skill and exercises the plan structures. The sc
 
 **Changes:**
 
-- Move Phases field from Milestone to Roadmap structure
-- Refactor milestone.art and milestone.tart for new structure
-- Add roadmaps/definitions/index.md
+- Move Phases field from Milestone to Roadmap structure.
+- Refactor milestone.art and milestone.tart for new structure.
+- Add roadmaps/definitions/index.md.
 
 ### Domain: Tasks
 
@@ -266,12 +264,12 @@ Execution occurs from `$WORKSPACE/` and is performed in the `$WORKSPACE` reposit
 | Iteration: Split Iterations From Commits         | `DONE`    |
 | Iteration: Convert Templates to Directive Syntax | `DONE`    |
 | Iteration: Rebuild Domain Indexes                | `DONE`    |
-| Iteration: Initialize Domains Knowledge          | `DONE`    |
+| Iteration: Initialize Domains Knowledge          | `WORKING` |
 | Iteration: Initialize Architecture Knowledge     | `DONE`    |
 | Iteration: Add Domain and Workflow Structure     | `DONE`    |
 | Iteration: Update Fundamentals File              | `DONE`    |
 | Iteration: Integrate Work Domain With Others     | `DONE`    |
-| Iteration: Build Plan Workflows                  | `WORKING` |
+| Iteration: Build Plan Workflows                  | `PLANNED` |
 | Iteration: Finish Plan Iteration Model           | `PLANNED` |
 | Iteration: Update Write Plan Skill               | `PLANNED` |
 | Iteration: Update Agent Modes                    | `PLANNED` |
@@ -286,17 +284,17 @@ Execution occurs from `$WORKSPACE/` and is performed in the `$WORKSPACE` reposit
 
 **Description:** Finalised Work Status enum, rewrote work-item-abstract.art with plan-level examples, created scope types and core types.
 
+**Status:** `DONE`
+
 **Changes:**
 
-- Work Status enum (DRAFT, PLANNING, READY, WORKING, BLOCKED, DELIVERED, INTEGRATING, DONE)
-- Rewrite work-item-abstract.art with plan-level examples
-- Purge title → name
-- Reshape Downstream Work Item
-- Create scope types (Project Scope, Repository Scope, Package Scope, Application Scope, Deployment Scope)
-- Create Work Phase type
-- Define 6 core types
-
-**Status:** `DONE`
+- Work Status enum (DRAFT, PLANNING, READY, WORKING, BLOCKED, DELIVERED, INTEGRATING, DONE).
+- Rewrite work-item-abstract.art with plan-level examples.
+- Purge title → name.
+- Reshape Downstream Work Item.
+- Create scope types (Project Scope, Repository Scope, Package Scope, Application Scope, Deployment Scope).
+- Create Work Phase type.
+- Define 6 core types.
 
 #### Iteration: Split Iterations From Commits
 
@@ -306,14 +304,14 @@ Execution occurs from `$WORKSPACE/` and is performed in the `$WORKSPACE` reposit
 
 **Description:** Plans now contain Iterations, created iteration.art and commits domain with Type: Commit.
 
+**Status:** `DONE`
+
 **Changes:**
 
-- Create `plans/structures/iteration.art`
-- Create `commits/` domain with Type: Commit
-- Update Iteration to have changes/instructions/report/commits
-- Update templates
-
-**Status:** `DONE`
+- Create `plans/structures/iteration.art`.
+- Create `commits/` domain with Type: Commit.
+- Update Iteration to have changes/instructions/report/commits.
+- Update templates.
 
 #### Iteration: Convert Templates to Directive Syntax
 
@@ -323,13 +321,13 @@ Execution occurs from `$WORKSPACE/` and is performed in the `$WORKSPACE` reposit
 
 **Description:** Converted `milestone.tart` and `plan.tart` to ::TEMPLATE directives.
 
+**Status:** `DONE`
+
 **Changes:**
 
 - Convert `milestone.tart` fully to ::TEMPLATE directives
 - Create `plan.tart` from milestone template
 - Align TEMPLATE::READ lists
-
-**Status:** `DONE`
 
 #### Iteration: Rebuild Domain Indexes
 
@@ -339,61 +337,13 @@ Execution occurs from `$WORKSPACE/` and is performed in the `$WORKSPACE` reposit
 
 **Description:** Rebuilt `domains/{domain}/index.md` for 17 domains and `domains/index.md`.
 
+**Status:** `DONE`
+
 **Changes:**
 
 - Rebuild `domains/{domain}/index.md` for 17 domains, including definitions, structures, types, templates, files, workflows, and routines.
-- Rebuild `domains/index.md` with 17 domains
-- Remove Tasks domain
-
-**Status:** `DONE`
-
-#### Iteration: Initialize Domains Knowledge
-
-**id:** `initialize-domains-knowledge`
-
-**Purpose:** Initialise domains architecture knowledge: reference model, workflows, and ADRs.
-
-**Description:** Created reference-model.md, reference-workflows.md, ADRs, and architecture index in `$ARTIFICIAL/art-domains`.
-
-**Changes:**
-
-In `$ARTIFICIAL/art-domains` namespace:
-
-- Create `reference-model.md` for 11 domains
-- Create `reference-workflows.md` for 4 workflows with stage Input/Output/Gates
-- Create `_records/adr/` similar to `$ARTIFICIAL/architecture` and capture up to 3 decisions (based on principles, not particular shapes) Examples of principles (not authoritative, food for thought, integrate with reality):
-  - A domain may depend directly on another domain when it cannot provide its own abstraction without that domain.
-  - A domain may assume another domain when the relationship is useful or conventional but both domains remain independently usable.
-  - A domain may be aware of another domain when it can reference, coordinate with, inform, or be informed by it without assuming its shape.
-  - Prefer describing relationships at the level of abstract concepts rather than prematurely coupling domains to concrete implementations.
-  - Explicitly distinguish between:
-    - work items and their relationships — dependencies, sequencing, composition, coordination, etc.;
-    - resources in work scope and their relationships to work items — operations, dependencies, ownership, etc.;
-    - knowledge resources and their relationships to work items and resources — architecture, patterns, conventions, pseudocode, etc.
-  - Where a domain works with an abstract concept that may eventually have several concrete domain manifestations, describe the abstract relationship and give those manifestations only as examples.
-  - Do not infer a dependency merely because one domain can be used together with another.
-  - Every domain should remain independently usable unless its purpose fundamentally requires another domain.
-  - Do not create relationships merely to make the domains form a hierarchy.
-  - Do not assume that an upstream/downstream workflow implies a domain dependency: independent domains may consume and produce abstract work items at different levels of granularity.
-
-- Create `architecture/index.md` (similar to `$ARTIFICIAL/architecture`)
-
-**Status:** `DONE`
-
-#### Iteration: Initialize Architecture Knowledge
-
-**id:** `init-architecture-knowledge`
-
-**Purpose:** Initialise architecture knowledge files in `$ARTIFICIAL/architecture`.
-
-**Description:** Created reference-model.md and reference-workflows.md in the architecture directory.
-
-**Changes:**
-
-- Create `$ARTIFICIAL/architecture/reference-model.md` with domain boundaries for 11 domains
-- Create `$ARTIFICIAL/architecture/reference-workflows.md` with 4 workflows and stage Input/Output/Gates/Operating Resources
-
-**Status:** `DONE`
+- Rebuild `domains/index.md` with 17 domains.
+- Remove Tasks domain.
 
 #### Iteration: Add Domain and Workflow Structure
 
@@ -403,13 +353,13 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Description:** Created domain.art, workflow.art, and domain templates.
 
+**Status:** `DONE`
+
 **Changes:**
 
-- Create domains/domains/structures/domain.art
-- Create domains/work/structures/workflow.art
-- Create domain templates
-
-**Status:** `DONE`
+- Create domains/domains/structures/domain.art.
+- Create domains/work/structures/workflow.art.
+- Create domain templates.
 
 #### Iteration: Update Fundamentals File
 
@@ -419,12 +369,12 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Description:** Update core definitions, remove duplicates.
 
+**Status:** `DONE`
+
 **Changes:**
 
-- Update core definitions (domains, resources, records, fields, routines)
-- Merge duplicate Interpreting Mandatory Reading Sections
-
-**Status:** `DONE`
+- Update core definitions (domains, resources, records, fields, routines).
+- Merge duplicate Interpreting Mandatory Reading Sections.
 
 #### Iteration: Integrate Work Domain With Others
 
@@ -434,15 +384,15 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Description:** Scans .agents for typos, broken references, long-winded path examples, and formatting issues; auto-fixes all and waits for user review.
 
+**Status:** `DONE`
+
 **Changes:**
 
-- Review .agents for typos and auto-fix all
-- Review .agents for stale references and fix broken links
-- Review .agents for shortenable references (use common paths such as $PROJECT and $DOMAINS as per this plan conventions, not full variable expansions)
-- Review .agents for formatting: bullet points end with dot, examples use `checkouts/artificial/art-js/spec/grammar/constructs/inline/example-inline.art` format
-- Wait for user review before committing
-
-**Status:** `DONE`
+- Review .agents for typos and auto-fix all.
+- Review .agents for stale references and fix broken links.
+- Review .agents for shortenable references (use common paths such as $PROJECT and $DOMAINS as per this plan conventions, not full variable expansions).
+- Review .agents for formatting: bullet points end with dot, examples use `checkouts/artificial/art-js/spec/grammar/constructs/inline/example-inline.art` format.
+- Wait for user review before committing.
 
 ##### Commits [add-work-domain-and-refactor]
 
@@ -458,7 +408,56 @@ In `$ARTIFICIAL/art-domains` namespace:
   - Refactor plan.art, plan.tart, milestone.art, milestone.tart for new structure
   - Update fundamentals, domains index, and templates
 - **Status:** `DONE`
+- **Policy:** `AUTONOMOUS`
 - **Hash:** `5a6b120`
+
+#### Iteration: Initialize Domains Knowledge
+
+**id:** `initialize-domains-knowledge`
+
+**Purpose:** Initialise domains architecture knowledge: reference model, workflows, and ADRs.
+
+**Description:** Created reference-model.md, reference-workflows.md, ADRs, and architecture index in `$ARTIFICIAL/art-domains`.
+
+**Status:** `READY`
+
+**Changes:**
+
+In `$ARTIFICIAL/art-domains` namespace:
+
+- Create `$ARTIFICIAL/art-domains/architecture/index.md` (similar to `$ARTIFICIAL/architecture`).
+- Create `$ARTIFICIAL/art-domains/architecture/reference-model.md` with domain boundaries for 11 domains.
+- Create `$ARTIFICIAL/art-domains/architecture/reference-workflows.md` with 4 workflows and stage Input/Output/Gates/Operating Resources.
+- Create `$ARTIFICIAL/art-domains/architecture/_records/adr/` similar to `$ARTIFICIAL/architecture` and capture up to 3 decisions (based on principles, not particular shapes) based on examples of principles provided with the instructions.
+
+**Instructions:** `./plan-workflows-make-work-flow/instructions/initialize-domains-knowledge.md`
+
+**Report:** `./plan-workflows-make-work-flow/instructions/initialize-domains-knowledge__report.md`
+
+##### Commits [add-domains-architecture-knowledge]
+
+- **Repository:** Repository Scope: Artificial `$ARTIFICIAL`
+- **Message:** knowledge(domains): Add reference model and workflow starting points.
+- **Body:**
+  - Create architecture index listing reference model and workflows.
+  - Create reference-model.md with domain boundaries for 11 domains.
+  - Create reference-workflows.md with 4 workflows and stage Input/Output/Gates/Operating Resources.
+- **Status:** `READY`
+- **Policy:** `AUTONOMOUS`
+- **Hash:** `TBD`
+
+##### Commits [add-domains-design-adrs]
+
+- **Repository:** Repository Scope: Artificial `$ARTIFICIAL`
+- **Message:** knowledge(domains): Add domain design ADRs.
+- **Body:**
+  - Create `_records/adr/` directory for domain design decisions.
+  - Add ADR: Domain Dependency Principle.
+  - Add ADR: Abstract Relationships Over Concrete Coupling.
+  - Add ADR: Independent Domains.
+- **Status:** `READY`
+- **Policy:** `BLOCKED`
+- **Hash:** `TBD`
 
 #### Iteration: Build Plan Workflows
 
@@ -470,15 +469,15 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Changes:**
 
-- Read draft content
-- Map to plan structure fields
-- Create plan.md with scopes, context, knowledge, iterations
+- Read draft content.
+- Map to plan structure fields.
+- Create plan.md with scopes, context, knowledge, iterations.
 
 **Instructions:** `./plan-workflows-make-work-flow/instructions/build-plan-workflows.md`
 
 **Report:** `./plan-workflows-make-work-flow/instructions/build-plan-workflows__report.md`
 
-**Status:** `WORKING`
+**Status:** `PLANNED`
 
 #### Iteration: Finish Plan Iteration Model
 
@@ -490,9 +489,9 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Changes:**
 
-- Review plan/iteration relation to new Type: Commit
-- Introduce "Committing" as workflow stage
-- Introduce Type: Commit Convention
+- Review plan/iteration relation to new Type: Commit.
+- Introduce "Committing" as workflow stage.
+- Introduce Type: Commit Convention.
 
 **Instructions:** `./plan-workflows-make-work-flow/instructions/finish-plan-iteration-model.md`
 
@@ -508,18 +507,18 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Description:** Update Composing Plan Scope, Composing Plan Context, and Create OR Update Plan routines.
 
+**Status:** `PREPARING`
+
 **Changes:**
 
-- Update Composing Plan Scope to output `List(Type: Work Scope Item (Abstract))`
-- Update Composing Plan Context to output context.upstream/knowledge/required-skills
-- Update Create OR Update Plan to use setting-up/verifying as NaturalBlock fields
-- Remove references to non-existent Plan Scope and Plan Context structures
+- Update Composing Plan Scope to output `List(Type: Work Scope Item (Abstract))`.
+- Update Composing Plan Context to output context.upstream/knowledge/required-skills.
+- Update Create OR Update Plan to use setting-up/verifying as NaturalBlock fields.
+- Remove references to non-existent Plan Scope and Plan Context structures.
 
 **Instructions:** `./plan-workflows-make-work-flow/instructions/update-write-plan-skill.md`
 
 **Report:** `./plan-workflows-make-work-flow/instructions/update-write-plan-skill__report.md`
-
-**Status:** `PLANNED`
 
 #### Iteration: Update Agent Modes
 
@@ -528,6 +527,8 @@ In `$ARTIFICIAL/art-domains` namespace:
 **Purpose:** Update agent modes: architect, planner, delegator, worker, backlog-manager.
 
 **Description:** Update agent mode definitions to work with new plan structure and skill.
+
+**Status:** `PREPARING`
 
 **Changes:**
 
@@ -541,8 +542,6 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Report:** `./plan-workflows-make-work-flow/instructions/update-agent-modes__report.md`
 
-**Status:** `PLANNED`
-
 #### Iteration: Refactor Domain Index Routines
 
 **id:** `refactor-domain-index-routines`
@@ -551,17 +550,17 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Description:** Simplify domain index routines, update domains-listing.tart and domain-table-of-contents.tart.
 
+**Status:** `PREPARING`
+
 **Changes:**
 
-- Simplify domain index routines
-- Update domains-listing.tart
-- Update domain-table-of-contents.tart
+- Simplify domain index routines.
+- Update domains-listing.tart.
+- Update domain-table-of-contents.tart.
 
 **Instructions:** `./plan-workflows-make-work-flow/instructions/refactor-domain-index-routines.md`
 
 **Report:** `./plan-workflows-make-work-flow/instructions/refactor-domain-index-routines__report.md`
-
-**Status:** `PLANNED`
 
 #### Iteration: Integrate Specs Into Plans
 
@@ -571,16 +570,16 @@ In `$ARTIFICIAL/art-domains` namespace:
 
 **Description:** Integrate Type: Spec (Abstract) into plan structure and template.
 
+**Status:** `PREPARING`
+
 **Changes:**
 
-- Integrate Type: Spec (Abstract) into plan structure
-- Update plan template for spec integration
+- Integrate Type: Spec (Abstract) into plan structure.
+- Update plan template for spec integration.
 
 **Instructions:** `./plan-workflows-make-work-flow/instructions/integrate-specs-into-plans.md`
 
 **Report:** `./plan-workflows-make-work-flow/instructions/integrate-specs-into-plans__report.md`
-
-**Status:** `PLANNED`
 
 ### Next
 
