@@ -1,0 +1,9 @@
+# Module
+
+## Scaffolder Skeleton: Package Common
+
+**Purpose:** Scaffolds shared package files: license and dotfiles.
+
+**Source:** `./skeleton`
+
+**Target:** `{{%path}}`

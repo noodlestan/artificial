@@ -1,0 +1,32 @@
+{
+"name": "@{{%package.canonical-name}}",
+"version": "{{%package.version}}",
+"description": "{{%package.description}}",
+"author": "Noodlestan Collective",
+"license": "MIT",
+"private": true,
+"repository": {
+"type": "git",
+"url": "https://github.com/noodlestan/artificial",
+"directory": "{{%namespace.path}}{{%package.path}}"
+},
+"type": "module",
+"module": "dist/esm/index.mjs",
+"main": "dist/cjs/index.js",
+"exports": {
+".": {
+"import": "./dist/esm/index.mjs",
+"types": "./dist/esm/index.d.ts",
+"require": "./dist/cjs/index.js"
+}
+},
+"files": [
+"dist",
+"LICENSE-MIT"
+],
+"scripts": {
+::TEMPLATE for each `%script` in `%package.scripts`
+"{{%script.name}}": "{{%script.command}}",
+::END
+}
+}

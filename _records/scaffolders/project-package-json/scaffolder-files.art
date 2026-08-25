@@ -1,0 +1,11 @@
+# Module
+
+## Scaffolder Files: Project Package Json
+
+**Purpose:** Generates the project root package.json from template.
+
+**Files:**
+
+- `package.json`:
+  - template: `./package.json.tart`
+  - target: `{{%path}}package.json`

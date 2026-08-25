@@ -1,0 +1,37 @@
+# Module
+
+## Package Script Set: Root Lifecycle
+
+**Scripts:**
+
+- Package Script: Dev
+  - Purpose: Run development server
+  - Command: `turbo run dev --ui tui`
+
+- Package Script: Clean
+  - Purpose: Clean build artifacts
+  - Command: `turbo run build:clean`
+
+- Package Script: Build
+  - Purpose: Build all packages
+  - Command: `turbo run build`
+
+- Package Script: Build Meta
+  - Purpose: Build meta layer
+  - Command: `turbo run build:meta`
+
+- Package Script: Lint
+  - Purpose: Lint all packages
+  - Command: `turbo run lint`
+
+- Package Script: Lint Fix
+  - Purpose: Fix lint issues
+  - Command: `turbo run lint:fix`
+
+- Package Script: Test
+  - Purpose: Run all tests
+  - Command: `turbo run test`
+
+- Package Script: Ci
+  - Purpose: Run CI pipeline
+  - Command: `turbo run ci`

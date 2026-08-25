@@ -1,0 +1,9 @@
+# Module
+
+## Scaffolder Skeleton: CLI Package
+
+**Purpose:** Scaffolds a CLI package: readme, package.json, tsconfig variants.
+
+**Source:** `./skeleton`
+
+**Target:** `{{%path}}`

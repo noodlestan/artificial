@@ -1,0 +1,15 @@
+# {{%namespace.name}}
+
+> {{%namespace.purpose}}
+
+{{%namespace.description}}
+
+## Apps
+
+::TEMPLATE for each `%package` in `%namespace.packages`
+
+- [{{%package.name}}](./{{%package.path}}README.md) — {{%package.description}}.
+
+::END
+
+## {{%project.license.short}}

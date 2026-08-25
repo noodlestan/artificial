@@ -1,0 +1,32 @@
+# Module
+
+## Package Dependency: Vite
+
+**Canonical Name:** `vite`
+
+**Purpose:** Build tool and dev server.
+
+**Version:** `^8.0.16`
+
+## Package Dependency: Vite Plugin Solid
+
+**Canonical Name:** `vite-plugin-solid`
+
+**Purpose:** SolidJS support for Vite.
+
+**Version:** `^2.11.12`
+
+## Package Dependency: Vite Plugin Solid SVG
+
+**Canonical Name:** `vite-plugin-solid-svg`
+
+**Purpose:** SVG support for SolidJS.
+
+**Version:** `^0.8.1`
+
+## Package Dependency Set: Solid Lib Development
+
+**Dependencies:**
+
+- Package Dependency: Vite
+- Package Dependency: Vite Plugin Solid

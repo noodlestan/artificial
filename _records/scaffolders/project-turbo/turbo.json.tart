@@ -1,0 +1,38 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "stream-with-experimental-timestamps",
+  "concurrency": "30",
+  "tasks": {
+    "test": {},
+    "build:clean": {
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
+    },
+    "build:meta": {
+      "cache": false,
+      "with": []
+    },
+    "extract": {
+      "cache": false,
+    },
+    "ci": {
+      "cache": false,
+      "dependsOn": ["^ci"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "lint:fix": {
+      "dependsOn": ["^lint:fix"]
+    },
+    "dev": {
+      "dependsOn": ["^lint"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

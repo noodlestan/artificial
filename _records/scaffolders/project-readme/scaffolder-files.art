@@ -1,0 +1,11 @@
+# Module
+
+## Scaffolder Files: Project README
+
+**Purpose:** Generates the project root README.md from template.
+
+**Files:**
+
+- `README.md`:
+  - template: `./README.md.tart`
+  - target: `{{%path}}README.md`

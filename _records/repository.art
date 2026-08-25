@@ -1,0 +1,49 @@
+# Module
+
+## Repository: Artificials
+
+**Purpose:** Umbrella project for shared resources and websites.
+
+**Description:** Umbrella repository hosting the Art JS Website, Workspace CLI Website, and shared resources.
+
+**Owner:** Project: Artificials
+
+**Author:** Noodlestan Collective
+
+**Remote:** `git@github.com:noodlestan/artificials.git`
+
+**Consumers:** TBD
+
+**Private:** `false`
+
+**Workspaces:** None
+
+**Language:** TypeScript
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** package.json
+
+**Dependencies:**
+
+- Runtime:
+  - TBD
+- Dev:
+  - TBD
+
+**Scripts:**
+
+- Package Script Set: Root Lifecycle
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Project Skeleton
+- Scaffolder Files: Project README
+- Scaffolder Files: Project Package Json
+- Scaffolder Files: Project Lefthook
+
+**License:** License: Noodlestan 2026 MIT

@@ -1,0 +1,23 @@
+# {{%package.name}}
+
+> {{%package.purpose}}
+
+{{%package.description}}
+
+This package is part of the [artificials](../../../README.md) toolkit.
+
+## Development
+
+Make sure you read the [namespace README](../../README.md) first.
+
+### Run
+
+Serve with the built-in node http server — no build, no dependencies.
+
+### Scripts
+
+::TEMPLATE for each `%script` in `%package.scripts`
+- **$** `npm run {{%script.name}}` — {{%script.purpose}}
+::END
+
+## {{%project.license.short}}

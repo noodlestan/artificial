@@ -1,0 +1,33 @@
+# Module
+
+## Package Dependency: No Comply Meta
+
+**Canonical Name:** `@no-comply/meta`
+
+**Purpose:** Meta extraction types.
+
+**Version:** `0.0.11`
+
+## Package Dependency: Purrception Primitives
+
+**Canonical Name:** `@purrception/primitives`
+
+**Purpose:** Core primitives.
+
+**Version:** `0.0.11`
+
+## Package Dependency: Purrception Lang Ts Extract
+
+**Canonical Name:** `@purrception/lang-ts-extract`
+
+**Purpose:** TypeScript extraction.
+
+**Version:** `0.0.11`
+
+## Package Dependency Set: Purrception Extract
+
+**Dependencies:**
+
+- Package Dependency: No Comply Meta
+- Package Dependency: Purrception Primitives
+- Package Dependency: Purrception Lang Ts Extract

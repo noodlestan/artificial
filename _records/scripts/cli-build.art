@@ -1,0 +1,21 @@
+# Module
+
+## Package Script Set: Cli Build
+
+**Scripts:**
+
+- Package Script: Dev
+  - Purpose: Watch mode for development
+  - Command: `esbuild-cli-watch`
+
+- Package Script: Build
+  - Purpose: Build the CLI package
+  - Command: `esbuild-cli`
+
+- Package Script: Build Types ESM
+  - Purpose: Generate ESM type definitions
+  - Command: `tsc --project tsconfig.esm.json`
+
+- Package Script: Build Types CJS
+  - Purpose: Generate CJS type definitions
+  - Command: `tsc --project tsconfig.cjs.json`

@@ -1,0 +1,13 @@
+# Module
+
+## Package Script Set: Lib Build
+
+**Scripts:**
+
+- Package Script: Dev
+  - Purpose: Watch mode for development
+  - Command: `vite build --watch`
+
+- Package Script: Build
+  - Purpose: Build the library
+  - Command: `vite build`

@@ -1,0 +1,25 @@
+# Module
+
+## Package Script Set: Common Scripts
+
+**Scripts:**
+
+- Package Script: Lint
+  - Purpose: Check formatting, lint, and type check
+  - Command: `prettier . -c && eslint . && tsc --noEmit`
+
+- Package Script: Lint Fix
+  - Purpose: Fix formatting and lint issues
+  - Command: `prettier . -c --write && eslint . --fix`
+
+- Package Script: Build Clean
+  - Purpose: Remove build artifacts
+  - Command: `rm -rf dist`
+
+- Package Script: CI
+  - Purpose: Run CI pipeline
+  - Command: `npm run lint && npm run build && npm run test`
+
+- Package Script: Test
+  - Purpose: Run tests
+  - Command: `echo none yet`

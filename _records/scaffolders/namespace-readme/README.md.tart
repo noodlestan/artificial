@@ -1,0 +1,28 @@
+# {{%namespace.name}}
+
+> {{%namespace.purpose}}
+
+{{%namespace.description}}
+
+## Packages
+
+::TEMPLATE make `%libs` = `%packages` filtered by `%package.path` starts with "lib"
+::TEMPLATE make `%clis` = `%packages` filtered by `%package.path` starts with "cli"
+
+### Libraries
+
+::TEMPLATE for each `%package` in `%libs`
+- [{{%package.name}}](./{{%package.path}}README.md) — {{%package.description}}
+::END
+
+### CLI
+
+::TEMPLATE for each `%package` in `%clis`
+- [{{%package.name}}](./{{%package.path}}README.md) — {{%package.description}}
+::END
+
+### Scripts
+
+::TEMPLATE for each `%script` in `%namespace.scripts`
+- **$** `npm run {{%script.name}}` — {{%script.purpose}}
+::END

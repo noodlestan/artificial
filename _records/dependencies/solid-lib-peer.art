@@ -1,0 +1,15 @@
+# Module
+
+## Package Dependency: SolidJs
+
+**Canonical Name:** `vite`
+
+**Purpose:** Build tool and dev server.
+
+**Version:** `^8.0.16`
+
+## Package Dependency Set: Solid Lib Peer
+
+**Dependencies:**
+
+- Package Dependency: SolidJs
