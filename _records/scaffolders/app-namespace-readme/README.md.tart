@@ -12,4 +12,6 @@
 
 ::END
 
-## {{%project.license.short}}
+## License
+
+{{%package.license.short}}

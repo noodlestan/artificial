@@ -17,7 +17,10 @@ This library is packaged for use in bundlers such as Vite and Astro. The main en
 ### Scripts
 
 ::TEMPLATE for each `%script` in `%package.scripts`
-- **$** `npm run {{%script.name}}` — {{%script.purpose}}
-::END
 
-## {{%project.license.short}}
+- **$** `npm run {{%script.name}}` — {{%script.purpose}}
+  ::END
+
+## License
+
+{{%package.license.short}}
