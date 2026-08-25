@@ -33,8 +33,8 @@ Create the domains architecture knowledge starting point in `$ARTIFICIAL/art-dom
 
 ## Mandatory Reading
 
-- `$ARTIFICIAL/architecture/reference-model.md` — Existing architecture reference model to align with.
-- `$ARTIFICIAL/architecture/reference-workflows.md` — Existing architecture reference workflows to align with.
+- `$ARTIFICIAL/art-domains/architecture/reference-model.md` — Existing architecture reference model to align with.
+- `$ARTIFICIAL/art-domains/architecture/reference-workflows.md` — Existing architecture reference workflows to align with.
 
 - RULE: You MUST follow any links under `## Mandatory Reading` sections found in the listed files.
 - RULE: If you are unable to read a file linked under `## Mandatory Reading` you must stop and REPORT A BLOCKER.
