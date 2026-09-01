@@ -12,11 +12,15 @@
 
 **Repository:** Repository: Artificials
 
+**Code:** https://github.com/noodlestan/artificials
+
 **Resources:**
 
 - Application: Art JS Website
 - Application: Workspace CLI Website
 
 **Private:** `false`
+
+**Management:** Umbrella project; planning happens via the backlogs of owned sub-projects (Art JS, Art Domains, Artisans).
 
 **License:** License: Noodlestan 2026 MIT
