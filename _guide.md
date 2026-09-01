@@ -48,22 +48,12 @@ Run from the repository root (monorepo):
 npm ci # to install dependencies.
 ```
 
-### Operating Instructions: Verifying Commit
+### Operating Instructions: Verifying Completion
 
 **Instructions:**
 
 Runs automatically on pre-commit hook (from the repository root):
 
 ```bash
-npm run ci # lint, build and test
-```
-
-### Operating Instructions: Verifying Completion
-
-**Instructions:**
-
-Run from the repository root (monorepo):
-
-```bash
-npm run ci # lint, build and test
+npm run ci # lint, test and build
 ```
