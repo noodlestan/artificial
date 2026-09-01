@@ -4,21 +4,16 @@
 
 A collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.
 
-## Packages
+## Projects
 
-| namespace   | dir                          | package                         | description                               |
-| ----------- | ---------------------------- | ------------------------------- | ----------------------------------------- |
-| `@art-js`   | `art-js/spec/`               | `@art-js/artificial-spec`       | Art Language specification                |
-| `@art-js`   | `art-js/libs/primitives/`    | `@art-js/artificial-primitives` | Foundational types and utilities          |
-| `@art-js`   | `art-js/libs/parser/`        | `@art-js/artificial-parser`     | Parses context files and art modules      |
-| `@art-js`   | `art-js/libs/validator/`     | `@art-js/artificial-validator`  | Validates parsed modules                  |
-| `@art-js`   | `art-js/libs/bundler/`       | `@art-js/artificial-bundler`    | Bundles Art modules                       |
-| `@art-js`   | `art-js/libs/program/`       | `@art-js/artificial-program`    | Executes parsed Art modules               |
-| `@art-js`   | `art-js/cli/bin/`            | `@art-js/artificial-bin`        | CLI for pipeline commands                 |
-| `@art-js`   | `art-js/cli/dev-server/`     | `@art-js/artificial-dev-server` | Local dev server for Art modules          |
-| `@art-js`   | `art-js/cli/watcher/`        | `@art-js/artificial-watcher`    | Watches for changes, triggers rebuilds    |
-| `@art-js`   | `art-js/cli/poc-parse/`      | `@art-js/poc-parse`             | POC parser spike                          |
-| `@artisans` | `artisans/apps/art-mantras/` | `@artisans/art-mantras`         | Interactive A.R.T.I.F.I.C.I.A.L.S curator |
+| Project            | Guide                                  | Backlog                                      |
+| ------------------ | -------------------------------------- | -------------------------------------------- |
+| Artificials (root) | `_guide.md`                            | `NONE`                                       |
+| POC Parse          | `art-js/cli/poc-parse/_guide.md`       | `_backlog/1-done/plan-poc-parse/` (archived) |
+| Art Mantras        | `artisans/apps/art-mantras/_guide.md`  | `artisans/apps/art-mantras/_backlog/`        |
+| Workspace CLI      | `art-domains/cli/workspace/_guide.md`  | `art-domains/cli/workspace/_backlog/`        |
+| Art JS             | `art-js/_backlog/_parking-lot.md`      | `art-js/_backlog/`                           |
+| Art Domains        | `art-domains/_backlog/_parking-lot.md` | `art-domains/_backlog/_architect.md`         |
 
 ## Scripts
 
