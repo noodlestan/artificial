@@ -1,8 +1,8 @@
-# Artificial
+# Artificials
 
 > Generate and manage (Art)ificial Driven Development environments.
 
-A collection of tools and resources to generate and manage agent instructions. Includes the Art Language, and a (reactive) pipeline for bundling, compiling, validating, parsing, and locating resources.
+A collection of tools and resources to generate and manage knowledge artefacts and agent instructions.
 
 ## Projects
 

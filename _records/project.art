@@ -2,11 +2,11 @@
 
 ## Project: Artificials
 
-**Purpose:** Umbrella project for shared resources and websites.
+**Purpose:** Generate and manage (Art)ificial Driven Development environments.
 
-**Description:** Hosts the Art JS Website, Workspace CLI Website, and other shared resources.
+**Description:** A collection of tools and resources to generate and manage knowledge artefacts and agent instructions.
 
-**Owner:** Project: Management
+**Owner:** Project: Noodlestan Management
 
 **Author:** Noodlestan Collective
 
@@ -16,11 +16,12 @@
 
 **Resources:**
 
+- Application: Art MD Website
 - Application: Art JS Website
 - Application: Workspace CLI Website
 
 **Private:** `false`
 
-**Management:** Umbrella project; planning happens via the backlogs of owned sub-projects (Art JS, Art Domains, Artisans).
+**Management:** Umbrella project; Coordinates other projects with Workflow: Roadmapping from one project-wide roadmap. Manages application backlogs with Workflow: Planning Work.
 
 **License:** License: Noodlestan 2026 MIT

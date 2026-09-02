@@ -1,6 +1,10 @@
-# Artificials
+# Guide: Artificials
 
-Umbrella project for shared resources and websites. Hosts the Art JS Website, Workspace CLI Website, and other shared resources.
+> Host and manage the Artificials roadmap, and the docs and demos applications.
+
+Monorepo containing the Artificials coordination roadmap, docs and demo applicationsa and their backlogs, and shared tooling and content.
+
+Umbrella project; Coordinates other projects with Workflow: Roadmapping from one project-wide roadmap. Manages application backlogs with Workflow: Planning Work.
 
 ## Recommended Reading
 

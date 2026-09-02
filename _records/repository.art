@@ -2,9 +2,9 @@
 
 ## Repository: Artificials
 
-**Purpose:** Umbrella project for shared resources and websites.
+**Purpose:** Host and manage the Artificials roadmap, and the docs and demos applications.
 
-**Description:** Umbrella repository hosting the Art JS Website, Workspace CLI Website, and shared resources.
+**Description:** Monorepo containing the Artificials coordination roadmap, docs and demo applicationsa and their backlogs, and shared tooling and content.
 
 **Owner:** Project: Artificials
 
