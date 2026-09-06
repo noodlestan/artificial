@@ -22,6 +22,6 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["art-js/", "artisans/", "art-domains/"],
+  "include": [],
   "exclude": ["**/node_modules/", "**/dist/", "**/coverage/"]
 }

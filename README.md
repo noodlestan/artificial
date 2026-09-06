@@ -15,16 +15,14 @@ A collection of tools and resources to generate and manage knowledge artefacts a
 | Art JS             | `art-js/_backlog/_parking-lot.md`      | `art-js/_backlog/`                           |
 | Art Domains        | `art-domains/_backlog/_parking-lot.md` | `art-domains/_backlog/_architect.md`         |
 
-## Scripts
+## Development
 
-- **$** `npm run build` — Bundle all packages for production.
-- **$** `npm run lint` — Lint all packages.
-- **$** `npm run ci` — Full CI pass (lint + build + test).
+### Scripts
 
-## Setup
-
-- **Serve a micro app** — each app under `artisans/apps/` is vanilla HTML/CSS/JS with a single `serve` script.
-- **Scaffold by cloning practices in neighbours** — when adding a new package of **app** type, its `package.json` is very different from the lib/cli packages.
+- **$** `npm run turbo build` — Build all packages.
+- **$** `npm run turbo test` — Run tests in all packages.
+- **$** `npm run turbo lint` — Lint all packages (Prettier + ESLint).
+- **$** `npm run ci` — Run all CI scripts in all packages.
 
 ## License
 
