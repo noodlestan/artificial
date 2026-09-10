@@ -1,6 +1,7 @@
 assert_lefthook_installed: true
 
 pre-commit:
+  follow: true
   parallel: false
   commands:
     '0-clean':
