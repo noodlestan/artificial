@@ -47,4 +47,5 @@ pids
 *.tsbuildinfo
 
 # Test directories
+**/.coverage
 **/coverage
