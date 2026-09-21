@@ -6,14 +6,12 @@ A collection of tools and resources to generate and manage knowledge artefacts a
 
 ## Projects
 
-| Project            | Guide                                  | Backlog                                      |
-| ------------------ | -------------------------------------- | -------------------------------------------- |
-| Artificials (root) | `_guide.md`                            | `NONE`                                       |
-| POC Parse          | `art-js/cli/poc-parse/_guide.md`       | `_backlog/1-done/plan-poc-parse/` (archived) |
-| Art Mantras        | `artisans/apps/art-mantras/_guide.md`  | `artisans/apps/art-mantras/_backlog/`        |
-| Workspace CLI      | `art-domains/cli/workspace/_guide.md`  | `art-domains/cli/workspace/_backlog/`        |
-| Art JS             | `art-js/_backlog/_parking-lot.md`      | `art-js/_backlog/`                           |
-| Art Domains        | `art-domains/_backlog/_parking-lot.md` | `art-domains/_backlog/_architect.md`         |
+- Application: Art MD Website (PLANNED)
+- Application: Art JS Website (PLANNED)
+- Application: Art Work Website (PLANNED)
+- [Project: Art MD](https://github.com/noodlestan/art-md)
+- [Project: Art JS](https://github.com/noodlestan/art-js)
+- [Project: Art Work](https://github.com/noodlestan/art-work)
 
 ## Development
 
