@@ -51,4 +51,4 @@ pids
 **/coverage
 
 # Astro
-.astro
+**/.astro
