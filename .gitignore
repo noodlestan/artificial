@@ -19,8 +19,8 @@ lerna-debug.log*
 # Dependency directories
 node_modules/
 .yarn/cache
-.yarn/unplugged
 .yarn/build-state.yml
+.yarn/unplugged
 .yarn/install-state.gz
 .pnp.*
 
@@ -49,3 +49,6 @@ pids
 # Test directories
 **/.coverage
 **/coverage
+
+# Astro
+.astro

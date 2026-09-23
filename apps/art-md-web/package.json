@@ -1,0 +1,25 @@
+{
+  "name": "apps-art-md-web",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "lint": "prettier . -c",
+    "lint:fix": "prettier . -c --write",
+    "build:clean": "rm -rf dist",
+    "build": "astro build",
+    "test": "echo none yet",
+    "preview": "astro preview",
+    "start": "astro",
+    "ci": "npm run lint && npm run build && npm run test"
+  },
+  "dependencies": {
+    "astro": "^7.2.7"
+  },
+  "allowScripts": {
+    "esbuild": true
+  }
+}

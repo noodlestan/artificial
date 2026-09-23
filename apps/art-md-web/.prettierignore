@@ -4,4 +4,4 @@ env.d.ts
 dist/
 
 # Astro
-apps/art-md-web/.astro/
+.astro/

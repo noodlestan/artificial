@@ -1,0 +1,20 @@
+# Module
+
+## Static Web Deployment: Art MD Website
+
+**Owner:** Application: Art MD Website
+
+**Status:** `DEPLOYED`
+
+**Build:** Deployment Build: NPM Command
+
+**Deploy:** Deployment Command: Static Web AWS CLI
+
+**Domain:** `noodlestan.org`
+
+**Environments:**
+
+- `Production` — Deployment Environment: Art MD Website Production
+- `Staging` — Deployment Environment: Art MD Website Staging
+
+**Infrastructure:** Deployment Infrastructure: Art MD Website

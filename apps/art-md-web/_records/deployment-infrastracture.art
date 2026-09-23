@@ -1,0 +1,18 @@
+# Module
+
+## Deployment Infrastructure: Art MD Website
+
+**Platform:** Terraform
+
+**Provider:** AWS
+
+**Files:**
+
+- `$OPS/domains/art-md/main.tf`
+- `$OPS/domains/art-md/websites/art-md-web/main.tf`
+- `$OPS/domains/art-md/main.tf` (module `art_md_web`)
+
+**Resources:**
+
+- `$OPS/modules/static-website/s3-bucket`
+- `$OPS/modules/static-website/cf-distribution`

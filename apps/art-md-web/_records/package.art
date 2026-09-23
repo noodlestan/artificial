@@ -1,0 +1,13 @@
+# Module
+
+## Package: Art MD Website
+
+**Purpose:** Demo Art MD features and host documentation.
+
+**Description:** Static website application built with Astro, hosted on AWS S3 with CloudFront CDN.
+
+**Owner:** Project: Artificials
+
+**Repository:** Repository: Artificials
+
+**Path:** `$ARTIFICIALS/apps/art-md-web`
