@@ -159,7 +159,7 @@ Execution is coordinated from `$WORKSPACE`. The content changes happen in `$ART_
 
 | Iteration / Instructions                                                                          | Status  |
 | ------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Add Home Content `./plan-home-content-and-about-page/instructions/add-home-content.md` | `READY` |
+| Iteration: Add Home Content `./plan-home-content-and-about-page/instructions/add-home-content.md` | `DONE`  |
 | Iteration: Add About Page `./plan-home-content-and-about-page/instructions/add-about-page.md`     | `READY` |
 | Iteration: Add Site Header `./plan-home-content-and-about-page/instructions/add-site-header.md`   | `READY` |
 
@@ -167,7 +167,9 @@ Execution is coordinated from `$WORKSPACE`. The content changes happen in `$ART_
 
 **Id:** `add-home-content`
 
-**Status:** `READY`
+**Status:** `DONE`
+
+**Report:** `./plan-home-content-and-about-page/instructions/add-home-content__report.md`
 
 **Purpose:** Add real home content to the Art MD Website home page.
 
@@ -194,13 +196,17 @@ Execution is coordinated from `$WORKSPACE`. The content changes happen in `$ART_
 
 #### Commits:
 
-| ID                 | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
-| ------------------ | --------------------------------- | ------------ | ----- | ---------- |
-| `add-home-content` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+| ID                 | Repository / Checkout / Branch    | Policy       | Hash      | Status      |
+| ------------------ | --------------------------------- | ------------ | --------- | ----------- |
+| `add-home-content` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `ae32ab1` | `COMMITTED` |
 
 ##### Commit: `add-home-content`
 
 **Repository:** Repository: Artificials
+
+**Hash:** `ae32ab1`
+
+**Status:** `COMMITTED`
 
 **Message:**
 
@@ -354,6 +360,7 @@ npm run build # produce a full build
 ### Evidence
 
 - **Home page renders** — `npm run build` succeeds and `src/pages/index.astro` shows real home content.
+- **Home content added** — `src/pages/index.astro` shows hero + intro, about link, GitHub link, and demos placeholder (commit `ae32ab1`).
 - **About page renders** — `/about` route shows the about page.
 - **Site header renders** — `/about` shows the site header with nav; home page shows no header.
 
