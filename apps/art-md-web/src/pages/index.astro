@@ -1,14 +1,35 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Art MD</title>
-	</head>
-	<body>
-		<h1>Art MD</h1>
-		<main>
-			<p>WIP</p>
-		</main>
-	</body>
-</html>
+---
+import HomeLayout from '../layouts/HomeLayout.astro';
+---
+
+<HomeLayout>
+	<main>
+		<section>
+			<h1>Art MD</h1>
+			<p>
+				Art MD is an extensible Markdown language for structured data. It
+				expresses structured data in Markdown with a language specification and
+				JavaScript libraries, enabling human and machine authoring at scale and
+				automated transformations. This site demos Art MD features and hosts its
+				documentation.
+			</p>
+		</section>
+		<section>
+			<h2>Learn more</h2>
+			<ul>
+				<li>
+					<a href="/about">About Art MD</a> — what the project is and what this site
+					hosts.
+				</li>
+				<li>
+					<a href="https://github.com/noodlestan/art-md">Art MD on GitHub</a> — the
+					source repository.
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Demos</h2>
+			<p>Code, design, and interaction demos are coming soon.</p>
+		</section>
+	</main>
+</HomeLayout>
