@@ -2,7 +2,7 @@
 
 **Id:** `scaffold-art-md-website`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -154,15 +154,15 @@ Execution is coordinated from `$WORKSPACE`. The package scaffold happens in `$AR
 
 ## Items:
 
-| Iteration / Instructions                                                                                  | Status  |
-| --------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Scaffold Art MD Website `plan-scaffold-art-md-website/instructions/scaffold-art-md-website.md` | `READY` |
+| Iteration / Instructions                                                                                  | Status |
+| --------------------------------------------------------------------------------------------------------- | ------ |
+| Iteration: Scaffold Art MD Website `plan-scaffold-art-md-website/instructions/scaffold-art-md-website.md` | `DONE` |
 
 ### Iteration: Scaffold Art MD Website
 
 **Id:** `scaffold-art-md-website`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Purpose:** Create the Art MD Website Astro package with guide, records, README, package config, Astro deps, config files, and WIP content.
 
@@ -186,9 +186,9 @@ Execution is coordinated from `$WORKSPACE`. The package scaffold happens in `$AR
 
 #### Commits:
 
-| ID                        | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
-| ------------------------- | --------------------------------- | ------------ | ----- | ---------- |
-| `scaffold-art-md-website` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+| ID                        | Repository / Checkout / Branch    | Policy       | Hash      | Status      |
+| ------------------------- | --------------------------------- | ------------ | --------- | ----------- |
+| `scaffold-art-md-website` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `3704084` | `COMMITTED` |
 
 ##### Commit: `scaffold-art-md-website`
 
@@ -199,12 +199,6 @@ Execution is coordinated from `$WORKSPACE`. The package scaffold happens in `$AR
 ```
 scaffold(art-md-web): Create package with hello world Astro site.
 ```
-
-**Policy:** `AUTONOMOUS`
-
-**Hash:** (TBD)
-
-**Status:** `AUTHORED`
 
 ---
 
