@@ -2,7 +2,7 @@
 
 **ID:** `home-content-and-about-page`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
