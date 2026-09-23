@@ -4,8 +4,7 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 
 ## ACTIONABLE
 
-- move `_backlog/3-now/plan-scaffold-art-md-website` to done
-- Identify next plan in `_roadmap/3-now/milestone-art-md-website/milestone.md`
+- None.
 
 ## PENDING
 

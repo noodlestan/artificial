@@ -173,7 +173,7 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 
 **Goal:** Prove out code, design, and interaction demos.
 
-**Description:** Build POC demos for code, design, and interactions, decomposing codec and style elements.
+**Description:** Build POC demos for code, design, and interactions, decomposing codec demo and style elements.
 
 **Status:** `PLANNING`
 
@@ -197,51 +197,19 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 
 ## Items:
 
-| Phase | Resource / Record                                                                             | Status |
-| ----- | --------------------------------------------------------------------------------------------- | ------ |
-| 1     | Plan: Scaffold Art MD Website `$PROJECT/_backlog/1-done/plan-scaffold-art-md-website/plan.md` | `DONE` |
-| 1     | Plan: Home content and about page                                                             | -      |
-| 2     | Plan: Code Demo POC (with SolidJS)                                                            | -      |
-| 2     | Plan: Decompose Codec Demo                                                                    | -      |
-| 2     | Plan: Design POC                                                                              | -      |
-| 2     | Plan: Decompose Style Elements                                                                | -      |
-| 1     | Plan: Demo Interactions POC                                                                   | -      |
-| 1     | Plan: Integrate Records in Demo                                                               | -      |
+| Phase | Resource / Record                                                                                     | Status     |
+| ----- | ----------------------------------------------------------------------------------------------------- | ---------- |
+| 1     | Plan: Scaffold Art MD Website `$PROJECT/_backlog/1-done/plan-scaffold-art-md-website/plan.md`         | `DONE`     |
+| 1     | Plan: Home content and about page `$PROJECT/_backlog/6-plan/plan-home-content-and-about-page/plan.md` | `PLANNING` |
+| -     |                                                                                                       |            |
+| 2     | Plan: Code Demo POC SolidJS `$PROJECT/_backlog/6-plan/plan-code-demo-poc-solidjs`                     | `DRAFT`    |
+| 2     | Plan: Decompose Codec Demo                                                                            | -          |
+| 2     | Plan: Design POC                                                                                      | -          |
+| 2     | Plan: Decompose Style Elements                                                                        | -          |
+| 2     | Plan: Demo Interactions POC                                                                           | -          |
+| 2     | Plan: Integrate Records in Demo                                                                       | -          |
 
 The following items are not yet captured in a work item document.
-
-### Plan: Home content and about page
-
-**Status:** `DRAFT`
-
-**Purpose:** Add home content and an about page to the Art MD Website.
-
-**Description:** Create the home content and about page for the Art MD Website.
-
-**Changes:**
-
-- Add home content.
-- Add about page.
-
-**Dependencies:**
-
-- None.
-
-### Plan: Code Demo POC (with SolidJS)
-
-**Status:** `DRAFT`
-
-**Purpose:** Prove out a code demo using SolidJS.
-
-**Description:** Build a code demo POC with SolidJS.
-
-**Changes:**
-
-- Build code demo POC with SolidJS.
-
-**Dependencies:**
-
-- None.
 
 ### Plan: Decompose Codec Demo
 
