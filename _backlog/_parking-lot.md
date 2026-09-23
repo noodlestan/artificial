@@ -4,7 +4,7 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 
 ## ACTIONABLE
 
-- None.
+- Plan: Home Content And About Page.
 
 ## PENDING
 
