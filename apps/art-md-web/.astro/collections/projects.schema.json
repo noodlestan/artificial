@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "project": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "website": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "code": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "repository": {
+                "type": "string"
+              },
+              "owner": {
+                "type": "string"
+              },
+              "resources": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "private": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "purpose",
+              "description",
+              "website",
+              "code",
+              "repository",
+              "owner",
+              "resources",
+              "private"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "project"
+        ]
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "project": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "website": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "code": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "repository": {
+                "type": "string"
+              },
+              "owner": {
+                "type": "string"
+              },
+              "resources": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "private": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "purpose",
+              "description",
+              "website",
+              "code",
+              "repository",
+              "owner",
+              "resources",
+              "private"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "project"
+        ]
+      }
+    }
+  ]
+}
