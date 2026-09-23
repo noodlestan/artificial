@@ -160,7 +160,7 @@ Execution is coordinated from `$WORKSPACE`. The content changes happen in `$ART_
 | Iteration / Instructions                                                                          | Status  |
 | ------------------------------------------------------------------------------------------------- | ------- |
 | Iteration: Add Home Content `./plan-home-content-and-about-page/instructions/add-home-content.md` | `DONE`  |
-| Iteration: Add About Page `./plan-home-content-and-about-page/instructions/add-about-page.md`     | `READY` |
+| Iteration: Add About Page `./plan-home-content-and-about-page/instructions/add-about-page.md`     | `DONE`  |
 | Iteration: Add Site Header `./plan-home-content-and-about-page/instructions/add-site-header.md`   | `READY` |
 
 ### Iteration: Add Home Content
@@ -218,7 +218,9 @@ feat(art-md-web): Add home content to Art MD website.
 
 **Id:** `add-about-page`
 
-**Status:** `READY`
+**Status:** `DONE`
+
+**Report:** `./plan-home-content-and-about-page/instructions/add-about-page__report.md`
 
 **Purpose:** Add an about page to the Art MD Website.
 
@@ -245,13 +247,17 @@ feat(art-md-web): Add home content to Art MD website.
 
 #### Commits:
 
-| ID               | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
-| ---------------- | --------------------------------- | ------------ | ----- | ---------- |
-| `add-about-page` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+| ID               | Repository / Checkout / Branch    | Policy       | Hash      | Status      |
+| ---------------- | --------------------------------- | ------------ | --------- | ----------- |
+| `add-about-page` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `1c71ae5` | `COMMITTED` |
 
 ##### Commit: `add-about-page`
 
 **Repository:** Repository: Artificials
+
+**Hash:** `1c71ae5`
+
+**Status:** `COMMITTED`
 
 **Message:**
 
@@ -362,6 +368,7 @@ npm run build # produce a full build
 - **Home page renders** — `npm run build` succeeds and `src/pages/index.astro` shows real home content.
 - **Home content added** — `src/pages/index.astro` shows hero + intro, about link, GitHub link, and demos placeholder (commit `ae32ab1`).
 - **About page renders** — `/about` route shows the about page.
+- **About page added** — `src/pages/about.astro` renders `intro`, `wip`, `architecture`, `contribute` sections (commit `1c71ae5`).
 - **Site header renders** — `/about` shows the site header with nav; home page shows no header.
 
 ### Findings
