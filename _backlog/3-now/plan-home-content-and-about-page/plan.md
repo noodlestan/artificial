@@ -2,7 +2,7 @@
 
 **ID:** `home-content-and-about-page`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -157,11 +157,11 @@ Execution is coordinated from `$WORKSPACE`. The content changes happen in `$ART_
 
 ## Items:
 
-| Iteration / Instructions                                                                          | Status  |
-| ------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Add Home Content `./plan-home-content-and-about-page/instructions/add-home-content.md` | `DONE`  |
-| Iteration: Add About Page `./plan-home-content-and-about-page/instructions/add-about-page.md`     | `DONE`  |
-| Iteration: Add Site Header `./plan-home-content-and-about-page/instructions/add-site-header.md`   | `READY` |
+| Iteration / Instructions                                                                          | Status |
+| ------------------------------------------------------------------------------------------------- | ------ |
+| Iteration: Add Home Content `./plan-home-content-and-about-page/instructions/add-home-content.md` | `DONE` |
+| Iteration: Add About Page `./plan-home-content-and-about-page/instructions/add-about-page.md`     | `DONE` |
+| Iteration: Add Site Header `./plan-home-content-and-about-page/instructions/add-site-header.md`   | `DONE` |
 
 ### Iteration: Add Home Content
 
@@ -269,7 +269,9 @@ feat(art-md-web): Add about page to Art MD website.
 
 **Id:** `add-site-header`
 
-**Status:** `READY`
+**Status:** `DONE`
+
+**Report:** `./plan-home-content-and-about-page/instructions/add-site-header__report.md`
 
 **Purpose:** Add a site header with navigation to the about page.
 
@@ -290,13 +292,17 @@ feat(art-md-web): Add about page to Art MD website.
 
 #### Commits:
 
-| ID                | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
-| ----------------- | --------------------------------- | ------------ | ----- | ---------- |
-| `add-site-header` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+| ID                | Repository / Checkout / Branch    | Policy       | Hash      | Status      |
+| ----------------- | --------------------------------- | ------------ | --------- | ----------- |
+| `add-site-header` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `ddd19a8` | `COMMITTED` |
 
 ##### Commit: `add-site-header`
 
 **Repository:** Repository: Artificials
+
+**Hash:** `ddd19a8`
+
+**Status:** `COMMITTED`
 
 **Message:**
 
@@ -310,7 +316,7 @@ feat(art-md-web): Add site header with navigation.
 
 ### Next
 
-Delegate the next `READY` instruction.
+All iterations DONE; plan complete.
 
 ### Blockers
 
@@ -370,6 +376,7 @@ npm run build # produce a full build
 - **About page renders** — `/about` route shows the about page.
 - **About page added** — `src/pages/about.astro` renders `intro`, `wip`, `architecture`, `contribute` sections (commit `1c71ae5`).
 - **Site header renders** — `/about` shows the site header with nav; home page shows no header.
+- **Site header added** — `SiteHeader.astro` + `PageLayout.astro` created; about uses `PageLayout`, home keeps `Layout` (commit `ddd19a8`).
 
 ### Findings
 
