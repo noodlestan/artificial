@@ -175,7 +175,7 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 
 **Description:** Build POC demos for code, design, and interactions, decomposing codec demo and style elements.
 
-**Status:** `PLANNING`
+**Status:** `WORKING`
 
 **Dependencies:**
 
@@ -204,7 +204,7 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 | -     |                                                                                                      |         |
 | 2     | Plan: Code Demo POC SolidJS `$PROJECT/_backlog/6-plan/plan-code-demo-poc-solidjs`                    | `DRAFT` |
 | 2     | Plan: Decompose Codec Demo                                                                           | -       |
-| 2     | Plan: Design POC                                                                                     | -       |
+| 2     | Plan: Design POC `$PROJECT/_backlog/3-now/plan-design-poc/plan.md`                                   | `READY` |
 | 2     | Plan: Decompose Style Elements                                                                       | -       |
 | 2     | Plan: Demo Interactions POC                                                                          | -       |
 | 2     | Plan: Integrate Records in Demo                                                                      | -       |

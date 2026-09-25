@@ -1,28 +1,27 @@
 ---
+import '../styles/global.css'
+import SiteHead from './components/SiteHead.astro';
 import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Art MD</title>
-	</head>
-	<body>
-		<SiteHeader />
-		<slot />
-	</body>
+  <head>
+    <SiteHead />
+    <title>Art MD</title>
+  </head>
+  <body>
+    <SiteHeader />
+    <main class="main-section markdown">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  main {
+    padding-block-start: 2rem;
+  }
 </style>
