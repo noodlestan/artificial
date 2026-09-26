@@ -157,10 +157,10 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 **Changes:**
 
 - Add `solid-js` and `@astrojs/solid-js` to `apps/art-md-web/package.json`, and register the integration in `astro.config.mjs`.
-- Add `@art-md/codec` to `apps/art-md-web/package.json`.
+- Add `@art-md/codec@^0.0.2` to `apps/art-md-web/package.json`.
 - Add `src/pages/demo.astro` on `PageLayout`, passing a `content` object with `title` and `description` — the layouts destructure `Astro.props.content` and throw without it.
 - Add a `CodeDemo` SolidJS component in `src/components/demos/code/` holding the markdown source in a signal.
-- Mount the island with `client:only="solid-js"`. Do **not** use `client:load` or `client:visible`: the published codec bundle dereferences `document` at module-evaluation time, so Astro's build-time server render would throw `document is not defined`.
+- Mount the island with `client:only="solid-js"`. Do **not** use `client:load` or `client:visible`. The package entry point is `./src/index.ts`, and Node refuses to strip types for files under `node_modules` (`ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`), so any Astro server pass would fail to load the module. Only the browser bundle, where Vite has already transpiled it, can import it. `client:only` skips the server render entirely.
 - Render two panes: an editable `textarea` for markdown, and a `readonly` `textarea` showing the serialised result of `createArtCodec().parse()`.
 - Pre-populate the input with the demo fixture below.
 - Surface codec parse failures inline instead of throwing, so malformed markdown does not blank the demo.
@@ -169,7 +169,7 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 
 **Dependencies:**
 
-- **`@art-md/codec` must resolve before this iteration can run — currently it does not.** See the packaging blocker under `## Work` → `### Blockers`.
+- None. `@art-md/codec@0.0.2` is published and its entry point resolves.
 
 Demo fixture:
 
@@ -260,13 +260,11 @@ build(art-md-web): Add 404 page for unknown routes
 
 ### Next
 
-Iteration `add-404-page` is DONE. Iteration `build-code-demo-poc` is `PLANNING` and blocked on the `art-md` packaging fix; republish the five packages with a valid entry point, then write its instructions.
+Iteration `add-404-page` is DONE. Iteration `build-code-demo-poc` is `PLANNING` and no longer blocked — write its instructions and mark it `READY`.
 
 ### Blockers
 
-- **All five published `art-md` packages have a broken entry point — blocks iteration `build-code-demo-poc`.** Every `package.json` sets `"main": "./src/index.ts"`, but `files` publishes only `["dist", "LICENSE-MIT", "README.md"]`, so `src/` is absent from the tarball. The published `@art-md/codec@0.0.1` tarball contains only `dist/esm/index.js`, `LICENSE-MIT`, `package.json`, `README.md` — no `src/`, no `exports` map, and no type declarations. Installing and resolving fails with `MODULE_NOT_FOUND: Cannot find module '.../@art-md/codec/src/index.ts'`. The fix belongs to `$ART_MD`: point `main` (or add an `exports` map) at `dist/`, add a `types` entry, then republish all five packages. Affects `codec`, `parser`, `serializer`, `constructs`, and `primitives` identically.
-- **The published codec bundle is browser-only at import time — constraint, not a blocker.** Importing `dist/esm/index.js` in Node throws `document is not defined` during module evaluation, with no call made. This is why the island must use `client:only="solid-js"`; recorded under `### Findings` and folded into the iteration `## Changes`.
-- **`$ART_JS` path variable was wrong** — resolved to `checkouts/art-js`, which does not exist. Corrected to `checkouts/art-js-planning`. Now resolved.
+- None. The `art-md` packaging blocker is resolved — see `### Findings`.
 
 ---
 
@@ -331,14 +329,13 @@ npm run build # produce a full build
 
 ### Findings
 
-- **Publishing did not unblock the demo** — `@art-md/codec@0.0.1` is live on npm, and its siblings moved to `0.0.2`, but the entry point is unresolvable. Version numbers are irrelevant while `main` points outside the tarball.
+- **The `art-md` packaging blocker is RESOLVED.** Adding `src` to `files` in all five packages and republishing fixed the unresolvable entry point. Verified against the registry: `@art-md/codec@0.0.2` installs, ships `src/index.ts`, and `require.resolve('@art-md/codec')` succeeds. Siblings are at `0.0.3`; codec at `0.0.2`. Because codec's dependency ranges are `*`, the demo will pull `0.0.3` of the four siblings alongside `codec@0.0.2`.
+- **The published entry point is TypeScript source, so plain Node cannot load it** — verified: importing `@art-md/codec` in Node fails with `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`, because type stripping is unsupported for files under `node_modules`. Bundler-based consumers are fine — Vite transpiles the source — so the Astro demo works, but any Node-side consumer (a CLI, a plain script, an SSR pass) would fail. This is what makes `client:only` mandatory for the island rather than merely preferable.
 - **Codec API surface** — `createArtCodec(config?)` returns `{ parse, serialize }`. `parse` accepts a markdown string and returns a `ParseResult`; defaults come from `DEFAULT_CONSTRUCT_PARSER` and the `CONSTRUCT_PARSERS` / `CONSTRUCT_SERIALIZERS` registries, so a bare `createArtCodec()` is enough for the demo.
-- **Codec dependency ranges are `*`** — so the demo will pull `0.0.2` of the four siblings alongside `codec@0.0.1`. Functionally fine, but codec sits one release behind its siblings' version line.
-- **The codec bundle dereferences `document` during module evaluation** — verified by importing the published `dist/esm/index.js` in Node and catching the throw with no call made. Astro islands rendered on the server would crash at build time; `client:only` avoids this.
 - **The site cannot host an island inside a markdown page** — there is no MDX integration and no `src/content` collection. `src/pages/index.md` and `about.md` are plain `.md` files using the `layout` frontmatter key, so their bodies render as markdown only.
 - **Layouts require a `content` prop** — `SiteHead` destructures `Astro.props.content`, so an `.astro` page on `PageLayout` or `HomeLayout` throws without a `content` object carrying `title` and `description`.
 - **Layouts already apply `main-section`** — `PageLayout` and `HomeLayout` both render `<main class="main-section markdown">`. A nested `main-section` doubles the page margin; this shipped in `6762790` because the `add-404-page` instructions required both.
-- **The site has no 404 page** — the CloudFront distribution declares `custom_error_response` for 404 pointing at `/404.html`, but Astro emits no such file, so unknown paths return S3's `application/xml` error body.
+- **The site has no 404 page** — the CloudFront distribution declares `custom_error_response` for 404 pointing at `/404.html`, but Astro emits no such file, so unknown paths return S3's `application/xml` error body. Resolved by `6762790`.
 
 ### Decisions
 
