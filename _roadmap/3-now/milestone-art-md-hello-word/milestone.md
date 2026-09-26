@@ -197,35 +197,19 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 
 ## Items:
 
-| Phase | Resource / Record                                                                                     | Status |
-| ----- | ----------------------------------------------------------------------------------------------------- | ------ |
-| 1     | Plan: Scaffold Art MD Website `$PROJECT/_backlog/1-done/plan-scaffold-art-md-website/plan.md`         | `DONE` |
-| 1     | Plan: Home content and about page `$PROJECT/_backlog/1-done/plan-home-content-and-about-page/plan.md` | `DONE` |
-| -     |                                                                                                       |        |
-| 2     | Plan: Code Demo POC SolidJS `$PROJECT/_backlog/1-done/plan-code-demo-poc-solidjs/plan.md`             | `DONE` |
-| 2     | Plan: Decompose Codec Demo                                                                            | -      |
-| 2     | Plan: Design POC `$PROJECT/_backlog/1-done/plan-design-poc/plan.md`                                   | `DONE` |
-| 2     | Plan: Decompose Style Elements                                                                        | -      |
-| 2     | Plan: Demo Interactions POC                                                                           | -      |
-| 2     | Plan: Integrate Records in Demo                                                                       | -      |
+| Phase | Resource / Record                                                                                     | Status     |
+| ----- | ----------------------------------------------------------------------------------------------------- | ---------- |
+| 1     | Plan: Scaffold Art MD Website `$PROJECT/_backlog/1-done/plan-scaffold-art-md-website/plan.md`         | `DONE`     |
+| 1     | Plan: Home content and about page `$PROJECT/_backlog/1-done/plan-home-content-and-about-page/plan.md` | `DONE`     |
+| -     |                                                                                                       |            |
+| 2     | Plan: Code Demo POC SolidJS `$PROJECT/_backlog/1-done/plan-code-demo-poc-solidjs/plan.md`             | `DONE`     |
+| 2     | Plan: Decompose Codec Demo `$PROJECT/_backlog/6-plan/plan-decompose-codec-demo/plan.md`               | `PLANNING` |
+| 2     | Plan: Design POC `$PROJECT/_backlog/1-done/plan-design-poc/plan.md`                                   | `DONE`     |
+| 2     | Plan: Decompose Style Elements                                                                        | -          |
+| 2     | Plan: Demo Interactions POC                                                                           | -          |
+| 2     | Plan: Integrate Records in Demo                                                                       | -          |
 
 The following items are not yet captured in a work item document.
-
-### Plan: Decompose Codec Demo
-
-**Status:** `DRAFT`
-
-**Purpose:** Decompose the codec demo.
-
-**Description:** Decompose the codec demo into reusable parts.
-
-**Changes:**
-
-- Decompose codec demo.
-
-**Dependencies:**
-
-- None.
 
 ### Plan: Decompose Style Elements
 
@@ -281,7 +265,7 @@ The following items are not yet captured in a work item document.
 
 ### Next
 
-Delegate plan `home-content-and-about-page`; then plan Phase 2: Code Demo POC (with SolidJS).
+Write instructions for plan `decompose-codec-demo`; then delegate its 3 iterations in order.
 
 ### Blockers
 
