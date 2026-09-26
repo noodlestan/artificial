@@ -46,13 +46,17 @@ Prove out a live, in-browser Art MD round trip: a SolidJS island that parses mar
 
 This iteration is the deliverable that justifies the whole plan — the code demo POC the Art MD Website home page currently advertises but does not have.
 
+The demo is carried by the home page layout, not by a dedicated route: the reader sees the round trip on first visit rather than having to follow a link to believe it.
+
 ## Mandatory Reading
 
 - `$ART_MD_WEB/_guide.md` (Guide) — package operations and layout.
 - `$ART_MD_WEB/README.md` (Readme) — package readme.
 - `$ART_MD_WEB/src/layouts/PageLayout.astro` (Reference) — the layout the demo route must use, and the `content` prop it requires.
-- `$ART_MD_WEB/src/pages/404.astro` (Reference) — a working `.astro` page on `PageLayout`; copy its `content` prop pattern.
-- `$ART_MD_WEB/src/pages/index.md` (Reference) — the home page whose `## Demos` section must link to the demo.
+- `$ART_MD_WEB/src/pages/404.astro` (Reference) — a working `.astro` page on `PageLayout`; copy its `content` prop pattern and its page-level `<style>`.
+- `$ART_MD_WEB/src/layouts/HomeLayout.astro` (Reference) — the layout that carries the island, and the `main.main-section` it already renders.
+- `$ART_MD_WEB/tsconfig.json` (Reference) — the Solid JSX configuration the island depends on.
+- `$ART_MD_WEB/src/pages/index.md` (Reference) — the home page body. It stays pure markdown; do not add a link to the demo, because the layout renders it.
 - `$ART_JS/_guide.md` (Guide) — TypeScript conventions for the `.tsx` component.
 
 - RULE: You MUST follow any links under `## Mandatory Reading` sections found in the listed files.
@@ -93,9 +97,9 @@ npm run build # produce a full build
 
 ## Changes
 
-- Step 1 / 5 — Add SolidJS and codec dependencies
-- Step 2 / 5 — Create the `CodeDemo` island
-- Step 3 / 5 — Create the `/demo` route and link it from the home page
+- Step 1 / 5 — Add SolidJS and codec dependencies, and the Solid JSX config
+- Step 2 / 5 — Create the `CodeDemo` island and its CSS module
+- Step 3 / 5 — Carry the island from the home page layout
 - Step 4 / 5 — Verify the build
 - Step 5 / 5 — Commit `build-code-demo-poc`
 
@@ -118,6 +122,20 @@ import solid from '@astrojs/solid-js';
 export default defineConfig({
   integrations: [solid()],
 });
+```
+
+Then set the Solid JSX config in `$ART_MD_WEB/tsconfig.json`. `astro/tsconfigs/strict` defaults to React-style JSX, so without these two options the integration's Babel transform does not apply and the island renders nothing:
+
+```json
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}
 ```
 
 Then run `npm install` from the `$PROJECT` root so the lockfile picks up the new packages.
@@ -159,23 +177,62 @@ Render two panes inside the returned JSX:
 - An editable `<textarea>` bound to `source()` via `onInput`, seeded with the demo fixture below.
 - A `readonly` `<textarea>` showing `output()`.
 
-### Step `3 / 5` — Create the Demo Route and Link It
+Put the island's styles in `$ART_MD_WEB/src/components/demos/code/CodeDemo.module.css`, keyed `CodeDemo` and `CodeDemo--Pane`, and apply them with `styles['CodeDemo']` and `styles['CodeDemo--Pane']`. Do **not** use an inline `<style>` block in the JSX: Astro scopes `<style>` per `.astro` file and does not hoist it for a Solid island, so it renders unreliably. The module should express the two-pane grid and reuse the site's existing CSS custom properties:
 
-Create `$ART_MD_WEB/src/pages/demo.astro`.
+```css
+.CodeDemo {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
 
-It must pass a `content` object to `PageLayout` — `SiteHead` destructures `Astro.props.content`, so omitting it throws. Copy the pattern from `$ART_MD_WEB/src/pages/404.astro`.
+.CodeDemo--Pane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+```
 
-Mount the island like this:
+### Step `3 / 5` — Carry the Island from the Home Page Layout
+
+Create `$ART_MD_WEB/src/components/pages/home/HomeDemo.astro`. It holds the copy and mounts the island:
 
 ```astro
+---
+import CodeDemo from '../../demos/code/CodeDemo';
+---
+
+<h1>Codec demo</h1>
+<p>Type Art MD on the first textarea.</p>
+<p>The <code>@art-md/codec</code> parses it into Art AST on the second.</p>
 <CodeDemo client:only="solid-js" />
 ```
 
 `client:only` is mandatory, not a style preference. The `@art-md/codec` entry point is TypeScript source, and Node refuses to strip types for files under `node_modules` (`ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`). Any Astro server render would fail to load the module. `client:only` skips the server render; the browser bundle is built by Vite, which transpiles the source.
 
-Do NOT wrap the island in a `main-section` element. `PageLayout` already renders `<main class="main-section markdown">`; a nested `main-section` applies the page margin twice.
+Then render it from `$ART_MD_WEB/src/layouts/HomeLayout.astro`, above the slot so the demo leads the page:
 
-Then update the `## Demos` section in `$ART_MD_WEB/src/pages/index.md`, replacing the `Interactive demo goes here.` placeholder with a link to `/demo`. Keep it as markdown — do not try to embed the component in `index.md`. The site has no MDX integration and no content collection, so a `.md` page body cannot host a component.
+```astro
+import HomeIntro from '../components/pages/home/HomeIntro.astro';
+import HomeDemo from '../components/pages/home/HomeDemo.astro';
+```
+
+```astro
+  <body>
+    <HomeIntro />
+    <main class="main-section markdown">
+      <HomeDemo />
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+```
+
+Rename `$ART_MD_WEB/src/components/pages/home/Intro.astro` to `HomeIntro.astro` and update the import. Page-scoped components carry a `Home` prefix, so they are distinguishable from the site's reusable ones.
+
+Do NOT add a `main-section` wrapper anywhere. `PageLayout` and `HomeLayout` already render `<main class="main-section markdown">`; a nested `main-section` applies the page margin twice. While you are here, drop the `<section class="main-section">` wrapper from `$ART_MD_WEB/src/pages/404.astro` for the same reason, and move that page's font sizing into a page-level `<style>` block.
+
+Do NOT add a `## Demos` link to `$ART_MD_WEB/src/pages/index.md`, and do not try to embed the component there. The site has no MDX integration and no content collection, so a `.md` page body cannot host a component — the layout is what carries the island.
 
 ### Step `4 / 5` — Verify the Build
 
@@ -187,11 +244,11 @@ npm run lint
 npm run build
 ```
 
-Expected outcome: the build reports `4 page(s) built`, listing `/404.html`, `/about/index.html`, `/demo/index.html`, and `/index.html`.
+Expected outcome: the build reports `3 page(s) built`, listing `/404.html`, `/about/index.html`, and `/index.html`.
 
 If the build fails with `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING` or `document is not defined`, the island is not using `client:only="solid-js"`. Fix the directive and rebuild.
 
-Confirm `/demo/index.html` exists on disk and that it contains the `astro-island` element carrying the `client-only` directive. Do not proceed to the commit step if the build fails.
+Confirm `dist/index.html` exists on disk and that it contains the `astro-island` element carrying the `client-only` directive and `solid-js` as its renderer value. Do not proceed to the commit step if the build fails.
 
 Note: this step verifies the build artefact only. Do not run `aws s3 sync` in this iteration.
 
@@ -208,10 +265,10 @@ Note: this step verifies the build artefact only. Do not run `aws s3 sync` in th
 ```
 build(art-md-web): Add SolidJS code demo parsing Art MD in the browser
 
-- Integrate SolidJS into the Astro app and depend on `@art-md/codec`.
-- Add a `/demo` route rendering a two-pane markdown-to-AST island.
-- Mount with `client:only` because the codec entry point is TypeScript source.
-- Show codec parse failures inline rather than throwing.
+- Integrate SolidJS and `@art-md/codec` into the Astro app.
+- Add a `CodeDemo` island with its styles in a CSS module, parsing Art MD to a document AST as you type.
+- Add demo on the home page through `HomeLayout`, and show parse failures inline.
+- Configure Typescript with `jsxImportSource` for TSX compatibility with IDE.
 ```
 
 ---
@@ -222,12 +279,13 @@ build(art-md-web): Add SolidJS code demo parsing Art MD in the browser
 
 - Verify that commits have been executed and pushed (or not pushed) according to the commit's policy.
 - Verify that the commit was created and **not** pushed, per the `NOPUSH` policy.
-- Verify that `solid-js`, `@astrojs/solid-js`, and `@art-md/codec` are in `apps/art-md-web/package.json`, and that `astro.config.mjs` registers the SolidJS integration.
-- Verify that `src/components/demos/code/CodeDemo.tsx` constructs the codec at module scope and serialises `result.document` only.
-- Verify that `src/pages/demo.astro` passes a `content` object to `PageLayout` and mounts the island with `client:only="solid-js"`.
-- Verify that the demo page does NOT nest a `main-section` inside the layout's own `main.main-section`.
-- Verify that `src/pages/index.md` links to `/demo` and no longer contains the `Interactive demo goes here.` placeholder.
-- Verify that the build reports `4 page(s) built` including `/demo/index.html`.
+- Verify that `solid-js`, `@astrojs/solid-js`, and `@art-md/codec` are in `apps/art-md-web/package.json`, that `astro.config.mjs` registers the SolidJS integration, and that `tsconfig.json` sets `jsx: preserve` with `jsxImportSource: solid-js`.
+- Verify that `src/components/demos/code/CodeDemo.tsx` constructs the codec at module scope and serialises `result.document` only, and that its styles live in `CodeDemo.module.css` rather than an inline `<style>` block.
+- Verify that `src/components/pages/home/HomeDemo.astro` mounts the island with `client:only="solid-js"` and that `HomeLayout` renders it above the slot.
+- Verify that `src/components/pages/home/Intro.astro` is now `HomeIntro.astro` and its import in `HomeLayout` is updated.
+- Verify that no page nests a `main-section` inside the layout's own `main.main-section`, including `404.astro`.
+- Verify that `src/pages/index.md` is unchanged by this iteration and contains no `## Demos` link, and that `src/pages/demo.astro` does not exist.
+- Verify that the build reports `3 page(s) built` and that `dist/index.html` carries the `astro-island` with `client="only"`.
 - Execute the **Verifying Completion** step as defined in the "Operating Instructions" section.
 - Report according to the "How to Report Back to the Delegator" instructions.
 

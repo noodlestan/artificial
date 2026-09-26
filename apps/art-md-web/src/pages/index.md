@@ -4,10 +4,6 @@ title: Art MD
 description: Express data in Markdown through an extensible language. Designed for human and machine authoring at scale.
 ---
 
-## Demos
-
-Interactive demo goes here.
-
 ## Features
 
 ### Extensible

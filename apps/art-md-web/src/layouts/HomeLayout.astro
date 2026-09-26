@@ -1,8 +1,9 @@
 ---
-import '../styles/global.css'
+import '../styles/global.css';
 import SiteHead from './components/SiteHead.astro';
 import SiteFooter from '../components/site/SiteFooter.astro';
-import Intro from '../components/pages/home/Intro.astro';
+import HomeIntro from '../components/pages/home/HomeIntro.astro';
+import HomeDemo from '../components/pages/home/HomeDemo.astro';
 
 const { content } = Astro.props;
 ---
@@ -10,11 +11,12 @@ const { content } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
-    <SiteHead content={content}/>
+    <SiteHead content={content} />
   </head>
   <body>
-    <Intro />
+    <HomeIntro />
     <main class="main-section markdown">
+      <HomeDemo />
       <slot />
     </main>
     <SiteFooter />
