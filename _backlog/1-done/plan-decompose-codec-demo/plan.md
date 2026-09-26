@@ -2,7 +2,7 @@
 
 **ID:** `decompose-codec-demo`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -118,17 +118,37 @@ Execution is coordinated from `$WORKSPACE`. All changes happen in `$ART_MD_WEB` 
 
 ## Items:
 
-| Iteration / Instructions                                                                                       | Status  |
-| -------------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Decompose Demo Components `./plan-decompose-codec-demo/instructions/decompose-demo-components.md`   | `READY` |
-| Iteration: Add Codec Demo Page `./plan-decompose-codec-demo/instructions/add-codec-demo-page.md`               | `READY` |
-| Iteration: Integrate Demo In Site Nav `./plan-decompose-codec-demo/instructions/integrate-demo-in-site-nav.md` | `READY` |
+| Iteration / Instructions                                                                                       | Status |
+| -------------------------------------------------------------------------------------------------------------- | ------ |
+| Iteration: Decompose Demo Components `./plan-decompose-codec-demo/instructions/decompose-demo-components.md`   | `DONE` |
+| Iteration: Add Codec Demo Page `./plan-decompose-codec-demo/instructions/add-codec-demo-page.md`               | `DONE` |
+| Iteration: Integrate Demo In Site Nav `./plan-decompose-codec-demo/instructions/integrate-demo-in-site-nav.md` | `DONE` |
+
+### Commit: `decompose-codec-demo`
+
+**Repository:** Repository: Artificials
+
+**Hash:** `0e6fcfc`
+
+**Status:** `COMMITTED`
+
+**Message:**
+
+```
+build(art-md-web): Add codec demo page with source switcher and site navigation
+
+- Add TextArea, DemoPane, and CodeDemo components.
+- Add typed demo sources with multiple fixtures.
+- Add /codec-demo route with dropdown source switching.
+- Extract SiteNav and SiteLinks for shared navigation.
+- Link demo page from home, about, and site header.
+```
 
 ### Iteration: Decompose Demo Components
 
 **Id:** `decompose-demo-components`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Purpose:** Make the codec demo's building blocks reusable and token-driven, so the demo page and later demos do not re-implement inputs and panes.
 
@@ -154,33 +174,15 @@ Execution is coordinated from `$WORKSPACE`. All changes happen in `$ART_MD_WEB` 
 
 #### Commits:
 
-| ID                          | Repository / Checkout / Branch    | Policy   | Hash  | Status     |
-| --------------------------- | --------------------------------- | -------- | ----- | ---------- |
-| `decompose-demo-components` | Artificials / `$PROJECT` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
-
-##### Commit: `decompose-demo-components`
-
-**Repository:** Repository: Artificials
-
-**Hash:** (TBD)
-
-**Status:** `AUTHORED` — blueprint, not yet created.
-
-**Message:**
-
-```
-build(art-md-web): Decompose codec demo into `TextArea` and `DemoPane` components
-
-- Add `TextArea` and `DemoPane` components with their own CSS modules.
-- Add the `--color-input-bg` token for the default and dark colour schemes.
-- Move the demo fixture to a typed `sources.ts` and make `CodeDemo` controlled.
-```
+| ID                          | Repository / Checkout / Branch    | Policy   | Hash | Status     |
+| --------------------------- | --------------------------------- | -------- | ---- | ---------- |
+| `decompose-demo-components` | Artificials / `$PROJECT` / `main` | `NOPUSH` | `-`  | `SQUASHED` |
 
 ### Iteration: Add Codec Demo Page
 
 **Id:** `add-codec-demo-page`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Purpose:** Give the codec demo its own route with more than one Art MD source, so visitors can compare a set of samples instead of a single hard-coded fixture.
 
@@ -205,33 +207,15 @@ build(art-md-web): Decompose codec demo into `TextArea` and `DemoPane` component
 
 #### Commits:
 
-| ID                    | Repository / Checkout / Branch    | Policy   | Hash  | Status     |
-| --------------------- | --------------------------------- | -------- | ----- | ---------- |
-| `add-codec-demo-page` | Artificials / `$PROJECT` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
-
-##### Commit: `add-codec-demo-page`
-
-**Repository:** Repository: Artificials
-
-**Hash:** (TBD)
-
-**Status:** `AUTHORED` — blueprint, not yet created.
-
-**Message:**
-
-```
-build(art-md-web): Add `codec-demo` page assembling demos from a source list
-
-- Add `src/pages/codec-demo.astro` on `PageLayout` and a page-scoped `CodecDemo.astro`.
-- Add a dropdown over typed demo sources; edits stay local and switching resets the input.
-- Link the demo page below the home page demo.
-```
+| ID                    | Repository / Checkout / Branch    | Policy   | Hash | Status     |
+| --------------------- | --------------------------------- | -------- | ---- | ---------- |
+| `add-codec-demo-page` | Artificials / `$PROJECT` / `main` | `NOPUSH` | `-`  | `SQUASHED` |
 
 ### Iteration: Integrate Demo In Site Nav
 
 **Id:** `integrate-demo-in-site-nav`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Purpose:** Make the demo page reachable from every page, so it is navigable rather than a link buried under the home page demo.
 
@@ -254,27 +238,9 @@ build(art-md-web): Add `codec-demo` page assembling demos from a source list
 
 #### Commits:
 
-| ID                           | Repository / Checkout / Branch    | Policy   | Hash  | Status     |
-| ---------------------------- | --------------------------------- | -------- | ----- | ---------- |
-| `integrate-demo-in-site-nav` | Artificials / `$PROJECT` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
-
-##### Commit: `integrate-demo-in-site-nav`
-
-**Repository:** Repository: Artificials
-
-**Hash:** (TBD)
-
-**Status:** `AUTHORED` — blueprint, not yet created.
-
-**Message:**
-
-```
-build(art-md-web): Add the demo page to the home, about, and site navigation
-
-- Extract `SiteNav` from `SiteHeader` and render the navbar on the home page.
-- Add `Demo` to the site nav and link the demo page from the home and about pages.
-- Link the about page from the demo page.
-```
+| ID                           | Repository / Checkout / Branch    | Policy   | Hash | Status     |
+| ---------------------------- | --------------------------------- | -------- | ---- | ---------- |
+| `integrate-demo-in-site-nav` | Artificials / `$PROJECT` / `main` | `NOPUSH` | `-`  | `SQUASHED` |
 
 ---
 
@@ -282,7 +248,7 @@ build(art-md-web): Add the demo page to the home, about, and site navigation
 
 ### Next
 
-Delegate `decompose-demo-components`, then `add-codec-demo-page`, then `integrate-demo-in-site-nav`; each instructions file carries one `NOPUSH` commit blueprint.
+All iterations DONE.
 
 ### Blockers
 
