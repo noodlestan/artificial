@@ -2,7 +2,7 @@
 
 **ID:** `code-demo-poc-solidjs`
 
-**Status:** `PLANNING`
+**Status:** `WORKING`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -140,7 +140,7 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 | Iteration / Instructions                                                                          | Status     |
 | ------------------------------------------------------------------------------------------------- | ---------- |
 | Iteration: Build Code Demo POC `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md` | `PLANNING` |
-| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `READY`    |
+| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `DONE`     |
 
 ### Iteration: Build Code Demo POC
 
@@ -150,23 +150,26 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 
 **Purpose:** Prove out a live, in-browser Art MD round trip by parsing user-authored markdown into an MDAST-derived AST with `@art-md/codec` inside a SolidJS island.
 
-**Description:** Integrate SolidJS into the Astro app, depend on `@art-md/codec`, and replace the Demos placeholder on the home page with a two-pane demo that parses markdown as the user types.
+**Description:** Integrate SolidJS into the Astro app, depend on `@art-md/codec`, and add a two-pane demo route that parses markdown in the browser as the user types.
 
 **Instructions:** `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md`
 
 **Changes:**
 
-- Add `solid-js` and the Astro SolidJS integration (`@astrojs/solid-js`) to `apps/art-md-web/package.json`, and register the integration in `astro.config.mjs`.
+- Add `solid-js` and `@astrojs/solid-js` to `apps/art-md-web/package.json`, and register the integration in `astro.config.mjs`.
 - Add `@art-md/codec` to `apps/art-md-web/package.json`.
+- Add `src/pages/demo.astro` on `PageLayout`, passing a `content` object with `title` and `description` — the layouts destructure `Astro.props.content` and throw without it.
 - Add a `CodeDemo` SolidJS component in `src/components/demos/code/` holding the markdown source in a signal.
-- Render two panes: an editable `textarea` for markdown, and a `readonly` `textarea` showing the serialised AST from `createArtCodec().parse()`.
+- Mount the island with `client:only="solid-js"`. Do **not** use `client:load` or `client:visible`: the published codec bundle dereferences `document` at module-evaluation time, so Astro's build-time server render would throw `document is not defined`.
+- Render two panes: an editable `textarea` for markdown, and a `readonly` `textarea` showing the serialised result of `createArtCodec().parse()`.
 - Pre-populate the input with the demo fixture below.
-- Replace the `Demos` placeholder section in `src/pages/index.md` with the `CodeDemo` component, keeping the `main-section` layout classes.
 - Surface codec parse failures inline instead of throwing, so malformed markdown does not blank the demo.
+- Update the `## Demos` section in `src/pages/index.md` to link to `/demo`. The demo cannot be embedded in `index.md` itself — the site has no MDX integration and no content collections, so a `.md` page body cannot host a component.
+- Do NOT add a `main-section` wrapper. `PageLayout` and `HomeLayout` already render `<main class="main-section markdown">`; a nested `main-section` applies the page margin twice.
 
 **Dependencies:**
 
-- None.
+- **`@art-md/codec` must resolve before this iteration can run — currently it does not.** See the packaging blocker under `## Work` → `### Blockers`.
 
 Demo fixture:
 
@@ -208,13 +211,15 @@ build(art-md-web): Add SolidJS code demo parsing Art MD in the browser
 
 **Id:** `add-404-page`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Purpose:** Add a 404 page so unknown routes render a styled page instead of the raw S3 XML error body.
 
 **Description:** Create `src/pages/404.astro` using `PageLayout` so the Astro build emits `dist/404.html`, which the CloudFront `custom_error_response` in `$OPS/modules/static-website/cf-distribution` already points at.
 
 **Instructions:** `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`
+
+**Report:** `./plan-code-demo-poc-solidjs/instructions/add-404-page__report.md`
 
 **Changes:**
 
@@ -228,17 +233,17 @@ build(art-md-web): Add SolidJS code demo parsing Art MD in the browser
 
 #### Commits:
 
-| ID             | Repository / Checkout / Branch    | Policy   | Hash  | Status     |
-| -------------- | --------------------------------- | -------- | ----- | ---------- |
-| `add-404-page` | Artificials / `$PROJECT` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
+| ID             | Repository / Checkout / Branch    | Policy   | Hash      | Status      |
+| -------------- | --------------------------------- | -------- | --------- | ----------- |
+| `add-404-page` | Artificials / `$PROJECT` / `main` | `NOPUSH` | `6762790` | `COMMITTED` |
 
 ##### Commit: `add-404-page`
 
 **Repository:** Repository: Artificials
 
-**Hash:** (TBD)
+**Hash:** `6762790`
 
-**Status:** `AUTHORED`
+**Status:** `COMMITTED` — created, not pushed (NOPUSH).
 
 **Message:**
 
@@ -255,11 +260,12 @@ build(art-md-web): Add 404 page for unknown routes
 
 ### Next
 
-Delegate `add-404-page`, which is `READY`. Resolve the `@art-md/codec` publish blocker, then write instructions for `build-code-demo-poc`.
+Iteration `add-404-page` is DONE. Iteration `build-code-demo-poc` is `PLANNING` and blocked on the `art-md` packaging fix; republish the five packages with a valid entry point, then write its instructions.
 
 ### Blockers
 
-- **`@art-md/codec` is unpublished** — `npm view @art-md/codec` returns 404, so iteration `build-code-demo-poc` cannot install it. Its siblings `@art-md/parser`, `@art-md/serializer`, `@art-md/constructs`, and `@art-md/primitives` are all published at `0.0.1`. Either publish `$ART_MD/libs/codec` first, or link it locally with `npm run art-work link` from the `$WORKSPACE` root. Blocks iteration `build-code-demo-poc`.
+- **All five published `art-md` packages have a broken entry point — blocks iteration `build-code-demo-poc`.** Every `package.json` sets `"main": "./src/index.ts"`, but `files` publishes only `["dist", "LICENSE-MIT", "README.md"]`, so `src/` is absent from the tarball. The published `@art-md/codec@0.0.1` tarball contains only `dist/esm/index.js`, `LICENSE-MIT`, `package.json`, `README.md` — no `src/`, no `exports` map, and no type declarations. Installing and resolving fails with `MODULE_NOT_FOUND: Cannot find module '.../@art-md/codec/src/index.ts'`. The fix belongs to `$ART_MD`: point `main` (or add an `exports` map) at `dist/`, add a `types` entry, then republish all five packages. Affects `codec`, `parser`, `serializer`, `constructs`, and `primitives` identically.
+- **The published codec bundle is browser-only at import time — constraint, not a blocker.** Importing `dist/esm/index.js` in Node throws `document is not defined` during module evaluation, with no call made. This is why the island must use `client:only="solid-js"`; recorded under `### Findings` and folded into the iteration `## Changes`.
 - **`$ART_JS` path variable was wrong** — resolved to `checkouts/art-js`, which does not exist. Corrected to `checkouts/art-js-planning`. Now resolved.
 
 ---
@@ -321,19 +327,24 @@ npm run build # produce a full build
 ### Evidence
 
 - **Code demo renders** — `npm run build` succeeds and the code demo page renders with SolidJS.
-- **404 page renders** — `npm run build` emits `dist/404.html`.
+- **404 page renders** — DONE. `npm run build` reports `3 page(s) built` and `ls -l dist/404.html` returns 8 841 bytes; commit `6762790`, not pushed.
 
 ### Findings
 
-- **`@art-md/codec` is not on the registry** — every other `art-md` library is published at `0.0.1`, but codec returns 404. Its `package.json` sets `private: false` and `publishConfig.access: public`, so it is publishable and simply has not been released.
-- **Codec API surface** — `@art-md/codec` exports only `createArtCodec` plus the `ArtCodecConfig` and `PartialArtCodecConfig` types; the demo must construct a codec rather than import a bare `parse` function.
-- **Codec dependency ranges are `*`** — `@art-md/codec` depends on `@art-md/primitives`, `constructs`, `parser`, and `serializer` at `*`, all of which resolve from the registry today.
+- **Publishing did not unblock the demo** — `@art-md/codec@0.0.1` is live on npm, and its siblings moved to `0.0.2`, but the entry point is unresolvable. Version numbers are irrelevant while `main` points outside the tarball.
+- **Codec API surface** — `createArtCodec(config?)` returns `{ parse, serialize }`. `parse` accepts a markdown string and returns a `ParseResult`; defaults come from `DEFAULT_CONSTRUCT_PARSER` and the `CONSTRUCT_PARSERS` / `CONSTRUCT_SERIALIZERS` registries, so a bare `createArtCodec()` is enough for the demo.
+- **Codec dependency ranges are `*`** — so the demo will pull `0.0.2` of the four siblings alongside `codec@0.0.1`. Functionally fine, but codec sits one release behind its siblings' version line.
+- **The codec bundle dereferences `document` during module evaluation** — verified by importing the published `dist/esm/index.js` in Node and catching the throw with no call made. Astro islands rendered on the server would crash at build time; `client:only` avoids this.
+- **The site cannot host an island inside a markdown page** — there is no MDX integration and no `src/content` collection. `src/pages/index.md` and `about.md` are plain `.md` files using the `layout` frontmatter key, so their bodies render as markdown only.
+- **Layouts require a `content` prop** — `SiteHead` destructures `Astro.props.content`, so an `.astro` page on `PageLayout` or `HomeLayout` throws without a `content` object carrying `title` and `description`.
+- **Layouts already apply `main-section`** — `PageLayout` and `HomeLayout` both render `<main class="main-section markdown">`. A nested `main-section` doubles the page margin; this shipped in `6762790` because the `add-404-page` instructions required both.
 - **The site has no 404 page** — the CloudFront distribution declares `custom_error_response` for 404 pointing at `/404.html`, but Astro emits no such file, so unknown paths return S3's `application/xml` error body.
 
 ### Decisions
 
 - **SolidJS** — Code demo POC uses SolidJS.
 - **In-browser parsing** — the demo parses with `createArtCodec` in the browser rather than pre-rendering, so the POC proves the codec runs client-side.
+- **Dedicated `/demo` route** — the island lives on `src/pages/demo.astro` and `index.md` links to it, rather than converting the site to MDX. Keeps markdown authoring for prose and adds one dependency-free route. The alternative — adopting MDX so islands embed directly in `index.md` — is a larger change affecting every page and is out of scope for this POC.
 
 ### Knowledge to Update
 
@@ -345,4 +356,6 @@ None.
 
 ### Feedback
 
-None.
+- **Setting Up is missing the monorepo root install** — the build needs `@noodlestan/tsconfig` from `$PROJECT`, not just `$ART_MD_WEB`. Add `npm ci` at the monorepo root to future instructions.
+- **Wrapper requirement is self-conflicting** — `PageLayout` already renders `<main class="main-section markdown">`, so requiring both the layout and a `main-section` section nests it and doubles the page margin.
+- **`PageLayout` requires a `content` prop** — `SiteHead` destructures `Astro.props.content`; an `.astro` page without it throws. Name the prop in future page instructions.
