@@ -1,0 +1,27 @@
+# Module
+
+## Deployment Infrastructure: Art MD Website
+
+**Platform:** Terraform
+
+**Provider:** AWS
+
+**State:**
+
+- Backend — `$OPS/backend/main.tf` (S3 `noodlestan-tf-backend` + DynamoDB `noodlestan-tf-lock`, `eu-west-1`)
+- Root — `$OPS/domains/noodlestan/main.tf`
+
+**Files:**
+
+- `$OPS/domains/noodlestan/websites/art-md/main.tf` — the `art_md_web` website module.
+- `$OPS/domains/noodlestan/main.tf` — module wiring (module `art_md_web`) and outputs.
+
+**Resources:**
+
+- `$OPS/modules/static-website/s3-bucket`
+- `$OPS/modules/static-website/cf-distribution`
+
+**Shared:**
+
+- Certificate — `$OPS/domains/noodlestan/certificate/main.tf`, ACM `noodlestan.org` with SAN `*.noodlestan.org` in `us-east-1`. Covers both Art MD Website domains.
+- Hosted zone — `$OPS/domains/noodlestan/domain/main.tf`, Route 53 zone `noodlestan.org`.
