@@ -2,7 +2,7 @@
 
 **ID:** `code-demo-poc-solidjs`
 
-**Status:** `DRAFT`
+**Status:** `PLANNING`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -20,13 +20,14 @@
 
 ## Path Variables
 
-| Variable      | Resolved Path                      | Purpose                                    |
-| ------------- | ---------------------------------- | ------------------------------------------ |
-| `$WORKSPACE`  | Current working directory          | Workspace root directory                   |
-| `$DOMAINS`    | `$WORKSPACE/.agents/domains`       | Domain resources directory                 |
-| `$PROJECT`    | `$WORKSPACE/checkouts/artificials` | Artificials project checkout               |
-| `$ART_MD_WEB` | `$PROJECT/apps/art-md-web`         | Art MD Website Astro package               |
-| `$ART_JS`     | `$WORKSPACE/checkouts/art-js`      | Art JS project checkout — observe progress |
+| Variable      | Resolved Path                          | Purpose                                            |
+| ------------- | -------------------------------------- | -------------------------------------------------- |
+| `$WORKSPACE`  | Current working directory              | Workspace root directory                           |
+| `$DOMAINS`    | `$WORKSPACE/.agents/domains`           | Domain resources directory                         |
+| `$PROJECT`    | `$WORKSPACE/checkouts/artificials`     | Artificials project checkout                       |
+| `$ART_MD_WEB` | `$PROJECT/apps/art-md-web`             | Art MD Website Astro package                       |
+| `$ART_MD`     | `$WORKSPACE/checkouts/art-md-planning` | Art MD project checkout — provides `@art-md/codec` |
+| `$ART_JS`     | `$WORKSPACE/checkouts/art-js-planning` | Art JS project checkout — observe progress         |
 
 ## Summary
 
@@ -105,7 +106,9 @@ This plan builds a code demo POC with SolidJS in the Art MD Website, observing t
 **Changes:**
 
 - Add SolidJS integration to the Astro app.
+- Add `@art-md/codec` dependency.
 - Build a code demo POC page.
+- Add a 404 page.
 
 **Dependencies:**
 
@@ -134,30 +137,36 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 
 ## Items:
 
-| Iteration / Instructions                                                                          | Status  |
-| ------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Build Code Demo POC `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md` | `DRAFT` |
-| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `DRAFT` |
+| Iteration / Instructions                                                                          | Status     |
+| ------------------------------------------------------------------------------------------------- | ---------- |
+| Iteration: Build Code Demo POC `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md` | `PLANNING` |
+| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `PLANNING` |
 
 ### Iteration: Build Code Demo POC
 
 **Id:** `build-code-demo-poc`
 
-**Status:** `DRAFT`
+**Status:** `PLANNING`
 
-**Purpose:** Build a code demo POC with SolidJS
+**Purpose:** Prove out a live, in-browser Art MD round trip by parsing user-authored markdown into an MDAST-derived AST with `@art-md/codec` inside a SolidJS island.
 
-**Description:** Add SolidJS integration to the Astro app and build a code demo POC page using `@art-md/codec`
+**Description:** Integrate SolidJS into the Astro app, depend on `@art-md/codec`, and replace the Demos placeholder on the home page with a two-pane demo that parses markdown as the user types.
 
 **Instructions:** `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md`
 
 **Changes:**
 
-- Add SolidJS integration to the Astro app.
-- Add `@art-md/codec` dependency.
-- Build a code demo POC on the homepage using SolidJS Components:
-  - User inputs markdown in one textarea, art-ast shows up in a readonly textarea.
-  - Markdown textarea is pre-populated a demo fixture.
+- Add `solid-js` and the Astro SolidJS integration (`@astrojs/solid-js`) to `apps/art-md-web/package.json`, and register the integration in `astro.config.mjs`.
+- Add `@art-md/codec` to `apps/art-md-web/package.json`.
+- Add a `CodeDemo` SolidJS component in `src/components/demos/code/` holding the markdown source in a signal.
+- Render two panes: an editable `textarea` for markdown, and a `readonly` `textarea` showing the serialised AST from `createArtCodec().parse()`.
+- Pre-populate the input with the demo fixture below.
+- Replace the `Demos` placeholder section in `src/pages/index.md` with the `CodeDemo` component, keeping the `main-section` layout classes.
+- Surface codec parse failures inline instead of throwing, so malformed markdown does not blank the demo.
+
+**Dependencies:**
+
+- None.
 
 Demo fixture:
 
@@ -171,13 +180,37 @@ Demo fixture:
 **Remote:** `git@github.com:noodlestan/art-md.git `
 ```
 
+#### Commits:
+
+| ID                    | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
+| --------------------- | --------------------------------- | ------------ | ----- | ---------- |
+| `build-code-demo-poc` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+
+##### Commit: `build-code-demo-poc`
+
+**Repository:** Repository: Artificials
+
+**Hash:** (TBD)
+
+**Status:** `AUTHORED`
+
+**Message:**
+
+```
+build(art-md-web): Add SolidJS code demo parsing Art MD in the browser
+
+- Integrate SolidJS into the Astro app and depend on `@art-md/codec`.
+- Replace the Demos placeholder with a two-pane markdown-to-AST demo.
+- Show codec parse failures inline rather than throwing.
+```
+
 ### Iteration: Add 404 Page
 
 **Id:** `add-404-page`
 
-**Status:** `DRAFT`
+**Status:** `PLANNING`
 
-**Purpose:** Add a 404 page so unknown routes render a styled page instead of an S3 XML error.
+**Purpose:** Add a 404 page so unknown routes render a styled page instead of the raw S3 XML error body.
 
 **Description:** Create `src/pages/404.astro` using `PageLayout` so the Astro build emits `dist/404.html`, which the CloudFront `custom_error_response` in `$OPS/modules/static-website/cf-distribution` already points at.
 
@@ -187,11 +220,34 @@ Demo fixture:
 
 - Create `src/pages/404.astro` using `PageLayout`, with a heading, a short explanation, and a link back to the home page.
 - Apply the `main-section` layout classes so the page matches the design POC.
-- Confirm `npm run build` emits `dist/404.html`, and that a request to an unknown path on the deployed site returns the page rather than `application/xml`.
+- Confirm `npm run build` emits `dist/404.html`; without it, CloudFront falls through to the S3 `application/xml` error body.
 
 **Dependencies:**
 
 - None.
+
+#### Commits:
+
+| ID             | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
+| -------------- | --------------------------------- | ------------ | ----- | ---------- |
+| `add-404-page` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+
+##### Commit: `add-404-page`
+
+**Repository:** Repository: Artificials
+
+**Hash:** (TBD)
+
+**Status:** `AUTHORED`
+
+**Message:**
+
+```
+build(art-md-web): Add 404 page for unknown routes
+
+- Create `src/pages/404.astro` on `PageLayout` so the build emits `dist/404.html`.
+- Link back to the home page and match the design POC layout classes.
+```
 
 ---
 
@@ -199,11 +255,12 @@ Demo fixture:
 
 ### Next
 
-Draft iterations and write instructions for the plan.
+Resolve the `@art-md/codec` publish blocker, then write instructions for `build-code-demo-poc` and `add-404-page`.
 
 ### Blockers
 
-- None.
+- **`@art-md/codec` is unpublished** — `npm view @art-md/codec` returns 404, so iteration `build-code-demo-poc` cannot install it. Its siblings `@art-md/parser`, `@art-md/serializer`, `@art-md/constructs`, and `@art-md/primitives` are all published at `0.0.1`. Either publish `$ART_MD/libs/codec` first, or link it locally with `npm run art-work link` from the `$WORKSPACE` root. Blocks iteration `build-code-demo-poc`.
+- **`$ART_JS` path variable was wrong** — resolved to `checkouts/art-js`, which does not exist. Corrected to `checkouts/art-js-planning`. Now resolved.
 
 ---
 
@@ -264,14 +321,19 @@ npm run build # produce a full build
 ### Evidence
 
 - **Code demo renders** — `npm run build` succeeds and the code demo page renders with SolidJS.
+- **404 page renders** — `npm run build` emits `dist/404.html`.
 
 ### Findings
 
-- None.
+- **`@art-md/codec` is not on the registry** — every other `art-md` library is published at `0.0.1`, but codec returns 404. Its `package.json` sets `private: false` and `publishConfig.access: public`, so it is publishable and simply has not been released.
+- **Codec API surface** — `@art-md/codec` exports only `createArtCodec` plus the `ArtCodecConfig` and `PartialArtCodecConfig` types; the demo must construct a codec rather than import a bare `parse` function.
+- **Codec dependency ranges are `*`** — `@art-md/codec` depends on `@art-md/primitives`, `constructs`, `parser`, and `serializer` at `*`, all of which resolve from the registry today.
+- **The site has no 404 page** — the CloudFront distribution declares `custom_error_response` for 404 pointing at `/404.html`, but Astro emits no such file, so unknown paths return S3's `application/xml` error body.
 
 ### Decisions
 
 - **SolidJS** — Code demo POC uses SolidJS.
+- **In-browser parsing** — the demo parses with `createArtCodec` in the browser rather than pre-rendering, so the POC proves the codec runs client-side.
 
 ### Knowledge to Update
 
