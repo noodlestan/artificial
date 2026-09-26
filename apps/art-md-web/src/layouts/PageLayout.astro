@@ -3,13 +3,15 @@ import '../styles/global.css'
 import SiteHead from './components/SiteHead.astro';
 import SiteHeader from '../components/site/SiteHeader.astro';
 import SiteFooter from '../components/site/SiteFooter.astro';
+
+const { content } = Astro.props;
+
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <SiteHead />
-    <title>Art MD</title>
+    <SiteHead content={content}/>
   </head>
   <body>
     <SiteHeader />

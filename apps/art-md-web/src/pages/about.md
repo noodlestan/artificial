@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/PageLayout.astro
 title: About Art MD
+description: Art MD expresses structured data in Markdown with an extensible language that enables human and machine authoring at scale.
 ---
 
 # About Art MD
