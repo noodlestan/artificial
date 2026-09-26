@@ -140,7 +140,7 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 | Iteration / Instructions                                                                          | Status     |
 | ------------------------------------------------------------------------------------------------- | ---------- |
 | Iteration: Build Code Demo POC `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md` | `PLANNING` |
-| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `PLANNING` |
+| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `READY`    |
 
 ### Iteration: Build Code Demo POC
 
@@ -208,7 +208,7 @@ build(art-md-web): Add SolidJS code demo parsing Art MD in the browser
 
 **Id:** `add-404-page`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Purpose:** Add a 404 page so unknown routes render a styled page instead of the raw S3 XML error body.
 
@@ -228,9 +228,9 @@ build(art-md-web): Add SolidJS code demo parsing Art MD in the browser
 
 #### Commits:
 
-| ID             | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
-| -------------- | --------------------------------- | ------------ | ----- | ---------- |
-| `add-404-page` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+| ID             | Repository / Checkout / Branch    | Policy   | Hash  | Status     |
+| -------------- | --------------------------------- | -------- | ----- | ---------- |
+| `add-404-page` | Artificials / `$PROJECT` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
 
 ##### Commit: `add-404-page`
 
@@ -255,7 +255,7 @@ build(art-md-web): Add 404 page for unknown routes
 
 ### Next
 
-Resolve the `@art-md/codec` publish blocker, then write instructions for `build-code-demo-poc` and `add-404-page`.
+Delegate `add-404-page`, which is `READY`. Resolve the `@art-md/codec` publish blocker, then write instructions for `build-code-demo-poc`.
 
 ### Blockers
 
