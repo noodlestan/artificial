@@ -2,7 +2,7 @@
 
 **ID:** `decompose-codec-demo`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -118,17 +118,17 @@ Execution is coordinated from `$WORKSPACE`. All changes happen in `$ART_MD_WEB` 
 
 ## Items:
 
-| Iteration / Instructions                                                                                       | Status     |
-| -------------------------------------------------------------------------------------------------------------- | ---------- |
-| Iteration: Decompose Demo Components `./plan-decompose-codec-demo/instructions/decompose-demo-components.md`   | `PLANNING` |
-| Iteration: Add Codec Demo Page `./plan-decompose-codec-demo/instructions/add-codec-demo-page.md`               | `PLANNING` |
-| Iteration: Integrate Demo In Site Nav `./plan-decompose-codec-demo/instructions/integrate-demo-in-site-nav.md` | `PLANNING` |
+| Iteration / Instructions                                                                                       | Status  |
+| -------------------------------------------------------------------------------------------------------------- | ------- |
+| Iteration: Decompose Demo Components `./plan-decompose-codec-demo/instructions/decompose-demo-components.md`   | `READY` |
+| Iteration: Add Codec Demo Page `./plan-decompose-codec-demo/instructions/add-codec-demo-page.md`               | `READY` |
+| Iteration: Integrate Demo In Site Nav `./plan-decompose-codec-demo/instructions/integrate-demo-in-site-nav.md` | `READY` |
 
 ### Iteration: Decompose Demo Components
 
 **Id:** `decompose-demo-components`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Purpose:** Make the codec demo's building blocks reusable and token-driven, so the demo page and later demos do not re-implement inputs and panes.
 
@@ -169,7 +169,7 @@ Execution is coordinated from `$WORKSPACE`. All changes happen in `$ART_MD_WEB` 
 **Message:**
 
 ```
-refactor(art-md-web): Decompose codec demo into `TextArea` and `DemoPane` components
+build(art-md-web): Decompose codec demo into `TextArea` and `DemoPane` components
 
 - Add `TextArea` and `DemoPane` components with their own CSS modules.
 - Add the `--color-input-bg` token for the default and dark colour schemes.
@@ -180,7 +180,7 @@ refactor(art-md-web): Decompose codec demo into `TextArea` and `DemoPane` compon
 
 **Id:** `add-codec-demo-page`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Purpose:** Give the codec demo its own route with more than one Art MD source, so visitors can compare a set of samples instead of a single hard-coded fixture.
 
@@ -231,7 +231,7 @@ build(art-md-web): Add `codec-demo` page assembling demos from a source list
 
 **Id:** `integrate-demo-in-site-nav`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Purpose:** Make the demo page reachable from every page, so it is navigable rather than a link buried under the home page demo.
 
@@ -282,7 +282,7 @@ build(art-md-web): Add the demo page to the home, about, and site navigation
 
 ### Next
 
-Write the instructions files for `decompose-demo-components`, `add-codec-demo-page`, and `integrate-demo-in-site-nav` with the **write instructions** command, then delegate them in order.
+Delegate `decompose-demo-components`, then `add-codec-demo-page`, then `integrate-demo-in-site-nav`; each instructions file carries one `NOPUSH` commit blueprint.
 
 ### Blockers
 
