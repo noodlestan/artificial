@@ -22,7 +22,7 @@
 
 - `$ART_MD_WEB/src/pages/index.astro` — replaced the WIP placeholder with real home content (hero + intro, about link, GitHub link, demos placeholder); page uses `Layout.astro`.
 
-**Commit:** `304585c` — `feat(art-md-web): Add home content to Art MD website.` (policy `AUTONOMOUS`, repository `Repository: Artificials`, branch `main`, pushed to `origin/main`; the push also carried the pre-existing local commit `3b42875 status(home-content-and-about-page): Mark plan WORKING.`).
+**Commit:** `304585c` — `build(art-md-web): Add home content to Art MD website.` (policy `AUTONOMOUS`, repository `Repository: Artificials`, branch `main`, pushed to `origin/main`; the push also carried the pre-existing local commit `3b42875 status(home-content-and-about-page): Mark plan WORKING.`).
 
 **Verification (Verifying Completion, from `$ART_MD_WEB`):**
 

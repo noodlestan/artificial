@@ -153,8 +153,8 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 
 | Index | Name         | Status    |
 | ----- | ------------ | --------- |
-| #1    | Hello World  | `WORKING` |
-| #2    | POC          | `DRAFT`   |
+| #1    | Hello World  | `DONE`    |
+| #2    | POC          | `WORKING` |
 | #3    | Records Demo | `DRAFT`   |
 
 ### Phase: 1 — Hello World
@@ -163,7 +163,7 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 
 **Description:** Scaffold the Art MD Website package and add home content and an about page.
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Dependencies:**
 
@@ -197,17 +197,17 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 
 ## Items:
 
-| Phase | Resource / Record                                                                                    | Status  |
-| ----- | ---------------------------------------------------------------------------------------------------- | ------- |
-| 1     | Plan: Scaffold Art MD Website `$PROJECT/_backlog/1-done/plan-scaffold-art-md-website/plan.md`        | `DONE`  |
-| 1     | Plan: Home content and about page `$PROJECT/_backlog/3-now/plan-home-content-and-about-page/plan.md` | `READY` |
-| -     |                                                                                                      |         |
-| 2     | Plan: Code Demo POC SolidJS `$PROJECT/_backlog/6-plan/plan-code-demo-poc-solidjs`                    | `DRAFT` |
-| 2     | Plan: Decompose Codec Demo                                                                           | -       |
-| 2     | Plan: Design POC `$PROJECT/_backlog/3-now/plan-design-poc/plan.md`                                   | `READY` |
-| 2     | Plan: Decompose Style Elements                                                                       | -       |
-| 2     | Plan: Demo Interactions POC                                                                          | -       |
-| 2     | Plan: Integrate Records in Demo                                                                      | -       |
+| Phase | Resource / Record                                                                                    | Status     |
+| ----- | ---------------------------------------------------------------------------------------------------- | ---------- |
+| 1     | Plan: Scaffold Art MD Website `$PROJECT/_backlog/1-done/plan-scaffold-art-md-website/plan.md`        | `DONE`     |
+| 1     | Plan: Home content and about page `$PROJECT/_backlog/3-now/plan-home-content-and-about-page/plan.md` | `DONE`     |
+| -     |                                                                                                      |            |
+| 2     | Plan: Code Demo POC SolidJS `$PROJECT/_backlog/3-now/plan-code-demo-poc-solidjs`                     | `PLANNING` |
+| 2     | Plan: Decompose Codec Demo                                                                           | -          |
+| 2     | Plan: Design POC `$PROJECT/_backlog/3-now/plan-design-poc/plan.md`                                   | `DONE`     |
+| 2     | Plan: Decompose Style Elements                                                                       | -          |
+| 2     | Plan: Demo Interactions POC                                                                          | -          |
+| 2     | Plan: Integrate Records in Demo                                                                      | -          |
 
 The following items are not yet captured in a work item document.
 

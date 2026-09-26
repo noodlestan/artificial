@@ -126,7 +126,7 @@ Update `$ART_MD_WEB/src/pages/about.astro` to use `PageLayout` instead of `Layou
 **Message:**
 
 ```
-feat(art-md-web): Add site header with navigation.
+build(art-md-web): Add site header with navigation.
 ```
 
 ---

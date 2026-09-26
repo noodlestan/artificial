@@ -22,7 +22,7 @@
 - `$ART_MD_WEB/src/layouts/PageLayout.astro` — new page layout: `Layout.astro` shell + `SiteHeader` before the slot.
 - `$ART_MD_WEB/src/pages/about.astro` — switched from `Layout` to `PageLayout` (header now visible on the about page).
 
-**Commit:** `ddd19a8` — `feat(art-md-web): Add site header with navigation.` (policy `AUTONOMOUS`, repository `Repository: Artificials`, branch `main`, pushed to `origin/main` as `e0b1867..ddd19a8`).
+**Commit:** `ddd19a8` — `build(art-md-web): Add site header with navigation.` (policy `AUTONOMOUS`, repository `Repository: Artificials`, branch `main`, pushed to `origin/main` as `e0b1867..ddd19a8`).
 
 **Verification (Verifying Completion, from `$ART_MD_WEB`):**
 

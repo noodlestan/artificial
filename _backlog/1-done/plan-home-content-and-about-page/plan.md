@@ -198,7 +198,7 @@ Execution is coordinated from `$WORKSPACE`. The content changes happen in `$ART_
 
 | ID                 | Repository / Checkout / Branch    | Policy       | Hash      | Status      |
 | ------------------ | --------------------------------- | ------------ | --------- | ----------- |
-| `add-home-content` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `ae32ab1` | `COMMITTED` |
+| `add-home-content` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `1558067` | `COMMITTED` |
 
 ##### Commit: `add-home-content`
 
@@ -211,7 +211,7 @@ Execution is coordinated from `$WORKSPACE`. The content changes happen in `$ART_
 **Message:**
 
 ```
-feat(art-md-web): Add home content to Art MD website.
+build(art-md-web): Add home content to Art MD website.
 ```
 
 ### Iteration: Add About Page
@@ -249,7 +249,7 @@ feat(art-md-web): Add home content to Art MD website.
 
 | ID               | Repository / Checkout / Branch    | Policy       | Hash      | Status      |
 | ---------------- | --------------------------------- | ------------ | --------- | ----------- |
-| `add-about-page` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `1c71ae5` | `COMMITTED` |
+| `add-about-page` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `fd4fc2f` | `COMMITTED` |
 
 ##### Commit: `add-about-page`
 
@@ -262,7 +262,7 @@ feat(art-md-web): Add home content to Art MD website.
 **Message:**
 
 ```
-feat(art-md-web): Add about page to Art MD website.
+build(art-md-web): Add about page to Art MD website.
 ```
 
 ### Iteration: Add Site Header
@@ -294,7 +294,7 @@ feat(art-md-web): Add about page to Art MD website.
 
 | ID                | Repository / Checkout / Branch    | Policy       | Hash      | Status      |
 | ----------------- | --------------------------------- | ------------ | --------- | ----------- |
-| `add-site-header` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `ddd19a8` | `COMMITTED` |
+| `add-site-header` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `1f59a44` | `COMMITTED` |
 
 ##### Commit: `add-site-header`
 
@@ -307,7 +307,7 @@ feat(art-md-web): Add about page to Art MD website.
 **Message:**
 
 ```
-feat(art-md-web): Add site header with navigation.
+build(art-md-web): Add site header with navigation.
 ```
 
 ---

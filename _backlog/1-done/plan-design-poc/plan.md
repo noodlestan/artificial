@@ -2,7 +2,7 @@
 
 **ID:** `design-poc`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -94,15 +94,15 @@ Execution is coordinated from `$WORKSPACE`. The changes are applied in `$ART_MD_
 
 ## Items:
 
-| Iteration / Instructions | Status    |
-| ------------------------ | --------- |
-| Iteration: POC Design    | `WORKING` |
+| Iteration / Instructions | Status |
+| ------------------------ | ------ |
+| Iteration: POC Design    | `DONE` |
 
 ### Iteration: POC Design
 
 **Id:** `poc-design`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Purpose:** Prove out the Art MD Website design system across the existing pages.
 
@@ -127,9 +127,9 @@ Execution is coordinated from `$WORKSPACE`. The changes are applied in `$ART_MD_
 
 #### Commits:
 
-| ID           | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
-| ------------ | --------------------------------- | ------------ | ----- | ---------- |
-| `poc-design` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+| ID           | Repository / Checkout / Branch    | Policy       | Hash      | Status      |
+| ------------ | --------------------------------- | ------------ | --------- | ----------- |
+| `poc-design` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | `e20af24` | `COMMITTED` |
 
 ##### Commit: `poc-design`
 

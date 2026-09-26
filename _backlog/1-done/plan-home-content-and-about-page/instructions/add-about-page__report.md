@@ -27,7 +27,7 @@
 
 **Commit:**
 
-- `e0b1867` — `feat(art-md-web): Add about page to Art MD website.` — 1 file changed, 118 insertions(+). Pre-commit hooks passed (0-clean, 1-extract, 2-ci).
+- `e0b1867` — `build(art-md-web): Add about page to Art MD website.` — 1 file changed, 118 insertions(+). Pre-commit hooks passed (0-clean, 1-extract, 2-ci).
 - Pushed to `origin/main`: `304585c..e0b1867`.
 
 **Setup note (pre-existing, not a blocker):** `npm ci` at the workspace root succeeds; at the `$PROJECT`/`$ART_MD_WEB` roots it fails because the committed `package-lock.json` entry for the workspace package carries `"name": "apps-noodlestan-web"` while `apps/art-md-web/package.json` declares `apps-art-md-web` (`npm ci` → `Missing: apps-art-md-web@0.0.1 from lock file`). Fixing it would modify `package-lock.json`, which is outside this instruction's scope. Dependencies were already installed and lint/build pass, so execution proceeded.
