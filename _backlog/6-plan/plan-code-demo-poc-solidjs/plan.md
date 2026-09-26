@@ -10,7 +10,7 @@
 
 **Purpose:** Prove out a code demo using SolidJS.
 
-**Description:** Build a code demo POC with SolidJS in the Art MD Website Astro package.
+**Description:** Build a code demo POC with SolidJS in the Art MD Website Astro package and add a 404 page.
 
 ## Mandatory Reading
 
@@ -137,6 +137,7 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 | Iteration / Instructions                                                                          | Status  |
 | ------------------------------------------------------------------------------------------------- | ------- |
 | Iteration: Build Code Demo POC `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md` | `DRAFT` |
+| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `DRAFT` |
 
 ### Iteration: Build Code Demo POC
 
@@ -144,7 +145,7 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 
 **Status:** `DRAFT`
 
-**Purpose:** Build a code demo POC with SolidJS.
+**Purpose:** Build a code demo POC with SolidJS
 
 **Description:** Add SolidJS integration to the Astro app and build a code demo POC page using `@art-md/codec`
 
@@ -169,6 +170,28 @@ Demo fixture:
 
 **Remote:** `git@github.com:noodlestan/art-md.git `
 ```
+
+### Iteration: Add 404 Page
+
+**Id:** `add-404-page`
+
+**Status:** `DRAFT`
+
+**Purpose:** Add a 404 page so unknown routes render a styled page instead of an S3 XML error.
+
+**Description:** Create `src/pages/404.astro` using `PageLayout` so the Astro build emits `dist/404.html`, which the CloudFront `custom_error_response` in `$OPS/modules/static-website/cf-distribution` already points at.
+
+**Instructions:** `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`
+
+**Changes:**
+
+- Create `src/pages/404.astro` using `PageLayout`, with a heading, a short explanation, and a link back to the home page.
+- Apply the `main-section` layout classes so the page matches the design POC.
+- Confirm `npm run build` emits `dist/404.html`, and that a request to an unknown path on the deployed site returns the page rather than `application/xml`.
+
+**Dependencies:**
+
+- None.
 
 ---
 

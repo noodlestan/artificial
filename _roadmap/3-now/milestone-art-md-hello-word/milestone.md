@@ -204,7 +204,7 @@ Execution is coordinated from `$WORKSPACE`. The implementation target is `$PROJE
 | -     |                                                                                                      |            |
 | 2     | Plan: Code Demo POC SolidJS `$PROJECT/_backlog/3-now/plan-code-demo-poc-solidjs`                     | `PLANNING` |
 | 2     | Plan: Decompose Codec Demo                                                                           | -          |
-| 2     | Plan: Design POC `$PROJECT/_backlog/3-now/plan-design-poc/plan.md`                                   | `DONE`     |
+| 2     | Plan: Design POC `$PROJECT/_backlog/1-done/plan-design-poc/plan.md`                                  | `DONE`     |
 | 2     | Plan: Decompose Style Elements                                                                       | -          |
 | 2     | Plan: Demo Interactions POC                                                                          | -          |
 | 2     | Plan: Integrate Records in Demo                                                                      | -          |
@@ -222,22 +222,6 @@ The following items are not yet captured in a work item document.
 **Changes:**
 
 - Decompose codec demo.
-
-**Dependencies:**
-
-- None.
-
-### Plan: Design POC
-
-**Status:** `DRAFT`
-
-**Purpose:** Prove out the design system.
-
-**Description:** Build a design POC.
-
-**Changes:**
-
-- Build design POC.
 
 **Dependencies:**
 
