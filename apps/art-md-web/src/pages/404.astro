@@ -1,0 +1,16 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const content = {
+  title: 'Page not found',
+  description: 'The requested page does not exist on this site.',
+};
+---
+
+<PageLayout content={content}>
+  <section class="main-section">
+    <h1>Page not found</h1>
+    <p>The page you requested does not exist on this site.</p>
+    <p><a href="/">Return to the home page</a></p>
+  </section>
+</PageLayout>
