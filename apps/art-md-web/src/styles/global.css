@@ -1,6 +1,7 @@
 :root {
   --color-content: #040404;
   --color-page-bg: #eaeaea;
+  --color-input-bg: #eeeeee;
   --color-interactive: oklch(63.25% 0.1381 161);
   --color-gradient-1: var(--color-interactive);
   --color-gradient-2: oklch(87.7% 0.079 234);
@@ -18,6 +19,7 @@
     --color-gradient-2: oklch(33.9% 0.0715 234);
     --color-content: #eaeaea;
     --color-page-bg: #040404;
+    --color-input-bg: #111111;
   }
 
   --page-margin-h: clamp(1rem, calc(1rem + (100vw - 20rem) * 0.05), 3rem);

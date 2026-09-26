@@ -1,64 +1,39 @@
-import { createMemo, createSignal } from 'solid-js';
+import { createEffect, createMemo, createSignal } from 'solid-js';
 import { createArtCodec } from '@art-md/codec';
+import DemoPane from './private/DemoPane';
+import TextArea from './private/TextArea';
 import styles from './CodeDemo.module.css';
 
 const codec = createArtCodec();
 
-const DEMO_MARKDOWN = `# Hello World
-
-## Repository: Art MD
-
-**Author:** Noodlestan Collective
-
-**Remote:** \`git@github.com:noodlestan/art-md.git\`
-`;
-
-type TextAreaEvent = {
-	currentTarget: HTMLTextAreaElement;
-	target: HTMLTextAreaElement;
+type CodeDemoProps = {
+	markdown: string;
 };
 
-type SourceInputEvent = InputEvent & TextAreaEvent;
+export default function CodeDemo(props: CodeDemoProps) {
+	const [draft, setDraft] = createSignal(props.markdown);
 
-function describeError(error: unknown) {
-	if (error instanceof Error) {
-		return error.message;
-	}
-	return String(error);
-}
-
-export default function CodeDemo() {
-	const [source, setSource] = createSignal(DEMO_MARKDOWN);
+	createEffect(() => {
+		setDraft(props.markdown);
+	});
 
 	const output = createMemo(() => {
 		try {
-			const { document } = codec.parse(source());
+			const { document } = codec.parse(draft());
 			return JSON.stringify(document, null, 2);
 		} catch (error) {
-			return `Parse error: ${describeError(error)}`;
+			return `Parse error: ${error instanceof Error ? error.message : String(error)}`;
 		}
 	});
 
-	function handleSourceInput(event: SourceInputEvent) {
-		setSource(event.currentTarget.value);
-	}
-
 	return (
 		<div class={styles['CodeDemo']}>
-			<div class={styles['CodeDemo--Pane']}>
-				<h2>Art MD</h2>
-				<textarea
-					aria-label="Art MD source"
-					onInput={handleSourceInput}
-					rows={20}
-					spellcheck={false}
-					value={source()}
-				/>
-			</div>
-			<div class={styles['CodeDemo--Pane']}>
-				<h2>ArtDocument (Art AST)</h2>
-				<textarea aria-label="Parsed Art MD document" readonly rows={20} value={output()} />
-			</div>
+			<DemoPane title="Art MD">
+				<TextArea ariaLabel="Art MD source" onInput={setDraft} rows={20} value={draft()} />
+			</DemoPane>
+			<DemoPane title="ArtDocument (Art AST)">
+				<TextArea ariaLabel="Parsed Art MD document" readonly rows={20} value={output()} />
+			</DemoPane>
 		</div>
 	);
 }

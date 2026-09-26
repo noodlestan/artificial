@@ -1,8 +1,14 @@
 ---
+import SiteLinks from '../../site/SiteLinks.astro';
 import SiteLogo from '../../site/SiteLogo.astro';
+import SiteNav from '../../site/SiteNav.astro';
 ---
 
 <header>
+  <div class="navigation">
+    <SiteNav />
+    <SiteLinks />
+  </div>
   <h1 aria-label="Art MD"><SiteLogo /></h1>
   <p>
     Express data in Markdown through an extensible language. Designed for human and machine
@@ -21,12 +27,18 @@ import SiteLogo from '../../site/SiteLogo.astro';
       var(--color-gradient-3) 80%
     );
   }
+
+  .navigation {
+
+  }
+
   p {
     margin-block: -1rem 0;
     padding-inline: var(--page-margin-h);
     font-size: 1.3rem;
     font-style: italic;
   }
+
   h1 {
     margin: 0;
     max-width: 60rem;

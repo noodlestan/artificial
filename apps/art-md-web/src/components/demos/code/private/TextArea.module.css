@@ -1,0 +1,10 @@
+.TextArea {
+  background: var(--color-input-bg);
+  color: var(--color-content);
+  font-family: var(--type-code-family);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  min-height: 20rem;
+  padding: 0.75rem;
+  resize: vertical;
+}

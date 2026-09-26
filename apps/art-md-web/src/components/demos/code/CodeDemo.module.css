@@ -3,22 +3,3 @@
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 }
-
-.CodeDemo--Pane {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.CodeDemo--Pane > h2 {
-  font-size: 1.25rem;
-}
-
-.CodeDemo--Pane > textarea {
-  font-family: var(--type-code-family);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  min-height: 20rem;
-  padding: 0.75rem;
-  resize: vertical;
-}

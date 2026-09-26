@@ -1,8 +1,10 @@
 ---
 import CodeDemo from '../../demos/code/CodeDemo';
+import { HOME_DEMO_SOURCE } from '../../demos/code/sources';
 ---
 
 <h1>Codec demo</h1>
 <p>Type Art MD on the first textarea.</p>
 <p>The <code>@art-md/codec</code> parses it into Art AST on the second.</p>
-<CodeDemo client:only="solid-js" />
+<CodeDemo client:only="solid-js" markdown={HOME_DEMO_SOURCE.markdown} />
+<p><a href="/codec-demo">Explore more Art MD demos</a>.</p>

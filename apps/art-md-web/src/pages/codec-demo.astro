@@ -1,0 +1,17 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import CodecDemo from '../components/pages/codec-demo/CodecDemo';
+import { DEMO_SOURCES } from '../components/demos/code/sources';
+
+const content = {
+  title: 'Codec demos',
+  description: 'Parse Art MD in the browser and inspect the resulting document AST.',
+};
+---
+
+<PageLayout content={content}>
+  <h1>Codec demos</h1>
+  <p>Pick a demo, edit the Art MD on the left, and read the parsed document on the right.</p>
+  <CodecDemo client:only="solid-js" sources={DEMO_SOURCES} />
+  <p><a href="/about">About Art MD</a></p>
+</PageLayout>

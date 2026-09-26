@@ -1,0 +1,9 @@
+.DemoPane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.DemoPane > h2 {
+  font-size: 1.25rem;
+}

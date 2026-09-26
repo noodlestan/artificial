@@ -48,6 +48,7 @@ which also coordinates the roadmap.
 
 - [Art MD on GitHub](https://github.com/noodlestan/art-md) — the language specification
   and JavaScript libraries.
+- [Codec Demo](/codec-demo) — Try the codec in the browser.
 - [Artificials on GitHub](https://github.com/noodlestan/artificials) — the project hosting
   this website and its roadmap.
 - [Noodlestan on Discord](https://discord.gg/4MBbPK7sU) — waiting for you there.
