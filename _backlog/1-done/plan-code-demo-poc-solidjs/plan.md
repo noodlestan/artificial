@@ -2,7 +2,7 @@
 
 **ID:** `code-demo-poc-solidjs`
 
-**Status:** `COMPLETE`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -186,9 +186,9 @@ Demo fixture:
 
 #### Commits:
 
-| ID                    | Repository / Checkout / Branch    | Policy   | Hash  | Status     |
-| --------------------- | --------------------------------- | -------- | ----- | ---------- |
-| `build-code-demo-poc` | Artificials / `$PROJECT` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
+| ID                    | Repository / Checkout / Branch    | Policy   | Hash      | Status      |
+| --------------------- | --------------------------------- | -------- | --------- | ----------- |
+| `build-code-demo-poc` | Artificials / `$PROJECT` / `main` | `NOPUSH` | `599e026` | `COMMITTED` |
 
 ##### Commit: `build-code-demo-poc`
 
