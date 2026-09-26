@@ -67,10 +67,10 @@ None.
 
 ### Workflows
 
-| Workflow / Path                                                        | Purpose                                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Workflow: Planning `$DOMAINS/plans/workflows/planning.art`             | Planning lifecycle for contextualising, drafting, refining, and integrating plans. |
-| Workflow: Engineering `$DOMAINS/engineering/workflows/engineering.art` | Engineering lifecycle for setting up, verifying, and committing work.              |
+| Workflow / Path                                                                | Purpose                                                                            |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| Workflow: Planning Work `$DOMAINS/work/workflows/planning-work/workflow.art`   | Planning lifecycle for contextualising, drafting, refining, and integrating plans. |
+| Workflow: Executing Work `$DOMAINS/work/workflows/executing-work/workflow.art` | Engineering lifecycle for setting up, verifying, and committing work.              |
 
 ### Knowledge
 
@@ -137,16 +137,16 @@ Execution is coordinated from `$WORKSPACE`. The demo changes happen in `$ART_MD_
 
 ## Items:
 
-| Iteration / Instructions                                                                          | Status     |
-| ------------------------------------------------------------------------------------------------- | ---------- |
-| Iteration: Build Code Demo POC `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md` | `PLANNING` |
-| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `DONE`     |
+| Iteration / Instructions                                                                          | Status  |
+| ------------------------------------------------------------------------------------------------- | ------- |
+| Iteration: Build Code Demo POC `./plan-code-demo-poc-solidjs/instructions/build-code-demo-poc.md` | `READY` |
+| Iteration: Add 404 Page `./plan-code-demo-poc-solidjs/instructions/add-404-page.md`               | `DONE`  |
 
 ### Iteration: Build Code Demo POC
 
 **Id:** `build-code-demo-poc`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Purpose:** Prove out a live, in-browser Art MD round trip by parsing user-authored markdown into an MDAST-derived AST with `@art-md/codec` inside a SolidJS island.
 
@@ -185,9 +185,9 @@ Demo fixture:
 
 #### Commits:
 
-| ID                    | Repository / Checkout / Branch    | Policy       | Hash  | Status     |
-| --------------------- | --------------------------------- | ------------ | ----- | ---------- |
-| `build-code-demo-poc` | Artificials / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+| ID                    | Repository / Checkout / Branch    | Policy   | Hash  | Status     |
+| --------------------- | --------------------------------- | -------- | ----- | ---------- |
+| `build-code-demo-poc` | Artificials / `$PROJECT` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
 
 ##### Commit: `build-code-demo-poc`
 
@@ -260,7 +260,7 @@ build(art-md-web): Add 404 page for unknown routes
 
 ### Next
 
-Iteration `add-404-page` is DONE. Iteration `build-code-demo-poc` is `PLANNING` and no longer blocked — write its instructions and mark it `READY`.
+Both iterations are `READY`. Delegate `build-code-demo-poc`, the last remaining work in this plan.
 
 ### Blockers
 
