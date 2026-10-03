@@ -4,7 +4,7 @@
 
 **Status:** `PLANNING`
 
-**Template:** `$DOMAINS/roadmaps/templates/milestone.tart`
+**Template:** `$DOMAINS/milestones/templates/milestone.tart`
 
 **Skill:** `write-milestone`
 
@@ -14,7 +14,7 @@
 
 ## Mandatory Reading
 
-::READ `$DOMAINS/roadmaps/structures/milestone.art` (Structure) — Defines the milestone structure and nested types.
+::READ `$DOMAINS/milestones/structures/milestone.art` (Structure) — Defines the milestone structure and nested types.
 
 ---
 
@@ -75,7 +75,7 @@ None.
 
 ### Knowledge
 
-::READ `$DOMAINS/roadmaps/structures/milestone.art` (Structure) — Defines milestone record fields and statuses. Relevant for stages Contextualizing, Drafting, Refining.
+::READ `$DOMAINS/milestones/structures/milestone.art` (Structure) — Defines milestone record fields and statuses. Relevant for stages Contextualizing, Drafting, Refining.
 
 ::READ `$DOMAINS/plans/structures/plan.art` (Structure) — Defines plan record fields and statuses. Relevant for stages Drafting, Refining.
 
