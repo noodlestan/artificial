@@ -23,6 +23,8 @@
     "ci": "npm run ci:root && turbo run ci"
   },
   "devDependencies": {
+    "@noodlestan/conventions-typescript": "0.1.0",
+    "@noodlestan/conventions-unit-tests": "0.1.0",
     "@noodlestan/tsconfig": "0.0.14",
     "lefthook": "2.1.9",
     "prettier": "3.8.4",
