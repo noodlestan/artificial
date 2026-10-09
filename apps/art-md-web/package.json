@@ -14,7 +14,7 @@
     "test": "echo none yet",
     "preview": "astro preview",
     "start": "astro",
-    "ci": "npm run lint && npm run build && npm run test"
+    "ci": "npm run build && npm run lint && npm run test"
   },
   "dependencies": {
     "@art-md/codec": "^0.0.2",
