@@ -25,7 +25,7 @@
   "devDependencies": {
     "@noodlestan/conventions-typescript": "0.1.0",
     "@noodlestan/conventions-unit-tests": "0.1.0",
-    "@noodlestan/tsconfig": "^0.2.0",
+    "@noodlestan/tsconfig": "0.2.0",
     "lefthook": "2.1.9",
     "prettier": "3.8.4",
     "turbo": "2.9.18"
