@@ -5,7 +5,7 @@ import SiteNav from '../../site/SiteNav.astro';
 ---
 
 <header>
-  <div class="navigation">
+  <div class="container navigation">
     <SiteNav />
     <SiteLinks />
   </div>
@@ -29,7 +29,13 @@ import SiteNav from '../../site/SiteNav.astro';
   }
 
   .navigation {
-
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: min(5vw, 3rem);
+    row-gap: 0.5rem;
+    padding-block: 1rem 0;
   }
 
   p {
