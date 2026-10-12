@@ -10,15 +10,15 @@ const { content } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <SiteHead content={content} />
-  </head>
-  <body>
-    <HomeIntro />
-    <main class="main-section markdown">
-      <HomeDemo />
-      <slot />
-    </main>
-    <SiteFooter />
-  </body>
+	<head>
+		<SiteHead content={content} />
+	</head>
+	<body>
+		<HomeIntro />
+		<main class="main-section markdown">
+			<HomeDemo />
+			<slot />
+		</main>
+		<SiteFooter />
+	</body>
 </html>

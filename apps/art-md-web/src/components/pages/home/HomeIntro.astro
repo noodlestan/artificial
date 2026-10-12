@@ -5,48 +5,50 @@ import SiteNav from '../../site/SiteNav.astro';
 ---
 
 <header>
-  <div class="container navigation">
-    <SiteNav />
-    <SiteLinks />
-  </div>
-  <h1 aria-label="Art MD"><SiteLogo /></h1>
-  <p>
-    Express data in Markdown through an extensible language. Designed for human and machine
-    authoring at scale.
-  </p>
+	<div class="container navigation">
+		<SiteNav />
+		<SiteLinks />
+	</div>
+	<h1 aria-label="Art MD">
+		<SiteLogo />
+	</h1>
+	<p>
+		Express data in Markdown through an extensible language. Designed for human and machine
+		authoring at scale.
+	</p>
 </header>
 
 <style>
-  header {
-    padding-block-end: 3rem;
-    background: #00855b;
-    background: linear-gradient(
-      180deg,
-      var(--color-gradient-1) 1%,
-      var(--color-gradient-2) 1%,
-      var(--color-gradient-3) 80%
-    );
-  }
+	header {
+		padding-block-end: 3rem;
+		background: #00855b;
+		background: linear-gradient(
+			180deg,
+			var(--color-gradient-1) 1%,
+			var(--color-gradient-2) 1%,
+			var(--color-gradient-3) 80%
+		);
+	}
 
-  .navigation {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: min(5vw, 3rem);
-    row-gap: 0.5rem;
-    padding-block: 1rem 0;
-  }
+	.navigation {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		column-gap: min(5vw, 3rem);
+		row-gap: 0.5rem;
+		padding-block: 1rem 0;
+	}
 
-  p {
-    margin-block: -1rem 0;
-    padding-inline: var(--page-margin-h);
-    font-size: 1.3rem;
-    font-style: italic;
-  }
+	p {
+		margin-block: -1rem 0;
+		padding-inline: var(--page-margin-h);
+		font-size: 1.3rem;
+		font-style: italic;
+	}
 
-  h1 {
-    margin: 0;
-    max-width: 60rem;
-  }
+	h1 {
+		margin: 0;
+		max-width: 60rem;
+	}
 </style>

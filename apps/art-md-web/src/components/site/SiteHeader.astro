@@ -5,38 +5,38 @@ import SiteNav from './SiteNav.astro';
 ---
 
 <header role="banner">
-  <div class="container">
-    <a class="site-title" href="/">
-      <SiteLogo />
-    </a>
-    <SiteNav />
-    <SiteLinks />
-  </div>
+	<div class="container">
+		<a class="site-title" href="/">
+			<SiteLogo />
+		</a>
+		<SiteNav />
+		<SiteLinks />
+	</div>
 </header>
 
 <style>
-  header {
-    padding-block: 1rem;
-    background: #88fcd4;
-    background: linear-gradient(
-      180deg,
-      var(--color-gradient-1) 6%,
-      var(--color-gradient-2) 6%,
-      var(--color-gradient-3)  84%
-    );
-  }
+	header {
+		padding-block: 1rem;
+		background: #88fcd4;
+		background: linear-gradient(
+			180deg,
+			var(--color-gradient-1) 6%,
+			var(--color-gradient-2) 6%,
+			var(--color-gradient-3) 84%
+		);
+	}
 
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: min(5vw, 3rem);
-    row-gap: 0.5rem;
-  }
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		column-gap: min(5vw, 3rem);
+		row-gap: 0.5rem;
+	}
 
-  .site-title {
-    height: 3.5rem;
-    color: var(--color-content);
-  }
+	.site-title {
+		height: 3.5rem;
+		color: var(--color-content);
+	}
 </style>
