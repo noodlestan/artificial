@@ -29,7 +29,7 @@ Records are co-located with the resources they describe in `_records/` directori
 
 ## Knowledge References
 
-This package does not maintain a dedicated architecture reference.
+This package does not maintain a dedicated knowledge reference.
 
 ## Conventions
 
