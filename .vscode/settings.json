@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "*.art": "markdown",
+    "*.tart": "markdown"
+  },
+  "eslint.codeActionsOnSave.mode": "all",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.fixAll.eslint": "never"
+  }
+}
