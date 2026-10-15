@@ -4,6 +4,8 @@
 
 A collection of tools and resources to generate and manage knowledge artefacts and agent instructions.
 
+**Keywords:** art, agentic-workflows, agent-instructions.
+
 ## Projects
 
 - Application: Art MD Website (PLANNED)

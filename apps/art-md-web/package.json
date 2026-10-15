@@ -1,5 +1,10 @@
 {
   "name": "apps-art-md-web",
+  "keywords": [
+    "art",
+    "markdown",
+    "demo"
+  ],
   "type": "module",
   "version": "0.0.1",
   "engines": {

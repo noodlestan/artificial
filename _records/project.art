@@ -26,6 +26,12 @@
 - Project: Art Web — https://github.com/noodlestan/art-web (PLANNED)
 - Project: Art Domains — https://github.com/noodlestan/art-domains
 
+**Keywords:**
+
+- art
+- agentic-workflows
+- agent-instructions
+
 **Private:** `false`
 
 **Management:** Umbrella project; Coordinates other projects with Workflow: Roadmapping from one project-wide roadmap. Manages application backlogs with Workflow: Planning Work.

@@ -2,6 +2,11 @@
   "name": "noodlestan/artificials",
   "version": "0.0.1",
   "description": "A collection of tools and resources to generate and manage knowledge artefacts and agent instructions.",
+  "keywords": [
+    "art",
+    "agentic-workflows",
+    "agent-instructions"
+  ],
   "author": "Noodlestan",
   "license": "MIT",
   "private": true,
